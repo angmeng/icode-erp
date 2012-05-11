@@ -1,0 +1,83 @@
+<script>
+  $(document).ready(function(){
+    $('#flo_partweight').numberbox({ min:0, precision:2 }); 
+    $('#flo_sellingprice').numberbox({ min:0, precision:2 });  
+    $('#flo_openingstock').numberbox({ min:0, precision:2 });   
+    $('#flo_currentstock').numberbox({ min:0, precision:2 });   
+  });
+</script>
+
+<%= form_for(@purchase_order_item) do |f| %>
+  <% if @purchase_order_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_order_item.errors.count, "error") %> prohibited this purchase_order_item from being saved:</h2>
+
+      <ul>
+      <% @purchase_order_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <% if @unit_measurements.present? %>
+      <% params[:unit_measurement_id] = @purchase_order_item.unit_measurement_id if @purchase_order_item.unit_measurement %>
+      <%= f.label :unit_measurement_id %><br />
+      <%= select_tag :unit_measurement_id, options_from_collection_for_select(@unit_measurements, 'id', 'code', params[:unit_measurement_id]), { :include_blank => true } %>
+    <% else %>
+      <p style="border: 1px solid red;">Unit Measurement don't exists. Please add new data in this <%= link_to "link", new_unit_measurement_path %>.</p>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </div>
+  <div class="field">
+    <%= f.label :color_grade %><br />
+    <%= f.text_field :color_grade %>
+  </div>
+  <div class="field">
+    <%= f.label :version %><br />
+    <%= f.text_field :version %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br />
+    <%= f.text_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :part_no %><br />
+    <%= f.text_field :part_no %>
+  </div>
+  <div class="field">
+    <%= f.label :tariff_code %><br />
+    <%= f.text_field :tariff_code %>
+  </div>
+  <div class="field">
+    <%= f.label :part_weight %><br />
+    <%= f.text_field :part_weight, :id => "flo_partweight" %>
+  </div>
+  <div class="field">
+    <%= f.label :selling_price %><br />
+    <%= f.text_field :selling_price, :id => "flo_sellingprice" %>
+  </div>
+  <div class="field">
+    <%= f.label :cutoff_date %><br />
+    <%= f.date_select :cutoff_date %>
+  </div>
+  <div class="field">
+    <%= f.label :opening_stock %><br />
+    <%= f.text_field :opening_stock, :id => "flo_openingstock" %>
+  </div>
+  <div class="field">
+    <%= f.label :current_stock %><br />
+    <%= f.text_field :current_stock, :id => "flo_currentstock" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

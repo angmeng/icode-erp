@@ -1,0 +1,25 @@
+<%= form_for(@unit_measurement) do |f| %>
+  <% if @unit_measurement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@unit_measurement.errors.count, "error") %> prohibited this unit_measurement from being saved:</h2>
+
+      <ul>
+      <% @unit_measurement.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

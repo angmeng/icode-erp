@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Merp</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title>BackupCenter</title>
+  <%= stylesheet_link_tag    "application", "easyui", 'easyui/icon', 'easyui/default/easyui', :media => "all" %>
+  <%= javascript_include_tag "application", 'jquery.easyui.min' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="easyui-layout">
+    <div id="easyui-content" region="center" title="Etheos Imprint Sdn Bhd" style="padding:10px;">  
+      <div style="padding-right:10px;">
+        <% if user_signed_in? %>
+          <%= render "/layouts/north_menu" %>
+        <% end %>
+      </div>
+      <p class="notice" id="notice"><%= notice %></p>
+      <p class="alert" id="alert"><%= alert %></p>
+      <%= yield %>       
+    </div>  
 </body>
 </html>

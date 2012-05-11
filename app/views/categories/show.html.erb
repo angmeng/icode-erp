@@ -1,0 +1,18 @@
+<p>
+  <b>Code:</b>
+  <%= @category.code %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @category.desc %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%= @category.parent_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

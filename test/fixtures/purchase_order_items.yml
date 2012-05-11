@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  unit_measurement_id: 1
+  desc: MyString
+  color_grade: MyString
+  version: MyString
+  model: MyString
+  part_no: MyString
+  tariff_code: MyString
+  part_weight: 1.5
+  selling_price: 1.5
+  cutoff_date: 2012-05-11
+  opening_stock: 1.5
+  current_stock: 1.5
+
+two:
+  code: MyString
+  unit_measurement_id: 1
+  desc: MyString
+  color_grade: MyString
+  version: MyString
+  model: MyString
+  part_no: MyString
+  tariff_code: MyString
+  part_weight: 1.5
+  selling_price: 1.5
+  cutoff_date: 2012-05-11
+  opening_stock: 1.5
+  current_stock: 1.5

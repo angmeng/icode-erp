@@ -1,0 +1,47 @@
+<h1>Listing purchase_order_items</h1>
+
+<table class="black-line-table">
+  <tr>
+    <th width="50">Code</th>
+    <th width="100">Unit measurement</th>
+    <th width="100">Desc</th>
+    <th width="100">Color grade</th>
+    <th width="80">Version</th>
+    <th width="80">Model</th>
+    <th width="80">Part no</th>
+    <th width="80">Tariff code</th>
+    <th width="80">Part weight</th>
+    <th width="80">Selling price</th>
+    <th width="80">Cutoff date</th>
+    <th width="80">Opening stock</th>
+    <th width="80">Current stock</th>
+    <th width="80"></th>
+    <th width="80"></th>
+    <th width="80"></th>
+  </tr>
+
+<% @purchase_order_items.each do |purchase_order_item| %>
+  <tr>
+    <td><%= purchase_order_item.code %></td>
+    <td><%= purchase_order_item.unit_measurement.code rescue '-' %></td>
+    <td><%= purchase_order_item.desc %></td>
+    <td><%= purchase_order_item.color_grade %></td>
+    <td><%= purchase_order_item.version %></td>
+    <td><%= purchase_order_item.model %></td>
+    <td><%= purchase_order_item.part_no %></td>
+    <td><%= purchase_order_item.tariff_code %></td>
+    <td><%= purchase_order_item.part_weight %></td>
+    <td><%= purchase_order_item.selling_price %></td>
+    <td><%= purchase_order_item.cutoff_date %></td>
+    <td><%= purchase_order_item.opening_stock %></td>
+    <td><%= purchase_order_item.current_stock %></td>
+    <td><%= link_to 'Show', purchase_order_item %></td>
+    <td><%= link_to 'Edit', edit_purchase_order_item_path(purchase_order_item) %></td>
+    <td><%= link_to 'Destroy', purchase_order_item, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase order item', new_purchase_order_item_path %>

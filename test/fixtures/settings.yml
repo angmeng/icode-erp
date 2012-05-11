@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  backup_path: MyString
+  version: MyString
+
+two:
+  backup_path: MyString
+  version: MyString

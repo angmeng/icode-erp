@@ -1,0 +1,19 @@
+<div style="background:#fafafa;padding:5px;width:100%;border:1px solid #ccc">  
+    <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-edit">Menu</a>
+    <a href="#" class="easyui-menubutton" menu="#mm2" iconCls="icon-edit">Data Entry</a>
+</div>  
+  
+<div id="mm1" style="width:150px;">
+    <div><%= link_to "Home", root_url %></div> 
+    <div><%= link_to "Setting", settings_url %></div>
+    <div><%= link_to "Backup", backup_users_path, :confirm => "Are you sure you want to run backup now ?" %></div>
+    <div class="menu-sep"></div>  
+    <div><%= link_to "Profile", profile_user_path(current_user.id) %></div>
+    <div><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
+</div>
+
+<div id="mm2" style="width:150px;">
+    <div><%= link_to "Category", categories_path %></div> 
+    <div><%= link_to "Unit measurement", unit_measurements_path %></div>
+    <div><%= link_to "Purchase Order Item", purchase_order_items_path %></div>
+</div>

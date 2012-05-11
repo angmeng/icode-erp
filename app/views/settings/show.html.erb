@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Backup path:</b>
+  <%= @setting.backup_path %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%= @setting.version %>
+</p>
+
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

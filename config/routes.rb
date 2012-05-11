@@ -1,4 +1,26 @@
 Merp::Application.routes.draw do
+  
+  resources :unit_measurements
+
+  resources :purchase_order_items
+
+  resources :categories
+
+  resources :departments
+
+  devise_for :users
+  resources :users do
+    member do
+      get "profile"
+      post "update_profile"
+    end
+    collection do
+      get "backup"
+    end
+  end
+  get "home/index"
+
+  resources :settings
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +70,7 @@ Merp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
