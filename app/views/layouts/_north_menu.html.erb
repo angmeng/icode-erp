@@ -1,9 +1,9 @@
-<div style="background:#fafafa;padding:5px;width:100%;border:1px solid #ccc">  
-    <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-edit">Menu</a>
-    <a href="#" class="easyui-menubutton" menu="#mm2" iconCls="icon-edit">Data Entry</a>
+<div style="background:#fafafa;width:100%;border:1px solid #ccc">
+    <a href="#" class="easyui-menubutton" menu="#menu1" iconCls="icon-edit">Menu</a>
+    <a href="#" class="easyui-menubutton" menu="#menu2" iconCls="icon-edit">Housekeeping</a>
 </div>  
   
-<div id="mm1" style="width:150px;">
+<div id="menu1" style="width:150px;">
     <div><%= link_to "Home", root_url %></div> 
     <div><%= link_to "Setting", settings_url %></div>
     <div><%= link_to "Backup", backup_users_path, :confirm => "Are you sure you want to run backup now ?" %></div>
@@ -12,8 +12,9 @@
     <div><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></div>
 </div>
 
-<div id="mm2" style="width:150px;">
-    <div><%= link_to "Category", categories_path %></div> 
+<div id="menu2" style="width:150px;">
+    <div><%= link_to "Company Profile", company_profiles_path %></div> 
+    <div><%= link_to "Category", new_category_path %></div> 
     <div><%= link_to "Unit measurement", unit_measurements_path %></div>
     <div><%= link_to "Purchase Order Item", purchase_order_items_path %></div>
 </div>

@@ -1,0 +1,10 @@
+<div id="product_layout" class="easyui-layout" style="width:auto;height:670px;">  
+    <div region="west" split="true" title="Non Operation Product Categories" style="width:270px;">
+      <%= render "/products/category" %>
+    </div>  
+    <div region="center" title="Non Operation Product Details" style="padding:5px;background:#eee;">
+      <div id = "loading_products">
+        <%= render "/products/product_details" %>
+      </div>
+    </div>  
+</div> 

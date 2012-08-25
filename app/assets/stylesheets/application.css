@@ -12,27 +12,158 @@
  *= require_tree .
 */
 
-table.black-line-table {
-	border-width: 1px;
-	border-spacing: 0px;
-	border-style: none;
-	border-color: black;
-	border-collapse: collapse;
-	background-color: transparent;
+/*layout design*/
+#main_menu { width: auto; }
+#menu h2 {
+    font-size: 1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
 }
-table.black-line-table th {
-	border-width: 1px;
-	padding: 1px;
-	border-style: solid;
-	border-color: black;
-	background-color: transparent;
-	-moz-border-radius: 0px 0px 0px 0px;
+#menu a:hover {
+    background-color: gold;
 }
-table.black-line-table td {
-	border-width: 1px;
-	padding: 1px;
-	border-style: solid;
-	border-color: black;
-	background-color: transparent;
-	-moz-border-radius: 0px 0px 0px 0px;
+#template img {
+    margin: 5px 20px 0 0;
+    float: left;
 }
+#template {
+    width: 380px;
+}
+#template ol {
+    float: left;
+    margin: 0;
+    padding: 10px 10px 0 10px;
+}
+#template:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+#template .k-button {
+    float: left;
+    clear: left;
+    margin: 5px 0 5px 12px;
+}
+
+.highlight{ background: bisque; color: blue;}
+
+#treeview .k-sprite { background-image: url("/assets/coloricons-sprite.png"); }
+#treeview .rootfolder { background-image: url("/assets/treeview_folder.gif")}
+#treeview .folder { background-image: url("/assets/treeview_folder_open.gif")}
+#treeview .file { background-image:url("/assets/treeview_file.gif")}
+#treeview .remove_file { background-image:url("/assets/remove_file.png")}
+
+#fix_height { overflow:auto; height:650px; }
+
+
+
+
+.digg_pagination {
+  background: white;
+  cursor: default;
+  /* self-clearing method: */ }
+.digg_pagination a, .digg_pagination span, .digg_pagination em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+.digg_pagination .disabled {
+    color: #999999;
+    border: 1px solid #dddddd; }
+.digg_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1; }
+.digg_pagination a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #000033;
+      border-color: #000033; }
+.digg_pagination .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center; }
+.digg_pagination .page_info b {
+      color: #000033;
+      background: #6aa6ed;
+      padding: 0.1em 0.25em; }
+.digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .digg_pagination {
+    height: 1%; }
+  *:first-child + html .digg_pagination {
+    overflow: hidden; }
+  
+.header_login { font-size: 30px; padding: 20px; font-weight: bold; background-color: orange; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+.centered { position: absolute; top: 30%; left: 40%; }
+.centered fieldset { background: skyblue; padding: 15px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+
+#input_box {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 200px;
+    background: #fff;
+    border: solid 1px transparent;
+    color: #555;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.approval_remark{ float:right; background-color:red; color:white; padding:5px; width: 450px; margin: 5px; }
+
+.opac_icon  { 
+    filter:alpha(opacity=30);
+    -moz-opacity:0.3;
+    -khtml-opacity: 0.3;
+    opacity: 0.3;
+    width: 25px;
+    height: 25px;
+}
+
+.cube25 { width: 25px; height: 25px; }
+
+#inline { display:none; }
+
+.search_link { 
+    float: right;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: palegreen;
+    color: blue;
+    padding: 5px;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.new_button { 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: pink;
+    color: blue;
+    padding: 5px;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bold;   
+}
+
+.type_window_patching { display:none; }
+.type_varnish { display:none; }
+
+

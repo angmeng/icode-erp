@@ -1,2 +1,79 @@
-<h1>User#index</h1>
-<p>Find me in app/views/user/index.html.erb</p>
+<h2>All Users</h2>
+
+<table width="100%">
+  <tr>
+    <td><%= link_to "Search", '#', :class => "search_link" %></td>
+  </tr>
+</table>
+
+<div class="search_engine">
+  <%= form_for @search do |f| %>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td><%= f.text_field :name_contains %></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><%= f.text_field :email_contains %></td>
+      </tr>
+      <tr>
+        <td>Department</td>
+        <td><%= f.select :department_id_equals, options_for_select(@user_department, params[:department_id_equals].to_s), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td>Level</td>
+        <td><%= f.select :level_equals, options_for_select(@user_level, params[:level_equals].to_s), :include_blank => true %></td>
+      </tr>
+      <tr><td colspan="10" align="right"><%= f.submit 'Search' %></td></tr>
+    </table>
+  <% end %>
+</div>
+
+<%#*<div id = "inline">%>
+  <%#= render "user_entry" %>
+<%#*</div>%>
+
+<% if @users.present? %>
+  <table class="white-line-table">
+    <tr class="header_line">
+      <% @user_header.each do |uh| %>
+        <%= content_tag :th, uh %>
+      <% end %>
+    </tr>
+    <% @users.each do |user| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>">
+        <td align="center"><%= user.name rescue '-' %></td>
+        <td align="center"><%= user.email rescue '-' %></td>
+        <td align="center"><%= user.department.name rescue '-' %></td>
+        <td align="center"><%= user.level rescue '-' %></td>
+        <td align="center">
+          <% if user.roles.present? %>
+            <% user.roles.each do |role| %>
+              <%= role.inventory_management_system.name rescue '-' %><br/>
+            <% end %>
+          <% end %>
+        </td>
+        <td align="center">
+          <%= link_show_800x450(user) %>
+          <%= link_edit_800x600(edit_user_path(user)) %>
+          <%= not_link_recycle %>
+          <%= not_link_printable %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<br/>
+
+<div class="digg_pagination">
+  <%= will_paginate @purchase_requisitions %>
+</div>
+
+
+
+<br/>
+
+
+

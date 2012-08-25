@@ -1,0 +1,224 @@
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+
+<% if notice %><p class="notice" id="notice"><%= notice %></p><% end %>
+<% if alert %><p class="alert" id="alert"><%= alert %></p><% end %>
+
+<%= form_for(@product) do |f| %>
+  <%= text_field_tag "add_category_id", params[:add_category_id] %>
+
+  <%= select_tag "category_type", options_for_select(@type) %>
+  <%= text_field_tag "pri", "yes" %>
+  <table>
+    <tr>
+      <td width="150">
+        <% if action_name == "edit" %>
+          Current Product No.
+        <% else %>
+          Previous Product No.
+        <% end %>
+      </td>
+      
+      <td>
+        <% if action_name == 'edit' %>
+          <%= @product.code %>
+        <% else %>
+          <%= ("%05d" % company.sn_product_id_no) rescue '0' %>
+        <% end %>
+      </td>
+      
+      <td width="30"></td>
+      
+      <td>
+        <% unless action_name == "edit" %>
+          <%= check_box_tag "jump", "yes" %>Jump
+        <% end %>
+      </td>
+      
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td>Category Description</td>
+      <td>
+        <% if action_name == "edit" %>
+          <% params[:category_description] = @product.product_category.desc rescue '-' %>
+        <% end %>
+        <%= text_field_tag :category_description, params[:category_description], :required => "true", :validType => "maxLength[15]", :class => "easyui-validatebox" %>
+      </td>
+      <td></td>
+      <td><%= f.label :unit_measurement_id, "U/M" %></td>
+      <td><%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', @product.unit_measurement_id.to_i), { :include_blank => true } %></td>
+    </tr>
+    
+    <tr>
+      <td style="vertical-align: top;">Description</td>
+      <td>
+        <%= f.text_area :desc, :required => "true", :validType => "maxLength[255]", :class => "easyui-validatebox", :rows => 3 %>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <%#*<tr>%>
+      <%#*<td>Color / Grade</td>%>
+      <%#*<td>%>
+        <%#= f.text_field :color_grade, :validType => "maxLength[255]", :class => "easyui-validatebox" %>
+      <%#*</td>%>
+      <%#*<td></td>%>
+      <%#*<td></td>%>
+      <%#*<td></td>%>
+    <%#*</tr>%>
+    <%#*<tr>%>
+      <%#*<td>Version</td>%>
+      <%#*<td>%>
+        <%#= f.text_field :version, :validType => "maxLength[40]", :class => "easyui-validatebox" %>
+      <%#*</td>%>
+      <%#*<td></td>%>
+      <%#*<td></td>%>
+      <%#*<td></td>%>
+    <%#*</tr>%>
+    <%#*<tr>%>
+      <%#*<td>Model</td>%>
+      <%#*<td>%>
+        <%#= f.text_field :model, :validType => "maxLength[40]", :class => "easyui-validatebox" %>
+      <%#*</td>%>
+      <%#*<td></td>%>
+      <%#*<td></td>%>
+      <%#*<td></td>%>
+    <%#*</tr>%>
+    <tr>
+      <td>Part No.</td>
+      <td><%= f.text_field :part_no, :validType => "maxLength[40]", :class => "easyui-validatebox" %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+      <td>Tarif Code</td>
+      <td><%= f.text_field :tarif_code, :validType => "maxLength[40]", :class => "easyui-validatebox" %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Part Weight</td>
+      <td><%= f.text_field :part_weight, :style => "text-align:right;", :required => "true" %> g</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Unit Price</td>
+      <td><%= f.text_field :selling_price, :style => "text-align:right;", :required => "true" %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Cutoff Date</td>
+      <td>
+        <% if action_name == "edit" %>
+            <% if @product.cutoff_date.blank? %>
+              <%= f.text_field :cutoff_date, :class => "cutoffdate" %>
+            <% else %>
+              <%= f.text_field :cutoff_date, :class => "cutoffdate", :value => @product.cutoff_date.strftime("%d-%m-%Y") %>
+            <% end %>
+        <% else %>
+          <%= f.text_field :cutoff_date, :class => "cutoffdate" %>
+        <% end %>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Opening Stock</td>
+      <td><%= f.text_field :opening_stock, :style => "text-align:right;", :class => "ten_digit_1" %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+    </tr>
+    
+    <tr>
+      <td>Current Stock</td>
+      <td class="current_stock_val">
+        <% if action_name == "edit" %>
+          <%= @product.current_stock rescue '-' %>
+        <% end %>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    
+    <% if action_name == "edit" %>
+        <% if @product.product_category %>
+            <tr><td colspan="10"><hr/></td></tr>
+            <tr>
+              <td>Sourcing</td>
+              <td>
+                <%= f.fields_for :product_vendors do |builder| %>
+                  <% if builder.object.new_record? %>
+                    <%= builder.select :trade_company_id, options_from_collection_for_select(TradeCompany.order("name").all, 'id', 'name', params[:tc].to_i), { :include_blank => true } %>
+                    <br/>
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+              <td colspan="2">
+                <ol>
+                  <%= f.fields_for :product_vendors do |builder| %>
+                    <% unless builder.object.new_record? %>
+                      <% if builder.object.trade_company_id.present? %>
+                        <li>
+                          <%= builder.object.trade_company.name %>
+                          <%= builder.check_box :_destroy %>Remove
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </ol>
+              </td>
+            </tr>
+        <% end %>
+    <% else %>
+    
+
+            <tr><td colspan="10"><hr/></td></tr>
+            <tr>
+              <td>Sourcing</td>
+              <td>
+                <%= f.fields_for :product_vendors do |builder| %>
+                  <% if builder.object.new_record? %>
+                    <%= builder.select :trade_company_id, options_from_collection_for_select(TradeCompany.order("name").all, 'id', 'name', params[:tc].to_i), { :include_blank => true } %>
+                    <br/>
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+              <td colspan="2">
+                <ol>
+                  <%= f.fields_for :product_vendors do |builder| %>
+                    <% unless builder.object.new_record? %>
+                      <% if builder.object.trade_company_id.present? %>
+                        <li>
+                          <%= builder.object.trade_company.name %>
+                          <%= builder.check_box :_destroy %>Remove
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </ol>
+              </td>
+            </tr>
+        
+    <% end %>
+  </table>
+
+  <br/>
+
+  <div align="right"><%= f.submit "Submit" %></div>
+<% end %>

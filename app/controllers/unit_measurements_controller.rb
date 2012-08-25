@@ -1,4 +1,7 @@
 class UnitMeasurementsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :is_director
+    
   # GET /unit_measurements
   # GET /unit_measurements.json
   def index

@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :is_director
   # GET /settings
   # GET /settings.json
   def index

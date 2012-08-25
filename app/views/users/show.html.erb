@@ -1,2 +1,34 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<%= render "/layouts/block_scaffolds" %>
+
+<h2>Show User</h2>
+
+<table>
+  <tr>
+    <td width="150">Name</td>
+    <td><%= @user.name rescue '-' %></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%= @user.email rescue '-' %></td>
+  </tr>
+  <tr>
+    <td>Department</td>
+    <td><%= @user.department.try(:name) %></td>
+  </tr>
+  <tr>
+    <td>Level</td>
+    <td><%= @user.level rescue '-' %></td>
+  </tr>
+  <tr>
+    <td>Roles</td>
+    <td>
+      <% @user.roles.each do |role| %>
+        <%= role.inventory_management_system.try(:name) %><br/>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+<%= link_close_button %>

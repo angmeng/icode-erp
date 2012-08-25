@@ -1,14 +1,194 @@
 Merp::Application.routes.draw do
-  
-  resources :unit_measurements
+
+  resources :colors
+
+  resources :sequents
+
+  resources :selection_die_cuts
+
+  resources :selection_glueings
+
+  resources :delivery_orders
+
+  resources :quotation_request_forms do
+    collection do
+      get "kiv"
+    end
+    member do
+      put "yes_button"
+      put "no_button"
+      get "printable"
+    end
+  end
+
+  resources :received_item_and_qties
+
+  resources :formulations
+
+  resources :roles
+
+  resources :inventory_management_systems
+
+  resources :delivery_orders
+
+  resources :sales_order_items
+
+  resources :sales_orders
+
+  resources :temporary_tarif_codes
+
+  resources :sales_tax_exemption_items
+
+  resources :inventory_issues
+
+  resources :temporary_sources
+
+  resources :inventory_histories
+
+  resources :purchase_order_item_lines
 
   resources :purchase_order_items
 
-  resources :categories
+  resources :incoming_rejects
+
+  resources :sales_tax_exemptions do 
+    collection do
+      get "no_validation"
+    end
+    member do
+      get "display_items"
+    end
+  end
+
+  resources :customs
+
+  resources :receive_note_items
+
+  resources :receive_notes do
+    get "info", :on => :collection
+  end
+
+  resources :payment_types
+
+  resources :purchase_requisition_items do 
+    put "remove_pr", :on => :member
+  end
+
+  resources :product_vendors
+
+  resources :purchase_requisitions do 
+    collection do
+      get "show_details_two"
+      get "show_details_three"
+      get "pr_no"
+      get "pr_status"
+      get "pr_requestor"
+      get "pr_department"
+      get "kiv"
+    end
+    member do
+      put "yes_approval_requester"
+      put "yes_approval_one"
+      put "no_approval_one"
+      put "yes_approval_om"
+      put "no_approval_om"
+      put "yes_approval_three"
+      put "no_approval_three"
+    end
+  end
+
+  resources :transports
+
+  resources :currencies
+
+  resources :purchase_orders do
+    collection do
+      get "cancel"
+      get "recover"
+      get "select_vendor"
+      get "approved_pr"
+      get "maintenance"
+      post "add_vendor"
+      get "proposed_vendor"
+      get "pending_approval"
+      get "vendor"
+      get "make_purchase_order"
+      post "create_without_sales_tax_exemption"
+    end
+    
+    member do
+      post "change_vendor"
+      put "proposed_approval"
+      get "show_select_vendor"
+      get "approval_yes"
+      put "approval_yes"
+      get "approval_no"
+      put "approval_no"
+      get "printable"
+      
+      get "display_maintenance"
+      put "submit_vselect"
+    end
+  end
+
+  resources :product_prices
+
+  resources :trade_terms
+
+  resources :type_of_sales
+
+  resources :trade_companies do
+    collection do
+      get "auto_complete"
+      get "all_trade_companies"
+      get "customer"
+      get "kiv_customers"
+      get "kiv_vendors"
+    end
+  end
+
+  resources :company_profiles
+
+  resources :unit_measurements
+
+  resources :products do
+    collection do
+      get "non_operation"
+      get "operation"
+      get "finish_good"
+      
+      get "new_for_receive_note"
+      post "post_for_receive_note"
+      
+      get "message"
+      
+    end
+    
+    member do
+      get "current_stock"
+      get "loading_product_id"
+    end
+  end
+
+  resources :product_categories do
+    collection do
+      post "edit_window"
+      post "new_folder"
+      get "non_operation"
+      get "operation"
+      get "finish_good"
+    end
+    member do
+      put "remove"
+      put "recover"
+    end
+  end
 
   resources :departments
 
-  devise_for :users
+#  devise_for :users, :controllers => { :registrations => "users" }
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  
   resources :users do
     member do
       get "profile"
@@ -16,6 +196,8 @@ Merp::Application.routes.draw do
     end
     collection do
       get "backup"
+      get "new_user_entry"
+      post "generator_user"
     end
   end
   get "home/index"

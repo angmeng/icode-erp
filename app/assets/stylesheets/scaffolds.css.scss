@@ -3,12 +3,12 @@ body {
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px; }
+  line-height: 18px; 
+}
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px; }
+  font-size: 13px; }
 
 pre {
   background-color: #eee;
@@ -28,10 +28,14 @@ div {
     margin-bottom: 10px; } }
 
 #notice {
-  color: green; }
+    color: green; 
+    border: 1px solid green;
+    padding: 5px; }
 
 #alert {
-  color: red; }
+    color: red; 
+    border: 1px solid red;
+    padding: 5px; }
 
 .field_with_errors {
   padding: 2px;
@@ -57,3 +61,76 @@ div {
   ul li {
     font-size: 12px;
     list-style: square; } }
+    
+  fieldset { border: 1px solid gray; } 
+  legend { font-size: 15px; font-weight: bold; }
+
+
+table.white-line-table {
+        width:100%;
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: white;
+	border-collapse: collapse;
+	background-color: transparent; }
+
+table.white-line-table th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: solid;
+	border-color: white;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; 
+        font-size: 13px;
+}
+        
+table.white-line-table td {
+	border-width: 1px;
+        padding: 1px;
+	border-style: solid;
+	border-color: white;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+        
+table.black-line-table {
+        width:100%;
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: black;
+	border-collapse: collapse;
+	background-color: transparent; }
+
+table.black-line-table th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+        
+table.black-line-table td {
+	border-width: 1px;
+        padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+
+.header_content { background-color: gold; }
+.header_title   { background-color: orange; }
+.header_line    { background-color: lightsteelblue; }
+.odd_line       { background-color: wheat; }
+.even_line      { background-color: #e0f8f8; }
+.footer_line    { background-color: lightgrey; }
+.green_line     { background-color: #00ff33; }
+.yellow_line    { background-color: yellow; }
+.bolder         { font-weight: bold; }
+.red_alert      { background-color: red; padding: 5px; color: white; font-weight: bold; }
+
+#management_system {
+    width:300px;
+}
+
+.search_engine { display:none; background-color: lightgrey; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 10px;}

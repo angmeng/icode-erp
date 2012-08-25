@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BackupCenter</title>
-  <%= stylesheet_link_tag    "application", "easyui", 'easyui/icon', 'easyui/default/easyui', :media => "all" %>
-  <%= javascript_include_tag "application", 'jquery.easyui.min' %>
+  <title>Etheos Imprint eResourse Planning System</title>
+  <%= stylesheet_link_tag    "application", :media => 'all' %>  
+  <%= stylesheet_link_tag    "easyui", 'easyui/icon', 'easyui/default/easyui', :media => "all" %>
+  <%= javascript_include_tag "application", "jquery.function", 'jquery.easyui.min' %>
+  <%=  yield :head %>
   <%= csrf_meta_tags %>
 </head>
 <body class="easyui-layout">
-    <div id="easyui-content" region="center" title="Etheos Imprint Sdn Bhd" style="padding:10px;">  
-      <div style="padding-right:10px;">
+    <div id="easyui-content" region="center" title="Etheos Imprint eResourse Planning System">  
+      <div>
         <% if user_signed_in? %>
-          <%= render "/layouts/north_menu" %>
+          <%= render "/layouts/top_menu" %>
         <% end %>
       </div>
-      <p class="notice" id="notice"><%= notice %></p>
-      <p class="alert" id="alert"><%= alert %></p>
+      <% if flash[:notice] %><p id="notice"><%= flash[:notice] %></p><% end %>
+      <% if flash[:alert] %><p id="alert"><%= flash[:alert] %></p><% end %>
       <%= yield %>       
     </div>  
 </body>

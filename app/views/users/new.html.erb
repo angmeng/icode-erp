@@ -1,2 +1,29 @@
-<h1>User#new</h1>
-<p>Find me in app/views/user/new.html.erb</p>
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :name %><br />
+  <%= f.text_field :name %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :department_id %><br />
+  <%= f.select :department_id, options_from_collection_for_select(Department.order("name").all, 'id', 'name'), { :include_blank => true } %></div>
+
+  <div><%= f.label :level %><br />
+  <%= f.select :level, options_for_select([["LEVEL 1", 1], ["LEVEL 2", 2], ["LEVEL 3", 3]]) %></div>
+  
+  <br/>
+  
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<%= render "links" %>

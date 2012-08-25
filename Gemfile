@@ -22,7 +22,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'devise', ">= 2.0.0"
+gem "devise", "~> 2.1.0"
+gem "devise-encryptable"
 gem "omniauth"
 
 # To use ActiveModel has_secure_password
@@ -39,3 +40,12 @@ gem "omniauth"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'rabl'
+gem 'will_paginate', '~> 3.0'
+gem "pdfkit"
+gem "squeel"
+#gem "meta_search", "~> 1.1.3"
+gem "meta_search"
+#gem "ransack"
+

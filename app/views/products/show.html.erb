@@ -1,0 +1,82 @@
+<%= render "/layouts/block_scaffolds" %>
+
+<h2>Show Product ID</h2>
+<table>
+  <tr>
+    <td width="170"><b>Product Code</b></td>
+    <td>
+      <%= render "/product_categories/join_product_category", :pc => @product.product_category %>
+    </td>
+    <td><b>U/M</b></td>
+    <td><%= @product.unit_measurement.code rescue '-' %></td>
+  </tr>
+  <tr>
+    <td><b>Category Description</b></td>
+    <td><%= @product.product_category.desc rescue '-' %></td>
+  </tr>
+  <tr>
+    <td><b>Description</b></td>
+    <td><%= simple_format(@product.desc) %></td>
+  </tr>
+
+  <tr>
+    <td><b>Part no</b></td>
+    <td><%= @product.part_no rescue '-' %></td>
+  </tr>
+
+  <tr>
+    <td><b>Tarif code</b></td>
+    <td>
+      <%= @product.sales_tax_exemption.tarif_code rescue '-' %>&nbsp;&nbsp;&nbsp;&nbsp; <b>Perihal Barang:</b> <%= @product.sales_tax_exemption.perihal_barang rescue '-' %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Part weight</b></td>
+    <td><%= number_with_precision(@product.part_weight, :precision => 6) %> g</td>
+  </tr>
+  <% if params[:category_type].to_i == ProductCategory::FINISH_GOOD %>
+    <tr>
+      <td>
+        <b>Selling price</b>
+      </td>
+      <td><%= number_with_precision(@product.selling_price, :precision => 5) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td><b>Cutoff date</b></td>
+    <td><%= @product.cutoff_date.strftime("%d %B %Y") rescue '-' %></td>
+  </tr>
+
+  <tr>
+    <td><b>Opening stock</b></td>
+    <td><%= number_with_precision(@product.opening_stock, :precision => 2) %></td>
+  </tr>
+
+  <tr>
+    <td><b>Current stock</b></td>
+    <td><%= number_with_precision(@product.current_stock, :precision => 2) %></td>
+  </tr>
+  
+  <% if @product.product_vendors.present? %>
+    <tr>
+      <td><b>Trade Companies</b></td>
+      <td>
+        <table>
+            <% @product.product_vendors.each_with_index do |pv, index| %>
+              <tr>
+                <td><%= index + 1 %>.&nbsp;</td>
+                <td><%= pv.trade_company.name rescue '-' %></td>
+                <td>(U/P: <%= number_with_precision(pv.unit_price, :precision => 4) rescue '-' %>)</td>
+              </tr>
+            <% end %>
+        </table>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%#= link_to 'Edit', edit_product_path(@product) %> 
+<%= link_close_button %>
