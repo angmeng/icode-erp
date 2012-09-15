@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824160656) do
+ActiveRecord::Schema.define(:version => 20120912143610) do
 
   create_table "colors", :force => true do |t|
     t.string   "color_code"
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
 
   create_table "currencies", :force => true do |t|
     t.string   "name"
-    t.string   "symbol"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "status",      :default => "ACTIVE"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "description"
   end
 
@@ -90,8 +90,9 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "status",     :default => "ACTIVE"
   end
 
   create_table "formulations", :force => true do |t|
@@ -246,11 +247,12 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
     t.integer  "revision",                :default => 0
     t.integer  "tax",                     :default => 0
     t.integer  "verify"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.integer  "purchase_requisition_id"
     t.integer  "sales_tax_exemption_id"
     t.float    "kgs",                     :default => 0.0
+    t.string   "status",                  :default => "ACTIVE"
   end
 
   add_index "purchase_orders", ["trade_company_id"], :name => "index_purchase_orders_on_trade_company_id"
@@ -299,6 +301,7 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
     t.string   "approved_by_level_five"
     t.date     "approved_by_level_five_date"
     t.string   "remark"
+    t.integer  "tasks"
   end
 
   create_table "quotation_request_forms", :force => true do |t|
@@ -444,12 +447,13 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
     t.float    "apply_qty",              :default => 0.0
     t.float    "complete_qty",           :default => 0.0
     t.integer  "unit_measurement_id"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.boolean  "valid_condition",        :default => false
     t.float    "remaining_total"
     t.string   "perihal_barang"
     t.string   "registration_no"
+    t.string   "status",                 :default => "ACTIVE"
   end
 
   create_table "selection_die_cuts", :force => true do |t|
@@ -543,14 +547,16 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
   create_table "trade_terms", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "status",      :default => "ACTIVE"
   end
 
   create_table "transports", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "status",     :default => "ACTIVE"
   end
 
   create_table "type_of_sales", :force => true do |t|
@@ -563,13 +569,14 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
   create_table "unit_measurements", :force => true do |t|
     t.string   "code"
     t.string   "desc"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "status",     :default => "ACTIVE"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",       :null => false
+    t.string   "encrypted_password",     :default => "",       :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -587,17 +594,19 @@ ActiveRecord::Schema.define(:version => 20120824160656) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "name"
     t.integer  "department_id"
     t.integer  "level"
+    t.string   "status",                 :default => "ACTIVE"
+    t.string   "job_title"
+    t.integer  "report_to"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["department_id"], :name => "index_users_on_department_id"
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 

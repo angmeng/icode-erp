@@ -1,10 +1,7 @@
 class ProductsController < ApplicationController
-  layout false
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
-  
-  def index
-  end
+  layout "sheetbox"
   
   def message
       session[:pri_id]       = params[:pri_id]
@@ -21,7 +18,7 @@ class ProductsController < ApplicationController
     else
       @listing_categories = nil
     end
-    render :layout => "application"
+#    
   end
   
   def operation
@@ -31,7 +28,7 @@ class ProductsController < ApplicationController
     else
       @listing_categories = nil
     end
-    render :layout => "application"
+#    
   end
   
   def finish_good
@@ -41,7 +38,7 @@ class ProductsController < ApplicationController
     else
       @listing_categories = nil
     end
-    render :layout => "application"
+#    
   end
 
   def show
@@ -146,6 +143,7 @@ class ProductsController < ApplicationController
   end
   
   private
+  
   def inventory_management_system
     role(Product::ROLE)
   end

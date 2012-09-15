@@ -6,16 +6,19 @@
   </tr>
 </table>
 
-<div><%= render "search_department" %></div>
+<div><%= render "search_department_kiv" %></div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING - DEPARTMENTS</strong></div>
+<div style="background-color:blue"><strong style="color:white;">LISTING KIV - DEPARTMENTS</strong></div>
 
 <% if @departments.present? %>
   <%= render "listing_department", :dep => @departments %>
-  <%= render "action_department" %>            
+  <%= render "action_department_kiv" %>   
 <% else %>
-  Not Record Found.
+  No Record Found..
 <% end %>
 
-<br/>
+<br />
+
+
+
 

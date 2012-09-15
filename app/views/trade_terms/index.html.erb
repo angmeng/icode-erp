@@ -1,0 +1,21 @@
+<table width="100%">
+  <tr>
+    <td align="right">
+      <%= link_to 'Search', "#", :class => "search_link" %>
+    </td>
+  </tr>
+</table>
+
+<div><%= render "search_trade_term" %></div>
+
+<div style="background-color:blue"><strong style="color:white;">LISTING - TRADE TERMS</strong></div>
+
+<% if @trade_terms.present? %>
+  <%= render "listing_trade_term", :tt => @trade_terms %>
+  <%= render "action_trade_term" %>            
+<% else %>
+  Not Record Found.
+<% end %>
+
+<br/>
+

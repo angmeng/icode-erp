@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if lt IE 9]>  <html class="ie     no-js" lang="en"> <![endif]-->
+  
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Etheos Imprint eResourse Planning System</title>
   <%= stylesheet_link_tag    "application", :media => 'all' %>  
-  <%= stylesheet_link_tag    "easyui", 'easyui/icon', 'easyui/default/easyui', :media => "all" %>
-  <%= javascript_include_tag "application", "jquery.function", 'jquery.easyui.min' %>
-  <%=  yield :head %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :head %>
   <%= csrf_meta_tags %>
 </head>
-<body class="easyui-layout">
-    <div id="easyui-content" region="center" title="Etheos Imprint eResourse Planning System">  
-      <div>
-        <% if user_signed_in? %>
-          <%= render "/layouts/top_menu" %>
-        <% end %>
-      </div>
-      <% if flash[:notice] %><p id="notice"><%= flash[:notice] %></p><% end %>
-      <% if flash[:alert] %><p id="alert"><%= flash[:alert] %></p><% end %>
-      <%= yield %>       
-    </div>  
+
+<body>
+  <div>
+    <% if user_signed_in? %>
+      <% unless action_name == "show" %>
+        <%= render "/layouts/top_menu" %>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <%# unless controller_name == "sessions" %>
+    <% flash.each do |key, msg| %>
+      <%= content_tag :p, :id => key do %>
+        <%= msg %>
+        <span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
+      <% end %>
+    <% end %>
+  <%# end %>
+
+  <%= yield %>    
 </body>
 </html>
+
+

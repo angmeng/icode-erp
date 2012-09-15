@@ -1,0 +1,24 @@
+<table width="100%">
+  <tr>
+    <td align="right">
+      <%= link_to 'Search', "#", :class => "search_link" %>
+    </td>
+  </tr>
+</table>
+
+<div><%= render "search_trade_term_kiv" %></div>
+
+<div style="background-color:blue"><strong style="color:white;">LISTING KIV - TRADE TERMS</strong></div>
+
+<% if @trade_terms.present? %>
+  <%= render "listing_trade_term", :tt => @trade_terms %>
+  <%= render "action_trade_term_kiv" %>   
+<% else %>
+  No Record Found..
+<% end %>
+
+<br />
+
+
+
+

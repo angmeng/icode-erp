@@ -67,18 +67,18 @@ UnitMeasurement.create([
 ])
 
 Currency.create([
-  {:name => 'AUD'},
-  {:name => 'RM'},
-  {:name => 'SGD'},
-  {:name => 'USD'},
-  {:name => 'YEN'}
+  {:name => 'AUD', :status => "ACTIVE"},
+  {:name => 'RM', :status => "ACTIVE"},
+  {:name => 'SGD', :status => "ACTIVE"},
+  {:name => 'USD', :status => "ACTIVE"},
+  {:name => 'YEN', :status => "ACTIVE"}
 ])
 
 Transport.create([
-  {:name => 'AIR'},
-  {:name => 'RAIL'},
-  {:name => 'ROAD'},
-  {:name => 'SEA'}
+  {:name => 'AIR', :status => "ACTIVE"},
+  {:name => 'RAIL', :status => "ACTIVE"},
+  {:name => 'ROAD', :status => "ACTIVE"},
+  {:name => 'SEA', :status => "ACTIVE"}
 ])
 
 Department.create([
@@ -117,75 +117,245 @@ InventoryIssue.create([
 ])
 
 InventoryManagementSystem.create([
-  {:name => 'PURCHASE REQUISITION MENU'},
-  {:name => 'PURCHASE REQUISITION MAIN'},
-  {:name => 'PURCHASE REQUISITION NEW'},
-  {:name => 'PURCHASE REQUISITION SHOW'},
-  {:name => 'PURCHASE REQUISITION EDIT'},
-  {:name => 'PURCHASE REQUISITION DELETE'},
-  {:name => 'PURCHASE REQUISITION PRINTABLE'},
     
+#1-18
+  #module
+  {:name => 'PR MENU'},
+  
+  #sub module
+  {:name => 'PR NEW'},
+  {:name => 'PR TRANSACTION'},
+  {:name => 'PR KIV VIEW'},
+  {:name => 'PR ITEMS KIV VIEW'},
+  
+  #action - pr new
+  {:name => 'PR NEW ADD ITEMS'},
+  {:name => 'PR NEW SHOW'},
+  {:name => 'PR NEW EDIT'},
+  {:name => 'PR NEW KIV'},
+  {:name => 'PR NEW PRINTABLE'},
+  
+  #action - pr transaction
+  {:name => 'PR TRANSACTION SHOW'},
+  {:name => 'PR TRANSACTION EDIT'},
+  {:name => 'PR TRANSACTION KIV'},
+  {:name => 'PR TRANSACTION PRINTABLE'},
+  
+  #action - pr kiv view
+  {:name => 'PR KIV SHOW'},
+  {:name => 'PR KIV RECOVER'},
+  
+  #action - pr items kiv view
+  {:name => 'PR ITEMS KIV SHOW'},
+  {:name => 'PR ITEMS KIV RECOVER'},
+  
+    
+  
+#19-48
+  #module
   {:name => 'PURCHASE ORDER MENU'},
-  {:name => 'PURCHASE ORDER MAIN'},
-  {:name => 'PURCHASE ORDER NEW'},
-  {:name => 'PURCHASE ORDER SHOW'},
-  {:name => 'PURCHASE ORDER EDIT'},
-  {:name => 'PURCHASE ORDER DELETE'},
-  {:name => 'PURCHASE ORDER PRINTABLE'},
   
+  #sub-module
+  {:name => 'PURCHASE ORDER APPROVED FROM PR'},
+  {:name => 'PURCHASE ORDER PR-REPAIR'},
+  {:name => 'PURCHASE ORDER PROPOSED VENDOR'},
+  {:name => 'PURCHASE ORDER VENDOR SELECTION'},
+  {:name => 'PURCHASE ORDER VENDOR REGISTRATION'},
+  {:name => 'PURCHASE ORDER ENTRY'},
+  {:name => 'PURCHASE ORDER TRANSACTION'},
+  {:name => 'PURCHASE ORDER KIV VIEW'},
+   
+  #action - pr-repair  
+  {:name => 'PURCHASE ORDER PR-REPAIR APPLY'}, 
+  {:name => 'PURCHASE ORDER PR-REPAIR SUBMIT TO'}, 
+  {:name => 'PURCHASE ORDER PR-REPAIR KIV'}, 
+  
+  #action - proposed vendor
+  {:name => 'PURCHASE ORDER PROPOSED VENDOR APPLY'},
+  {:name => 'PURCHASE ORDER PROPOSED VENDOR SUBMIT TO'},
+  {:name => 'PURCHASE ORDER PROPOSED VENDOR KIV'}, 
+  
+  #action - vendor selection
+  {:name => 'PURCHASE ORDER VENDOR SELECTION APPLY'},
+  {:name => 'PURCHASE ORDER VENDOR SELECTION SUBMIT TO'},
+  {:name => 'PURCHASE ORDER VENDOR SELECTION KIV'}, 
+  
+  #action - vendor registration
+  {:name => 'PURCHASE ORDER VENDOR REGISTRATION APPLY'},
+  {:name => 'PURCHASE ORDER VENDOR REGISTRATION SUBMIT TO'},
+  {:name => 'PURCHASE ORDER VENDOR REGISTRATION KIV'},
+  
+  #action - po entry
+  {:name => 'PURCHASE ORDER ENTRY APPLY'},
+  {:name => 'PURCHASE ORDER ENTRY SUBMIT TO'},
+  {:name => 'PURCHASE ORDER ENTRY KIV'},
+  
+  #action - transaction
+  {:name => 'PURCHASE ORDER TRANSACTION SHOW'},
+  {:name => 'PURCHASE ORDER TRANSACTION EDIT'},
+  {:name => 'PURCHASE ORDER TRANSACTION KIV'},
+  {:name => 'PURCHASE ORDER TRANSACTION PRINTABLE'},
+  
+  #action - kiv
+  {:name => 'PO KIV SHOW'},
+  {:name => 'PO KIV RECOVER'},
+   
+    
+#49-60
+  #module
   {:name => 'RECEIVE NOTE MENU'},
-  {:name => 'RECEIVE NOTE MAIN'},
+  
+  #sub-module
   {:name => 'RECEIVE NOTE NEW'},
-  {:name => 'RECEIVE NOTE SHOW'},
-  {:name => 'RECEIVE NOTE EDIT'},
-  {:name => 'RECEIVE NOTE DELETE'},
-  {:name => 'RECEIVE NOTE PRINTABLE'},
+  {:name => 'RECEIVE NOTE TRANSACTION'},
+  {:name => 'RECEIVE NOTE COMPLETED VIEW'},
+  {:name => 'RECEIVE NOTE KIV VIEW'},
   
-  {:name => 'INCOMING REJECT MENU'},
-  {:name => 'INCOMING REJECT MAIN'},
-  {:name => 'INCOMING REJECT NEW'},
-  {:name => 'INCOMING REJECT SHOW'},
-  {:name => 'INCOMING REJECT EDIT'},
-  {:name => 'INCOMING REJECT DELETE'},
-  {:name => 'INCOMING REJECT PRINTABLE'},
-
+  #action - new
+  {:name => 'RECEIVE NOTE NEW SAVE'},
+  
+  #action - Transaction
+  {:name => 'RECEIVE NOTE TRANSACTION SHOW'},
+  {:name => 'RECEIVE NOTE TRANSACTION EDIT'},
+  {:name => 'RECEIVE NOTE TRANSACTION KIV'},
+  {:name => 'RECEIVE NOTE TRANSACTION PRINTABLE'},
+  
+  #action - kiv
+  {:name => 'RN KIV SHOW'},
+  {:name => 'RN KIV RECOVER'},
+  
+    
+#61-76
+  #module
   {:name => 'SALES TAX EXEMPTION MENU'},
-  {:name => 'SALES TAX EXEMPTION MAIN'},
+  
+  #sub-module
   {:name => 'SALES TAX EXEMPTION NEW'},
-  {:name => 'SALES TAX EXEMPTION SHOW'},
-  {:name => 'SALES TAX EXEMPTION EDIT'},
-  {:name => 'SALES TAX EXEMPTION DELETE'},
-  {:name => 'SALES TAX EXEMPTION PRINTABLE'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID'},
+  {:name => 'SALES TAX EXEMPTION KIV'},
   
+  #sub-module
+  {:name => 'SALES TAX EXEMPTION SAVE'},
+    
+  #action-transaction valid
+  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID SHOW'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID EDIT'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID KIV'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID PRINTABLE'},
+  
+  #action-transaction unvalid
+  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID SHOW'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID EDIT'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID KIV'},
+  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID PRINTABLE'},
+  
+  #action - kiv valid
+  {:name => 'STE KIV VALID SHOW'},
+  {:name => 'STE KIV VALID RECOVER'},
+  
+    
+#77-87
+  #module
   {:name => 'INVENTORY MENU'},
-  {:name => 'INVENTORY MAIN'},
+  
+  #sub module
   {:name => 'INVENTORY NEW'},
-  {:name => 'INVENTORY SHOW'},
-  {:name => 'INVENTORY EDIT'},
-  {:name => 'INVENTORY DELETE'},
-  {:name => 'INVENTORY PRINTABLE'},
+  {:name => 'INVENTORY TRANSACTION'},
+  {:name => 'INVENTORY KIV VIEW'},
   
+  #action
+  {:name => 'INVENTORY NEW SAVE'},
+  
+  #action - transaction
+  {:name => 'INVENTORY TRANSACTION SHOW'},
+  {:name => 'INVENTORY TRANSACTION EDIT'},
+  {:name => 'INVENTORY TRANSACTION KIV'},
+  {:name => 'INVENTORY TRANSACTION PRINTABLE'},
+  
+  #action => kiv
+  {:name => 'INVENTORY TRANSACTION KIV SHOW'},
+  {:name => 'INVENTORY TRANSACTION KIV RECOVER'},
+  
+    
+#88-93
+# Housekeeping
+  #module
+  {:name => 'COMPANY PROFILE MENU'},
+  
+  #sub module
+  {:name => 'COMPANY PROFILE VIEW'},
+  
+  #action
+  {:name => 'COMPANY PROFILE SHOW'},
+  {:name => 'COMPANY PROFILE EDIT'},
+  {:name => 'COMPANY PROFILE KIV'},
+  {:name => 'COMPANY PROFILE PRINTABLE'},
+    
+#94-114
+  #module  
   {:name => 'TRADE COMPANY MENU'},
-  {:name => 'TRADE COMPANY MAIN'},
-  {:name => 'TRADE COMPANY NEW'},
-  {:name => 'TRADE COMPANY SHOW'},
-  {:name => 'TRADE COMPANY EDIT'},
-  {:name => 'TRADE COMPANY DELETE'},
-  {:name => 'TRADE COMPANY PRINTABLE'},
   
+  #sub module
+  {:name => 'VENDOR MENU'},
+  {:name => 'CUSTOMER MENU'},
+  
+  #sub sub module
+  {:name => 'VENDOR NEW'},
+  {:name => 'VENDOR LISTING'},
+  {:name => 'VENDOR KIV'},
+  
+    #action - save
+  {:name => 'VENDOR NEW SAVE'},
+    
+  #action vendor listing
+  {:name => 'VENDOR SHOW'},
+  {:name => 'VENDOR EDIT'},
+  {:name => 'VENDOR ACTION KIV'},  #127
+  {:name => 'VENDOR PRINTABLE'},
+  
+  {:name => 'VENDOR KIV SHOW'},
+  {:name => 'VENDOR KIV RECOVER'},
+    
+
+  {:name => 'CUSTOMER NEW'},
+  {:name => 'CUSTOMER LISTING'},
+  {:name => 'CUSTOMER KIV'},
+  
+    #new
+  {:name => 'CUSTOMER NEW SAVE'},
+  
+    #listing
+  {:name => 'CUSTOMER SHOW'},
+  {:name => 'CUSTOMER EDIT'},
+  {:name => 'CUSTOMER ACTION KIV'},  #128
+  {:name => 'CUSTOMER PRINTABLE'},
+  
+    #kiv
+  {:name => 'CUSTOMER KIV SHOW'},
+  {:name => 'CUSTOMER KIV RECOVER'},
+
+
+#115-126
   {:name => 'PRODUCT CATEGORY MENU'},
-  {:name => 'PRODUCT CATEGORY MAIN'},
   {:name => 'PRODUCT CATEGORY NEW'},
   {:name => 'PRODUCT CATEGORY SHOW'},
   {:name => 'PRODUCT CATEGORY EDIT'},
-  {:name => 'PRODUCT CATEGORY DELETE'},
+  {:name => 'PRODUCT CATEGORY KIV'},
   {:name => 'PRODUCT CATEGORY PRINTABLE'},
-  
   {:name => 'PRODUCT ID MENU'},
-  {:name => 'PRODUCT ID MAIN'},
   {:name => 'PRODUCT ID NEW'},
   {:name => 'PRODUCT ID SHOW'},
   {:name => 'PRODUCT ID EDIT'},
-  {:name => 'PRODUCT ID DELETE'},
+  {:name => 'PRODUCT ID KIV'},
   {:name => 'PRODUCT ID PRINTABLE'}
+  
+    
+#  {:name => 'INCOMING REJECT MENU'},
+#  {:name => 'INCOMING REJECT TRANSACTION'},
+#  {:name => 'INCOMING REJECT NEW'},
+#  {:name => 'INCOMING REJECT SHOW'},
+#  {:name => 'INCOMING REJECT EDIT'},
+#  {:name => 'INCOMING REJECT DELETE'},
+#  {:name => 'INCOMING REJECT PRINTABLE'},
 ])

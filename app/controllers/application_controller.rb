@@ -32,14 +32,14 @@ class ApplicationController < ActionController::Base
   helper_method :unit_measurement
   helper_method :currency
   helper_method :transport
-  helper_method :trade_company
-  helper_method :trade_name
+  helper_method :trade_company_vendor
   helper_method :trade_company_customer
-  helper_method :sales_tax_exemption
+  helper_method :ste_no_with_valid
+  helper_method :ste_no_with_not_valid
   helper_method :issues_in
   helper_method :issues_out
   helper_method :roles
-
+  helper_method :users
   
   def company
     @company ||= CompanyProfile.first
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
   
   def trade_term
-    @trade_term ||= TradeTerm.all
+    @trade_term ||= TradeTerm.ordered
   end
   
   def type_of_sale
@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   end
   
   def unit_measurement
-    @unit_measurement ||=  UnitMeasurement.ordered
+    @unit_measurement ||=  UnitMeasurement.ordering_code
   end
 
   def currency
@@ -69,20 +69,20 @@ class ApplicationController < ActionController::Base
     @transport ||= Transport.ordered
   end
   
-  def trade_company
-    @trade_company ||= TradeCompany.ordered_code
-  end
-  
-  def trade_name
-    @trade_name ||= TradeCompany.ordered_name
+  def trade_company_vendor #vendor only
+    @trade_company_vendor ||= TradeCompany.ordered_with_vendor_name
   end
   
   def trade_company_customer
     @trade_company_customer ||= TradeCompany.ordered_with_customer_name
   end
   
-  def sales_tax_exemption
-    @sales_tax_exemption ||= SalesTaxExemption.order_licence
+  def ste_no_with_valid
+    @ste_no_with_valid ||= SalesTaxExemption.ordered_ste_no_with_valid
+  end
+  
+  def ste_no_with_not_valid
+    @ste_no_with_not_valid ||= SalesTaxExemption.ordered_ste_no_with_not_valid
   end
   
   def issues_in
@@ -95,6 +95,10 @@ class ApplicationController < ActionController::Base
   
   def product_suppliers
     @product_suppliers ||= Product.collection_suppliers
+  end
+  
+  def users
+    @users ||= User.ordered_name
   end
   
   def goto_direction(this)
@@ -114,6 +118,8 @@ class ApplicationController < ActionController::Base
   def roles
     @roles = current_user.roles.map(&:inventory_management_system_id)
   end
+  
+
   
   private
   

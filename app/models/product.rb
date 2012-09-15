@@ -25,11 +25,29 @@ class Product < ActiveRecord::Base
   validates :desc, :length => { :maximum => 255 }
   
   ROLE = [
-    InventoryManagementSystem::PRODUCT_ID_SHOW, 
-    InventoryManagementSystem::PRODUCT_ID_EDIT,
-    InventoryManagementSystem::PRODUCT_ID_DELETE,
-    InventoryManagementSystem::PRODUCT_ID_PRINTABLE,
-    InventoryManagementSystem::PRODUCT_ID_NEW
+    InventoryManagementSystem::PRODUCT_MENU,
+  
+    InventoryManagementSystem::PRODUCT_NON_OPERATION,
+    InventoryManagementSystem::PRODUCT_OPERATION,
+    InventoryManagementSystem::PRODUCT_FINISH_GOOD,
+
+    InventoryManagementSystem::PRODUCT_NON_OPERATION_PARENT_FOLDER,
+    InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_FOLDER,
+    InventoryManagementSystem::PRODUCT_NON_OPERATION_EDIT_SUB_FOLDER,
+    InventoryManagementSystem::PRODUCT_NON_OPERATION_ADD_NEW_FILE,
+    InventoryManagementSystem::PRODUCT_NON_OPERATION_EDIT_FILE,
+
+    InventoryManagementSystem::PRODUCT_OPERATION_PARENT_FOLDER,
+    InventoryManagementSystem::PRODUCT_OPERATION_SUB_FOLDER,
+    InventoryManagementSystem::PRODUCT_OPERATION_EDIT_SUB_FOLDER,
+    InventoryManagementSystem::PRODUCT_OPERATION_ADD_NEW_FILE,
+    InventoryManagementSystem::PRODUCT_OPERATION_EDIT_FILE,
+
+    InventoryManagementSystem::PRODUCT_FINISH_GOOD_PARENT_FOLDER, 
+    InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_FOLDER,
+    InventoryManagementSystem::PRODUCT_FINISH_GOOD_EDIT_SUB_FOLDER,
+    InventoryManagementSystem::PRODUCT_FINISH_GOOD_ADD_NEW_FILE,
+    InventoryManagementSystem::PRODUCT_FINISH_GOOD_EDIT_FILE
   ]
     
   def uppercase_text

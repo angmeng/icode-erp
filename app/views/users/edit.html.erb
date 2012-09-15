@@ -1,152 +1,28 @@
-<%= render "/layouts/block_alert" %>
-
-<h2>User Entry</h2>
+<div style="background-color:blue"><strong style="color:white;">EDIT USER</strong></div>
 
 <%= form_tag @user, :url => edit_user_path(@user), :method => :put do  %>
-  <% if current_user.level == User::LEVEL_FIVE %>
-    <table>
-        <tr>
-          <td>Name</td>
-          <td><%= text_field_tag :new_name, @user.name, :size => 30, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td><%= text_field_tag :new_email, @user.email, :size => 30, :required => "true", :validType => "maxLength[80]", :class => "easyui-validatebox" %></td>
-        </tr>
-        <tr>
-          <td>Department</td>
-          <td><%= select_tag :department_id, options_from_collection_for_select(Department.order("name").all, 'id', 'name', @user.department_id.to_i), { :include_blank => true } %></td>
-        </tr>
-        <tr>
-          <td>Level</td>
-          <td>
-            <% if @user.level != User::LEVEL_FIVE %>
-              <%= select_tag :level, options_for_select([["LEVEL 1", User::LEVEL_ONE ], ["LEVEL 2", User::LEVEL_TWO], ["LEVEL 3", User::LEVEL_THREE]], @user.level.to_i), :include_blank => true %>
-            <% else %>
-              <%= @user.level %>
-              <%= hidden_field_tag :level, @user.level %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>Password</td>
-          <td><%= password_field_tag :password, params[:password], :size => 30, :validType => "maxLength[40]", :class => "easyui-validatebox" %></td>
-        </tr>
-        <tr>
-          <td colspan="2"><i style="color:red;">*Blank password field if don't change password.</i></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="right"><%= submit_tag "Submit" %></td>
-        </tr>
-    </table>
-      
-    <div id="management_system">
-      <div>Inventory Management System</div>
-
-      <ul id="panelbar">
-        <li>
-          Purchase Requisitions
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_MENU, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_MENU) %> Purchase Requisition Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_MAIN, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_MAIN) %> Purchase Requisition Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_NEW, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_NEW) %> Purchase Requisition New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_SHOW, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_SHOW) %> Purchase Requisition Show</li-->
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_EDIT, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_EDIT) %> Purchase Requisition Edit</li-->
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_DELETE, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_DELETE) %> Purchase Requisition Delete</li-->
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_PRINTABLE) %> Purchase Requisition Printable</li-->
-          </ul>
+  <div id="user_strip">
+    <ul>
+        <li class="k-state-active">
+          User Account
         </li>
         <li>
-          Purchase Orders
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_MENU, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %> Purchase Order Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_MAIN, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_MAIN) %> Purchase Order Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_NEW, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_NEW) %> Purchase Order New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_SHOW, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_SHOW) %> Purchase Order Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_EDIT, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_EDIT) %> Purchase Order Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_DELETE, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_DELETE) %> Purchase Order Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PRINTABLE) %> Purchase Order Printable</li-->
-          </ul>
+          Inventory Management System
         </li>
-        <li>
-          Receive Notes
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> Receive Note Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MAIN, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_MAIN) %> Receive Note Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %> Receive Note New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SHOW, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_SHOW) %> Receive Note Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_EDIT, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_EDIT) %> Receive Note Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_DELETE, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_DELETE) %> Receive Note Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_PRINTABLE) %> Receive Note Printable</li-->
-          </ul>
-        </li>
-        <li>
-          Incoming Reject
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_MENU, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_MENU) %> Incoming Reject Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_MAIN, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_MAIN) %> Incoming Reject Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_NEW, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_NEW) %> Incoming Reject New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_SHOW, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_SHOW) %> Incoming Reject Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_EDIT, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_EDIT) %> Incoming Reject Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_DELETE, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_DELETE) %> Incoming Reject Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INCOMING_REJECT_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::INCOMING_REJECT_PRINTABLE) %> Incoming Reject Printable</li-->
-          </ul>
-        </li>
-        <li>
-          Custom
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU) %> Sales Tax Exemption Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MAIN, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MAIN) %> Sales Tax Exemption Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW) %> Sales Tax Exemption New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SHOW, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SHOW) %> Sales Tax Exemption Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_EDIT, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_EDIT) %> Sales Tax Exemption Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_DELETE, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_DELETE) %> Sales Tax Exemption Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_PRINTABLE) %> Sales Tax Exemption Printable</li-->
-          </ul>
-        </li>
-        <li>
-          Inventory
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_MENU, @checkboxes.include?(InventoryManagementSystem::INVENTORY_MENU) %> Inventory Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_MAIN, @checkboxes.include?(InventoryManagementSystem::INVENTORY_MAIN) %> Inventory Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW, @checkboxes.include?(InventoryManagementSystem::INVENTORY_NEW) %> Inventory New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_SHOW, @checkboxes.include?(InventoryManagementSystem::INVENTORY_SHOW) %> Inventory Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_EDIT, @checkboxes.include?(InventoryManagementSystem::INVENTORY_EDIT) %> Inventory Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_DELETE, @checkboxes.include?(InventoryManagementSystem::INVENTORY_DELETE) %> Inventory Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::INVENTORY_PRINTABLE) %> Inventory Printable</li-->
-          </ul>
-        </li>
-        <li>
-          Housekeeping
-          <ul>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_MENU, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_MENU) %> Trade Company Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_MAIN, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_MAIN) %> Trade Company Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_NEW, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_NEW) %> Trade Company New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_SHOW, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_SHOW) %> Trade Company Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_EDIT, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_EDIT) %> Trade Company Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_DELETE, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_DELETE) %> Trade Company Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_PRINTABLE) %> Trade Company Printable</li-->
-            
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_MENU, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_MENU) %> Product Category Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_MAIN, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_MAIN) %> Product Category Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_NEW, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_NEW) %> Product Category New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_SHOW, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_SHOW) %> Product Category Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_EDIT, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_EDIT) %> Product Category Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_DELETE, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_DELETE) %> Product Category Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_CATEGORY_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::PRODUCT_CATEGORY_PRINTABLE) %> Product Category Printable</li-->
-          
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_MENU, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_MENU) %> Product ID Menu</li-->
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_MAIN, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_MAIN) %> Product ID Main</li>
-            <li><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_NEW, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_NEW) %> Product ID New</li>
-            <!--li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_SHOW, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_SHOW) %> Product ID Show</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_EDIT, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_EDIT) %> Product ID Edit</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_DELETE, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_DELETE) %> Product ID Delete</li>
-            <li><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_ID_PRINTABLE, @checkboxes.include?(InventoryManagementSystem::PRODUCT_ID_PRINTABLE) %> Product ID Printable</li-->
-          </ul>
-        </li>
-      </ul>
+    </ul>
+    <div>
+      <%= render "edit_user_account" %>
     </div>
-  <% end %>
+    <div>
+      <%= render "management" %>
+    </div>
+  </div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
 <% end %>
+
+
 
 

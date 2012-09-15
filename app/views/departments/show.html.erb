@@ -1,10 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div style="background-color:blue"><strong style="color:white;">SHOW DETAILS</strong></div>
 
-<p>
-  <b>Name:</b>
-  <%= @department.name %>
-</p>
+<div class="fix_800x450">
+  <p>
+    <b>Name:</b>
+    <%= @department.name %>
+  </p>	
+</div>
 
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>

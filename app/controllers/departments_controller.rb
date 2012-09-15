@@ -1,16 +1,18 @@
 class DepartmentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :is_director
+  layout "sheetbox"
   
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @departments }
-    end
+    @search = Department.search(params[:search])
+    @departments = Department.ordered_name(@search)
+  end
+  
+  def kiv
+    @search = Department.search(params[:search])
+    @departments = Department.ordered_name_kiv(@search)
   end
 
   # GET /departments/1
@@ -76,10 +78,20 @@ class DepartmentsController < ApplicationController
   # DELETE /departments/1.json
   def destroy
     @department = Department.find(params[:id])
-    @department.destroy
+    @department.update_attributes(:status => Department::KEEP_IN_VIEW)
 
     respond_to do |format|
-      format.html { redirect_to departments_url }
+      format.html { redirect_to departments_url, :notice => "This department has moved to KIV." }
+      format.json { head :no_content }
+    end
+  end
+  
+  def recover
+    @department = Department.find(params[:id])
+    @department.update_attributes(:status => Department::ACTIVE)
+
+    respond_to do |format|
+      format.html { redirect_to kiv_departments_url, :notice => "This department has moved out from KIV." }
       format.json { head :no_content }
     end
   end

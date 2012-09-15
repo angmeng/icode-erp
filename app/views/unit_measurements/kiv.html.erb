@@ -6,13 +6,13 @@
   </tr>
 </table>
 
-<div><%= render "search_unit_measurement"  %></div>
+<div><%= render "search_unit_measurement_kiv"  %></div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING - UNIT MEASUREMENTS</strong></div>
+<div style="background-color:blue"><strong style="color:white;">LISTING KIV - UNIT MEASUREMENTS</strong></div>
 
 <% if @unit_measurements.present? %>
   <%= render "listing_um", :ums => @unit_measurements %>
-  <%= render "action_unit_measurement" %>            
+  <%= render "action_unit_measurement_kiv" %>            
 <% else %>
   Not Record Found.
 <% end %>

@@ -1,0 +1,21 @@
+<table width="100%">
+  <tr>
+    <td align="right">
+      <%= link_to 'Search', "#", :class => "search_link" %>
+    </td>
+  </tr>
+</table>
+
+<div><%= render "search_transport" %></div>
+
+<div style="background-color:blue"><strong style="color:white;">LISTING - TRANSPORTS</strong></div>
+
+<% if @transports.present? %>
+  <%= render "listing_transport", :trans => @transports %>
+  <%= render "action_transport" %>            
+<% else %>
+  Not Record Found.
+<% end %>
+
+<br/>
+

@@ -1,27 +1,22 @@
 class UnitMeasurementsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :is_director
+  layout "sheetbox"
     
-  # GET /unit_measurements
-  # GET /unit_measurements.json
   def index
-    @unit_measurements = UnitMeasurement.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @unit_measurements }
-    end
+    @search = UnitMeasurement.search(params[:search])
+    @unit_measurements = UnitMeasurement.ordered_code(@search)
+  end
+  
+  def kiv
+    @search = UnitMeasurement.search(params[:search])
+    @unit_measurements = UnitMeasurement.ordered_code_kiv(@search)
   end
 
   # GET /unit_measurements/1
   # GET /unit_measurements/1.json
   def show
     @unit_measurement = UnitMeasurement.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @unit_measurement }
-    end
   end
 
   # GET /unit_measurements/new
@@ -71,15 +66,29 @@ class UnitMeasurementsController < ApplicationController
       end
     end
   end
+  
+  def recover
+    @unit_measurement = UnitMeasurement.find(params[:id])
+
+    respond_to do |format|
+      if @unit_measurement.update_attributes(:status => UnitMeasurement::ACTIVE)
+        format.html { redirect_to kiv_unit_measurements_path, notice: 'This unit measurement has moved out from KIV.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @unit_measurement.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /unit_measurements/1
   # DELETE /unit_measurements/1.json
   def destroy
     @unit_measurement = UnitMeasurement.find(params[:id])
-    @unit_measurement.destroy
+    @unit_measurement.update_attributes(:status => "KIV")
 
     respond_to do |format|
-      format.html { redirect_to unit_measurements_url }
+      format.html { redirect_to unit_measurements_url, :notice => "This unit measurement has moved to KIV." }
       format.json { head :no_content }
     end
   end

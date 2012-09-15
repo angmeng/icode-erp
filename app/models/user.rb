@@ -11,63 +11,55 @@ class User < ActiveRecord::Base
          :token_authenticatable, :encryptable, :lockable, :timeoutable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :department_id, :level, :encrypted_password, :password_salt
+  attr_accessible  :password, :password_confirmation, :remember_me, :name, :department_id, :level, :encrypted_password, :password_salt, :status, :job_title, :report_to
   
-  validates :name, :department_id, :level, :presence => true
-  validates :name, :email, :uniqueness => true
-  
-  belongs_to :department
+  validates :name, :job_title, :department_id, :level, :report_to, :presence => true
+  validates :name, :uniqueness => true
   
   has_one :purchase_order
+  has_one :requested_by, :foreign_key => "requested_by", :class_name => "PurchaseRequisition"
   has_many :purchase_requisition_items, :dependent => :destroy
   has_many :sales_order_items, :dependent => :destroy
-  
   has_many :roles, :dependent => :destroy
   has_many :inventory_management_systems, :through => :roles
   
-  has_one :requested_by, :foreign_key => "requested_by", :class_name => "PurchaseRequisition"
+#  has_many   :tasks,     :foreign_key => "report_to", :class_name => "User"
+  belongs_to :applicant, :foreign_key => "report_to", :class_name => "User"
+  
+  has_many :prs, :foreign_key => "tasks", :class_name => "PurchaseRequisition"
+  
+  belongs_to :department
   
   def uppercase_text
     self.name.upcase! if self.name?
+    self.job_title.upcase! if self.job_title?
   end
-  
-  ROLE = [
-    InventoryManagementSystem::QUOTATION_REQUEST_SHOW, 
-#    InventoryManagementSystem::QUOTATION_REQUEST_EDIT
-#    InventoryManagementSystem::PURCHASE_ORDER_DELETE,
-#    InventoryManagementSystem::PURCHASE_ORDER_PRINTABLE,
-#    InventoryManagementSystem::PURCHASE_ORDER_NEW
-  ]
   
   LEVEL_ONE   = 1   # Staff
   LEVEL_TWO   = 2   # Supervisor
   LEVEL_THREE = 3   # General Manager
   LEVEL_FIVE  = 5   # Director
   
-  scope :ordered_name, order("name")
- 
-  HEADER_TITLE = [
-    'Name',
-    'Email',
-    'Department',
-    'Level',
-    'Roles',
-    'Action'
-  ]
+  ACTIVE = "ACTIVE"
+  KEEP_IN_VIEW = "KIV"
+  
+  def self.ordered_level(search)
+    search.order("level DESC").where(:status => User::ACTIVE)
+  end
+  
+  def self.ordered_level_kiv(search)
+    search.order("level DESC").where(:status => User::KEEP_IN_VIEW)
+  end
+  
+  def self.ordered_name
+    order("name").where(:status => User::ACTIVE)
+  end
   
   def generate_role(inventory_management_system)
     inventory_management_system.each do |ims|
       roles.create!(:inventory_management_system_id => ims.to_i)
     end
   end
-
-#  def self.searching_keyword(kw)
-#    if kw.present?
-#      self.where("name like ?", "%#{kw}%") 
-#    else
-#      self.all
-#    end
-#  end
 
   def self.uniq_department
     department = []
@@ -99,5 +91,43 @@ class User < ActiveRecord::Base
       end
     end
     return array
+  end
+  
+  def self.uniq_report_to
+    report = []
+    rpts = User.select('DISTINCT report_to');
+    if rpts.present?
+      rpts.each do |rpt|
+        unless rpt.report_to.blank? or rpt.report_to == 0
+          username = User.find(rpt.report_to).name 
+          report << [username, rpt.report_to]
+        end
+      end
+    end
+    return report
+  end
+  
+  def self.clearing
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE inventory_histories")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_categories")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_prices")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_vendors")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE products")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_order_item_lines")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_orders")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_requisition_items")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_requisitions")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE receive_note_items")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE receive_notes")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE roles")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE sales_tax_exemption_items")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE sales_tax_exemptions")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE temporary_sources")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE temporary_tarif_codes")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE trade_companies")
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
+    User.create(:name => "DIRECTOR", :password => 12345678, :department_id => 1, :level => 5, :job_title => "Director", :report_to => 0)
+    #ActiveRecord::Base.connection.execute("TRUNCATE TABLE colors")
+    #ActiveRecord::Base.connection.execute("TRUNCATE TABLE quotation_request_forms")
   end
 end

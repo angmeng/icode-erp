@@ -14,7 +14,34 @@
 //= require jquery_ujs
 //= require_tree .
 
-//$(document).ready(function () {
-//    $("#notice, #alert").fadeOut(8000);
-//});
+$(document).ready(function () {
+    $("#timedout").hide();
+});
+
+
+$(function() {
+    
+    $("input").bind("keypress", function(e) {
+            if (e.keyCode == 13) return false;
+    });
+ 
+});
+
+//function disableEnterKey(e)
+//{
+//     var key;
+//
+//     if(window.event)
+//          key = window.event.keyCode;     //IE
+//     else
+//          key = e.which;     //firefox
+//
+//     if(key == 13)
+//          return false;
+//     else
+//          return true;
+//}
+
+//<input type=”text” name=”mytext” onKeyPress=”return disableEnterKey(event)”>
+
 

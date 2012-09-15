@@ -54,9 +54,11 @@ Merp::Application.routes.draw do
   resources :sales_tax_exemptions do 
     collection do
       get "no_validation"
+      get "kiv"
     end
     member do
       get "display_items"
+      put "recover"
     end
   end
 
@@ -71,7 +73,11 @@ Merp::Application.routes.draw do
   resources :payment_types
 
   resources :purchase_requisition_items do 
-    put "remove_pr", :on => :member
+    member do
+      put "remove_pr"
+      put "recover"
+    end
+    get "kiv", :on => :collection
   end
 
   resources :product_vendors
@@ -85,7 +91,9 @@ Merp::Application.routes.draw do
       get "pr_requestor"
       get "pr_department"
       get "kiv"
+      get "signature_report"
     end
+    
     member do
       put "yes_approval_requester"
       put "yes_approval_one"
@@ -94,17 +102,24 @@ Merp::Application.routes.draw do
       put "no_approval_om"
       put "yes_approval_three"
       put "no_approval_three"
+      put "recover"
     end
   end
 
-  resources :transports
+  resources :transports do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
 
-  resources :currencies
-
+  resources :currencies do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
+  
   resources :purchase_orders do
     collection do
       get "cancel"
-      get "recover"
+      get "kiv"
       get "select_vendor"
       get "approved_pr"
       get "maintenance"
@@ -125,15 +140,18 @@ Merp::Application.routes.draw do
       get "approval_no"
       put "approval_no"
       get "printable"
-      
       get "display_maintenance"
       put "submit_vselect"
+      put "recover"
     end
   end
 
   resources :product_prices
 
-  resources :trade_terms
+  resources :trade_terms do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
 
   resources :type_of_sales
 
@@ -145,11 +163,15 @@ Merp::Application.routes.draw do
       get "kiv_customers"
       get "kiv_vendors"
     end
+    put "recover", :on => :member
   end
 
   resources :company_profiles
 
-  resources :unit_measurements
+  resources :unit_measurements do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
 
   resources :products do
     collection do
@@ -177,6 +199,8 @@ Merp::Application.routes.draw do
       get "non_operation"
       get "operation"
       get "finish_good"
+      
+      get "parent"
     end
     member do
       put "remove"
@@ -184,7 +208,10 @@ Merp::Application.routes.draw do
     end
   end
 
-  resources :departments
+  resources :departments do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
 
 #  devise_for :users, :controllers => { :registrations => "users" }
   devise_for :users, :controllers => { :registrations => "registrations" }
@@ -193,13 +220,18 @@ Merp::Application.routes.draw do
     member do
       get "profile"
       post "update_profile"
+      put "recover"
     end
     collection do
       get "backup"
       get "new_user_entry"
+      get "kiv"
       post "generator_user"
+      get "lookup_level"
+      get "clear_database"
     end
   end
+  
   get "home/index"
 
   resources :settings
