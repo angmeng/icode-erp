@@ -50,3 +50,4 @@ gem "paperclip"
 #gem 'font-kit-rails'
 gem 'turbolinks'
 #gem "wkhtmltopdf-binary"
+
