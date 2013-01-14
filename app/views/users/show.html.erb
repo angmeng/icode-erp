@@ -30,7 +30,11 @@
         </tr>
         <tr>
           <td>Report To</td>
-          <td><%= @user.applicant.name rescue '-' %></td>
+          <% if @user.direct_report == TRUE %>
+            <td>Direct Report To Director</td>
+          <% else %>
+            <td><%= @user.applicant.name rescue '-' %></td>
+          <% end %>
         </tr>
       </table>
     </div>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company name:</b>
+  <%= @temporary_source.company_name %>
+</p>
+
+<p>
+  <b>Select vendor:</b>
+  <%= @temporary_source.select_vendor %>
+</p>
+
+<p>
+  <b>Unit price:</b>
+  <%= @temporary_source.unit_price %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @temporary_source.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_temporary_source_path(@temporary_source) %> |
+<%= link_to 'Back', temporary_sources_path %>

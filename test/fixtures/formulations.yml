@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  per_value: 1.5
+  from_unit_measurement_id: 1
+  convert_value: 1.5
+  to_unit_measurement_id: 1
+
+two:
+  per_value: 1.5
+  from_unit_measurement_id: 1
+  convert_value: 1.5
+  to_unit_measurement_id: 1

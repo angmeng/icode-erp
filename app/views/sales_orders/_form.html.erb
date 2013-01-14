@@ -1,0 +1,104 @@
+<%= form_for(@sales_order) do |f| %>
+  <table>
+    <tr>
+      <% if action_name == "edit" %>
+        <td width="150"><b>SO No#</b></td>
+        <td><%= @sales_order.sales_order_no rescue '-' %></td>
+      <% else %>
+        <td width="150"><b>Current SO No.</b></td>
+        <td><%= company.sn_sales_order_no + 1 %></td>
+      <% end %>
+        
+      <td width="50"></td>
+      
+      <td width="100"><b>SO Date</b></td>
+      <td>
+        <% if action_name == "edit" %>
+          <%= @sales_order.so_date.strftime("%d-%m-%Y") rescue '-' %>
+        <% else %>
+          <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+        <% end %>
+      </td>
+      
+      <td width="50"></td>
+      
+      <td width="100"><b>Lot No</b></td>
+      <td><%= f.text_field :lot_no %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Customer Company</b></td>
+      <td>
+        <% if @temp_company.present? %>
+          <%= @temp_company.trade_company.name rescue'-'  %>
+          <%= f.hidden_field :trade_company_id, :value => @temp_company.trade_company_id  %>
+        <% else %>
+          <%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @sales_order.trade_company_id), { :include_blank => true }, { :id => "kendo_combobox", :class => "sales_order_trade_company_id", :style => "width: 400px;", :onchange => "sales_order_company_change(this)" } %>
+        <% end %>
+      </td>
+      
+      <td></td>
+      
+      <td><b>Revision</b></td>
+      <td><%= f.text_field :revision, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5, :value => 0 %></td>
+      
+      <td></td>
+      
+      <td><b>Mfg Date</b></td>
+      <td><%= f.text_field :mfg_date, :class => "kendo_date_multiple" %></td>
+    </tr>
+    
+    <tr>
+      <td><b>P/O#</b></td>
+      <td><%= f.text_field :purchase_order_no, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+      
+      <td></td>
+      
+      <td><b>Purpose</b></td>
+      <td><%= f.select :purpose, options_for_select({ "SALES" => SalesOrder::SALES }, @sales_order.purpose), :include_blank => true %></td>
+      
+      <td></td>
+      
+      <td><b>Exp Date</b></td>
+      <td><%= f.text_field :exp_date, :class => "kendo_date_multiple" %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Sales Rep.</b></td>
+      <td><%= f.text_field :sales_rep, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+      <td></td>
+      <td><b>Currency</b></td>
+      <td><%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id), :include_blank => true %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Updated By</b></td>
+      <td>
+        <%= current_user.name %>
+        <%= f.hidden_field :updated_by, :value => current_user.id %>
+      </td>
+      <td></td>
+      <td><b>Trade Term</b></td>
+      <td><%= f.select :trade_term_id, options_from_collection_for_select(trade_term, "id", "name", @sales_order.trade_term_id), :include_blank => true %></td>
+    </tr>
+  </table>
+
+  <hr/>
+  
+  <%= render "new_sales_order_items", :sales_order => @sales_order %>
+  
+  <%#*<div class="new_form">%>
+    <%#*<div class="item_scroll">%>
+      <%# if @so_items.present?  %>
+        <%#= render "so_items", :so_item => @so_items %>
+      <%# else %>
+        <%#*No Record Found.%>
+      <%# end %>
+    <%#*</div>%>
+    <%#= f.submit "Submit" %>
+  <%#*</div>%>
+  
+  <%= render "action_so_entry" %>
+  
+<% end %>
+  

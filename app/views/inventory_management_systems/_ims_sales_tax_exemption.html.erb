@@ -1,0 +1,318 @@
+<%#*<table>%>
+    <% if checkboxes.present? %>
+  
+      <% if action_name == "show" %>
+  
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU), :disabled => true %> Sales Tax Exemption</td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW), :disabled => true %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New S.T.E. for Supplier</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER), :disabled => true %></td>
+          <% 16.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID), :disabled => true %> Listing S.T.E. for Suppliers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_EDIT, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_EDIT), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_KIV, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_KIV), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_PRINTABLE), :disabled => true %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Histories for Suppliers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES), :disabled => true %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+
+        <!--tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID), :disabled => true %> Listing S.T.E. for Suppliers - INVALID</td>
+          <td></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW), :disabled => true %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_PRINTABLE), :disabled => true %></td>
+          <%# 12.times do |td| %><td></td><%# end %>
+        </tr-->
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER), :disabled => true %> Listing S.T.E. for Suppliers - KIV</td>
+          <td></td><td></td><td></td><td></td><td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_SUPPLIER_SHOW, checkboxes.include?(InventoryManagementSystem::STE_KIV_SUPPLIER_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_SUPPLIER_RECOVER, checkboxes.include?(InventoryManagementSystem::STE_KIV_SUPPLIER_RECOVER), :disabled => true %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <!-- Customer -->
+        <tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU), :disabled => true %></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW), :disabled => true %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New S.T.E. for Customer</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER), :disabled => true %></td>
+          <% 16.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID), :disabled => true %> Listing S.T.E. for Customers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE), :disabled => true %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Histories for Customers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES), :disabled => true %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+
+        <!--tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID), :disabled => true %> Listing S.T.E. for Customers - INVALID</td>
+          <td></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_SHOW), :disabled => true %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_PRINTABLE), :disabled => true %></td>
+          <%# 12.times do |td| %><td></td><%# end %>
+        </tr-->
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER), :disabled => true %> Listing S.T.E. for Customers - KIV</td>
+          <td></td><td></td><td></td><td></td><td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_CUSTOMER_SHOW, checkboxes.include?(InventoryManagementSystem::STE_KIV_CUSTOMER_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_CUSTOMER_RECOVER, checkboxes.include?(InventoryManagementSystem::STE_KIV_CUSTOMER_RECOVER), :disabled => true %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+        
+      <% else %>
+
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU) %> Sales Tax Exemption</td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New S.T.E. for Suppliers</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER) %></td>
+          <% 16.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID) %> Listing S.T.E. for Suppliers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_EDIT, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_EDIT) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_KIV, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_KIV) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_PRINTABLE) %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Histories for Suppliers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES) %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+
+        <!--tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID) %> Listing S.T.E. for Suppliers - INVALID</td>
+          <td></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW) %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_PRINTABLE) %></td>
+          <%# 12.times do |td| %><td></td><%# end %>
+        </tr-->
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER) %> Listing S.T.E. for Suppliers - KIV</td>
+          <td></td><td></td><td></td><td></td><td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_SUPPLIER_SHOW, checkboxes.include?(InventoryManagementSystem::STE_KIV_SUPPLIER_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_SUPPLIER_RECOVER, checkboxes.include?(InventoryManagementSystem::STE_KIV_SUPPLIER_RECOVER) %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <!-- Customer -->
+        <tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU), :disabled => true %></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW), :disabled => true %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New S.T.E. for Customer</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER) %></td>
+          <% 16.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID) %> Listing S.T.E. for Customers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE) %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Show Histories for Customers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES) %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+
+        <!--tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID) %> Listing S.T.E. for Customers - INVALID</td>
+          <td></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_SHOW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_SHOW) %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_PRINTABLE) %></td>
+          <%# 12.times do |td| %><td></td><%# end %>
+        </tr-->
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER) %> Listing S.T.E. for Customers - KIV</td>
+          <td></td><td></td><td></td><td></td><td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_CUSTOMER_SHOW, checkboxes.include?(InventoryManagementSystem::STE_KIV_CUSTOMER_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_CUSTOMER_RECOVER, checkboxes.include?(InventoryManagementSystem::STE_KIV_CUSTOMER_RECOVER) %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+      
+      <% end %>
+      
+    <% else %>
+      
+      <tr>
+        <td></td>
+        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU %> Sales Tax Exemption</td>
+        <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New S.T.E. for Supplier</td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER %></td>
+        <% 16.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID %> Listing S.T.E. for Suppliers</td>
+        <td></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_EDIT %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_KIV %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_PRINTABLE %></td>
+        <% 12.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Histories for Suppliers</td>
+        <td></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES %></td>
+        <% 15.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <!--tr>
+        <td></td>
+        <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID %> Listing S.T.E. for Suppliers - INVALID</td>
+        <td></td>
+        <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW %></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_PRINTABLE %></td>
+        <%# 12.times do |td| %><td></td><%# end %>
+      </tr-->
+      
+      <tr>
+        
+        <td></td>
+        <td></td>
+        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER %> Listing S.T.E. for Suppliers - KIV</td>
+        <td></td><td></td><td></td><td></td><td></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_SUPPLIER_SHOW %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_SUPPLIER_RECOVER %></td>
+        <% 10.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <!-- Customer -->
+        <tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU), :disabled => true %></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW, checkboxes.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW), :disabled => true %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New S.T.E. for Customer</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER %></td>
+          <% 16.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID %> Listing S.T.E. for Customers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Show Histories for Customers</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+
+        <!--tr>
+          <td></td>
+          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID %> Listing S.T.E. for Customers - INVALID</td>
+          <td></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_SHOW %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_PRINTABLE %></td>
+          <%# 12.times do |td| %><td></td><%# end %>
+        </tr-->
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER %> Listing S.T.E. for Customers - KIV</td>
+          <td></td><td></td><td></td><td></td><td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_CUSTOMER_SHOW %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::STE_KIV_CUSTOMER_RECOVER %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+
+    <% end %>
+
+<%#*</table>%>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sales tax exemption:</b>
+  <%= @sales_tax_exemption_barang.sales_tax_exemption_id %>
+</p>
+
+<p>
+  <b>Perihal barang:</b>
+  <%= @sales_tax_exemption_barang.perihal_barang %>
+</p>
+
+<p>
+  <b>Apply qty:</b>
+  <%= @sales_tax_exemption_barang.apply_qty %>
+</p>
+
+<p>
+  <b>Complete qty:</b>
+  <%= @sales_tax_exemption_barang.complete_qty %>
+</p>
+
+<p>
+  <b>Unit measurement:</b>
+  <%= @sales_tax_exemption_barang.unit_measurement_id %>
+</p>
+
+<p>
+  <b>Tarif code:</b>
+  <%= @sales_tax_exemption_barang.tarif_code %>
+</p>
+
+<p>
+  <b>Valid condition:</b>
+  <%= @sales_tax_exemption_barang.valid_condition %>
+</p>
+
+
+<%= link_to 'Edit', edit_sales_tax_exemption_barang_path(@sales_tax_exemption_barang) %> |
+<%= link_to 'Back', sales_tax_exemption_barangs_path %>

@@ -13,16 +13,46 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require turbolinks
 
 $(document).ready(function () {
+    
     $("#timedout").hide();
+    
+//    $("button").click(function(){
+//        $.ajax({url:"demo_test.txt", 
+//            beforeSend:function(xhr) {
+//                $("#spinner").show();
+//            },
+//         complete:function(xhr) {
+//           $("#spinner").delay(3000).hide();
+//         },
+//          success:function(result){
+//            $("#div1").html(result);
+//              },
+//          error:function(xhr){
+//              alert("An error occured: " + xhr.status + " " + xhr.statusText);
+//          }
+//        });
+//    });
 });
 
 
 $(function() {
     
     $("input").bind("keypress", function(e) {
-            if (e.keyCode == 13) return false;
+        if (e.keyCode == 13){
+            if ($(this).attr("name") == "user[password]" || $(this).attr("name") == "user[name]"){
+                return true;
+            } else {
+                return false;
+            } 
+        }
+//        if ($(this).attr("value") == "Log In"){
+//            if (e.keyCode == 13) return true;
+//        } else{
+//            if (e.keyCode == 13) return false;
+//        }
     });
  
 });

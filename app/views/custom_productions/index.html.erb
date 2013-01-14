@@ -1,0 +1,29 @@
+<h1>Listing custom_productions</h1>
+
+<table>
+  <tr>
+    <th>Lot size</th>
+    <th>Part no</th>
+    <th>Category no</th>
+    <th>Stock reference</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @custom_productions.each do |custom_production| %>
+  <tr>
+    <td><%= custom_production.lot_size %></td>
+    <td><%= custom_production.part_no %></td>
+    <td><%= custom_production.category_no %></td>
+    <td><%= custom_production.stock_reference %></td>
+    <td><%= link_to 'Show', custom_production %></td>
+    <td><%= link_to 'Edit', edit_custom_production_path(custom_production) %></td>
+    <td><%= link_to 'Destroy', custom_production, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Custom production', new_custom_production_path %>

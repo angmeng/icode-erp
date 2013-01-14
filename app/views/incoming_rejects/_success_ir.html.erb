@@ -1,0 +1,49 @@
+<table class="white-line-table">
+  <tr class="header_line">
+    <th style="font-size: 12px;">No.</th>
+    <th style="font-size: 12px;">P/R No.</th>
+    <th style="font-size: 12px;">P/O No.</th>
+    <th style="font-size: 12px;">R/N No.</th>
+    <th style="font-size: 12px;">Product I/D</th>
+    <th style="font-size: 12px;">Vendor</th>
+    <th style="font-size: 12px;">Description(in Detail)</th>
+    <th style="font-size: 12px;">Order Qty</th>
+    <th style="font-size: 12px;">U/M</th>
+    <th style="font-size: 12px;">Received Qty</th>
+    <th style="font-size: 12px;">R/N Date</th>
+    <th style="font-size: 12px;">Updated by</th>
+    <th style="font-size: 12px;">Vendor's D/O</th>
+    <th style="font-size: 12px;">Action</th>
+  </tr>
+
+  <% @incoming_rejects.each_with_index do |receive_note, index| %>
+    <tr class="<%= cycle('odd_line', 'even_line') %>">
+      <td><%= index + 1 %></td>
+      <td align="right"><%= receive_note.purchase_requisition_item.purchase_requisition.pr_no rescue '-' %></td>
+      <td align="right"><%= receive_note.purchase_requisition_item.purchase_requisition.purchase_order.po_no rescue '- ' %></td>
+      <td align="right"><%= receive_note.receive_note_no rescue'-' %></td>
+      <td>
+        <% if receive_note.purchase_requisition_item.try(:product).present? %>
+          <%= render "/product_categories/join_product_category", :pc => receive_note.purchase_requisition_item %>
+        <% else %>
+        -
+        <% end %>
+      </td>
+      <td><%= receive_note.purchase_requisition_item.trade_company.name rescue '-' %></td>
+      <td><%= receive_note.purchase_requisition_item.description rescue '-' %></td>
+      <td align="right"><%= receive_note.order_qty %></td>
+      <td><%= receive_note.purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+      <td align="right"><%= receive_note.received_qty rescue '0' %></td>
+      <td><%= receive_note.created_at.strftime("%d-%m-%Y") rescue '-' %></td>
+      <td><%= User.find_by_id(receive_note.updated_by).name rescue '-' %></td>
+      <td align="right"><%= receive_note.vendor_delivery_no rescue '-' %></td>
+      <td align="center">
+        <%= link_show_1600x900(incoming_reject_path(receive_note)) %>
+        <%= not_link_edit %>
+        <%= not_link_kiv %>
+        <%= not_link_printable %>
+        
+      </td>
+    </tr>
+  <% end %>
+</table>

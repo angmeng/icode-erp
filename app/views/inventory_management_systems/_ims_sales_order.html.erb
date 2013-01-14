@@ -1,0 +1,141 @@
+<%#*<table>%>
+  <% if checkboxes.present? %>
+    <% if action_name == "show" %>
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_MENU, checkboxes.include?(InventoryManagementSystem::SO_MENU), :disabled => true %> SALES ORDER</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY, checkboxes.include?(InventoryManagementSystem::SO_ENTRY), :disabled => true %>SO Entry</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_ADD, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_ADD), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_SHOW, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_EDIT, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_EDIT), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_KIV, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_KIV), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_PRINTABLE), :disabled => true %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM), :disabled => true %>SO KIV Items</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_RECOVER), :disabled => true %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION), :disabled => true %>SO Transactions & Histories</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_SHOW), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_EDIT), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_KIV), :disabled => true %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_PRINTABLE), :disabled => true %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+
+        <!--tr>
+          <td></td>
+          <%#*<td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_VIEW, checkboxes.include?(InventoryManagementSystem::PR_KIV_VIEW), :disabled => true %> PR KIV</td>%>
+          <td></td><td></td><td></td><td></td><td></td>
+          <%#*<td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_KIV_SHOW), :disabled => true %></td>%>
+          <%#*<td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_KIV_RECOVER), :disabled => true %></td>%>
+          <td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>      
+
+        <tr>
+          <td></td>
+          <%#*<td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_VIEW, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW), :disabled => true %> PR Items KIV</td>%>
+          <td></td><td></td><td></td><td></td><td></td>
+          <%#*<td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_SHOW), :disabled => true %></td>%>
+          <%#*<td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_RECOVER), :disabled => true %></td>%>
+          <td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr-->  
+        
+    <% else %>
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_MENU, checkboxes.include?(InventoryManagementSystem::SO_MENU) %> SALES ORDER</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY, checkboxes.include?(InventoryManagementSystem::SO_ENTRY) %>SO Entry</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_ADD, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_ADD) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_SHOW, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_EDIT, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_EDIT) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_KIV, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_KIV) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_PRINTABLE) %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM) %>SO KIV Items</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_RECOVER) %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION) %>SO Transactions & Histories</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_KIV) %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_PRINTABLE) %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>    
+
+        <!--tr>
+          <td></td>
+          <%#*<td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_VIEW, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %> PR Items KIV</td>%>
+          <%#*<td></td><td></td><td></td><td></td><td></td>%>
+          <%#*<td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_SHOW) %></td>%>
+          <%#*<td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_RECOVER) %></td>%>
+          <td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr-->  
+        
+    <% end %>
+
+  <% else %>      
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_MENU %> SALES ORDER</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY %>SO Entry</td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_ADD %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_SHOW %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_EDIT %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_KIV %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_PRINTABLE %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM %>SO KIV Items</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER %></td>
+          <% 10.times do |td| %><td></td><% end %>
+        </tr>    
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION %>SO Transactions & Histories</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_SHOW %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_EDIT %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_KIV %></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_PRINTABLE %></td>
+          <% 12.times do |td| %><td></td><% end %>
+        </tr>  
+      
+  <% end %>
+<%#*</table>%>

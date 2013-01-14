@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Color code:</b>
+  <%= @color.color_code %>
+</p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @color.quotation_request_form_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_color_path(@color) %> |
+<%= link_to 'Back', colors_path %>

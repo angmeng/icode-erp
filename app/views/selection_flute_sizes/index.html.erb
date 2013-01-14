@@ -1,0 +1,27 @@
+<h1>Listing selection_flute_sizes</h1>
+
+<table>
+  <tr>
+    <th>Flute width</th>
+    <th>Flute length</th>
+    <th>Quotation request form</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @selection_flute_sizes.each do |selection_flute_size| %>
+  <tr>
+    <td><%= selection_flute_size.flute_width %></td>
+    <td><%= selection_flute_size.flute_length %></td>
+    <td><%= selection_flute_size.quotation_request_form_id %></td>
+    <td><%= link_to 'Show', selection_flute_size %></td>
+    <td><%= link_to 'Edit', edit_selection_flute_size_path(selection_flute_size) %></td>
+    <td><%= link_to 'Destroy', selection_flute_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Selection flute size', new_selection_flute_size_path %>

@@ -1,0 +1,55 @@
+<fieldset>
+  <legend>
+    <% if @field_sets.present? %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::MOQ_FIELDSET, @field_sets.include?(QuotationRequestForm::MOQ_FIELDSET) %>MINIMUN ORDER QUANTITY
+    <% else %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::MOQ_FIELDSET %>MINIMUN ORDER QUANTITY
+    <% end %>
+  </legend>
+  
+  <% if @field_sets.present? %>
+    <% if @field_sets.include?(QuotationRequestForm::MOQ_FIELDSET) %>
+      <table>
+        <tr>
+          <td width="100"><b>No of MOQ</b></td>
+          <td><%= f.text_field :no_of_moq, :size => 3, :onblur => "dropdown_moq(this)" %></td>
+        </tr>
+
+        <tr>
+          <td><b>Quantity</b></td>
+          <td>
+            <span id="quantity_no">
+              <% if @quotation_request_form.material_of_quantities.present? %>
+                <% @quotation_request_form.material_of_quantities.each do |se| %>
+                  <%= text_field_tag "quantity[#{se.id}][qty]", se.quantity, :size => 8 %>
+                <% end %>
+              <% end %>
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Unit Price</b></td>
+          <td>
+            <span id="pricing">
+              <% if @quotation_request_form.material_of_quantities.present? %>
+                <% @quotation_request_form.material_of_quantities.each do |se| %>
+                  <%= text_field_tag "pricing[#{se.id}][price]", two_precision(se.unit_price), :size => 8 %>
+                <% end %>
+              <% end %>
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Remarks</b></td>
+          <td><%= f.text_field :remarks %></td>
+        </tr>
+      </table>
+    <% else %>
+      <%= render "disabled_moq", :f => f  %>
+    <% end %>
+  <% else %>
+    <%= render "disabled_moq", :f => f  %>
+  <% end %>
+</fieldset>

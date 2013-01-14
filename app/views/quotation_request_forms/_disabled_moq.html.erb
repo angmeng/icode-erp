@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <td width="100"><b>No of MOQ</b></td>
+    <td>
+      <%= f.text_field :no_of_moq, :size => 3, :onblur => "dropdown_moq(this)", :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Quantity</b></td>
+    <td>
+      <span id="quantity_no">
+      </span>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Unit Price</b></td>
+    <td>
+      <span id="pricing"></span>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Remarks</b></td>
+    <td><%= f.text_field :remarks, :disabled => true %></td>
+  </tr>
+</table>

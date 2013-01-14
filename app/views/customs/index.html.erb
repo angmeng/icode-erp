@@ -1,0 +1,43 @@
+<h2>Listing Sales Tax Exemptions</h2>
+
+<%= link_to 'New Sales Tax Exemption', new_custom_path, :class => "ste_iframe", "data-fancybox-type" => "iframe"  %>
+
+<br/><br/>
+
+<% if @customs.present? %>
+  <table class="black-line-table">
+    <tr>
+      <th>Code</th>
+      <th>STExemp. Name</th>
+      <th>Trade company</th>
+      <th>Period Start</th>
+      <th>Period End</th>
+      <th>Tarif Code</th>
+      <th>Apply Qty</th>
+      <th>Complete Qty</th>
+      <th>U/M</th>
+      <th>Action</th>
+    </tr>
+
+    <% @customs.each do |custom| %>
+      <tr>
+        <td align="right"><%= custom.sales_tax_exemption_no rescue '-' %></td>
+        <td><%= custom.sales_tax_exemption rescue '-' %></td>
+        <td>
+          [<%= custom.trade_company.code rescue '-' %>] <%= custom.trade_company.name rescue '-' %>
+        </td>
+        <td align="center"><%= custom.period_start.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="center"><%= custom.period_end.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="center"><%= custom.tarif_code rescue '-' %></td>
+        <td align="right"><%= custom.apply_qty %></td>
+        <td align="right"><%= custom.complete_qty %></td>
+        <td align="center"><%= custom.unit_measurement.code rescue '-' %></td>
+        <td align="center">
+          <%= link_to image_tag("viewIcon.png", :alt => "view"), custom %>
+          <%= link_to image_tag("pen.png", :alt => "edit", :size => "16x16"), edit_custom_path(custom) %>
+          <%= link_to image_tag("deleteicon.jpg", :alt => "delete", :size => "16x16"), custom, confirm: 'Are you sure?', method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

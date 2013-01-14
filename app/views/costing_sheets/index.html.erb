@@ -1,0 +1,12 @@
+<div style="background-color:blue"><strong style="color:white;">COSTING SHEETS</strong></div>
+
+<div class="fix_1600x900">
+  <% if @costing_sheets %>
+    <%= render "listing_costing_sheets", :costing => @costing_sheets %>
+  <% else %>
+    No Record Found.
+  <% end %>
+</div>
+
+<%= render "action_costing_sheet" %>
+

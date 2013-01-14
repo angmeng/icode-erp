@@ -1,0 +1,58 @@
+<h2>Listing Approved From Purchase Requisitions</h2>
+
+<%= render "linking" %>
+
+<% if current_user.level == User::LEVEL_FIVE %>
+  <div>
+    <div style="background-color:blue"><strong style="color:white;">CANCELLED</strong></div>
+    <!----- Cancelled PR (First Time) ----->
+    <% if @pr.present? %>
+      <h3>Cancelled PR items (First Time)</h3>
+      <div style="background-color: lightgreen;">
+        <table class="black-line-table">
+          <tr>
+            <th width="150">PR No.</th>
+            <th width="500">Vendor</th>
+            <th width="150">Items</th>
+            <th width="150">Total</th>
+            <th>Action</th>
+          </tr>
+          <% @pr.each do |item| %>
+            <% @pr_items = item.purchase_requisition_items.where(:status => PurchaseRequisitionItem::CANCEL).group_by(&:trade_company_new_name) %>
+            <% if @pr_items.present? %>
+              <%= render "/purchase_orders/first_time_approved_from_purchase_requisition_items", :pending => @pr_items %>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+
+    <!----- Cancelled PR (Existing) ----->
+    <% if @pr.present? %>
+      <h3>Cancelled PR items (Existing Vendor)</h3>
+      <div style="background-color: navajowhite;">
+        <table class="black-line-table">
+          <tr>
+              <%#*<th width="150">PR No.</th>%>
+              <th width="500">Vendor</th>
+              <th width="150">Items</th>
+              <th width="150">Total</th>
+              <th>Action</th>
+          </tr>
+          <% @pr.each do |item| %>
+            <% @pr_items = item.purchase_requisition_items.where(:status => PurchaseRequisitionItem::CANCEL).group_by(&:trade_company_id) %>
+            <% if @pr_items.present? %>
+              <%= render "/purchase_orders/existing_approved_from_purchase_requisition_items", :pending => @pr_items %>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<br/>
+
+
+  
+
+  

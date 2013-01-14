@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Receive note:</b>
+  <%= @received_item_and_qty.receive_note_id %>
+</p>
+
+<p>
+  <b>Received qty:</b>
+  <%= @received_item_and_qty.received_qty %>
+</p>
+
+<p>
+  <b>Purchase order item line:</b>
+  <%= @received_item_and_qty.purchase_order_item_line_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_received_item_and_qty_path(@received_item_and_qty) %> |
+<%= link_to 'Back', received_item_and_qties_path %>

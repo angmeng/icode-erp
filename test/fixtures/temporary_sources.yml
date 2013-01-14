@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  company_name: MyString
+  select_vendor: false
+  unit_price: 1.5
+  remark: MyString
+
+two:
+  company_name: MyString
+  select_vendor: false
+  unit_price: 1.5
+  remark: MyString

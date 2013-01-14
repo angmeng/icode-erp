@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td><%= text_field_tag :new_name, params[:new_name], :size => 30, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+  </tr>
+  <tr>
+    <td>Job Title</td>
+    <td><%= text_field_tag :job_title, params[:job_title], :size => 30, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+  </tr>
+  <tr>
+    <td>Department</td>
+    <td><%= select_tag :department_id, options_from_collection_for_select(Department.order_name, 'id', 'name', params[:department_id].to_i), { :include_blank => true } %></td>
+  </tr>
+  <tr>
+    <td>Level</td>
+    <td><%= select_tag :level, options_for_select([["LEVEL 1", User::LEVEL_ONE ], ["LEVEL 2", User::LEVEL_TWO], ["LEVEL 3", User::LEVEL_THREE]], params[:level].to_i), :include_blank => true, :onchange => " dropdown_report_to(this)" %></td>
+  </tr>
+  <tr>
+    <td>Password</td>
+    <td><%= password_field_tag :password, params[:password], :size => 30, :validType => "maxLength[40]", :class => "easyui-validatebox" %></td>
+  </tr>
+  <tr>
+    <td>Report To</td>
+    <td><%= select_tag :report_to, options_from_collection_for_select(users, 'id', 'name', params[:report_to].to_i), { :include_blank => true } %></td>
+  </tr>
+</table>

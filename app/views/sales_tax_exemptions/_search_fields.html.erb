@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <td><b><%= f.label :registration_no_equals, "Registration No" %></b></td>
+    <td><%= f.text_field :registration_no_equals %></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :sales_tax_exemption_no_contains, "Sales Tax Exemption No." %></b></td>
+    <td><%= f.text_field :sales_tax_exemption_no_contains %></td>
+  </tr>
+  <tr>
+    <td><b>Vendor</b></td>
+    <td><%= f.text_field :trade_company_name_contains %></td>
+  </tr>
+  <tr>
+    <td><b>Perihal Barang</b></td>
+    <td><%= f.text_field :perihal_barang_contains %></td>
+  </tr>
+  <tr>
+    <td><b>Tarif Code</b></td>
+    <td><%= f.text_field :tarif_code_contains %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td align="right"><%= f.submit 'Search' %></td>
+  </tr>
+</table>

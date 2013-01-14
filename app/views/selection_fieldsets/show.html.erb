@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_fieldset.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Select no:</b>
+  <%= @selection_fieldset.select_no %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_fieldset_path(@selection_fieldset) %> |
+<%= link_to 'Back', selection_fieldsets_path %>

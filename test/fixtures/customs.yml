@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_tax_exemption: MyString
+  trade_company_id: 1
+  period_start: 2012-06-19
+  period_end: 2012-06-19
+  tarif_code: MyString
+  apply_qty: 1
+  complete_qty: 1
+  unit_measurement_id: 1
+
+two:
+  sales_tax_exemption: MyString
+  trade_company_id: 1
+  period_start: 2012-06-19
+  period_end: 2012-06-19
+  tarif_code: MyString
+  apply_qty: 1
+  complete_qty: 1
+  unit_measurement_id: 1

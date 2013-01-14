@@ -1,0 +1,32 @@
+<table id="grid_h495" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th style="font-size: 12px;">R/N No.</th>
+      <th style="font-size: 12px;">R/N Date</th>
+      <th style="font-size: 12px;">Items</th>
+      <th style="font-size: 12px;">Updated by</th>
+      <th style="font-size: 12px;">Vendor</th>
+      <th style="font-size: 12px;">Vendor's D/O</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @receive_notes.each do |receive_note| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= receive_note.id %>">
+        <td></td>
+        <td align="center"><%= receive_note.receive_note_no %></td>
+        <td align="center"><%= receive_note.rn_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="center"><%= receive_note.receive_note_items.count rescue '0' %></td>
+        <td><%= User.find_by_id(receive_note.updated_by).name rescue '-' %></td>
+        <td>
+          <%= link_to(trade_company_path(receive_note.trade_company_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+            [<%= receive_note.trade_company.code rescue'-' %>] <%= receive_note.trade_company.name rescue'-' %>
+          <% end %>
+        </td>
+        <td align="center"><%= receive_note.vendor_delivery_no rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

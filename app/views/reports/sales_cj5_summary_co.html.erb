@@ -1,0 +1,61 @@
+<h1>sales cj5 summary co</h1>
+
+<div>
+
+	<%= form_for @sales_cj5_summary_co , :url => sales_cj5_summary_co_reports_path do %>
+	<table>
+		<tr>
+			<td>Trade Company<td>
+			<td><%=f.text_field :trade_company, :size => 12 %></td>
+			<td>List form</td>
+			<td><%= f.text_field :list_form_gte %> To 
+				<%= f.text_field :list_form_lte %>
+			</td>
+		</tr>
+
+	</table>
+	<% end %>
+</div>
+<hr />
+<% @sales_cj5_summary_co_report.each_with_index do |p , index| %>
+<div>
+	
+	<table>
+		<tr>
+			<td>Pengilang :</td>
+			<td>Etheos Imprint Technology SDN BHD</td>
+			<td>pembeling :</td>
+			<td><% p.trade_company.name %></td>
+		</tr>
+	</table>
+
+	<fieldset>
+		<table>
+			<thead>
+			<tr>
+				<th>Tarikh</th>
+				<th>Inbosis</th>
+				<th>perihal barang</th>
+				<th>Kuantiti</th>
+				<th>harga/Unit</th>
+				<th>Amaunt (RM)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%#= p. %></td>
+				<td><%#= p. %></td>
+				<td><%= p.perihal_barang %></td>
+				<td><%#= p. %></td>
+				<td><%#= p. %></td>
+				<td><%#= p. %></td>
+			</tr>
+		</tbody>
+		</table>
+
+	</fieldset>
+
+
+</div>
+<% end %>
+

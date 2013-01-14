@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  flute_width: 1.5
+  flute_length: 1.5
+  quotation_request_form_id: 1
+
+two:
+  flute_width: 1.5
+  flute_length: 1.5
+  quotation_request_form_id: 1

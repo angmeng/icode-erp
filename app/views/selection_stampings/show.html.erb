@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stamping type:</b>
+  <%= @selection_stamping.stamping_type %>
+</p>
+
+<p>
+  <b>Stamping other:</b>
+  <%= @selection_stamping.stamping_other %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_stamping_path(@selection_stamping) %> |
+<%= link_to 'Back', selection_stampings_path %>

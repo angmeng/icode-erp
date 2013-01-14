@@ -1,0 +1,57 @@
+<%= form_for(@incoming_reject) do |f| %>
+  <table>
+    <tr>
+      <td width="150" class="bolder"><%= f.label :incoming_reject_no, "Previous IR No." %></td>
+      <td><%= company.sn_incoming_reject_no rescue "-" %></td>
+      <td width="50"></td>
+      <td width="200" class="bolder">IR Date</td>
+      <td>
+        <% if @incoming_reject.ir_date.present? %>
+          <%= f.text_field :ir_date, :value => @incoming_reject.ir_date.strftime("%d-%m-%Y") %>
+        <% else %>
+          <%= f.text_field :ir_date, :value => Date.today.strftime("%d-%m-%Y") %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class="bolder">Vendor</td>
+      <td>
+        [<%= @trade.code rescue '-' %>]
+        <%= @trade.name rescue '-' %>
+      </td>
+      <td></td>
+      <td class="bolder"><%= f.label :sales_tax_exemption_no, "Sales Tax Exemption No." %></td>
+      <td><%= f.text_field :sales_tax_exemption_no %></td>
+    </tr>
+    <tr>
+      <td class="bolder"><%= f.label :updated_by %></td>
+      <td>
+        <%= current_user.name %>
+        <%= f.hidden_field :updated_by, :value => current_user.id %>
+      </td>
+      <td></td>
+      <td class="bolder"><%= f.label :purpose %></td>
+      <td><%= f.select :purpose, options_for_select([["Purchase", IncomingReject::PURCHASE], ["Sub-CON", IncomingReject::SUB_CON]], @incoming_reject.purpose.to_i), :include_blank => true %></td>
+      <td align="right"><%= f.submit "Submit" %></td>
+    </tr>
+    
+    <%#*<tr><td colspan="10"><hr/></td></tr>%>
+    
+    <%#*<tr>%>
+      <%#*<td>%>
+<%#= f.label :job_order_no %>
+      <%#*</td>%>
+      <%#*<td>%>
+<%#= f.text_field :job_order_no %>
+      <%#*</td>%>
+    <%#*</tr>%>
+    
+    
+  </table>
+
+  <%= render "/incoming_rejects/search_from_receive_note", :rn_vendor => @rn_vendor_id %>
+  <%#= render "/incoming_rejects/search_po_check", :rn_vendor => @po_check %>
+  
+<% end %>
+
+

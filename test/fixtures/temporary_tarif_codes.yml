@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tarif_code: MyString
+  remaining_total: 1.5
+
+two:
+  tarif_code: MyString
+  remaining_total: 1.5

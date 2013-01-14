@@ -1,0 +1,23 @@
+<table width="100%">
+  <tr>
+    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
+  </tr>
+</table>
+
+<div><%= render "search_sales_orders"  %></div>
+
+<div style="background-color:blue"><strong style="color:white;">TRANSACTION & HISTORIES - SALES ORDERS</strong></div>
+
+<div class="fix_1600x900">
+  <% if @sales_orders.present? %>
+    <%= render "so_transaction", :so => @sales_orders %>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+
+<%= render "action_so_transaction" %> 
+
+
+
+

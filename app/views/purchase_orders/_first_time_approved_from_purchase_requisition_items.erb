@@ -1,0 +1,28 @@
+<% if pending.present? %>
+  <% pending.each do |k, v| %>
+    <% if k.present? %>
+        <tr class="<%= cycle("odd_line", "even_line") %>">
+          <td align="right"><%= v.first.purchase_requisition.pr_no rescue '-' %></td>
+          <td><%= k %></td>
+          <td align="right"><%= v.count rescue '0' %></td>
+          <td align="right">
+            <% arr = [] %>
+            <% v.each {|vv| arr << iproduct(vv.quantity, vv.unit_price) } %>
+            <%= number_with_precision(arr.sum(), :precision => 2) %>
+          </td>
+          <td align="center">
+            <% unless v.first.status == PurchaseRequisitionItem::CANCEL %>
+              <%= link_to "create vendor", new_trade_company_path(:trade_company_new_name => k), :class => "trade_company_iframe", "data-fancybox-type" => "iframe" %>
+              <% if current_user.level == User::LEVEL_FIVE %>
+                <%= link_to image_tag("deleteicon.jpg", :alt => "cancel", :size => "16x16"), cancel_purchase_orders_path(:pr_id => v.first.purchase_requisition_id, :company_name => k), confirm: "Are you sure to cancel the PR?" %>
+              <% end %>
+            <% else %>
+              <% if current_user.level == User::LEVEL_FIVE %>
+                <%= link_to "recover", recover_purchase_orders_path(:pr_id => v.first.purchase_requisition_id, :company_name => k), confirm: "Are you sure to recover the PR?" %>
+              <% end %>
+            <% end %>
+          </td>
+      </tr>
+    <% end %>
+  <% end %>
+<% end %>

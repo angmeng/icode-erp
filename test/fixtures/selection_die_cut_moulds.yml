@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  mould_no: MyString
+  window_no: MyString
+  quotation_request_form_id: 1
+
+two:
+  mould_no: MyString
+  window_no: MyString
+  quotation_request_form_id: 1

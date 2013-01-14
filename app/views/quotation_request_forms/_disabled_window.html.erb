@@ -1,0 +1,35 @@
+<table>
+  <tr>
+    <td width="150"><b>Window Patching</b></td>
+    <td>
+      <%= f.radio_button("window_patching", false, :disabled => true) %>NO
+      <%= f.radio_button("window_patching", true, :disabled => true) %>YES
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Type of W. Patching</b></td>
+    <td>
+      <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM, :disabled => true) %><%= QuotationRequestForm::OPP_FILM %>
+      <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM, :disabled => true) %><%= QuotationRequestForm::PLAIN_FILM %>
+      <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET, :disabled => true) %><%= QuotationRequestForm::PLASTIC_SHEET %><br/>
+      <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT, :disabled => true) %><%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :size => 14, :disabled => true %>
+      <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching", :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Size</b></td>
+    <td>
+      (W)<%= f.text_field :window_width, :size => 5, :disabled => true %> 
+      (L)<%= f.text_field :window_length, :size => 5, :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Usage</b></td>
+    <td>
+      <%= f.text_field :window_usage, :size => 3,:disabled => true %> PCS
+    </td>
+  </tr>
+</table>

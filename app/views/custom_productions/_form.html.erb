@@ -1,0 +1,33 @@
+<%= form_for(@custom_production) do |f| %>
+  <% if @custom_production.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@custom_production.errors.count, "error") %> prohibited this custom_production from being saved:</h2>
+
+      <ul>
+      <% @custom_production.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :lot_size %><br />
+    <%= f.text_field :lot_size %>
+  </div>
+  <div class="field">
+    <%= f.label :part_no %><br />
+    <%= f.text_field :part_no %>
+  </div>
+  <div class="field">
+    <%= f.label :category_no %><br />
+    <%= f.text_field :category_no %>
+  </div>
+  <div class="field">
+    <%= f.label :stock_reference %><br />
+    <%= f.text_field :stock_reference %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

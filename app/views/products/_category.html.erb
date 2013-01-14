@@ -1,0 +1,7 @@
+<ul id="treeview" style="width: 80%; height: 100000px;">
+  <% if categories.present? %>
+    <% categories.each do |cat| %> 
+      <%= treeview_with_parent(cat, "", false) %>
+    <% end %>
+  <% end %>
+</ul>

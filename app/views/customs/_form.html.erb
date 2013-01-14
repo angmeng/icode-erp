@@ -1,0 +1,67 @@
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+
+<% if notice %><p class="notice" id="notice"><%= notice %></p><% end %>
+<% if alert %><p class="alert" id="alert"><%= alert %></p><% end %>
+
+<%= form_for(@custom) do |f| %>
+  <table width="100%">
+    <tr>
+      <% if action_name == "edit" %>
+        <td width="250">Sales Tax Exemption No.</td>
+        <td><%= @custom.sales_tax_exemption_no rescue '0' %></td>
+      <% else %>
+        <td width="250">Previous Sales Tax Exemption No.</td>
+        <td><%= company.sn_sales_tax_exemption_no rescue '0' %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= f.label :sales_tax_exemption, "Sales Tax Exemption *" %></td>
+      <td><%= f.text_field :sales_tax_exemption, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox", :size => 50 %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :trade_company_id %></td>
+      <td>
+        <%= f.select :trade_company_id, options_from_collection_for_select(trade_company, 'id', 'code', @custom.trade_company_id.to_i), { :include_blank => true }, :onchange => "getCombo_tradecompany_code(this)" %>
+        <span id="ste_company_name"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>Period</td>
+      <td>
+        <% if action_name == "edit" %>
+          <%= f.text_field :period_start, :value => @custom.period_start.strftime("%d-%m-%Y") %> - <%= f.text_field :period_end, :value => @custom.period_end.strftime("%d-%m-%Y") %>
+        <% else %>
+          <%= f.text_field :period_start %> - <%= f.text_field :period_end %>
+        <% end %>
+      </td>
+    </tr>
+    <tr><td colspan="10"><hr/></td></tr>
+    <tr>
+      <td><%= f.label :tarif_code %></td>
+      <td><%= f.text_field :tarif_code, :required => "true" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :apply_qty %></td>
+      <td><%= f.text_field :apply_qty, :class => "ten_digit_1", :required => "true", :style => "text-align:right;" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :complete_qty %></td>
+      <td><%= f.text_field :complete_qty, :class => "ten_digit_2", :required => "true", :style => "text-align:right;" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :unit_measurement_id, "U/M" %></td>
+      <td><%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', @custom.unit_measurement_id.to_i), { :include_blank => true } %></td>
+    </tr>
+  </table>
+
+  <div align="right">
+    <% if action_name == "edit" %>
+      <%= f.submit "Edit" %>
+    <% else %>
+      <%= f.submit "Create" %>
+    <% end %>
+    
+  </div>
+<% end %>
+  

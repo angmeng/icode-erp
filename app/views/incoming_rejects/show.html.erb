@@ -1,0 +1,57 @@
+<p>
+  <b>Incoming reject no:</b>
+  <%= @incoming_reject.incoming_reject_no %>
+</p>
+
+<p>
+  <b>Purpose:</b>
+  <% if @incoming_reject.purpose == IncomingReject::PURCHASE %>
+    Purchase
+  <% elsif @incoming_reject.purpose == IncomingReject::SUB_CON %>
+    SUB-CON
+  <% end %>
+</p>
+
+<p>
+  <b>Vendor delivery no:</b>
+  <%= @incoming_reject.vendor_delivery_no %>
+</p>
+
+<p>
+  <b>Updated by:</b>
+  <%= User.find(@incoming_reject.updated_by).name rescue '-' %>
+</p>
+
+<p>
+  <b>Returned qty:</b>
+  <%= @incoming_reject.returned_qty %>
+</p>
+
+<p>
+  <b>Order qty:</b>
+  <%= @incoming_reject.order_qty %>
+</p>
+
+<p>
+  <b>Job order no:</b>
+  <%= @incoming_reject.job_order_no %>
+</p>
+
+<p>
+  <b>Balance qty:</b>
+  <%= @incoming_reject.balance_qty %>
+</p>
+
+<p>
+  <b>Current stock:</b>
+  <%= @incoming_reject.current_stock %>
+</p>
+
+<p>
+  <b>Client part no:</b>
+  <%= @incoming_reject.client_part_no %>
+</p>
+
+
+<%= link_to 'Edit', edit_incoming_reject_path(@incoming_reject) %> |
+<%= link_to 'Back', incoming_rejects_path %>

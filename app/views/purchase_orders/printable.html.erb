@@ -1,0 +1,166 @@
+<div style="margin-bottom: 70px;"></div>
+
+<br>PURCHASE ORDER</br>
+
+<table width="100%">
+    <tr>
+      <td width="100" class="bolder">Vendor</td>
+      <td>:</td>
+      <td><%= @purchase_order.trade_company.name rescue "-" %></td>
+      <td width="30"></td>
+      <td width="100" class="bolder">P/O No</td>
+      <td>:</td>
+      <td><%= @purchase_order.po_no rescue "-" %></td>
+    </tr>
+    
+    <tr>
+      <td>[<%= @purchase_order.trade_company.code %>]</td>
+      <td>:</td>
+      <td rowspan="3"><%= simple_format(@purchase_order.trade_company.address_1) rescue '-' %></td>
+      <td></td>
+      <td width="200" class="bolder">Date</td>
+      <td>:</td>
+      <td><%= @purchase_order.created_at.strftime("%d-%m-%Y") %></td>
+    </tr> 
+    
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="bolder">Term</td>
+      <td>:</td>
+      <td><%= @purchase_order.trade_term.name rescue '-' %></td>
+    </tr>
+    
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="bolder">Currency</td>
+      <td>:</td>
+      <td><%= @purchase_order.currency.name rescue '-' %></td>
+    </tr>
+    
+    <tr>
+      <td class="bolder">Fax #</td>
+      <td>:</td>
+      <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
+      <td></td>
+      <td class="bolder">Revision</td>
+      <td>:</td>
+      <td><%= @purchase_order.revision rescue '-' %></td>
+    </tr>
+    
+    <tr>
+      <td class="bolder">Attn.</td>
+      <td>:</td>
+      <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
+      <td></td>
+      <td class="bolder">Sales Tax Exemption No.</td>
+      <td>:</td>
+      <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+</table>
+
+<div>
+  <% @pr_company_id = @purchase_order.purchase_requisition_items %>
+  <% if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
+    <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pr_company_id %>
+  <% else %>
+    <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pr_company_id %>
+  <% end %>
+</div>
+
+<br/>
+
+<table class="black-line-table" width="100%">
+  <tr>
+    <td>
+      <font size="1">
+        NOTES TO VENDOR :-<br/>
+        1. Goods of Inferior Quality will be rejected.<br/>
+        2. Please chop, sign & return the attched acknowledge.<br/>
+        3. Please quote P/O No. in your invoices & D/Os.<br/>
+      </font>
+    </td>
+    <td>
+      <font size="1">
+       REMARKS :<br/>
+       Please arrange delivery according the date advise, thank you.
+      </font>
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2">
+      <table style="border-collapse: collapse;">
+        <tr>
+          <td class="bolder" width="300" align="center">PURCHASED BY</td>
+          <td class="bolder" width="300" align="center">REQUESTED BY</td>
+          <td class="bolder" width="300" align="center">AUTHORISED BY</td>
+        </tr>
+        <tr>
+          <td height="80"></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="center">
+            <% pb = User.find(@purchase_order.purchase_by) %>
+            <%= pb.name %>
+          </td>
+          <td align="center">
+            <% rb = User.find(@purchase_order.request_by) %>
+            <%= rb.name rescue '-' %>
+          </td>
+          <td align="center">B Y LIM</td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">VENDOR'S STAMP & SIGNATURE</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<style>
+  
+  body {
+  background-color: #fff;
+  color: #333;
+  <%#*font-family: verdana, arial, helvetica, sans-serif;%>
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  line-height: 18px; }
+
+p, div {
+    margin: 0; }
+
+p, ol, ul, td {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px; }
+ 
+      table.black-line-table {
+        width:100%;
+	border-width: 1px;
+	<%#*border-spacing: 0px;%>
+	border-style: none;
+	border-color: black;
+	border-collapse: collapse;
+	background-color: transparent; }
+
+    table.black-line-table th {
+            border-width: 1px;
+            padding: 1px;
+            border-style: solid;
+            border-color: black;
+            background-color: transparent; }
+
+    table.black-line-table td {
+            border-width: 1px;
+            padding: 1px;
+            border-style: solid;
+            border-color: black;
+            background-color: transparent; }
+</style>

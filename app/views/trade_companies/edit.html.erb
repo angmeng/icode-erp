@@ -1,0 +1,5 @@
+<div style="background-color:blue">
+  <strong style="color:white;">EDITING <%= @trade_company.user_type == TradeCompany::CUSTOMER ? "CUSTOMER" : "SUPPLIER" %></strong>
+</div>
+
+<%= render 'form' %>

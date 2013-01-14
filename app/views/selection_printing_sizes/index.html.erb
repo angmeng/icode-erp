@@ -1,0 +1,29 @@
+<h1>Listing selection_printing_sizes</h1>
+
+<table>
+  <tr>
+    <th>Quotation request form</th>
+    <th>Length</th>
+    <th>Width</th>
+    <th>Ups</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @selection_printing_sizes.each do |selection_printing_size| %>
+  <tr>
+    <td><%= selection_printing_size.quotation_request_form_id %></td>
+    <td><%= selection_printing_size.length %></td>
+    <td><%= selection_printing_size.width %></td>
+    <td><%= selection_printing_size.ups %></td>
+    <td><%= link_to 'Show', selection_printing_size %></td>
+    <td><%= link_to 'Edit', edit_selection_printing_size_path(selection_printing_size) %></td>
+    <td><%= link_to 'Destroy', selection_printing_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Selection printing size', new_selection_printing_size_path %>

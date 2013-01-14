@@ -1,0 +1,73 @@
+<h2>PURCHASE ORDER [<span style="color:red;"><%= @purchase_order.po_no %></span>]</h2>
+
+<div class="fix_1600x900">
+  
+  <table>
+      <tr>
+        <td width="100"><b>Vendor</b></td>
+        <td>[<%= @purchase_order.trade_company.code %>] <%= @purchase_order.trade_company.name rescue "-" %></td>
+        <td width="100"></td>
+        <td width="100"><b>P/O Date</b></td>
+        <td><%= @purchase_order.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td rowspan="3"><%= simple_format(@purchase_order.trade_company.address_1) rescue '-' %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr> 
+      <tr>
+        <td></td>
+        <td></td>
+        <td><b>Trade Term</b></td>
+        <td><%= @purchase_order.trade_term.name rescue '-' %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><b>Currency</b></td>
+        <td><%= @purchase_order.currency.name rescue '-' %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><b>Fax #</b></td>
+        <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
+        <td></td>
+        <td><b>Revision</b></td>
+        <td><%= @purchase_order.revision rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Attn.</b></td>
+        <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
+        <td></td>
+        <td><b>Transport</b></td>
+        <td><%= @purchase_order.transport.name rescue "-" %></td>
+      </tr>
+      <tr>
+        <td><b>Purchased By</b></td>
+        <td>
+          <% pb = User.find(@purchase_order.purchase_by) %>
+          <%= pb.name %>
+        </td>
+        <td></td>
+        <td title="Sales Tax Exemption No."><b>STE No.</b></td>
+        <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
+      </tr>
+  </table>
+
+  <div class="fix_po_show_listing">
+    <% if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
+      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @purchase_order.purchase_requisition_items %>
+    <% else %>
+      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @purchase_order.purchase_requisition_items %>
+    <% end %>
+  </div>
+
+
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

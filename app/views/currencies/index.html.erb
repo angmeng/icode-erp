@@ -1,0 +1,20 @@
+<table width="100%">
+  <tr>
+    <td align="right">
+      <%= link_to 'Search', "#", :class => "search_link" %>
+    </td>
+  </tr>
+</table>
+
+<div><%= render "search_currency"  %></div>
+
+<div style="background-color:blue"><strong style="color:white;">LISTING - CURRENCIES</strong></div>
+
+<% if @currencies.present? %>
+  <%= render "listing_currency", :cur => @currencies %>
+  <%= render "action_currency" %>            
+<% else %>
+  Not Record Found.
+<% end %>
+
+<br/>

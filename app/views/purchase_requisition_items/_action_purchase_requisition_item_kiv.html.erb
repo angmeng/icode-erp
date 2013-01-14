@@ -1,0 +1,19 @@
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_SHOW) %>
+    <span id="on_show_kiv" showClass="show_without_refresh_page_800x450"><%= not_link_binary %></span>
+    <%#= link_show_1600x900(purchase_requisition_path(p)) %>
+  <% else %>
+    <span class="word_opac"><%= not_link_binary %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_RECOVER) %>
+    <span id="on_recover"><%= not_link_recover %></span>
+    <%#= link_to image_tag("pen.png", :alt => "Edit", :title => "Edit", :class => "cube25"), edit_purchase_requisition_path(p) %>
+  <% else %>
+    <span class="word_opac"><%= not_link_recover %></span>
+  <% end %>
+   
+  <%= link_close_button %>
+
+</div>

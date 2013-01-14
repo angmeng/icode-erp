@@ -1,0 +1,25 @@
+<%= form_for(@change_company_code) do |f| %>
+
+<div class="fix_800x450">
+  <table>
+    <tr>
+      <td><b>Old Company Code *</b></td>
+      <td><%= f.select :old_code, options_from_collection_for_select(trade_company_both, :code, :code, @change_company_code.old_code), { :include_blank => true }, { :id => "kendo_combobox" } %></td>
+    </tr>
+    
+    <tr>
+      <td colspan="2" align="center">Change To</td>
+    </tr>
+    
+    <tr>
+      <td><b>New Company Code *</b></td>
+      <td><%= f.text_field :new_code,:size => 8 %></td>
+    </tr>
+  </table>
+</div>
+    
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

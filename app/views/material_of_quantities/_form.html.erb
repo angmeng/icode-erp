@@ -1,0 +1,29 @@
+<%= form_for(@material_of_quantity) do |f| %>
+  <% if @material_of_quantity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@material_of_quantity.errors.count, "error") %> prohibited this material_of_quantity from being saved:</h2>
+
+      <ul>
+      <% @material_of_quantity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :quotation_request_form_id %><br />
+    <%= f.number_field :quotation_request_form_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_price %><br />
+    <%= f.text_field :unit_price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

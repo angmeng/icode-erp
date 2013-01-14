@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag    "scaffolds.css", :media => "all" %>
+
+<h2>Show <%= @user.name rescue '-' %> Details</h2>
+
+<table class="black-line-table">
+    <tr class="header_line">
+        <th>No.</th>
+        <th>PR No.#</th>
+        <th>Status</th>
+        <th>Requestor</th>
+    </tr>
+    <% sd.each_with_index do |p, index| %>
+      <tr class="<%= cycle("odd_line", "even_line") %>">
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= p.pr_no %></td>
+        <td align="center">
+          <% if p.status == PurchaseRequisition::LEVEL_ONE %>
+            Level 1
+          <% elsif p.status == PurchaseRequisition::LEVEL_TWO %>
+            Level 2
+          <% elsif p.status == PurchaseRequisition::LEVEL_THREE %>
+            Level 3
+          <% elsif p.status == PurchaseRequisition::LEVEL_FIVE %>
+            Level 5
+          <% elsif p.status == PurchaseRequisition::COMPLETED %>
+            Completed
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td align="center"><%= p.user.name %></td>
+
+      </tr>
+    <% end %>
+</table>

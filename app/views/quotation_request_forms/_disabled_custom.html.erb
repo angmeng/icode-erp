@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <td width="160"><b>Brand</b></td>
+    <td><%= f.text_field :custom_stock_code, :disabled => true %></td>
+  </tr>
+
+  <tr>
+    <td><b>Category</b></td>
+    <td><%= f.text_field :box_part_no, :disabled => true %></td>
+  </tr>
+
+  <tr>
+    <td><b>No of Size</b></td>
+    <td><%= f.text_field :lot_size_no, :size => 3, :onblur => "dropdown_lotsize(this)", :disabled => true %></td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td>
+      <span id="lot_size"></span>
+    </td>
+  </tr>
+</table>

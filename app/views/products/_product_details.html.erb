@@ -1,0 +1,20 @@
+<% if data.present? %>
+  <table>
+    <tr>
+      <td width="170"><b>Category Name</b></td>
+      <td><%= data.code rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Category Description</b></td>
+      <td><%= data.desc rescue '-' %></td>
+    </tr>
+  </table>
+
+  <hr/>
+  
+  <% if data.product.present? %>
+    <%= render "read_product_id", :product_id => @show_product %>
+  <% else %>
+    <%= render "show_checkboxes_of_field", :field_id => field_id %>
+  <% end %>
+<% end %>

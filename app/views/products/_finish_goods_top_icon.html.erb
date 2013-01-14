@@ -1,0 +1,85 @@
+<% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP) %>
+  <%= link_parent_folder(parent_product_categories_path(:category_type => ProductCategory::FINISH_GOOD)) %>
+<% else %>
+  <%= not_link_parent_folder %>
+<% end %>
+
+<% if data.present? %>
+
+  <% if data.parent_id == 0 %>
+    <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP_EDIT) %>
+      <%= link_parent_folder_edit(click_edit_group_product_category_path(data)) %>
+    <% else %>
+      <%= not_link_parent_folder_edit %>
+    <% end %>
+  <% else %>
+    <%= not_link_parent_folder_edit %>
+  <% end %>
+
+  <% unless data.icon == ProductCategory::ICON_FILE %>
+    <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP) %>
+      <% if match_field.present? %>
+        <%= link_subfolder(new_product_category_path(:category_type => ProductCategory::FINISH_GOOD, :parent_id => data.id, :refer_category_id => data.refer_category_id)) %>
+      <% else %>
+        <%= link_subfolder(new_product_category_path(:category_type => ProductCategory::FINISH_GOOD, :parent_id => data.id)) %>
+      <% end %>
+    <% else %>
+      <%= not_link_subfolder %>
+    <% end %>
+  <% else %>
+    <%= not_link_subfolder %>
+  <% end %>
+
+  <% unless data.parent_id == 0 %>
+    <% unless data.icon == ProductCategory::ICON_FILE %>
+      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT) %>
+        <%= link_edit_subfolder(edit_product_category_path(data)) %>
+      <% else %>
+        <%= not_link_edit_subfolder %>
+      <% end %>
+    <% else %>
+      <%= not_link_edit_subfolder %>
+    <% end %>
+  <% else %>
+    <%= not_link_edit_subfolder %>
+  <% end %>
+
+  <% unless data.icon == ProductCategory::ICON_FILE %>
+      <% if data.children.present? %>
+            <% if data.children.first.icon.present? %>
+                  <% unless data.children.first.icon == ProductCategory::ICON_FOLDER %>
+                      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE) %>
+                        <%= render "/products/add_file", :listing_categories => data %>
+                      <% else %>
+                        <%= not_link_addfile_button %>
+                      <% end %>
+                  <% else %>
+                    <%= not_link_addfile_button %>
+                  <% end %>
+            <% else %>
+              <%= not_link_addfile_button %>
+            <% end %>
+      <% else %>
+        <%= render "/products/add_file", :listing_categories => data %>
+      <% end %>
+  <% else %>
+    <%= not_link_addfile_button %>
+  <% end %>
+  
+  <% if data.product.present? %>
+      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT) %>
+        <%= link_document_edit(edit_product_path(data.product)) %>
+      <% else %>
+        <%= not_link_document_edit %>
+      <% end %>
+  <% else %>
+    <%= not_link_document_edit %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV) %>
+    <%= link_kiv(product_category_path(data)) %>
+  <% else %>
+    <%= not_link_kiv %>
+  <% end %>
+
+<% end %>

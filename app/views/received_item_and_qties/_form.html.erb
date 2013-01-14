@@ -1,0 +1,29 @@
+<%= form_for(@received_item_and_qty) do |f| %>
+  <% if @received_item_and_qty.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@received_item_and_qty.errors.count, "error") %> prohibited this received_item_and_qty from being saved:</h2>
+
+      <ul>
+      <% @received_item_and_qty.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :receive_note_id %><br />
+    <%= f.number_field :receive_note_id %>
+  </div>
+  <div class="field">
+    <%= f.label :received_qty %><br />
+    <%= f.number_field :received_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase_order_item_line_id %><br />
+    <%= f.number_field :purchase_order_item_line_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

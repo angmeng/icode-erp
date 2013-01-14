@@ -1,0 +1,37 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::QR_NEW_ADD) %>
+    <%= link_to image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "cube35"), new_quotation_request_form_path, :class => "iframe_1600x900", "data-fancybox-type" => "iframe" %>
+  <% else %>
+    <%= image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "opac_icon") %>
+  <% end %>
+</div>
+
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::QR_NEW_SHOW) %>
+    <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_show %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::QR_NEW_EDIT) %>
+    <span id="on_edit" editClass="iframe_1600x900"><%= not_link_edit %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_edit %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::QR_NEW_KIV_ITEM) %>
+     <span id="on_kiv"><%= not_link_kiv %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_kiv %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::QR_NEW_PRINTABLE) %>
+    <span id="on_printable_qr"><%= not_link_printable %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_printable %></span>
+  <% end %>
+   
+  <%= link_close_button %>
+
+</div>

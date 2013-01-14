@@ -1,0 +1,306 @@
+<div style="background-color:blue"><strong style="color:white;">COSTING SHEET DETAILS</strong></div>
+
+<div class="fix_800x600">
+  <table class="black-line-table">
+    <tr>
+      <td colspan="5"><%= @costing_sheet.quotation_request_form.customer_name rescue '-' %></td>
+      <td colspan="2"><%= @costing_sheet.costing_sheet_date.strftime("%d-%m-%Y") %></td>
+    </tr>
+
+    <tr style="background-color: burlywood;">
+      <th width="30"></th>
+      <th width="100"></th>
+      <th width="100"><b>A</b></th>
+      <th width="100"><b>B</b></th>
+      <th width="80"><b>C</b></th>
+      <th width="80"><b>D</b></th>
+      <th width="80"><b>E</b></th>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">1</td>
+      <td><b>Product Size</b></td>
+      <td><%= @costing_sheet.prod_size rescue '-' %></td>
+      <td><b>Paper Size</b></td>
+      <td>(L) <%= two_precision(@costing_sheet.paper_size_l) %></td>
+      <td>(W) <%= two_precision(@costing_sheet.paper_size_w) %></td>
+      <td align="center"><%= @costing_sheet.ratio rescue '-' %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">2</td>
+      <td><b>Open Size</b></td>
+      <td><%= @costing_sheet.open_size rescue '-' %></td>
+      <td><b>Printing Size</b></td>
+      <td><%#= @costing_sheet.printing_size_l, :size => 10, :value => "#{@quotation_requisition.open_size_length}*#{@quotation_requisition.open_size_width}" %></td>
+      <td><%#= @costing_sheet.printing_size_w, :size => 10, :value => "#{@quotation_requisition.open_size_length}*#{@quotation_requisition.open_size_width}" %></td>
+      <td><%#= @costing_sheet.ups, :size => 10 %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">3</td>
+      <td><b>Quantity</b></td>
+      <td><%= no_precision(@costing_sheet.quantity) %></td>
+      <td><b>1s Art Card</b></td>
+      <td align="center"><%= @costing_sheet.art_card rescue '-' %></td>
+      <td><b>Rej %</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.rej_percent) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">4</td>
+      <td><b>Color</b></td>
+      <td><%= @costing_sheet.color %></td>
+      <td><b>$/lb</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.cost_lb) %></td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr style="background-color: gainsboro;">
+      <td></td>
+      <td><b>Material Cost</b></td>
+      <td><b>$/pc</b></td>
+      <td><b>Usage/Lot</b></td>
+      <td><b>Rej</b></td>
+      <td><b>$/Lot</b></td>
+      <td><b>$/Pc</b></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">5</td>
+      <td><b>1s Art Card</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.art_card_pc) %></td>
+      <td align="center"><%= two_precision(@costing_sheet.material_cost_usage) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.material_cost_rej) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.material_cost_lot) %></td>
+      <td align="right" style="background-color:darkkhaki;">
+        <%= hash_entry(@costing_sheet, @costing_sheet.material_cost_pc) %>
+        <%#= three_precision(@costing_sheet.material_cost_pc) %>
+      </td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr style="background-color: gainsboro;">
+      <td></td>
+      <td><b>Printing Cost</b></td>
+      <td><b>M/c</b></td>
+      <td><b>$/K</b></td>
+      <td><b>R%</b></td>
+      <td><b>$/Lot</b></td>
+      <td><b>$/Pc</b></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">6</td>
+      <td align="center"><%= @costing_sheet.printing_cost rescue '-' %></td>
+      <td><%= @costing_sheet.printing_cost_mc rescue '-' %></td>
+      <td align="right"><%= two_precision(@costing_sheet.printing_cost_k) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.printing_cost_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.printing_cost_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.printing_cost_pc) %></td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr style="background-color: gainsboro;">
+      <td></td>
+      <td><b>Pre-press</b></td>
+      <td><b>$/SQ in</b></td>
+      <td><b>L</b></td>
+      <td><b>W</b></td>
+      <td><b>$/Lot</b></td>
+      <td><b>$/Pc</b></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">7</td>
+      <td><%#= @costing_sheet.pre_press %></td>
+      <td><%#= @costing_sheet.pre_press_sq, :size => 8 %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">8</td>
+      <td><b>Plate</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.plate_sq) %></td>
+      <td align="center"><%= two_precision(@costing_sheet.plate_l) %></td>
+      <td align="center"><%= two_precision(@costing_sheet.plate_w) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.plate_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.plate_pc) %></td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr style="background-color: gainsboro;">
+      <td></td>
+      <td><b>Finishing</b></td>
+      <td></td>
+      <td><b>$/K</b></td>
+      <td><b>R%</b></td>
+      <td><b>$/Lot</b></td>
+      <td><b>$/Pc</b></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">9</td>
+      <td><b>Uv/Calender</b></td>
+      <td></td>
+      <td align="right"><%= six_precision(@costing_sheet.uv_k) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.uv_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.uv_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.uv_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">10</td>
+      <td><b>Lmn-Flute/opp</b></td>
+      <td><%= @costing_sheet.lamination_remark %></td>
+      <td align="right"><%= six_precision(@costing_sheet.lamination_k) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.lamination_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.lamination_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.lamination_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">11</td>
+      <td><b>Die Cut Mold</b></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="right"><%= two_precision(@costing_sheet.die_cut_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.die_cut_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">12</td>
+      <td><b>Die Cut Labour</b></td>
+      <td></td>
+      <td align="right"><%= two_precision(@costing_sheet.die_cut_labour_k) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.die_cut_labour_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.die_cut_labour_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.die_cut_labour_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">13</td>
+      <td><b>Glueing</b></td>
+      <td><%= @costing_sheet.glueing_remark %></td>
+      <td align="right"><%= two_precision(@costing_sheet.glueing_k) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.glueing_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.glueing_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.glueing_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">14</td>
+      <td><b>Gold Stamp</b></td>
+      <td><%= @costing_sheet.gold_remark %></td>
+      <td align="right"><%= four_precision(@costing_sheet.gold_k) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.gold_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.gold_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.gold_pc) %></td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr style="background-color: gainsboro;">
+      <td></td>
+      <td><b>Other Cost</b></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><b>$/Lot</b></td>
+      <td><b>$/Pc</b></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">15</td>
+      <td><b>Packing Cost</b></td>
+      <td align="right"><%= four_precision(@costing_sheet.packing_cost) %></td>
+      <td></td>
+      <td align="right"><%= four_precision(@costing_sheet.packing_cost_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.packing_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.packing_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">16</td>
+      <td><b>Transport</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.transport) %></td>
+      <td></td>
+      <td align="right"><%= four_precision(@costing_sheet.transport_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.transport_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.transport_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">17</td>
+      <td><b>Misc</b></td>
+      <td></td>
+      <td></td>
+      <td align="right"><%= four_precision(@costing_sheet.misc_r) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.misc_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.misc_pc) %></td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr>
+      <td style="background-color: burlywood;">18</td>
+      <td><b>Ratio</b></td>
+      <td></td>
+      <td><b>Total</b></td>
+      <td></td>
+      <td align="right"><%= two_precision(@costing_sheet.total_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.total_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">19</td>
+      <td><b>Raw-Material %</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.raw_material_percent) %></td>
+      <td><b>Admin-%</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.admin_percent) %></td>
+      <td align="right"><%= two_precision(@costing_sheet.admin_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.admin_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">20</td>
+      <td><b>Paper-Mt</b></td>
+      <td align="right"><%= two_precision(@costing_sheet.paper_mt) %></td>
+      <td><b>Grand Total</b></td>
+      <td></td>
+      <td align="right"><%= two_precision(@costing_sheet.grand_total_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.grand_total_pc) %></td>
+    </tr>
+
+    <tr>
+      <td style="background-color: burlywood;">21</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="right"><%= two_precision(@costing_sheet.summary_percent) %></td>
+      <td align="right"><%= four_precision(@costing_sheet.summary_lot) %></td>
+      <td align="right"><%= three_precision(@costing_sheet.summary_pc) %></td>
+    </tr>
+
+    <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+
+    <tr>
+      <td></td>
+      <td><b>Remark</b></td>
+      <td colspan="6">
+        <%= raw(@costing_sheet.remark.gsub(/\n/, '<br/>')) %>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

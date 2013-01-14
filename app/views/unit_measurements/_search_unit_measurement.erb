@@ -1,0 +1,13 @@
+<div class="search_engine">
+  <%= form_for @search do |f| %>
+    <table>
+      <tr>
+        <td><%= f.label :code_contains, "Name" %></td>
+        <td><%= f.text_field :code_contains %></td>
+      </tr>
+      <tr>
+        <td colspan="10" align="right"><%= f.submit 'Search' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

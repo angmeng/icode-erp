@@ -1,0 +1,83 @@
+<table id="grid_h495" class="white-line-table">
+  <thead>
+    <tr class="header_line">
+      <th style="font-size: 12px;">PO No.</th>
+      <th style="font-size: 12px;">Product I/D</th>
+      <th style="font-size: 12px;">Description(in Detail)</th>
+      <th style="font-size: 12px;">PO Qty</th>
+      <th style="font-size: 12px;">U/M</th>
+      <th style="font-size: 12px;">ETA</th>
+      <th style="font-size: 12px;">Completed Qty</th>
+      <th style="font-size: 12px;">RN Qty</th>
+      <th style="font-size: 12px;">Vendor Part No.</th>
+      <th style="font-size: 12px;">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% po_no.each do |po| %>
+      <% if po.present? %>
+
+        <% if po.purchase_order_item_lines.map(&:checked).include?(FALSE) %>
+          <tr class="header_title" style="height:30px;">
+            <td style="font-size: 20px; font-weight: bold; color: blue;" align="center">
+              <%= link_to(purchase_order_path(po.id), { :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"}) do %>
+                <%= po.po_no rescue '-' %>
+              <% end %>
+            </td>
+            <td colspan="10"></td>
+          </tr>
+
+          <% po.purchase_order_item_lines.each do |rn| %>
+            <% if rn.purchase_requisition_item.present? %>
+              <tr class="<%= cycle("odd_line", "even_line") %>">
+                <td></td>
+                <td align="center">
+                  <% if rn.purchase_requisition_item.product.present? %>
+                    <%= link_to(product_path(rn.purchase_requisition_item.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                      <%= render "/product_categories/join_product_category", :pc => rn.purchase_requisition_item %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td><%= simple_format(rn.purchase_requisition_item.description) %></td>
+                <td align="center"><%= rn.purchase_requisition_item.quantity %></td>
+                <td align="center"><%= rn.purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+                <td align="center"><%= rn.purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></td>
+                <td align="center">
+                  <% unless rn.checked == TRUE %>
+                    <% if rn.receive_note_items.present? %>
+                      <%= rn.receive_note_items.map(&:received_qty).sum() rescue '0' %>
+                    <% else %>
+                      0
+                    <% end %>
+                  <% end %>
+                </td>
+                <td align="center">
+                  <% unless rn.checked == TRUE %>
+                    <% if params[:rn_qty].present? %>
+                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", params[:rn_qty]["#{rn.purchase_requisition_item.id.to_s}"][:qty], :size => 10, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}" %>
+                    <% else %>
+                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", 0, :size => 10, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}" %>
+                    <% end %>
+                  <% else %>
+                    <%= rn.received_qty rescue '-' %>
+                  <% end %>
+                </td>
+                <td align="center">
+                  <% unless rn.checked == TRUE %>
+                    <%= rn.purchase_requisition_item.product.part_no rescue '-' %>
+                  <% end %>
+                </td>
+                <td align="center">
+                  <% unless rn.checked == TRUE %>
+                    <%= check_box_tag "rn_checked[]", rn.purchase_requisition_item.id %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

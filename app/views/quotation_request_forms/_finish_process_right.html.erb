@@ -1,0 +1,163 @@
+<fieldset>
+  <legend>
+    <% if @field_sets.present? %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::WINDOW_FIELDSET, @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) %>WINDOW PATCHING
+    <% else %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::WINDOW_FIELDSET %>WINDOW PATCHING
+    <% end %>
+  </legend>
+  
+  <% if @field_sets.present? %>
+    <% if @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) %>
+      <table>
+        <tr>
+          <td width="150"><b>Window Patching</b></td>
+          <td>
+            <%= f.radio_button("window_patching", false) %>NO
+            <%= f.radio_button("window_patching", true) %>YES
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Type of W. Patching</b></td>
+          <td>
+            <% if @quotation_request_form.window_patching == FALSE %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM, :disabled => true) %><%= QuotationRequestForm::OPP_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM, :disabled => true) %><%= QuotationRequestForm::PLAIN_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET, :disabled => true) %><%= QuotationRequestForm::PLASTIC_SHEET %><br/>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT, :disabled => true) %><%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :disabled => true, :size => 14 %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching", :disabled => true %>
+            <% else %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM) %><%= QuotationRequestForm::OPP_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM) %><%= QuotationRequestForm::PLAIN_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET) %><%= QuotationRequestForm::PLASTIC_SHEET %><br/>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT) %><%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :size => 14 %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching" %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Size</b></td>
+          <td>
+            <% if @quotation_request_form.window_patching == FALSE %>
+              (W)<%= f.text_field :window_width, :size => 5, :disabled => true %> 
+              (L)<%= f.text_field :window_length, :size => 5, :disabled => true %>
+            <% else %>
+              (W)<%= f.text_field :window_width, :size => 5 %> 
+              (L)<%= f.text_field :window_length, :size => 5 %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Usage</b></td>
+          <td>
+            <% if @quotation_request_form.window_patching == FALSE %>
+              <%= f.text_field :window_usage, :size => 3,:disabled => true %> PCS
+            <% else %>
+              <%= f.text_field :window_usage, :size => 3 %> PCS
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    <% else %>
+      <%= render "disabled_window", :f => f %>
+    <% end %>
+  <% else %>
+    <%= render "disabled_window", :f => f %>
+  <% end %>
+</fieldset>
+
+<fieldset>
+  <legend>
+    <% if @field_sets.present? %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::GLUEING_FIELDSET, @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) %>GLUEING
+    <% else %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::GLUEING_FIELDSET %>GLUEING
+    <% end %>
+  </legend>
+  
+  <% if @field_sets.present? %>
+    <% if @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) %>
+      <table>
+        <tr>
+          <td width="150"><b>Type of Glueing</b>T</td>
+          <td>
+            <% if @quotation_request_form.selection_glueings.present? %>
+                <%= check_box_tag "glueing[]", QuotationRequestForm::PRE_FOLD, @glueing_types.include?(QuotationRequestForm::PRE_FOLD) %><%= QuotationRequestForm::PRE_FOLD %>
+                <%= check_box_tag "glueing[]", "1 SIDE", @glueing_types.include?("1 SIDE") %>1 SIDE
+                <%= check_box_tag "glueing[]", "2 SIDE", @glueing_types.include?("2 SIDE") %>2 SIDE
+                <%= check_box_tag "glueing[]", "4P", @glueing_types.include?("4P") %>4P
+                <%= check_box_tag "glueing[]", "6P", @glueing_types.include?("6P") %>6P
+                <%= check_box_tag "glueing[]", "LB", @glueing_types.include?("LB") %><span title="Lock Bottom">LB</span><br/>
+                <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS, @glueing_types.include?(QuotationRequestForm::OTHERS) %> 
+                <%= QuotationRequestForm::OTHERS %>: 
+                <% if @glueing_types.include?(QuotationRequestForm::OTHERS) %>
+                  <%= text_field_tag "glueing_text", @quotation_request_form.selection_glueings.find_by_glueing(QuotationRequestForm::OTHERS).glueing_other, :size => 8 %>
+                <% else %>
+                  <%= text_field_tag "glueing_text", params[:glueing_text], :size => 8 %>
+                <% end %>
+            <% else %>
+                <%= check_box_tag "glueing[]", QuotationRequestForm::PRE_FOLD %><%= QuotationRequestForm::PRE_FOLD %> 
+                <%= check_box_tag "glueing[]", "1 SIDE" %>1 SIDE
+                <%= check_box_tag "glueing[]", "2 SIDE" %>2 SIDE
+                <%= check_box_tag "glueing[]", "4P" %>4P
+                <%= check_box_tag "glueing[]", "6P" %>6P
+                <%= check_box_tag "glueing[]", "LB" %><span title="Lock Bottom">LB</span><br/>
+                <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag "glueing_text", params[:glueing_text], :size => 8 %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Glueing Material</b></td>
+          <td><%= f.text_field :glueing_material %></td>
+          <td></td>
+        </tr>
+      </table>
+    <% else %>
+      <%= render "disabled_glueing", :f => f  %>
+    <% end %>
+  <% else %>
+    <%= render "disabled_glueing", :f => f  %>
+  <% end %>
+</fieldset>
+
+<fieldset>
+  <legend>
+    <% if @field_sets.present? %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::PACKING_FIELDSET, @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>PACKING
+    <% else %>
+      <%= check_box_tag "field_set[]", QuotationRequestForm::PACKING_FIELDSET %>PACKING
+    <% end %>
+  </legend>
+  
+  <% if @field_sets.present? %>
+    <% if @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>
+      <table>
+        <tr>
+          <td width="150"><b>Type of Packing</b></td>
+          <td>
+            <%= f.radio_button "packing_type", QuotationRequestForm::BULK %><%= QuotationRequestForm::BULK %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::PACKET %><%= QuotationRequestForm::PACKET %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::CARTON %><%= QuotationRequestForm::CARTON %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::BIN %><%= QuotationRequestForm::BIN %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::OTHERS %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :packing_type_other, :size => 20 %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Packed Qty</b></td>
+          <td><%= f.text_field :packed_quantity, :size => 5 %>PCS</td>
+        </tr>
+      </table>
+    <% else %>
+      <%= render "disabled_packing", :f => f  %>
+    <% end %>
+  <% else %>
+    <%= render "disabled_packing", :f => f  %>
+  <% end %>
+  
+</fieldset>
+

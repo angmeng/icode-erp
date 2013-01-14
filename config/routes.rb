@@ -1,5 +1,126 @@
 Merp::Application.routes.draw do
 
+
+  resources :reports do
+    collection do
+    get "pr_report"
+    get "price_report"
+    get "po_report"
+    #get "po_detail_report"
+    #get "fg_transaction_cw"
+    get "sales_tax_exemption_report"
+    #get "sales_cj5_summary_co"
+    get "product_report"
+    get "company_report"
+    get "purchase_by_creditor_report"
+    get "inventory_report"
+    get "customer_report"
+    get "rn_report"
+
+    get "pdf_sale_tax_exemption_report"
+    get "pdf_product_report"
+    get "pdf_inventory_report"
+    get "pdf_pr_report"
+    get "pdf_po_report"
+    get "pdf_rn_report"
+    
+    end 
+    member do
+      
+      
+    end
+  end
+
+
+  resources :delivery_order_items
+
+  resources :group_running_nos
+
+  resources :change_company_codes
+
+  resources :sales_tax_exemption_barangs
+
+  resources :packing_quantities
+
+  resources :contacts
+
+  resources :product_fields
+
+  resources :bom_materials
+
+  resources :materials
+
+  resources :bill_of_materials
+
+  resources :quotation_attachment_pos
+
+  resources :product_customers do
+    collection do
+      get "matching_product_customer"
+      get "take_data"
+    end
+  end
+
+  resources :product_comboboxes do
+    collection do
+      get "supplier_product_description"
+    end
+  end
+
+  resources :price_control_items
+
+  resources :price_controls do 
+    collection do
+      get "take_old_unit_price_and_eff_date"
+      get "kiv"
+    end
+    member do
+      get "moving_kiv"
+      put "recover"
+    end
+  end
+
+  resources :costing_sheet_changelogs
+
+  resources :costing_sheet_formulations do
+    collection do
+      get "kiv"
+    end
+    member do
+      put "recover"
+    end
+  end
+
+  resources :costing_sheets do
+    collection do
+      get "kiv"
+    end
+    member do
+      put "recover"
+      get 'printable'
+    end
+  end
+
+  resources :selection_flute_sizes
+
+  resources :selection_die_cut_moulds
+
+  resources :selection_stamping_sizes
+
+  resources :custom_productions
+
+  resources :selection_fieldsets
+
+  resources :selection_stampings
+
+  resources :selection_printing_sizes
+
+  resources :pre_print_types
+
+  resources :material_of_quantities
+
+  resources :selection_varnish_types
+
   resources :colors
 
   resources :sequents
@@ -13,11 +134,21 @@ Merp::Application.routes.draw do
   resources :quotation_request_forms do
     collection do
       get "kiv"
+      get "kiv_items"
+      get "pending_quotation"
+      get "signature_quotation"
+      post "update_checkboxes"
+      post "customer_confirm"
+      post "sending_mail"
+      get "feedback"
     end
     member do
       put "yes_button"
       put "no_button"
+      put "quoter_press_yes"
       get "printable"
+      get "mailing"
+      put "recover"
     end
   end
 
@@ -31,9 +162,23 @@ Merp::Application.routes.draw do
 
   resources :delivery_orders
 
-  resources :sales_order_items
+  resources :sales_order_items do
+    collection do
+      get "kiv"
+    end
+    member do
+      put "recover"
+    end
+  end
+  
 
-  resources :sales_orders
+  resources :sales_orders do
+    collection do
+      get "customer_registration"
+      get "product_registration"
+      get "production"
+    end
+  end
 
   resources :temporary_tarif_codes
 
@@ -53,8 +198,12 @@ Merp::Application.routes.draw do
 
   resources :sales_tax_exemptions do 
     collection do
-      get "no_validation"
-      get "kiv"
+      get "customer"
+      get "new_customer"
+#      get "supplier_invalid"
+#      get "customer_invalid"
+      get "kiv_supplier"
+      get "kiv_customer"
     end
     member do
       get "display_items"
@@ -127,6 +276,7 @@ Merp::Application.routes.draw do
       get "proposed_vendor"
       get "pending_approval"
       get "vendor"
+      get "no_product_id"
       get "make_purchase_order"
       post "create_without_sales_tax_exemption"
     end
@@ -159,9 +309,13 @@ Merp::Application.routes.draw do
     collection do
       get "auto_complete"
       get "all_trade_companies"
+      get "all_suppliers"
+      get "all_customers"
       get "customer"
       get "kiv_customers"
       get "kiv_vendors"
+      get "active_customer"
+      get "customer_name_n_place_customer_id"
     end
     put "recover", :on => :member
   end
@@ -178,12 +332,15 @@ Merp::Application.routes.draw do
       get "non_operation"
       get "operation"
       get "finish_good"
+      get "kiv_non_operation"
+      get "kiv_operation"
+      get "kiv_finish_good"
       
       get "new_for_receive_note"
       post "post_for_receive_note"
       
       get "message"
-      
+      get "look_product_desc"
     end
     
     member do
@@ -196,15 +353,20 @@ Merp::Application.routes.draw do
     collection do
       post "edit_window"
       post "new_folder"
+      post "add_group"
+      
       get "non_operation"
       get "operation"
       get "finish_good"
       
       get "parent"
+      get "err_msg"
     end
     member do
+      get "click_edit_group"
       put "remove"
       put "recover"
+      put "edit_group"
     end
   end
 
@@ -212,8 +374,7 @@ Merp::Application.routes.draw do
     get "kiv", :on => :collection
     put "recover", :on => :member
   end
-
-#  devise_for :users, :controllers => { :registrations => "users" }
+  
   devise_for :users, :controllers => { :registrations => "registrations" }
   
   resources :users do
@@ -235,60 +396,6 @@ Merp::Application.routes.draw do
   get "home/index"
 
   resources :settings
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
+  
   root :to => 'home#index'
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end

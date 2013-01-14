@@ -1,0 +1,13 @@
+<div style="background-color:blue"><strong style="color:white;">CUSTOMER REGISTRATION</strong></div>
+
+<div class="fix_1600x900">
+  <% if @quotation_request_forms.present? %>
+    <%= render "registration_company", :company => @quotation_request_forms %>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+
+<%= render "action_customer_registration" %>
+
+

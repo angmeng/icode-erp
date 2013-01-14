@@ -1,0 +1,5 @@
+<% if params[:category_id].present? %>
+  $("#loading_products").html("<%= (render(:partial => "product_details", :object => @listing_categories)) %>");
+<% else %>
+  $("#loading_products").html("");
+<% end %>

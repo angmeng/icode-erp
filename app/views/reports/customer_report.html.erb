@@ -1,0 +1,50 @@
+<h1>customer report</h1>
+
+<div>
+	<%= form_for @product_customer_report, :url => customer_report_reports_path  do |f| %>
+	<tr>
+		<td>Product ID</td>
+		<td><%= f.text_field :product_code_contains , :size => 6 %> - 
+			<%= f.text_field :product_unit_measurement_code_contains  , :size => 6 %></td>
+	</tr>
+	<tr>
+		<td><%= submit_tag "search" %></td>
+		
+	</tr>
+	<% end %>
+</div>
+<br />
+<div>
+	<fieldset>
+	<table class="table table-striped">
+	
+	<thead>
+	<tr>
+		<th>No.</th>
+		<th>Customer Code / Name</th>
+		<th>U/Price</th>
+		<th>Part No.</th>
+	</tr>
+
+	</thead>
+
+	<% @show_product_customer_report.each_with_index do |pri , index| %>
+
+	<tbody>
+		
+		<tr>
+			<td><%= index + 1 %></td>
+			<td><%= pri.trade_company.code rescue '-'%>.<%= pri.trade_company.name rescue '-'%></td>
+			<td><%= pri.selling_price rescue '-' %></td>
+			<td><%= pri.product.part_no rescue '-'%></td>
+		</tr>
+		
+	</tbody>
+	
+</table>
+</fieldset>
+<% end %>
+
+
+
+</div>

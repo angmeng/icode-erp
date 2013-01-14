@@ -1,0 +1,24 @@
+<div style="background-color:blue"><strong style="color:white;">Show Change Company Code Details</strong></div>
+
+<div class="fix_800x450">
+  <table>
+    <tr>
+      <td width="100"><b>Date</b></td>
+      <td><%= @change_company_code.created_at.strftime("%d-%m-%Y") rescue '-' %></td>
+    </tr>
+
+    <tr>
+      <td><b>Old Code</b></td>
+      <td><%= @change_company_code.old_code rescue '-' %></td>
+    </tr>
+
+    <tr>
+      <td><b>New Code</b></td>
+      <td><%= @change_company_code.new_code rescue '-' %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

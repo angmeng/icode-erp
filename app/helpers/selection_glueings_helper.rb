@@ -1,0 +1,2 @@
+module SelectionGlueingsHelper
+end

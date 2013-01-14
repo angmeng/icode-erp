@@ -1,0 +1,29 @@
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::VENDOR_SHOW) %>
+    <span id="on_show" showClass="show_without_refresh_page_1024x800"><%= not_link_show %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_show %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::VENDOR_EDIT) %>
+    <span id="on_edit" editClass="iframe_1024x800"><%= not_link_edit %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_edit %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::VENDOR_ACTION_KIV) %>
+     <span id="on_kiv"><%= not_link_kiv %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_kiv %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::VENDOR_PRINTABLE) %>
+    <span id="on_printable"><%= not_link_printable %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_printable %></span>
+  <% end %>
+   
+  <%= link_close_button %>
+
+</div>

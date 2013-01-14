@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if lt IE 9]>  <html class="ie     no-js" lang="en"> <![endif]-->
+
+<head>
+  <%#*<meta http-equiv="X-UA-Compatible" content="IE=8" />%>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Etheos Imprint eResourse Planning System</title>
+  <%= stylesheet_link_tag    "application", :media => 'all' %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :head %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  
+  <div>
+    <div style="float:right;"></div>
+    <% flash.each do |key, msg| %>
+      <%= content_tag :p, :id => key do %>
+        <%= msg %>
+        <span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
+      <% end %>
+    <% end %>
+
+    <%= yield %>   
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,106 @@
+<div style="background-color:blue"><strong style="color:white;">PENDING OF PROPOSED VENDOR</strong></div>
+
+<div class="fix_800x600">
+  <div style="height: 100px;">
+    <% if @purchase_requisition_item.temporary_sources.present? %>
+      <table class="white-line-table">
+        <tr class="header_line">
+          <th></th>
+          <th style="font-size: 12px;">Vendor</th>
+          <th style="font-size: 12px;">U/P</th>
+          <th style="font-size: 12px;">Remark</th>
+        </tr>
+
+        <% @purchase_requisition_item.temporary_sources.each do |p| %>
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+            <td align="center">
+              <% if p.select_vendor == TRUE %>
+                <%= image_tag "checking.png", :size => "16x16" %>
+              <% end %>
+            </td>
+            <td width="300"><%= p.company_name %></td>
+            <td width="150" align="right"><%= four_precision(p.unit_price) %></td>
+            <td><%= p.remark %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+
+  <hr/>
+  
+  <div style="height: 100px;">
+    <% if @purchase_requisition_item.urgent == TRUE %>
+      <div style="float:right"><%= image_tag("urgent_time.png", :alt => "Urgent", :title => "Urgent", :class => 'cube35' ) %></div>  
+    <% end %>
+
+    <table>
+      <% if @purchase_requisition_item.product_id.present? %>
+        <tr>
+          <td><b>Product</b></td>
+          <td><%= render "/product_categories/join_product_category", :pc => @purchase_requisition_item %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td width="100"  style="vertical-align: top;"><b>Description</b></td>
+        <td><%= simple_format(@purchase_requisition_item.description) %></td>
+      </tr>
+
+      <tr>
+        <td><b>Quantity</b></td>
+        <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>ETA</b></td>
+        <td>
+          <% if @purchase_requisition_item.eta < Date.today %>
+            <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+          <% else %>
+            <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
+          <% end %>
+        </td>
+      </tr>
+
+      <% unless @purchase_requisition_item.remark.blank? %>
+        <tr>
+          <td><b>Remark</b></td>
+          <td><%= @purchase_requisition_item.remark %></td>
+        </tr>
+      <% end %> 
+    </table>
+  </div>
+
+  <br/><hr/>
+
+  <% unless @purchase_requisition_item.maintenance == TRUE or @purchase_requisition_item.approval_proposed == TRUE or @purchase_requisition_item.proposed_vendor == FALSE %>
+    <div align="center" style="height: 100px;">
+      <%= link_to image_tag("yes_button.jpg", :width => '90', :style=> "border:none;"), '#', :class => "click_yes_approval" %>
+      <%= link_to image_tag("no_button.jpg", :width => '90', :style=> "border:none;"), '#', :class => "click_no_remark" %>
+
+      <div style="display:none; background-color:burlywood; padding:10px; width: 300px;" class="show_yes_button">
+        <%= form_tag approval_yes_purchase_order_path(@purchase_requisition_item), :method => :put do %>
+          <strong>Are you sure submit to Vendor Registration / PO Entry?</strong><br/>
+          <%= submit_tag "Yes" %>
+          <%= link_to "No", "#", :class => "click_close_button" %>
+        <% end %>
+      </div>
+
+      <div style="display:none; background-color:burlywood; padding:10px; width: 300px;" class="show_approval">
+        <%= form_tag approval_no_purchase_order_path(@purchase_requisition_item), :method => :put do %>
+          <strong>Remark:</strong><br/>
+          <%= text_area_tag :approval_remark, params[:approval_remark], :cols => 30 %><br/>
+          <%= submit_tag "Submit" %>
+          <%= link_to "Cancel", "#", :class => "click_cancel_button" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button  %>
+</div>
+
+

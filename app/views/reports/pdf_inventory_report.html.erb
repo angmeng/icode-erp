@@ -1,0 +1,37 @@
+<h2>Inventory Report</h2>
+
+<div>
+	 <% if @inventory_detail_report.present? %>
+	 <% @inventory_detail_report.each_with_index do |pri , index| %>
+	<fieldset>
+		<table class="table table-striped" border="1">
+			<tr>
+				<th>No.</th>
+				<th>Product ID</th>
+				<th>Stock In</th>
+				<th>Stock Out</th>
+				<th>Description</th>
+				<th>In / Out</th>
+				
+			</tr>
+
+			<%# arr = [] %>
+
+			
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
+				<td><%= pri.stock_in rescue '-'%></td>
+				<td><%= pri.stock_out rescue '-'%></td>
+				<td><%= pri.inventory_issue.description rescue '-'%></td>
+				<td><%= pri.inventory_issue.in_out rescue '-' %></td>
+				<%#= iproduct(pri.amount) rescue '-'%>
+			</tr>
+			<% end %>
+
+		</table>
+
+	
+  		<% end %>
+	</fieldset>
+</div>

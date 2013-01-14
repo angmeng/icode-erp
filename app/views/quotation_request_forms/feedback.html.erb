@@ -1,0 +1,21 @@
+<div style="background-color:blue"><strong style="color:white;">CUSTOMER FEEDBACK - QUOTATION REQUISITION</strong></div>
+
+<div class="fix_1600x900">
+  <%= form_tag customer_confirm_quotation_request_forms_path do %>
+    <div class="new_qr_form">
+      <% if @quotation_request_forms.present? %>
+        <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+      <% else %>
+        Not Record Found.
+      <% end %>
+    </div>
+    <div style="padding: 5px;">
+      <b>Confirmed By</b> <%= current_user.name rescue '-' %><br/>
+      <%= hidden_field_tag :confirmed_by, current_user.id %>
+      <%= submit_tag "Submit", :confirm => "Are you sure to submit?" %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "action_quotation_feedback" %>
+

@@ -1,0 +1,17 @@
+<div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
+
+<%= form_tag generator_user_users_path do  %>
+  <div id="user_strip">
+    <ul>
+      <li class="k-state-active">User Account</li>
+      <li>Inventory Management System</li>
+    </ul>
+    <div><%= render "user_account" %></div>
+    <div><%= render "management" %></div>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

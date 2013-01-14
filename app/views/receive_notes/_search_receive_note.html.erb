@@ -1,0 +1,17 @@
+<div class="search_engine">
+  <%= form_for @search, :url => new_receive_note_path do |f| %>
+    <table>
+      <tr>
+        <td><b>Vendor Code</b></td>
+        <td><%= f.text_field :trade_company_code_equals %></td>
+      </tr>
+      <tr>
+        <td><b>Vendor Name</b></td>
+        <td><%= f.text_field :trade_company_name_equals %></td>
+      </tr>
+      <tr>
+        <td colspan="10" align="right"><%= f.submit 'Search' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

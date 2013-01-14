@@ -1,0 +1,5 @@
+<% if @trade_companies.present? %>
+  $("#trade_companies").html("<%= escape_javascript(render(@trade_companies)) %>");
+<% else %>
+  $("#trade_companies").html("");
+<% end %>

@@ -1,164 +1,326 @@
-<h2 align="center" style="border: 5px solid blue; width: 800px; padding: 10px;">
-  WELCOME TO ETHEOS IMPRINT E-RESOURCE PLANNING SYSTEM
-</h2>
-
-<div style="height: 500px;">
+<div id="main_pr">
+  <!--div id="load_window" style="display: none; "></div-->
+  
   <table>
-    
-        <tr>
-          <th class="block_box">PURCHASE REQUISITION</th>
+    <tr>
+      <th class="block_box" width="150">PURCHASE REQUISITION</th>
+
+      <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
+        <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
+          <td width="150"><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td width="150">New & Pending PRs</td>
+        <% end %>
           
-          <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
-            <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
-              <td><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-            <% else %>
-              <td>New & Pending PRs</td>
-            <% end %>
-              
-            <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-            
-            <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
-              <td><%= link_to "Approve / Reject Tasks", signature_report_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-            <% else %>
-              <td>Signature & Feedback Tasks</td>
-            <% end %>
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-            <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+        <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
+          <td width="150"><%= link_to "Approve / Reject PRs Tasks", signature_report_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td width="150">Approve / Reject PRs Tasks</td>
+        <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
-              <td><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-            <% else %>
-              <td>PR Transactions & Histories</td>
-            <% end %>
-          <% end %>
-              
-        </tr>
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-        <tr>
-          <th><%= image_tag "arrow-bottom.png", :size => '25x25' %></th>
-        </tr>
+        <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
+          <td width="150"><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td width="150">PR Transactions & Histories</td>
+        <% end %>
+      <% end %>
+
+    </tr>
+
+    <tr>
+      <th><%= image_tag "arrow-bottom.png", :size => '25x25' %></th>
+    </tr>
     
-        <tr>
-            <th class="block_box" rowspan="2">PURCHASE ORDER</th>
+    <tr>
+        <th class="block_box" rowspan="2">PURCHASE ORDER</th>
 
-            <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
-              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR) %>
-                <td rowspan="2"><%= link_to "Approved From PR", approved_pr_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"  %></td>
-              <% else %>
-                <td rowspan="2">Approved From PR</td>
-              <% end %>
+        <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR) %>
+            <td rowspan="2"><%= link_to "Approved From PR", approved_pr_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"  %></td>
+          <% else %>
+            <td rowspan="2">Approved From PR</td>
+          <% end %>
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR) %>
-                <td><%= link_to "PR-Repair", maintenance_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td>PR-Repair</td>
-              <% end %>
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR) %>
+            <td><%= link_to "PR-Repair", maintenance_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td>PR-Repair</td>
+          <% end %>
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION) %>
+            <td rowspan="2"><%= link_to "Vendor Selection", pending_approval_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td rowspan="2">Vendor Selection</td>
+          <% end %>
 
-              <td rowspan="2">
-                <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION) %>
-                  <%= link_to "Vendor Selection", pending_approval_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %> 
-                <% else %>
-                  Vendor Selection
-                <% end %>
-              </td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td width="150">Auto linking vendor if exist</td>
 
-              <td>Auto vendor if exist</td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+          <!-- Start -->
+          <td width="150">If Product ID exist</td>
+          
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+          <!-- End -->
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY) %>
+            <td rowspan="2" width="100"><%= link_to "PO Entry", make_purchase_order_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td rowspan="2" width="100">PO Entry</td>
+          <% end %>
 
-              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY) %>
-                <td rowspan="2"><%= link_to "PO Entry", make_purchase_order_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td rowspan="2">PO Entry</td>
-              <% end %>
+          <td rowspan="2"><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-              <td rowspan="2"><%= image_tag "arrow-right.png", :width => "30px" %></td>
-
-              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
-                <td rowspan="2"><%= link_to "PO Transactions & Histories", purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td rowspan="2">PO Transactions & Histories</td>
-              <% end %>
-            <% end %>
-        </tr>
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
+            <td rowspan="2" width="150"><%= link_to "PO Transactions & Histories", purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td rowspan="2" width="150">PO Transactions & Histories</td>
+          <% end %>
+        <% end %>
+    </tr>
         
-        <tr>
-          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
+    <tr>
+      <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR) %>
-                <td><%= link_to "Proposed Vendor", proposed_vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td>Proposed Vendor</td>
-              <% end %>
-
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-
-              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION) %>
-                <td><%= link_to "Vendor Registration", vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td>Vendor Registration</td>
-              <% end %>
-
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR) %>
+            <td><%= link_to "Proposed Vendor", proposed_vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td>Proposed Vendor</td>
           <% end %>
-        </tr>
 
-        <tr>
-          <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
-        </tr>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+
+          <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION) %>
+            <td><%= link_to "Vendor Registration", vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td>Vendor Registration</td>
+          <% end %>
+
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+          <!-- Start -->
+          <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION) %>
+            <td><%= link_to "Product ID Registration (Non Operation and Operation)", no_product_id_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <%# else %>
+            <!--td>Vendor Registration</td-->
+          <%# end %>
+          
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+          <!-- End -->
+
+      <% end %>
+    </tr>
+
+    <tr>
+      <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
+    </tr>
     
-        <tr>
-            <th class="block_box">RECEIVED NOTES</th>
+    <tr>
+        <th class="block_box">RECEIVED NOTES</th>
 
-            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> 
-              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
-                <td><%= link_to "New RNs", new_receive_note_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td>New RNs</td>
-              <% end %>
+        <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> 
+          <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
+            <td><%= link_to "New RNs", new_receive_note_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td>New RNs</td>
+          <% end %>
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
-                <td><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td>RN Transactions & Histories</td>
-              <% end %>
+          <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+            <td><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td>RN Transactions & Histories</td>
+          <% end %>
 
-              <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
-                <td><%= link_to "Received Notes Completed", info_receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
-              <% else %>
-                <td>Received Notes Completed</td>
-              <% end %>
-            <% end %>
-        </tr>
+          <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
+            <td><%= link_to "Received Notes Completed", info_receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td>Received Notes Completed</td>
+          <% end %>
+        <% end %>
+    </tr>
   </table>
 </div>
 
+<div id="main_qr">
+  <table>
+    <tr>
+      <th class="block_box">QUOTATION REQUISITION</th>
 
+      <% if roles.include?(InventoryManagementSystem::QR_MENU) %>
+          
+        <% if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
+          <td><%= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td class="text_gray">New & Pending QRs</td>
+        <% end %>
+
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+        <% if roles.include?(InventoryManagementSystem::QR_APPROVED_REJECT) %>
+          <td><%= link_to 'Approve / Reject QRs Tasks', signature_quotation_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td>Approve / Reject QRs Tasks</td>
+        <% end %>
+
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+        <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
+          <td><%= link_to "QR Transactions & Histories", quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td>QR Transactions & Histories</td>
+        <% end %>
+          
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+        
+        <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
+          <td><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td>QR Customer Feedback</td>
+        <% end %>
+          
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+
+        <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %>
+          <td><%= link_to "Customer Registration", customer_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <% else %>
+          <td>Customer Registration</td>
+        <% end %>    
+          
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
+        <% if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
+          <td>
+            <%#= link_to "Product ID Registration (Finish Goods)", product_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+            <%= link_to "Product ID Registration (Finish Goods)", finish_good_products_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+          </td>
+        <% else %>
+          <td>Product ID Registration</td>
+        <% end %>
+          
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+        
+        <%# if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
+          <td><%= link_to "Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <%# else %>
+          <%#*<td>Product ID Registration</td>%>
+        <%# end %>
+        
+          
+      <% end %>
+    </tr>
+
+    <tr>
+      <th><%= image_tag "arrow-bottom.png", :width => "30px"  %></th>
+    </tr>
+    
+    <tr>
+      <th class="block_box">SALES ORDER</th>
+      
+      <!--td>Auto linking customer if exist</td-->
+
+      <!--td><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
+      
+
+        
+      <!--td rowspan="2"><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
+      
+      <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
+        <td><%= link_to "Sales Order Entry", new_sales_order_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+      <% else %>
+        <td>Sales Order Entry</td>
+      <% end %>
+        
+      <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+      
+      <%# if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
+        <td><%= link_to "Production", production_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+      <%# else %>
+        <%#*<td>Production</td>%>
+      <%# end %>
+        
+      <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+      
+      <% if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
+        <td><%= link_to "SO transactions & Histories", sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+      <% else %>
+        <td>SO transactions & Histories</td>
+      <% end %>
+    </tr>
+
+    <tr>
+      <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
+    </tr>
+    
+    <tr>
+        <th class="block_box">DELIVERY ORDER</th>
+        <%# if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
+          <td><%= link_to "Delivery Order Entry", new_delivery_order_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <%# else %>
+          <%#*<td>Production</td>%>
+        <%# end %>
+
+        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+        
+        <%# if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
+          <td><%= link_to "Delivery Order Transactions & Histories", delivery_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></td>
+        <%# else %>
+          <%#*<td>Production</td>%>
+        <%# end %>
+    </tr>
+  </table>
+</div>
+
+<div class="padding_10">
+  <div><b>QUICK TIPS</b></div>
+  <table>
+    <tr>
+      <td width="60" align="center">
+        <% if roles.include?(InventoryManagementSystem::PR_MENU) or roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) or roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+          <%= link_to image_tag("purchase.png", :alt => "Purchase", :title => "Purchase", :class => "cube35"), '#', :id => "show_purchase"  %>
+        <% else %>
+          <%= image_tag("purchase.png", :alt => "Purchase", :title => "Purchase", :class => "opac_icon")  %>
+        <% end %>
+        <br/>PO
+      </td>
+
+      <td width="60" align="center">
+        <% if roles.include?(InventoryManagementSystem::QR_MENU) or roles.include?(InventoryManagementSystem::SO_MENU) or roles.include?(InventoryManagementSystem::DO_MENU) %>
+          <%= link_to image_tag("invoice.png", :alt => "Sales", :title => "Sales", :class => "cube35"), '#', :id => "show_sales"  %>
+        <% else %>
+          <%= image_tag("invoice.png", :alt => "Sales", :title => "Sales", :class => "opac_icon") %>
+        <% end %>
+        <br/>SO
+      </td>
+    </tr>
+  </table>
+</div>
 
 <% if current_user.level == User::LEVEL_FIVE %>
-  <hr/>
-  
-  <div style="font-weight: bold;">Access Management (LEVEL 5)</div>
-  
-  <div style="width:60px;">
+  <div class="padding_10">
+    <div><b>ACCESS MANAGEMENT (LEVEL 5)</b></div>
+    <div style="width:60px;">
       <%= link_to image_tag("user_icon.png", :alt => "All Users", :title => "All Users", :class => "cube40"), users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %><br/>
       Listing Users
+    </div>
   </div>
 <% end %>
-
-
-

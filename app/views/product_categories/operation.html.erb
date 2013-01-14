@@ -1,0 +1,55 @@
+<h2>Operation</h2>
+
+<% if action_name == 'operation' %>
+  <button class="new_folder_button">New Category Folder</button>
+<% end %>
+
+<div width="50%" id="fix_height">
+  <ul id="treeview" style="width: 80%"> 
+    <% if @categories.present? %>
+      <% @categories.each do |cat| %> 
+        <%= treeview_with_parent(cat, "", true, true) %>
+      <% end %>
+    <% end %>
+  </ul> 
+</div>
+  
+<% @new_category = ProductCategory.new %>
+<% @icon = ProductCategory::ICON_FOLDER %>
+<% @category_type = 1 %>
+
+<div id='add_sub_category_div' class='easyui-window' title='Add category' closed='true' minimizable='false' style='width:400px;height:250px;'>
+    <div style="padding: 10px 10px 10px 10px;">
+      <%= render "/product_categories/form" %>
+    </div>
+</div>
+
+
+<div id='edit_sub_category_div' class='easyui-window' title='Edit category' closed='true' minimizable='false' style='width:400px;height:250px;'>
+    <div style="padding: 10px 10px 10px 10px;">
+        <%= form_tag edit_window_product_categories_path do %>
+          <table>
+            <tr>
+              <td><%= label_tag :code %></td>
+              <td><%= text_field_tag :code %></td>
+            </tr>
+            <tr>
+              <td><%= label_tag :desc %></td>
+              <td><%= text_field_tag :desc %></td>
+            </tr>
+            <tr>  
+              <td><%= hidden_field_tag :parent_id, params[:parent_id], :id => "edit_parent_id" %></td>
+            </tr>
+          </table>
+          <%= submit_tag "Edit" %>
+        <% end %>
+    </div>
+</div>
+
+<div id='new_folder_div' class='easyui-window' title='New category folder' closed='true' minimizable='false' style='width:400px;height:250px;'>
+  <%= form_tag new_folder_product_categories_path do  %>
+      <% params[:parent_id] = 0 %>
+      <%= render "/product_categories/form" %>
+  <% end %>
+</div>
+

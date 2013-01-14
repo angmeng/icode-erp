@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lot_size: MyString
+  part_no: MyString
+  category_no: MyString
+  stock_reference: MyString
+
+two:
+  lot_size: MyString
+  part_no: MyString
+  category_no: MyString
+  stock_reference: MyString

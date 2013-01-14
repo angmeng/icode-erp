@@ -1,0 +1,54 @@
+<h1>Company report</h1>
+
+<div>
+<table>
+	<%= form_for @company_report , :url => company_report_reports_path  do |f| %>
+	<tr>
+		<td>Company Code</td>
+		<td><%= f.text_field :code_contains %></td>
+		<td>Company Name</td>
+		<td><%= f.text_field :name_contains %></td>
+	</tr>
+	<tr>
+		<td><%= f.submit "search" %></td>
+	</tr>
+	<% end %>
+</table>
+
+
+</div>
+
+<div>
+<fieldset>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>No.</th>
+			<th>Code</th>
+			<th>Company name & Address</th>
+			<th>Tel. & Fax</th>
+			<th>Contact Address</th>
+		</tr>
+	</thead>
+		<% @show_company_report.each_with_index do |pri , index| %>
+	<body>
+		<tr>
+			<td><%= index + 1 %></td>
+			<td><%= pri.code rescue'-' %></td>
+
+			<td><%= pri.address_1 rescue'-'%> /
+				<%= pri.address_2 rescue'-'%> /<%= pri.address_1 rescue'-'%></td>
+
+			<td><%= pri.tel_no_1 rescue'-'%> / <%= pri.tel_no_2 rescue'-'%> &
+				<%= pri.fax_no rescue'-'%></td>
+
+			<td><%= pri.contact_person rescue'-' %></td>
+			
+		</tr>
+	</tbody>
+		<% end %>
+	</table>
+
+</fieldset>
+
+	</div>

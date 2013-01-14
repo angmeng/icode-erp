@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  receive_note_id: 1
+  received_qty: 1
+  purchase_order_item_line_id: 1
+
+two:
+  receive_note_id: 1
+  received_qty: 1
+  purchase_order_item_line_id: 1

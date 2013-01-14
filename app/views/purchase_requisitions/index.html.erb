@@ -1,0 +1,15 @@
+<%= render "/home/search_button" %>
+
+<%= render "search_purchase_requisition" %>
+
+<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong></div>
+
+<div class="fix_1600x900">
+  <% if @purchase_requisitions.present? %>
+    <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+
+<%= render "action_purchase_requisition" %>  

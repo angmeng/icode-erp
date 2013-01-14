@@ -1,0 +1,135 @@
+<%= form_for(@purchase_order) do |f| %>
+  <div class="fix_1600x900">
+      <table>
+        <tr>
+          <td width="140"><b>Current PO No.</b></td>
+          <td><%= company.sn_purchase_order_no + 1 %></td>
+          <td width="50"></td>
+          <td width="100"><b>Revision</b></td>
+          <td><%= f.text_field :revision, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %></td>
+        </tr> 
+
+        <tr>
+          <td><b>P/O Date</b></td>
+          <td>
+            <% if action_name == "edit" %>
+              <%= f.text_field :po_date, :value => @purchase_order.po_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+            <% else %>
+              <%= f.text_field :po_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+            <% end %>
+          </td>
+          <td></td>
+          <td><b>S/Tax</b></td>
+          <td><%= f.text_field :tax, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %></td>
+        </tr>
+
+        <tr>
+          <td><b>Vendor</b></td>
+          <td>
+            <% if action_name == "edit" %>
+              [<%= @purchase_order.trade_company.code %>] <%= @purchase_order.trade_company.name %>
+            <% else %>
+              [<%= @vendor_id.code rescue '-' %>] <%= @vendor_id.name rescue '-' %>
+              <%= f.hidden_field "trade_company_id", :value => @vendor_id.id %>
+            <% end %>
+          </td>
+          <td></td>
+          <td><b>Currency</b></td>
+          <td><%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @purchase_order.currency_id), { :include_blank => true } %></td>
+        </tr>
+
+        <tr>
+          <td><b>Purchase By</b></td>
+          <td>
+            <%= current_user.name %>
+            <%= f.hidden_field :purchase_by, :value => current_user.id %>
+          </td>
+          <td></td>
+          <td><b>Trade Term</b></td>
+          <% if @vendor_id.trade_term_id.present? %>
+            <td><%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @vendor_id.trade_term_id) %></td>
+          <% else %>
+            <td><%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @purchase_order.trade_term_id), { :include_blank => true } %></td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td><b>Requested By</b></td>
+          <td>
+            <% if action_name == "edit" %>
+              <% req = User.find(@purchase_order.request_by) %>
+              <%= req.name if req.present? %>
+            <% else %>
+              <% @req = @pri_company.first.purchase_requisition %>
+              <% if @req.present? %>
+                <%= @req.user.name rescue '-' %>
+                <%= f.hidden_field :request_by, :value => @req.requested_by %>
+                <%= f.hidden_field :purchase_requisition_id, :value => @req.id %>
+              <% end %>
+            <% end %>
+          </td>
+          <td></td>
+          <td><b>Transport</b></td>
+          <td><%= f.select :transport_id, options_from_collection_for_select(transport, 'id', 'name', @purchase_order.transport_id), { :include_blank => true } %></td>
+        </tr>
+
+        <tr>
+          <td width="140" title="Sales Tax Exemption No."><b>STE No.</b></td>
+
+          <% if @ste.present? %>
+            <td>
+              [<%= @ste.running_no rescue '-' %>] <%= @ste.sales_tax_exemption_no rescue '-' %>
+              <%= f.hidden_field :sales_tax_exemption_id, :value => @ste.id %>
+            </td>
+          <% else %>
+            <td>
+              <% if @exist_sales_tax.present? %>
+                <i style="color:red;">STE has invalid. Please updated latest.</i>
+              <% else %>
+                -
+              <% end %>
+            </td>
+          <% end %>
+
+          <!--td></td>
+
+          <td width="140" title="Sales Tax Exemption Period">STE Period</td>
+
+          <td>
+            <%# if @ste.present? %>
+              <#%= @ste.period_start.strftime("%d-%m-%Y") rescue '-' %> ~ <%#= @ste.period_end.strftime("%d-%m-%Y") rescue '-' %>
+            <%# else %>
+              <%# if @exist_sales_tax.present? %>
+                <i style="color:red;">STE is NOT valid.</i>
+              <%# else %>
+                -
+              <%# end %>
+            <%# end %>
+          </td-->
+        </tr>
+      </table>
+      
+      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
+  </div>
+
+  <div class="icon_tag">
+    <% unless action_name == "edit" %>
+      <% @pri_company.each do |k| %>
+        <% if k.product.blank? %>
+          <% params[:blank_product] = "yes" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% unless params[:blank_product] == "yes" %>
+      <% unless @exist_sales_tax.present? %>
+        <%= link_save_button %>
+      <% end %>
+    <% end %>
+    
+    <%= link_close_button %>
+  </div>
+<% end %>
+
+
+

@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sales order item:</b>
+  <%= @delivery_order_item.sales_order_item_id %>
+</p>
+
+<p>
+  <b>So date:</b>
+  <%= @delivery_order_item.so_date %>
+</p>
+
+<p>
+  <b>Delivery qty:</b>
+  <%= @delivery_order_item.delivery_qty %>
+</p>
+
+<p>
+  <b>Order qty:</b>
+  <%= @delivery_order_item.order_qty %>
+</p>
+
+<p>
+  <b>Unit price:</b>
+  <%= @delivery_order_item.unit_price %>
+</p>
+
+<p>
+  <b>Balance qty:</b>
+  <%= @delivery_order_item.balance_qty %>
+</p>
+
+<p>
+  <b>No of carton:</b>
+  <%= @delivery_order_item.no_of_carton %>
+</p>
+
+<p>
+  <b>Gen current stock:</b>
+  <%= @delivery_order_item.gen_current_stock %>
+</p>
+
+<p>
+  <b>Do status:</b>
+  <%= @delivery_order_item.do_status %>
+</p>
+
+<p>
+  <b>Part no:</b>
+  <%= @delivery_order_item.part_no %>
+</p>
+
+<p>
+  <b>Client lot:</b>
+  <%= @delivery_order_item.client_lot %>
+</p>
+
+<p>
+  <b>Client po:</b>
+  <%= @delivery_order_item.client_po %>
+</p>
+
+<p>
+  <b>Department:</b>
+  <%= @delivery_order_item.department %>
+</p>
+
+<p>
+  <b>Dept current stock:</b>
+  <%= @delivery_order_item.dept_current_stock %>
+</p>
+
+
+<%= link_to 'Edit', edit_delivery_order_item_path(@delivery_order_item) %> |
+<%= link_to 'Back', delivery_order_items_path %>

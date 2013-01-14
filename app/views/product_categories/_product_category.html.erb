@@ -1,0 +1,11 @@
+<% if product_category.present? %>
+  <table>
+      <tr>
+        <td width="80"><%= product_category.code %></td>
+        <td width="300"><%= product_category.desc %></td>
+        <td width="80"><%= link_to 'Show', product_category_path(product_category) %>
+        <td width="80"><%= link_to 'Edit', edit_product_category_path(product_category) %>
+        <td width="80"><%= link_to 'Destroy', product_category, confirm: 'Are you sure?', method: :delete %>
+      </tr>
+  </table>
+<% end %>

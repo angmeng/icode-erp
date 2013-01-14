@@ -1,0 +1,25 @@
+<%= form_for(@costing_sheet_changelog) do |f| %>
+  <% if @costing_sheet_changelog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@costing_sheet_changelog.errors.count, "error") %> prohibited this costing_sheet_changelog from being saved:</h2>
+
+      <ul>
+      <% @costing_sheet_changelog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :costing_sheet_id %><br />
+    <%= f.number_field :costing_sheet_id %>
+  </div>
+  <div class="field">
+    <%= f.label :change_log %><br />
+    <%= f.text_field :change_log %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<table id="grid_h295" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Product ID</th>
+      <th>Description</th>
+      <th>Old Unit Price</th>
+      <th>Old Effective Date</th>
+      <th>New Unit Price</th>
+      <th>New Effective Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% pri.each do |prod_price| %>
+      <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="price_control_items" rowsId="<%= prod_price.id %>">
+        <td></td>
+        <td align="center"><%= prod_price.product.product_combobox.product_code rescue '-' %></td>
+        <td><%= prod_price.product.desc rescue '-' %></td>
+        <% if prod_price.old_unit_price.present? %>
+          <td align="right"><%= four_precision(prod_price.old_unit_price) rescue '-' %></td>
+        <% else %>
+          <td align="center">-</td>
+        <% end %>
+        <td align="center"><%= prod_price.old_eff_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <% if prod_price.new_unit_price.present? %>
+          <td align="right"><%= four_precision(prod_price.new_unit_price) rescue '-' %></td>
+        <% else %>
+          <td align="center">-</td>
+        <% end %>
+        <td align="center"><%= prod_price.new_eff_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

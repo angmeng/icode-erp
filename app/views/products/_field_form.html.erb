@@ -1,0 +1,531 @@
+<table>
+  <tr>
+    <td width="170">
+      <b>
+        <% if action_name == "edit" %>
+          Product ID#
+        <% else %>
+          Current Product ID
+        <% end %>
+      </b>
+    </td>
+
+    <td>
+      <% if action_name == 'edit' %>
+        <%= @product.code rescue '-' %>
+      <% else %>
+        <%= @source %>-<%= ("%05d" % (company.sn_product_id_no + 1)) rescue '0' %>
+      <% end %>
+    </td>
+
+    <td>
+      <b>
+        <% unless action_name == "edit" %>
+          <%= check_box_tag "jump", "yes" %> <b>JUMP</b>
+        <% end %>
+      </b>
+    </td>
+  </tr>
+  
+  <tr>
+    <td><b>Category Description</b></td>
+    
+    <td>
+      <% if product.product_category.present? %>
+        <%= product.product_category.desc rescue '-' %>
+      <% else %>
+        <%= @source_desc %>
+        <%= hidden_field_tag :category_name, @source_desc, :required => "true" %>
+      <% end %>
+    </td>
+  </tr>
+  
+  <% if fielding.include?(ProductField::DESCRIPTION) %>
+    <tr>
+      <td style="vertical-align: top;"><b>Description</b></td>
+      <td>
+        <% if session[:po_desc].present? %>
+          <%#= simple_format(session[:po_desc]) %>
+          <%= f.text_area :desc, :value => session[:po_desc], :rows => 3 %>
+        <% else %>
+          <%= f.text_area :desc, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,255]'", :rows => 3 %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::GSM) %>
+    <tr>
+      <td width="110"><b>GSM</b></td>
+      <td width="80"><%= f.text_field :gsm, :size => 8 %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::WIDTH) %>
+    <tr>
+      <td><b>Width</b></td>
+      <td>
+        <%= f.text_field :width, :size => 8, :class => "two_zero_" %>
+        <%= f.select :width_um, Product::COMBO_UM, :include_blank => true %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::LENGTH) %>
+    <tr>
+      <td><b>Length</b></td>
+      <td>
+        <%= f.text_field :length, :size => 8, :class => "two_zero_" %>
+        <%= f.select :length_um, Product::COMBO_UM, :include_blank => true %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::HEIGHT) %>
+    <tr>   
+      <td><b>Height</b></td>
+      <td>
+        <%= f.text_field :height, :size => 8, :class => "two_zero_" %>
+        <%= f.select :height_um, Product::COMBO_UM, :include_blank => true %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::TICKNESS) %>
+    <tr>   
+      <td><b>Tickness</b></td>
+      <td>
+        <%= f.text_field :tickness, :size => 8, :class => "two_zero_" %>
+        <%= f.select :tickness_um, Product::COMBO_UM, :include_blank => true %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::UNIT_MEASURE) %>
+    <tr>
+      <td><b>U/M</b></td>
+      <td>
+        <% if session[:po_um_id].present? %>
+          <%= UnitMeasurement.find(session[:po_um_id].to_i).code rescue '-'  %>
+          <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', session[:po_um_id].to_i), { :include_blank => true }, :style => "display:none;" %>
+        <% else %>
+          <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', @product.unit_measurement_id.to_i), { :include_blank => true } %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::ORIGIN) %>
+    <tr>   
+      <td><b>Origin</b></td>
+      <td><%= f.text_field :origin %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::BRAND) %>
+    <tr>   
+      <td><b>Brand</b></td>
+      <td><%= f.text_field :brand %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::GRADE) %>
+    <tr>   
+      <td><b>Grade</b></td>
+      <td><%= f.text_field :grade %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PACKING_METHOD) %>
+    <tr>
+      <td><b>Packing Method</b></td>
+      <td>
+        <%= f.text_field :packing_method %>
+        <span id="generate">Generate</span>
+      </td>
+    </tr>
+    
+    <tr>
+      <td style="vertical-align: top;"><b>Packing Qty</b></td>
+      <td>
+        <table class="generate_packing_method">
+          <% if product.packing_quantities.present? %>
+            <% um = product.unit_measurement.code if product.unit_measurement.present?  %>
+            <% product.packing_quantities.each do |pack| %>
+              <tr>
+                <td><%= text_field_tag "packing_method_qty[#{pack.id}][val]", pack.quantity %></td>
+                <td>
+                  <%= um %> per <%= pack.packing_type rescue '-' %>
+                  <%= hidden_field_tag "packing_method_per[#{pack.id}][val]", pack.packing_type %>
+                  
+                  <% um = pack.packing_type %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PACKING_QTY) %>
+    <tr>   
+      <td><b>Packing Qty</b></td>
+      <td><%= f.text_field :packing_qty, :size => 8, :class => "two_zero_" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::BUFFER_STOCK) %>
+    <tr>
+      <td><b>Buffer Stock</b></td>
+      <td><%= f.text_field :buffer_stock, :size => 8 %></td>
+    </tr>
+  <% end %>
+          
+  <% if fielding.include?(ProductField::TARIF_CODE) %>
+    <tr>
+      <td width="110"><b>Tarif Code</b></td>
+      <td>
+        <%= f.text_field :tarif_code %>
+        <%# if action_name == "edit" %>
+          <%#= f.select :sales_tax_exemption_id, options_from_collection_for_select(perihal_barang_both, "sales_tax_exemption_id", "tarif_code", @product.sales_tax_exemption_id), {:include_blank => true, :onchange => "getcombo_perihal_barang(this)"}, {:id => "kendo_combobox" } %>
+          <%#= f.select :sales_tax_exemption_barang_id, options_from_collection_for_select(perihal_barang_both, "id", "tarif_code", @product.sales_tax_exemption_barang_id), {:include_blank => true, :onchange => "getcombo_perihal_barang(this)"}, {:id => "kendo_combobox" } %>
+        <%# else %>
+          <%#= f.select :sales_tax_exemption_id, options_from_collection_for_select(perihal_barang_both, "sales_tax_exemption_id", "tarif_code", params[:tarif_code]), {:include_blank => true, :onchange => "getcombo_perihal_barang(this)"}, {:id => "kendo_combobox" } %>
+          <%#= f.select :sales_tax_exemption_barang_id, options_from_collection_for_select(perihal_barang_both, "id", "tarif_code", params[:tarif_code]), {:include_blank => true, :onchange => "getcombo_perihal_barang(this)"}, {:id => "kendo_combobox" } %>
+        <%# end %>
+        <!--span id="show_barang"><%#= @product.sales_tax_exemption.perihal_barang if @product.sales_tax_exemption.present? %></span-->
+      </td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PART_WEIGHT) %>
+    <tr>
+      <td><b>Part Weight/pc</b></td>
+      <td><%= f.text_field :part_weight, :size => 8, :class => "six_zero" %> g</td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::CONTAINER_NO) %>
+    <tr>
+      <td><b>Container No </b></td>
+      <td><%= f.text_field :container_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::SEAL_NO) %>
+    <tr>
+      <td><b>Seal No</b></td>
+      <td><%= f.text_field :seal_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::DESPATCH_ADVISE) %>
+    <tr>
+      <td><b>Despatch Advise </b></td>
+      <td><%= f.text_field :despatch_advise %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::SIZE) %>
+    <tr>
+      <td><b>Size</b></td>
+      <td><%= f.text_field :size %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::MODEL_NO) %>
+    <tr>
+      <td><b>Model No</b></td>
+      <td><%= f.text_field :model_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::REORDER_NO) %>
+    <tr>
+      <td><b>Reorder No</b></td>
+      <td><%= f.text_field :reorder_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::ART_NO) %>
+    <tr>
+      <td><b>Art No</b></td>
+      <td><%= f.text_field :art_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::REF_NO) %>
+    <tr>
+      <td><b>Ref No</b></td>
+      <td><%= f.text_field :ref_no %></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::MOULD_NO) %>
+    <tr>
+      <td><b>Mould No</b></td>
+      <td><%= f.text_field :mould_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::WORK_ORDER_NO) %>
+    <tr>
+      <td><b>Work Order No</b></td>
+      <td><%= f.text_field :work_order_no %></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::MFG_DATE) %>
+    <tr>
+      <td><b>MFG Date</b></td>
+      <td><%= f.text_field :mfg_date, :id => "kendo_date" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::EXP_DATE) %>
+    <tr>
+      <td><b>EXP Date</b></td>
+      <td><%= f.text_field :exp_date, :id => "kendo_date" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::FILM_NO) %>
+    <tr>
+      <td><b>Film No</b></td>
+      <td><%= f.text_field :film_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::BAR_CODE) %>
+    <tr>
+      <td><b>Bar Code</b></td>
+      <td><%= f.text_field :bar_code %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::LOT_NO) %>
+    <tr>
+      <td><b>LOT #</b></td>
+      <td><%= f.text_field :lot_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::ITEM_CODE) %>
+    <tr>
+      <td><b>Item Code</b></td>
+      <td><%= f.text_field :item_code %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PART_CODE) %>
+    <tr>
+      <td><b>Part Code</b></td>
+      <td><%= f.text_field :part_code %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PANTONE_CODE) %>
+    <tr>
+      <td><b>Pantone Code</b></td>
+      <td><%= f.text_field :pantone_code %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::COLOUR) %>
+    <tr>
+      <td><b>Colour</b></td>
+      <td><%= f.text_field :color %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::SERIAL_NO) %>
+    <tr>
+      <td><b>Serial No</b></td>
+      <td><%= f.text_field :serial_no %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::WARRANTY) %>
+    <tr>
+      <td><b>Warranty</b></td>
+      <td><%= f.text_field :warranty, :size => 8 %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::CAPACITY) %>
+    <tr>
+      <td><b>Capacity</b></td>
+      <td><%= f.text_field :capacity, :size => 8 %></td>
+    </tr>
+  <% end %>
+          
+  <% if fielding.include?(ProductField::DIAMETER) %>
+    <tr>
+      <td><b>Diameter</b></td>
+      <td><%= f.text_field :diameter, :size => 8, :class => "two_zero_" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::VOLTAGE) %>
+    <tr>
+      <td><b>Voltage</b></td>
+      <td><%= f.text_field :voltage, :size => 8 %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::WATT) %>
+    <tr>
+      <td><b>Watt</b></td>
+      <td><%= f.text_field :watt, :size => 8 %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PIN) %>
+    <tr>
+      <td><b>Pin</b></td>
+      <td><%= f.text_field :pin, :size => 8 %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::AMPERE) %>
+    <tr>
+      <td><b>Ampere</b></td>
+      <td><%= f.text_field :ampere, :size => 8 %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::HP) %>
+    <tr>
+      <td><b>HP</b></td>
+      <td><%= f.text_field :hp, :size => 8, :class => "two_zero_" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::HZ) %>
+    <tr>
+      <td><b>HZ</b></td>
+      <td><%= f.text_field :hz, :size => 8, :class => "two_zero_" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PURENESS) %>
+    <tr>
+      <td><b>Pureness</b></td>
+      <td><%= f.text_field :pureness, :size => 8, :class => "two_zero_" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::TON) %>
+    <tr>
+      <td><b>Ton</b></td>
+      <td><%= f.text_field :ton, :size => 8, :class => "four_zero" %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::CONSIGNEE) %>
+    <tr>
+      <td><b>Consignee</b></td>
+      <td><%= f.text_field :consignee %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::DESTINATION) %>
+    <tr>
+      <td><b>Destination</b></td>
+      <td><%= f.text_field :destination %></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::PROCESS) %>
+    <tr>
+      <td><b>Process</b></td>
+      <td><%= f.text_field :process %></td>
+    </tr>
+  <% end %>
+  
+
+  
+  
+  
+  
+ 
+
+  <%# if action_name == "edit" %>
+      <%# if @product.product_category.present? %>
+        <%# unless @product.product_category.category_type.to_i == ProductCategory::FINISH_GOOD  %>
+            <!--tr><td colspan="10"><hr/></td></tr>
+            <tr>
+              <td class="bolder">New Sourcing</td>
+              <td>
+                <%#= f.fields_for :product_vendors do |builder| %>
+                  <%# if builder.object.new_record? %>
+                    <%#= builder.select :trade_company_id, options_from_collection_for_select(trade_company_vendor, 'id', 'name', params[:tc].to_i), { :include_blank => true } %>
+                    U/P <%#= builder.text_field :unit_price %><br/>
+                  <%# end %>
+                <%# end %>
+              </td>
+            </tr>
+            <tr>
+              <td class="bolder">Sourcing</td>
+              <td colspan="2">
+                <table>
+                  <%#= f.fields_for :product_vendors do |builder| %>
+                    <%# unless builder.object.new_record? %>
+                      <%# if builder.object.trade_company_id.present? %>
+                        <tr>
+                          <td><%#= builder.object.trade_company.name %></td>
+                          <td>(U/P: <%#= number_with_precision(builder.object.unit_price, :precision => 4) rescue '-' %>)</td>
+                          <td><%#= builder.check_box :_destroy %>Remove</td>
+                        </tr>
+                      <%# end %>
+                    <%# end %>
+                  <%# end %>
+                </table>
+              </td>
+            </tr>
+        <%# end %>
+      <%# end %>
+  <%# else %>
+      <%# unless params[:category_type].to_i == ProductCategory::FINISH_GOOD  %>
+          <tr><td colspan="10"><hr/></td></tr>
+          <tr><td class="bolder">Sourcing</td></tr>
+          <tr>
+            <td></td>
+            <td>
+              <%#= f.fields_for :product_vendors do |builder| %>
+                <%# if builder.object.new_record? %>
+                  <%# if session[:po_vendor_id].present? and session[:po_up].present? %>
+                    <b>Company Name: </b><%#= TradeCompany.find_by_id(session[:po_vendor_id]).name rescue '-' %>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b>Unit Price: </b><%#= number_with_precision(session[:po_up], :precision => 4, :separator => '.', :delimiter => ',') rescue '-'  %>
+                    <%#= builder.select :trade_company_id, options_from_collection_for_select(TradeCompany.order("name").all, 'id', 'name', session[:po_vendor_id].to_i), { :include_blank => true }, :style => "display:none;" %>
+                    <%#= builder.text_field :unit_price, :value => session[:po_up], :style => "display:none;" %>
+                  <%# else %>
+                    <%#= builder.select :trade_company_id, options_from_collection_for_select(TradeCompany.order("name").all, 'id', 'name', params[:tc].to_i), { :include_blank => true } %>
+                    U/P <%#= builder.text_field :unit_price %>
+                  <%# end %>
+                  <br/>
+                <%# end %>
+              <%# end %>
+            </td>
+            <td></td>
+            <td colspan="2">
+              <ol>
+                <%#= f.fields_for :product_vendors do |builder| %>
+                  <%# unless builder.object.new_record? %>
+                    <%# if builder.object.trade_company_id.present? %>
+                      <li>
+                        <%#= builder.object.trade_company.name %>
+                        <%#= builder.check_box :_destroy %>Remove
+                      </li>
+                    <%# end %>
+                  <%# end %>
+                <%# end %>
+              </ol>
+            </td>
+          </tr-->
+      <%# end %>
+  <%# end %>     
+
+</table>

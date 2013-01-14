@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  purchase_requisition_item_line_id: 1
+  product_id: 1
+  stock_in: 1
+  stock_out: 1
+  issue_id: 1
+
+two:
+  purchase_requisition_item_line_id: 1
+  product_id: 1
+  stock_in: 1
+  stock_out: 1
+  issue_id: 1

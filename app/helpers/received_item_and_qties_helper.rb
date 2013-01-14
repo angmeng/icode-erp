@@ -1,0 +1,2 @@
+module ReceivedItemAndQtiesHelper
+end

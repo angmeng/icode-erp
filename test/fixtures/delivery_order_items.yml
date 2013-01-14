@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_order_item_id: 1
+  so_date: 2013-01-05
+  delivery_qty: 1
+  order_qty: 1
+  unit_price: 1.5
+  balance_qty: 1
+  no_of_carton: 1
+  gen_current_stock: 1
+  do_status: MyString
+  part_no: MyString
+  client_lot: MyString
+  client_po: MyString
+  department: MyString
+  dept_current_stock: 1
+
+two:
+  sales_order_item_id: 1
+  so_date: 2013-01-05
+  delivery_qty: 1
+  order_qty: 1
+  unit_price: 1.5
+  balance_qty: 1
+  no_of_carton: 1
+  gen_current_stock: 1
+  do_status: MyString
+  part_no: MyString
+  client_lot: MyString
+  client_po: MyString
+  department: MyString
+  dept_current_stock: 1

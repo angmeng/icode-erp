@@ -1,0 +1,11 @@
+<div style="background-color:blue"><strong style="color:white;">LISTING PURCHASE REQUISITION ITEMS - KIV</strong></div>
+
+<div class="fix_1600x900">
+  <% if @purchase_requisition_items.present? %>
+    <%= render "/purchase_requisitions/details_from_purchase_requisition_items", :pr => @purchase_requisition_items %>
+  <% else %>
+    No Record Found.
+  <% end %>
+</div>
+
+<%= render "action_purchase_requisition_item_kiv" %> 

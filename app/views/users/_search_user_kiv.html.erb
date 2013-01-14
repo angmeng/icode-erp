@@ -1,0 +1,27 @@
+<div class="search_engine">
+  <%= form_for @search, :url => kiv_users_path do |f| %>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td><%= f.text_field :name_contains %></td>
+      </tr>
+      <tr>
+        <td>Job Title</td>
+        <td><%= f.text_field :job_title_contains %></td>
+      </tr>
+      <tr>
+        <td>Department</td>
+        <td><%= f.select :department_id_equals, options_for_select(@user_department, params[:department_id_equals].to_s), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td>Level</td>
+        <td><%= f.select :level_equals, options_for_select(@user_level, params[:level_equals].to_s), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td>Report To</td>
+        <td><%= f.select :report_to_equals, options_for_select(@user_report_to, params[:report_to_equals].to_s), :include_blank => true %></td>
+      </tr>
+      <tr><td colspan="10" align="right"><%= f.submit 'Search' %></td></tr>
+    </table>
+  <% end %>
+</div>

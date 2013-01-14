@@ -1,0 +1,37 @@
+<div class="search_engine">
+  <%= form_for @search do |f| %>
+    <table>
+      <tr>
+        <td><%= f.label :purchase_requisition_pr_no_equals, "PR No#" %></td>
+        <td><%= f.text_field :purchase_requisition_pr_no_equals %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :po_no_equals, "PO No#" %></td>
+        <td><%= f.text_field :po_no_equals %></td>
+      </tr>
+      <tr>
+        <td>PO Date: </td>
+        <td>
+          <% if @search.po_date_gte.present? %>
+            <%= f.text_field :po_date_gte, :value => @search.po_date_gte.strftime("%d-%m-%Y"), :include_blank => true %>
+          <% else %>
+            <%= f.text_field :po_date_gte, :include_blank => true %>
+          <% end %>
+           - 
+          <% if @search.po_date_lte.present? %>
+            <%= f.text_field :po_date_lte, :value => @search.po_date_lte.strftime("%d-%m-%Y"), :include_blank => true %>
+          <% else %>
+            <%= f.text_field :po_date_lte, :include_blank => true %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>Vendor: </td>
+        <td><%= f.text_field :trade_company_name_contains %></td>
+      </tr>
+      <tr>
+        <td colspan="10" align="right"><%= f.submit 'search' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

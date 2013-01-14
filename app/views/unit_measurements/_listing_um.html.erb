@@ -1,0 +1,15 @@
+<div class="fix_800x600">
+  <table class="white-line-table zebraLight">
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Name</th>
+    </tr>
+
+    <% ums.each do |unit_measurement| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= unit_measurement.id %>">
+        <td></td>
+        <td><%= unit_measurement.code %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

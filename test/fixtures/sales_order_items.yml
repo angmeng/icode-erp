@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_order_id: 1
+  product_id: 1
+  description: MyString
+  quantity: 1
+  unit_measurement_id: 1
+  eta: 2012-07-17
+  unit_price: 1.5
+  status: MyString
+  customer_po: MyString
+  part_no: 1
+  current_stock: 1
+  complete_qty: 1
+
+two:
+  sales_order_id: 1
+  product_id: 1
+  description: MyString
+  quantity: 1
+  unit_measurement_id: 1
+  eta: 2012-07-17
+  unit_price: 1.5
+  status: MyString
+  customer_po: MyString
+  part_no: 1
+  current_stock: 1
+  complete_qty: 1

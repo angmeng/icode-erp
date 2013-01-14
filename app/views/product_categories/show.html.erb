@@ -1,0 +1,33 @@
+<div style="background-color:blue"><strong style="color:white;">SHOW PRODUCT CATEGORY DETAILS</strong></div>
+
+<div class="fix_800x450">
+  <table>
+    <tr>
+      <td width="100"><b>Code</b></td>
+      <td width="200"><%= @product_category.code %></td>
+      <td width="100"><b>Category Type</b></td>
+      <td>
+        <% if @product_category.category_type == ProductCategory::NON_OPERATION %>
+          NON-OPERATION
+        <% elsif @product_category.category_type == ProductCategory::OPERATION %>
+          OPERATION
+        <% elsif @product_category.category_type == ProductCategory::FINISH_GOOD %>
+          FINISH GOODS
+        <% else %>
+          -
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>Description</b></td>
+      <td><%= @product_category.desc rescue '-' %></td>
+    </tr>
+  </table>
+  
+  <%= render "/products/show_checkboxes_of_field", :field_id => @field_id %>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

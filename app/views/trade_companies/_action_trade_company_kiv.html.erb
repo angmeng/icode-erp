@@ -1,0 +1,17 @@
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::VENDOR_KIV_SHOW) %>
+    <span id="on_show_kiv" showClass="show_without_refresh_page_800x600"><%= not_link_binary %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_binary %></span>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::VENDOR_KIV_RECOVER) %>
+    <span id="on_recover"><%= not_link_recover %></span>
+  <% else %>
+    <span class="word_opac"><%= not_link_recover %></span>
+  <% end %>
+   
+  <%= link_close_button %>
+
+</div>

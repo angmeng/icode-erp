@@ -1,0 +1,14 @@
+<%= render "linking" %> 
+
+<div style="background-color:blue"><strong style="color:white;">VENDOR SELECTION</strong></div>
+
+<div class="fix_1600x900">
+  <% if @pending_vendor.present? %>
+    <%= render "/purchase_orders/pending_approval", :pending => @pending_vendor %>
+  <% else %>
+    No Record Found.
+  <% end %>
+</div>
+
+<%= render "action_purchase_order_pending_app" %>
+    

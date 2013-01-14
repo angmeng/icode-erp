@@ -1,0 +1,5 @@
+<% @company_type = @sales_tax_exemption.company_type == SalesTaxExemption::CUSTOMER ? SalesTaxExemption::CUSTOMER : SalesTaxExemption::SUPPLIER %>
+<div style="background-color:blue"><strong style="color:white;">EDITING SALES TAX EXEMPTION FOR <%= @company_type %></strong></div>
+
+<%= render 'form' %>
+

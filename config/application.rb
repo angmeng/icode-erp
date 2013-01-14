@@ -2,6 +2,8 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+require 'pdfkit'
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -18,6 +20,7 @@ module Merp
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
+#    config.autoload_paths += %W(#{config.root}/libs/ext)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -59,6 +62,6 @@ module Merp
     config.assets.version = '1.0'
     
 #    config.middleware.use "PDFKit::Middleware"
-    config.middleware.use "PDFKit::Middleware", :print_media_type => true
+    config.middleware.use PDFKit::Middleware
   end
 end

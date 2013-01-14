@@ -1,0 +1,690 @@
+<div id="main_menu">
+  <div align="center" id="main_header">ETHEOS IMPRINT E-RESOURCE PLANNING SYSTEM</div>
+  
+  <ul id="menu">
+    <li style="width:210px;">
+      Home (<strong><%= current_user.name %></strong>)
+      <ul>
+        <li style = "width:200px;"><%= link_to "Main", root_url %></li>
+        <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+      </ul>
+    </li>
+
+    <li style="width:130px;">
+      Purchase Flow
+      <ul>
+
+        <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
+          <li style="width:200px;">
+            Purchase Requisition
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
+                <li><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">PR Transactions & Histories</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
+                <li><%= link_to "Approve / Reject PRs Tasks", signature_report_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Approve / Reject Tasks</li>
+              <% end %>
+              
+              <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
+                <li><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New & Pending PRs</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PR_KIV_VIEW) %>
+                <li><%= link_to "KIV - Purchase Requisitions", kiv_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">KIV - Purchase Requisitions</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %>
+                <li><%= link_to "KIV - Purchase Requisitions Items", kiv_purchase_requisition_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">KIV - Purchase Requisitions Items</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
+          <li style="width:200px;">
+            Purchase Order
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
+                <li><%= link_to "PO Transactions & Histories", purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">PO Transactions & Histories</li>
+              <% end %>
+              
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR) %>
+                <li><%= link_to "Approved From PR", approved_pr_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Approved From PR</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR) %>
+                <li><%= link_to "PR-Repair", maintenance_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">PR-Repair</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR) %>
+                <li><%= link_to "Proposed Vendor", proposed_vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Proposed Vendor</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION) %>
+                <li><%= link_to "Vendor Selection", pending_approval_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Vendor Selection</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION) %>
+                <li><%= link_to "Vendor Registration", vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Vendor Registration</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY) %>
+                <li><%= link_to "PO Entry", make_purchase_order_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">PO Entry</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_KIV_VIEW) %>
+                <li><%= link_to "PO Transactions & Histories - KIV", kiv_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">PO Transactions & Histories - KIV</li>
+              <% end %>
+                
+                
+            </ul>
+          </li>
+        <% end %>
+
+        <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+          <li style="width:200px;">
+            Received Notes
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <li><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">RN Transactions & Histories</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
+                <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %>
+                  <li><%= link_to "Received Notes Completed", info_receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">Received Notes Completed</li>
+                <% end %>
+              <% end %>
+                  
+              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
+                <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
+                    <li><%= link_to "New RNs", new_receive_note_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                    <li class="text_gray">New RNs</li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <li style="width:200px;">
+              Purchase Report
+              <ul>                 
+                  <li><%= link_to "Purchase requisitions report", pr_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                  <li><%#= link_to "Monthly Purchae Analysis", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+                  <li><%#= link_to "Purchase by Creditors", purchase_by_creditor_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+                <li><%#= link_to "Purchase Part Transactions", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                <li><%#= link_to "Prod Type Pure By Vendor", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              </ul>
+          </li>  
+
+          <li style="width:200px;">
+              Purchase Order Report
+              <ul>
+                  <li><%= link_to "Purchase Order Report", po_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+              </ul>
+            </li>   
+
+            <li style="width:200px;">
+              Received Note Report
+              <ul>
+                  <li><%= link_to "Received Note Report", rn_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+              </ul>
+            </li>
+
+        <%#*<li>%>
+          <%#*Incoming Reject%>
+          <%#*<ul>%>
+            <%# if roles.include?(InventoryManagementSystem::INCOMING_REJECT_TRANSACTION) %>
+              <%#*<li><%= link_to "Transactions", incoming_rejects_path %>
+      <%#*</li>%>  
+            <%# end %>
+
+            <%# if roles.include?(InventoryManagementSystem::INCOMING_REJECT_NEW) %>
+              <%#*<li><%= link_to "New", new_incoming_reject_path %>
+      <%#*</li>%>
+            <%# end %>
+          <%#*</ul>%>
+        <%#*</li>%>
+      </ul>
+    </li>
+
+    <li style="width:130px;">
+      Sales Flow
+      <ul>
+        <% if roles.include?(InventoryManagementSystem::QR_MENU) %>
+          <li>
+            Quotation Requisition
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
+                <li><%= link_to "QR Transactions & Histories", quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">QR Transactions & Histories</li>
+              <% end %>
+              
+              <% if roles.include?(InventoryManagementSystem::QR_APPROVED_REJECT) %>
+                <li><%= link_to 'Approve / Reject QRs Tasks', signature_quotation_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Approve / Reject QRs Tasks</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
+                <li><%= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New & Pending QRs</li>
+              <% end %>
+              
+              <% if roles.include?(InventoryManagementSystem::QR_KIV) %>
+                <li><%= link_to 'QR No# - KIV', kiv_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">QR No# - KIV</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %>
+                <li><%= link_to 'Costing Sheet - KIV', kiv_costing_sheets_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Costing Sheet - KIV</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
+                <li><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">QR Customer Feedback</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+          
+        <% if roles.include?(InventoryManagementSystem::SO_MENU) %>
+          <li>
+            Sales Order
+            <ul>
+              <li><%= link_to "SO Transactions & Histories", sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              
+              <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
+                <li><%= link_to 'SO Entry', new_sales_order_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">SO Entry</li>
+              <% end %>
+              
+              <%# if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
+                <!--li><%#= link_to "Product ID Registration", product_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
+              <%# else %>
+                <%#*<li class="text_gray">Product ID Registration</li>%>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %>
+                <!--li><%#= link_to "Customer Registration", customer_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
+              <%# else %>
+                <%#*<li class="text_gray">Customer Registration</li>%>
+              <%# end %>
+                
+              <% if roles.include?(InventoryManagementSystem::SO_KIV_ITEM) %>
+                <li><%= link_to "KIV - Sales Order Items", kiv_sales_order_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">KIV - Sales Order Items</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+          
+        <% if roles.include?(InventoryManagementSystem::DO_MENU) %>
+          <li>
+            Delivery Order
+            <ul>
+              <li><%#= link_to "Transactions", delivery_orders_path %></li>
+              <li><%#= link_to "New", new_delivery_order_path %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+
+    <li style="width:130px;">
+      Custom
+      <ul>
+        <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU) %>
+          <li style="width:200px;">
+            Sales Tax Exemption
+            <ul>
+              <!-- For Suppliers -->   
+              <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID) %>
+                <li><%= link_to "Listing Sales Tax Exemption for Suppliers", sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Listing Sales Tax Exemption for Suppliers</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER) %>
+                <li><%= link_to "New Sales Tax Exemption for Supplier", new_sales_tax_exemption_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Sales Tax Exemption for Supplier</li>
+              <% end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID) %>
+                <!--li><%#= link_to "Listing Sales Tax Exemption for Suppliers - INVALID", supplier_invalid_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
+              <%# else %>
+                <%#*<li class="text_gray">Listing Sales Tax Exemption for Suppliers - INVALID</li>%>
+              <%# end %>
+
+              <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER) %>
+                <li><%= link_to "Listing Sales Tax Exemption for Suppliers - KIV", kiv_supplier_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Listing Sales Tax Exemption for Suppliers - KIV</li>
+              <% end %>
+                
+              <li><hr/></li>
+                
+              <!-- For Customers -->
+              <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID) %>
+                <li><%= link_to "Listing Sales Tax Exemption for Customers", customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Listing Sales Tax Exemption for Customers</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER) %>
+                <li><%= link_to "New Sales Tax Exemption for Customer", new_customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Sales Tax Exemption for Customer</li>
+              <% end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID) %>
+                <!--li><%#= link_to "Listing Sales Tax Exemption for Customers - INVALID", customer_invalid_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
+              <%# else %>
+                <!--li class="text_gray">Listing Sales Tax Exemption for Customers - INVALID</li-->
+              <%# end %>
+
+              <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER) %>
+                <li><%= link_to "Lisiting Sales Tax Exemption for Customers - KIV", kiv_customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Listing Sales Tax Exemption for Customers - KIV</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %>
+          <li style="width:200px;">
+            Costing Sheet
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
+                <li><%= link_to "Formulation", costing_sheet_formulations_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Formulation</li>
+              <% end %>
+
+              <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
+                <li><%= link_to "KIV", kiv_costing_sheet_formulations_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <%# else %>
+                <%#*<li class="text_gray">Formulation</li>%>
+              <%# end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %>
+          <!--li style="width:200px;">
+            Subcon
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
+                <li><%#= link_to "Listing Subcons", subcons_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <%# else %>
+                <%#*<li class="text_gray">Formulation</li>%>
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
+                <li><%#= link_to "New Subcons", new_subcon_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+              <%# else %>
+                <%#*<li class="text_gray">Formulation</li>%>
+              <%# end %>
+            </ul>
+          </li-->
+        <%# end %>
+
+        <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %>
+          <li style="width:200px;">
+            Sub-Material
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
+                <li><%= link_to "Requisition Form", new_bill_of_material_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <%# else %>
+                <%#*<li class="text_gray">Formulation</li>%>
+              <%# end %>
+            </ul>
+          </li>
+        <%# end %>
+
+        <li style="width:200px;">
+              Report
+              <ul>
+               <li><%= link_to "Sales Tax Exemptions Report", sales_tax_exemption_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              </ul>
+          </li>
+
+      </ul>
+    </li>
+
+    <li style="width:130px;">
+      Inventory Flow
+      <ul>
+
+        <% if roles.include?(InventoryManagementSystem::INVENTORY_MENU) %>
+          <li style="width:200px;">
+            Inventory
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
+                <li><%= link_to "Inventory Transactions & Histories", inventory_histories_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Inventory Transactions & Histories</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+                <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                  <li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">New Inventory</li>
+                <% end %>
+              <% end %>
+
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+                <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                  <%#*<li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+            <%#*</li>%>
+                <%# else %>
+                  <%#*<li class="text_gray">New Inventory</li>%>
+                <%# end %>
+              <%# end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <li style="width:200px;">
+            Inventory Report
+            <ul>
+               <li><%= link_to "Inventory", inventory_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            </ul>
+          </li>
+
+      </ul>
+    </li>
+
+      <!--li><%#= link_to "Setting", settings_url %></li-->
+      <!--li><%#= link_to "Backup", backup_users_path, :confirm => "Are you sure you want to run backup now ?" %></li-->
+      <!--li><%#= link_to "Profile", profile_user_path(current_user.id) %></li-->
+
+    <li style="width:130px;">
+      Housekeeping
+      <ul>
+        <% if roles.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU) %>
+          <li><%= link_to "Company Profile", company_profiles_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+        <% else %>
+          <li class="text_gray">Company Profile</li>
+        <% end %>
+
+        <% if current_user.level == User::LEVEL_FIVE %>
+          <li>
+            User
+            <ul>
+              <li><%= link_to "Listing Users", users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "New User", new_user_entry_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "KIV - Users", kiv_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <!--li><%#= link_to "Clearing Database", clear_database_users_path, :confirm => "Are you sure to clear database?" %></li-->
+            </ul>
+          </li>
+        <% end %>
+
+        <% if roles.include?(InventoryManagementSystem::TRADE_COMPANY_MENU) %>
+          <li>
+            Trade Company
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::VENDOR_LISTING) %>
+                <li><%= link_to "Listing Suppliers", trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Listing Suppliers</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::VENDOR_NEW_ADD) %>
+                <li><%= link_to 'New Supplier', new_trade_company_path(:option => TradeCompany::SUPPLIER), :class => "show_without_refresh_page_1024x800", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Supplier</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::VENDOR_KIV) %>
+                <li><%= link_to 'KIV Suppliers', kiv_vendors_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">KIV Suppliers</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::CUSTOMER_LISTING) %>
+                <li><%= link_to "Listing Customers", customer_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">Listing Customers</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::CUSTOMER_NEW_ADD) %>
+                <li><%= link_to 'New Customer', new_trade_company_path(:option => TradeCompany::CUSTOMER), :class => "show_without_refresh_page_1024x800", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Customer</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::CUSTOMER_KIV) %>
+                <li><%= link_to 'KIV Customers', kiv_customers_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">KIV Customers</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <% if roles.include?(InventoryManagementSystem::PRODUCT_MENU) %>
+          <li>
+            Product ID
+            <ul>
+                <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION) %>
+                  <li><%= link_to "Non Operation", non_operation_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">Non Operation</li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::PRODUCT_OPERATION) %>
+                  <li><%= link_to "Operation", operation_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">Operation</li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD) %>
+                  <li><%= link_to "Finish Goods", finish_good_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">Finish Goods</li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION) %>
+                  <li><%= link_to "KIV Non Operation", kiv_non_operation_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">KIV Non Operation</li>
+                <% end %>
+
+                <% if roles.include?(InventoryManagementSystem::KIV_PRODUCT_OPERATION) %>
+                  <li><%= link_to "KIV Operation", kiv_operation_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">KIV Operation</li>
+                <% end %>
+
+                <% if roles.include?(InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD) %>
+                  <li><%= link_to "KIV Finish Goods", kiv_finish_good_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                  <li class="text_gray">KIV Finish Goods</li>
+                <% end %>
+            </ul>
+          </li>
+        <% end %>
+
+        <% if current_user.level == User::LEVEL_FIVE %>
+          <li>
+            General Term
+            <ul>
+              <li>
+                Unit Measurements
+                <ul>
+                  <li><%= link_to "Listing UM", unit_measurements_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "New UM", new_unit_measurement_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "KIV UM", kiv_unit_measurements_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                </ul>
+              </li>
+              <li>
+                Currencies
+                <ul>
+                  <li><%= link_to "Listing Currency", currencies_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "New Currency", new_currency_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "KIV Currency", kiv_currencies_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                </ul>
+              </li>
+              <li>
+                Departments
+                <ul>
+                  <li><%= link_to "Listing Departments", departments_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "New Department", new_department_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "KIV Department", kiv_departments_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                </ul>
+              </li>
+              <li>
+                Trade Terms
+                <ul>
+                  <li><%= link_to "Listing Trade Terms", trade_terms_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "New Trade Term", new_trade_term_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "KIV Trade Term", kiv_trade_terms_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                </ul>
+              </li>
+              <li>
+                Transports
+                <ul>
+                  <li><%= link_to "Listing Transports", transports_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "New Transport", new_transport_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "KIV Transports", kiv_transports_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+
+        <li>
+          Product Price Control               
+          <ul>
+            <li><%= link_to "Listing Product Price Control", price_controls_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Listing Product Price Control - KIV", kiv_price_controls_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+          </ul>
+        </li>
+        
+        <li>
+          <%#*Change Status / Coding%>
+          Change Coding
+          <ul>
+            <li><%= link_to "Listing Change Company Coding", change_company_codes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "New Change Company Code", new_change_company_code_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li style="width:200px;">
+        Report
+        <ul>
+
+          <li style="width:200px;">
+              Listing Report
+              <ul>
+                <li><%= link_to "Company", company_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                <li><%#= link_to "Category", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+                <li><%#= link_to "Sub-category", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                <li><%= link_to "Product ID", product_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+                <li><%#= link_to "Price", price_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                <li><%= link_to "Product - customer", customer_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              </ul>
+            </li>
+            
+
+            <li style="width:200px;">
+              Stock Flow Tracking
+              <ul>
+                  <li><%#= link_to "FG Transaction C/W U/P", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  <li><%#= link_to "FG Transaction", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+              </ul>
+            </li>
+        
+            <li style="width:200px;">
+              Sales Report
+              <ul>
+                  <li><%#= link_to "Daily Turnover", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                  <li><%#= link_to "Monthly Turnover", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                  <li><%#= link_to "sales Summary by S/Rep", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                  <li><%#= link_to "Daily Turnover By Product", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                  <li><%#= link_to "Monthly Turnover By Co.", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                  <li><%#= link_to "Customer Sales Analysis", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                <li><%#= link_to "Prod Type Sales Analysis", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+
+                <li><%#= link_to "Sales Transactions By Prod(C/P)", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              </ul>
+            </li>
+
+            <li style="width:200px;">
+              Production Report
+              <ul>
+                  <li><%#= link_to "A", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+                  <li><%#= link_to "B", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  
+                <li><%#= link_to "C", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              </ul>
+            </li>
+
+  </ul>
+</div>
+

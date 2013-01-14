@@ -1,0 +1,52 @@
+<table class="white-line-table">
+  <tr class="header_line">
+    <th style="font-size: 12px;" width="140">RN no.</th>
+    <th style="font-size: 12px;" width="140">Vendor D/O</th>
+    <th style="font-size: 12px;" width="140">PO no.</th>
+    <th style="font-size: 12px;">Product I/D</th>
+    <th style="font-size: 12px;">Description(in Detail)</th>
+    <th style="font-size: 12px;">Order Qty</th>
+    <th style="font-size: 12px;">U/M</th>
+    <th>RN Qty</th>
+    <th>Current Stock</th>
+    <th>Client Part No.</th>
+    <th>Returned Qty</th>
+    <th style="font-size: 12px;">Action</th>
+  </tr>
+
+  <% rn_vendor.each do |rn| %>
+    <tr class="header_title" style="height:30px;">
+      <td style="font-size: 20px; font-weight: bold; color: blue;" align="center"><%= rn.receive_note_no rescue '-' %></td>
+      <td><%= rn.vendor_delivery_no rescue '-' %></td>
+      <td colspan="10"></td>
+    </tr>
+    <tr>
+
+    </tr>
+
+    <% rn.receive_note_items.each do |item| %>
+      <tr class="<%= cycle("odd_line", "even_line") %>">
+        <td></td>
+        <td></td>
+        <td align="center">
+          <%= link_to(purchase_order_path(item.purchase_order_item_line.purchase_order.id), { :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"}) do %>
+            <%= item.purchase_order_item_line.purchase_order.po_no rescue '-' %>
+          <% end %>
+        </td>
+        <td align="center"><%= render "/product_categories/join_product_category", :pc => item.purchase_order_item_line.purchase_requisition_item %></td>
+        <td><%= simple_format(item.purchase_order_item_line.purchase_requisition_item.description) rescue '-' %></td>
+        <td align="center"><%= item.purchase_order_item_line.purchase_requisition_item.quantity rescue '0' %></td>
+        <td align="center"><%= item.purchase_order_item_line.purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+        <td align="center"><%= item.received_qty rescue '-' %></td>
+        <td align="center"><%= item.purchase_order_item_line.purchase_requisition_item.product.current_stock rescue '-' %></td>
+        <td><%= item.purchase_order_item_line.purchase_requisition_item.product.part_no rescue '-' %></td>
+        <td><%= text_field_tag "returned_qty[#{item.id.to_s}][qty]", 0, :size => 10 %></td>
+        <td align="center">
+          <% if item.purchase_order_item_line.checked == TRUE %>
+            <%= check_box_tag "select_rn[]", item.id %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

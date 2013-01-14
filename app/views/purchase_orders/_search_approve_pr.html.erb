@@ -1,0 +1,21 @@
+<div class="search_engine">
+  <%= form_tag approved_pr_purchase_orders_path, :method => :get do %>
+    <table>
+      <tr>
+        <td>Item Status</td>
+        <td><%= select_tag :item_status, options_for_select(['PR-Repair', 'Proposed Vendor', 'Vendor Selection', 'After Vendor Selection']), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td>PR NO.#</td>
+        <td><%= text_field_tag :pr_no, params[:pr_no] %></td>
+      </tr>
+      <tr>
+        <td>Product ID</td>
+        <td><%= select_tag :product_id, options_for_select(@option_product_id), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td colspan="10" align="right"><%= submit_tag 'search' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

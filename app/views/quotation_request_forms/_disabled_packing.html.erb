@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <td width="150"><b>Type of Packing</b></td>
+    <td>
+      <%= f.radio_button "packing_type", QuotationRequestForm::BULK, :disabled => true %><%= QuotationRequestForm::BULK %>
+      <%= f.radio_button "packing_type", QuotationRequestForm::PACKET, :disabled => true %><%= QuotationRequestForm::PACKET %>
+      <%= f.radio_button "packing_type", QuotationRequestForm::CARTON, :disabled => true %><%= QuotationRequestForm::CARTON %>
+      <%= f.radio_button "packing_type", QuotationRequestForm::BIN, :disabled => true %><%= QuotationRequestForm::BIN %>
+      <%= f.radio_button "packing_type", QuotationRequestForm::OTHERS, :disabled => true %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :packing_type_other, :size => 20, :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Packed Qty</b></td>
+    <td><%= f.text_field :packed_quantity, :size => 5, :disabled => true %>PCS</td>
+  </tr>
+</table>

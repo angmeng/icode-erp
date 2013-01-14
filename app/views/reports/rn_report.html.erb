@@ -1,0 +1,51 @@
+<h1>Receive Note Report</h1>
+
+<div>
+	<table>
+		<%= form_for @rn_report, :url => rn_report_reports_path  do |f| %>
+		<tr>
+			<td>Receive Note :
+			<%= f.text_field :receive_note_receive_note_no_gte ,:size => 9 %> - <%= f.text_field :receive_note_receive_note_no_lte , :size => 9 %> </td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><%= f.submit "Search" %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+
+<div>
+	<fieldset>
+	<table id="grid_h495" class="white-line-table zebraLight">
+		<thead>
+		<tr class="header_line">
+			<th>Date</th>
+			<th>Received From</th>
+			<th>Vendor's D/O</th>
+			<th>Update By</th>
+		</tr>
+	</thead>
+	</tbody>
+		<% @show_rn_report.each do |d| %>
+		<tr>
+			<td><%= d.receive_note.rn_date rescue '-' %></td>
+			<td><%= d.receive_note.trade_company.code rescue '-'%> / 
+			<%= d.receive_note.trade_company.name rescue '-' %></td>
+			<td><%= d.receive_note.vendor_delivery_no rescue '-' %></td>
+			<td><%= d.receive_note.update_by rescue '-' %></td>
+		</tr>
+		<% end %>
+	</tbody>
+	</table>
+</fieldset>
+<div style="float:right;">
+  <span><%= link_to "PDF report" , pdf_rn_report_reports_path(:rn_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
+
+  <%= link_close_button %>
+</div>
+
+</div>
+
+
+

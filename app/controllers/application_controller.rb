@@ -32,17 +32,31 @@ class ApplicationController < ActionController::Base
   helper_method :unit_measurement
   helper_method :currency
   helper_method :transport
+  helper_method :trade_company_both
   helper_method :trade_company_vendor
+  helper_method :trade_company_vendor_with_code
   helper_method :trade_company_customer
+  helper_method :trade_company_customer_with_code
+  helper_method :product_non_operation_n_operation_with_combobox
+  helper_method :product_non_operation_n_operation_with_pr_combobox
+  helper_method :product_finish_goods_with_combobox
   helper_method :ste_no_with_valid
   helper_method :ste_no_with_not_valid
+  helper_method :perihal_barangs_vendor
   helper_method :issues_in
   helper_method :issues_out
   helper_method :roles
   helper_method :users
+  helper_method :material
+  helper_method :perihal_barang_both
+  
   
   def company
     @company ||= CompanyProfile.first
+  end
+  
+  def perihal_barang_both
+    @perihal_barang_both ||= SalesTaxExemptionBarang.where(:valid_condition => TRUE)
   end
   
   def payment_type
@@ -69,20 +83,52 @@ class ApplicationController < ActionController::Base
     @transport ||= Transport.ordered
   end
   
-  def trade_company_vendor #vendor only
+  def trade_company_both
+    @trade_company_both ||= TradeCompany.ordered_with_both
+  end
+  
+  #vendor only, including in Purchase Order
+  def trade_company_vendor 
     @trade_company_vendor ||= TradeCompany.ordered_with_vendor_name
+  end
+  
+  def trade_company_vendor_with_code        #only vendor comboboxes
+    @trade_company_vendor_with_code ||= TradeCompany.vendor_with_code
   end
   
   def trade_company_customer
     @trade_company_customer ||= TradeCompany.ordered_with_customer_name
   end
   
+  def trade_company_customer_with_code      #only customer comboboxes
+    @trade_company_customer_with_code ||= TradeCompany.customer_with_code
+  end
+  
+  def product_non_operation_n_operation_with_combobox
+    @product_non_operation_n_operation_with_combobox ||= ProductCombobox.db_active_both_operation
+  end
+  
+  def product_non_operation_n_operation_with_pr_combobox
+    @product_non_operation_n_operation_with_pr_combobox ||= ProductCombobox.pr_comboboxes
+  end
+
+  def product_finish_goods_with_combobox
+#    @product_finish_goods ||= ProductCombobox.finish_goods
+    @product_finish_goods_with_combobox = ProductCombobox.qr_comboboxes
+  end
+  
+#  def trade_company_subcon
+#    @trade_company_subcon ||= TradeCompany.ordered_with_subcon_name
+#  end
+  
   def ste_no_with_valid
-    @ste_no_with_valid ||= SalesTaxExemption.ordered_ste_no_with_valid
+#    @ste_no_with_valid ||= SalesTaxExemption.ordered_ste_no_with_valid
+    @ste_no_with_valid ||= SalesTaxExemption.ste_with_valid
   end
   
   def ste_no_with_not_valid
-    @ste_no_with_not_valid ||= SalesTaxExemption.ordered_ste_no_with_not_valid
+#    @ste_no_with_not_valid ||= SalesTaxExemption.ordered_ste_no_with_not_valid
+    @ste_no_with_not_valid ||= SalesTaxExemption.ste_with_invalid
   end
   
   def issues_in
@@ -101,14 +147,32 @@ class ApplicationController < ActionController::Base
     @users ||= User.ordered_name
   end
   
+  def material
+    @material ||= Material.where(:status => Material::ACTIVE)
+  end
+  
   def goto_direction(this)
-      if this.category_type == ProductCategory::NON_OPERATION
-        redirect_to non_operation_product_categories_path
-      elsif this.category_type == ProductCategory::OPERATION
-        redirect_to operation_product_categories_path
-      else
-        redirect_to finish_good_product_categories_path
-      end
+    if this.category_type == ProductCategory::FINISH_GOOD
+      redirect_to finish_good_products_path
+    elsif this.category_type == ProductCategory::NON_OPERATION
+      redirect_to non_operation_products_path
+    elsif this.category_type == ProductCategory::OPERATION
+      redirect_to operation_products_path
+    else
+      render :text => "Something wrong.."
+    end
+  end
+  
+  def goto_direction_kiv(this)
+    if this.category_type == ProductCategory::FINISH_GOOD
+      redirect_to kiv_finish_good_products_path
+    elsif this.category_type == ProductCategory::NON_OPERATION
+      redirect_to kiv_non_operation_products_path
+    elsif this.category_type == ProductCategory::OPERATION
+      redirect_to kiv_operation_products_path
+    else
+      render :text => "Something wrong.."
+    end
   end
   
   def layout_false

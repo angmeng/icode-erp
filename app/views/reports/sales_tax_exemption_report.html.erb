@@ -1,0 +1,71 @@
+<h1> Sales tax exemption </h1>
+
+<div>
+    <%= form_for @sales_tax_exemption, :url => sales_tax_exemption_report_reports_path  do |f| %>
+      <table>
+        <tr>
+          <td>Sales Tax Exemption :</td>
+          <td><%= f.text_field :sales_tax_exemption_no_sw, :size => 12 %> To
+            <%= f.text_field :sales_tax_exemption_no_ew, :size => 12 %></td>
+          <td>Tarif Code </td>
+          <td><%= f.text_field :tarif_code_sw , :size => 10 %></td>
+        </tr>
+        <tr>
+          <td>Invoice Period</th>
+          <td><%= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
+          <%= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
+        </tr>
+        
+        <tr>
+        <td><%= f.submit "Search" %></td>
+         </tr>
+      </table>
+  <% end %>
+</div>
+
+<hr />
+
+<div>
+	<fieldset>
+	<a>Sales Tax Exemption Report</a>
+	<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>No.</th>
+			<th>Trade company</th>
+			<th>Sales Tax Exemption</th>
+			<th>Date</th>
+			<th>Inv No.</th>
+			<th>Tarif Code</th>
+			<th>Amount</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	<% @show_sale_tax_exemption_report.each_with_index do |pri , index| %>
+		<tr>
+			<td><%= index + 1 %></td>
+			<td><%= pri.trade_company.name rescue '-'%></td>
+			<td><%#= p. %></td>
+			<td><%= pri.period_start rescue '-' %></td>
+			<td><%= pri.ste_no rescue '-' %></td>
+			<td><%= pri.tarif_code rescue '-' %></td>
+			<td><%= pri.remaining_total rescue '-' %></td>
+
+		</tr>
+		<% end %>
+	</tbody>
+		
+	</table>
+	
+
+	</fieldset>
+<div style="float:right;">
+   <span><%= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:ste_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
+
+   <span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+
+   <%= link_close_button %>
+</div>
+
+</div>

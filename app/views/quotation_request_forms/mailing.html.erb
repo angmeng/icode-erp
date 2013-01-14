@@ -1,0 +1,35 @@
+<div style="background-color:blue;"><strong style="color:white;">SENDING MAIL</strong></div>
+
+<%= form_tag sending_mail_quotation_request_forms_path(:id => @quotation_request_form.id) do %>
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td><b>Attachment File</b></td>
+        <td>
+          QR No#<%= @quotation_request_form.quotation_request_no rescue 'none' %>.pdf
+          <%= hidden_field_tag :user_pdf_link, printable_quotation_request_form_path(@quotation_request_form, :format => :pdf), :size => 50 %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>From</b></td>
+        <td><%= text_field_tag :user_from, params[:user_from] %></td>
+      </tr>
+      <tr>
+        <td><b>To</b></td>
+        <td><%= text_field_tag :user_to, params[:user_to] %></td>
+      </tr>
+      <tr>
+        <td><b>Subject</b></td>
+        <td><%= text_field_tag :user_subject, params[:user_subject], :size => 40 %></td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><b>Message</b></td>
+        <td><%= text_area_tag :user_message, params[:user_message], :rows => 10, :cols => 50 %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_mail_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

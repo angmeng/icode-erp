@@ -1,0 +1,11 @@
+<div style="background-color:blue"><strong style="color:white;">EDITING PURCHASE ORDER NO.</strong></div>
+
+<% if @ste.present? %>
+  <%= render "/purchase_orders/with_sales_tax_exemption"  %>
+<% else %>
+    <% if @exist_sales_tax.present? %>
+      <%= render "/purchase_orders/with_sales_tax_exemption" %>
+    <% else %>
+      <%= render "/purchase_orders/without_sales_tax_exemption" %>
+    <% end %>
+<% end %>

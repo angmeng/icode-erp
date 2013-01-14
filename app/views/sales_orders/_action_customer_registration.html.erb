@@ -1,0 +1,17 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %>
+    <span id="on_add_customer" addClass="iframe_1024x800"><%= image_tag("add_item_button.png", :alt => "Add New Customer", :title => "Add New Customer", :class => "opac_icon") %></span>
+  <% else %>
+    <%= image_tag("add_item_button.png", :alt => "Add New Customer", :title => "Add New Customer", :class => "opac_icon") %>
+  <% end %>
+</div>
+
+<div class="icon_tag">
+  
+    <span class="word_opac"><%= not_link_show %></span>
+    <span class="word_opac"><%= not_link_edit %></span>
+    <span class="word_opac"><%= not_link_kiv %></span>
+    <span class="word_opac"><%= not_link_printable %></span>
+    <%= link_close_button %>
+
+</div>

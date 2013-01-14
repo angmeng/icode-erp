@@ -11,6 +11,7 @@ class UnitMeasurement < ActiveRecord::Base
   has_one :purchase_requisition
   has_one :custom
   has_one :sales_tax_exemption
+  has_one :sales_tax_exemption_barang
   has_one :sales_order_item
   
   validates :code, :presence => true
@@ -20,14 +21,16 @@ class UnitMeasurement < ActiveRecord::Base
   has_one :to_unit_measurement_id, :class_name => "Formulation", :foreign_key => "to_unit_measurement_id"
   has_one :quotation_request_form
   
-  scope :ordering_code, order("code").where(:status => UnitMeasurement::ACTIVE)
+  default_scope order("code")
+  
+  scope :ordering_code, where(:status => UnitMeasurement::ACTIVE)
 
   def self.ordered_code(search)
-    search.order("code").where(:status => UnitMeasurement::ACTIVE)
+    search.where(:status => UnitMeasurement::ACTIVE)
   end
   
   def self.ordered_code_kiv(search)
-    search.order("code").where(:status => UnitMeasurement::KEEP_IN_VIEW)
+    search.where(:status => UnitMeasurement::KEEP_IN_VIEW)
   end
   
   def uppercase_text

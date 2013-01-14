@@ -1,0 +1,13 @@
+<%= render "linking" %> 
+
+<div style="background-color:blue"><strong style="color:white;">PRODUCT ID REGISTRATION (NON OPERATION AND OPERATION)</strong></div>
+
+<div class="fix_1600x900">
+  <% if @no_product_id.present? %>
+    <%= render "/purchase_orders/read_no_product_id", :product_id => @no_product_id %>
+  <% else %>
+    No Record Found.
+  <% end %>
+</div>
+
+<%= render "action_purchase_order_no_product_id" %>

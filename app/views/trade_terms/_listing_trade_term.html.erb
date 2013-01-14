@@ -1,0 +1,15 @@
+<div class="fix_800x600">
+  <table class="white-line-table zebraLight">
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Name</th>
+    </tr>
+
+    <% tt.each do |trade_term| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= trade_term.id %>">
+        <td></td>
+        <td><%= trade_term.name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,108 @@
+<%= form_for(@sales_tax_exemption) do |f| %>
+  <% unless action_name == "edit" %>
+    <% if action_name == "new_customer" %>
+      <%= f.hidden_field :company_type, :value => SalesTaxExemption::CUSTOMER %>
+    <% else %>
+      <%= f.hidden_field :company_type, :value => SalesTaxExemption::SUPPLIER %>
+    <% end %>
+    <%= f.hidden_field :valid_condition, :value => TRUE %>
+  <% end %>
+
+  <div class="fix_800x600">
+    <table width="100%">
+      <tr>
+        <% if action_name == "edit" %>
+          <td width="200"><b>Running No#</b></td>
+          <td><%= @sales_tax_exemption.running_no rescue '-' %></td>
+        <% else %>
+          <td width="200"><b>Current Running No.</b></td>
+          <td><%= company.sn_sales_tax_exemption_no.to_i + 1 %></td>
+        <% end %>
+      </tr>
+      
+      <tr>
+        <td><b>Type of Exemption</b></td>
+        <td><%= f.text_field :type_of_exemption, :size => 5 %></td>
+      </tr>
+      
+      <tr>
+        <td><b><%= f.label :sales_tax_exemption_no, "Sales Tax Exemption No." %></b></td>
+        <td><%= f.text_field :sales_tax_exemption_no, :validType => "maxLength[50]", :class => "easyui-validatebox", :size => 50 %></td>
+      </tr>
+      
+      <tr>
+        <td><b><%= f.label :registration_no, "Registration No." %></b></td>
+        <td><%= f.text_field :registration_no %></td>
+      </tr>
+      
+      <tr>
+        <td><b><%= f.label :trade_company_id, "Supplier Company" %></b></td>
+        <td>
+          <%= f.select :trade_company_id, options_from_collection_for_select(trade_company_vendor, 'id', 'code', @sales_tax_exemption.trade_company_id.to_i), { :include_blank => true }, :onchange => "getCombo_tradecompany_code(this)" %>
+          <span id="ste_company_name"><%= @sales_tax_exemption.trade_company.name if @sales_tax_exemption.trade_company_id.present? %></span>
+        </td>
+      </tr>
+      
+      <tr>
+        <td><b>Period</b></td>
+        <td>
+          <% if action_name == "edit" %>
+            <%= f.text_field :period_start, :value => @sales_tax_exemption.period_start.strftime("%d-%m-%Y"), :size => 10, :id => "kendo_date" %> - <%= f.text_field :period_end, :value => @sales_tax_exemption.period_end.strftime("%d-%m-%Y"), :size => 10, :id => "kendo_date" %>
+          <% else %>
+            <%= f.text_field :period_start, :size => 10, :id => "kendo_date" %> - <%= f.text_field :period_end, :size => 10, :id => "kendo_date" %>
+          <% end %>
+        </td>
+      </tr> 
+      
+      <tr><td colspan="10"><hr/></td></tr>
+    </table>
+    
+    <table class="white-line-table target_table">
+      <thead>
+        <tr style="background-color: gainsboro;">
+          <th>Perihal Barang</th>
+          <th>Tarif Code</th>
+          <th>Apply Qty</th>
+          <th>Completed Qty</th>
+          <th>U/M</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
+          
+          <% @sales_tax_exemption.sales_tax_exemption_barangs.each_with_index do |goods, index| %>
+            <tr class="<%= cycle('odd_line', 'even_line') %>">
+              <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true %></td>
+              <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :size => 20 %></td>
+              <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :size => 8 %>
+              <td align="right">0<%= hidden_field_tag "datarow[#{index}][complete_qty]", goods.complete_qty %></td>
+              <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), { :include_blank => true } %></td>        
+            </tr>
+          <% end %>
+          
+        <% else %>
+            
+          <tr class="<%= cycle('odd_line', 'even_line') %>">
+            <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true %></td>
+            <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :size => 20 %></td>
+            <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :size => 8 %>
+            <td align="right">0<%= hidden_field_tag "datarow[0][complete_qty]", 0 %></td>
+            <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', @sales_tax_exemption.unit_measurement_id.to_i), { :include_blank => true } %></td>        
+          </tr>
+          
+        <% end %>
+      </tbody>
+    </table>
+    
+  </div>
+
+  <div class="left_icon_tag">
+    <%= link_to "Add Item", "#", :id => "add_bottom_row", :class => "k-button" %>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button  %>
+  </div>
+<% end %>

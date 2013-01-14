@@ -1,0 +1,46 @@
+<div class="fix_1600x900">
+  <% if listing_delivery_no.present? %>
+      <table id="grid_h495" class="white-line-table zebraLight">
+        <thead>
+          <tr class="header_line">
+              <th class="check_highlight"></th>
+              <th>D/O No.</th>
+              <th>Trade Company</th>
+              <th>Type of Sales</th>
+              <th>Currency</th>
+              <th>Term</th>
+              <th>Transport</th>
+              <th>Sales Rep.</th>
+              <th>Sales Tax Exemption</th>
+              <th>Sales Tax %</th>
+              <th>Updated By</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <% listing_delivery_no.each do |p| %>
+
+            <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= p.id %>">
+              <td></td>
+              <td align="center"><%= p.do_no %></td>              
+              <td align="center">[<%= p.trade_company.code rescue '-' %>] <%= p.trade_company.name rescue '-' %> </td>
+              <td align="center"><%= p.type_of_sale.name rescue '-' %></td>
+              <td align="center"><%= p.currency.name rescue '-' %></td>
+              <td align="center"><%= p.trade_term.name rescue '-' %></td>
+              <td align="center"><%= p.transport.name rescue '-' %></td>
+              <td align="center"><%= p.sales_rep %></td>
+              <td align="center"><%= p.sales_tax_exemption %></td>
+              <td align="center"><%= p.sales_tax %></td>
+              <td align="center"><%= User.find(p.updated_by).name rescue '-' %></td>
+            </tr>
+
+          <% end %>
+
+        </tbody>
+      </table>
+  <% else %>
+    No Record Found
+  <% end %>
+</div>
+

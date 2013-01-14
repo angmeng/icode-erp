@@ -45,7 +45,8 @@ gem 'rabl'
 gem 'will_paginate', '~> 3.0'
 gem "pdfkit"
 gem "squeel"
-#gem "meta_search", "~> 1.1.3"
 gem "meta_search"
-#gem "ransack"
-
+gem "paperclip"
+#gem 'font-kit-rails'
+gem 'turbolinks'
+#gem "wkhtmltopdf-binary"

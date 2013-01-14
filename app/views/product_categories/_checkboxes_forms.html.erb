@@ -1,0 +1,138 @@
+<table width="100%">
+  
+  <% if action_name == "edit" %>
+  
+    <% if @edit_field_id.present? %>
+      <tr>
+        <td style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::DESCRIPTION, @edit_field_id.include?(ProductField::DESCRIPTION) %>DESCRIPTION<br/>
+          <%= check_box_tag "prod_field[]", ProductField::GSM, @edit_field_id.include?(ProductField::GSM) %>GSM<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WIDTH, @edit_field_id.include?(ProductField::WIDTH) %>WIDTH<br/>
+          <%= check_box_tag "prod_field[]", ProductField::LENGTH, @edit_field_id.include?(ProductField::LENGTH) %>LENGTH<br/>
+          <%= check_box_tag "prod_field[]", ProductField::HEIGHT, @edit_field_id.include?(ProductField::HEIGHT) %>HEIGHT<br/>
+          <%= check_box_tag "prod_field[]", ProductField::TICKNESS, @edit_field_id.include?(ProductField::TICKNESS) %>TICKNESS<br/>
+          <%= check_box_tag "prod_field[]", ProductField::UNIT_MEASURE, @edit_field_id.include?(ProductField::UNIT_MEASURE) %>UNIT MEASURE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::ORIGIN, @edit_field_id.include?(ProductField::ORIGIN) %>ORIGIN<br/>
+          <%= check_box_tag "prod_field[]", ProductField::BRAND, @edit_field_id.include?(ProductField::BRAND) %>BRAND<br/>
+          <%= check_box_tag "prod_field[]", ProductField::GRADE, @edit_field_id.include?(ProductField::GRADE) %>GRADE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PACKING_METHOD, @edit_field_id.include?(ProductField::PACKING_METHOD) %>PACKING METHOD + PACKING QTY<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PACKING_QTY, @edit_field_id.include?(ProductField::PACKING_QTY) %>PACKING QTY<br/>
+        </td>
+
+        <td style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::BUFFER_STOCK, @edit_field_id.include?(ProductField::BUFFER_STOCK) %>BUFFER STOCK<br/>
+          <%= check_box_tag "prod_field[]", ProductField::TARIF_CODE, @edit_field_id.include?(ProductField::TARIF_CODE) %>TARIF CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PART_WEIGHT, @edit_field_id.include?(ProductField::PART_WEIGHT) %>PART WEIGHT<br/>
+          <%= check_box_tag "prod_field[]", ProductField::CONTAINER_NO, @edit_field_id.include?(ProductField::CONTAINER_NO) %>CONTAINER NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::SEAL_NO, @edit_field_id.include?(ProductField::SEAL_NO) %>SEAL NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::DESPATCH_ADVISE, @edit_field_id.include?(ProductField::DESPATCH_ADVISE) %>DESPATCH ADVISE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::SIZE, @edit_field_id.include?(ProductField::SIZE) %>SIZE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::MODEL_NO, @edit_field_id.include?(ProductField::MODEL_NO) %>MODEL NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::REORDER_NO, @edit_field_id.include?(ProductField::REORDER_NO) %>REORDER NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::ART_NO, @edit_field_id.include?(ProductField::ART_NO) %>ART NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::REF_NO, @edit_field_id.include?(ProductField::REF_NO) %>REF NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::MOULD_NO, @edit_field_id.include?(ProductField::MOULD_NO) %>MOULD NO<br/>
+        </td>
+
+        <td style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::WORK_ORDER_NO, @edit_field_id.include?(ProductField::WORK_ORDER_NO) %>WORK ORDER NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::MFG_DATE, @edit_field_id.include?(ProductField::MFG_DATE) %>MFG DATE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::EXP_DATE, @edit_field_id.include?(ProductField::EXP_DATE) %>EXP DATE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::FILM_NO, @edit_field_id.include?(ProductField::FILM_NO) %>FILE NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::BAR_CODE, @edit_field_id.include?(ProductField::BAR_CODE) %>BAR CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::LOT_NO, @edit_field_id.include?(ProductField::LOT_NO) %>LOT NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::ITEM_CODE, @edit_field_id.include?(ProductField::ITEM_CODE) %>ITEM CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PART_CODE, @edit_field_id.include?(ProductField::PART_CODE) %>PART CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PANTONE_CODE, @edit_field_id.include?(ProductField::PANTONE_CODE) %>PANTONE CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::COLOUR, @edit_field_id.include?(ProductField::COLOUR) %>COLOUR<br/>
+          <%= check_box_tag "prod_field[]", ProductField::SERIAL_NO, @edit_field_id.include?(ProductField::SERIAL_NO) %>SERIAL NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WARRANTY, @edit_field_id.include?(ProductField::WARRANTY) %>WARRANTY<br/>
+        </td>
+
+        <td style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::CAPACITY, @edit_field_id.include?(ProductField::CAPACITY) %>CAPACITY<br/>
+          <%= check_box_tag "prod_field[]", ProductField::DIAMETER, @edit_field_id.include?(ProductField::DIAMETER) %>DIAMETER<br/>
+          <%= check_box_tag "prod_field[]", ProductField::VOLTAGE, @edit_field_id.include?(ProductField::VOLTAGE) %>VOLTAGE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WATT, @edit_field_id.include?(ProductField::WATT) %>WATT<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PIN, @edit_field_id.include?(ProductField::PIN) %>PIN<br/>
+          <%= check_box_tag "prod_field[]", ProductField::AMPERE, @edit_field_id.include?(ProductField::AMPERE) %>AMPERE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::HP, @edit_field_id.include?(ProductField::HP) %>HP<br/>
+          <%= check_box_tag "prod_field[]", ProductField::HZ, @edit_field_id.include?(ProductField::HZ) %>HZ<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PURENESS, @edit_field_id.include?(ProductField::PURENESS) %>PURENESS<br/>
+          <%= check_box_tag "prod_field[]", ProductField::TON, @edit_field_id.include?(ProductField::TON) %>TON<br/>
+          <%= check_box_tag "prod_field[]", ProductField::CONSIGNEE, @edit_field_id.include?(ProductField::CONSIGNEE) %>CONSIGNEE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::DESTINATION, @edit_field_id.include?(ProductField::DESTINATION) %>DESTINATION<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PROCESS, @edit_field_id.include?(ProductField::PROCESS) %>PROCESS<br/>
+        </td>
+      </tr>
+    <% else %>
+      <%= render "/products/show_checkboxes_of_field", :field_id => @edit_field_id_lvl_two %>
+    <% end %>
+      
+  <% else %>
+    <!-- NEW -->  
+    <tr>
+      <td style="vertical-align: top;">
+        <%= check_box_tag "prod_field[]", ProductField::DESCRIPTION, true %>DESCRIPTION<br/>
+        <%= check_box_tag "prod_field[]", ProductField::GSM %>GSM<br/>
+        <%= check_box_tag "prod_field[]", ProductField::WIDTH %>WIDTH<br/>
+        <%= check_box_tag "prod_field[]", ProductField::LENGTH %>LENGTH<br/>
+        <%= check_box_tag "prod_field[]", ProductField::HEIGHT %>HEIGHT<br/>
+        <%= check_box_tag "prod_field[]", ProductField::TICKNESS %>TICKNESS<br/>
+        <%= check_box_tag "prod_field[]", ProductField::UNIT_MEASURE, true %>UNIT MEASURE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::ORIGIN %>ORIGIN<br/>
+        <%= check_box_tag "prod_field[]", ProductField::BRAND %>BRAND<br/>
+        <%= check_box_tag "prod_field[]", ProductField::GRADE %>GRADE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PACKING_METHOD %>PACKING METHOD + PACKING QTY<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PACKING_QTY, true %>PACKING QTY<br/>
+      </td>
+
+      <td style="vertical-align: top;">
+        <%= check_box_tag "prod_field[]", ProductField::BUFFER_STOCK %>BUFFER STOCK<br/>
+        <%= check_box_tag "prod_field[]", ProductField::TARIF_CODE %>TARIF CODE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PART_WEIGHT %>PART WEIGHT<br/>
+        <%= check_box_tag "prod_field[]", ProductField::CONTAINER_NO %>CONTAINER NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::SEAL_NO %>SEAL NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::DESPATCH_ADVISE %>DESPATCH ADVISE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::SIZE %>SIZE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::MODEL_NO %>MODEL NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::REORDER_NO %>REORDER NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::ART_NO %>ART NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::REF_NO %>REF NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::MOULD_NO %>MOULD NO<br/>
+      </td>
+
+      <td style="vertical-align: top;">
+        <%= check_box_tag "prod_field[]", ProductField::WORK_ORDER_NO %>WORK ORDER NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::MFG_DATE %>MFG DATE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::EXP_DATE %>EXP DATE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::FILM_NO %>FILE NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::BAR_CODE %>BAR CODE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::LOT_NO %>LOT NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::ITEM_CODE %>ITEM CODE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PART_CODE %>PART CODE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PANTONE_CODE %>PANTONE CODE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::COLOUR %>COLOUR<br/>
+        <%= check_box_tag "prod_field[]", ProductField::SERIAL_NO %>SERIAL NO<br/>
+        <%= check_box_tag "prod_field[]", ProductField::WARRANTY %>WARRANTY<br/>
+      </td>
+
+      <td style="vertical-align: top;">
+        <%= check_box_tag "prod_field[]", ProductField::CAPACITY %>CAPACITY<br/>
+        <%= check_box_tag "prod_field[]", ProductField::DIAMETER %>DIAMETER<br/>
+        <%= check_box_tag "prod_field[]", ProductField::VOLTAGE %>VOLTAGE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::WATT %>WATT<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PIN %>PIN<br/>
+        <%= check_box_tag "prod_field[]", ProductField::AMPERE %>AMPERE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::HP %>HP<br/>
+        <%= check_box_tag "prod_field[]", ProductField::HZ %>HZ<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PURENESS %>PURENESS<br/>
+        <%= check_box_tag "prod_field[]", ProductField::TON %>TON<br/>
+        <%= check_box_tag "prod_field[]", ProductField::CONSIGNEE %>CONSIGNEE<br/>
+        <%= check_box_tag "prod_field[]", ProductField::DESTINATION %>DESTINATION<br/>
+        <%= check_box_tag "prod_field[]", ProductField::PROCESS %>PROCESS<br/>
+      </td>
+    </tr>
+    
+  <% end %>
+</table>

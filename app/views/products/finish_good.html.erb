@@ -1,74 +1,14 @@
-<% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_PARENT_FOLDER) %>
-  <%= link_parent_folder(parent_product_categories_path(:category_type => ProductCategory::FINISH_GOOD)) %>
-<% else %>
-  <%= not_link_parent_folder %>
-<% end %>
+<%= render "finish_goods_top_icon", :data => @listing_categories, :match_field => @field_id %>
 
-<% if @listing_categories.present? %>
-
-  <% unless @listing_categories.icon == ProductCategory::ICON_FILE %>
-      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_FOLDER) %>
-        <%= link_subfolder(new_product_category_path(:category_type => ProductCategory::FINISH_GOOD, :parent_id => @listing_categories.id)) %>
-      <% else %>
-        <%= not_link_subfolder %>
-      <% end %>
-  <% else %>
-    <%= not_link_subfolder %>
-  <% end %>
-
-  <% unless @listing_categories.icon == ProductCategory::ICON_FILE %>
-      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_EDIT_SUB_FOLDER ) %>
-        <%= link_edit_subfolder(edit_product_category_path(@listing_categories)) %>
-      <% else %>
-        <%= not_link_edit_subfolder %>
-      <% end %>
-  <% else %>
-    <%= not_link_edit_subfolder %>
-  <% end %>
-
-  <% unless @listing_categories.icon == ProductCategory::ICON_FILE %>
-      <% if @listing_categories.children.present? %>
-            <% if @listing_categories.children.first.icon.present? %>
-                  <% unless @listing_categories.children.first.icon == ProductCategory::ICON_FOLDER %>
-                      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_ADD_NEW_FILE) %>
-                        <%= render "/products/add_file", :listing_categories => @listing_categories %>
-                      <% else %>
-                        <%= not_link_addfile_button %>
-                      <% end %>
-                  <% else %>
-                    <%= not_link_addfile_button %>
-                  <% end %>
-            <% else %>
-              <%= not_link_addfile_button %>
-            <% end %>
-      <% else %>
-        <%= render "/products/add_file", :listing_categories => @listing_categories %>
-      <% end %>
-  <% else %>
-    <%= not_link_addfile_button %>
-  <% end %>
-  
-  <% if @listing_categories.product.present? %>
-      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_EDIT_FILE) %>
-        <%= link_document_edit(edit_product_path(@listing_categories.product)) %>
-      <% else %>
-        <%= not_link_document_edit %>
-      <% end %>
-  <% else %>
-    <%= not_link_document_edit %>
-  <% end %>
-
-<% end %>
-
-<div id="product_layout" class="easyui-layout" style="width:auto;height:500px;">  
-    <div region="west" split="true" title="Finish Goods Product Categories" style="width:300px;">
-      <%= render "/products/category" %>
-    </div>  
-    <div region="center" title="Finish Goods Product Details" style="padding:5px;background:#eee;">
-      <div id = "loading_products">
-        <%= render "/products/product_details" %>
-      </div>
-    </div>  
+<div id="product_layout" class="easyui-layout" style="width:100%;height:500px;">  
+  <div region="west" split="true" title="Finish Goods Product Categories" style="width:300px;">
+    <%= render "/products/category", :categories => @categories %>
+  </div>  
+  <div region="center" title="Finish Goods Product Details" style="padding:5px;background:#eee;width:100%;">
+    <div id = "loading_products">
+      <%= render "/products/product_details", :data => @listing_categories, :field_id => @field_id %>
+    </div>
+  </div>  
 </div> 
 
 <div class="icon_tag">

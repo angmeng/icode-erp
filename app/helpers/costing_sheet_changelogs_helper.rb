@@ -1,0 +1,2 @@
+module CostingSheetChangelogsHelper
+end

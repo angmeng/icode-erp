@@ -1,0 +1,25 @@
+<%= form_for(@pre_print_type) do |f| %>
+  <% if @pre_print_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pre_print_type.errors.count, "error") %> prohibited this pre_print_type from being saved:</h2>
+
+      <ul>
+      <% @pre_print_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :quotation_request_form_id %><br />
+    <%= f.number_field :quotation_request_form_id %>
+  </div>
+  <div class="field">
+    <%= f.label :pre_print %><br />
+    <%= f.text_field :pre_print %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

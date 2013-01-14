@@ -1,0 +1,40 @@
+<%= form_for(@bill_of_material) do |f| %>
+  <div class="fix_1600x900">
+    <div class="left_icon_tag">
+      <% if action_name == "edit" %>
+        Date: <%= @bill_of_material.bom_date.strftime("%d-%m-%Y") rescue '-' %>
+      <% else %>
+        Date: <%= f.text_field :bom_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+      <% end %>
+    </div>
+    <div class="icon_tag">
+      Previous BOM No# <%= company.sn_bom_no rescue '-' %><br/>
+      Type
+      <%= f.radio_button :type, "Printing" %> Printing
+      <%= f.radio_button :type, "Finishing" %> Finishing
+      <%= f.radio_button :type, "Store" %> Store
+      <%= f.radio_button :type, "Other" %> <%= f.text_field :other_type, :size => 10 %>
+    </div>
+    <div style="margin-top: 80px;">
+      <table>
+        <tr>
+          <th>Description</th>
+          <th>Qty</th>
+          <th>U/M</th>
+          <th>Remark</th>
+        </tr>
+        <tr>
+          <td><%= select_tag "description", options_from_collection_for_select(material, :id, :description) %></td>
+          <td><%= text_field_tag "Quantity", params[:quantity]  %></td>
+          <td><%= select_tag "unit_measurement_id", options_from_collection_for_select(unit_measurement, :id, :code) %></td>
+          <td><%= text_field_tag "remark", params[:remark] %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

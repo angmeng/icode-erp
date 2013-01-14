@@ -1,0 +1,11 @@
+<div style="background-color:blue"><strong style="color:white;">LISTING KIV - QUOTATION REQUISITION</strong></div>
+
+<% if @quotation_request_forms.present? %>
+  <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+<% else %>
+  Not Record Found.
+<% end %>
+
+<div class="icon_tag">
+  <%= render "action_quotation_kiv_item" %>
+</div>

@@ -1,0 +1,27 @@
+<h1>Listing material_of_quantities</h1>
+
+<table>
+  <tr>
+    <th>Quotation request form</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @material_of_quantities.each do |material_of_quantity| %>
+  <tr>
+    <td><%= material_of_quantity.quotation_request_form_id %></td>
+    <td><%= material_of_quantity.quantity %></td>
+    <td><%= material_of_quantity.unit_price %></td>
+    <td><%= link_to 'Show', material_of_quantity %></td>
+    <td><%= link_to 'Edit', edit_material_of_quantity_path(material_of_quantity) %></td>
+    <td><%= link_to 'Destroy', material_of_quantity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Material of quantity', new_material_of_quantity_path %>

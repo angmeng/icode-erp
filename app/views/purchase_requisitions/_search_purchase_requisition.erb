@@ -1,0 +1,27 @@
+<div class="search_engine">
+  <%= form_for @search do |f| %>
+    <table>
+      <tr>
+        <td><%= f.label :pr_no_equals, "PR No#" %></td>
+        <td><%= f.text_field :pr_no_equals %></td>
+      </tr>
+      <% unless action_name == "kiv" %>
+        <tr>
+          <td>Status</td>
+          <td><%= f.select :status_contains, options_for_select(@pr_status, params[:status_contains].to_s), :include_blank => true %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>Requestor</td>
+        <td><%= f.select :requested_by_equals, options_for_select(@pr_requestor, params[:requested_by_equals].to_s), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td>Department</td>
+        <td><%= f.select :requested_by_contains, options_for_select(@pr_department, params[:requested_by_contains].to_s), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <td colspan="10" align="right"><%= f.submit 'Search' %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

@@ -1,0 +1,41 @@
+<%#*<table>%>
+    <% if checkboxes.present? %>
+  
+      <% if action_name == "show" %>
+  
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU), :disabled => true %> Costing Sheet</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING), :disabled => true %> Formulation for Costing Sheet</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW), :disabled => true %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+        
+      <% else %>
+
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %> Costing Sheet</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING) %> Formulation for Costing Sheet</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+      
+      <% end %>
+      
+    <% else %>
+      
+        <tr>
+          <td></td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU %> Costing Sheet</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING %> Formulation for Costing Sheet</td>
+          <td></td>
+          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW %></td>
+          <% 15.times do |td| %><td></td><% end %>
+        </tr>
+
+    <% end %>
+
+<%#*</table>%>

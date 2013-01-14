@@ -6,6 +6,7 @@
 <!--[if lt IE 9]>  <html class="ie     no-js" lang="en"> <![endif]-->
   
 <head>
+  <%#*<meta http-equiv="X-UA-Compatible" content="IE=8" />%>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Etheos Imprint eResourse Planning System</title>
   <%= stylesheet_link_tag    "application", :media => 'all' %>  
@@ -15,24 +16,25 @@
 </head>
 
 <body>
-  <div>
-    <% if user_signed_in? %>
-      <% unless action_name == "show" %>
-        <%= render "/layouts/top_menu" %>
-      <% end %>
-    <% end %>
-  </div>
   
-  <%# unless controller_name == "sessions" %>
+  <% if user_signed_in? %>
+    <% unless action_name == "show" %>
+      <%= render "/layouts/top_menu" %>
+    <% end %>
+  <% end %>
+  
+  <div id="container">
+    
     <% flash.each do |key, msg| %>
       <%= content_tag :p, :id => key do %>
         <%= msg %>
         <span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
       <% end %>
     <% end %>
-  <%# end %>
 
-  <%= yield %>    
+    <%= yield %>
+  </div>
+  
 </body>
 </html>
 

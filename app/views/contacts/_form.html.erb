@@ -1,0 +1,41 @@
+<%= form_for(@contact) do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :trade_company_id %><br />
+    <%= f.number_field :trade_company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :department, "Department *" %><br />
+    <%= f.text_field :department %>
+  </div>
+  <div class="field">
+    <%= f.label :name, "Name *" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_area_code, "Phone Area Code *" %><br />
+    <%= f.text_field :phone_area_code %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_no, "Phone No. *" %><br />
+    <%= f.text_field :phone_no %>
+  </div>
+  <div class="field">
+    <%= f.label :email, "E-mail *" %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

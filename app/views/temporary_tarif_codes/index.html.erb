@@ -1,0 +1,25 @@
+<h1>Listing temporary_tarif_codes</h1>
+
+<table>
+  <tr>
+    <th>Tarif code</th>
+    <th>Remaining total</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @temporary_tarif_codes.each do |temporary_tarif_code| %>
+  <tr>
+    <td><%= temporary_tarif_code.tarif_code %></td>
+    <td><%= temporary_tarif_code.remaining_total %></td>
+    <td><%= link_to 'Show', temporary_tarif_code %></td>
+    <td><%= link_to 'Edit', edit_temporary_tarif_code_path(temporary_tarif_code) %></td>
+    <td><%= link_to 'Destroy', temporary_tarif_code, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Temporary tarif code', new_temporary_tarif_code_path %>

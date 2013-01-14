@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  formula: MyString
+  costing_sheet_id: 1
+
+two:
+  code: MyString
+  formula: MyString
+  costing_sheet_id: 1

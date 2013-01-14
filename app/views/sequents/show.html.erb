@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sequent color:</b>
+  <%= @sequent.sequent_color %>
+</p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @sequent.quotation_request_form_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_sequent_path(@sequent) %> |
+<%= link_to 'Back', sequents_path %>

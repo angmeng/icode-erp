@@ -1,0 +1,22 @@
+<style>
+  .err_container  { padding: 10px; background: silver; width: 500px; height: 100px; }
+</style>
+
+<div class="err_container">
+  <p><b>ERROR MESSAGE: </b></p>
+
+  <% flash.each do |key, msg| %>
+    <%= content_tag :p do %>
+      <span class="red_text"><%= msg %></span>
+    <% end %>
+  <% end %>
+
+      
+  <br/><br/><br/><br/><br/>
+  
+  <div class="icon_tag">
+    <%= link_to "Close", "#", :onclick => "parent.$.fancybox.close();" %>
+  </div>
+
+  <p>P/S: Press <b>'Backspace'</b> to return back the form.</p>
+</div>

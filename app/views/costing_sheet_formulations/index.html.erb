@@ -1,0 +1,30 @@
+<div style="background-color:blue"><strong style="color:white;">COSTING SHEET FORMULATION</strong></div>
+
+<div class="fix_1600x900">
+  
+  <% if @costing_sheet_formulations.present? %>
+    <table id="autowidth_h400" class="white-line-table zebraLight">
+      <thead>
+        <tr class="header_line">
+          <th>Code</th>
+          <th>Name</th>
+          <th>Formulation</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @costing_sheet_formulations.each do |costing_sheet_formulation| %>
+          <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= costing_sheet_formulation.id %>">
+            <td><%= costing_sheet_formulation.code %></td>
+            <td><%= costing_sheet_formulation.name %></td>
+            <td><%= costing_sheet_formulation.formulation %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+
+<%= render "action_cs_formulation" %>  

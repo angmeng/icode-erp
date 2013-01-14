@@ -1,0 +1,56 @@
+<div style="background-color:blue"><strong style="color:white;">SHOW SALES ORDER ITEM</strong></div>
+
+<div class="fix_800x450">
+  <table>
+    <tr>
+      <td width="150"><b>Product</b></td>
+      <td><%= render "/product_categories/join_product_category", :pc => @sales_order_item %></td>
+    </tr>
+    <tr>
+      <td><b>Description</b></td>
+      <td><%= @sales_order_item.description rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Quantity</b></td>
+      <td><%= @sales_order_item.quantity rescue '-' %></td>
+      <td><b>U/M </b><%= @sales_order_item.unit_measurement.code rescue '-' %></td>
+        
+    </tr>
+    
+    <tr>
+      <td><b>ETA</b></td>
+      <td><%= @sales_order_item.eta.strftime('%d-%m-%Y') rescue '-' %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Selling Price</b></td>
+      <td><%= four_precision(@sales_order_item.unit_price) %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Amount Price</b></td>
+      <td><%= iproduct(@sales_order_item.unit_price, @sales_order_item.quantity) %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Customer PO</b></td>
+      <td><%= @sales_order_item.customer_po rescue '-' %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Part no</b></td>
+      <td><%= @sales_order_item.part_no rescue '-' %></td>
+    </tr>
+    
+    <tr>
+      <td><b>Current Stock</b></td>
+      <td><%= @sales_order_item.current_stock rescue '-' %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button  %>
+</div>
+
+

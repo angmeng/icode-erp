@@ -1,0 +1,34 @@
+<% if sales_tax_exemptions.present? %>
+  
+    <table id="grid_h495" class="white-line-table zebraLight">
+      <thead>
+        <tr class="header_line">
+          <th class="check_highlight"></th>
+          <th>Running No#</th>
+          <th>Type of Exemption</th>
+          <th>Sales Tax Exemption No.</th>
+          <th>Registration No.</th>
+          <th>Company Name</th>
+          <th>Period Start</th>
+          <th>Period End</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% sales_tax_exemptions.each do |ste| %>
+          <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= ste.id %>">
+            <td></td>
+            <td align="center"><%= ste.running_no rescue '-' %></td>
+            <td align="center"><%= ste.type_of_exemption rescue '-' %></td>
+            <td align="center"><%= ste.sales_tax_exemption_no rescue '-' %></td>
+            <td align="center"><%= ste.registration_no rescue '-' %></td>
+            <td>[<%= ste.trade_company.code rescue '-' %>] <%= ste.trade_company.name rescue '-' %></td>
+            <td align="center"><%= ste.period_start.strftime("%d-%m-%Y") rescue '-' %></td>
+            <td align="center"><%= ste.period_end.strftime("%d-%m-%Y") rescue '-' %></td>
+          </tr>
+        <% end %>
+          
+      </tbody>
+    </table>
+  
+<% end %>

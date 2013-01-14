@@ -1,0 +1,18 @@
+<h2>New Incoming Reject</h2>
+
+<div>
+  <%= form_tag new_incoming_reject_path, :method => :get do %>
+    <%= select_tag(:vendor_id, options_for_select(@rn, params[:vendor_id]), :include_blank => true, :style => "width:500px;") %>
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>
+
+<br/>
+
+<% if @rn_vendor_id.present? %>
+  <%= render 'form' %>
+<% end %>
+
+<br/><br/>
+
+<%= link_to image_tag('backicon.jpg'), incoming_rejects_path %>

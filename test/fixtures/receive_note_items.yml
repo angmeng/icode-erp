@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  receive_note_id: 1
+  purchase_order_id: 1
+  received_quantity: 1
+  status: MyString
+  order_quantity: 1
+  balance_quantity: 1
+  current_stock: 1
+  vendor_part: MyString
+
+two:
+  receive_note_id: 1
+  purchase_order_id: 1
+  received_quantity: 1
+  status: MyString
+  order_quantity: 1
+  balance_quantity: 1
+  current_stock: 1
+  vendor_part: MyString

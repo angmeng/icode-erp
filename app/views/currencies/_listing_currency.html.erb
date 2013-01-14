@@ -1,0 +1,15 @@
+<div class="fix_800x600">
+  <table class="white-line-table zebraLight">
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Name</th>
+    </tr>
+
+    <% cur.each do |currency| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= currency.id %>">
+        <td></td>
+        <td><%= currency.name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

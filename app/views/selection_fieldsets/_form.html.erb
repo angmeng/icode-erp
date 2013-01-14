@@ -1,0 +1,25 @@
+<%= form_for(@selection_fieldset) do |f| %>
+  <% if @selection_fieldset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@selection_fieldset.errors.count, "error") %> prohibited this selection_fieldset from being saved:</h2>
+
+      <ul>
+      <% @selection_fieldset.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :quotation_request_form_id %><br />
+    <%= f.number_field :quotation_request_form_id %>
+  </div>
+  <div class="field">
+    <%= f.label :select_no %><br />
+    <%= f.number_field :select_no %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

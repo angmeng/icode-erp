@@ -1,0 +1,68 @@
+  <div>
+    <%= form_for @po_report, :url => po_report_reports_path  do |f| %>
+      <table>
+        <tr>
+          <td>PO No.</td>
+          <td><%= f.text_field :po_no_gte, :size => 12 %> To
+            <%= f.text_field :po_no_lte, :size => 12 %></td>
+          <td>Vendor</td>
+          <td><%= f.text_field :trade_company_name_contains, :size => 9 %></td>
+        </tr>
+        <tr>
+          <td>PO Date</td>
+          <td><%= f.text_field :po_date_gte, :size => 9 , :id=> "kendo_date" %> To 
+          <%= f.text_field :po_date_lte , :size => 9 , :id=> "kendo_date" %></td>
+        </tr>
+        
+        <tr>
+        <td><%= f.submit "Search" %></td>
+         </tr>
+      </table>
+  <% end %>
+  </div>
+<hr />
+<div>
+  <fieldset>
+
+    
+  	<table id="grid_h495" class="white-line-table zebraLight">
+  		<thead>
+  			<tr class="header_line">
+          
+  				<th>PO No.</th>
+  				<th>vendor</th>
+  				<th>Order date</th>
+  				<th>Currency</th>
+  				<th>Term</th>
+  				<th>Transport</th>
+  				<th>Purchase By.</th>
+  				<th>Requested By.</th>
+  			</tr>
+  		</thead>
+
+  	<% @show_po_report.each do |p | %>
+  	<tbody>
+  		<tr>
+        
+  			<td><%= p.po_no rescue'-' %></td>
+  			<td><%= p.trade_company.name rescue '-' %></td>
+  			<td><%= p.po_date rescue '-' %></td>
+  			<td><%= p.currency.name rescue '-' %></td>
+  			<td><%= p.trade_term.name rescue '-' %></td>
+  			<td><%= p.transport.name rescue '-' %></td>
+  			<td><%= p.purchase_by.name rescue '-' %></td>
+  			<td><%= p.request_by.name rescue '-' %></td>
+  		</tr>
+  	</tbody>
+  	<% end %>
+    </table>
+  </fieldset>
+</div>
+
+<div style="float:right;">
+  <span><%= link_to "PDF report" , pdf_po_report_reports_path(:po_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
+
+  <span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+
+  <%= link_close_button %>
+</div>

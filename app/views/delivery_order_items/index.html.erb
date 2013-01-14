@@ -1,0 +1,49 @@
+<h1>Listing delivery_order_items</h1>
+
+<table>
+  <tr>
+    <th>Sales order item</th>
+    <th>So date</th>
+    <th>Delivery qty</th>
+    <th>Order qty</th>
+    <th>Unit price</th>
+    <th>Balance qty</th>
+    <th>No of carton</th>
+    <th>Gen current stock</th>
+    <th>Do status</th>
+    <th>Part no</th>
+    <th>Client lot</th>
+    <th>Client po</th>
+    <th>Department</th>
+    <th>Dept current stock</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @delivery_order_items.each do |delivery_order_item| %>
+  <tr>
+    <td><%= delivery_order_item.sales_order_item_id %></td>
+    <td><%= delivery_order_item.so_date %></td>
+    <td><%= delivery_order_item.delivery_qty %></td>
+    <td><%= delivery_order_item.order_qty %></td>
+    <td><%= delivery_order_item.unit_price %></td>
+    <td><%= delivery_order_item.balance_qty %></td>
+    <td><%= delivery_order_item.no_of_carton %></td>
+    <td><%= delivery_order_item.gen_current_stock %></td>
+    <td><%= delivery_order_item.do_status %></td>
+    <td><%= delivery_order_item.part_no %></td>
+    <td><%= delivery_order_item.client_lot %></td>
+    <td><%= delivery_order_item.client_po %></td>
+    <td><%= delivery_order_item.department %></td>
+    <td><%= delivery_order_item.dept_current_stock %></td>
+    <td><%= link_to 'Show', delivery_order_item %></td>
+    <td><%= link_to 'Edit', edit_delivery_order_item_path(delivery_order_item) %></td>
+    <td><%= link_to 'Destroy', delivery_order_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Delivery order item', new_delivery_order_item_path %>

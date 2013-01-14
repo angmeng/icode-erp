@@ -1,0 +1,27 @@
+<h1>Listing selection_stamping_sizes</h1>
+
+<table>
+  <tr>
+    <th>Stamping width</th>
+    <th>Stamping length</th>
+    <th>Quoation request form</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @selection_stamping_sizes.each do |selection_stamping_size| %>
+  <tr>
+    <td><%= selection_stamping_size.stamping_width %></td>
+    <td><%= selection_stamping_size.stamping_length %></td>
+    <td><%= selection_stamping_size.quoation_request_form_id %></td>
+    <td><%= link_to 'Show', selection_stamping_size %></td>
+    <td><%= link_to 'Edit', edit_selection_stamping_size_path(selection_stamping_size) %></td>
+    <td><%= link_to 'Destroy', selection_stamping_size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Selection stamping size', new_selection_stamping_size_path %>

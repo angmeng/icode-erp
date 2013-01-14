@@ -1,0 +1,25 @@
+<%= form_for(@packing_quantity) do |f| %>
+  <% if @packing_quantity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@packing_quantity.errors.count, "error") %> prohibited this packing_quantity from being saved:</h2>
+
+      <ul>
+      <% @packing_quantity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :per %><br />
+    <%= f.text_field :per %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

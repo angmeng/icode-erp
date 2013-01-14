@@ -1,0 +1,25 @@
+<%= form_for(@selection_die_cut) do |f| %>
+  <% if @selection_die_cut.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@selection_die_cut.errors.count, "error") %> prohibited this selection_die_cut from being saved:</h2>
+
+      <ul>
+      <% @selection_die_cut.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :quotation_request_form_id %><br />
+    <%= f.number_field :quotation_request_form_id %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

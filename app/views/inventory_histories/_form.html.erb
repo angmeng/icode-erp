@@ -1,0 +1,61 @@
+<%= form_for(@inventory_history) do |f| %>
+  <div class="fix_800x450">
+    <table>
+      <% unless action_name == "edit" %>
+        <tr>
+          <td>Type</td>
+          <td><%= select_tag "in_out", options_for_select([ "IN", "OUT" ], params[:in_out]), :include_blank => true , :onchange => "getCombo_in_out(this)" %></td>
+        </tr>
+      <% end %>
+        
+      <% unless action_name == "edit" %>
+        <tr>
+          <td>Product ID *</td>
+          <td>
+            <%= select_tag :product_id, options_from_collection_for_select(Product.all, 'id', 'code', @inventory_history.product_id.to_i), :include_blank => true, :onchange => "getCombo_product(this)" %>
+            <span id="current_product_stock"></span>
+          </td>
+        </tr>
+      <% end %>
+
+      <% unless action_name == "edit" %>
+        <% if params[:in_out] == "IN" or @inventory_history.stock_out == 0 %>
+          <tr class="show_in">
+            <td>Stock In</td>
+            <td><%= f.text_field :stock_in, :value => 0 %></td>
+          </tr>
+        <% else %>
+          <tr style="display:none;" class="show_in">
+            <td>Stock In</td>
+            <td><%= f.text_field :stock_in, :value => 0 %></td>
+          </tr>
+        <% end %>
+      <% end %>
+
+      <% unless action_name == "edit" %>
+        <% if params[:in_out] == "OUT" or @inventory_history.stock_in == 0 %>
+          <tr class="show_out">
+            <td>Stock Out</td>
+            <td><%= f.text_field :stock_out, :value => 0 %></td>
+          </tr>
+        <% else %>
+          <tr style="display:none;" class="show_out">
+            <td>Stock Out</td>
+            <td><%= f.text_field :stock_out, :value => 0 %></td>
+          </tr>
+        <% end %>
+      <% end %>
+
+      <tr>
+        <td><%= f.label :inventory_issue_id, "Inventory Issue" %></td>
+        <td>
+          <%= f.select :inventory_issue_id, options_from_collection_for_select(InventoryIssue.all, 'id', 'description', @inventory_history.inventory_issue_id.to_i), :include_blank => true %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<div class="icon_tag">
+  
+  <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_SHOW) %>
+    <span id="on_show" showClass="show_without_refresh_page_800x450" ><%= not_link_show %></span>
+  <%# else %>
+     <!--span class="word_opac"><%#= not_link_show %></span-->
+  <%# end %>
+    
+  <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_SHOW) %>
+    <span id="on_recover"><%= not_link_recover %></span>
+  <%# else %>
+     <!--span class="word_opac"><%#= not_link_show %></span-->
+  <%# end %>
+   
+  <%= link_close_button %>
+
+</div>

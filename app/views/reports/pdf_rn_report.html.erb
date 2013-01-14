@@ -1,0 +1,33 @@
+<h1>detail receive note report</h1>
+
+<div>
+	<fieldset>
+		<% if rn_detail_report.present? %>
+		<% @rn_detail_report.each do |d| %>
+		<table border="1">
+			<thead>
+			<tr>
+				<th>Date</th>
+				<th>Received From</th>
+				<th>Vendor's D/O</th>
+				<th>Update By</th>
+			</tr>
+		</head>
+		<% arr = [] %>
+		</tbody>
+		
+		<tr>
+			<td><%= d.receive_note.rn_date rescue '-' %></td>
+			<td><%= d.receive_note.trade_company.code rescue '-'%> / 
+			<%= d.receive_note.trade_company.name rescue '-' %></td>
+			<td><%= d.receive_note.vendor_delivery_no rescue '-' %></td>
+			<td><%= d.receive_note.update_by rescue '-' %></td>
+		</tr>
+		<% end %>
+	</tbody>
+		</table>
+
+		<% end %>
+	</fieldset>
+</div>
+

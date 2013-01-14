@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @group_running_no.code %>
+</p>
+
+<p>
+  <b>Current no:</b>
+  <%= @group_running_no.current_no %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_running_no_path(@group_running_no) %> |
+<%= link_to 'Back', group_running_nos_path %>

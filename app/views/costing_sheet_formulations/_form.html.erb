@@ -1,0 +1,37 @@
+<%= form_for(@costing_sheet_formulation) do |f| %>
+  <div class="fix_800x450">
+    <table>
+      <% if action_name == 'edit' %>
+        <tr>
+          <td>Code</td>
+          <td><%= @costing_sheet_formulation.code rescue '-' %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td>Previous Code</td>
+          <td>
+            <% if @last.present? %>
+              <%= @last.id %>
+              <%= f.hidden_field :code, :value => (@last.id) + 1 %>
+            <% else %>
+              0
+              <%= f.hidden_field :code, :value => 1 %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>Name</td>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <td width="100"><%= f.label :formulation %></td>
+        <td><%= f.text_field :formulation, :size => 100 %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

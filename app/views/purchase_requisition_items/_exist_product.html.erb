@@ -1,0 +1,124 @@
+<%= form_for(@purchase_requisition_item) do |f| %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %> 
+
+  <!-- Only display when click EDIT -->
+  <% if @purchase_requisition_item.temporary_sources.present? %>
+    <% if @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE).present? %>
+      <% source = @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE) %>
+    <% end %>
+  <% end %>
+
+  <div class="fix_800x600">
+    <table width="100%">
+      <tr>
+        <td width="150"><b>Product ID</b></td>
+        <td><%= f.select :product_id, options_for_select(product_non_operation_n_operation_with_pr_combobox, @purchase_requisition_item.product_id), { :include_blank => true }, { :id => "kendo_combobox", :onchange => "put_product_description(this)", :style => "width: 400px;" } %></td>
+      </tr>
+
+      <tr>
+        <td><b>Supplier Name</b></td>
+        <td>
+          <% if source.present? %>
+            <%= select_tag "company_name", options_for_select(trade_company_vendor_with_code, source.company_name), :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)" %>
+          <% else %>
+            <%= select_tag "company_name", options_for_select(trade_company_vendor_with_code),                      :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)" %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr><td colspan="10"><hr/></td></tr>
+
+      <tr>
+        <td><b>Description</b></td>
+        <td>
+          <% if @purchase_requisition_item.product_id.present? %>
+            <span class="get_desc"><%= @purchase_requisition_item.description %></span>
+          <% else %>
+            <span class="get_desc"></span>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Quantity</b></td>
+        <td>
+          <%= f.text_field :quantity, :size => 10, :required => "true" %>
+          <b>U/M: </b>
+          <% if @purchase_requisition_item.product_id.present? %>
+            <span id="data_um"><%= @purchase_requisition_item.unit_measurement.code rescue '-' %></span>
+          <% else %>
+            <span id="data_um"></span>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Unit Price</b></td>
+        <td>
+          <% if source.present? %>
+            <%= text_field_tag :estimated_price, source.unit_price, :size => 10 %>
+          <% else %>
+            <%= text_field_tag :estimated_price, params[:estimated_price], :size => 10 %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Total Price</b></td>
+        <td id="estimated_total_price">
+          <% if source.present? %>
+            <%= iproduct(@purchase_requisition_item.quantity, source.unit_price) %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>ETA</b></td>
+        <td>
+          <% if @purchase_requisition_item.eta.present? %>
+            <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+          <% else %>
+            <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Remark</b></td>
+        <td><%= f.text_area :remark, :rows => 2 %></td>
+      </tr>
+            
+      <tr>
+        <% if action_name == "edit" %>
+          <!--td><b><%#= f.label :status %></b></td-->
+          <!--td>
+            <%# if @purchase_requisition_item.status == PurchaseRequisitionItem::PENDING %>
+              PENDING
+            <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::IN_PROCESSING %>
+              IN PROGRESS
+            <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::REJECT %>
+              REJECT
+            <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::APPROVED %>
+              PENDING PO
+            <%# else %>
+              <%#= @purchase_requisition_item.status rescue ' ' %>
+            <%# end %>
+          </td-->
+        <% else %>
+          <td><%= f.hidden_field :status, :value => PurchaseRequisitionItem::PENDING %></td>
+        <% end %>
+      </tr>
+      
+      <tr>
+        <td><b>Urgent</b></td>
+        <td><%= f.check_box :urgent %></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

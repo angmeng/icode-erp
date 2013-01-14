@@ -1,0 +1,28 @@
+<div class="new_costingsheet">
+    
+    <table id="autowidth_h400" class="white-line-table zebraLight">
+      <thead>
+        <tr class="header_line">
+          <th width="100">Date</th>
+          <th width="100">Summary %</th>
+          <th width="100">Summary Lot</th>
+          <th width="100">Summary Pc</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if costing.present? %>
+          <% costing.each do |costing_sheet| %>
+            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= costing_sheet.id %>">
+              <td align="center"><%= costing_sheet.costing_sheet_date.strftime("%d-%m-%Y") rescue '-' %></td>
+              <td align="center"><%= two_precision(costing_sheet.summary_percent) rescue '-' %></td>
+              <td align="center"><%= four_precision(costing_sheet.summary_lot) rescue '-' %></td>
+              <td align="center"><%= three_precision(costing_sheet.summary_pc) rescue '-' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+
+    </table>
+  
+</div>

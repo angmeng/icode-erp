@@ -1,0 +1,66 @@
+<% if field_id.present? %>
+    <table>
+      <tr>
+        <td width="250" style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::DESCRIPTION, field_id.include?(ProductField::DESCRIPTION), :disabled => true %>DESCRIPTION<br/>
+          <%= check_box_tag "prod_field[]", ProductField::GSM, field_id.include?(ProductField::GSM), :disabled => true %>GSM<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WIDTH, field_id.include?(ProductField::WIDTH), :disabled => true %>WIDTH<br/>
+          <%= check_box_tag "prod_field[]", ProductField::LENGTH, field_id.include?(ProductField::LENGTH), :disabled => true %>LENGTH<br/>
+          <%= check_box_tag "prod_field[]", ProductField::HEIGHT, field_id.include?(ProductField::HEIGHT), :disabled => true %>HEIGHT<br/>
+          <%= check_box_tag "prod_field[]", ProductField::TICKNESS, field_id.include?(ProductField::TICKNESS), :disabled => true %>TICKNESS<br/>
+          <%= check_box_tag "prod_field[]", ProductField::UNIT_MEASURE, field_id.include?(ProductField::UNIT_MEASURE), :disabled => true %>UNIT MEASURE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::ORIGIN, field_id.include?(ProductField::ORIGIN), :disabled => true %>ORIGIN<br/>
+          <%= check_box_tag "prod_field[]", ProductField::BRAND, field_id.include?(ProductField::BRAND), :disabled => true %>BRAND<br/>
+          <%= check_box_tag "prod_field[]", ProductField::GRADE, field_id.include?(ProductField::GRADE), :disabled => true %>GRADE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PACKING_METHOD, field_id.include?(ProductField::PACKING_METHOD), :disabled => true %>PACKING METHOD + PACKING QTY<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PACKING_QTY, field_id.include?(ProductField::PACKING_QTY), :disabled => true %>PACKING QTY<br/>
+        </td>
+        
+        <td width="200" style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::BUFFER_STOCK, field_id.include?(ProductField::BUFFER_STOCK), :disabled => true %>BUFFER STOCK<br/>
+          <%= check_box_tag "prod_field[]", ProductField::TARIF_CODE, field_id.include?(ProductField::TARIF_CODE), :disabled => true %>TARIF CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PART_WEIGHT, field_id.include?(ProductField::PART_WEIGHT), :disabled => true %>PART WEIGHT<br/>
+          <%= check_box_tag "prod_field[]", ProductField::CONTAINER_NO, field_id.include?(ProductField::CONTAINER_NO), :disabled => true %>CONTAINER NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::SEAL_NO, field_id.include?(ProductField::SEAL_NO), :disabled => true %>SEAL NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::DESPATCH_ADVISE, field_id.include?(ProductField::DESPATCH_ADVISE), :disabled => true %>DESPATCH ADVISE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::SIZE, field_id.include?(ProductField::SIZE), :disabled => true %>SIZE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::MODEL_NO, field_id.include?(ProductField::MODEL_NO), :disabled => true %>MODEL NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::REORDER_NO, field_id.include?(ProductField::REORDER_NO), :disabled => true %>REORDER NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::ART_NO, field_id.include?(ProductField::ART_NO), :disabled => true %>ART NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::REF_NO, field_id.include?(ProductField::REF_NO), :disabled => true %>REF NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::MOULD_NO, field_id.include?(ProductField::MOULD_NO), :disabled => true %>MOULD NO<br/>
+        </td>
+        
+        <td width="200" style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::WORK_ORDER_NO, field_id.include?(ProductField::WORK_ORDER_NO), :disabled => true %>WORK ORDER NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::MFG_DATE, field_id.include?(ProductField::MFG_DATE), :disabled => true %>MFG DATE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::EXP_DATE, field_id.include?(ProductField::EXP_DATE), :disabled => true %>EXP DATE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::FILM_NO, field_id.include?(ProductField::FILM_NO), :disabled => true %>FILE NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::BAR_CODE, field_id.include?(ProductField::BAR_CODE), :disabled => true %>BAR CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::LOT_NO, field_id.include?(ProductField::LOT_NO), :disabled => true %>LOT NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::ITEM_CODE, field_id.include?(ProductField::ITEM_CODE), :disabled => true %>ITEM CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PART_CODE, field_id.include?(ProductField::PART_CODE), :disabled => true %>PART CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PANTONE_CODE, field_id.include?(ProductField::PANTONE_CODE), :disabled => true %>PANTONE CODE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::COLOUR, field_id.include?(ProductField::COLOUR), :disabled => true %>COLOUR<br/>
+          <%= check_box_tag "prod_field[]", ProductField::SERIAL_NO, field_id.include?(ProductField::SERIAL_NO), :disabled => true %>SERIAL NO<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WARRANTY, field_id.include?(ProductField::WARRANTY), :disabled => true %>WARRANTY<br/>
+        </td>
+        
+        <td width="200" style="vertical-align: top;">
+          <%= check_box_tag "prod_field[]", ProductField::CAPACITY, field_id.include?(ProductField::CAPACITY), :disabled => true %>CAPACITY<br/>
+          <%= check_box_tag "prod_field[]", ProductField::DIAMETER, field_id.include?(ProductField::DIAMETER), :disabled => true %>DIAMETER<br/>
+          <%= check_box_tag "prod_field[]", ProductField::VOLTAGE, field_id.include?(ProductField::VOLTAGE), :disabled => true %>VOLTAGE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WATT, field_id.include?(ProductField::WATT), :disabled => true %>WATT<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PIN, field_id.include?(ProductField::PIN), :disabled => true %>PIN<br/>
+          <%= check_box_tag "prod_field[]", ProductField::AMPERE, field_id.include?(ProductField::AMPERE), :disabled => true %>AMPERE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::HP, field_id.include?(ProductField::HP), :disabled => true %>HP<br/>
+          <%= check_box_tag "prod_field[]", ProductField::HZ, field_id.include?(ProductField::HZ), :disabled => true %>HZ<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PURENESS, field_id.include?(ProductField::PURENESS), :disabled => true %>PURENESS<br/>
+          <%= check_box_tag "prod_field[]", ProductField::TON, field_id.include?(ProductField::TON), :disabled => true %>TON<br/>
+          <%= check_box_tag "prod_field[]", ProductField::CONSIGNEE, field_id.include?(ProductField::CONSIGNEE), :disabled => true %>CONSIGNEE<br/>
+          <%= check_box_tag "prod_field[]", ProductField::DESTINATION, field_id.include?(ProductField::DESTINATION), :disabled => true %>DESTINATION<br/>
+          <%= check_box_tag "prod_field[]", ProductField::PROCESS, field_id.include?(ProductField::PROCESS), :disabled => true %>PROCESS<br/>
+        </td>
+      </tr>
+    </table>
+<% end %>

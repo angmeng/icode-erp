@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  quotation_request_form_id: 1
+  length: 1.5
+  width: 1.5
+  ups: 1
+
+two:
+  quotation_request_form_id: 1
+  length: 1.5
+  width: 1.5
+  ups: 1

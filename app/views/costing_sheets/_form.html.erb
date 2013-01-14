@@ -1,0 +1,370 @@
+<%= form_for(@costing_sheet) do |f| %>
+
+  <div class="fix_800x600">
+    <table class="white-line-table">
+      <% if action_name == "edit" %>
+        <tr>
+          <td colspan="5"><%= @costing_sheet.quotation_request_form.customer_name rescue '-' %></td>
+          <td colspan="2"><%= @costing_sheet.costing_sheet_date.strftime("%d-%m-%Y") %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan="5">
+            <%= @quotation_requisition.customer_name rescue '-' %>
+            <%= f.hidden_field :quotation_request_form_id, :value => @quotation_requisition.id %>
+          </td>
+          <td colspan="2"><%= f.text_field :costing_sheet_date, :value => Date.today, :id => "kendo_date" %></td>
+        </tr>
+      <% end %>
+      
+      <tr style="background-color: burlywood;">
+        <td width="30"></td>
+        <td width="150"></td>
+        <td width="150"><b>A</b></td>
+        <td width="150"><b>B</b></td>
+        <td width="80"><b>C</b></td>
+        <td width="80"><b>D</b></td>
+        <td width="80"><b>E</b></td>
+      </tr>
+
+      <% if action_name == 'edit' %>
+        <tr>
+          <td style="background-color: burlywood;">1</td>
+          <td><b>Product Size, mm</b></td>
+          <td>
+            <%= "#{two_precision(@costing_sheet.quotation_request_form.internal_dimensen_length)} * #{two_precision(@costing_sheet.quotation_request_form.internal_dimensen_width)} * #{two_precision(@costing_sheet.quotation_request_form.internal_dimensen_height)}" %>
+            <%= f.hidden_field :prod_size, :size => 20, :value => "#{two_precision(@costing_sheet.quotation_request_form.internal_dimensen_length)}*#{two_precision(@costing_sheet.quotation_request_form.internal_dimensen_width)}*#{two_precision(@costing_sheet.quotation_request_form.internal_dimensen_height)}" %>
+          </td>
+          <td><b>Paper Size, inch</b></td>
+          <td>
+            (L) <%= two_precision(@costing_sheet.quotation_request_form.paper_length) %>
+            <%= f.hidden_field :paper_size_l, :size => 10, :value => "#{two_precision(@costing_sheet.quotation_request_form.paper_length)}", :class => "two_zero_" %>
+          </td>
+          <td>
+            (W) <%= two_precision(@costing_sheet.quotation_request_form.paper_width) %>
+            <%= f.hidden_field :paper_size_w, :size => 10, :value => "#{two_precision(@costing_sheet.quotation_request_form.paper_width)}", :class => "two_zero_" %>
+          </td>
+          <td>
+            <%= @costing_sheet.quotation_request_form.ratio rescue '-' %>
+            <%= f.hidden_field :ratio, :size => 10, :value => "#{@costing_sheet.quotation_request_form.ratio rescue '-'}", :class => "two_digit_" %>
+          </td>
+        </tr>
+      <% else %>
+        <tr>
+          <td style="background-color: burlywood;">1</td>
+          <td><b>Product Size, mm</b></td>
+          <td>
+            <%= "#{two_precision(@quotation_requisition.internal_dimensen_length)} * #{two_precision(@quotation_requisition.internal_dimensen_width)} * #{two_precision(@quotation_requisition.internal_dimensen_height)}" %>
+            <%= f.hidden_field :prod_size, :size => 20, :value => "#{two_precision(@quotation_requisition.internal_dimensen_length)}*#{two_precision(@quotation_requisition.internal_dimensen_width)}*#{two_precision(@quotation_requisition.internal_dimensen_height)}" %>
+          </td>
+          <td><b>Paper Size, inch</b></td>
+          <td>
+            (L) <%= two_precision(@quotation_requisition.paper_length) %>
+            <%= f.hidden_field :paper_size_l, :size => 10, :value => "#{two_precision(@quotation_requisition.paper_length)}", :class => "two_zero_" %>
+          </td>
+          <td>
+            (W) <%= two_precision(@quotation_requisition.paper_width) %>
+            <%= f.hidden_field :paper_size_w, :size => 10, :value => "#{two_precision(@quotation_requisition.paper_width)}", :class => "two_zero_" %>
+          </td>
+          <td>
+            <%= @quotation_requisition.ratio rescue '-' %>
+            <%= f.hidden_field :ratio, :size => 10, :value => "#{@quotation_requisition.ratio rescue '-'}", :class => "two_digit_" %>
+          </td>
+        </tr>
+      <% end %>
+      
+      <% if action_name == "edit" %>
+        <tr>
+          <td style="background-color: burlywood;">2</td>
+          <td><b>Open Size, inch</b></td>
+          <td>
+            <%= "#{two_precision(@costing_sheet.quotation_request_form.open_size_length)} * #{two_precision(@costing_sheet.quotation_request_form.open_size_width)}" %>
+            <%= f.hidden_field :open_size, :size => 20, :value => "#{two_precision(@costing_sheet.quotation_request_form.open_size_length)} * #{two_precision(@costing_sheet.quotation_request_form.open_size_width)}" %>
+          </td>
+          <td><b>Printing Size</b></td>
+          <td><%#= f.text_field :printing_size_l, :size => 10, :value => "#{@quotation_requisition.open_size_length}*#{@quotation_requisition.open_size_width}" %></td>
+          <td><%#= f.text_field :printing_size_w, :size => 10, :value => "#{@quotation_requisition.open_size_length}*#{@quotation_requisition.open_size_width}" %></td>
+          <td><%#= f.text_field :ups, :size => 10 %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td style="background-color: burlywood;">2</td>
+          <td><b>Open Size, inch</b></td>
+          <td>
+            <%= "#{two_precision(@quotation_requisition.open_size_length)} * #{two_precision(@quotation_requisition.open_size_width)}" %>
+            <%= f.hidden_field :open_size, :size => 20, :value => "#{two_precision(@quotation_requisition.open_size_length)} * #{two_precision(@quotation_requisition.open_size_width)}" %>
+          </td>
+          <td><b>Printing Size</b></td>
+          <td><%#= f.text_field :printing_size_l, :size => 10, :value => "#{@quotation_requisition.open_size_length}*#{@quotation_requisition.open_size_width}" %></td>
+          <td><%#= f.text_field :printing_size_w, :size => 10, :value => "#{@quotation_requisition.open_size_length}*#{@quotation_requisition.open_size_width}" %></td>
+          <td><%#= f.text_field :ups, :size => 10 %></td>
+        </tr>
+      <% end %>
+      
+      <tr>
+        <td style="background-color: burlywood;">3</td>
+        <td><b>Quantity</b></td>
+        <td><%= f.text_field :quantity, :size => 8, :class => "ten_digit_" %></td>
+        <td><b>1s Art Card</b></td>
+        <td><%= f.text_field :art_card, :size => 8, :class => "ten_digit_" %></td>
+        <td><b>Rej %</b></td>
+        <td><%= f.text_field :rej_percent, :size => 8, :class => "two_zero_" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">4</td>
+        <td><b>Color</b></td>
+        <td><%= f.text_field :color, :size => 8, :class => "two_digit_" %></td>
+        <td><b>$/lb</b></td>
+        <td><%= f.text_field :cost_lb, :size => 8, :class => "two_zero_" %></td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr style="background-color: gainsboro;">
+        <td></td>
+        <td><b>Material Cost</b></td>
+        <td><b>$/pc</b></td>
+        <td><b>Usage/Lot</b></td>
+        <td><b>Rej</b></td>
+        <td><b>$/Lot</b></td>
+        <td><b>$/Pc</b></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">5</td>
+        <td><b>1s Art Card</b></td>
+        <td><%= f.text_field :art_card_pc, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :material_cost_usage, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :material_cost_rej, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :material_cost_lot, :size => 8, :class => "two_zero_"  %></td>
+        <td>
+          <%= f.select :material_cost_pc, options_from_collection_for_select(@formulations, :id, :name, @costing_sheet.material_cost_pc.to_i), :include_blank => true %>
+          <%#= f.text_field :material_cost_pc, :size => 8, :class => "three_zero"  %>
+        </td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr style="background-color: gainsboro;">
+        <td></td>
+        <td><b>Printing Cost</b></td>
+        <td><b>M/c</b></td>
+        <td><b>$/K</b></td>
+        <td><b>R%</b></td>
+        <td><b>$/Lot</b></td>
+        <td><b>$/Pc</b></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">6</td>
+        <td><%= f.text_field :printing_cost, :size => 8, :class => "two_digit_" %></td>
+        <td><%= f.text_field :printing_cost_mc, :size => 8 %></td>
+        <td><%= f.text_field :printing_cost_k, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :printing_cost_r, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :printing_cost_lot, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :printing_cost_pc, :size => 8, :class => "three_zero"  %></td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr style="background-color: gainsboro;">
+        <td></td>
+        <td><b>Pre-press</b></td>
+        <td><b>$/SQ in</b></td>
+        <td><b>L</b></td>
+        <td><b>W</b></td>
+        <td><b>$/Lot</b></td>
+        <td><b>$/Pc</b></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">7</td>
+        <td><%#= f.text_field :pre_press %></td>
+        <td><%#= f.text_field :pre_press_sq, :size => 8 %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">8</td>
+        <td><b>Plate</b></td>
+        <td><%= f.text_field :plate_sq, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :plate_l, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :plate_w, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :plate_lot, :size => 8, :class => "two_zero_"  %></td>
+        <td><%= f.text_field :plate_pc, :size => 8, :class => "three_zero"  %></td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr style="background-color: gainsboro;">
+        <td></td>
+        <td><b>Finishing</b></td>
+        <td></td>
+        <td><b>$/K</b></td>
+        <td><b>R%</b></td>
+        <td><b>$/Lot</b></td>
+        <td><b>$/Pc</b></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">9</td>
+        <td><b>Uv/Calender</b></td>
+        <td></td>
+        <td><%= f.text_field :uv_k, :size => 8, :class => "six_zero" %></td>
+        <td><%= f.text_field :uv_r, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :uv_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :uv_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">10</td>
+        <td><b>Lmn-Flute/opp</b></td>
+        <td><%= f.text_field :lamination_remark, :size => 20 %></td>
+        <td><%= f.text_field :lamination_k, :size => 8, :class => "six_zero" %></td>
+        <td><%= f.text_field :lamination_r, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :lamination_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :lamination_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">11</td>
+        <td><b>Die Cut Mold</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= f.text_field :die_cut_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :die_cut_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">12</td>
+        <td><b>Die Cut Labour</b></td>
+        <td></td>
+        <td><%= f.text_field :die_cut_labour_k, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :die_cut_labour_r, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :die_cut_labour_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :die_cut_labour_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">13</td>
+        <td><b>Glueing</b></td>
+        <td><%= f.text_field :glueing_remark, :size => 20 %></td>
+        <td><%= f.text_field :glueing_k, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :glueing_r, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :glueing_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :glueing_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">14</td>
+        <td><b>Gold Stamp</b></td>
+        <td><%= f.text_field :gold_remark, :size => 20 %></td>
+        <td><%= f.text_field :gold_k, :size => 8, :class => "four_zero" %></td>
+        <td><%= f.text_field :gold_r, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :gold_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :gold_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr style="background-color: gainsboro;">
+        <td></td>
+        <td><b>Other Cost</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>$/Lot</b></td>
+        <td><b>$/Pc</b></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">15</td>
+        <td><b>Packing Cost</b></td>
+        <td><%= f.text_field :packing_cost, :size => 20, :class => "four_zero" %></td>
+        <td></td>
+        <td><%= f.text_field :packing_cost_r, :size => 8, :class => "four_zero" %></td>
+        <td><%= f.text_field :packing_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :packing_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">16</td>
+        <td><b>Transport</b></td>
+        <td><%= f.text_field :transport, :size => 20 %></td>
+        <td></td>
+        <td><%= f.text_field :transport_r, :size => 8, :class => "four_zero" %></td>
+        <td><%= f.text_field :transport_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :transport_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">17</td>
+        <td><b>Misc</b></td>
+        <td></td>
+        <td></td>
+        <td><%= f.text_field :misc_r, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :misc_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :misc_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">18</td>
+        <td><b>Ratio</b></td>
+        <td></td>
+        <td><b>Total</b></td>
+        <td></td>
+        <td><%= f.text_field :total_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :total_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">19</td>
+        <td><b>Raw-Material %</b></td>
+        <td><%= f.text_field :raw_material_percent, :size => 8, :class => "two_zero_" %></td>
+        <td><b>Admin-%</b></td>
+        <td><%= f.text_field :admin_percent, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :admin_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :admin_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">20</td>
+        <td><b>Paper-Mt</b></td>
+        <td><%= f.text_field :paper_mt, :size => 8, :class => "two_zero_" %></td>
+        <td><b>Grand Total</b></td>
+        <td></td>
+        <td><%= f.text_field :grand_total_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :grand_total_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr>
+        <td style="background-color: burlywood;">21</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= f.text_field :summary_percent, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :summary_lot, :size => 8, :class => "two_zero_" %></td>
+        <td><%= f.text_field :summary_pc, :size => 8, :class => "three_zero" %></td>
+      </tr>
+      
+      <tr><td style="background-color: burlywood;">&nbsp;</td></tr>
+      
+      <tr>
+        <td></td>
+        <td><b>Remark</b></td>
+        <td colspan="6"><%= f.text_area :remark, :rows => 3, :col => 50 %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

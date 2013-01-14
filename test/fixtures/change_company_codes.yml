@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  old_code: MyString
+  new_code: MyString
+  trade_company_id: 1
+  remark: MyString
+
+two:
+  old_code: MyString
+  new_code: MyString
+  trade_company_id: 1
+  remark: MyString

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_glueing.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Glueing:</b>
+  <%= @selection_glueing.glueing %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_glueing_path(@selection_glueing) %> |
+<%= link_to 'Back', selection_glueings_path %>

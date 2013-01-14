@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  quotation_request_form_id: 1
+  material_price: 1.5
+  color_price: 1.5
+  surface_finishing_price: 1.5
+  lamination_price: 1.5
+  stamping_price: 1.5
+  die_cut_price: 1.5
+  window_patching_price: 1.5
+  glueing_price: 1.5
+  packing_price: 1.5
+  wax_price: 1.5
+  folding_price: 1.5
+  collating_price: 1.5
+
+two:
+  quotation_request_form_id: 1
+  material_price: 1.5
+  color_price: 1.5
+  surface_finishing_price: 1.5
+  lamination_price: 1.5
+  stamping_price: 1.5
+  die_cut_price: 1.5
+  window_patching_price: 1.5
+  glueing_price: 1.5
+  packing_price: 1.5
+  wax_price: 1.5
+  folding_price: 1.5
+  collating_price: 1.5

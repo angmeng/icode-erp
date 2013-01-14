@@ -1,0 +1,2 @@
+module TypeOfSalesHelper
+end

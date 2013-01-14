@@ -1,0 +1,29 @@
+<%= form_for(@selection_stamping_size) do |f| %>
+  <% if @selection_stamping_size.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@selection_stamping_size.errors.count, "error") %> prohibited this selection_stamping_size from being saved:</h2>
+
+      <ul>
+      <% @selection_stamping_size.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :stamping_width %><br />
+    <%= f.text_field :stamping_width %>
+  </div>
+  <div class="field">
+    <%= f.label :stamping_length %><br />
+    <%= f.text_field :stamping_length %>
+  </div>
+  <div class="field">
+    <%= f.label :quoation_request_form_id %><br />
+    <%= f.number_field :quoation_request_form_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<h1>Listing purchase_order_item_lines</h1>
+
+<table>
+  <tr>
+    <th>Purchase requisition item</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchase_order_item_lines.each do |purchase_order_item_line| %>
+  <tr>
+    <td><%= purchase_order_item_line.purchase_requisition_item_id %></td>
+    <td><%= link_to 'Show', purchase_order_item_line %></td>
+    <td><%= link_to 'Edit', edit_purchase_order_item_line_path(purchase_order_item_line) %></td>
+    <td><%= link_to 'Destroy', purchase_order_item_line, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase order item line', new_purchase_order_item_line_path %>

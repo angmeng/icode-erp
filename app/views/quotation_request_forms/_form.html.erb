@@ -1,0 +1,105 @@
+<%= form_for(@quotation_request_form) do |f| %>
+
+  <% unless action_name == "edit" %>
+    <%= f.hidden_field :status, :value => QuotationRequestForm::PENDING %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% end %>
+
+  <div class="fix_1600x900">
+        <div id="qr_strip" style="width: 99.90%">
+            <ul>
+              <li class="k-state-active">CUSTOM REQUEST</li>
+              <li>MATERIAL</li>
+              <li>PRINTING PROCESS</li>
+              <li>FINISHING PROCESS</li>
+              <li>OTHERS</li>
+              <li>MOQ</li>
+            </ul>
+          
+            <!-- OK -->
+            <div><%= render "custom_request", :f => f %></div>
+
+            <!-- OK -->
+            <div><%= render "material", :f => f %></div>
+            
+            <!-- OK -->
+            <div><%= render "color", :f => f %></div>
+          
+            <!-- OK -->
+            <div>
+              <table>
+                <tr>
+                  <td width="800" style="vertical-align: top;"><%= render "finish_process_left", :f => f %></td>
+                  <td width="800" style="vertical-align: top;"><%= render "finish_process_right", :f => f %></td>
+                </tr>
+              </table>
+            </div>
+            
+            <div><%= render "others", :f => f %></div>
+          
+            <div><%= render "moq", :f => f %></div>
+        </div>
+  </div>
+
+  <div class="icon_tag">
+    <%# if @quotation_request_form.user_id == current_user.id or User.find_by_level(User::LEVEL_FIVE).id == current_user.id %>
+    <%= link_save_button %>
+    <%# else %>
+      <%#= not_link_save %>
+    <%# end %>
+    <%= link_close_button %>
+  </div>
+<% end %>
+  
+<table>
+  <tr>
+    <td><b>Updated By</b></td>
+    <td width="150">
+      <% if @quotation_request_form.user_id.present? %>
+        <%= @quotation_request_form.user.name rescue '-' %>
+      <% else %>
+        <%= current_user.name %>
+      <% end %>
+    </td>
+    <td rowspan="2">
+      <% if @quotation_request_form.status_remark.present? %>
+        <span style="background:red; color:white;">Status Remark: <%= @quotation_request_form.status_remark rescue '-' %></span><br/>
+        <% if @quotation_request_form.qr_status == QuotationRequestForm::REJECTED %>
+          <% if current_user.id == @quotation_request_form.qr_task %>
+            <b>Finished?</b>
+            <%= link_to "YES", quoter_press_yes_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Authorized By</b></td>
+    <td>
+      <% unless @quotation_request_form.director_approved == TRUE %>
+          <% if action_name == "edit" %>
+            <% if current_user.level == User::LEVEL_FIVE %>
+              <% if @quotation_request_form.qr_status == QuotationRequestForm::APPROVING %>
+                <b>Approve?</b>
+                <%= link_to "YES", yes_button_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?" %>
+                <%= link_to "NO", '#', :class => "pop_remark" %>
+              <% end %>
+            <% end %>
+          <% end %>
+      <% else %>
+        <%= User.find_by_level(User::LEVEL_FIVE).name rescue '-' %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<div id='qr_remark' class='easyui-window' title='Quotation Request Remark' closed='true' minimizable='false' style='width:400px;height:250px;'>
+  <% if action_name == "edit" %>
+    <%= form_tag no_button_quotation_request_form_path(@quotation_request_form), :method => :put do %>
+      Remark:<br/>
+      <%= text_area_tag :status_remark, params[:status_remark], :cols => 40, :required => 'true' %><br/>
+      <%= submit_tag "Submit Remark" %>
+    <% end %>
+  <% end %>
+</div>

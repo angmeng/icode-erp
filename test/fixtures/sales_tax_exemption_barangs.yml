@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_tax_exemption_id: 1
+  perihal_barang: MyString
+  apply_qty: 1.5
+  complete_qty: 1.5
+  unit_measurement_id: 1
+  tarif_code: MyString
+  valid_condition: false
+
+two:
+  sales_tax_exemption_id: 1
+  perihal_barang: MyString
+  apply_qty: 1.5
+  complete_qty: 1.5
+  unit_measurement_id: 1
+  tarif_code: MyString
+  valid_condition: false

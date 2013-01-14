@@ -1,0 +1,42 @@
+<h1>purchase by creditor</h1>
+
+<div>
+	<table>
+		<%= form_for @purchase_by_creditor, :url =>purchase_by_creditor_report_reports_path  do |f| %>
+		<tr>
+			<td>Period</td>
+			<td><%= f.text_field:  %></td>
+		</tr>
+		<tr>
+			<td><% f.submit "search" %></td>
+		</tr>
+		<% end %>
+	</table>
+	</div>
+
+	<div>
+		<table>
+			<thead>
+			<tr>
+				<th>No.</th>
+				<th>Tarde Company</th>
+				<th>Amount</th>
+				<th> % </th>
+				<th>Quantity</th>
+			</tr>
+		</thead>
+
+
+		<% @show_purchase_by_creditor.each_with_index do |p , index| %>
+		<tbody>
+			<tr>
+				<td><% p.index + 1 %></td>
+				<td><% p.purchase_requisition_item.tarde_company.name %></td>
+				<td><% p.index + 1 %></td>
+				<td><% p.index + 1 %></td>
+				<td><% p.quantity %></td>
+			</tr>
+		</tbody>
+		<% end %>
+		</table>
+	</div>

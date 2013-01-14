@@ -1,0 +1,45 @@
+<%= form_for(@sales_tax_exemption_barang) do |f| %>
+  <% if @sales_tax_exemption_barang.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sales_tax_exemption_barang.errors.count, "error") %> prohibited this sales_tax_exemption_barang from being saved:</h2>
+
+      <ul>
+      <% @sales_tax_exemption_barang.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sales_tax_exemption_id %><br />
+    <%= f.number_field :sales_tax_exemption_id %>
+  </div>
+  <div class="field">
+    <%= f.label :perihal_barang %><br />
+    <%= f.text_field :perihal_barang %>
+  </div>
+  <div class="field">
+    <%= f.label :apply_qty %><br />
+    <%= f.text_field :apply_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :complete_qty %><br />
+    <%= f.text_field :complete_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_measurement_id %><br />
+    <%= f.number_field :unit_measurement_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tarif_code %><br />
+    <%= f.text_field :tarif_code %>
+  </div>
+  <div class="field">
+    <%= f.label :valid_condition %><br />
+    <%= f.check_box :valid_condition %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

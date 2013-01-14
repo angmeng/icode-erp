@@ -1,0 +1,27 @@
+<h1>Listing received_item_and_qties</h1>
+
+<table>
+  <tr>
+    <th>Receive note</th>
+    <th>Received qty</th>
+    <th>Purchase order item line</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @received_item_and_qties.each do |received_item_and_qty| %>
+  <tr>
+    <td><%= received_item_and_qty.receive_note_id %></td>
+    <td><%= received_item_and_qty.received_qty %></td>
+    <td><%= received_item_and_qty.purchase_order_item_line_id %></td>
+    <td><%= link_to 'Show', received_item_and_qty %></td>
+    <td><%= link_to 'Edit', edit_received_item_and_qty_path(received_item_and_qty) %></td>
+    <td><%= link_to 'Destroy', received_item_and_qty, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Received item and qty', new_received_item_and_qty_path %>

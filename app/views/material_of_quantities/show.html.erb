@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @material_of_quantity.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @material_of_quantity.quantity %>
+</p>
+
+<p>
+  <b>Unit price:</b>
+  <%= @material_of_quantity.unit_price %>
+</p>
+
+
+<%= link_to 'Edit', edit_material_of_quantity_path(@material_of_quantity) %> |
+<%= link_to 'Back', material_of_quantities_path %>

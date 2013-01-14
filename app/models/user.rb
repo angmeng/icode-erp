@@ -16,17 +16,20 @@ class User < ActiveRecord::Base
   validates :name, :job_title, :department_id, :level, :report_to, :presence => true
   validates :name, :uniqueness => true
   
-  has_one :purchase_order
-  has_one :requested_by, :foreign_key => "requested_by", :class_name => "PurchaseRequisition"
+  has_one  :purchase_order
+  has_one  :requested_by, :foreign_key => "requested_by", :class_name => "PurchaseRequisition"
   has_many :purchase_requisition_items, :dependent => :destroy
   has_many :sales_order_items, :dependent => :destroy
   has_many :roles, :dependent => :destroy
   has_many :inventory_management_systems, :through => :roles
+  has_many :quotation_request_forms, :dependent => :destroy
+  has_many :price_control_items, :dependent => :destroy
+  has_many :price_controls, :dependent => :destroy
   
-#  has_many   :tasks,     :foreign_key => "report_to", :class_name => "User"
   belongs_to :applicant, :foreign_key => "report_to", :class_name => "User"
   
   has_many :prs, :foreign_key => "tasks", :class_name => "PurchaseRequisition"
+  has_many :qrs, :foreign_key => "qr_task", :class_name => "QuotationRequestForm"
   
   belongs_to :department
   
@@ -107,6 +110,15 @@ class User < ActiveRecord::Base
     return report
   end
   
+  def self.is_boss(user)
+    real_user = User.find_by_id(user.id)
+    if real_user.level == User::LEVEL_FIVE
+      return true
+    else
+      return false
+    end
+  end
+  
   def self.clearing
     ActiveRecord::Base.connection.execute("TRUNCATE TABLE inventory_histories")
     ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_categories")
@@ -126,7 +138,9 @@ class User < ActiveRecord::Base
     ActiveRecord::Base.connection.execute("TRUNCATE TABLE temporary_tarif_codes")
     ActiveRecord::Base.connection.execute("TRUNCATE TABLE trade_companies")
     ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
-    User.create(:name => "DIRECTOR", :password => 12345678, :department_id => 1, :level => 5, :job_title => "Director", :report_to => 0)
+    user = User.new(:name => "DIRECTOR", :password => '12345678', :password_confirmation => "12345678" , :department_id => 1, :level => 5, :job_title => "Director", :report_to => 0)
+    
+    user.save!
     #ActiveRecord::Base.connection.execute("TRUNCATE TABLE colors")
     #ActiveRecord::Base.connection.execute("TRUNCATE TABLE quotation_request_forms")
   end

@@ -1,0 +1,97 @@
+<%= form_for(@sales_order_item) do |f| %>
+  <div class="fix_800x450">
+    <% if action_name == 'new' or action_name == 'create' %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% end %>
+    <% if @company_id.present? %>
+      <%= f.hidden_field :trade_company_id, :value => @company_id %>
+    <% end %>
+    
+    <table>
+      <tr>
+        <td width="120"><b>Product ID</b></td>
+        <td><%= f.select "product_id", options_from_collection_for_select(product_finish_goods_with_combobox, :product_id, :product_code, @sales_order_item.product_id), { :include_blank => true }, { :onchange => "fg_product(this)" } %></td>
+      </tr>
+
+      <tr>
+        <td>
+          <b>Description</b>
+          <%= f.hidden_field :description, :size => 10 %>
+        </td>
+        <td id="display_desc">
+          <%= @sales_order_item.description rescue '-' if action_name == "edit" %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Quantity</b></td>
+        <td><%= f.text_field :quantity, :size => 5 %></td>
+        <td>
+          <b>U/M</b>
+          <%= f.hidden_field :unit_measurement_id, :size => 10 %>
+        </td>
+        <td id="display_um">
+          <%= @sales_order_item.unit_measurement.code rescue '-' if action_name == "edit" %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>ETA Date</b></td>
+        <td>
+          <% if action_name == "edit" %>
+            <%= f.text_field :eta, :value => @sales_order_item.eta.strftime("%d-%m-%Y") rescue ' ' %>
+          <% else %>
+            <%= f.text_field :eta %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <b>Selling Price</b>
+          <%= f.hidden_field :unit_price, :size => 10 %>
+        </td>
+        <td id="display_sp">
+          <%= four_precision(@sales_order_item.unit_price) rescue '-' if action_name == "edit" %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Amount Price</b></td>
+        <td class="amount_price">
+          <%= iproduct(@sales_order_item.unit_price, @sales_order_item.quantity) rescue '-' if action_name == "edit" %>
+        </td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td><%= f.hidden_field :status, :value => SalesOrderItem::PENDING %></td>
+      </tr>
+
+      <tr>
+        <td><b>Customer P/O</b></td>
+        <td><%= f.text_field :customer_po %></td>
+      </tr>
+
+      <tr>
+        <td><b>Client Part No</b></td>
+        <td><%= f.text_field :part_no, :size => 10 %></td>
+      </tr>
+
+      <tr>
+        <td>
+          <b>Current Stock</b>
+          <%= f.hidden_field :current_stock, :size => 10 %>
+        </td>
+        <td id="display_current_stock">
+          <%= @sales_order_item.current_stock rescue '-' if action_name == "edit" %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+
+<% end %>

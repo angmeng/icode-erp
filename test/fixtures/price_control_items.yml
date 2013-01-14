@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_id: 1
+  old_unit_price: 1.5
+  old_eff_date: 2012-11-10
+  new_unit_price: 1.5
+  new_eff_date: 2012-11-10
+  part_no: MyString
+  status: MyString
+
+two:
+  product_id: 1
+  old_unit_price: 1.5
+  old_eff_date: 2012-11-10
+  new_unit_price: 1.5
+  new_eff_date: 2012-11-10
+  part_no: MyString
+  status: MyString

@@ -1,0 +1,10 @@
+<div style="background-color:blue"><strong style="color:white;">EDITING PURCHASE REQUISITION ITEMS</strong></div>
+
+<div>
+  <% if @purchase_requisition_item.product_id.blank?  %>
+    <%= render "new_product" %>
+  <% else %>
+    <%= render "exist_product" %>
+  <% end %>
+</div>
+

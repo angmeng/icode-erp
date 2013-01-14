@@ -1,0 +1,63 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  address: MyText
+  tel_no_1: MyString
+  tel_no_2: MyString
+  fax_no: MyString
+  sales_tax_no: MyString
+  reg_no: MyString
+  sn_sales_order_no: 1
+  sn_purchase_order_no: 1
+  sn_deliver_order_no: 1
+  sn_receive_note_no: 1
+  sn_transfer_slip_no: 1
+  sn_store_voucher_no: 1
+  sn_incoming_reject_no: 1
+  sn_outgoing_reject_no: 1
+  sn_credit_note_no: 1
+  sn_debit_note_no: 1
+  sn_billing_order_no: 1
+  sn_purchase_req_no: 1
+  sn_product_price_no: 1
+  sn_job_order_no: 1
+  sn_shipment_schedule: 1
+  sp_scrap_sheet_no: 1
+  sp_receiving_instr_no: 1
+  sn_shipping_instr_no: 1
+  sn_receipt_no: 1
+  sn_bankin_slip_no: 1
+  sn_journal_voucher_no: 1
+  sn_payment_voucher_no: 1
+
+two:
+  name: MyString
+  address: MyText
+  tel_no_1: MyString
+  tel_no_2: MyString
+  fax_no: MyString
+  sales_tax_no: MyString
+  reg_no: MyString
+  sn_sales_order_no: 1
+  sn_purchase_order_no: 1
+  sn_deliver_order_no: 1
+  sn_receive_note_no: 1
+  sn_transfer_slip_no: 1
+  sn_store_voucher_no: 1
+  sn_incoming_reject_no: 1
+  sn_outgoing_reject_no: 1
+  sn_credit_note_no: 1
+  sn_debit_note_no: 1
+  sn_billing_order_no: 1
+  sn_purchase_req_no: 1
+  sn_product_price_no: 1
+  sn_job_order_no: 1
+  sn_shipment_schedule: 1
+  sp_scrap_sheet_no: 1
+  sp_receiving_instr_no: 1
+  sn_shipping_instr_no: 1
+  sn_receipt_no: 1
+  sn_bankin_slip_no: 1
+  sn_journal_voucher_no: 1
+  sn_payment_voucher_no: 1

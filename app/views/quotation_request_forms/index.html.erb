@@ -1,0 +1,20 @@
+<table width="100%">
+  <tr>
+    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
+  </tr>
+</table>
+
+<div><%= render "search_quotation_request" %></div>
+
+<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS & HISTORIES FOR QUOTATION REQUISITION</strong></div>
+
+<div class="fix_1600x900">
+  <% if @quotation_request_forms.present? %>
+    <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+
+<%= render "action_quotation_transaction" %>
+

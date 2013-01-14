@@ -1,0 +1,25 @@
+<%= form_for(@sequent) do |f| %>
+  <% if @sequent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sequent.errors.count, "error") %> prohibited this sequent from being saved:</h2>
+
+      <ul>
+      <% @sequent.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sequent_color %><br />
+    <%= f.text_field :sequent_color %>
+  </div>
+  <div class="field">
+    <%= f.label :quotation_request_form_id %><br />
+    <%= f.number_field :quotation_request_form_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

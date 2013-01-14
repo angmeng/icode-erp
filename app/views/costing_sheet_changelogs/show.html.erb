@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Costing sheet:</b>
+  <%= @costing_sheet_changelog.costing_sheet_id %>
+</p>
+
+<p>
+  <b>Change log:</b>
+  <%= @costing_sheet_changelog.change_log %>
+</p>
+
+
+<%= link_to 'Edit', edit_costing_sheet_changelog_path(@costing_sheet_changelog) %> |
+<%= link_to 'Back', costing_sheet_changelogs_path %>

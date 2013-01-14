@@ -1,0 +1,25 @@
+<h1>Listing pre_print_types</h1>
+
+<table>
+  <tr>
+    <th>Quotation request form</th>
+    <th>Pre print</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pre_print_types.each do |pre_print_type| %>
+  <tr>
+    <td><%= pre_print_type.quotation_request_form_id %></td>
+    <td><%= pre_print_type.pre_print %></td>
+    <td><%= link_to 'Show', pre_print_type %></td>
+    <td><%= link_to 'Edit', edit_pre_print_type_path(pre_print_type) %></td>
+    <td><%= link_to 'Destroy', pre_print_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pre print type', new_pre_print_type_path %>

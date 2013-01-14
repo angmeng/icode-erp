@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  do_no: 1
+  trade_company_id: 1
+  sales_tax: 1
+  type_of_sales_id: 1
+  tport_c: 1.5
+  currency_id: 1
+  bk_two: 1
+  trade_term_id: 1
+  updated_by: 1
+  transport_id: 1
+  sales_rep: MyString
+  sales_tax_exemption: MyString
+
+two:
+  do_no: 1
+  trade_company_id: 1
+  sales_tax: 1
+  type_of_sales_id: 1
+  tport_c: 1.5
+  currency_id: 1
+  bk_two: 1
+  trade_term_id: 1
+  updated_by: 1
+  transport_id: 1
+  sales_rep: MyString
+  sales_tax_exemption: MyString

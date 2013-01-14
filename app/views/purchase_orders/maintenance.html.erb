@@ -1,0 +1,16 @@
+<%= render "linking" %>
+
+<div style="background-color:blue"><strong style="color:white;">PR-REPAIR</strong></div>
+
+<div class="fix_1600x900">
+  <% if @maintenance.present? %>
+    <%= render "pr_repair", :maintenance => @maintenance %>
+  <% else %>
+    No Record Found.
+  <% end %>
+</div>
+  
+<%= render "action_purchase_order_repair" %>
+
+
+    

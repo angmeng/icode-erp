@@ -1,0 +1,27 @@
+<h1>Listing selection_die_cut_moulds</h1>
+
+<table>
+  <tr>
+    <th>Mould no</th>
+    <th>Window no</th>
+    <th>Quotation request form</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @selection_die_cut_moulds.each do |selection_die_cut_mould| %>
+  <tr>
+    <td><%= selection_die_cut_mould.mould_no %></td>
+    <td><%= selection_die_cut_mould.window_no %></td>
+    <td><%= selection_die_cut_mould.quotation_request_form_id %></td>
+    <td><%= link_to 'Show', selection_die_cut_mould %></td>
+    <td><%= link_to 'Edit', edit_selection_die_cut_mould_path(selection_die_cut_mould) %></td>
+    <td><%= link_to 'Destroy', selection_die_cut_mould, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Selection die cut mould', new_selection_die_cut_mould_path %>

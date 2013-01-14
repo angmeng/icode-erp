@@ -1,0 +1,25 @@
+<h1>Listing costing_sheet_changelogs</h1>
+
+<table>
+  <tr>
+    <th>Costing sheet</th>
+    <th>Change log</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @costing_sheet_changelogs.each do |costing_sheet_changelog| %>
+  <tr>
+    <td><%= costing_sheet_changelog.costing_sheet_id %></td>
+    <td><%= costing_sheet_changelog.change_log %></td>
+    <td><%= link_to 'Show', costing_sheet_changelog %></td>
+    <td><%= link_to 'Edit', edit_costing_sheet_changelog_path(costing_sheet_changelog) %></td>
+    <td><%= link_to 'Destroy', costing_sheet_changelog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Costing sheet changelog', new_costing_sheet_changelog_path %>

@@ -1,0 +1,84 @@
+<%= form_for @new_category, :remote => true do |f| %>
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td><b>Code</b></td>
+        <td><%= f.text_field :code, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
+      </tr>
+      <tr>
+        <td><b>Description</b></td>
+        <td><%= f.text_field :desc, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,40]'" %></td>
+      </tr>
+    </table>
+    
+    <div style="display: none;">
+      <table>
+        <tr>
+          <td>
+            <% if @category_id.present? %>
+              <%= f.text_field :parent_id, :value => @category_id %>
+              <% @level = answer_level(@category_id) %>
+            <% else %>
+              <%= f.text_field :parent_id, :value => @new_category.parent_id %>
+              <% @level = answer_level(@new_category.parent_id) %>
+            <% end %>
+            <%= f.text_field :level, :value => @level.to_i + 1 %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <% if @icon.present? %>
+              <%= f.text_field :icon, :value => @icon %>
+            <% else %>
+              <%= f.text_field :icon, :value => @new_category.icon %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <% if @category_type.present? %>
+              <%= f.text_field :category_type, :value => @category_type %>
+            <% else %>
+              <%= f.text_field :category_type, :value => @new_category.category_type %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><%= f.check_box  :exist_field, { checked: true } %></td>
+        </tr>
+        
+        <tr>
+          <td>
+            <% if @refer_id.present? %>
+              <%= f.text_field :refer_category_id, :value => @refer_id %>
+              <% @field_id = gather_field_id(@refer_id) %>
+            <% else %>
+              <%= f.text_field :refer_category_id, :value => @new_category.refer_category_id %>
+              <% @field_id = gather_field_id(@new_category.refer_category_id) %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <div style="background-color: gainsboro;"><b>Field For Product ID</b></div>
+    
+    <% if action_name == "edit" %>
+      <%= render "checkboxes_forms" %>
+    <% else %>
+      <% if @field_id.present? %>
+        <%= render "/products/show_checkboxes_of_field", :field_id => @field_id %>
+      <% else %>
+        <%= render "checkboxes_forms" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

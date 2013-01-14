@@ -1,0 +1,32 @@
+<div style="background-color:blue"><strong style="color:white;">SHOW DETAILS</strong></div>
+
+<div class="fix_800x450">
+  <p>
+    <b>Product:</b>
+    <%= render "/product_categories/join_product_category", :pc => @inventory_history %>
+  </p>
+
+  <p>
+    <b>Stock in:</b>
+    <%= @inventory_history.stock_in %>
+  </p>
+
+  <p>
+    <b>Stock out:</b>
+    <%= @inventory_history.stock_out %>
+  </p>
+
+  <p>
+    <b>Inventory Issue:</b>
+    <%= @inventory_history.inventory_issue.description rescue '-' %>
+  </p>
+
+  <p>
+    <b>Total:</b>
+    <%= @inventory_history.amount rescue '-' %>
+  </p>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

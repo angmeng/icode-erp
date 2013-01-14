@@ -1,0 +1,24 @@
+<% if ccc.present? %>
+  <table id="grid_h495" class="white-line-table zebraLight">
+    <thead>
+      <tr class="header_line">
+        <th class="check_highlight"></th>
+        <th>Date</th>
+        <th>Old code</th>
+        <th>New code</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% ccc.each do |change_company_code| %>
+        <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= change_company_code.id %>">
+          <td></td>
+          <td align="center"><%= change_company_code.created_at.strftime("%d-%m-%Y") rescue '-' %></td>
+          <td align="center"><%= change_company_code.old_code %></td>
+          <td align="center"><%= change_company_code.new_code %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+

@@ -1,0 +1,80 @@
+<%= form_for(@delivery_order) do |f| %>
+  <div class="fix_1600x900">
+    <table>
+      <tr>
+        <% if action_name == 'edit' %>
+          <td width="130"><b>D/O No#</b></td>
+          <td><%= @delivery_order.do_no rescue '-' %></td>
+        <% else %>
+          <td width="130"><b>Current D/O No.</b></td>
+          <td><%= company.sn_deliver_order_no + 1 rescue '-' %></td>
+        <% end %>
+
+        <td width="30"></td>
+
+        <td width="130"><b>D/O Date</b></td>
+        <td><%= f.text_field :do_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %></td>
+      </tr>
+
+      <tr>
+        <td><b>Customer Company</b></td>
+        <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @delivery_order.trade_company_id), { :include_blank => true }, { :id => "kendo_combobox", :style => "width: 400px;" } %></td>
+        <td></td>
+        <td><b>Sales Tax</b></td>
+        <td><%= f.text_field :sales_tax, :size => 5 %></td>
+      </tr>
+
+      <tr>
+        <td><b>Type of Sales</b></td>
+        <td><%= f.select :type_of_sale_id, options_from_collection_for_select(type_of_sale, :id, :name, @delivery_order.type_of_sale_id), :include_blank => true %></td>
+        <td></td>
+        <td><b>T'port C.</b></td>
+        <td><%= f.text_field :tport_c %></td>
+      </tr>
+
+      <tr>
+        <td><b>Currency</b></td>
+        <td><%= f.select :currency_id, options_from_collection_for_select(currency, :id, :name, @delivery_order.currency_id), :include_blank => true %></td>
+        <td></td>
+        <td><b>BK. 2#</b></td>
+        <td><%= f.number_field :bk_two %></td>
+      </tr>
+
+      <tr>
+        <td><b>Trade Term</b></td>
+        <td><%= f.select :trade_term_id, options_from_collection_for_select(trade_term, :id, :name, @delivery_order.trade_term_id), :include_blank => true %></td>
+        <td></td>
+        <td><b>Update By</b></td>
+        <td>
+          <%= current_user.name %>
+          <%= f.hidden_field :updated_by, :value => current_user.id %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Transport</b></td>
+        <td><%= f.select :transport_id, options_from_collection_for_select(transport, :id, :name, @delivery_order.transport_id), :include_blank => true  %></td>
+      </tr>
+
+      <tr>
+        <td><b>Sales Rep.</b></td>
+        <td><%= f.text_field :sales_rep %></td>
+      </tr>
+
+      <tr>
+        <td><b>Sales Tax Exemption</b></td>
+        <td><%= f.text_field :sales_tax_exemption %></td>
+      </tr>
+    </table>
+
+    <hr/>
+
+    <%= render "new_delivery_order_items", :delivery_order => @delivery_order %>
+  </div>
+  
+  <%= render 'action_delivery_order_new' %>
+
+
+<% end %>
+
+

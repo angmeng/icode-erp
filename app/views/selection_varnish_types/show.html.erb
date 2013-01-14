@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_varnish_type.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Varnish type:</b>
+  <%= @selection_varnish_type.varnish_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_varnish_type_path(@selection_varnish_type) %> |
+<%= link_to 'Back', selection_varnish_types_path %>

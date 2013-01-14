@@ -1,0 +1,320 @@
+<div style="background-color:blue"><strong style="color:white;"><%= @trade_company.user_type == TradeCompany::CUSTOMER ? "SHOW CUSTOMER DETAILS" : "SHOW SUPPLIER DETAILS" %></strong></div>
+
+<div class="fix_1024x800">
+  <div id="company_strip">
+    <ul>
+        <li class="k-state-active">Company Details</li>
+        <li>Payment Details</li>
+        <li>Other Details</li>
+    </ul>
+    
+    <div>
+      <table>
+        <tr>
+          <td width="150"><b>Company Code</b></td>
+          <td>[<%= @trade_company.code rescue '-' %>] <%= @trade_company.name rescue '-' %></td>
+        </tr>
+
+        <% if @trade_company.user_type.present? %>
+          <% if @trade_company.user_type == TradeCompany::CUSTOMER %>
+            <tr>
+              <td style="vertical-align: top;"><b>Bill To</b></td>
+              <td><%= raw(@trade_company.address_1.gsub(/\n/,'<br/>')) rescue '-' %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <% if @trade_company.postcode_one.present? %>
+                  <%= @trade_company.postcode_one rescue '-' %>&nbsp;
+                <% end %>
+                <% if @trade_company.city_one.present? %>
+                  <%= @trade_company.city_one rescue '-' %>,&nbsp;
+                <% end %>
+                <% if @trade_company.state_one.present? %>
+                  <%= @trade_company.state_one rescue '-' %>,&nbsp;
+                <% end %>
+                <% if @trade_company.country_one.present? %>
+                  <%= @trade_company.country_one rescue '-' %>.
+                <% end %>
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="vertical-align: top;"><b>Ship To</b></td>
+              <td><%= raw(@trade_company.address_2.gsub(/\n/,'<br/>')) rescue '-' %></td>
+            </tr>
+            
+            <tr>
+              <td></td>
+              <td>
+                <% if @trade_company.postcode_two.present? %>
+                  <%= @trade_company.postcode_two rescue '-' %>&nbsp;
+                <% end %>
+                <% if @trade_company.city_two.present? %>
+                  <%= @trade_company.city_two rescue '-' %>,&nbsp;
+                <% end %>
+                <% if @trade_company.state_two.present? %>
+                  <%= @trade_company.state_two rescue '-' %>,&nbsp;
+                <% end %>
+                <% if @trade_company.country_two.present? %>
+                  <%= @trade_company.country_two rescue '-' %>.
+                <% end %>
+            </tr>
+          <% else %>
+            
+            <tr>
+              <td style="vertical-align: top;"><b>Supplier Address</b></td>
+              <td><%= raw(@trade_company.address_1.gsub(/\n/,'<br/>')) rescue '-' %></td>
+            </tr>
+            
+            <tr>
+              <td></td>
+              <td>
+                <% if @trade_company.postcode_one.present? %>
+                  <%= @trade_company.postcode_one rescue '-' %>&nbsp;
+                <% end %>
+                <% if @trade_company.city_one.present? %>
+                  <%= @trade_company.city_one rescue '-' %>,&nbsp;
+                <% end %>
+                <% if @trade_company.state_one.present? %>
+                  <%= @trade_company.state_one rescue '-' %>,&nbsp;
+                <% end %>
+                <% if @trade_company.country_one.present? %>
+                  <%= @trade_company.country_one rescue '-' %>.
+                <% end %>
+              </td>
+            </tr>
+            
+          <% end %>
+        <% end %>
+           
+        <% if @trade_company.email.present? %>
+          <tr>
+            <td><b>Email</b></td>
+            <td><%= @trade_company.email rescue '-' %></td>
+          </tr>
+        <% end %>
+        
+        <tr>
+          <td><b>Phone/Mobile No.</b></td>
+          <td>
+            <%= @trade_company.tel_area_code_one rescue '-' %>-<%= @trade_company.tel_no_1 rescue '-' %> 
+            <% unless @trade_company.tel_no_2.blank? %>
+              / <%= @trade_company.tel_area_code_two rescue '-' %>-<%= @trade_company.tel_no_2 rescue '-' %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <% if @trade_company.fax_no.present? %>
+          <tr>
+            <td><b>Fax No.</b></td>
+            <td><%= @trade_company.fax_area_code rescue '-' %>-<%= @trade_company.fax_no rescue '-' %></td>
+          </tr>
+        <% end %>
+
+        <% if @trade_company.website.present? %>
+          <tr>
+            <td><b>Website</b></td>            
+            <td>
+              <% if @trade_company.website.present? %>
+                <%= link_to "#{@trade_company.website}", @trade_company.website, :target => "_blank"  %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+          
+        <% if @trade_company.company_reg_no.present? %>
+          <tr>
+            <td><b>Company Reg. No.</b></td>
+            <td><%= @trade_company.company_reg_no rescue '-' %></td>
+          </tr>
+        <% end %>
+
+        <% if @trade_company.user_type == TradeCompany::SUPPLIER %>
+          <tr>
+            <td><b>Supplier Performance Monitoring Record</b></td>
+            <td>
+              <% if @trade_company.performance_monitoring == TRUE %>
+                YES
+              <% else %>
+                NO
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+          
+        <tr>
+          <td><b>Attn</b></td>
+          <td><%= @trade_company.contact_person %></td>
+        </tr>
+
+        <% if @trade_company.contacts.present? %>
+          <tr>
+            <td style="vertical-align: top;"><b>Listing Contacts</b></td>
+            <td>
+              <table class="black-line-table">
+                <tr style="background-color: gainsboro;">
+                  <th width="30">No.</th>
+                  <th width="100">Department</th>
+                  <th width="100">Name</th>
+                  <th width="200">Email</th>
+                  <th width="100">Phone No.</th>
+                  <th width="100">Mobile No.</th>
+                </tr>
+                <% @trade_company.contacts.each_with_index do |contact, index| %>
+                  <tr>
+                    <td align="center"><%= index + 1 %></td>
+                    <td align="center"><%= contact.department rescue '-' %></td>
+                    <td align="center"><%= contact.name rescue '-' %></td>
+                    <td align="center"><%= contact.email rescue '-' %></td>
+                    <td align="center"><%= contact.phone_area_code rescue '-' %>-<%= contact.phone_no rescue '-' %></td>
+                    <td align="center"><%= contact.mobile_area_code rescue '-' %>-<%= contact.mobile_no rescue '-' %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td><b>Status</b></td>
+          <td>
+            <% if @trade_company.status == TradeCompany::ACTIVE  %>
+              ACTIVE
+            <% elsif @trade_company.status == TradeCompany::INACTIVE %>
+              UNACTIVE
+            <% elsif @trade_company.status == TradeCompany::KIV %>
+              KIV
+            <% else %>
+              -
+            <% end %>
+          </td>
+        </tr>
+
+        <!--tr>
+          <td><b>Subcon</b></td>
+          <td></td>
+          <td><%#= @trade_company.subcon == TRUE ? "YES" : "NO" %></td>
+        </tr-->
+      </table>
+
+    </div>
+
+    
+    
+    <div>
+      <table>
+        <tr>
+          <td><b>Payment Type</b></td>
+          <td></td>
+          <td><%= @trade_company.payment_type.name rescue '-' %></td>
+        </tr>
+        
+        <tr>
+          <td><b>Opening A/C Date</b></td>
+          <td></td>
+          <td><%= @trade_company.opening_ac_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        </tr>
+        
+        <tr>
+          <td><b>Opening A/C Amount</b></td>
+          <td></td>
+          <td><%= two_precision(@trade_company.opening_ac_amount) %></td>
+        </tr>
+        
+        <tr>
+          <td><b>Limit</b></td>
+          <td></td>
+          <td><%= two_precision(@trade_company.limit_amount) %></td>
+        </tr>
+        
+        <tr>
+          <td><b>Banking Name</b></td>
+          <td></td>
+          <td><%= @trade_company.banking_name rescue '' %></td>
+        </tr>
+        
+        <tr>
+          <td><b>Banking Account</b></td>
+          <td></td>
+          <td><%= @trade_company.banking_account rescue '' %></td>
+        </tr>
+      </table>
+      <br/>
+    </div>
+    
+    
+    <div>
+       <table>
+          <tr>
+            <td><b>Type of Sales</b></td>
+            <td></td>
+            <td><%= @trade_company.type_of_sale.name rescue '-' %></td>
+          </tr>
+          
+          <tr>
+            <td><b>Sales Tax Licence No.</b></td>
+            <td></td>
+            <td><%= @trade_company.sales_tax_licence_no rescue '-' %></td>
+          </tr>
+          
+          <tr>
+            <td><b>Sales Tax Exemption No.</b></td>
+            <td></td>
+            <td>
+              <% if @trade_company.sales_tax_exemption.present? %>
+                [<%= @trade_company.sales_tax_exemption.running_no rescue '-' %>]
+                <%= @trade_company.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
+              <% else %>
+                <i style="color:red;">
+                  After register new company, please go to Custom -> New Sales Tax Exemption No. for register.
+                </i>
+              <% end %>
+            </td>
+          </tr>
+          
+          <tr>
+            <td><b>Warehouse Licence No.</b></td>
+            <td></td>
+            <td><%= @trade_company.warehouse_licence_no rescue '-' %></td>
+          </tr>
+          
+          <tr>
+            <td><b>MFG Ware warehouse Licence No.</b></td>
+            <td></td>
+            <td><%= @trade_company.mfg_warehouse_licence_no rescue '-' %></td>
+          </tr>
+          
+          <tr>
+            <td><b>Sales Rep.</b></td>
+            <td></td>
+            <td><%= @trade_company.sales_rep %></td>
+          </tr>
+          
+          <tr>
+            <td><b>Customer Approval #</b></td>
+            <td></td>
+            <td><%= @trade_company.customer_approval rescue '-' %></td>
+          </tr>
+          
+          <tr>
+            <td><b>Trade Term</b></td>
+            <td></td>
+            <td><%= @trade_company.trade_term.name rescue '-' %></td>
+          </tr>
+          
+          <tr>
+            <td><b>Certification</b></td>
+            <td></td>
+            <td><%= @trade_company.certification rescue '-' %></td>
+          </tr>
+
+        </table>
+        <br/>
+    </div>
+  </div>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

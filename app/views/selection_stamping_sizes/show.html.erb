@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stamping width:</b>
+  <%= @selection_stamping_size.stamping_width %>
+</p>
+
+<p>
+  <b>Stamping length:</b>
+  <%= @selection_stamping_size.stamping_length %>
+</p>
+
+<p>
+  <b>Quoation request form:</b>
+  <%= @selection_stamping_size.quoation_request_form_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_stamping_size_path(@selection_stamping_size) %> |
+<%= link_to 'Back', selection_stamping_sizes_path %>

@@ -1,0 +1,37 @@
+<table id="grid_h495" class="white-line-table zebraLight">
+  
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Name</th>
+      <th>Job Title</th>
+      <th>Department</th>
+      <th>Level</th>
+      <th>Report To</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% users.each do |user| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= user.id %>">
+        <td></td>
+        <td align="center"><%= user.name rescue '-' %></td>
+        <td align="center"><%= user.job_title rescue '-' %></td>
+        <td align="center"><%= user.department.name rescue '-' %></td>
+        <td align="center"><%= user.level rescue '-' %></td>
+        <td align="center">
+          <% if user.level == User::LEVEL_FIVE %>
+            -
+          <% else %>
+            <% if user.direct_report.present? %>
+              DIRECTOR
+            <% else %>
+              <%= user.applicant.name rescue '-' %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

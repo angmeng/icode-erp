@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Mould no:</b>
+  <%= @selection_die_cut_mould.mould_no %>
+</p>
+
+<p>
+  <b>Window no:</b>
+  <%= @selection_die_cut_mould.window_no %>
+</p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_die_cut_mould.quotation_request_form_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_die_cut_mould_path(@selection_die_cut_mould) %> |
+<%= link_to 'Back', selection_die_cut_moulds_path %>

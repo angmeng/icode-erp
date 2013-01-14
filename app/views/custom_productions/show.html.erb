@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lot size:</b>
+  <%= @custom_production.lot_size %>
+</p>
+
+<p>
+  <b>Part no:</b>
+  <%= @custom_production.part_no %>
+</p>
+
+<p>
+  <b>Category no:</b>
+  <%= @custom_production.category_no %>
+</p>
+
+<p>
+  <b>Stock reference:</b>
+  <%= @custom_production.stock_reference %>
+</p>
+
+
+<%= link_to 'Edit', edit_custom_production_path(@custom_production) %> |
+<%= link_to 'Back', custom_productions_path %>

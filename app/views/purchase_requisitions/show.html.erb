@@ -1,0 +1,144 @@
+<div style="background-color:blue"><strong style="color:white;">SHOW PR DETAILS</strong></div>
+
+<table width="100%" class="header_content">
+  <tr>
+    <td><h3>The Details of Purchase Requisition</h3></td>
+    <td align="right">
+      <table>
+        <tr>
+          <td><b>PR No.# : </b></td>
+          <td align="right"><%= @purchase_requisition.pr_no %></td>
+        </tr>
+        <tr>
+          <td><b>PR Date : </b></td>
+          <td><%= @purchase_requisition.created_at.strftime("%d-%m-%Y") %></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+    
+<div class="new_form">
+  <% if @show_items.present? %>
+    <%= render "/purchase_requisitions/details_from_purchase_requisition_items", :pr => @show_items %>
+  <% end %>
+</div>
+
+<table>
+  <tr>
+    <td width="300" style="vertical-align: top;">
+      <b>REQUESTER (DEPT. HEAD)</b>
+      <table>
+        <tr>
+          <td style="vertical-align: top;">
+            <table>
+              <tr>
+                <td><b>Name</b></td>
+                <td><%= @purchase_requisition.user.name rescue '-' %></td>
+              </tr>
+              <tr>
+                <td><b>Date</b></td>
+                <td><%= @purchase_requisition.requested_by_date.strftime("%d-%m-%Y") rescue '-' %></td>
+              </tr>
+              <% unless @purchase_requisition.remark.blank? %>
+                <tr>
+                  <td><b>Remark</b></td>
+                  <td style="color:white; background: red;"><%= @purchase_requisition.remark rescue '-' %></td>
+                </tr>
+              <% end %>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+    
+    <% if @logic.include?(2) %>
+      <td width="300" style="vertical-align: top;">
+          <b>APPROVAL(1)</b>
+          <% if @purchase_requisition.approved_by_level_two.present? %>
+              <table>
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%= User.find_by_id(@purchase_requisition.approved_by_level_two).name rescue '-' %></td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td><%= @purchase_requisition.approved_by_level_two_date.strftime("%d-%m-%Y") rescue '-' %></td>
+                </tr>
+              </table>
+          <% else %>
+              <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_TWO  %>
+                <table><tr><td colspan="2" align="center">PENDING</td></tr></table>
+              <% end %>
+          <% end %>
+      </td>
+      <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+    <% end %>
+
+    <!--------------------- Approval(OM) --------------------->
+    <% if @logic.include?(3) %>
+      <td width="300" style="vertical-align: top;">
+          <b>APPROVAL(OM)</b>
+          <% if @purchase_requisition.approved_by_level_three.present? %>
+              <table>
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%= User.find_by_id(@purchase_requisition.approved_by_level_three).name rescue '-' %></td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td><%= @purchase_requisition.approved_by_level_three_date.strftime("%d-%m-%Y") rescue '-' %></td>
+                </tr>
+              </table>
+          <% else %>
+            <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_THREE %>
+                <table><tr><td colspan="2" align="center">PENDING</td></tr></table>
+            <% end %>
+          <% end %>
+      </td>
+      <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+    <% end %>
+
+    <!--------------------- Approval(3) --------------------->
+    <% if @logic.include?(5) %>
+      <td width="300" style="vertical-align: top;">
+          <b>APPROVAL(3)</b>
+          <% if @purchase_requisition.approved_by_level_five.present? %>
+              <table>
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%= User.find_by_id(@purchase_requisition.approved_by_level_five).name rescue '-' %></td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td><%= @purchase_requisition.approved_by_level_five_date.strftime("%d-%m-%Y") rescue '-' %></td>
+                </tr>
+              </table>
+          <% else %>
+            <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_FIVE %>
+                <table><tr><td colspan="2" align="center">PENDING</td></tr></table>
+            <% end %>
+          <% end %>
+      </td>
+    <% end %>
+      
+    <% if @purchase_requisition.status == PurchaseRequisition::SUBMIT_PO %>
+      <% unless @user.level == User::LEVEL_FIVE %>
+        <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+      <% end %>
+    <% end %>
+      
+     <!--------------------- Completed --------------------->
+    <% if @purchase_requisition.status == PurchaseRequisition::SUBMIT_PO or @purchase_requisition.status == PurchaseRequisition::SUBMIT_RN %>
+      <td width="300"><%= image_tag("complete-Icon.png", :alt => "completed", :size => "50x50") %></td>
+    <% end %>
+    
+  </tr>
+</table>    
+
+<%= render "action_purchase_requisition_show" %>
+
+
+
+

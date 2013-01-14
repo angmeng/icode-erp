@@ -1,0 +1,32 @@
+<table width="100%">
+  <tr>
+    <td align="right">
+      <%= link_to 'Search', "#", :class => "search_link" %>
+    </td>
+  </tr>
+</table>
+
+<div><%= render "search_receive_note" %></div>
+
+<div style="background-color:blue"><strong style="color:white;">NEW RECEIVE NOTE</strong></div>
+
+<% if @po_no.present? %>
+      <%= form_for(@receive_note) do |f| %>
+        <%= render 'form', :f => f %>
+
+        <div class="icon_tag">
+          <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
+            <%= link_save_button %>
+          <% else %>
+            <%= not_link_save %>
+          <% end %>
+          <%= link_close_button  %>
+        </div>
+      <% end %>
+<% else %>
+  No Record Found.
+<% end %>
+
+
+
+

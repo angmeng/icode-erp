@@ -1,0 +1,168 @@
+<div style="background-color:blue"><strong style="color:white;">COMPANY PROFILES</strong></div>
+
+<table>
+  <tr>
+    <td width="150">Company's Name</td>
+    <td><%= company.name rescue '-' %></td>
+  </tr>
+  <tr>
+    <td width="150">Address</td>
+    <td><%= simple_format(company.address) %></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="150">Tel1 No.</td>
+    <td width="150"><%= company.tel_no_1 rescue '-' %></td>
+    <td width="150">Tel2 No.</td>
+    <td width="150"><%= company.tel_no_2 rescue '-' %></td>
+    <td width="150">Fax No.</td>
+    <td width="150"><%= company.fax_no rescue '-' %></td>
+  </tr>
+  <tr>
+    <td>Sales Tax No.</td>
+    <td><%= company.sales_tax_no rescue '-' %></td>
+    <td>Reg. No.</td>
+    <td><%= company.reg_no rescue '-' %></td>
+  </tr>
+</table>
+
+<hr/>
+
+<table>
+  <tr>
+    <td>
+          <table>
+            <tr>
+              <td width="180">Sales Order No.</td>
+              <td width="150"><%= company.sn_sales_order_no rescue '0' %></td>
+              <td width="50"></td>
+              <td width="180">Transfer Slip No.</td>
+              <td width="150"><%= company.sn_transfer_slip_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Purchase Order No.</td>
+              <td><%= company.sn_purchase_order_no rescue '0' %></td>
+              <td></td>
+              <td>Store Voucher No.</td>
+              <td><%= company.sn_store_voucher_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Deliver Order No.</td>
+              <td><%= company.sn_deliver_order_no rescue '0' %></td>
+              <td></td>
+              <td>Incoming Reject No.</td>
+              <td><%= company.sn_incoming_reject_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Receive Note No.</td>
+              <td><%= company.sn_receive_note_no rescue '0' %></td>
+              <td></td>
+              <td>Outgoing Reject No.</td>
+              <td><%= company.sn_outgoing_reject_no rescue '0' %></td>
+            </tr>
+            
+            <tr><td>&nbsp;</td></tr>
+            
+            <tr>
+              <td>Credit Note No.</td>
+              <td><%= company.sn_credit_note_no rescue '0' %></td>
+              <td></td>
+              <td>Job Order No.</td>    
+              <td><%= company.sn_job_order_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Debit Note No.</td>
+              <td><%= company.sn_debit_note_no rescue '0' %></td>
+              <td></td>
+              <td>Shipment Schedule #</td>
+              <td><%= company.sn_shipment_schedule rescue '0' %></td> 
+            </tr>
+            
+            <tr>
+              <td>Billing Order No.</td>
+              <td><%= company.sn_billing_order_no rescue '0' %></td>
+              <td></td>
+              <td>Scrap Sheet No.</td>
+              <td><%= company.sn_scrap_sheet_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Purchase Req No.</td>
+              <td><%= company.sn_purchase_req_no rescue '0' %></td>
+              <td></td>
+              <td>Receiving Instr No.</td>
+              <td><%= company.sn_receiving_instr_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Product Price No.</td>
+              <td><%= company.sn_product_price_no rescue '0' %></td>
+              <td></td>
+              <td>Shipping Instr No.</td>
+              <td><%= company.sn_shipping_instr_no rescue '0' %></td>
+            </tr>
+                
+            <tr><td>&nbsp;</td></tr>
+            
+            <tr>
+              <td>Receipt No.</td>
+              <td><%= company.sn_receipt_no rescue '0' %></td>
+              <td></td>
+              <td>Journal Voucher No.</td>
+              <td><%= company.sn_journal_voucher_no rescue '0' %></td>
+            </tr>
+            
+            <tr>
+              <td>Bank-In Slip No.</td>
+              <td><%= company.sn_bankin_slip_no rescue '0' %></td>
+              <td></td>
+              <td>Payment Voucher No.</td>
+              <td><%= company.sn_payment_voucher_no rescue '0' %></td>
+            </tr>
+            
+            <tr><td>&nbsp;</td></tr>
+            
+            <tr>
+              <td>Product I/D No.</td>
+              <td><%= company.sn_product_id_no rescue '0' %></td>
+              <td></td>
+              <td>Quotation Request No.</td>
+              <td><%= company.sn_quotation_request_no rescue '0' %></td>
+            </tr>
+          </table>
+    </td>
+  </tr>
+</table>
+
+<% if current_user.level == User::LEVEL_FIVE %>
+  <div class="icon_tag">
+    <%= not_link_add %>
+
+    <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
+
+    <span id="on_edit" editClass="iframe_1600x900">
+      <% if company.present? %>
+        <%= link_edit_1600x900(edit_company_profile_path(company)) %>
+      <% end %>
+    </span>
+
+    <span id="on_kiv"><%= not_link_kiv %></span>
+
+    <span id="on_printable"><%= link_printable(company_profiles_path(format: "pdf"))  %></span>
+
+    <%= link_close_button %>
+  </div>
+
+
+  <%# if company.present? %>
+    <%#= link_to 'Edit', edit_company_profile_path(company), :class => "iframe_1024x800", "data-fancybox-type" => "iframe" %>
+  <%# else %>
+    <%#= link_to 'New', new_company_profile_path, :class => "iframe_1024x800", "data-fancybox-type" => "iframe" %>
+  <%# end %>
+<% end %>

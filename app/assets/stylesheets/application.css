@@ -12,29 +12,24 @@
  *= require_tree .
 */
 
-/*=================================== SCAFFOLDS STYLE =====================================*/
+/*==================== SCAFFOLDS STYLE ==================================================================================*/
+/*html { overflow-y: scroll; }*/
 
 body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-family: Tahoma, arial, helvetica, sans-serif;
+  font-size: 12px;
   line-height: 18px; 
 }
 
-p, div {
-    margin: 0;
-/*    margin-bottom: 0px;
-    margin-top: 0px;
-    margin-left:  0px;
-    margin-right:  0px;*/
-}
+p, div { margin: 0; }
 
 hr { border: 1px solid black; }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px; }
+    font-family: Tahoma, arial, helvetica, sans-serif;
+    font-size: 12px; }
 
 pre {
   background-color: #eee;
@@ -45,14 +40,14 @@ a         { color: #000; }
 a:visited { color: #666; }
 a:hover   { color: #fff; background-color:#000; }
 
-#notice {
+p#notice {
     background-color: green;
     color: white;
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 5px; }
 
-#alert {
+p#alert {
     background-color: red; 
     color: white;  
     margin-top: 5px;
@@ -87,24 +82,39 @@ a:hover   { color: #fff; background-color:#000; }
   font-size: 12px;
   list-style: square;
   color:black; }   
-/*=================================== SCAFFOLDS STYLE (END) =====================================*/
+/*==================== SCAFFOLDS STYLE (END) =============================================================================*/
 
-/*=================================== LOGIN DESIGN =====================================*/
-.header_login { font-size: 30px; padding: 20px; font-weight: bold; background-color: orange; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
-.centered { position: absolute; top: 30%; left: 40%; }
-.centered fieldset { background: skyblue; padding: 15px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
-#input_box { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; width: 200px; background: #fff;border: solid 1px transparent; color: #555; padding: 8px; font-size: 13px; }
-/*=================================== LOGIN DESIGN (END) =====================================*/
+/*==================== LOGIN DESIGN ======================================================================================*/
+.header_login       { font-size: 30px; padding: 20px; font-weight: bold; background-color: orange; -moz-border-radius: 10px; -webkit-border-radius: 10px; -ms-border-radius: 10px; border-radius: 10px; }
+.centered           { position: absolute; top: 30%; left: 40%; }
+.centered fieldset  { background: skyblue; padding: 15px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+.input_box          { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; width: 200px; background: #fff; border: solid 1px transparent; color: #555; padding: 8px; font-size: 13px; }
+/*==================== LOGIN DESIGN (END) ================================================================================*/
 
 /*=================================== MENU TOOL =====================================*/
-#main_menu { width: auto; }
-#menu h2 { font-size: 1em; text-transform: uppercase; padding: 5px 10px; }
+#main_header { 
+    padding: 20px 0px 20px 0px; font-weight: bold; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 30px; color: whitesmoke;
+    
+    background-color: #A6DEFF;
+    /* For WebKit (Safari, Chrome, etc) */
+    background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
+    /* Mozilla,Firefox/Gecko */
+    background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
+    /* IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#A6DEFF) no-repeat;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
+}
+#main_menu  { width: auto; }
+#main_pr    { height: 300px; padding: 10px; background-color: #DCF0F7; }
+#main_qr    { height: 300px; padding: 10px; background-color: #C5EFFD; display: none; }
+#menu h2    { font-size: 13px; text-transform: uppercase; padding: 5px 10px; }
 #menu a:hover { background-color: gold; }
-#template img { margin: 5px 20px 0 0; float: left;}
+/*#template img { margin: 5px 20px 0 0; float: left;}
 #template { width: 380px; }
 #template ol { float: left; margin: 0; padding: 10px 10px 0 10px; }
 #template:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-#template .k-button { float: left; clear: left; margin: 5px 0 5px 12px; }
+#template .k-button { float: left; clear: left; margin: 5px 0 5px 12px; }*/
 /*=================================== MENU TOOL (END) =====================================*/
 
 /*=================================== WHITE TABLE =====================================*/
@@ -123,7 +133,7 @@ table.white-line-table th {
 	border-style: solid;
 	border-color: white;
 	background-color: transparent;
-        font-size: 13px;
+        font-size: 12px;
 }
         
 table.white-line-table td {
@@ -161,11 +171,30 @@ table.black-line-table td {
 	-moz-border-radius: 0px 0px 0px 0px; }
 /*=================================== BLACK TABLE (END) =====================================*/
 
-#treeview .k-sprite { background-image: url("/assets/coloricons-sprite.png"); }
-#treeview .rootfolder { background-image: url("/assets/treeview_folder.gif")}
-#treeview .folder { background-image: url("/assets/treeview_folder_open.gif")}
-#treeview .file { background-image:url("/assets/treeview_file.gif")}
-#treeview .remove_file { background-image:url("/assets/remove_file.png")}
+/*=================================== STANDARD TABLE WIDTH =====================================*/
+.std_no             { width: 30px; }
+.std_check          { width: 40px; }
+.std_item_status    { width: 90px; }
+.std_po_item_status { width: 100px; }
+.std_pid            { width: 150px; }
+.std_company        { width: 200px; }
+.std_desc           { width: 200px; }
+.std_eta            { width: 80px; }
+.std_qty            { width: 50px; }
+.std_um             { width: 30px; }
+.std_up             { width: 100px; }
+.std_total          { width: 100px; }
+.std_remark         { width: 100px; }
+.std_pr_no          { width: 50px; }
+/*=================================== STANDARD TABLE WIDTH (END) =====================================*/
+
+#treeview .k-sprite     { background-image: url("/assets/coloricons-sprite.png") }
+#treeview .rootfolder   { background-image: url("/assets/treeview_folder.gif") }
+#treeview .folder       { background-image: url("/assets/treeview_folder_open.gif") }
+#treeview .file         { background-image:url("/assets/treeview_file.gif") }
+#treeview .remove_file  { background-image:url("/assets/remove_file.png") }
+#treeview .kiv_file     { background-image:url("/assets/remove_file.png") }
+#treeview .kiv_folder   { background-image:url("/assets/remove_folder.png") }
 
 .approval_remark{ background-color:red; color:white; padding:5px; width: 450px; }
 
@@ -177,6 +206,10 @@ table.black-line-table td {
     width: 35px;
     height: 35px; }
 
+.opac_word {
+    color: grey;
+}
+
 #inline { display:none; }
 
 .search_link { 
@@ -187,9 +220,21 @@ table.black-line-table td {
     background-color: palegreen;
     color: brown;
     padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
     text-decoration: none;
     font-weight: bold;}
+
+#run_size, #generate, .generate_button { 
+    border-radius: 5px;  /* IE 9*/
+    -moz-border-radius: 5px;  /* Safari*/
+    -webkit-border-radius: 5px;  /* Chrome 9*/
+    background-color: lightgray;
+    padding: 5px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    width: 40px;
+    cursor: pointer; }
 
 .new_button { 
     border-radius: 5px;
@@ -198,7 +243,7 @@ table.black-line-table td {
     background-color: pink;
     color: blue;
     padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
     text-decoration: none;
     font-weight: bold;   
 }
@@ -216,39 +261,57 @@ legend { font-size: 15px; font-weight: bold; }
 .header_line    { background-color: lightsteelblue; }
 .odd_line       { background-color: wheat; }
 .even_line      { background-color: #e0f8f8; }
-.footer_line    { background-color: lightgrey; }
+.footer_line    { background-color: lightgrey; text-align: right; padding-right: 100px; }
 .green_line     { background-color: #00ff33; }
 .yellow_line    { background-color: yellow; }
-.bolder         { font-weight: bold; }
-.red_alert      { background-color: red; color: white; font-weight: bold; }
+.red_alert      { color: red; font-weight: bold; /*background-color: red; color: white; font-weight: bold;*/ }
 .red_urgent     { border: 3px solid red; }
+.red_text       { color: red; font-weight: bold; }
 .text_gray      { color: lightgray; }
-.highlight{ background: bisque; color: blue;}
-.cube35 { width: 35px; height: 35px; border:none; }
-.cube40 { width: 40px; height: 40px; border:none; }
-.cube50 { width: 40px; height: 40px; border:none; }
-.icon_tag { float:right; padding: 5px; }
-.underline { border-bottom: 1px solid black; }
+/*.highlight      { background: bisque; color: blue;}*/
+.cube35         { width: 35px; height: 35px; border:none; }
+.cube40         { width: 40px; height: 40px; border:none; }
+.cube50         { width: 40px; height: 40px; border:none; }
+.icon_tag       { float:right; padding: 5px; }
+.left_icon_tag  { float:left; padding: 5px; }
+.underline      { border-bottom: 1px solid black; }
+.direct_report  { display: none; }
+#get_size       { display:none; float: right; background-color: orange; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding-left:5px; padding-right: 5px; cursor: pointer; }
+.padding_10     { padding: 10px; }
+.check_highlight{ width: 25px; }
 
-.search_engine { display:none; background-color: lightgrey; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 10px;}
 
-.item_scroll {
-    border: 1px solid navajowhite;
-    overflow:auto;
-    width: 100%;
-    height: 280px;}
+.search_engine { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 97.8%; z-index: 50;}
 
 #fix_height { overflow:auto; height:650px; }
 
 .new_form {
     border: 1px solid grey;
     width: 100%;
+    height: 400px;
+    overflow: auto;
+}
+
+.new_qr_form {
+    border: 1px solid grey;
+    width: 99.80%;
     height: 400px;}
+
+.new_costingsheet {
+/*    border: 1px solid grey;*/
+    width: 100%;
+    height: 410px;}
+
+.item_scroll {
+    border: 1px solid gainsboro;
+    overflow: auto;
+    width: 99.7%;
+    height: 320px;}
 
 .fix_800x450 {
     border: 1px solid grey;
     overflow:auto;
-    height: 340px;
+    height: 345px;
     width: 100%;}
 
 .fix_800x600 {
@@ -264,10 +327,9 @@ legend { font-size: 15px; font-weight: bold; }
     width: 100%;}
 
 .fix_1024x800 {
-    border: 1px solid grey;
-/*    background-color: lightgrey;*/
+    border: 1px solid grey  ;
     overflow:auto;
-    height: 400px;
+    height: 540px;
     width: 100%;}
 
 .fix_po_show_listing {
@@ -305,4 +367,39 @@ legend { font-size: 15px; font-weight: bold; }
 
 tr.over td{ background: gold; }
 tr.selected_row td{ background: gold; }
+
+#paper_size {
+    position: absolute;
+    top: 100px;
+    left: 600px;
+    border: 1px solid blue;
+}
+
+#paper_size_show {
+    position: absolute;
+    top: 100px;
+    left: 600px;
+}
+
+#printing_size_show {
+    position: absolute;
+    top: 100px;
+    left: 1050px;
+}
+
+#company_strip{ width: 99.70%; }
+
+.placeholder { color: #999; font-style: italic; }
+
+#container{
+    border: 1px solid #aaa;
+    width: 100%;
+    height: 600px;
+    margin: auto;
+    overflow: auto;
+}
+
+.check_picture {
+    background-image: url("/assets/checking.png");
+}
 

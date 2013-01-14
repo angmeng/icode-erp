@@ -1,0 +1,30 @@
+<h2>The Transactions of Incoming Rejects</h2>
+
+<table width="100%">
+  <tr>
+    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
+  </tr>
+</table>
+
+<div><%= render "search_incoming_reject" %></div>
+
+<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS</strong></div>
+
+<% if @incoming_rejects.present? %>
+  <%= render "success_ir" %>
+<% else %>
+  Not Record Found.
+<% end %>
+
+<br/>
+
+<div class="digg_pagination">
+  <%= will_paginate @purchase_requisitions %>
+</div>
+
+
+
+
+
+
+

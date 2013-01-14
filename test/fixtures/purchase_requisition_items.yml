@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  purchase_requisition_id: 1
+  product_id: 1
+  trade_company_id: 1
+  description: MyText
+  quantity: 1
+  unit_measurement_id: 1
+  eta: MyString
+  purchase_order_no: MyString
+  unit_price: 1.5
+  remark: MyText
+
+two:
+  purchase_requisition_id: 1
+  product_id: 1
+  trade_company_id: 1
+  description: MyText
+  quantity: 1
+  unit_measurement_id: 1
+  eta: MyString
+  purchase_order_no: MyString
+  unit_price: 1.5
+  remark: MyText

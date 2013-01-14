@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     checkboxes
-#    @checkboxes = @user.roles.map(&:inventory_management_system_id)
   end
 
   def new
@@ -29,7 +28,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if params[:inventory_management_system].present?
-      building_user(params[:new_name], params[:department_id], params[:level], params[:password], params[:job_title], params[:report_to])
+      building_user(params[:new_name], params[:department_id], params[:level], params[:password], params[:job_title], params[:report_to], params[:direct_report])
       if @user.update_attributes(params[:user])
         @user.roles.delete_all
         @user.generate_role(params[:inventory_management_system])
@@ -89,7 +88,7 @@ class UsersController < ApplicationController
   def generator_user
     if params[:inventory_management_system].present?
       @user = User.new
-      building_user(params[:new_name], params[:department_id], params[:level].to_i, params[:password], params[:job_title], params[:report_to].to_i)
+      building_user(params[:new_name], params[:department_id], params[:level].to_i, params[:password], params[:job_title], params[:report_to].to_i, params[:direct_report])
       if @user.save
         @user.generate_role(params[:inventory_management_system])
         redirect_to users_path, :notice => "User has created successfully."
@@ -105,17 +104,22 @@ class UsersController < ApplicationController
     end
   end
   
-  def building_user(new_name, department_id, level, password, job_title, report_to)
+  def building_user(new_name, department_id, level, password, job_title, report_to, direct_report)
     @user.name = new_name
     @user.department_id = department_id
     @user.level = level
     @user.password = password unless password.blank?
     @user.job_title = job_title
     @user.report_to = report_to
+    if direct_report.present?
+      @user.direct_report = direct_report
+    else
+      @user.direct_report = 0
+    end
   end
   
   def new_user_entry
-#    render :layout => "application"
+
   end
   
   def kiv

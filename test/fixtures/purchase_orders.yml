@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  po_no: 1
+  po_date: 2012-05-25
+  trade_company_id: 1
+  purchase_by: 1
+  request_by: 1
+  currency_id: 1
+  trade_term_id: 1
+  transport_id: 1
+  revision: 1
+  tax: 1
+  verify: 1
+  user_id: 1
+  updated_by: 1
+
+two:
+  po_no: 1
+  po_date: 2012-05-25
+  trade_company_id: 1
+  purchase_by: 1
+  request_by: 1
+  currency_id: 1
+  trade_term_id: 1
+  transport_id: 1
+  revision: 1
+  tax: 1
+  verify: 1
+  user_id: 1
+  updated_by: 1

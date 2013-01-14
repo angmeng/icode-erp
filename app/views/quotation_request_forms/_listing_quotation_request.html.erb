@@ -1,0 +1,98 @@
+<table id="grid_h400" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <% if action_name == "pending_quotation" %>
+        <th title="Check & Submit">C&S</th>
+      <% elsif action_name == "signature_quotation" %>
+        <th>Task</th>
+      <% elsif action_name == "index" %>
+        <th>Sender Count</th>
+        <th>Customer PO No#</th>
+      <% elsif action_name == "feedback" %>
+        <th title="Check & Submit">C&S</th>
+        <th align="center" width="100">Customer PO No#</th>
+      <% end %>
+      <th>QR No.</th>
+      <th>Status</th>
+      <th>Customer company</th>
+      <th>Description</th>
+      <th>QRF date</th>
+      <th>Updated By</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% quotations.each do |quotation_request_form| %>
+      <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= quotation_request_form.id %>">
+        <td></td>
+        <% if action_name == "pending_quotation" %>
+          <td align="center"><%= check_box_tag "checkbox_quotation[]", quotation_request_form.id %></td>
+        <% elsif action_name == "signature_quotation" %>
+          <td align="center"><%= quotation_request_form.qr_status rescue '-' %></td>
+        <% elsif action_name == "index" %>
+          <td align="center"><%= quotation_request_form.send_count rescue '0' %></td>
+          <td align="center"><%= quotation_request_form.customer_po_no rescue '-' %></td>
+        <% elsif action_name == "feedback" %>
+          <td align="center"><%= check_box_tag "checkbox_quotation[]", quotation_request_form.id %></td>
+          <td>
+            <% if params[:checkbox_quotation].present? and params[:po_no].present? %>
+              <%= text_field_tag "po_no[#{quotation_request_form.id.to_s}][tfield]", params[:po_no]["#{quotation_request_form.id}"][:tfield] %>
+            <% else %>
+              <%= text_field_tag "po_no[#{quotation_request_form.id.to_s}][tfield]" %>
+            <% end %>
+          </td>
+        <% end %>
+          
+        <td align="center"><%= quotation_request_form.quotation_request_no rescue '0' %></td>
+        
+        <td align="center">
+          <% if quotation_request_form.status == QuotationRequestForm::PENDING %>
+            PENDING
+          <% elsif quotation_request_form.status == QuotationRequestForm::IN_PROCESS %>
+            IN PROCESS
+          <% elsif quotation_request_form.status == QuotationRequestForm::APPROVED %>
+            APPROVED
+          <% elsif quotation_request_form.status == QuotationRequestForm::KEEP_IN_VIEW %>
+            KEEP IN VIEW
+          <% elsif quotation_request_form.status == QuotationRequestForm::CONFIRMED %>
+            CONFIRMED
+          <% else %>
+            -
+          <% end %>
+        </td>
+        
+        <td>
+          <%# if action_name == "feedback" %>
+            <%# if quotation_request_form.trade_company_id.present? %>
+              <%#= hidden_field_tag :company_exist, "yes" %>
+              <%#= quotation_request_form.customer_name rescue '-' %>
+            <%# else %>
+              <%#= hidden_field_tag :company_exist, "no" %>
+              <!--span class="red_text">
+                <%#= quotation_request_form.customer_name rescue '-' %>
+              </span-->
+              <!--&nbsp;(<%#= link_to "Create Customer ID", new_trade_company_path(:option => "customer", :qr_id => quotation_request_form.id), :class => "iframe_800x600", "data-fancybox-type" => "iframe" %>)-->
+            <%# end %>
+          <%# else %>
+            <%#= quotation_request_form.customer_name rescue '-' %>
+          <%# end %>
+              
+          <% if quotation_request_form.trade_company_id.present? %>
+            <%= quotation_request_form.customer_name rescue '-' %>
+          <% else %>
+            <span class="red_text"><%= quotation_request_form.customer_name rescue '-' %></span>
+          <% end %>
+        </td>
+        
+        <td><%= quotation_request_form.description rescue '-' %></td>
+        
+        <td align="center"><%= quotation_request_form.qrf_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        
+        <td align="center"><%= quotation_request_form.user.name rescue '-' %></td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+  
+</table>

@@ -1,0 +1,20 @@
+<table id="grid_h495" class="white-line-table zebraLight">
+  <tr class="header_line">
+    <th class="check_highlight"></th>
+    <th>Code</th>
+    <th>Company Name</th>
+    <th>Phone No.</th>
+    <th>Email</th>
+  </tr>
+      
+  <% trade_company.each do |tc| %>
+    <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= tc.id %>">
+      <td></td>
+      <td align="center"><%= tc.code rescue '-' %></td>
+      <td><%= tc.name rescue '-' %></td>
+      <td align="center"><%= tc.tel_area_code_one %>-<%= tc.tel_no_1 %></td>
+      <td align="center"><%= tc.email rescue'-' %></td>
+    </tr>
+  <% end %>
+        
+</table>

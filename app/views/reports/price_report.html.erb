@@ -1,0 +1,58 @@
+<h2>Price Report</h2>
+ 
+<div>
+<fieldset>
+
+	<table>
+		<%= form_for @price_report , :url => price_report_reports_path  do |f| %>
+		<tr>
+			<td>Company Code - Name :
+			<%= f.text_field :price_control_trade_company_code_contains , :size => 9 %> - 
+			<%= f.text_field :price_control_trade_company_name_contains , :size => 9 %></td>
+			<td></td>
+		</tr>
+		
+		<tr>
+			<td><%= f.submit "Search" %></td>
+		</tr>
+			<% end %>
+	</table>
+	
+
+	<table class="table table-striped" >
+		<thead>
+			<tr>
+				<th>Product code</th>
+				<th>Part No.</th>
+				<th>Status</th>
+				<th>Reference</th>
+				<th>Old Unit Price</th>
+				<th>Old Eff Date</th>
+				<th>New Unit Price</th>
+				<th>New Eff Price</th>
+			</tr>
+		</thead>	
+
+	
+	<tbody>
+	<% @price_report.each do |pri| %>
+	<tr>
+		
+		<td><%= pri.product_product_code rescue '-'%></td>
+		<td><%= pri.part_no rescue '-'%></td>
+		<td><%= pri.status rescue '-'%></td>
+		<td><%= pri.price_control_reference rescue '-'%></td>
+		<td><%= pri.old_unit_price rescue '-'%></td>
+		<td><%= pri.old_eff_date rescue '-'%></td>
+		<td><%= pri.new_unit_date rescue '-'%></td>
+		<td><%= pri.new_eff_date rescue '-'%></td>
+	</tr>
+	</tbody>
+	<% end %>
+	 
+	</table>
+
+	
+		
+	</fieldset>
+</div>

@@ -1,0 +1,52 @@
+<table>
+  <tr>
+    <td width="150"><b>Die Cut</b></td>
+    <td>
+      <% if @quotation_request_form.selection_die_cuts.present? %>
+        <%= check_box_tag "die_cut[]", QuotationRequestForm::BOX_OUTLINE, @die_cut.include?(QuotationRequestForm::BOX_OUTLINE) %><%= QuotationRequestForm::BOX_OUTLINE %>
+        <%= check_box_tag "die_cut[]", QuotationRequestForm::TRIMING, @die_cut.include?(QuotationRequestForm::TRIMING) %><%= QuotationRequestForm::TRIMING %>
+        <%= check_box_tag "die_cut[]", QuotationRequestForm::WINDOW, @die_cut.include?(QuotationRequestForm::WINDOW) %><%= QuotationRequestForm::WINDOW %>
+      <% else %>
+        <%= check_box_tag "die_cut[]", QuotationRequestForm::BOX_OUTLINE, false, :disabled => true %><%= QuotationRequestForm::BOX_OUTLINE %>
+        <%= check_box_tag "die_cut[]", QuotationRequestForm::TRIMING, false, :disabled => true %><%= QuotationRequestForm::TRIMING %>
+        <%= check_box_tag "die_cut[]", QuotationRequestForm::WINDOW, false, :disabled => true %><%= QuotationRequestForm::WINDOW %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Type of Die Cut</b></td>
+    <td>
+      <%= f.radio_button("die_cut_type", QuotationRequestForm::INTERLOCK, :disabled => true) %><%= QuotationRequestForm::INTERLOCK %>
+      <%= f.radio_button("die_cut_type", QuotationRequestForm::FLAT, :disabled => true) %><%= QuotationRequestForm::FLAT %>
+      <%= f.radio_button("die_cut_type", QuotationRequestForm::BUTTERFLY, :disabled => true) %><%= QuotationRequestForm::BUTTERFLY %>
+      <%= f.radio_button("die_cut_type", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "die_cut_type_other",  :id => "other_die_cut", :size => 20, :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Window Shape</b></td>
+    <td>
+      <%= f.radio_button("window_shape", QuotationRequestForm::RECTANGLE, :disabled => true) %><%= QuotationRequestForm::RECTANGLE %>
+      <%= f.radio_button("window_shape", QuotationRequestForm::KIDNEY, :disabled => true) %><%= QuotationRequestForm::KIDNEY %>
+      <%= f.radio_button("window_shape", QuotationRequestForm::OVAL, :disabled => true) %><%= QuotationRequestForm::OVAL %>
+      <%= f.radio_button("window_shape", QuotationRequestForm::TRIANGLE, :disabled => true) %><%= QuotationRequestForm::TRIANGLE %><br/>
+      <%= f.radio_button("window_shape", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_shape_other", :id => "window_shape_other", :size => 13, :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Mould No.</b></td>
+    <td id="mould_no">
+      <input id="mould_no_" size="10" type="text" name="mould_no[1][val]"/>
+      
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Window No.</b></td>
+    <td id="window_no">
+      <input id="window_no_" size="10" type="text" name="window_no[1][val]"/>
+    </td>
+  </tr>
+</table>

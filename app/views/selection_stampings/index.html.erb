@@ -1,0 +1,25 @@
+<h1>Listing selection_stampings</h1>
+
+<table>
+  <tr>
+    <th>Stamping type</th>
+    <th>Stamping other</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @selection_stampings.each do |selection_stamping| %>
+  <tr>
+    <td><%= selection_stamping.stamping_type %></td>
+    <td><%= selection_stamping.stamping_other %></td>
+    <td><%= link_to 'Show', selection_stamping %></td>
+    <td><%= link_to 'Edit', edit_selection_stamping_path(selection_stamping) %></td>
+    <td><%= link_to 'Destroy', selection_stamping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Selection stamping', new_selection_stamping_path %>

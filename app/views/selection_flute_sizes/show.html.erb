@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Flute width:</b>
+  <%= @selection_flute_size.flute_width %>
+</p>
+
+<p>
+  <b>Flute length:</b>
+  <%= @selection_flute_size.flute_length %>
+</p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_flute_size.quotation_request_form_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_flute_size_path(@selection_flute_size) %> |
+<%= link_to 'Back', selection_flute_sizes_path %>

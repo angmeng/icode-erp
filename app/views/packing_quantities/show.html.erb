@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @packing_quantity.quantity %>
+</p>
+
+<p>
+  <b>Per:</b>
+  <%= @packing_quantity.per %>
+</p>
+
+
+<%= link_to 'Edit', edit_packing_quantity_path(@packing_quantity) %> |
+<%= link_to 'Back', packing_quantities_path %>

@@ -1,0 +1,102 @@
+<table id="grid_h495" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+        <th class="std_no">No.</th>
+        <th class="std_po_item_status">Item Status</th>
+        <th class="std_pr_no">PR NO.#</th>
+        <th class="std_pid">Product ID</th>
+        <th class="std_company">Vendor</th>
+        <th class="std_desc">Description (in Detail)</th>
+        <th class="std_eta">ETA</th>
+        <th class="std_qty">Qty</th>
+        <th class="std_um">U/M</th>
+        <th class="std_up">Unit Price</th>
+        <th class="std_total">Total</th>
+        <th class="std_remark">Remark</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% pr.each_with_index do |p, index| %>
+    
+        <% if p.temporary_sources.present? %> 
+          <% if p.temporary_sources.find_by_select_vendor(TRUE).present? %>
+            <% source = p.temporary_sources.find_by_select_vendor(TRUE) %>
+          <% end %>
+        <% end %>
+            
+        <% if p.urgent == TRUE %>
+          <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
+          <% else %>
+            <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
+          <% end %>
+        <% else %>
+          <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
+        <% end %>
+            <td></td>
+          <td align="center"><%= index + 1 %></td>
+          <td align="center">
+            <% if p.maintenance == TRUE and p.proposed_vendor == FALSE and p.approval_proposed == FALSE %>
+              PR-Repair
+            <% elsif p.maintenance == FALSE and p.proposed_vendor == FALSE and p.approval_proposed == FALSE  %>
+              Proposed Vendor
+            <% elsif p.maintenance == FALSE and p.proposed_vendor == TRUE and p.approval_proposed == FALSE %>
+              Vendor Selection
+            <% elsif p.maintenance == FALSE and p.proposed_vendor == TRUE and p.approval_proposed == TRUE %>
+              After Vendor Selection
+            <% else %>
+              -
+            <% end %>
+          </td>
+          <td align="center"><%= p.purchase_requisition.pr_no rescue '-' %></td>
+          <td align="center">
+            <% if p.product_id? %>
+              <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                <%= render '/product_categories/join_product_category', :pc => p %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% unless p.maintenance == TRUE %>
+              <% if source.present? %>
+                <% if company = TradeCompany.find_by_name(source.company_name) %>
+                  <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                    <%= source.company_name rescue '-' %>
+                  <% end %>
+                <% else %>
+                  <span class="red_alert"><%= source.company_name rescue '-' %></span>
+                <% end %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= simple_format(p.description) %></td>
+          <td align="center">
+            <% if p.eta < Date.today %>
+              <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+            <% else %>
+              <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
+            <% end %>
+          </td>
+          <td align="center"><%= p.quantity %></td>
+          <td align="center"><%= p.unit_measurement.code rescue '-' %></td>
+          
+          <% if p.maintenance == TRUE %>
+            <td></td><td></td>
+          <% else %>
+            <% if source.present? %>
+              <td align="right"><%= four_precision(source.unit_price) %></td>
+              <td align="right"><%= iproduct(p.quantity, source.unit_price) %></td>
+            <% end %>
+          <% end %>
+              
+          <% if p.remark.present? %>
+            <td><%= p.remark rescue '-' %></td>
+          <% else %>
+            <td align="center">-</td>
+          <% end %>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

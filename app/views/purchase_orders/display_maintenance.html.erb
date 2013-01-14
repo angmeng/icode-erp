@@ -1,0 +1,57 @@
+<%= form_tag add_vendor_purchase_orders_path, :method => :post do %>
+  <% if @pr_item.present? %>
+    <%= hidden_field_tag "purchase_requisition_item_id", @pr_item.id %>
+  <% else %>
+    <%= hidden_field_tag "purchase_requisition_item_id", params[:purchase_requisition_item_id] %>
+  <% end %>
+
+  <div style="background-color:blue"><strong style="color:white;">MAINTENANCE</strong></div>
+  
+  <div class="fix_800x450">
+    
+    <% if @pr_item.temporary_sources.present? %> 
+      <% if @pr_item.temporary_sources.find_by_select_vendor(TRUE).present? %>
+        <% source = @pr_item.temporary_sources.find_by_select_vendor(TRUE) %>
+      <% end %>
+    <% end %>
+    
+    <table>
+      <tr>
+        <td width="200"><b>Supplier Name</b></td>
+        <%# if @pr_item.Xtemporary_sources.present? %>
+          <!--td><%#= text_field_tag "trade_company_id", @pr_item.temporary_sources.first.company_name, :style => "width:380px;", :class => "autoComplete_trade_company_#{@pr_item.id.to_s}" %></td-->
+        <%# else %>
+          <!--td><%#= select_tag "trade_company_id", options_from_collection_for_select(trade_company_vendor, :name, :name, params[:trade_company_id]), :style => "width: 500px", :id => "combox_company", :include_blank => true %></td-->
+        <%# end %>
+          
+        <% if source.present? %>
+          <td><%= text_field_tag :company_name, source.company_name, :style => "width:400px;", :id => "autoComplete_trade_companies" %></td>
+        <% else %>
+          <td><%= text_field_tag :company_name, params[:company_name], :style => "width:400px;", :id => "autoComplete_trade_companies" %></td>
+        <% end %>
+      </tr>
+
+      <tr>
+        <td><b>Estimated Price</b></td>
+        <% if source.present? %>
+          <td><%= text_field_tag :unit_price, source.unit_price, :size => 8 %></td>
+        <% else %>
+          <td><%= text_field_tag :unit_price, params[:unit_price], :size => 8 %></td>
+        <% end %>
+      </tr>
+      
+      <% if @pr_item.approval_remark.present? %>
+        <tr>
+          <td>Vendor Selection wrote the remark:</td>
+          <td class="red_alert"><%= @pr_item.approval_remark %></td>
+        </tr>
+      <% end %>
+      
+    </table>
+  </div>
+  
+  <div class="icon_tag">
+    <%= link_save_button  %>
+    <%= link_close_button %>
+  </div>
+<% end %>

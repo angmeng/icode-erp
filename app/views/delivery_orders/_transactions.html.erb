@@ -1,0 +1,41 @@
+<% if list_do.present? %>
+  <table>
+    <tr>
+      <th>Do no</th>
+      <th>Trade company</th>
+      <th>Sales tax</th>
+      <th>Type of sales</th>
+      <th>Tport c</th>
+      <th>Currency</th>
+      <th>Bk two</th>
+      <th>Trade term</th>
+      <th>Updated by</th>
+      <th>Transport</th>
+      <th>Sales rep</th>
+      <th>Sales tax exemption</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% list_do.each do |delivery_order| %>
+    <tr>
+      <td><%= delivery_order.do_no %></td>
+      <td><%= delivery_order.trade_company_id %></td>
+      <td><%= delivery_order.sales_tax %></td>
+      <td><%= delivery_order.type_of_sales_id %></td>
+      <td><%= delivery_order.tport_c %></td>
+      <td><%= delivery_order.currency_id %></td>
+      <td><%= delivery_order.bk_two %></td>
+      <td><%= delivery_order.trade_term_id %></td>
+      <td><%= delivery_order.updated_by %></td>
+      <td><%= delivery_order.transport_id %></td>
+      <td><%= delivery_order.sales_rep %></td>
+      <td><%= delivery_order.sales_tax_exemption %></td>
+      <td><%= link_to 'Show', delivery_order %></td>
+      <td><%= link_to 'Edit', edit_delivery_order_path(delivery_order) %></td>
+      <td><%= link_to 'Destroy', delivery_order, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

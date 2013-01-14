@@ -1,0 +1,62 @@
+
+  <table id="grid_h495" class="white-line-table zebraLight">
+    <tr class="header_line">
+        <th class="check_highlight"></th>
+        <th>Received?</th>
+        <th>PR No.</th>
+        <th>PO No.</th>
+        <th>PO Date</th>
+        <th>Vendor</th>
+        <th>Items</th>
+        <th>Purchased By</th>
+        <th>Requested By</th>
+        <th>Currency</th>
+        <th>Trade Term</th>
+        <th>Transport</th>
+        <th>Rev.</th>
+        <th>Tax%</th>
+        <%#*<th>Action</th>%>
+    </tr>
+
+    <% success.each do |item| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
+        <td></td>
+        <td align="center">
+          <% if item.purchase_order_item_lines.present? %>
+            <% if item.purchase_order_item_lines.find_all_by_checked(TRUE) %>
+              <%= item.purchase_order_item_lines.find_all_by_checked(TRUE).count rescue '-' %>
+            <% else %>
+              NO
+            <% end %>
+          <% end %>
+        </td>
+        <td align="center">
+          <%= link_to(item.purchase_requisition.pr_no, purchase_requisition_path(item.purchase_requisition_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" ) %>
+        </td>
+        <td align="center"><%= item.po_no rescue '-' %></td>
+        <td align="center"><%= item.created_at.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td>
+          <% if item.trade_company_id? %>
+            <%= link_to(trade_company_path(item.trade_company_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+              [<%= item.trade_company.code rescue '-' %>] <%= item.trade_company.name rescue '-' %>
+            <% end %>
+          <% else %>
+              -
+          <% end %>
+        </td>
+        <td align="center"><%= item.purchase_order_item_lines.count rescue '-' %></td>
+        <td align="center"><%= User.find_by_id(item.purchase_by).name rescue '-' %></td>
+        <td align="center"><%= User.find_by_id(item.request_by).name rescue '-' %></td>
+        <td align="center">
+          <span title="<%= item.currency.description rescue ' ' %>">
+            <%= item.currency.name rescue '-' %>
+          </span>
+        </td>
+        <td align="center"><%= item.trade_term.name rescue '-' %></td>
+        <td align="center"><%= item.transport.name rescue '-' %></td>
+        <td align="center"><%= item.revision rescue '-' %></td>
+        <td align="center"><%= item.tax rescue '-' %></td>
+      </tr>
+    <% end %>
+  </table>
+

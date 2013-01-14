@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  incoming_reject_no: 1
+  bk_one: 1
+  purpose: 1
+  vendor_delivery_no: MyString
+  updated_by: 1
+  purchase_requisition_item_id: 1
+  returned_qty: 1
+  order_qty: 1
+  job_order_no: 1
+  balance_qty: 1
+  current_stock: 1
+  client_part_no: MyString
+
+two:
+  incoming_reject_no: 1
+  bk_one: 1
+  purpose: 1
+  vendor_delivery_no: MyString
+  updated_by: 1
+  purchase_requisition_item_id: 1
+  returned_qty: 1
+  order_qty: 1
+  job_order_no: 1
+  balance_qty: 1
+  current_stock: 1
+  client_part_no: MyString

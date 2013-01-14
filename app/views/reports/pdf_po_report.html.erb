@@ -1,0 +1,51 @@
+<h2>Purchase Order Report</h1>
+
+<div>
+  <% if @po_detail_report.present? %>
+  <% @po_detail_report.each do |p | %>
+  <fieldset>
+     
+      <div style="float:left">
+        <h3>Vendor : <u><%= p.trade_company.name %></u></h3>
+      </div>
+    
+      <div style="float:right;">
+        Purchase By. : <%= p.purchase_by.name rescue '-' %>
+      </div>
+      <div style="float:right;">
+        Request By. : <%= p.request_by.name rescue '-' %>
+      </div>
+      
+    
+
+  	<table class="table table-striped" border="1">
+  		<thead>
+  			<tr>
+  				<th>PO No.</th>
+  				
+  				<th>Order date</th>
+  				<th>Currency</th>
+  				<th>Term</th>
+  				<th>Transport</th>
+  				
+  			</tr>
+  		</thead>
+      
+  	<tbody>
+  		<tr>
+  			<td><%= p.po_no rescue'-' %></td>
+  			<td><%= p.po_date rescue '-' %></td>
+  			<td><%= p.currency.name rescue '-' %></td>
+  			<td><%= p.trade_term.name rescue '-' %></td>
+  			<td><%= p.transport.name rescue '-' %></td>
+  			
+  		</tr>
+  	</tbody>
+  	
+    </table>
+   
+  </fieldset>
+
+   <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,51 @@
+<div style="background-color:blue"><strong style="color:white;">NEW PURCHASE REQUISITION APPLICATION</strong></div>
+
+<table width="100%" class="header_content">
+  <tr>
+    <td><h3>Pending PR Items</h3></td>
+    <td align="right">
+      <table>
+        <tr>
+          <td><b>Current PR No. : </b></td>
+          <td align="right"><%= company.sn_purchase_req_no + 1 %></td>
+        </tr>
+        <tr>
+          <td><b>PR Date : </b></td>
+          <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<div class="new_form">
+    <% if @pending.present? %>
+      <%= render 'form' %>
+    <% end %>
+        
+    <div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:400px;height:250px;'>
+      <div align="center">
+        <h3>New Item Request?</h3>
+        <br/>
+        <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
+        <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
+      </div>
+    </div>
+</div>
+
+<div style="float:left; padding: 5px;">
+  <% if roles.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS) %>
+    <%= link_to "Add Item", "#", :class => "pr_items_click k-button" %>
+  <% else %>
+    Add Item
+  <% end %>
+</div>
+
+<%= render "action_purchase_requisition_new" %>
+
+<!--div id="load_window" style="display: none; "></div-->
+<%#= link_to image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "cube35"), "#", :title => "New Purchase Requisition Item", :id => "open_window", :connect_to => new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES) %>
+
+
+
+

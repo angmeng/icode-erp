@@ -1,0 +1,49 @@
+<%= form_for(@receive_note_item) do |f| %>
+  <% if @receive_note_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@receive_note_item.errors.count, "error") %> prohibited this receive_note_item from being saved:</h2>
+
+      <ul>
+      <% @receive_note_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :receive_note_id %><br />
+    <%= f.number_field :receive_note_id %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase_order_id %><br />
+    <%= f.number_field :purchase_order_id %>
+  </div>
+  <div class="field">
+    <%= f.label :received_quantity %><br />
+    <%= f.number_field :received_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :order_quantity %><br />
+    <%= f.number_field :order_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_quantity %><br />
+    <%= f.number_field :balance_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :current_stock %><br />
+    <%= f.number_field :current_stock %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_part %><br />
+    <%= f.text_field :vendor_part %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

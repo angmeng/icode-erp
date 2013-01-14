@@ -1,0 +1,35 @@
+<div style="background-color:blue"><strong style="color:white;">LISTING PRODUCT PRICE CONTROLS - KIV</strong></div>
+
+<table id="grid_h495" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>PP No</th>
+      <th>PP date</th>
+      <th>Trade Company</th>
+      <th>Reference</th>
+      <th>Currency</th>
+      <th>User</th>
+      <!--th>Status</th-->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @price_controls.present? %>
+      <% @price_controls.each do |price_control| %>
+        <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= price_control.id %>">
+          <td></td>
+          <td align="center"><%= price_control.pp_no rescue '-' %></td>
+          <td align="center"><%= price_control.pp_date.strftime("%d-%m-%Y") %></td>
+          <td>[<%= price_control.trade_company.code rescue '-' %>] <%= price_control.trade_company.name rescue '-' %></td>
+          <td align="center"><%= price_control.reference rescue '-' %></td>
+          <td align="center"><%= price_control.currency.name rescue '-' %></td>
+          <td align="center"><%= price_control.user.name rescue '-' %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= render "action_price_control_kiv" %> 

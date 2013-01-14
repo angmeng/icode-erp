@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <td width="150"><b>Type of Glueing</b></td>
+    <td>
+      <%= check_box_tag "glueing[]", "1 side", false, :disabled => true %> 1 side
+      <%= check_box_tag "glueing[]", "2 side", false, :disabled => true %> 2 side
+      <%= check_box_tag "glueing[]", "4P", false, :disabled => true %> 4P
+      <%= check_box_tag "glueing[]", "6P", false, :disabled => true %> 6P
+      <%= check_box_tag "glueing[]", "LB", false, :disabled => true %> <span title="Lock Bottom">LB</span>
+      <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS, false, :disabled => true %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag "glueing_text", params[:glueing_text], :size => 8, :disabled => true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Glueing Material</b></td>
+    <td><%= f.text_field :glueing_material, :disabled => true %></td>
+    <td></td>
+  </tr>
+</table>

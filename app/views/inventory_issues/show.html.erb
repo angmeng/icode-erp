@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @inventory_issue.description %>
+</p>
+
+<p>
+  <b>In out:</b>
+  <%= @inventory_issue.in_out %>
+</p>
+
+
+<%= link_to 'Edit', edit_inventory_issue_path(@inventory_issue) %> |
+<%= link_to 'Back', inventory_issues_path %>

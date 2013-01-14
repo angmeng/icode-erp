@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pp_no: 1
+  pp_date: 2012-11-10
+  trade_company_id: 1
+  reference: MyString
+  currency_id: 1
+  user_id: 1
+  status: MyString
+
+two:
+  pp_no: 1
+  pp_date: 2012-11-10
+  trade_company_id: 1
+  reference: MyString
+  currency_id: 1
+  user_id: 1
+  status: MyString

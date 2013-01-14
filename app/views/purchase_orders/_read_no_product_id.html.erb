@@ -1,0 +1,25 @@
+<table id="grid_h495" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Description</th>
+      <th>U/M</th>
+      <th>Unit Price</th>
+      <th>Supplier Name</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% product_id.each do |prod| %>
+
+        <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="purchase_requisition_items" rowsId="<%= prod.id %>">
+            <td></td>
+            <td><%= simple_format(prod.description) rescue '-' %></td>
+            <td align="center"><%= prod.unit_measurement.code rescue '-' %></td>
+            <td align="center"><%= prod.unit_price rescue '-' %></td>
+            <td>[<%= prod.trade_company.code rescue '-' %>] <%= prod.trade_company.name rescue "-" %></td>
+        </tr>
+        
+    <% end %>
+  </tbody>  
+</table>

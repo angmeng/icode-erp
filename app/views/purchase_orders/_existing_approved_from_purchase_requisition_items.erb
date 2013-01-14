@@ -1,0 +1,37 @@
+<table id="grid_h495" class="white-line-table zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th>PR No.</th>
+      <th>Vendor</th>
+      <th>Sales Tax Exemption</th>
+      <th>Items</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% pending.each do |k, v| %>
+      <% if k.present? %>
+        <% trade_company = TradeCompany.find(k) %>
+
+        <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= k %>">
+            <td align="center"><%= v.first.purchase_requisition.pr_no rescue '-' %></td>
+            <td>[<%= trade_company.code rescue '-' %>] <%= trade_company.name rescue "-" %></td>
+            <td align="center">
+              <% if trade_company.sales_tax_exemption.present? %>
+                YES
+              <% else %>
+                NO
+              <% end %>
+            </td>
+            <td align="center"><%= v.size rescue '0' %></td>
+            <td align="right">
+              <% arr = [] %>
+              <% v.each {|vv| arr << vv.quantity * vv.unit_price } %>
+              <%= two_precision(arr.sum()) %>
+            </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>  
+</table>

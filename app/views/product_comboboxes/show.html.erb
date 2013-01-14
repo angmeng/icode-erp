@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Product:</b>
+  <%= @product_combobox.product_id %>
+</p>
+
+<p>
+  <b>Product code:</b>
+  <%= @product_combobox.product_code %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_combobox_path(@product_combobox) %> |
+<%= link_to 'Back', product_comboboxes_path %>

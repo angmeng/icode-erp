@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_order_no: 1
+  trade_company_id: 1
+  purchase_order_no: MyString
+  sales_rep: MyString
+  currency_id: 1
+  trade_term_id: 1
+  revision: 1
+  purpose: 1
+  updated_by: 1
+
+two:
+  sales_order_no: 1
+  trade_company_id: 1
+  purchase_order_no: MyString
+  sales_rep: MyString
+  currency_id: 1
+  trade_term_id: 1
+  revision: 1
+  purpose: 1
+  updated_by: 1

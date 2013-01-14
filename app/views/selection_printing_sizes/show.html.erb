@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_printing_size.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @selection_printing_size.length %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @selection_printing_size.width %>
+</p>
+
+<p>
+  <b>Ups:</b>
+  <%= @selection_printing_size.ups %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_printing_size_path(@selection_printing_size) %> |
+<%= link_to 'Back', selection_printing_sizes_path %>

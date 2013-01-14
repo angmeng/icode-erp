@@ -1,0 +1,45 @@
+<h2>Listing Formulations</h2>
+
+<%= link_to 'New Formulation', new_formulation_path, :class => "iframe_800x450", "data-fancybox-type" => "iframe" %><br/><br/>
+
+<div>
+  Converting the formulation
+  <%= form_tag formulations_path, :method => :get do %>
+    From: <%= select_tag :from_um, options_from_collection_for_select(unit_measurement, :id, :code, params[:from_um]), :include_blank => true %>
+    To: <%= select_tag :to_um, options_from_collection_for_select(unit_measurement, :id, :code, params[:to_um]), :include_blank => true %>
+    Current Value: <%= text_field_tag :current_value, params[:current_value]%><br/>
+    Convert Value: <%= params[:convert_value] %><br/><br/>
+    <%= submit_tag "Convert", :name => nil %>
+  <% end %>
+</div>
+
+<br/><br/>
+
+<table class="white-line-table">
+  <tr class="header_line">
+    <th>Per value</th>
+    <th>From unit measurement</th>
+    <th>Convert value</th>
+    <th>To unit measurement</th>
+    <th>Action</th>
+  </tr>
+
+<% @formulations.each do |formulation| %>
+  <tr class="<%= cycle('odd_line', 'even_line') %>">
+    <td align="center"><%= formulation.per_value %></td>
+    <td align="center"><%= um_code(formulation.from_unit_measurement_id) %></td>
+    <td align="center"><%= formulation.convert_value %></td>
+    <td align="center"><%= um_code(formulation.to_unit_measurement_id) %></td>
+    <td align="center">
+      <%= link_show_800x450(formulation) %>
+      <%= link_edit_800x450(edit_formulation_path(formulation)) %>
+      <%= link_recycle(formulation) %>
+      <%= not_link_printable %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

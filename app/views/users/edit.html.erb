@@ -3,19 +3,11 @@
 <%= form_tag @user, :url => edit_user_path(@user), :method => :put do  %>
   <div id="user_strip">
     <ul>
-        <li class="k-state-active">
-          User Account
-        </li>
-        <li>
-          Inventory Management System
-        </li>
+      <li class="k-state-active">User Account</li>
+      <li>Inventory Management System</li>
     </ul>
-    <div>
-      <%= render "edit_user_account" %>
-    </div>
-    <div>
-      <%= render "management" %>
-    </div>
+    <div><%= render "edit_user_account" %></div>
+    <div><%= render "management" %></div>
   </div>
   <div class="icon_tag">
     <%= link_save_button %>

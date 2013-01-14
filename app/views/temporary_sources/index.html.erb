@@ -1,0 +1,29 @@
+<h1>Listing temporary_sources</h1>
+
+<table>
+  <tr>
+    <th>Company name</th>
+    <th>Select vendor</th>
+    <th>Unit price</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @temporary_sources.each do |temporary_source| %>
+  <tr>
+    <td><%= temporary_source.company_name %></td>
+    <td><%= temporary_source.select_vendor %></td>
+    <td><%= temporary_source.unit_price %></td>
+    <td><%= temporary_source.remark %></td>
+    <td><%= link_to 'Show', temporary_source %></td>
+    <td><%= link_to 'Edit', edit_temporary_source_path(temporary_source) %></td>
+    <td><%= link_to 'Destroy', temporary_source, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Temporary source', new_temporary_source_path %>

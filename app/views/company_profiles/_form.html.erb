@@ -1,0 +1,164 @@
+<%= form_for(@company_profile) do |f| %>
+
+  <table>
+    <tr>
+      <td width="150"><%= f.label :name, "Company's Name *"%></td>
+      <td><%= f.text_field :name, :size => 50 %></td>
+    </tr>
+    <tr>
+      <td width="150"><%= f.label :address, "Address *" %></td>
+      <td><%= f.text_area :address, :rows => 2 %></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td width="150"><%= f.label :tel_no_1, "Tel1 No. *" %></td>
+      <td width="150"><%= f.text_field :tel_no_1 %></td>
+
+      <td width="150"><%= f.label :tel_no_2, "Tel2 No. *" %></td>
+      <td width="150"><%= f.text_field :tel_no_2 %></td>
+
+      <td width="150"><%= f.label :fax_no, "Fax No. *" %></td>
+      <td width="150"><%= f.text_field :fax_no %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :sales_tax_no, "Sales Tax No. *" %></td>
+      <td><%= f.text_field :sales_tax_no %></td>
+
+      <td><%= f.label :reg_no, "Reg. No. *" %></td>
+      <td><%= f.text_field :reg_no %></td>
+    </tr>
+  </table>
+
+  <hr/>
+
+  <table>
+    <tr>
+      <td>
+            <table>
+              <tr>
+                <td width="150"><%= f.label :sn_sales_order_no, "Sales Order No." %></td>
+                <td width="150"><%= f.text_field :sn_sales_order_no, :style => "text-align:right;", :class => "company_sales_1", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_purchase_order_no, "Purchase Order No." %></td>
+                <td><%= f.text_field :sn_purchase_order_no, :style => "text-align:right;", :class => "company_sales_2", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_deliver_order_no, "Deliver Order No." %></td>
+                <td><%= f.text_field :sn_deliver_order_no, :style => "text-align:right;", :class => "company_sales_3", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_receive_note_no, "Receive Note No." %></td>
+                <td><%= f.text_field :sn_receive_note_no, :style => "text-align:right;", :class => "company_sales_4", :size => 10 %></td>
+              </tr>
+
+              <tr><td>&nbsp;</td></tr>
+
+              <tr>
+                <td><%= f.label :sn_credit_note_no, "Credit Note No." %></td>
+                <td><%= f.text_field :sn_credit_note_no, :style => "text-align:right;", :class => "company_sales_9", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_debit_note_no, "Debit Note No." %></td>
+                <td><%= f.text_field :sn_debit_note_no, :style => "text-align:right;", :class => "company_sales_10", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_billing_order_no, "Billing Order No." %></td>
+                <td><%= f.text_field :sn_billing_order_no, :style => "text-align:right;", :class => "company_sales_11", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_purchase_req_no, "Purchase Req No." %></td>
+                <td><%= f.text_field :sn_purchase_req_no, :style => "text-align:right;", :class => "company_sales_12", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_product_price_no, "Product Price No." %></td>
+                <td><%= f.text_field :sn_product_price_no, :style => "text-align:right;", :class => "company_sales_13", :size => 10 %></td>
+              </tr>
+
+              <tr><td>&nbsp;</td></tr>
+
+              <tr>
+                <td><%= f.label :sn_receipt_no, "Receipt No." %></td>
+                <td><%= f.text_field :sn_receipt_no, :style => "text-align:right;", :class => "company_sales_19", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_bankin_slip_no, "Bank-In Slip No." %></td>
+                <td><%= f.text_field :sn_bankin_slip_no, :style => "text-align:right;", :class => "company_sales_20", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_product_id_no, "Product I/D No." %></td>
+                <td><%= f.text_field :sn_product_id_no, :style => "text-align:right;", :class => "company_sales_23", :size => 10 %></td>
+              </tr>
+            </table>
+      </td>
+
+      <td>
+            <table>
+              <tr>
+                <td width="150"><%= f.label :sn_transfer_slip_no, "Transfer Slip No." %></td>
+                <td><%= f.text_field :sn_transfer_slip_no, :style => "text-align:right;", :class => "company_sales_5", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_store_voucher_no, "Store Voucher No." %></td>
+                <td><%= f.text_field :sn_store_voucher_no, :style => "text-align:right;", :class => "company_sales_6", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_incoming_reject_no, "Incoming Reject No." %></td>
+                <td><%= f.text_field :sn_incoming_reject_no, :style => "text-align:right;", :class => "company_sales_7", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_outgoing_reject_no, "Outgoing Reject No." %></td>
+                <td><%= f.text_field :sn_outgoing_reject_no, :style => "text-align:right;", :class => "company_sales_8", :size => 10 %></td>
+              </tr>
+
+              <tr><td>&nbsp;</td></tr>
+
+              <tr>
+                <td><%= f.label :sn_job_order_no, "Job Order No." %></td>    
+                <td><%= f.text_field :sn_job_order_no, :style => "text-align:right;", :class => "company_sales_14", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_shipment_schedule, "Shipment Schedule #" %></td>
+                <td><%= f.text_field :sn_shipment_schedule, :style => "text-align:right;", :class => "company_sales_15", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_scrap_sheet_no, "Scrap Sheet No." %></td>
+                <td><%= f.text_field :sn_scrap_sheet_no, :style => "text-align:right;", :class => "company_sales_16", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_receiving_instr_no, "Receiving Instr No." %></td>
+                <td><%= f.text_field :sn_receiving_instr_no, :style => "text-align:right;", :class => "company_sales_17", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_shipping_instr_no, "Shipping Instr No." %></td>
+                <td><%= f.text_field :sn_shipping_instr_no, :style => "text-align:right;", :class => "company_sales_18", :size => 10 %></td>
+              </tr>
+
+              <tr><td>&nbsp;</td></tr>
+
+              <tr>
+                <td><%= f.label :sn_journal_voucher_no, "Journal Voucher No." %></td>
+                <td><%= f.text_field :sn_journal_voucher_no, :style => "text-align:right;", :class => "company_sales_21", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_payment_voucher_no, "Payment Voucher No." %></td>
+                <td><%= f.text_field :sn_payment_voucher_no, :style => "text-align:right;", :class => "company_sales_22", :size => 10 %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sn_quotation_request_no, "Quotation Request No." %></td>
+                <td><%= f.text_field :sn_quotation_request_no, :style => "text-align:right;", :class => "company_sales_23", :size => 10 %></td>
+              </tr>
+            </table>
+      </td>
+      
+
+    </tr>
+  </table>
+  
+  <div align="right">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stamping_width: 1.5
+  stamping_length: 1.5
+  quoation_request_form_id: 1
+
+two:
+  stamping_width: 1.5
+  stamping_length: 1.5
+  quoation_request_form_id: 1

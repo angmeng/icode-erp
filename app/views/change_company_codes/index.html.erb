@@ -1,0 +1,16 @@
+<%= render "/home/search_button" %>
+
+<%= render "search_change_code" %>
+
+<div style="background-color:blue"><strong style="color:white;">LISTING CHANGE COMPANY CODE</strong></div>
+
+<div class="fix_1600x900">
+  <% if @change_company_codes.present? %>
+    <%= render "listing_change_code", :ccc => @change_company_codes %>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+
+<%= render "action_change_code" %>  
+

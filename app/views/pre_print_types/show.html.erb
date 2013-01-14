@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @pre_print_type.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Pre print:</b>
+  <%= @pre_print_type.pre_print %>
+</p>
+
+
+<%= link_to 'Edit', edit_pre_print_type_path(@pre_print_type) %> |
+<%= link_to 'Back', pre_print_types_path %>

@@ -1,0 +1,35 @@
+<div style="background-color:blue"><strong style="color:white;">EDITING RECEIVED NOTE</strong></div> 
+
+<%= form_for @receive_note, :method => :put do |f| %>
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td class="bolder">Current RN No.#</td>
+        <td><%= @receive_note.receive_note_no rescue '-' %></td>
+        <td width="50"></td>
+        <td class="bolder">RN Date</td>
+        <td><%= f.text_field :rn_date, :value => @receive_note.rn_date.strftime("%d-%m-%Y") %></td>
+        <td width="50"></td>
+      </tr>
+      <tr>
+        <td class="bolder">Vendor</td>
+        <td>[<%= @receive_note.trade_company.code rescue '-' %>] <%= @receive_note.trade_company.name rescue '-' %></td>
+        <td></td>
+        <td class="bolder">Updated By</td>
+        <td><%= User.find(@receive_note.updated_by).name rescue '-' %></td>
+      </tr>
+      <tr>
+        <td class="bolder">Vendor's D/O</td>
+        <td><%= f.text_field :vendor_delivery_no, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

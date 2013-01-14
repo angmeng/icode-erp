@@ -1,0 +1,26 @@
+<div style="height: 465px;">
+  <ul id="treeview" style="width: 80%">
+    <% if categories.present? %>
+      <% categories.each do |cat| %> 
+        <li>
+          <% prod_code = [] %>
+          <% if cat.parent_id == 0 %>
+            <% string = cat.code %>
+          <% else %>
+            <% prod_code << product_parent(cat, false) %>
+            <% prod_code << cat.code %>
+            <% string = prod_code.join("-") %>
+          <% end %>
+          
+          <% if action_name == "kiv_operation" %>
+            <%= link_to "#{string}", kiv_operation_products_path(:category_id => cat.id) %> 
+          <% elsif action_name == "kiv_non_operation" %>
+            <%= link_to "#{string}", kiv_non_operation_products_path(:category_id => cat.id) %> 
+          <% elsif action_name == "kiv_finish_good" %>
+            <%= link_to "#{string}", kiv_finish_good_products_path(:category_id => cat.id) %> 
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,35 @@
+<h1>Listing sales_tax_exemption_barangs</h1>
+
+<table>
+  <tr>
+    <th>Sales tax exemption</th>
+    <th>Perihal barang</th>
+    <th>Apply qty</th>
+    <th>Complete qty</th>
+    <th>Unit measurement</th>
+    <th>Tarif code</th>
+    <th>Valid condition</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sales_tax_exemption_barangs.each do |sales_tax_exemption_barang| %>
+  <tr>
+    <td><%= sales_tax_exemption_barang.sales_tax_exemption_id %></td>
+    <td><%= sales_tax_exemption_barang.perihal_barang %></td>
+    <td><%= sales_tax_exemption_barang.apply_qty %></td>
+    <td><%= sales_tax_exemption_barang.complete_qty %></td>
+    <td><%= sales_tax_exemption_barang.unit_measurement_id %></td>
+    <td><%= sales_tax_exemption_barang.tarif_code %></td>
+    <td><%= sales_tax_exemption_barang.valid_condition %></td>
+    <td><%= link_to 'Show', sales_tax_exemption_barang %></td>
+    <td><%= link_to 'Edit', edit_sales_tax_exemption_barang_path(sales_tax_exemption_barang) %></td>
+    <td><%= link_to 'Destroy', sales_tax_exemption_barang, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sales tax exemption barang', new_sales_tax_exemption_barang_path %>

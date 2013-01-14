@@ -1,0 +1,18 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "knowledges" %>
+<% end %>
+
+<div id="product_tabStrip">
+    <ul>
+        <li class="k-state-active">Finish Goods</li>
+    </ul>
+    <div>
+      <ul id="treeview" style="width: 80%">  
+        <% if @finish_goods.present? %>
+          <% @finish_goods.each do |cat| %> 
+            <%= treeview_with_selection(cat, "") %>
+          <% end %>
+        <% end %>
+      </ul> 
+    </div>
+</div>

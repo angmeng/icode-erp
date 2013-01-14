@@ -1,0 +1,11 @@
+<div style="background-color:blue"><strong style="color:white;">LISTING KIV - SALES ORDER ITEMS</strong></div>
+
+<div class="fix_1600x900">
+  <% if @sales_order_items.present? %>
+    <%= render "/sales_orders/so_items", :so_item => @sales_order_items %>
+  <% else %>
+    Not Record Found.
+  <% end %>
+</div>
+  
+<%= render "action_sales_order_item_kiv" %> 

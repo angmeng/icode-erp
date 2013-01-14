@@ -1,0 +1,90 @@
+<%= form_for(@price_control_item) do |f| %>
+  <% unless action_name == 'edit' %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% end %>
+
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td width="100"><b>Product ID</b></td>
+        <td>
+          <%# if action_name == 'edit' %>
+            <%#= f.select :product_id, options_from_collection_for_select(product_finish_goods_with_combobox, :product_id, :product_code, @price_control_item.product_id), { :include_blank => true }, { :onchange => "product_data(this)" } %>
+            <%= f.select :product_id, options_for_select(product_finish_goods_with_combobox, @price_control_item.product_id), { :include_blank => true }, { :id => "kendo_combobox", :style => "width: 400px;", :onchange => "product_data(this)" } %>
+          <%# else %>
+            <%#= f.select :product_id, options_from_collection_for_select(product_finish_goods_with_combobox, :product_id, :product_code), { :include_blank => true }, { :onchange => "product_data(this)" } %>
+          <%# end %>
+        </td>
+        <%#*<td id="prod_desc">%>
+          <%# if action_name == "edit" %>
+            <%#= @price_control_item.product.desc rescue '-' %>
+          <%# end %>
+        <%#*</td>%>
+      </tr>
+
+      <tr>
+        <td><b>Current Stock</b></td>
+        <td id="prod_stock">
+          <% if action_name == "edit" %>
+            <%= @price_control_item.product.current_stock rescue '-' %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Part No.</b></td>
+        <td id="prod_part_no">
+          <% if action_name == "edit" %>
+            <%= @price_control_item.part_no rescue '-' %>
+          <% end %>
+        </td>
+        <td><%= f.hidden_field :part_no %></td>
+      </tr>
+    </table>
+    
+    <table>
+      <tr style="background-color: gainsboro;">
+        <td width="100"></td>
+        <td width="150"><b>OLD</b></td>
+        <td width="150"><b>NEW</b></td>
+      </tr>
+
+      <tr>
+        <td style="background-color: gainsboro;"><b>Unit Price</b></td>
+        <td>
+          <span id="prod_selling_price">
+            <% if action_name == 'edit' %>
+              <%= four_precision(@price_control_item.old_unit_price) rescue '-' %>
+            <% end %>
+          </span>
+          <%= f.hidden_field :old_unit_price %>
+        </td>
+        <td><%= f.text_field :new_unit_price, :size => 20 %></td>
+      </tr>
+
+      <tr>
+        <td style="background-color: gainsboro;"><b>Effective Date</b></td>
+        <td>
+          <span id="prod_effective_date">
+            <% if action_name == 'edit'  %>
+              <%= @price_control_item.old_eff_date.strftime("%d-%m-%Y") rescue '-' %>
+            <% end %>
+          </span>
+          <%= f.hidden_field :old_eff_date %>
+        </td>
+        <td>
+          <% if action_name == 'edit' %>
+            <%= f.text_field :new_eff_date, :value => @price_control_item.new_eff_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+          <% else %>
+            <%= f.text_field :new_eff_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>

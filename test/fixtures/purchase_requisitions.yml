@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pr_no: 1
+  purchase_date: 2012-06-04
+  product_id: 1
+  trade_company_id: 1
+  description: MyText
+  quantity: 1
+  unit_measurement_id: 1
+  eta: MyString
+  purchase_order_no: MyString
+  unit_price: 1.5
+  remark: MyText
+  status: MyString
+
+two:
+  pr_no: 1
+  purchase_date: 2012-06-04
+  product_id: 1
+  trade_company_id: 1
+  description: MyText
+  quantity: 1
+  unit_measurement_id: 1
+  eta: MyString
+  purchase_order_no: MyString
+  unit_price: 1.5
+  remark: MyText
+  status: MyString

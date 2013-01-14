@@ -1,0 +1,45 @@
+<% if @ste.present? %>
+  <% if @ste.sales_tax_exemption_items.present? %>
+    <div style="background-color: gold; padding:5px;">
+      <b>Registration No.:</b> <%= @ste.registration_no rescue '-' %><br/>
+      <b>Sales Tax Exemption No.:</b> <%= @ste.sales_tax_exemption_no rescue "-" %><br/>
+      <b>Vendor:</b> [<%= @ste.trade_company.code rescue '-' %>] <%= @ste.trade_company.name rescue '-' %><br/>
+      <b title="Sales Tax Exemption Period">Period:</b> [START] <%= @ste.period_start.strftime("%d-%m-%Y") rescue '-' %> [END] <%= @ste.period_end.strftime("%d-%m-%Y") rescue '-' %><br/>
+      <b>Perihal Barang:</b> <%= @ste.perihal_barang rescue '-' %><br/>
+      <b>Tarif Code:</b> <%= @ste.tarif_code rescue '-' %><br/>
+      <b>Applied Qty:</b> <%= @ste.apply_qty rescue '-' %><br/>
+      <b>U/M:</b> <%= @ste.unit_measurement.code rescue '-' %><br/>
+    </div>
+
+    <table class="white-line-table">
+      <tr class="header_line">
+        <th>PO No.</th>
+        <th>Product ID</th>
+        <th>KGS</th>
+        <th>Remaining Total</th>
+      </tr>
+        <% @ste.sales_tax_exemption_items.each do |p| %>
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+            <td align="center">
+              <%= link_to "#{p.purchase_order.po_no}", purchase_order_path(p.purchase_order_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+            </td>
+            <td align="center">
+              <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                <%= render "/product_categories/join_product_category", :pc => p %>
+              <% end %>
+            </td>
+            <td align="center"><%= p.kgs rescue '-' %></td>
+            <td align="center"><%= p.remaining_total rescue '-' %></td>
+          </tr>
+        <% end %>
+    </table>
+
+    <h1 align="center" style="color:red;">
+      <% if  @ste.valid_condition == TRUE  %>
+        NOT VALID
+      <% end %>
+    </h1>
+  <% else %>
+    No items
+  <% end %>
+<% end %>

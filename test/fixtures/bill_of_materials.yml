@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bom_no: 1
+  type: 
+  sales_order_item_id: 1
+
+two:
+  bom_no: 1
+  type: 
+  sales_order_item_id: 1

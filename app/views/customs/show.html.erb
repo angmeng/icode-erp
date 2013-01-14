@@ -1,0 +1,48 @@
+<%= stylesheet_link_tag    "application", :media => "all" %>
+
+<% if notice %><p class="notice" id="notice"><%= notice %></p><% end %>
+<% if alert %><p class="alert" id="alert"><%= alert %></p><% end %>
+
+<p>
+  <b>Sales Tax Exemption No.:</b>
+  <%= @custom.sales_tax_exemption_no %>
+</p>
+
+<p>
+  <b>Sales Tax Exemption:</b>
+  <%= @custom.sales_tax_exemption %>
+</p>
+
+<p>
+  <b>Trade Company:</b>
+  [<%= @custom.trade_company.code rescue '-' %>] <%= @custom.trade_company.name rescue '-' %>
+</p>
+
+<p>
+  <b>Period:</b>
+  [Start] <%= @custom.period_start.strftime("%d-%m-%Y") rescue '-' %>
+  [End]   <%= @custom.period_end.strftime("%d-%m-%Y") rescue '-' %>
+</p>
+
+<p>
+  <b>Tarif code:</b>
+  <%= @custom.tarif_code rescue '-' %>
+</p>
+
+<p>
+  <b>Apply qty:</b>
+  <%= @custom.apply_qty rescue '-' %>
+</p>
+
+<p>
+  <b>Complete qty:</b>
+  <%= @custom.complete_qty rescue '-' %>
+</p>
+
+<p>
+  <b>Unit measurement:</b>
+  <%= @custom.unit_measurement.code rescue '-' %>
+</p>
+
+
+<%= link_to 'Edit', edit_custom_path(@custom) %>

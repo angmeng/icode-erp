@@ -42,6 +42,7 @@ UnitMeasurement.create([
   {:code => "DRUM"}, 
   {:code => "HR"}, 
   {:code => "GM"}, 
+  {:code => "GSM"},
   {:code => "KG"}, 
   {:code => "LOAD"}, 
   {:code => "METER"}, 
@@ -106,256 +107,85 @@ InventoryIssue.create([
   {:description => 'RECEIVED NOTE'},
   {:description => 'PRODUCTION RETURN', :in_out => "IN"},
   {:description => 'RETURN STOCK FORM LOAN', :in_out => "IN"},
-  
   {:description => 'REJECT FOR REWORK / RETURN', :in_out => "OUT"},
   {:description => 'BOM PLAN TO PRODUCTION', :in_out => "OUT"},
   {:description => 'REQUEST FOR SAMPLE', :in_out => "OUT"},
   {:description => 'ON LOAN', :in_out => "OUT"},
   {:description => 'SCRAP NOTE', :in_out => "OUT"},
-  
   {:description => 'NEW PRODUCT'}
 ])
 
-InventoryManagementSystem.create([
-    
-#1-18
-  #module
-  {:name => 'PR MENU'},
+Material.create([
+  {code: '1', :description => 'Spray Powder'},
+  {code: '2', :description => 'Ink Remover'},
+  {code: '3', :description => 'Plate Cleaner'},
+  {code: '4', :description => 'Cotton Rag'},
+  {code: '5', :description => 'OPP Varnish'},
+  {code: '6', :description => 'IPA'},
+  {code: '7', :description => 'Kerosene'},
+  {code: '8', :description => 'Water Base'},
+  {code: '9', :description => 'Lube Guard'},
+  {code: '10', :description => 'Anti Skin'},
   
-  #sub module
-  {:name => 'PR NEW'},
-  {:name => 'PR TRANSACTION'},
-  {:name => 'PR KIV VIEW'},
-  {:name => 'PR ITEMS KIV VIEW'},
+  {code: '11', :description => 'Foamex'},
+  {code: '12', :description => 'Drier'},
+  {code: '13', :description => 'Orange Sponge'},
+  {code: '14', :description => 'Thinner'},
+  {code: '15', :description => 'Blanket with Bar'},
+  {code: '16', :description => 'Blanket'},
+  {code: '17', :description => 'Litho Thin Varnish'},
+  {code: '18', :description => 'Jelly Compound'},
+  {code: '19', :description => 'Die Cut Sponge'},
+  {code: '20', :description => 'Channel'},
   
-  #action - pr new
-  {:name => 'PR NEW ADD ITEMS'},
-  {:name => 'PR NEW SHOW'},
-  {:name => 'PR NEW EDIT'},
-  {:name => 'PR NEW KIV'},
-  {:name => 'PR NEW PRINTABLE'},
+  {code: '21', :description => 'SKP Tape'},
+  {code: '22', :description => 'Masking Tape'},
+  {code: '23', :description => 'Glue 8890'},
+  {code: '24', :description => 'Glue V2350'},
+  {code: '25', :description => 'Rubber Band'},
+  {code: '26', :description => 'OPP Tape'},
+  {code: '27', :description => 'Fountain'},
+  {code: '28', :description => 'Semi Auto Strap'},
+  {code: '29', :description => 'Clip'},
+  {code: '30', :description => 'Stretch Film'},
   
-  #action - pr transaction
-  {:name => 'PR TRANSACTION SHOW'},
-  {:name => 'PR TRANSACTION EDIT'},
-  {:name => 'PR TRANSACTION KIV'},
-  {:name => 'PR TRANSACTION PRINTABLE'},
-  
-  #action - pr kiv view
-  {:name => 'PR KIV SHOW'},
-  {:name => 'PR KIV RECOVER'},
-  
-  #action - pr items kiv view
-  {:name => 'PR ITEMS KIV SHOW'},
-  {:name => 'PR ITEMS KIV RECOVER'},
-  
-    
-  
-#19-48
-  #module
-  {:name => 'PURCHASE ORDER MENU'},
-  
-  #sub-module
-  {:name => 'PURCHASE ORDER APPROVED FROM PR'},
-  {:name => 'PURCHASE ORDER PR-REPAIR'},
-  {:name => 'PURCHASE ORDER PROPOSED VENDOR'},
-  {:name => 'PURCHASE ORDER VENDOR SELECTION'},
-  {:name => 'PURCHASE ORDER VENDOR REGISTRATION'},
-  {:name => 'PURCHASE ORDER ENTRY'},
-  {:name => 'PURCHASE ORDER TRANSACTION'},
-  {:name => 'PURCHASE ORDER KIV VIEW'},
-   
-  #action - pr-repair  
-  {:name => 'PURCHASE ORDER PR-REPAIR APPLY'}, 
-  {:name => 'PURCHASE ORDER PR-REPAIR SUBMIT TO'}, 
-  {:name => 'PURCHASE ORDER PR-REPAIR KIV'}, 
-  
-  #action - proposed vendor
-  {:name => 'PURCHASE ORDER PROPOSED VENDOR APPLY'},
-  {:name => 'PURCHASE ORDER PROPOSED VENDOR SUBMIT TO'},
-  {:name => 'PURCHASE ORDER PROPOSED VENDOR KIV'}, 
-  
-  #action - vendor selection
-  {:name => 'PURCHASE ORDER VENDOR SELECTION APPLY'},
-  {:name => 'PURCHASE ORDER VENDOR SELECTION SUBMIT TO'},
-  {:name => 'PURCHASE ORDER VENDOR SELECTION KIV'}, 
-  
-  #action - vendor registration
-  {:name => 'PURCHASE ORDER VENDOR REGISTRATION APPLY'},
-  {:name => 'PURCHASE ORDER VENDOR REGISTRATION SUBMIT TO'},
-  {:name => 'PURCHASE ORDER VENDOR REGISTRATION KIV'},
-  
-  #action - po entry
-  {:name => 'PURCHASE ORDER ENTRY APPLY'},
-  {:name => 'PURCHASE ORDER ENTRY SUBMIT TO'},
-  {:name => 'PURCHASE ORDER ENTRY KIV'},
-  
-  #action - transaction
-  {:name => 'PURCHASE ORDER TRANSACTION SHOW'},
-  {:name => 'PURCHASE ORDER TRANSACTION EDIT'},
-  {:name => 'PURCHASE ORDER TRANSACTION KIV'},
-  {:name => 'PURCHASE ORDER TRANSACTION PRINTABLE'},
-  
-  #action - kiv
-  {:name => 'PO KIV SHOW'},
-  {:name => 'PO KIV RECOVER'},
-   
-    
-#49-60
-  #module
-  {:name => 'RECEIVE NOTE MENU'},
-  
-  #sub-module
-  {:name => 'RECEIVE NOTE NEW'},
-  {:name => 'RECEIVE NOTE TRANSACTION'},
-  {:name => 'RECEIVE NOTE COMPLETED VIEW'},
-  {:name => 'RECEIVE NOTE KIV VIEW'},
-  
-  #action - new
-  {:name => 'RECEIVE NOTE NEW SAVE'},
-  
-  #action - Transaction
-  {:name => 'RECEIVE NOTE TRANSACTION SHOW'},
-  {:name => 'RECEIVE NOTE TRANSACTION EDIT'},
-  {:name => 'RECEIVE NOTE TRANSACTION KIV'},
-  {:name => 'RECEIVE NOTE TRANSACTION PRINTABLE'},
-  
-  #action - kiv
-  {:name => 'RN KIV SHOW'},
-  {:name => 'RN KIV RECOVER'},
-  
-    
-#61-76
-  #module
-  {:name => 'SALES TAX EXEMPTION MENU'},
-  
-  #sub-module
-  {:name => 'SALES TAX EXEMPTION NEW'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID'},
-  {:name => 'SALES TAX EXEMPTION KIV'},
-  
-  #sub-module
-  {:name => 'SALES TAX EXEMPTION SAVE'},
-    
-  #action-transaction valid
-  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID SHOW'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID EDIT'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID KIV'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION VALID PRINTABLE'},
-  
-  #action-transaction unvalid
-  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID SHOW'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID EDIT'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID KIV'},
-  {:name => 'SALES TAX EXEMPTION TRANSACTION UNVALID PRINTABLE'},
-  
-  #action - kiv valid
-  {:name => 'STE KIV VALID SHOW'},
-  {:name => 'STE KIV VALID RECOVER'},
-  
-    
-#77-87
-  #module
-  {:name => 'INVENTORY MENU'},
-  
-  #sub module
-  {:name => 'INVENTORY NEW'},
-  {:name => 'INVENTORY TRANSACTION'},
-  {:name => 'INVENTORY KIV VIEW'},
-  
-  #action
-  {:name => 'INVENTORY NEW SAVE'},
-  
-  #action - transaction
-  {:name => 'INVENTORY TRANSACTION SHOW'},
-  {:name => 'INVENTORY TRANSACTION EDIT'},
-  {:name => 'INVENTORY TRANSACTION KIV'},
-  {:name => 'INVENTORY TRANSACTION PRINTABLE'},
-  
-  #action => kiv
-  {:name => 'INVENTORY TRANSACTION KIV SHOW'},
-  {:name => 'INVENTORY TRANSACTION KIV RECOVER'},
-  
-    
-#88-93
-# Housekeeping
-  #module
-  {:name => 'COMPANY PROFILE MENU'},
-  
-  #sub module
-  {:name => 'COMPANY PROFILE VIEW'},
-  
-  #action
-  {:name => 'COMPANY PROFILE SHOW'},
-  {:name => 'COMPANY PROFILE EDIT'},
-  {:name => 'COMPANY PROFILE KIV'},
-  {:name => 'COMPANY PROFILE PRINTABLE'},
-    
-#94-114
-  #module  
-  {:name => 'TRADE COMPANY MENU'},
-  
-  #sub module
-  {:name => 'VENDOR MENU'},
-  {:name => 'CUSTOMER MENU'},
-  
-  #sub sub module
-  {:name => 'VENDOR NEW'},
-  {:name => 'VENDOR LISTING'},
-  {:name => 'VENDOR KIV'},
-  
-    #action - save
-  {:name => 'VENDOR NEW SAVE'},
-    
-  #action vendor listing
-  {:name => 'VENDOR SHOW'},
-  {:name => 'VENDOR EDIT'},
-  {:name => 'VENDOR ACTION KIV'},  #127
-  {:name => 'VENDOR PRINTABLE'},
-  
-  {:name => 'VENDOR KIV SHOW'},
-  {:name => 'VENDOR KIV RECOVER'},
-    
-
-  {:name => 'CUSTOMER NEW'},
-  {:name => 'CUSTOMER LISTING'},
-  {:name => 'CUSTOMER KIV'},
-  
-    #new
-  {:name => 'CUSTOMER NEW SAVE'},
-  
-    #listing
-  {:name => 'CUSTOMER SHOW'},
-  {:name => 'CUSTOMER EDIT'},
-  {:name => 'CUSTOMER ACTION KIV'},  #128
-  {:name => 'CUSTOMER PRINTABLE'},
-  
-    #kiv
-  {:name => 'CUSTOMER KIV SHOW'},
-  {:name => 'CUSTOMER KIV RECOVER'},
-
-
-#115-126
-  {:name => 'PRODUCT CATEGORY MENU'},
-  {:name => 'PRODUCT CATEGORY NEW'},
-  {:name => 'PRODUCT CATEGORY SHOW'},
-  {:name => 'PRODUCT CATEGORY EDIT'},
-  {:name => 'PRODUCT CATEGORY KIV'},
-  {:name => 'PRODUCT CATEGORY PRINTABLE'},
-  {:name => 'PRODUCT ID MENU'},
-  {:name => 'PRODUCT ID NEW'},
-  {:name => 'PRODUCT ID SHOW'},
-  {:name => 'PRODUCT ID EDIT'},
-  {:name => 'PRODUCT ID KIV'},
-  {:name => 'PRODUCT ID PRINTABLE'}
-  
-    
-#  {:name => 'INCOMING REJECT MENU'},
-#  {:name => 'INCOMING REJECT TRANSACTION'},
-#  {:name => 'INCOMING REJECT NEW'},
-#  {:name => 'INCOMING REJECT SHOW'},
-#  {:name => 'INCOMING REJECT EDIT'},
-#  {:name => 'INCOMING REJECT DELETE'},
-#  {:name => 'INCOMING REJECT PRINTABLE'},
+  {code: '31', :description => 'Double Side Tape'},
+  {code: '32', :description => 'Silicone Spray'}
 ])
+
+#CompanyProfile.create([
+#  :name => 'ETHEOS IMPRINT TECHNOLOGY SDN BHD',
+#  :address => 'EOT 603 KAW PERINDUSTRIAN
+#                KG TELUK SG DUA
+#                13800 BUTTERWORTH PENANG.',
+#  :tel_no_1 => '04-3565872',
+#  :tel_no_2 => '04-3565870',
+#  :fax_no => '04-3565879',
+#  :sales_tax_no => 'A061583',
+#  :reg_no => '362823-K',
+#  :sn_sales_order_no => 21662,
+#  :sn_purchase_order_no => 23438,
+#  :sn_deliver_order_no => 35056,
+#  :sn_receive_note_no => 28134,
+#  :sn_transfer_slip_no => 0,
+#  :sn_store_voucher_no => 0,
+#  :sn_incoming_reject_no => 11,
+#  :sn_outgoing_reject_no => 331,
+#  :sn_credit_note_no => 924,
+#  :sn_debit_note_no => 712,
+#  :sn_billing_order_no => 0,
+#  :sn_purchase_req_no => 106,
+#  :sn_product_price_no => 2034,
+#  :sn_job_order_no => 0,
+#  :sn_shipment_schedule => 0,
+#  :sn_scrap_sheet_no => 0,
+#  :sn_receiving_instr_no => 0,
+#  :sn_shipping_instr_no => 0,
+#  :sn_receipt_no => 6189,
+#  :sn_bankin_slip_no => 0,
+#  :sn_journal_voucher_no => 312,
+#  :sn_payment_voucher_no => 0,
+#  :sn_product_id_no => 70,
+#  :sn_sales_tax_exemption_no => 22,
+#  :sn_quotation_request_no => 4
+#])

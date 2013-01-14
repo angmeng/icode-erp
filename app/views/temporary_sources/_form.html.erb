@@ -1,0 +1,33 @@
+<%= form_for(@temporary_source) do |f| %>
+  <% if @temporary_source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@temporary_source.errors.count, "error") %> prohibited this temporary_source from being saved:</h2>
+
+      <ul>
+      <% @temporary_source.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :company_name %><br />
+    <%= f.text_field :company_name %>
+  </div>
+  <div class="field">
+    <%= f.label :select_vendor %><br />
+    <%= f.check_box :select_vendor %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_price %><br />
+    <%= f.text_field :unit_price %>
+  </div>
+  <div class="field">
+    <%= f.label :remark %><br />
+    <%= f.text_field :remark %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

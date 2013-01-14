@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @selection_die_cut.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @selection_die_cut.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_selection_die_cut_path(@selection_die_cut) %> |
+<%= link_to 'Back', selection_die_cuts_path %>

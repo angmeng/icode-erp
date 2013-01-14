@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  receive_note_no: 1
+  receive_no_date: 2012-06-14
+  trade_company_id: 1
+  updated_by: 1
+  currency_id: 1
+  trade_term_id: 1
+  vendor_delivery_no: 1
+  sale_tax_exempt: 1
+
+two:
+  receive_note_no: 1
+  receive_no_date: 2012-06-14
+  trade_company_id: 1
+  updated_by: 1
+  currency_id: 1
+  trade_term_id: 1
+  vendor_delivery_no: 1
+  sale_tax_exempt: 1

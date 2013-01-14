@@ -1,0 +1,45 @@
+<%#*<table width="100%">%>
+  <%#*<tr>%>
+    <%#*<td align="right" style="vertical-align:bottom;">%>
+      <%# if collection_supplier.present? %>
+        <%#= form_tag inventory_histories_path, :method => :get do %>
+            <%#*Product No. #%>
+            <%#= select_tag 'select_product', options_for_select(collection_supplier, params[:select_product].to_i), :include_blank => true %>
+            <%#= submit_tag "Search", :name => nil %>
+        <%# end %>
+      <%# end %>
+    <%#*</td>%>
+  <%#*</tr>%>
+<%#*</table>%>
+
+<table class="white-line-table">
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr class="header_line">
+    <th>Product ID</th>
+    <th>Total</th>
+    <th>U/M</th>
+  </tr>
+  
+  <% inventories.each do |value| %>
+  
+    <% unless value.product.product_category.try(:category_type) == ProductCategory::FINISH_GOOD %>
+
+      <tr class="<%= cycle("odd_line", "even_line") %>">
+        
+        <td align="center">
+          <%= link_to(product_path(value.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+            <%= render "/product_categories/join_product_category", :pc => value %>
+          <% end %>
+        </td>
+        
+        <td align="center"><%= value.product.current_stock rescue '-' %></td>
+        <td align="center"><%= value.product.unit_measurement.code rescue '-' %></td>
+        
+      </tr>
+    <% end %>
+      
+  <% end %>
+</table>

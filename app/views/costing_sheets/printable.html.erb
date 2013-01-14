@@ -1,0 +1,32 @@
+<style>
+  /*=================================== BLACK TABLE =====================================*/
+  table.black-line-table {
+          <%#*width:100%;%>
+          border-width: 1px;
+          border-spacing: 0px;
+          border-style: none;
+          border-color: black;
+          border-collapse: collapse;
+          background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent;
+          -moz-border-radius: 0px 0px 0px 0px; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent;
+          -moz-border-radius: 0px 0px 0px 0px; }
+  /*=================================== BLACK TABLE (END) =====================================*/
+
+  #break_line {  page-break-before: always;  } 
+</style>
+
+<%= render "print_cs", :cs => @costing_sheet %>

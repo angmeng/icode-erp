@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer_name: MyString
+  qrf_date: 2012-08-11
+  description: MyString
+  dimensen_length: 1.5
+  dimensen_width: 1.5
+  dimensen_height: 1.5
+  open_size_length: 1.5
+  open_size_width: 1.5
+  color: MyString
+  material: MyString
+  finishing: MyString
+  quantity: 1
+  unit_price: 1.5
+  remark: MyString
+
+two:
+  customer_name: MyString
+  qrf_date: 2012-08-11
+  description: MyString
+  dimensen_length: 1.5
+  dimensen_width: 1.5
+  dimensen_height: 1.5
+  open_size_length: 1.5
+  open_size_width: 1.5
+  color: MyString
+  material: MyString
+  finishing: MyString
+  quantity: 1
+  unit_price: 1.5
+  remark: MyString

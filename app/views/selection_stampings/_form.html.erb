@@ -1,0 +1,25 @@
+<%= form_for(@selection_stamping) do |f| %>
+  <% if @selection_stamping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@selection_stamping.errors.count, "error") %> prohibited this selection_stamping from being saved:</h2>
+
+      <ul>
+      <% @selection_stamping.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :stamping_type %><br />
+    <%= f.text_field :stamping_type %>
+  </div>
+  <div class="field">
+    <%= f.label :stamping_other %><br />
+    <%= f.text_field :stamping_other %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
