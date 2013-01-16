@@ -1,13 +1,13 @@
 class DepartmentsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :is_director
+  before_filter :are_you_director?
   layout "sheetbox"
   
   # GET /departments
   # GET /departments.json
   def index
     @search = Department.search(params[:search])
-    @departments = Department.ordered_name(@search)
+    @departments = Department.search_departments(@search)
   end
   
   def kiv

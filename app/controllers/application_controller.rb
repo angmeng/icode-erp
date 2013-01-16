@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 #
 #  member_session
 
-  helper_method :company
+  
   helper_method :payment_type
   helper_method :trade_term
   helper_method :type_of_sale
@@ -46,13 +46,35 @@ class ApplicationController < ActionController::Base
   helper_method :issues_in
   helper_method :issues_out
   helper_method :roles
-  helper_method :users
+  
   helper_method :material
   helper_method :perihal_barang_both
   
   
+  
+  helper_method :company
   def company
     @company ||= CompanyProfile.first
+  end
+  
+#  helper_method :user_is_director?
+#  def user_is_director?
+#    current_user.level == User::LEVEL_FIVE
+#  end
+  
+  helper_method :user_is_admin?
+  def user_is_admin?
+    current_user.admin == true
+  end
+  
+  helper_method :users
+  def users
+    @users ||= User.users_active
+  end
+  
+  helper_method :departments
+  def departments
+    @departments ||= Department.departments_active
   end
   
   def perihal_barang_both
@@ -143,9 +165,7 @@ class ApplicationController < ActionController::Base
     @product_suppliers ||= Product.collection_suppliers
   end
   
-  def users
-    @users ||= User.ordered_name
-  end
+  
   
   def material
     @material ||= Material.where(:status => Material::ACTIVE)
@@ -187,12 +207,14 @@ class ApplicationController < ActionController::Base
   
   private
   
-  def is_director
-    unless current_user.level == User::LEVEL_FIVE
+  def are_you_director?
+    unless user_is_admin?
       flash[:alert] = "You are not authorize!!"
       redirect_to root_url
     end
   end
+  
+ 
   
   def role(model_array)
     model_array.each do |role|

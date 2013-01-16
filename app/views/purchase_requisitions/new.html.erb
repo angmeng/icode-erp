@@ -18,7 +18,7 @@
   </tr>
 </table>
 
-<div class="new_form">
+<div class="new_purchase_form">
     <% if @pending.present? %>
       <%= render 'form' %>
     <% end %>
@@ -33,7 +33,8 @@
     </div>
 </div>
 
-<div style="float:left; padding: 5px;">
+<%#*<div style="float:left; padding: 5px;">%>
+<div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS) %>
     <%= link_to "Add Item", "#", :class => "pr_items_click k-button" %>
   <% else %>
@@ -45,6 +46,39 @@
 
 <!--div id="load_window" style="display: none; "></div-->
 <%#= link_to image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "cube35"), "#", :title => "New Purchase Requisition Item", :id => "open_window", :connect_to => new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES) %>
+
+
+<!--div id="window">
+  Super Star sayang
+</div-->
+
+<!--span id="undo" style="display:none" class="k-button">Click here to open the window.</span-->
+
+<!--script>
+    $(document).ready(function() {
+        var window = $("#window"), undo = $("#undo");
+
+        undo.bind("click", function() {
+            window.data("kendoWindow").open().center();
+        });
+
+        if (!window.data("kendoWindow")) {
+            window.kendoWindow({
+                width: "300px",
+                actions: ["Close"],
+                title: "About Josef Hoffmann",
+                close: function() {
+                    undo.show();
+                }
+            });
+        }
+        
+        window.data("kendoWindow").wrapper.find(".k-i-custom").click(function(e){
+            alert("Custom action button clicked");
+            e.preventDefault();
+        });
+    });
+</script-->
 
 
 

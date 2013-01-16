@@ -78,8 +78,12 @@ class PurchaseRequisition < ActiveRecord::Base
     purchase_requisition_items.each {|cn| cn.update_attributes!(:status => PurchaseRequisitionItem::CANCEL)}
   end
   
-  def self.ordered_pr_no(search)
-    search.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
+#  def self.ordered_pr_no(search)
+#    search.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
+#  end
+  
+  def ordered_by_pr_no
+    where("status != ?", PurchaseRequisition::KEEP_IN_VIEW).order("pr_no DESC")
   end
   
   def self.search_engine(field_box, select_field)

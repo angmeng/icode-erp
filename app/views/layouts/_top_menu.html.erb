@@ -456,13 +456,13 @@
           <li class="text_gray">Company Profile</li>
         <% end %>
 
-        <% if current_user.level == User::LEVEL_FIVE %>
+        <% if user_is_admin? %>
           <li>
             User
             <ul>
               <li><%= link_to "Listing Users", users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <li><%= link_to "New User", new_user_entry_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-              <li><%= link_to "KIV - Users", kiv_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Listing Users - KIV", kiv_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <!--li><%#= link_to "Clearing Database", clear_database_users_path, :confirm => "Are you sure to clear database?" %></li-->
             </ul>
           </li>
@@ -554,7 +554,7 @@
           </li>
         <% end %>
 
-        <% if current_user.level == User::LEVEL_FIVE %>
+        <% if user_is_admin? %>
           <li>
             General Term
             <ul>

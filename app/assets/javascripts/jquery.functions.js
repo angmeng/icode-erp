@@ -67,36 +67,36 @@ $(document).ready(function() {
         scrolling: "yes"
     });
     
-    $('input[class^="company_sales_"]').numberbox({min:0,  max: 999999});
-    $('input[class^="two_digit_"]').numberbox({min:0,  max: 99});
-    $('input[class^="three_digit_"]').numberbox({min:0,  max: 999});
-    $('input[class^="ten_digit_"]').numberbox({min:0,  max: 9999999999});
-    $('input[class^="five_digit_"]').numberbox({min:0,  max: 99999});
-    $('#purchase_requisition_quantity').numberbox({min:0,  max: 99999});
-    $('input[class^="two_zero_"]').numberbox({min:0,  precision:2});
-    $('input[class^="three_zero"]').numberbox({min:0,  precision:3});
-    $('input[class^="four_zero"]').numberbox({min:0, precision:4});
-    $('input[class^="four_precision"]').numberbox({min:0, precision:4});
-    $('#product_part_weight, input[class^="six_zero"]').numberbox({min:0, precision:6}); 
-    $('#estimated_price, #purchase_requisition_item_unit_price, #receive_note_kgs, #unit_price').numberbox({min:0, precision:4}); 
-    $('#product_selling_price').numberbox({min:0, precision:5}); 
+//    $('input[class^="company_sales_"]').numberbox({min:0,  max: 999999});
+//    $('input[class^="two_digit_"]').numberbox({min:0,  max: 99});
+//    $('input[class^="three_digit_"]').numberbox({min:0,  max: 999});
+//    $('input[class^="ten_digit_"]').numberbox({min:0,  max: 9999999999});
+//    $('input[class^="five_digit_"]').numberbox({min:0,  max: 99999});
+//    $('#purchase_requisition_quantity').numberbox({min:0,  max: 99999});
+//    $('input[class^="two_zero_"]').numberbox({min:0,  precision:2});
+//    $('input[class^="three_zero"]').numberbox({min:0,  precision:3});
+//    $('input[class^="four_zero"]').numberbox({min:0, precision:4});
+//    $('input[class^="four_precision"]').numberbox({min:0, precision:4});
+//    $('#product_part_weight, input[class^="six_zero"]').numberbox({min:0, precision:6}); 
+//    $('#estimated_price, #purchase_requisition_item_unit_price, #receive_note_kgs, #unit_price').numberbox({min:0, precision:4}); 
+//    $('#product_selling_price').numberbox({min:0, precision:5}); 
     
-    $.extend($.fn.validatebox.defaults.rules, {  
-        fixLength: {  
-            validator: function(value, param){  
-                return value.length === param[0];
-            }, 
-            message: 'Please enter full {0} characters.'  
-        },
-        maxLength: {  
-            validator: function(value, param){  
-                return value.length <= param[0];
-            }, 
-            message: 'Please enter full {0} characters.'  
-        }
-    }); 
+//    $.extend($.fn.validatebox.defaults.rules, {  
+//        fixLength: {  
+//            validator: function(value, param){  
+//                return value.length === param[0];
+//            }, 
+//            message: 'Please enter full {0} characters.'  
+//        },
+//        maxLength: {  
+//            validator: function(value, param){  
+//                return value.length <= param[0];
+//            }, 
+//            message: 'Please enter full {0} characters.'  
+//        }
+//    }); 
 
-    $("#menu").kendoMenu();
+    $("#menu").kendoMenu({ openOnClick: true });
     $("#treeview").kendoTreeView();
     $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
     $("#panelbar").kendoPanelBar({expandMode: "single"});
@@ -105,11 +105,9 @@ $(document).ready(function() {
     
     $('input[class^="kendo_date_multiple"]').kendoDatePicker({ format: "dd-MM-yyyy" });
     $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
-//    $('input[class^="kendo_price_"]').kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
-    
-  $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({ format: "dd-MM-yyyy" }); 
-  $("#kendo_combobox, #kendo_combobox_two").kendoComboBox({filter: "contains"});
-  $("#kendo_price").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
+    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({ format: "dd-MM-yyyy" }); 
+    $("#kendo_combobox, #kendo_combobox_two").kendoComboBox({filter: "contains"});
+    $("#kendo_price").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
     
     // Just autocomplete all suppliers only
     $("#autoComplete_suppliers").kendoAutoComplete({    
@@ -529,6 +527,7 @@ $(document).ready(function() {
     }); 
 //////////////////////////// packing end
 
+///////////////////////////////////////////////// It is use for button script /////////////////////////////////////////////
     $(".zebraLight tr").mouseover(function(){$(this).addClass("over");}).mouseout(function(){$(this).removeClass("over");});
 
     $('.zebraLight tr').click(function() {
@@ -537,7 +536,7 @@ $(document).ready(function() {
             $(this).find('img').remove();
         });
         $(this).addClass('selected_row');  
-        $(this).find('td:first').html("<img src='/assets/checking.png' width='20' height='20' />");
+        $(this).find('td:first').html("<img src='/assets/checking.png' width='15' height='15' />");
         var controller_Name = $(this).attr("controllerName");
       
         var row_id = $(this).attr("rowsId");
@@ -579,30 +578,30 @@ $(document).ready(function() {
             var link_costing = "/costing_sheets?id=" + row_id;
             var link_add_product_id = "/products/message?pri_id=" + row_id;
 
-            html_show = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_show  + ">Show</a>"
-            html_edit = "<a class='k-button " + edit_class + "' data-fancybox-type='iframe' href=" + link_edit + "> Edit</a>"
-            html_kiv = "<a rel='nofollow' class='k-button' data-method='delete' data-confirm='Are you sure move to KIV?' href=" + link_kiv + "> Drop to KIV</a>"
-            html_moving_kiv = "<a data-confirm='Are you sure move to KIV?' class='k-button' href=" + link_moving_kiv + ">Drop to KIV</a>"
-            html_pdf = "<a target='_blank' class='k-button' href=" + link_printable + ">Printer</a>"
-            html_pdf_qr = "<a target='_blank' class='k-button' href=" + link_printable_qr + ">Printer</a>"
-            html_pdf_cs = "<a target='_blank' class='k-button' href=" + link_printable_cs + ">Printer</a>"
-            html_show_kiv = "<a class='k-button " + show_class + "' data-fancybox-type='iframe' href=" + link_show_kiv  + ">Show KIV</a>"
-            html_recover = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you sure to recover?' href=" + link_recover + ">Recover</a>"
-            html_remove = "<a href='k-button " + link_remove + "' data-confirm='Are you sure to remove?' data-method='put' rel='nofollow'>" + "> Remove</a>"
-            html_apply = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_apply + ">Apply</a>"
-            html_submit_to = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you confirm submit to Vendor Selection?' href=" + link_submit_to + ">Submit to</a>"
-            html_vendor_select = "<a class='k-button " + apply_vendor_select_class + "' data-fancybox-type='iframe' href=" + link_apply_vendor_select + ">Apply</a>"
-            html_apply_proposed_vendor = "<a class='k-button " + apply_proposed_vendor_class + "' data-fancybox-type='iframe' href=" + link_apply_proposed_vendor + ">Add New Sources</a>"
-            html_submit_proposed_vendor = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you confirm submit to Vendor Selection?' href=" + link_submit_proposed_vendor + ">Submit to Vendor Selection</a>"
-            html_vendor_reg = "<a class='k-button " + apply_vendor_reg_class + "' data-fancybox-type='iframe' href=" + link_apply_vendor_reg + ">Add New Vendor</a>"                          
-            html_make_po = "<a class='k-button " + apply_make_po_class + "' data-fancybox-type='iframe' href=" + link_apply_make_po + ">Add New PO</a>"
-            html_printable_po = "<a target='_blank' class='k-button' href=" + link_printable_po + ">Printer</a>"
-            html_ste_show_history = "<a class='show_without_refresh_page_1600x900 k-button' data-fancybox-type='iframe' href=" + link_show_history + ">Show Histories for Suppliers</a>"
-            html_mail = "<a class='iframe_800x450 k-button' data-fancybox-type='iframe' href=" + link_mail + ">Mail</a>"
-            html_add_customer = "<a class='k-button " + add_class + "' data-fancybox-type='iframe' href=" + link_add_customer + ">Add New Customer</a>"
-            html_add_product = "<a class='k-button " + add_class + "' data-fancybox-type='iframe' href=" + link_add_product + ">Add New Product</a>"
-            html_costing = "<a class='k-button " + cost_class + "' data-fancybox-type='iframe' href=" + link_costing + ">Costing Sheet</a>"
-            html_add_product_id = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_add_product_id + ">Apply the Product ID Registration</a>"
+            html_show = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_show  + "><b>Show</b></a>"
+            html_edit = "<a class='k-button " + edit_class + "' data-fancybox-type='iframe' href=" + link_edit + "><b>Edit</b></a>"
+            html_kiv = "<a rel='nofollow' class='k-button' data-method='delete' data-confirm='Are you sure move to KIV?' href=" + link_kiv + "><b>Drop to KIV</b></a>"
+            html_moving_kiv = "<a data-confirm='Are you sure move to KIV?' class='k-button' href=" + link_moving_kiv + "><b>Drop to KIV</b></a>"
+            html_pdf = "<a target='_blank' class='k-button' href=" + link_printable + "><b>Printer</b></a>"
+            html_pdf_qr = "<a target='_blank' class='k-button' href=" + link_printable_qr + "><b>Printer</b></a>"
+            html_pdf_cs = "<a target='_blank' class='k-button' href=" + link_printable_cs + "><b>Printer</b></a>"
+            html_show_kiv = "<a class='k-button " + show_class + "' data-fancybox-type='iframe' href=" + link_show_kiv  + "><b>Show KIV</b></a>"
+            html_recover = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you sure to recover?' href=" + link_recover + "><b>Recover</b></a>"
+            html_remove = "<a href='k-button " + link_remove + "' data-confirm='Are you sure to remove?' data-method='put' rel='nofollow'>" + "><b>Remove</b></a>"
+            html_apply = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_apply + "><b>Apply</b></a>"
+            html_submit_to = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you confirm submit to Vendor Selection?' href=" + link_submit_to + "><b>Submit to</b></a>"
+            html_vendor_select = "<a class='k-button " + apply_vendor_select_class + "' data-fancybox-type='iframe' href=" + link_apply_vendor_select + "><b>Apply</b></a>"
+            html_apply_proposed_vendor = "<a class='k-button " + apply_proposed_vendor_class + "' data-fancybox-type='iframe' href=" + link_apply_proposed_vendor + "><b>Add New Sources</b></a>"
+            html_submit_proposed_vendor = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you confirm submit to Vendor Selection?' href=" + link_submit_proposed_vendor + "><b>Submit to Vendor Selection</b></a>"
+            html_vendor_reg = "<a class='k-button " + apply_vendor_reg_class + "' data-fancybox-type='iframe' href=" + link_apply_vendor_reg + "><b>Add New Vendor</b></a>"                          
+            html_make_po = "<a class='k-button " + apply_make_po_class + "' data-fancybox-type='iframe' href=" + link_apply_make_po + "><b>Add New PO</b></a>"
+            html_printable_po = "<a target='_blank' class='k-button' href=" + link_printable_po + "><b>Printer</b></a>"
+            html_ste_show_history = "<a class='show_without_refresh_page_1600x900 k-button' data-fancybox-type='iframe' href=" + link_show_history + "><b>Show Histories for Suppliers</b></a>"
+            html_mail = "<a class='iframe_800x450 k-button' data-fancybox-type='iframe' href=" + link_mail + "><b>Mail</b></a>"
+            html_add_customer = "<a class='k-button " + add_class + "' data-fancybox-type='iframe' href=" + link_add_customer + "><b>Add New Customer</b></a>"
+            html_add_product = "<a class='k-button " + add_class + "' data-fancybox-type='iframe' href=" + link_add_product + "><b>Add New Product</b></a>"
+            html_costing = "<a class='k-button " + cost_class + "' data-fancybox-type='iframe' href=" + link_costing + "><b>Costing Sheet</b></a>"
+            html_add_product_id = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_add_product_id + "><b>Apply the Product ID Registration</b></a>"
             
             $("#on_show").html(html_show);
             $("#on_edit").html(html_edit);
@@ -1828,13 +1827,13 @@ $(document).ready(function() {
     }); 
     
     $("#show_purchase").click(function() { 
-        $("#main_pr").show();
         $("#main_qr").hide();
+        $("#main_pr").slideDown();
     }); 
     
     $("#show_sales").click(function() { 
-        $("#main_pr").hide();
-        $("#main_qr").show();
+        $("#main_pr").slideUp();
+        $("#main_qr").slideDown();
     }); 
     
     $("#type_in").click(function(){

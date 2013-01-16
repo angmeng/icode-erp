@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104164749) do
+ActiveRecord::Schema.define(:version => 20130115160643) do
 
   create_table "bill_of_materials", :force => true do |t|
     t.integer  "bom_no"
@@ -295,9 +295,9 @@ ActiveRecord::Schema.define(:version => 20130104164749) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.string   "status",     :default => "ACTIVE"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "status",     :default => 1
   end
 
   create_table "formulations", :force => true do |t|
@@ -1089,8 +1089,8 @@ ActiveRecord::Schema.define(:version => 20130104164749) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",       :null => false
-    t.string   "encrypted_password",     :default => "",       :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -1108,15 +1108,15 @@ ActiveRecord::Schema.define(:version => 20130104164749) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "name"
     t.integer  "department_id"
-    t.integer  "level"
-    t.string   "status",                 :default => "ACTIVE"
     t.string   "job_title"
-    t.integer  "report_to"
-    t.boolean  "direct_report",          :default => false
+    t.integer  "status",                 :default => 1
+    t.boolean  "admin",                  :default => false
+    t.integer  "level_two"
+    t.integer  "level_three"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

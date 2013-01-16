@@ -1,17 +1,32 @@
-<div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
+<div id="popup_container">
+  <div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
+  <div>
+    <%= form_tag generator_user_users_path do  %>
+      <div id="user_strip">
+        <ul>
+          <li class="k-state-active">User Account</li>
+          <li>Inventory Management System</li>
+        </ul>
+        <div><%= render "user_account" %></div>
+        <div><%= render "management" %></div>
+      </div>
 
-<%= form_tag generator_user_users_path do  %>
-  <div id="user_strip">
-    <ul>
-      <li class="k-state-active">User Account</li>
-      <li>Inventory Management System</li>
-    </ul>
-    <div><%= render "user_account" %></div>
-    <div><%= render "management" %></div>
+      <div class="icon_tag">
+        <%= link_save_button %>
+        <%= link_close_button %>
+      </div>
+    <% end %>
   </div>
+</div>
 
-  <div class="icon_tag">
-    <%= link_save_button %>
-    <%= link_close_button %>
-  </div>
+<% content_for :jquery_script do %>
+   <script>
+      $(document).ready(function() {
+          $("#new_name").keyup(function(){
+            var string = $(this).val();
+            $("#insert_name").html(string);
+            return false;
+          });
+      });
+    </script>
 <% end %>
