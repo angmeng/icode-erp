@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -2225,4 +2225,4 @@ ActiveRecord::Schema.define(:version => 20130117100731) do
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
 end
->>>>>>> 0967767b36d500b165b148736b22a32e79b979a9
+

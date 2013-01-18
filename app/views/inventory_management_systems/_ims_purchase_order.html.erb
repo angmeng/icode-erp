@@ -8,7 +8,7 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR), :disabled => true %> Approved From PR</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR_SHOW, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR_SHOW), :disabled => true %></td>
-          <% 15.times do |td| %><td></td><% end %>
+          <% 9.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -18,7 +18,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_SUBMIT_TO), :disabled => true %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -28,17 +28,17 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_APPLY), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_SUBMIT_TO), :disabled => true %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
-        <tr>
+       <tr>
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION), :disabled => true %> Vendor Selection</td>
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_APPLY), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_SUBMIT_TO), :disabled => true %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -48,7 +48,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO), :disabled => true %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -58,10 +58,10 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY_SUBMIT_TO), :disabled => true %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
-        <tr>
+       <tr>
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION), :disabled => true %> PO Transactions & Histories</td>
@@ -70,7 +70,7 @@
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_EDIT), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_KIV), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::  PURCHASE_ORDER_TRANSACTION_PRINTABLE), :disabled => true %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
@@ -84,18 +84,18 @@
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::  PURCHASE_ORDER_TRANSACTION_PRINTABLE), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PO_KIV_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PO_KIV_RECOVER), :disabled => true %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
   
     <% else %>
   
-        <tr>
+       <tr>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_MENU, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %> PURCHASE ORDER</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR) %> Approved From PR</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR_SHOW, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR_SHOW) %></td>
-          <% 15.times do |td| %><td></td><% end %>
+          <% 9.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -105,7 +105,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_SUBMIT_TO) %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -115,7 +115,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_APPLY) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_SUBMIT_TO) %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -125,7 +125,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_APPLY) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_SUBMIT_TO) %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -135,7 +135,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO) %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -145,7 +145,7 @@
           <% 7.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY_SUBMIT_TO) %></td>
-          <% 8.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -157,7 +157,7 @@
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_EDIT) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_KIV) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::  PURCHASE_ORDER_TRANSACTION_PRINTABLE) %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
@@ -171,7 +171,7 @@
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::  PURCHASE_ORDER_TRANSACTION_PRINTABLE), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PO_KIV_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PO_KIV_RECOVER) %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
         
     <% end %>
@@ -184,7 +184,7 @@
       <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR %> Approved From PR</td>
       <td></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR_SHOW %></td>
-      <% 15.times do |td| %><td></td><% end %>
+      <% 9.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -194,7 +194,7 @@
       <% 7.times do |td| %><td></td><% end %>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_SUBMIT_TO %></td>
-      <% 8.times do |td| %><td></td><% end %>
+      <% 2.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -204,7 +204,7 @@
       <% 7.times do |td| %><td></td><% end %>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_APPLY %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR_SUBMIT_TO %></td>
-      <% 8.times do |td| %><td></td><% end %>
+      <% 2.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -214,7 +214,7 @@
       <% 7.times do |td| %><td></td><% end %>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_APPLY %></td>
       <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION_SUBMIT_TO %></td>
-      <% 8.times do |td| %><td></td><% end %>
+      <% 2.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -224,7 +224,7 @@
       <% 7.times do |td| %><td></td><% end %>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY %></td>
       <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO %></td>
-      <% 8.times do |td| %><td></td><% end %>
+      <% 2.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -234,7 +234,7 @@
       <% 7.times do |td| %><td></td><% end %>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY %></td>
       <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY_SUBMIT_TO %></td>
-      <% 8.times do |td| %><td></td><% end %>
+      <% 2.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -246,7 +246,7 @@
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_EDIT %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_KIV %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_PRINTABLE %></td>
-      <% 12.times do |td| %><td></td><% end %>
+      <% 6.times do |td| %><td></td><% end %>
     </tr>
     
     <tr>
@@ -260,7 +260,7 @@
       <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::  PURCHASE_ORDER_TRANSACTION_PRINTABLE), :disabled => true %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_KIV_SHOW %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_KIV_RECOVER %></td>
-      <% 10.times do |td| %><td></td><% end %>
+      <% 4.times do |td| %><td></td><% end %>
     </tr>
     
   <% end %>

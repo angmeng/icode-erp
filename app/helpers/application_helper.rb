@@ -678,7 +678,7 @@ module ApplicationHelper
     end
     
     def link_close_button
-      link_to 'Close', "#", :class=>"k-button font_bold" , :onclick => "parent.$.fancybox.close();"
+      link_to 'Home' , root_url , :class=>"k-button font_bold"  #:onclick => "parent.$.fancybox.close();"
     end
     
     def link_mail_button
