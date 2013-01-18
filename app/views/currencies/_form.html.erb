@@ -3,7 +3,11 @@
     <table>
       <tr>
         <td width="100">Name *</td>
-        <td><%= f.text_field :name %></td>
+        <td>
+          <%#= f.text_field :name , :class="k-textbox" ,{"required validationMessage"="Please enter {0}"} %>
+          <%= f.text_field :name, :class => "k-textbox", "required validationMessage" => "Please Enter Name" %>
+          
+        </td>
       </tr>
     </table>
   </div>
@@ -13,5 +17,4 @@
     <%= link_close_button %>
   </div>
 <% end %>
-
 

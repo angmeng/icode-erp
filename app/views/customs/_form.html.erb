@@ -15,9 +15,10 @@
         <td><%= company.sn_sales_tax_exemption_no rescue '0' %></td>
       <% end %>
     </tr>
+    
     <tr>
-      <td><%= f.label :sales_tax_exemption, "Sales Tax Exemption *" %></td>
-      <td><%= f.text_field :sales_tax_exemption, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox", :size => 50 %></td>
+      <td><%= f.label :sales_tax_exemption %></td>
+      <td><%= f.text_field :sales_tax_exemption, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox k-text", :size => 50 , "required validationMessage" => "Please Enter Sales Tax Exemption" %></td>
     </tr>
     <tr>
       <td><%= f.label :trade_company_id %></td>

@@ -16,24 +16,24 @@
     <%= f.number_field :sales_tax_exemption_id %>
   </div>
   <div class="field">
-    <%= f.label :perihal_barang %><br />
-    <%= f.text_field :perihal_barang %>
+    <%= f.label :perihal_barang , "Perihal Barang *" %><br />
+    <%= f.text_field :perihal_barang,:class => "k-textbox", "required validationMessage" => "Please Enter Perihal Barang" %>
   </div>
   <div class="field">
-    <%= f.label :apply_qty %><br />
-    <%= f.text_field :apply_qty %>
+    <%= f.label :apply_qty , "Apply Qty *" %><br />
+    <%= f.text_field :apply_qty, :class => "k-textbox" , "required validationMessage" => "Please Enter Apply Qty" %>
   </div>
   <div class="field">
     <%= f.label :complete_qty %><br />
     <%= f.text_field :complete_qty %>
   </div>
   <div class="field">
-    <%= f.label :unit_measurement_id %><br />
-    <%= f.number_field :unit_measurement_id %>
+    <%= f.label :unit_measurement_id , "Unit Measument ID *" %><br />
+    <%= f.number_field :unit_measurement_id , :class => "k-textbox" , "required validationMessage" => "Please Enter Unit Measument ID"  %>
   </div>
   <div class="field">
-    <%= f.label :tarif_code %><br />
-    <%= f.text_field :tarif_code %>
+    <%= f.label :tarif_code , "Tarif Code *" %><br />
+    <%= f.text_field :tarif_code ,:class => "k-textbox", "required validationMessage" => "Please Enter From Tarif Code"%>
   </div>
   <div class="field">
     <%= f.label :valid_condition %><br />

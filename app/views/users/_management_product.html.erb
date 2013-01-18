@@ -1,0 +1,45 @@
+<table id="grid_h490" class="black-line-table zebraLight">
+  
+  <thead>
+    
+    <tr class="header_line">
+      <th></th>
+      <th width="200" rowspan="2">MODULE</th>
+      <th width="350" rowspan="2">SUB-MODULE</th>
+      <th colspan="17">ACTION</th>
+    </tr>
+
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th width="50">Drop to KIV</th>
+      <th width="50">Recover</th>
+      <th width="50">Create Group</th>
+      <th width="50">Edit Group</th>
+      <th width="50">Add Sub Group/Product Type</th>
+      <th width="50">Edit Sub Group/Product Type</th>
+      <th width="50">Add Product ID</th>
+      <th width="50">Edit Product ID</th>
+      
+    </tr>
+    
+  </thead>
+  <%#= image_tag("add_item_button.png", :alt => "Add or Exist Files", :title => "Add or Exist Files", :class => "cube35") %>
+  <tbody>
+    <!--PURCHASE-->
+    <%#= render "/inventory_management_systems/ims_purchase_requisition", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_purchase_order", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_receive_note", :checkboxes => @checkboxes %>
+    <!--SALES-->
+    <%#= render "/inventory_management_systems/ims_quotation_requisition", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_sales_order", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_delivery_order", :checkboxes => @checkboxes %>
+    <!--OTHER-->
+    <%#= render "/inventory_management_systems/ims_sales_tax_exemption", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_formulation_for_costing", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_inventory", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_company_profile", :checkboxes => @checkboxes %>
+    <%#= render "/inventory_management_systems/ims_trade_company", :checkboxes => @checkboxes %>
+    <%= render "/inventory_management_systems/ims_product", :checkboxes => @checkboxes %>
+    
+  </tbody>
+</table>

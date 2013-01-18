@@ -1,7 +1,7 @@
 class PurchaseRequisitionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox"
+  
 
   def index
     @search = PurchaseRequisition.search(params[:search])

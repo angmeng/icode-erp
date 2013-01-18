@@ -6,8 +6,8 @@
         <td><%= f.text_field :code, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
       </tr>
       <tr>
-        <td><b>Description</b></td>
-        <td><%= f.text_field :desc, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,40]'" %></td>
+        <td><b>Description *</b></td>
+        <td><%= f.text_field :desc, :class => "easyui-validatebox k-textbox", "data-options" => "required: true, validType: 'length[2,40]'", "required validationMessage" => "Please Enter Description" %></td>
       </tr>
     </table>
     
@@ -16,10 +16,10 @@
         <tr>
           <td>
             <% if @category_id.present? %>
-              <%= f.text_field :parent_id, :value => @category_id %>
+              <%= f.text_field :parent_id, :value => @category_id , :class => "k-textbox" , "required validationMessage" => "Please Enter Parent Id" %>
               <% @level = answer_level(@category_id) %>
             <% else %>
-              <%= f.text_field :parent_id, :value => @new_category.parent_id %>
+              <%= f.text_field :parent_id, :value => @new_category.parent_id , :class => "k-textbox" , "required validationMessage" => "Please Enter Parent Id"%>
               <% @level = answer_level(@new_category.parent_id) %>
             <% end %>
             <%= f.text_field :level, :value => @level.to_i + 1 %>
@@ -29,9 +29,9 @@
         <tr>
           <td>
             <% if @icon.present? %>
-              <%= f.text_field :icon, :value => @icon %>
+              <%= f.text_field :icon, :value => @icon , :class => "k-textbox" , "required validationMessage" => "Please Enter An Icon" %>
             <% else %>
-              <%= f.text_field :icon, :value => @new_category.icon %>
+              <%= f.text_field :icon, :value => @new_category.icon , :class => "k-textbox" , "required validationMessage" => "Please Enter An Icon " %>
             <% end %>
           </td>
         </tr>
@@ -39,9 +39,9 @@
         <tr>
           <td>
             <% if @category_type.present? %>
-              <%= f.text_field :category_type, :value => @category_type %>
+              <%= f.text_field :category_type, :value => @category_type  , :class => "k-textbox" , "required validationMessage" => "Please Enter Category Type"%>
             <% else %>
-              <%= f.text_field :category_type, :value => @new_category.category_type %>
+              <%= f.text_field :category_type, :value => @new_category.category_type, :class => "k-textbox" , "required validationMessage" => "Please Enter Catedory Type" %>
             <% end %>
           </td>
         </tr>

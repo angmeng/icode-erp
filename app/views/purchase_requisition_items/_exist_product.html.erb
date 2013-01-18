@@ -41,10 +41,10 @@
       </tr>
 
       <tr>
-        <td><b>Quantity</b></td>
+        <td><b>Quantity *</b></td>
         <td>
           <%= f.text_field :quantity, :size => 10, :required => "true" %>
-          <b>U/M: </b>
+          <b>U/M:</b>
           <% if @purchase_requisition_item.product_id.present? %>
             <span id="data_um"><%= @purchase_requisition_item.unit_measurement.code rescue '-' %></span>
           <% else %>
@@ -74,12 +74,12 @@
       </tr>
 
       <tr>
-        <td><b>ETA</b></td>
+        <td><b>ETA *</b></td>
         <td>
           <% if @purchase_requisition_item.eta.present? %>
-            <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+            <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA"%>
           <% else %>
-            <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+            <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA" %>
           <% end %>
         </td>
       </tr>

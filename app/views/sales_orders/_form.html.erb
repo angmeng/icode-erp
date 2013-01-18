@@ -11,12 +11,12 @@
         
       <td width="50"></td>
       
-      <td width="100"><b>SO Date</b></td>
+      <td width="100"><b>SO Date *</b></td>
       <td>
         <% if action_name == "edit" %>
           <%= @sales_order.so_date.strftime("%d-%m-%Y") rescue '-' %>
         <% else %>
-          <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+          <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date"  , "required validationMessage" => "Please Enter SO Date" %>
         <% end %>
       </td>
       
@@ -27,7 +27,7 @@
     </tr>
     
     <tr>
-      <td><b>Customer Company</b></td>
+      <td><b>Customer Company *</b></td>
       <td>
         <% if @temp_company.present? %>
           <%= @temp_company.trade_company.name rescue'-'  %>
@@ -54,21 +54,22 @@
       
       <td></td>
       
-      <td><b>Purpose</b></td>
-      <td><%= f.select :purpose, options_for_select({ "SALES" => SalesOrder::SALES }, @sales_order.purpose), :include_blank => true %></td>
+      <td><b>Purpose *</b></td>
+      <td><%= f.select :purpose, options_for_select({ "SALES" => SalesOrder::SALES }, @sales_order.purpose), :include_blank => true  , "required validationMessage" => "Please Enter Purpose " %></td>
       
       <td></td>
       
       <td><b>Exp Date</b></td>
       <td><%= f.text_field :exp_date, :class => "kendo_date_multiple" %></td>
     </tr>
-    
     <tr>
       <td><b>Sales Rep.</b></td>
       <td><%= f.text_field :sales_rep, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
       <td></td>
-      <td><b>Currency</b></td>
-      <td><%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id), :include_blank => true %></td>
+      <td><b>Currency *</b></td>
+      <td><%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id),{ :include_blank => true  }  %>
+        
+       </td>
     </tr>
     
     <tr>

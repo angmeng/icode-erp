@@ -24,18 +24,18 @@
       <%= f.text_field :customer_name, :style => "width:400px;", :id => "autoComplete_customers", :onblur => "place_customer_id_to_trade_company_id(this)" %>
       <%= f.hidden_field :trade_company_id, :size => 8 %>
       
-      <b>QRF Date</b>
+      <b>QRF Date *</b>
       <% if @quotation_request_form.qrf_date.present? %>
-        <%= f.text_field :qrf_date, :value => @quotation_request_form.qrf_date.strftime('%d-%m-%Y') %>
+        <%= f.text_field :qrf_date, :value => @quotation_request_form.qrf_date.strftime('%d-%m-%Y'), :class => "k-textbox" , "required validationMessage" => "Please Enter QRF Date" %>
       <% else %>
-        <%= f.text_field :qrf_date, :value => Date.today.strftime('%d-%m-%Y') %>
+        <%= f.text_field :qrf_date, :value => Date.today.strftime('%d-%m-%Y'), :class => "k-textbox" , "required validationMessage" => "Please Enter QRF Date" %>
       <% end %>
     </td>
   </tr>
 
   <tr>
-    <td><b>Description</b></td>
-    <td><%= f.text_area :description, :rows => 2 %></td>
+    <td><b>Description *</b></td>
+    <td><%= f.text_area :description, :rows => 2 , :class => "k-textbox" , "required validationMessage" => "Please Enter Description" %></td>
   </tr>    
 
   <tr>
@@ -59,10 +59,10 @@
   </tr>
 
   <tr>
-    <td><b>Open Size, inch</b></td>
+    <td><b>Open Size, inch *</b></td>
     <td>
-      (L) <%= f.text_field :open_size_length, :size => 10, :class => "two_zero_open_length"  %>
-      (W) <%= f.text_field :open_size_width, :size => 10, :class => "two_zero_open_width"  %>
+      (L) <%= f.text_field :open_size_length, :size => 10, :class => "two_zero_open_length", :class => "k-textbox" , "required validationMessage" => "Please Enter Open Size, lenght"   %>
+      (W) <%= f.text_field :open_size_width, :size => 10, :class => "two_zero_open_width", :class => "k-textbox" , "required validationMessage" => "Please Enter Open Size, Width"   %>
     </td>
   </tr>
 </table>

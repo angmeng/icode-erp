@@ -3,31 +3,31 @@
   <table>
     <tr>
       <td width="150"><%= f.label :name, "Company's Name *"%></td>
-      <td><%= f.text_field :name, :size => 50 %></td>
+      <td><%= f.text_field :name, :size => 50 , :class => "k-textbox" ,"required validationMessage" => "Please Enter Company Name"%></td>
     </tr>
     <tr>
       <td width="150"><%= f.label :address, "Address *" %></td>
-      <td><%= f.text_area :address, :rows => 2 %></td>
+      <td><%= f.text_area :address, :rows => 2 , :class => "k-textbox", "required validationMessage" => "Please Enter Address"%></td>
     </tr>
   </table>
 
   <table>
     <tr>
       <td width="150"><%= f.label :tel_no_1, "Tel1 No. *" %></td>
-      <td width="150"><%= f.text_field :tel_no_1 %></td>
+      <td width="150"><%= f.text_field :tel_no_1,:class => "k-textbox", "required validationMessage" => "Please Enter Tel 1 No" %></td>
 
       <td width="150"><%= f.label :tel_no_2, "Tel2 No. *" %></td>
-      <td width="150"><%= f.text_field :tel_no_2 %></td>
+      <td width="150"><%= f.text_field :tel_no_2 , :class => "k-textbox", "required validationMessage" => "Please Enter Tel 2 No" %></td>
 
       <td width="150"><%= f.label :fax_no, "Fax No. *" %></td>
-      <td width="150"><%= f.text_field :fax_no %></td>
+      <td width="150"><%= f.text_field :fax_no , :class => "k-textbox", "required validationMessage" => "Please Enter Fax No" %></td>
     </tr>
     <tr>
       <td><%= f.label :sales_tax_no, "Sales Tax No. *" %></td>
-      <td><%= f.text_field :sales_tax_no %></td>
+      <td><%= f.text_field :sales_tax_no , :class => "k-textbox", "required validationMessage" => "Please Enter Sales Tax No " %></td>
 
       <td><%= f.label :reg_no, "Reg. No. *" %></td>
-      <td><%= f.text_field :reg_no %></td>
+      <td><%= f.text_field :reg_no , :class => "k-textbox", "required validationMessage" => "Please Enter Reg No" %></td>
     </tr>
   </table>
 

@@ -16,27 +16,27 @@
 
         <td>
           <% if action_name == "edit" %>
-            <%= f.text_field :pp_date , :value => @price_control.pp_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+            <%= f.text_field :pp_date , :value => @price_control.pp_date.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Select P/P Date"  %>
           <% else %>
-            <%= f.text_field :pp_date , :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+            <%= f.text_field :pp_date , :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" ,  "required validationMessage" => "Please Select P/P Date"  %>
           <% end %>
         </td>
       </tr>
 
       <tr>
         <td><b>Trade Company *</b></td>
-        <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true }, { :class => "kendo_combobox_multiple price_control_trade_company_id", :style => "width: 400px;" } %></td>
+        <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true , "required validationMessage" => "Please Select trade company"}, { :class => "kendo_combobox_multiple price_control_trade_company_id", :style => "width: 400px;" }  %></td>
         <%#*:id => "kendo_combobox",%> 
       </tr>
 
       <tr>
         <td><b>Reference *</b></td>
-        <td><%= f.text_field :reference %></td>
+        <td><%= f.text_field :reference, :class => "k-textbox", "required validationMessage" => "Please Enter Reference" %></td>
       </tr>
 
       <tr>
         <td><b>Currency *</b></td>
-        <td><%= f.select :currency_id, options_from_collection_for_select(currency, :id, :name, @price_control.currency_id), { :include_blank => true }, { :style => "width: 100px;" } %></td>
+        <td><%= f.select :currency_id, options_from_collection_for_select(currency, :id, :name, @price_control.currency_id), { :include_blank => true }, { :style => "width: 100px;"}%></td>
         <td></td>
         <td><b>Updated By</b></td>
         <td>

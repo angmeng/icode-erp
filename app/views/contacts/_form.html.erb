@@ -17,23 +17,23 @@
   </div>
   <div class="field">
     <%= f.label :department, "Department *" %><br />
-    <%= f.text_field :department %>
+    <%= f.text_field :department, :class => "k-textbox", "required validationMessage" => "Please Enter Deparment " %>
   </div>
   <div class="field">
     <%= f.label :name, "Name *" %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name , :class => "k-textbox", "required validationMessage" => "Please Enter Name" %>
   </div>
   <div class="field">
     <%= f.label :phone_area_code, "Phone Area Code *" %><br />
-    <%= f.text_field :phone_area_code %>
+    <%= f.text_field :phone_area_code , :class => "k-textbox", "required validationMessage" => "Please Enter Phone Area Code" %>
   </div>
   <div class="field">
     <%= f.label :phone_no, "Phone No. *" %><br />
-    <%= f.text_field :phone_no %>
+    <%= f.text_field :phone_no, :class => "k-textbox", "required validationMessage" => "Please Enter Phone No" %>
   </div>
   <div class="field">
-    <%= f.label :email, "E-mail *" %><br />
-    <%= f.text_field :email %>
+    <%= f.label :email %><br />
+    <%= f.text_field :email ,:class => "k-textbox", "required data-email-msg='Email format is invalid'" %>
   </div>
   <div class="actions">
     <%= f.submit %>

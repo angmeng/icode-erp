@@ -4,16 +4,16 @@
   <table>
     <tr>
       <td><b>Old Company Code *</b></td>
-      <td><%= f.select :old_code, options_from_collection_for_select(trade_company_both, :code, :code, @change_company_code.old_code), { :include_blank => true }, { :id => "kendo_combobox" } %></td>
+      <td><%= f.select :old_code, options_from_collection_for_select(trade_company_both, :code, :code, @change_company_code.old_code), { :include_blank => true }, { :id => "kendo_combobox" } , :class => "k-textbox", "required validationMessage" => "Please Enter Old Company Code" %></td>
     </tr>
     
     <tr>
       <td colspan="2" align="center">Change To</td>
     </tr>
-    
+    required validationMessage="Please enter {0}"
     <tr>
       <td><b>New Company Code *</b></td>
-      <td><%= f.text_field :new_code,:size => 8 %></td>
+      <td><%= f.text_field :new_code,:size => 8 , :class => "k-textbox", "required validationMessage" => "Please Enter New Company Code" %></td>
     </tr>
   </table>
 </div>

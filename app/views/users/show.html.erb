@@ -1,3 +1,4 @@
+<div id="popup_container">
 <div style="background-color:blue"><strong style="color:white;">SHOW USER</strong></div>
 
   <div id="user_strip">
@@ -7,6 +8,9 @@
         </li>
         <li>
           Inventory Management System
+        </li>
+        <li>
+          Inventory Management System II- Product 
         </li>
     </ul>
     
@@ -38,12 +42,19 @@
         </tr>
       </table>
     </div>
+
     <div>
       <%= render "management" %>
     </div>
-  </div>
+    <div>
+      <div class="user_management">
+      <%= render "management_product" %>
+    </div>
+    </div>
+  
 
 <div class="icon_tag">
   <%= link_close_button %>
 </div>
 
+</div>

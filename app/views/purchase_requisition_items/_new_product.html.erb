@@ -34,10 +34,10 @@
             </tr>
 
             <tr id="new_product_qty">
-              <td><b>Quantity</b></td>
+              <td><b>Quantity </b></td>
               <td colspan="3">
                 <%= f.text_field :quantity, :size => 10, :class => "five_digit_" %>
-                <b>U/M:</b> <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', @purchase_requisition_item.unit_measurement_id.to_i), { :include_blank => true }, { :id => "kendo_combobox" } %>
+                <b>U/M: *</b> <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code'  , @purchase_requisition_item.unit_measurement_id.to_i), { :include_blank => true }, { :id => "kendo_combobox" } %>
               </td>
             </tr>
 
@@ -67,9 +67,9 @@
               <td><b>ETA *</b></td>
               <td>
                 <% if @purchase_requisition_item.eta.present? %>
-                  <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+                  <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA" %>
                 <% else %>
-                  <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+                  <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date"  , "required validationMessage" => "Please Enter ETA"%>
                 <% end %>
               </td>
             </tr>

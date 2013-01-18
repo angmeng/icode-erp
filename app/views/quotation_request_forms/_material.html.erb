@@ -1,12 +1,12 @@
 <div style="height: 445px; width: 510px;">
   <table>
     <tr>
-      <td width="120"><b>Paper Quality</b></td>
-      <td><%= f.text_field :material_gramme, :size => 5, :class => "three_digit_" %> GSM</td>
+      <td width="120"><b>Paper Quality *</b></td>
+      <td><%= f.text_field :material_gramme, :size => 5, :class => "three_digit_ k-textbox" , "required validationMessage" => "Please Enter Paper Quality" %> GSM</td>
       <% if unit_measurement.find_by_code('GSM').present? %>
-        <%= f.hidden_field :unit_measurement_id, :value => unit_measurement.find_by_code('GSM').id, :size => 3 %>
+        <%= f.hidden_field :unit_measurement_id, :value => unit_measurement.find_by_code('GSM').id, :size => 3 , :class => "k-textbox" , "required validationMessage" => "Please Enter unit measurement id " %>
       <% else %>
-        <%= f.hidden_field :unit_measurement_id, :value => 40, :size => 3 %>
+        <%= f.hidden_field :unit_measurement_id, :value => 40, :size => 3, :class => "k-textbox" , "required validationMessage" => "Please Enter unit measurement id " %>
       <% end %>
     </tr>
 
@@ -21,15 +21,15 @@
     </tr>
 
     <tr>
-      <td><b>Paper Size, inch</b></td>
+      <td><b>Paper Size, inch *</b></td>
       <td>
-        (W)<%= f.text_field :paper_width, :size => 5, :class => "two_zero_" %>
-        (L)<%= f.text_field :paper_length, :size => 5, :class => "two_zero_" %>  
+        (W)<%= f.text_field :paper_width, :size => 5, :class => "two_zero_" , :class => "k-textbox" , "required validationMessage" => "Please Enter paper Size , width " %>
+        (L)<%= f.text_field :paper_length, :size => 5, :class => "two_zero_" , :class => "k-textbox" , "required validationMessage" => "Please Enter paper size , length " %>  
       </td>
 
-      <td><b>Ratio</b></td>
+      <td><b>Ratio *</b></td>
       <td>
-        <%= f.text_field :ratio, :size => 5, :class => "two_digit_ratio"  %>
+        <%= f.text_field :ratio, :size => 5, :class => "two_digit_ratio" , :class => "k-textbox" , "required validationMessage" => "Please Enter Ratio" %>
         <span id="run_size">RUN</span>
       </td>
     </tr>

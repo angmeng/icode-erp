@@ -16,8 +16,8 @@
     <%= f.number_field :product_id %>
   </div>
   <div class="field">
-    <%= f.label :product_code %><br />
-    <%= f.text_field :product_code %>
+    <%= f.label :product_code , "Product Code *" %><br />
+    <%= f.text_field :product_code , , :class => "k-textbox" , "required validationMessage" => "Please Enter Parent Code" %>
   </div>
   <div class="actions">
     <%= f.submit %>

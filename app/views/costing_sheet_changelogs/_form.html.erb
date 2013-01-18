@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :costing_sheet_id %><br />
-    <%= f.number_field :costing_sheet_id %>
+    <%= f.label :costing_sheet_id , "Costing Sheet Id *" %><br />
+    <%= f.number_field :costing_sheet_id :class => "k-textbox", "required validationMessage" => "Please Enter Costing Sheet Id"%>
   </div>
   <div class="field">
     <%= f.label :change_log %><br />

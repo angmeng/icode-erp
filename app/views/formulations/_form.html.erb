@@ -5,19 +5,19 @@
   <table>
     <tr>
       <td><%= f.label :per_value, "Per Value *" %></td>
-      <td><%= f.text_field :per_value %></td>
+      <td><%= f.text_field :per_value, :class => "k-textbox", "required validationMessage" => "Please Enter Per Value" %></td>
     </tr>
     <tr>
-      <td><%= f.label :from_unit_measurement_id, "From Unit Measurement id" %></td>
-      <td><%= f.select :from_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.from_unit_measurement_id), :include_blank => true %></td>
+      <td><%= f.label :from_unit_measurement_id, "From Unit Measurement id *" %></td>
+      <td><%= f.select :from_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.from_unit_measurement_id), :include_blank => true,:class => "k-textbox", "required validationMessage" => "Please Enter From Unit Measurement Id" %></td>
     </tr>
     <tr>
       <td><%= f.label :convert_value , "Convert Value *" %></td>
-      <td><%= f.text_field :convert_value %></td>
+      <td><%= f.text_field :convert_value :class => "k-textbox", "required validationMessage" => "Please Enter Convert Value"%></td>
     </tr>
     <tr>
       <td><%= f.label :to_unit_measurement_id, "To Unit Measurement Id *" %></td>
-      <td><%= f.select :to_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.to_unit_measurement_id), :include_blank => true %></td>
+      <td><%= f.select :to_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.to_unit_measurement_id), :include_blank => true, :class => "k-textbox", "required validationMessage" => "Please Enter To Unit Measurement Id" %></td>
     </tr>
     <tr>
       <td colspahn="2">
