@@ -9,7 +9,7 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING), :disabled => true %> Formulation for Costing Sheet</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW), :disabled => true %></td>
-          <% 15.times do |td| %><td></td><% end %>
+          <% 9.times do |td| %><td></td><% end %>
         </tr>
         
       <% else %>
@@ -20,7 +20,7 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING) %> Formulation for Costing Sheet</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %></td>
-          <% 15.times do |td| %><td></td><% end %>
+          <% 9.times do |td| %><td></td><% end %>
         </tr>
       
       <% end %>
@@ -33,7 +33,7 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING %> Formulation for Costing Sheet</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW %></td>
-          <% 15.times do |td| %><td></td><% end %>
+          <% 9.times do |td| %><td></td><% end %>
         </tr>
 
     <% end %>

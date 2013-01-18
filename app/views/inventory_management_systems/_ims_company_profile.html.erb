@@ -12,7 +12,7 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_EDIT, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_EDIT), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_KIV, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_KIV), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE), :disabled => true %></td>
-        <% 12.times do |td| %><td></td><% end %>
+        <% 6.times do |td| %><td></td><% end %>
       </tr>
   
     <% else %>
@@ -26,7 +26,7 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_EDIT, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_KIV, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
-        <% 12.times do |td| %><td></td><% end %>
+        <% 6.times do |td| %><td></td><% end %>
       </tr>
       
     <% end %>
@@ -42,7 +42,7 @@
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_EDIT %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_KIV %></td>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE %></td>
-      <% 12.times do |td| %><td></td><% end %>
+      <% 6.times do |td| %><td></td><% end %>
     </tr>
 
   <% end %>

@@ -10,7 +10,7 @@
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
@@ -22,10 +22,10 @@
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_EDIT, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_EDIT), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_PRINTABLE), :disabled => true %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
 
-        <tr>
+         <tr>
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION), :disabled => true %> PR Transactions & Histories</td>
@@ -34,9 +34,8 @@
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_EDIT), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_PRINTABLE), :disabled => true %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
-        
         <tr>
           <td></td>
           <td></td>
@@ -46,7 +45,7 @@
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_DETAILS_EDIT, checkboxes.include?(InventoryManagementSystem::PR_DETAILS_EDIT), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_DETAILS_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_DETAILS_PRINTABLE), :disabled => true %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -56,7 +55,7 @@
           <% 5.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_KIV_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_KIV_RECOVER), :disabled => true %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>      
 
         <tr>
@@ -66,7 +65,7 @@
           <% 5.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_RECOVER), :disabled => true %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>  
         
     <% else %>
@@ -80,7 +79,7 @@
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE) %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
@@ -92,7 +91,7 @@
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_EDIT, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_EDIT) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_PRINTABLE) %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -104,7 +103,7 @@
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_EDIT) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_PRINTABLE) %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
@@ -116,7 +115,7 @@
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_DETAILS_EDIT, checkboxes.include?(InventoryManagementSystem::PR_DETAILS_EDIT) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_DETAILS_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_DETAILS_PRINTABLE) %></td>
-          <% 12.times do |td| %><td></td><% end %>
+          <% 6.times do |td| %><td></td><% end %>
         </tr>
 
         <tr>
@@ -126,7 +125,7 @@
           <% 5.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_KIV_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_KIV_RECOVER) %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>      
 
         <tr>
@@ -136,13 +135,13 @@
           <% 5.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_ITEMS_KIV_RECOVER) %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>  
         
     <% end %>
 
   <% else %>
-    
+  
       <tr>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MENU %> PURCHASE REQUISITION</td>
@@ -152,7 +151,7 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE %></td>
-        <% 12.times do |td| %><td></td><% end %>
+        <% 6.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -164,7 +163,7 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_EDIT %></td>
         <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_PRINTABLE %></td>
-        <% 12.times do |td| %><td></td><% end %>
+        <% 6.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
@@ -176,7 +175,7 @@
         <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_EDIT %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_PRINTABLE %></td>
-        <% 12.times do |td| %><td></td><% end %>
+        <% 6.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -188,7 +187,7 @@
         <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_DETAILS_EDIT %></td>
         <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_DETAILS_PRINTABLE %></td>
-        <% 12.times do |td| %><td></td><% end %>
+        <% 6.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
@@ -198,7 +197,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_SHOW %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_RECOVER %></td>
-        <% 10.times do |td| %><td></td><% end %>
+        <% 4.times do |td| %><td></td><% end %>
       </tr>      
 
       <tr>
@@ -208,7 +207,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_SHOW %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_ITEMS_KIV_RECOVER %></td>
-        <% 10.times do |td| %><td></td><% end %>
+        <% 4.times do |td| %><td></td><% end %>
       </tr>  
       
   <% end %>
