@@ -1,54 +1,47 @@
 <table>
     <tr>
-      <td>Name</td>
-      <td><%= text_field_tag :new_name, @user.name, :size => 30, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+      <td width="100"><b>Name *</b></td>
+      <td><%= text_field_tag :new_name, @user.name %></td>
     </tr>
     <tr>
-      <td>Job Title</td>
-      <td><%= text_field_tag :job_title, @user.job_title, :size => 30, :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
+      <td><b>Job Title *</b></td>
+      <td><%= text_field_tag :job_title, @user.job_title %></td>
     </tr>
     <tr>
-      <td>Department</td>
-      <td><%= select_tag :department_id, options_from_collection_for_select(Department.order_name, 'id', 'name', @user.department_id.to_i), { :include_blank => true } %></td>
+      <td><b>Department *</b></td>
+      <td><%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', @user.department_id.to_i), { :include_blank => true } %></td>
     </tr>
     <tr>
-      <td>Level</td>
-      <td>
-        <% if @user.level != User::LEVEL_FIVE %>
-          <%= select_tag :level, options_for_select([["LEVEL 1", User::LEVEL_ONE ], ["LEVEL 2", User::LEVEL_TWO], ["LEVEL 3", User::LEVEL_THREE]], @user.level.to_i), :include_blank => true, :onchange => " dropdown_report_to(this)" %>
-        <% else %>
-          <%= @user.level %>
-          <%= hidden_field_tag :level, @user.level %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>Password</td>
-      <td><%= password_field_tag :password, params[:password], :size => 30, :validType => "maxLength[40]", :class => "easyui-validatebox" %></td>
+      <td><b>Password *</b></td>
+      <td><%= password_field_tag :password, params[:password] %></td>
     </tr>
     <tr>
       <td colspan="2"><i style="color:red;">*Blank password field if don't change password.</i></td>
     </tr>
-    <tr>
-      <td>Report To</td>
-      <td>
-        <% if @user.level != User::LEVEL_FIVE %>
-          <%= select_tag :report_to, options_from_collection_for_select(users, 'id', 'name', @user.report_to.to_i), { :include_blank => true } %>
-        
-          <% if @user.level == User::LEVEL_ONE or @user.level == User::LEVEL_TWO %>
-        
-            <% if @user.direct_report.present? %>
-              <%= check_box_tag :direct_report, TRUE, @user.direct_report %> Direct Report To Director
-            <% else %>
-              <%= check_box_tag :direct_report, TRUE %> Direct Report To Director
-            <% end %>
-              
-          <% end %>
-              
-        <% else %>
-          -
-          <%= hidden_field_tag :report_to, @user.report_to %>
-        <% end %>
-      </td>
-    </tr>
+    
+    <% unless @user.admin == current_user.admin %>
+      <tr>
+        <td valign="top"><b>Report Flow</b></td>
+        <td>
+          <table class="white-line-table">
+            <thead>
+              <tr style="background-color: gainsboro;">
+                <th width="100">Level 1</th>
+                <th width="100">Level 2</th>
+                <th width="100">Level 3</th>
+                <th width="100">Level 5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="center"><span id="insert_name"><%= @user.name rescue '(name)' %></span></td>
+                <td><%= select_tag :lvl_two,   options_from_collection_for_select(users, 'id', 'name', @user.level_two.to_i), { :include_blank => true } %></td>
+                <td><%= select_tag :lvl_three, options_from_collection_for_select(users, 'id', 'name', @user.level_three.to_i), { :include_blank => true } %></td>
+                <td align="center"><%= current_user.name %></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    <% end %>
 </table>

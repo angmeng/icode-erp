@@ -42,10 +42,10 @@
         </thead>
         <tbody>
           <tr>
-            <td><span id="insert_name">(Name)</span></td>
+            <td align="center"><span id="insert_name">(Name)</span></td>
             <td><%= select_tag :lvl_two,   options_from_collection_for_select(users, 'id', 'name', params[:lvl_two].to_i), { :include_blank => true } %></td>
             <td><%= select_tag :lvl_three, options_from_collection_for_select(users, 'id', 'name', params[:lvl_three].to_i), { :include_blank => true } %></td>
-            <td><%= current_user.name %></td>
+            <td align="center"><%= current_user.name %></td>
           </tr>
         </tbody>
       </table>

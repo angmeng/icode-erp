@@ -60,6 +60,14 @@ $(document).ready(function() {
         height: "400px",
         scrolling: "yes"
     });
+    
+    $("#grid_h430").chromatable({
+        width: "1330px",
+        height: "430px",
+        scrolling: "yes"
+    });
+    
+    
 
     $("#autowidth_h400").chromatable({
         width: "1510px",
@@ -587,7 +595,7 @@ $(document).ready(function() {
             html_pdf_cs = "<a target='_blank' class='k-button' href=" + link_printable_cs + "><b>Printer</b></a>"
             html_show_kiv = "<a class='k-button " + show_class + "' data-fancybox-type='iframe' href=" + link_show_kiv  + "><b>Show KIV</b></a>"
             html_recover = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you sure to recover?' href=" + link_recover + "><b>Recover</b></a>"
-            html_remove = "<a href='k-button " + link_remove + "' data-confirm='Are you sure to remove?' data-method='put' rel='nofollow'>" + "><b>Remove</b></a>"
+            html_remove = "<a href='" + link_remove + "' data-confirm='Are you sure to remove?' data-method='put' rel='nofollow' class='k-button'>" + "<b>Remove</b></a>"
             html_apply = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_apply + "><b>Apply</b></a>"
             html_submit_to = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you confirm submit to Vendor Selection?' href=" + link_submit_to + "><b>Submit to</b></a>"
             html_vendor_select = "<a class='k-button " + apply_vendor_select_class + "' data-fancybox-type='iframe' href=" + link_apply_vendor_select + "><b>Apply</b></a>"

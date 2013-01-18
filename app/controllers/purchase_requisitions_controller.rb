@@ -5,27 +5,27 @@ class PurchaseRequisitionsController < ApplicationController
 
   def index
     @search = PurchaseRequisition.search(params[:search])
-#    @purchase_requisitions = PurchaseRequisition.ordered_pr_no(@search)
-    @purchase_requisitions = @search.ordered_by_pr_no
-    if User.is_boss(current_user)
+    @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions(@search)
+    if user_is_admin?
       @purchase_requisitions = @purchase_requisitions.all
     else
       @purchase_requisitions = @purchase_requisitions.find_all_by_requested_by(current_user.id)
     end
-    
-    @pr_status = PurchaseRequisition.uniq_status
-    @pr_requestor = PurchaseRequisition.uniq_requestor
-    @pr_department = PurchaseRequisition.uniq_department
+    @pr_status      = PurchaseRequisition.uniq_status
+    @pr_requestor   = PurchaseRequisition.uniq_requestor
+    @pr_department  = PurchaseRequisition.uniq_department
   end
   
   def kiv
-    @purchase_requisitions = PurchaseRequisition.ordered_pr_no_kiv
+    @search = PurchaseRequisition.search(params[:search])
+    @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions_kiv(@search)
   end
   
   def show
-    @purchase_requisition = PurchaseRequisition.find(params[:id])
-    @user = User.find(@purchase_requisition.requested_by)
-    @logic = PurchaseRequisition.logic(@user)
+#    @purchase_requisition = PurchaseRequisition.find(params[:id])
+#    @user = User.find(@purchase_requisition.requested_by)
+#    @logic = PurchaseRequisition.logic(@user)
+    loading_logic(params[:id])
     @show_items = @purchase_requisition.purchase_requisition_items
   end
 
@@ -34,49 +34,33 @@ class PurchaseRequisitionsController < ApplicationController
     @pending = current_user.purchase_requisition_items.where("status = ?", PurchaseRequisitionItem::PENDING)
   end
 
-  def edit
-    @purchase_requisition = PurchaseRequisition.find(params[:id])
-    @user = User.find(@purchase_requisition.requested_by)
-    @logic = PurchaseRequisition.logic(@user)
-    @edit_items = @purchase_requisition.purchase_requisition_items
-    @app_lvl2 = User.find(@purchase_requisition.approved_by_level_two) if @purchase_requisition.approved_by_level_two?
-    @app_lvl3 = User.find(@purchase_requisition.approved_by_level_three) if @purchase_requisition.approved_by_level_three?
-    @app_lvl4 = User.find(@purchase_requisition.approved_by_level_five) if @purchase_requisition.approved_by_level_five?
-  end
-
   def create
+    #validate should checking whether select items and eta date are valid?
     @purchase_requisition = PurchaseRequisition.new(params[:purchase_requisition])
     pr_value = company.sn_purchase_req_no.to_i + 1
-    @purchase_requisition.pr_no = pr_value
-    
-    if current_user.direct_report == TRUE
-      boss = User.find_by_level(5)
-      @purchase_requisition.status = PurchaseRequisition::LEVEL_FIVE
-      @purchase_requisition.tasks = boss.id
+    @manage, msg = PurchaseRequisition.managing_validate(current_user, params[:select_items])
+    PurchaseRequisitionManagement.arrange(current_user, @purchase_requisition, pr_value) if @manage.present?
+
+    if @manage.present? && @purchase_requisition.save
+      company.update_attributes(:sn_purchase_req_no => pr_value)
+      PurchaseRequisitionManagement.run_update(current_user, @purchase_requisition, params[:select_items])
+      redirect_to new_purchase_requisition_path, notice: 'Purchase requisition was successfully created.'
     else
-      @purchase_requisition.status = PurchaseRequisition.generate_level(current_user)
-      @purchase_requisition.tasks = current_user.report_to
-    end
-    
-    if params[:select_items].present?
-      @eta, msg = PurchaseRequisitionItem.before_check_eta(current_user, params[:select_items])
-      if @eta.present?
-        if @purchase_requisition.save
-          company.update_attributes(:sn_purchase_req_no => pr_value)
-          PurchaseRequisitionItem.run_update(@purchase_requisition, current_user, params[:select_items])
-          redirect_to new_purchase_requisition_path, notice: 'Purchase requisition was successfully created.'
-        else
-          flash[:alert] = @purchase_requisition.errors.full_messages.join(", ")
-          error_callback
-        end
-      else
-        flash[:alert] = msg
-        error_callback
-      end
-    else
-      flash[:alert] = "Please select items from checkboxes."
+      msg << @purchase_requisition.errors.full_messages.join(", ")
+      flash[:alert] = msg
       error_callback
     end
+  end
+  
+  def edit
+#    @purchase_requisition = PurchaseRequisition.find(params[:id])
+#    @user = User.find(@purchase_requisition.requested_by)
+#    @logic = PurchaseRequisition.logic(@user)
+    loading_logic(params[:id])
+    @edit_items = @purchase_requisition.purchase_requisition_items
+    @app_lvl2 = User.find(@purchase_requisition.approved_by_level_two)    if @purchase_requisition.approved_by_level_two.present?
+    @app_lvl3 = User.find(@purchase_requisition.approved_by_level_three)  if @purchase_requisition.approved_by_level_three.present?
+    @app_lvl4 = User.find(@purchase_requisition.approved_by_level_five)   if @purchase_requisition.approved_by_level_five.present?
   end
 
   def update
@@ -106,18 +90,17 @@ class PurchaseRequisitionsController < ApplicationController
   def recover
     @purchase_requisition = PurchaseRequisition.find(params[:id])
     user = User.find(@purchase_requisition.requested_by)
-    
-    if user.level == User::LEVEL_ONE
-      @purchase_requisition.update_attributes(:status => PurchaseRequisition::LEVEL_ONE, :tasks => user.id)
-    elsif user.level == User::LEVEL_TWO
-      @purchase_requisition.update_attributes(:status => PurchaseRequisition::LEVEL_TWO, :tasks => user.id)
-    elsif user.level == User::LEVEL_THREE
-      @purchase_requisition.update_attributes(:status => PurchaseRequisition::LEVEL_THREE, :tasks => user.id)
-    elsif user.level == User::LEVEL_FIVE
-      @purchase_requisition.update_attributes(:status => PurchaseRequisition::LEVEL_FIVE, :tasks => user.id)
+    if user.level_two == @purchase_requisition.tasks
+      status = PurchaseRequisition::LEVEL_TWO
+    elsif user.level_three == @purchase_requisition.tasks
+      status = PurchaseRequisition::LEVEL_THREE
+    elsif user.approved_by_level_five.blank?
+      status = PurchaseRequisition::LEVEL_FIVE
     else
-      @purchase_requisition.update_attributes(:status => PurchaseRequisition::KEEP_IN_VIEW)
+      status = PurchaseRequisition::RECOVERED
     end
+    
+    @purchase_requisition.update_attributes(:status => status)
 
     respond_to do |format|
       format.html { redirect_to kiv_purchase_requisitions_path, :notice => "The PR has recovered from KIV." }
@@ -126,27 +109,17 @@ class PurchaseRequisitionsController < ApplicationController
   end
   
   def signature_report
-    @user_report = current_user.prs
+    if user_is_admin?
+      @user_report = PurchaseRequisition.where("status = ? or status = ? or status = ?", PurchaseRequisition::LEVEL_FIVE, PurchaseRequisition::LEVEL_THREE, PurchaseRequisition::LEVEL_TWO)
+    else
+      @user_report = current_user.prs.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
+    end
   end
   
   def yes_approval_requester
     @app_req = PurchaseRequisition.find(params[:id])
-    @app_req_user = User.find_by_id(@app_req.requested_by)
-    if @app_req_user.direct_report == TRUE
-      add_status = PurchaseRequisition::LEVEL_FIVE
-      task = User.find_by_level(5).id
-    else
-      if @app_req.status == PurchaseRequisition::LEVEL_ONE
-        add_status = PurchaseRequisition::LEVEL_TWO
-      elsif @app_req.status == PurchaseRequisition::LEVEL_TWO
-        add_status = PurchaseRequisition::LEVEL_THREE
-      elsif @app_req.status == PurchaseRequisition::LEVEL_THREE
-        add_status = PurchaseRequisition::LEVEL_FIVE
-      end
-      task = current_user.report_to
-    end
-    
-    if @app_req.update_attributes(:status => add_status, :requested_by_date => Date.today, :tasks => task, :remark => nil)
+    @return_obj = PurchaseRequisition.level_one_to(@app_req, director_data)
+    if @app_req.update_attributes(:status => @return_obj[:status], :requested_by_date => Date.today, :tasks => @return_obj[:task], :remark => nil)
       redirect_to edit_purchase_requisition_path(@app_req), :notice => "Update Successfully."
     else
       flash[:alert] = @app_req.errors.full_messages.join(",")
@@ -156,25 +129,19 @@ class PurchaseRequisitionsController < ApplicationController
   
   def yes_approval_one
     @app_one = PurchaseRequisition.find(params[:id])
-    if current_user.direct_report == true
-      status = PurchaseRequisition::LEVEL_FIVE
-      task = User.find_by_level(5).id
-    else
-      status = PurchaseRequisition::LEVEL_THREE
-      task = current_user.report_to
-    end
-#    
-    if @app_one.update_attributes(:status => status, :approved_by_level_two => current_user.id, :approved_by_level_two_date => Date.today, :tasks => task)
+    @return_obj = PurchaseRequisition.level_two_to(@app_one, director_data)
+    if @app_one.update_attributes(:status => @return_obj[:status], :approved_by_level_two => current_user.id, :approved_by_level_two_date => Date.today, :tasks => @return_obj[:task])
       redirect_to edit_purchase_requisition_path(@app_one), :notice => "Update Successfully."
     else
-      flash[:alert] = @app_one.errors.full_messages.join(",")
+      flash[:alert] = @app_one.errors.full_messages.join(", ")
       redirect_to edit_purchase_requisition_path(@app_one)
     end
   end
+  
   def no_approval_one
     @app_one = PurchaseRequisition.find(params[:id])
     params[:remark] = nil unless params[:remark].present?
-    user = User.find(@app_one.requested_by)
+    user = User.find_by_id(@app_one.requested_by)
     if @app_one.update_attributes(:status => generate_add_status(user), :remark => params[:remark], :tasks => user.id)
       redirect_to edit_purchase_requisition_path(@app_one), :notice => "Update Successfully."
     else
@@ -186,13 +153,14 @@ class PurchaseRequisitionsController < ApplicationController
   
   def yes_approval_om
     @app_om = PurchaseRequisition.find(params[:id])
-    if @app_om.update_attributes(:status => PurchaseRequisition::LEVEL_FIVE, :approved_by_level_three => current_user.id, :approved_by_level_three_date => Date.today, :tasks => current_user.report_to)
+    if @app_om.update_attributes(:status => PurchaseRequisition::LEVEL_FIVE, :approved_by_level_three => current_user.id, :approved_by_level_three_date => Date.today, :tasks => director_data.id)
       redirect_to edit_purchase_requisition_path(@app_om), :notice => "Update Successfully."
     else
       flash[:alert] = @app_om.errors.full_messages.join(",")
       redirect_to edit_purchase_requisition_path(@app_om)
     end
   end
+  
   def no_approval_om
     @app_om = PurchaseRequisition.find(params[:id])
     params[:remark] = nil unless params[:remark].present?
@@ -216,6 +184,7 @@ class PurchaseRequisitionsController < ApplicationController
       redirect_to edit_purchase_requisition_path(@app_three)
     end
   end
+  
   def no_approval_three
     @app_three = PurchaseRequisition.find(params[:id])
     params[:remark] = nil unless params[:remark].present?
@@ -286,24 +255,30 @@ class PurchaseRequisitionsController < ApplicationController
     end
   end
   
+  private 
+  
   def error_callback
     @pending = current_user.purchase_requisition_items.where("status = ?", PurchaseRequisitionItem::PENDING)
     render action: "new"
   end
-  
-  private 
   
   def inventory_management_system
     role(PurchaseRequisition::ROLE)
   end
   
   def generate_add_status(user)
-      if user.level == User::LEVEL_ONE
+#      if user.level == User::LEVEL_ONE
         PurchaseRequisition::LEVEL_ONE
-      elsif user.level == User::LEVEL_TWO
-        PurchaseRequisition::LEVEL_TWO
-      elsif user.level == User::LEVEL_THREE
-        PurchaseRequisition::LEVEL_THREE
-      end
+#      elsif user.level == User::LEVEL_TWO
+#        PurchaseRequisition::LEVEL_TWO
+#      elsif user.level == User::LEVEL_THREE
+#        PurchaseRequisition::LEVEL_THREE
+#      end
+  end
+  
+  def loading_logic(id)
+    @purchase_requisition = PurchaseRequisition.find(id)
+    @user = User.find(@purchase_requisition.requested_by)
+    @logic = PurchaseRequisition.logic(@user)
   end
 end

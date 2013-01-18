@@ -15,7 +15,7 @@
 /*==================== SCAFFOLDS STYLE ==================================================================================*/
 html { 
     height: 100%; /* For 100% height */ 
-/*    overflow-y: scroll;*/
+/*    overflow-y: hidden;*/
 }
 
 body {
@@ -50,6 +50,11 @@ body {
 /*    font: 1.5em arial, verdana, sans-serif;*/
     width: 100%;
     min-height: 100%;
+}
+
+#popup_content {
+    height: 500px;
+    border: 1px solid black;
 }
 
 p, div { margin: 0; }
@@ -283,7 +288,6 @@ table.black-line-table td {
 fieldset { border: 1px solid gray; } 
 legend { font-size: 15px; font-weight: bold; }
 
-
 .font_bold      { font-weight: bold; }
 .header_content { background-color: #FE9B00; }
 .header_title   { background-color: orange; }
@@ -317,9 +321,15 @@ legend { font-size: 15px; font-weight: bold; }
 
 /* new_form */
 .new_purchase_form {
-    border: 1px solid grey;
-    width: 100%;
+    border: 1px solid black;
+/*    width: 100%;*/
     height: 400px;
+    overflow: auto;
+}
+
+.purchase_form_show{
+    border: 1px solid black;
+    height: 350px;
     overflow: auto;
 }
 
@@ -343,19 +353,29 @@ legend { font-size: 15px; font-weight: bold; }
     border: 1px solid grey;
     overflow:auto;
     height: 345px;
-    width: 100%;}
+/*    width: 100%;*/
+}
 
 .fix_800x600 {
     border: 1px solid grey;
     overflow:auto;
     height: 450px;
-    width: 100%;}
+/*    width: 100%;*/
+}
 
 .fix_1600x900 {
-    border: 1px solid grey;
+    border: 1px solid black;
     overflow:auto;
     height: 500px;
-    width: 100%;}
+/*    width: 100%;*/
+}
+
+.fix_1600x900_h450 {
+    border: 1px solid black;
+    overflow:auto;
+    height: 450px;
+/*    width: 100%;*/
+}
 
 .fix_1024x800 {
     border: 1px solid grey  ;

@@ -15,10 +15,12 @@ class PurchaseRequisition < ActiveRecord::Base
   LEVEL_TWO       = "LV2"   # Supervisor
   LEVEL_THREE     = "LV3"   # General Manager
   LEVEL_FIVE      = "LV5"   # Director
+  
   SUBMIT_PO       = "SUB_PO"
   SUBMIT_RN       = "SUB_RN"
-  COMPLETED       = "CLOSE"
+  COMPLETED       = "COMPLETED"
   KEEP_IN_VIEW    = "KIV"
+  RECOVERED       = "RECOVERED"
   
   PR_NO = 1
   PR_STATUS = 2
@@ -58,21 +60,33 @@ class PurchaseRequisition < ActiveRecord::Base
   
   default_scope order("pr_no DESC")
   
-  scope :ordered_pr_no_kiv, where("status = ?", PurchaseRequisition::KEEP_IN_VIEW)
-
-  def self.generate_level(user)
-    if user.level == User::LEVEL_ONE
-      "LV2"
-    elsif user.level == User::LEVEL_TWO
-      "LV3"
-    elsif user.level == User::LEVEL_THREE
-      "LV5"
-    elsif user.level == User::LEVEL_FIVE
-      "SUB_PO"
-    else
-      "LV1"
-    end
+  def self.search_purchase_requisitions(search)
+    search.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
   end
+  
+  def self.search_purchase_requisitions_kiv(search)
+    search.where("status = ?",  PurchaseRequisition::KEEP_IN_VIEW)
+  end
+  
+#  def ordered_by_pr_no
+#    where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
+#  end
+  
+#  scope :ordered_pr_no_kiv, where("status = ?", PurchaseRequisition::KEEP_IN_VIEW)
+
+#  def self.generate_level(user)
+#    if user.level == User::LEVEL_ONE
+#      "LV2"
+#    elsif user.level == User::LEVEL_TWO
+#      "LV3"
+#    elsif user.level == User::LEVEL_THREE
+#      "LV5"
+#    elsif user.level == User::LEVEL_FIVE
+#      "SUB_PO"
+#    else
+#      "LV1"
+#    end
+#  end
   
   def update_to_cancel
     purchase_requisition_items.each {|cn| cn.update_attributes!(:status => PurchaseRequisitionItem::CANCEL)}
@@ -82,9 +96,7 @@ class PurchaseRequisition < ActiveRecord::Base
 #    search.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
 #  end
   
-  def ordered_by_pr_no
-    where("status != ?", PurchaseRequisition::KEEP_IN_VIEW).order("pr_no DESC")
-  end
+  
   
   def self.search_engine(field_box, select_field)
     if select_field.to_i == PurchaseRequisition::PR_NO
@@ -151,18 +163,73 @@ class PurchaseRequisition < ActiveRecord::Base
   
   def self.logic(user)
     array_logic = []
-    if user.level == User::LEVEL_ONE
-      array_logic = [2,3,5]
-    elsif user.level == User::LEVEL_TWO
-      array_logic = [3,5]
-    elsif user.level == User::LEVEL_THREE
-      array_logic = [5]
-    elsif user.level == User::LEVEL_FIVE
-      array_logic = [1]
-    else
-      array_logic = [1,2,3,5]
+#    if user.level == User::LEVEL_ONE
+#      array_logic = [2,3,5]
+#    elsif user.level == User::LEVEL_TWO
+#      array_logic = [3,5]
+#    elsif user.level == User::LEVEL_THREE
+#      array_logic = [5]
+#    elsif user.level == User::LEVEL_FIVE
+#      array_logic = [1]
+#    else
+#      array_logic = [1,2,3,5]
+#    end
+    if user.has_level_two?
+      array_logic << 2
+    end
+    if user.has_level_three?
+      array_logic << 3
     end
     return array_logic
+  end
+  
+  def self.managing_validate(user, select_items)
+    if select_items.present?
+      user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
+      if user_pending.present?
+        user_pending.each do |p|
+          if p.eta < Date.today
+            return false, "ETA Should Have Future Date."
+            break
+          end
+        end
+      end
+    else
+      return false, "Please Select Items From Checkboxes."
+    end
+  end
+  
+  def self.level_one_to(user, boss)
+    ret = {}
+    @requestor = User.find_by_id(user.requested_by)
+    
+    if @requestor.has_level_two?
+      ret[:status] = PurchaseRequisition::LEVEL_TWO
+      ret[:task] = @requestor.level_two
+    elsif @requestor.has_level_three?
+      ret[:status] = PurchaseRequisition::LEVEL_THREE
+      ret[:task] = @requestor.level_three
+    else
+      ret[:status] = PurchaseRequisition::LEVEL_FIVE
+      ret[:task] = boss.id
+    end
+    
+    return ret
+  end
+  
+  def self.level_two_to(user, boss)
+    ret = {}
+    @requestor = User.find_by_id(user.requested_by)
+    
+    if @requestor.has_level_three?
+      ret[:status] = PurchaseRequisition::LEVEL_THREE
+      ret[:task] = @requestor.level_three
+    else
+      ret[:status] = PurchaseRequisition::LEVEL_FIVE
+      ret[:task] = boss.id
+    end
+    
+    return ret
   end
 
 end

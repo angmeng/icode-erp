@@ -1,0 +1,31 @@
+<% if pick == "both" %>
+  <table>
+    <tr>
+      <td><b>Name</b></td>
+      <td>
+        <% if purchase_requisition.user.present? %>
+          <% if purchase_requisition.user.has_level_two? %>
+            <%= User.find(purchase_requisition.user.level_two).name rescue '-' %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Date</b></td>
+      <td>PENDING</td>
+    </tr>
+  </table>
+<% elsif pick == "name" %>
+  <table>
+    <tr>
+      <td><b>Name</b></td>
+      <td>
+        <% if purchase_requisition.user.present? %>
+          <% if purchase_requisition.user.has_level_two? %>
+            <%= User.find(purchase_requisition.user.level_two).name rescue '-' %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+<% end %>

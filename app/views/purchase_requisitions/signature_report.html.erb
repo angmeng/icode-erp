@@ -1,11 +1,13 @@
-<div style="background-color:blue"><strong style="color:white;">APPROVE / REJECT PURCHASE REQUISITION TASKS</strong></div>
+<div id="popup_container">
+  <div style="background-color:blue"><strong style="color:white;">APPROVE / REJECT PURCHASE REQUISITION TASKS</strong></div>
 
-<div class="fix_1600x900">
-  <% if @user_report.present? %>
-    <%= render "/purchase_requisitions/summary_from_purchase_requisition", :summary => @user_report %>
-  <% else %>
-    No Tasks.
-  <% end %>
+  <div class="fix_1600x900">
+    <% if @user_report.present? %>
+      <%= render "/purchase_requisitions/summary_from_purchase_requisition", :summary => @user_report %>
+    <% else %>
+      No Tasks.
+    <% end %>
+  </div>
+
+  <%= render "action_purchase_requisition_signature" %> 
 </div>
-
-<%= render "action_purchase_requisition_signature" %> 

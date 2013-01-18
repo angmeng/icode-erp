@@ -9,10 +9,12 @@ class Department < ActiveRecord::Base
   has_one :user
   validates :name, :uniqueness => true
   
-  default_scope order("name")  
-  scope :departments_active, where("status = ?", DataStatus::ACTIVE)
+  default_scope order("name")
+  
+  scope :departments_active, where("status = ?", Department::ACTIVE)
+  
   def self.search_departments(search)
-    search.where("status = ?", DataStatus::ACTIVE)
+    search.where("status = ?", Department::ACTIVE)
   end
   
   def uppercase_text
@@ -22,8 +24,6 @@ class Department < ActiveRecord::Base
 #  def self.order_name
 #    order("name").where(:status => Department::ACTIVE)
 #  end
-  
-
   
   def self.ordered_name_kiv(search)
     search.order("name").where(:status => Department::KEEP_IN_VIEW)

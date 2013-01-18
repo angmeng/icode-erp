@@ -1,4 +1,4 @@
-<table id="grid_h495" class="white-line-table zebraLight">
+<table id="grid_h430" class="white-line-table zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -19,6 +19,7 @@
 
   <tbody>
     <% pr.each_with_index do |p, index| %>
+      <% unless p.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
     
         <% if p.temporary_sources.present? %> 
           <% if p.temporary_sources.find_by_select_vendor(TRUE).present? %>
@@ -35,7 +36,8 @@
         <% else %>
           <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
         <% end %>
-            <td></td>
+            
+          <td></td>
           <td align="center"><%= index + 1 %></td>
           <td align="center">
             <% if p.maintenance == TRUE and p.proposed_vendor == FALSE and p.approval_proposed == FALSE %>
@@ -97,6 +99,7 @@
             <td align="center">-</td>
           <% end %>
         </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

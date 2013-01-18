@@ -46,9 +46,10 @@ class ApplicationController < ActionController::Base
   helper_method :issues_in
   helper_method :issues_out
   helper_method :roles
-  
   helper_method :material
   helper_method :perihal_barang_both
+  
+  
   
   
   
@@ -67,6 +68,11 @@ class ApplicationController < ActionController::Base
     current_user.admin == true
   end
   
+  helper_method :director_data
+  def director_data
+    @director_data ||= User.find_by_admin(true)
+  end
+  
   helper_method :users
   def users
     @users ||= User.users_active
@@ -76,6 +82,10 @@ class ApplicationController < ActionController::Base
   def departments
     @departments ||= Department.departments_active
   end
+  
+  
+  
+  
   
   def perihal_barang_both
     @perihal_barang_both ||= SalesTaxExemptionBarang.where(:valid_condition => TRUE)

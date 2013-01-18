@@ -1,5 +1,5 @@
 <% if pr.present? %>
-  <table id="grid_h370" class="white-line-table zebraLight">
+  <table id="grid_h295" class="white-line-table zebraLight">
     <thead>
       <tr class="header_line">
         <th class="check_highlight"></th>
@@ -55,7 +55,7 @@
                       <%= source.company_name rescue '-' %>
                     <% end %>
                   <% else %>
-                    <%= source.company_name rescue '-' %>
+                    <span class="red_alert"><%= source.company_name rescue '-' %></span>
                   <% end %>
                 <% end %>
               <% end %>
@@ -88,12 +88,6 @@
             <% end %>
           </tr>
       <% end %>
-          
-            <%# 100.times.each do |p| %>
-              <%#*<tr>%>
-                <%#*<td>TEST</td>%>
-              <%#*</tr>%>
-            <%# end %>
     </tbody>
   </table>
 

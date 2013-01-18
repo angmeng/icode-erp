@@ -1,13 +1,15 @@
-<%= render "linking" %>
+<div id="popup_container">
+  <%= render "linking" %>
 
-<div style="background-color:blue"><strong style="color:white;">APPROVED FROM PR</strong></div> 
+  <div style="background-color:blue"><strong style="color:white;">APPROVED FROM PR</strong></div> 
 
-<div class="fix_1600x900">
-  <% if @approved_pr.present? %>
-    <%= render "details_from_pri", :pr => @approved_pr %>
-  <% else %>
-    No Record Found.
-  <% end %>
+  <div class="fix_1600x900_h450">
+    <% if @approved_pr.present? %>
+      <%= render "details_from_pri", :pr => @approved_pr %>
+    <% else %>
+      No Record Found.
+    <% end %>
+  </div>
+
+  <%= render "action_purchase_order_approved_pr" %>
 </div>
-  
-<%= render "action_purchase_order_approved_pr" %>

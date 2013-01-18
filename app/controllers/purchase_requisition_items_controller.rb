@@ -20,9 +20,6 @@ class PurchaseRequisitionItemsController < ApplicationController
 
   def new
     @purchase_requisition_item = PurchaseRequisitionItem.new
-#    @all_companies = TradeCompany.order("name").all.collect {|c| [c.name, c.name,] }
-#    @non_operation_categories = ProductCategory.db_non_operation
-#    @operation_categories = ProductCategory.db_operation
     @new_product = params[:new_product].to_i
   end
 
@@ -31,7 +28,8 @@ class PurchaseRequisitionItemsController < ApplicationController
     @eta, msg = PurchaseRequisitionItem.present_date(@purchase_requisition_item.eta)
     if @eta.present?
       unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
-        PurchaseRequisitionItem.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price])
+#        PurchaseRequisitionItem.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price])
+        PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price])
       end
       if @purchase_requisition_item.save
         redirect_to @purchase_requisition_item, notice: 'Purchase Requisition Item was successfully created.'

@@ -17,7 +17,7 @@
 
             <% unless @purchase_requisition_item.maintenance == TRUE %>
               <tr class="new_product_cp">
-                <td width="165" ><b>Supplier Name</b></td>
+                <td width="165" ><b>Vendor Name</b></td>
                 <td>
                   <% if action_name == "edit" %>
                     <%= text_field_tag :company_name, @purchase_requisition_item.temporary_sources.first.company_name, :style => "width:400px;", :id => "autoComplete_suppliers" %>

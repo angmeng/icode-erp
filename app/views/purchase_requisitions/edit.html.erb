@@ -19,7 +19,8 @@
       </tr>
     </table>
   
-    <div class="new_form">
+    <%#*<div class="new_form">%>
+    <div class="purchase_form_show">
       <% if @edit_items.present? %>
         <%= render "/purchase_requisitions/details_from_purchase_requisition_items", :pr => @edit_items %>
       <% end %>
@@ -49,7 +50,7 @@
                       <% if @purchase_requisition.tasks == current_user.id %>
                         <tr>
                           <td><b>Approved?</b></td>
-                          <td><%= link_to "YES", yes_approval_requester_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?" %></td>
+                          <td><%= link_to "YES", yes_approval_requester_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %></td>
                         </tr>
                       <% end %>
                     <% end %>
@@ -66,6 +67,7 @@
               </tr>
             </table>
           </td>
+          
           <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
 
           <% if @logic.include?(2) %>
@@ -85,33 +87,28 @@
                 <% else %>
                     <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_TWO %>
                         <% if @purchase_requisition.tasks == current_user.id %>
-                            <table>
-                              <tr>
-                                <td><b>Name</b></td>
-                                <td><%= current_user.name  %></td>
-                              </tr>
-                              <tr>
-                                <td><b>Date</b></td>
-                                <td><%= Date.today.strftime("%d-%m-%Y") %></td>
-                              </tr>
-                              <tr>
-                                  <td><b>Approved?</b></td>
-                                  <td>
-                                    <%= link_to "YES", yes_approval_one_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?" %>
-                                    <%= link_to "NO", "#", :class => "pr_remark_one_link" %>
-                                  </td>
-                              </tr>
-                            </table>
+                          <table>
+                            <tr>
+                              <td><b>Name</b></td>
+                              <td><%= current_user.name  %></td>
+                            </tr>
+                            <tr>
+                              <td><b>Date</b></td>
+                              <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+                            </tr>
+                            <tr>
+                              <td><b>Approved?</b></td>
+                              <td>
+                                <%= link_to "YES", yes_approval_one_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                                <%= link_to "NO", "#", :class => "pr_remark_one_link k-button" %>
+                              </td>
+                            </tr>
+                          </table>
                         <% else %>
-                            <table>
-                              <tr>
-                                <td></td><td>PENDING</td>
-                              </tr>
-                              <tr>
-                                <td></td><td></td>
-                              </tr>
-                            </table>
+                          <%= render "level_two_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "both" %>
                         <% end %>
+                    <% else %>
+                      <%= render "level_two_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "name" %>
                     <% end %>
                 <% end %>
             </td>
@@ -139,7 +136,7 @@
                             <table>
                               <tr>
                                 <td><b>Name</b></td>
-                                <td><%= current_user.name  %></td>
+                                <td><%= current_user.name %></td>
                               </tr>
                               <tr>
                                 <td><b>Date</b></td>
@@ -148,29 +145,25 @@
                               <tr>
                                   <td><b>Approved?</b></td>
                                   <td>
-                                    <%= link_to "YES", yes_approval_om_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?" %>
-                                    <%= link_to "NO", "#", :class => "pr_remark_om_link" %>
+                                    <%= link_to "YES", yes_approval_om_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                                    <%= link_to "NO", "#", :class => "pr_remark_om_link k-button" %>
                                   </td>
                               </tr>
                             </table>
                         <% else %>
-                            <table>
-                              <tr>
-                                <td></td><td>PENDING</td>
-                              </tr>
-                              <tr>
-                                <td></td><td></td>
-                              </tr>
-                            </table>
+                            <%= render "level_three_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "both" %>
                         <% end %>
+                    <% else %>
+                      <%= render "level_three_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "name" %>
                     <% end %>
                 <% end %>
             </td>
+            
             <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
           <% end %>
           
           <!--------------------- Approval(3) --------------------->
-          <% if @logic.include?(5) %>
+          <%# if @logic.include?(5) %>
             <td width="300" style="vertical-align: top;">
                 <b>APPROVAL(3)</b>
                 <% if @purchase_requisition.approved_by_level_five.present? %>
@@ -185,39 +178,34 @@
                       </tr>
                     </table>
                 <% else %>
-                    <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_FIVE %>
-                        <% if @purchase_requisition.tasks == current_user.id %>
-                                <table>
-                                  <tr>
-                                    <td><b>Name</b></td>
-                                    <td><%= current_user.name %></td>
-                                  </tr>
-                                  <tr>
-                                    <td><b>Date</b></td>
-                                    <td><%= Date.today.strftime("%d-%m-%Y") %></td>
-                                  </tr>
-                                  <tr>
-                                      <td><b>Approved?</b></td>
-                                      <td>
-                                        <%= link_to "YES", yes_approval_three_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?" %>
-                                        <%= link_to "NO", "#", :class => "pr_remark_three_link" %>
-                                      </td>
-                                  </tr>
-                                </table>
-                        <% else %>
-                                <table>
-                                  <tr>
-                                    <td></td><td>PENDING</td>
-                                  </tr>
-                                  <tr>
-                                    <td></td><td></td>
-                                  </tr>
-                                </table>
-                        <% end %>
+                    <% unless @purchase_requisition.status == PurchaseRequisition::LEVEL_ONE %>
+                      <% if user_is_admin? %>
+                        <table>
+                          <tr>
+                            <td><b>Name</b></td>
+                            <td><%= current_user.name %></td>
+                          </tr>
+                          <tr>
+                            <td><b>Date</b></td>
+                            <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+                          </tr>
+                          <tr>
+                            <td><b>Approved?</b></td>
+                            <td>
+                              <%= link_to "YES", yes_approval_three_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                              <%= link_to "NO", "#", :class => "pr_remark_three_link k-button" %>
+                            </td>
+                          </tr>
+                        </table>
+                      <% else %>
+                        <%= render "level_five_name_and_pending", :pick => "both" %>  
+                      <% end %>
+                    <% else %>
+                      <%= render "level_five_name_and_pending", :pick => "name" %>
                     <% end %>
                 <% end %>
             </td>
-          <% end %>
+          <%# end %>
             
           <% if @purchase_requisition.status == PurchaseRequisition::SUBMIT_PO %>
             <% unless @user.level == User::LEVEL_FIVE %>

@@ -1,14 +1,16 @@
-<%= render "linking" %>
+<div id="popup_container">
+   <%= render "linking" %>
 
-<div style="background-color:blue"><strong style="color:white;">PROPOSED VENDOR</strong></div>
+  <div style="background-color:blue"><strong style="color:white;">PROPOSED VENDOR</strong></div>
 
-<div class="fix_1600x900">
-  <% if @proposed_vendor.present? %>
-    <%= render "/purchase_orders/proposed_vendor_from_purchase_requisition_items", :proposed => @proposed_vendor %>
-  <% else %>
-    No Record Found.
-  <% end %>
+  <div class="fix_1600x900_h450">
+    <% if @proposed_vendor.present? %>
+      <%= render "/purchase_orders/proposed_vendor_from_purchase_requisition_items", :proposed => @proposed_vendor %>
+    <% else %>
+      No Record Found.
+    <% end %>
+  </div>
+
+  <%= render "action_purchase_order_proposed_vendor" %>
+
 </div>
-
-<%= render "action_purchase_order_proposed_vendor" %>
-

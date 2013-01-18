@@ -432,7 +432,7 @@ module ApplicationHelper
     end
     
     def not_link_add_item
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Add"
       end
     end
@@ -442,7 +442,7 @@ module ApplicationHelper
     end
     
     def not_link_add
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Add"
       end
     end
@@ -455,7 +455,7 @@ module ApplicationHelper
     end
     
     def not_link_addnew
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Add New"
       end
     end
@@ -475,13 +475,13 @@ module ApplicationHelper
     end
     
     def not_link_show
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Show"
       end
     end
     
     def not_link_remove_row
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Remove Item"
       end
     end
@@ -489,7 +489,7 @@ module ApplicationHelper
     
     
     def not_link_binary
-     content_tag :span, :class => "k-button", :style => "color: grey;" do 
+     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Show KIV"
       end
     end
@@ -509,7 +509,7 @@ module ApplicationHelper
     end
     
     def not_link_edit
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Edit"
       end
     end
@@ -520,13 +520,13 @@ module ApplicationHelper
     end
     
     def not_link_apply
-       content_tag :span, :class => "k-button", :style => "color: grey;" do 
+       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Apply"
       end
     end
     
     def not_link_submit_to
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Submit to"
       end
     end
@@ -540,7 +540,7 @@ module ApplicationHelper
     end
     
     def not_link_parent_folder
-     content_tag :span, :class => "k-button", :style => "color: grey;" do 
+     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Create Group"
       end
     end
@@ -550,7 +550,7 @@ module ApplicationHelper
     end
     
     def not_link_parent_folder_edit
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Edit Group"
       end
     end
@@ -560,7 +560,7 @@ module ApplicationHelper
     end
     
     def not_link_subfolder
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Add Sub Group / Product Type"
       end
     end
@@ -570,7 +570,7 @@ module ApplicationHelper
     end
     
     def not_link_edit_subfolder
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Edit Sub Group / Product Type"
       end
     end
@@ -580,7 +580,7 @@ module ApplicationHelper
     end
     
     def not_link_addfile_button
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Add Product ID"
       end
     end
@@ -590,7 +590,7 @@ module ApplicationHelper
     end
     
     def not_link_document_edit
-       content_tag :span, :class => "k-button", :style => "color: grey;" do 
+       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Edit Product ID"
       end
     end
@@ -604,7 +604,7 @@ module ApplicationHelper
     end
     
     def not_link_remove
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Remove"
       end
     end
@@ -617,7 +617,7 @@ module ApplicationHelper
     end
     
     def not_link_kiv
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Drop To KIV"
       end
     end
@@ -630,7 +630,7 @@ module ApplicationHelper
     end
     
     def not_link_recover
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Recover"
       end
     end
@@ -642,7 +642,7 @@ module ApplicationHelper
     end
     
     def not_link_recycle
-       content_tag :span, :class => "k-button", :style => "color: grey;" do 
+       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Delete"
       end
     end
@@ -654,7 +654,7 @@ module ApplicationHelper
     end
     
     def not_link_printable
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Printer"
       end
     end
@@ -672,7 +672,7 @@ module ApplicationHelper
     end
     
     def not_link_save
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Save"
       end
     end
@@ -690,7 +690,7 @@ module ApplicationHelper
     
     
     def not_link_cost
-      content_tag :span, :class => "k-button", :style => "color: grey;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
        "Costing Sheet"
       end
     end
