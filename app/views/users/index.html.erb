@@ -1,19 +1,23 @@
-<table width="100%">
-  <tr>
-    <td><%= link_to "Search", '#', :class => "search_link" %></td>
-  </tr>
-</table>
+<div id="popup_container">
+  <table width="100%">
+    <tr>
+      <td><%= link_to "Search", '#', :class => "search_link" %></td>
+    </tr>
+  </table>
 
-<div><%= render "search_user" %></div>
+  <div><%= render "search_user" %></div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING - USERS</strong></div>
+  <div style="background-color:blue"><strong style="color:white;">LISTING USERS</strong></div>
 
-<div class="fix_1600x900">
-  <% if @users.present? %>
-    <%= render "listing_users", :list_users => @users %>
-  <% else %>
-    No record found.
-  <% end %>
+  <!--div class="fix_1600x900"-->
+  <div id="popup_content">
+    <% if @users.present? %>
+      <%= render "listing_users", :list_users => @users %>
+    <% else %>
+      No record found.
+    <% end %>
+  </div>
+  
+  <%= render "action_user" %>
 </div>
   
-<%= render "action_user" %>

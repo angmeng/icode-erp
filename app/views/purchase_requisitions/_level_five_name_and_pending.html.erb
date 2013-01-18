@@ -1,0 +1,19 @@
+<% if pick == "both" %>
+  <table>
+    <tr>
+      <td><b>Name</b></td>
+      <td><%= director_data.name rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Date</b></td>
+      <td>PENDING</td>
+    </tr>
+  </table>
+<% elsif pick == "name" %>
+  <table>
+    <tr>
+      <td><b>Name</b></td>
+      <td><%= director_data.name rescue '-' %></td>
+    </tr>
+  </table>
+<% end %>

@@ -37,15 +37,15 @@
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::PR_KIV_VIEW) %>
-                <li><%= link_to "KIV - Purchase Requisitions", kiv_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Purchase Requisitions - KIV", kiv_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
-                <li class="text_gray">KIV - Purchase Requisitions</li>
+                <li class="text_gray">Listing Purchase Requisitions - KIV</li>
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %>
-                <li><%= link_to "KIV - Purchase Requisitions Items", kiv_purchase_requisition_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Purchase Requisitions Items - KIV", kiv_purchase_requisition_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
-                <li class="text_gray">KIV - Purchase Requisitions Items</li>
+                <li class="text_gray">Listing Purchase Requisitions Items - KIV</li>
               <% end %>
             </ul>
           </li>

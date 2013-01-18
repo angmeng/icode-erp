@@ -17,7 +17,7 @@
       </tr>
 
       <tr>
-        <td><b>Supplier Name</b></td>
+        <td><b>Vendor Name</b></td>
         <td>
           <% if source.present? %>
             <%= select_tag "company_name", options_for_select(trade_company_vendor_with_code, source.company_name), :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)" %>

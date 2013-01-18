@@ -1,6 +1,6 @@
-<div style="background-color:blue"><strong style="color:white;">NEW PURCHASE REQUISITION ITEMS</strong></div>
+<div id="popup_container">
+  <div style="background-color:blue"><strong style="color:white;">NEW PURCHASE REQUISITION ITEMS</strong></div>
 
-<div>
   <% if @new_product == PurchaseRequisition::YES %>
     <%= render "new_product" %>
   <% else %>

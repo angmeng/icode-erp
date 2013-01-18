@@ -1,14 +1,15 @@
-<%= render "linking" %> 
+<div id="popup_container">
+  <%= render "linking" %> 
 
-<div style="background-color:blue"><strong style="color:white;">VENDOR REGISTRATION</strong></div>
+  <div style="background-color:blue"><strong style="color:white;">VENDOR REGISTRATION</strong></div>
 
-<div class="fix_1600x900">
-  <% if @vendor.present? %>
-    <%= render "/purchase_orders/vendor", :pending => @vendor %>
-  <% else %>
-    No Record Found.
-  <% end %>
+  <div class="fix_1600x900_h450">
+    <% if @vendor.present? %>
+      <%= render "/purchase_orders/vendor", :pending => @vendor %>
+    <% else %>
+      No Record Found.
+    <% end %>
+  </div>
+
+  <%= render "action_purchase_order_vendor_reg" %>
 </div>
-
-<%= render "action_purchase_order_vendor_reg" %>
-

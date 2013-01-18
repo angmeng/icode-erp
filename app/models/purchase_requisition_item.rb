@@ -23,47 +23,50 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   has_many   :temporary_sources, :dependent => :destroy
   accepts_nested_attributes_for :temporary_sources, :allow_destroy => true
   
+  MAINTENANCE = TRUE
+  
   # It is Items Status
-  APPROVED      = 'A'
   PENDING       = 'P'
+  APPROVED      = 'A'
   IN_PROCESSING = 'IP'
   REJECT        = 'R'
-#  PURCHASE_ORDER  = "PO"   # Pending PO
+  PURCHASE_ORDER  = "PO"   # Pending PO
   RECEIVE_NOTE     = "RN"  # PO issued
   RECEIVED_PARTIAL = "RP"
   RECEIVED_FULL    = "RF"
   KEEP_IN_VIEW    = "KIV"
   INCOMING_REJECT = "IR"
   CANCEL          = "X"
-  MAINTENANCE = TRUE
   
-  scope :ordered_purchase_requisition_id, order("purchase_requisition_id DESC").where("status = ?", PurchaseRequisitionItem::APPROVED)  #approved_pr in purchase order
   
-  def self.run_update(purchase_requisition, user, select_items)
-    user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
-    if user_pending.present?
-      user_pending.each do |p|
-        if user.level == User::LEVEL_FIVE
-          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::APPROVED)
-        else
-          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::IN_PROCESSING)
-        end
-      end
-    end
-  end
+  #approved_pr in purchase order
+  scope :ordered_purchase_requisition_id, order("purchase_requisition_id DESC").where("status = ?", PurchaseRequisitionItem::APPROVED)  
   
-  def self.before_check_eta(user, select_items)
-    user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
-    if user_pending.present?
-      user_pending.each do |p|
-        if p.eta < Date.today
-          return false, "ETA should have future date."
-        else
-          return true
-        end
-      end
-    end
-  end
+#  def self.run_update(purchase_requisition, user, select_items)
+#    user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
+#    if user_pending.present?
+#      user_pending.each do |p|
+#        if user.level == User::LEVEL_FIVE
+#          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::APPROVED)
+#        else
+#          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::IN_PROCESSING)
+#        end
+#      end
+#    end
+#  end
+  
+#  def self.before_check_eta(user, select_items)
+#    user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
+#    if user_pending.present?
+#      user_pending.each do |p|
+#        if p.eta < Date.today
+#          return false, "ETA should have future date."
+#        else
+#          return true
+#        end
+#      end
+#    end
+#  end
   
   def self.completed_update(app_three)
     all_pending = app_three.purchase_requisition_items.where(:status => PurchaseRequisitionItem::IN_PROCESSING)
@@ -144,17 +147,17 @@ class PurchaseRequisitionItem < ActiveRecord::Base
       return false, "ETA should not blank."
     end
   end
-  
-  def self.running_new_temporary(purchase_requisition_item, company_name, estimated_price)
-    if purchase_requisition_item.product_id.present?
-      prod = Product.find(purchase_requisition_item.product_id)
-      purchase_requisition_item.description = prod.desc
-      purchase_requisition_item.unit_measurement_id = prod.unit_measurement_id
-    end    
-    purchase_requisition_item.temporary_sources.new(:company_name => company_name, :select_vendor => TRUE, :unit_price => estimated_price)
-    purchase_requisition_item.temporary_sources.new(:company_name => "-", :select_vendor => FALSE, :unit_price => 0)
-    purchase_requisition_item.temporary_sources.new(:company_name => "-", :select_vendor => FALSE, :unit_price => 0)
-  end
+
+#  def self.running_new_temporary(purchase_requisition_item, company_name, estimated_price)
+#    if purchase_requisition_item.product_id.present?
+#      prod = Product.find(purchase_requisition_item.product_id)
+#      purchase_requisition_item.description = prod.desc
+#      purchase_requisition_item.unit_measurement_id = prod.unit_measurement_id
+#    end    
+#    purchase_requisition_item.temporary_sources.new(:company_name => company_name, :select_vendor => TRUE, :unit_price => estimated_price)
+#    purchase_requisition_item.temporary_sources.new(:company_name => "-", :select_vendor => FALSE, :unit_price => 0)
+#    purchase_requisition_item.temporary_sources.new(:company_name => "-", :select_vendor => FALSE, :unit_price => 0)
+#  end
   
   def self.running_approval(pri)
     if pri.present?
