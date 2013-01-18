@@ -6,30 +6,20 @@
       <th>Name</th>
       <th>Job Title</th>
       <th>Department</th>
-      <th>Level</th>
-      <th>Report To</th>
+      <th>Level Two</th>
+      <th>Level Three</th>
     </tr>
   </thead>
 
   <tbody>
-    <% users.each do |user| %>
+    <% list_users.each do |user| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= user.id %>">
         <td></td>
         <td align="center"><%= user.name rescue '-' %></td>
         <td align="center"><%= user.job_title rescue '-' %></td>
         <td align="center"><%= user.department.name rescue '-' %></td>
-        <td align="center"><%= user.level rescue '-' %></td>
-        <td align="center">
-          <% if user.level == User::LEVEL_FIVE %>
-            -
-          <% else %>
-            <% if user.direct_report.present? %>
-              DIRECTOR
-            <% else %>
-              <%= user.applicant.name rescue '-' %>
-            <% end %>
-          <% end %>
-        </td>
+        <td align="center"><%= user.level_two rescue '-' %></td>
+        <td align="center"><%= user.level_three rescue '-' %></td>
       </tr>
     <% end %>
   </tbody>

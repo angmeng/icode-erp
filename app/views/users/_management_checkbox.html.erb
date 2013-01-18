@@ -1,16 +1,13 @@
 <table id="grid_h490" class="black-line-table zebraLight">
-  
   <thead>
-    
     <tr class="header_line">
-      <th></th>
+      <th class="check_highlight" rowspan="2"></th>
       <th width="200" rowspan="2">MODULE</th>
       <th width="350" rowspan="2">SUB-MODULE</th>
       <th colspan="17">ACTION</th>
     </tr>
 
     <tr class="header_line">
-      <th class="check_highlight"></th>
       <th width="50">Add or Exist Files</th>
       <th width="50">Show</th>
       <th width="50">Edit</th>
@@ -29,9 +26,8 @@
       <th width="50">Send Mail</th>
       <th width="50">Costing Sheet</th>
     </tr>
-    
   </thead>
-  <%#= image_tag("add_item_button.png", :alt => "Add or Exist Files", :title => "Add or Exist Files", :class => "cube35") %>
+  
   <tbody>
     <!--PURCHASE-->
     <%= render "/inventory_management_systems/ims_purchase_requisition", :checkboxes => @checkboxes %>
@@ -48,6 +44,10 @@
     <%= render "/inventory_management_systems/ims_company_profile", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_trade_company", :checkboxes => @checkboxes %>
     <%#= render "/inventory_management_systems/ims_product", :checkboxes => @checkboxes %>
+    
+    <tr><td colspan="20">&nbsp;</td></tr>
+    <tr><td colspan="20">&nbsp;</td></tr>
+    <tr><td colspan="20">&nbsp;</td></tr>
     
   </tbody>
 </table>

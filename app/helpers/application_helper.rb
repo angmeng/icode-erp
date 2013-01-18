@@ -668,7 +668,7 @@ module ApplicationHelper
     end
     
     def link_save_button
-      submit_tag "Save", :class => "k-button"
+      submit_tag "Save", :class => "k-button font_bold"
     end
     
     def not_link_save
@@ -678,7 +678,7 @@ module ApplicationHelper
     end
     
     def link_close_button
-      link_to 'Close', "#", :class=>"k-button" , :onclick => "parent.$.fancybox.close();" ,:class => " k-button"
+      link_to 'Close', "#", :class=>"k-button font_bold" , :onclick => "parent.$.fancybox.close();"
     end
     
     def link_mail_button

@@ -315,7 +315,7 @@
   </table>
 </div>
 
-<% if current_user.level == User::LEVEL_FIVE %>
+<% if user_is_admin? %>
   <div class="padding_10">
     <div><b>ACCESS MANAGEMENT (LEVEL 5)</b></div>
     <div style="width:60px;">

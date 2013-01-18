@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :is_director
+  before_filter :are_you_director?
   layout "sheetbox"
   
   def index
-    copy_index
+    @search = User.search(params[:search])
+    @users = User.search_users(@search)  
   end
 
   def show
@@ -85,42 +86,34 @@ class UsersController < ApplicationController
     end
   end
   
+  def new_user_entry
+    # create method will go to generator_user
+  end
+  
   def generator_user
     if params[:inventory_management_system].present?
-      @user = User.new
-      building_user(params[:new_name], params[:department_id], params[:level].to_i, params[:password], params[:job_title], params[:report_to].to_i, params[:direct_report])
+      @user = User.new(:name => params[:new_name], :department_id => params[:department_id], :job_title => params[:job_title], :password => take_password(params[:password]), :level_two => params[:lvl_two], :level_three => params[:lvl_three])
       if @user.save
         @user.generate_role(params[:inventory_management_system])
         redirect_to users_path, :notice => "User has created successfully."
-      else        
-        copy_index
+      else
         flash[:alert] = @user.errors.full_messages.join(", ")
         render "new_user_entry"
       end
     else
-      copy_index
       flash[:alert] = "Please tick the checkboxes on your inventory management system."
       render "new_user_entry"
     end
   end
   
-  def building_user(new_name, department_id, level, password, job_title, report_to, direct_report)
-    @user.name = new_name
-    @user.department_id = department_id
-    @user.level = level
-    @user.password = password unless password.blank?
-    @user.job_title = job_title
-    @user.report_to = report_to
-    if direct_report.present?
-      @user.direct_report = direct_report
-    else
-      @user.direct_report = 0
-    end
-  end
+#  def building_user(new_name, department_id, level, password, job_title, report_to, direct_report)
+#    @user.name = new_name
+#    @user.department_id = department_id
+#    @user.password = password unless password.blank?
+#    @user.job_title = job_title
+#  end
   
-  def new_user_entry
-
-  end
+  
   
   def kiv
     @search = User.search(params[:search])
@@ -129,8 +122,6 @@ class UsersController < ApplicationController
     @user_level = User.uniq_level
     @user_report_to = User.uniq_report_to
   end
-  
-
   
   def lookup_level
     if params[:lvl].present?
@@ -152,11 +143,7 @@ class UsersController < ApplicationController
     @checkboxes = @user.roles.map(&:inventory_management_system_id)
   end
   
-  def copy_index
-    @search = User.search(params[:search])
-    @users = User.ordered_level(@search)
-    @user_department = User.uniq_department
-    @user_level = User.uniq_level
-    @user_report_to = User.uniq_report_to
+  def take_password(password)
+    return password unless password.blank?
   end
 end

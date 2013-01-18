@@ -1,4 +1,8 @@
-<div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
+<div id="popup_container">
+  <div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
+  <div>
+    
+
 
 <%= form_tag generator_user_users_path do  %>
   <div id="user_strip">
@@ -12,10 +16,24 @@
     <div class="user_management">
     <div><%= render "management_product" %></div>
   </div>
-  </div>
 
-  <div class="icon_tag">
-    <%= link_save_button %>
-    <%= link_close_button %>
+      <div class="icon_tag">
+        <%= link_save_button %>
+        <%= link_close_button %>
+      </div>
+    <% end %>
+
   </div>
+</div>
+
+<% content_for :jquery_script do %>
+   <script>
+      $(document).ready(function() {
+          $("#new_name").keyup(function(){
+            var string = $(this).val();
+            $("#insert_name").html(string);
+            return false;
+          });
+      });
+    </script>
 <% end %>

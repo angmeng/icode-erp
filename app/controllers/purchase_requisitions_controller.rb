@@ -5,12 +5,14 @@ class PurchaseRequisitionsController < ApplicationController
 
   def index
     @search = PurchaseRequisition.search(params[:search])
-    @purchase_requisitions = PurchaseRequisition.ordered_pr_no(@search)
+#    @purchase_requisitions = PurchaseRequisition.ordered_pr_no(@search)
+    @purchase_requisitions = @search.ordered_by_pr_no
     if User.is_boss(current_user)
       @purchase_requisitions = @purchase_requisitions.all
     else
       @purchase_requisitions = @purchase_requisitions.find_all_by_requested_by(current_user.id)
     end
+    
     @pr_status = PurchaseRequisition.uniq_status
     @pr_requestor = PurchaseRequisition.uniq_requestor
     @pr_department = PurchaseRequisition.uniq_department

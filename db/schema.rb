@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104164749) do
+ActiveRecord::Schema.define(:version => 20130115160643) do
 
   create_table "bill_of_materials", :force => true do |t|
     t.integer  "bom_no"
@@ -1082,8 +1082,9 @@ ActiveRecord::Schema.define(:version => 20130104164749) do
     t.integer  "level"
     t.string   "status",                 :default => "ACTIVE"
     t.string   "job_title"
-    t.integer  "report_to"
-    t.boolean  "direct_report",          :default => false
+    t.boolean  "admin",                  :default => false
+    t.integer  "level_two"
+    t.integer  "level_three"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
