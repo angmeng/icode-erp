@@ -1,6 +1,6 @@
 class PurchaseRequisition < ActiveRecord::Base
   
-  attr_accessible :pr_no, :status, :requested_by, :requested_by_date, :approved_by_level_two, :approved_by_level_two_date, :approved_by_level_three, :approved_by_level_three_date, :approved_by_level_five, :approved_by_level_five_date, :remark, :tasks
+  attr_accessible :pr_no,  :requested_by, :requested_by_date, :approved_by_level_two, :approved_by_level_two_date, :approved_by_level_three, :approved_by_level_three_date, :approved_by_level_five, :approved_by_level_five_date, :remark, :tasks, :status, :recover_status
 
   belongs_to :product
   belongs_to :trade_company
@@ -20,7 +20,7 @@ class PurchaseRequisition < ActiveRecord::Base
   SUBMIT_RN       = "SUB_RN"
   COMPLETED       = "COMPLETED"
   KEEP_IN_VIEW    = "KIV"
-  RECOVERED       = "RECOVERED"
+#  RECOVERED       = "RECOVERED"
   
   PR_NO = 1
   PR_STATUS = 2
@@ -198,6 +198,20 @@ class PurchaseRequisition < ActiveRecord::Base
       return false, "Please Select Items From Checkboxes."
     end
   end
+  
+#  def self.require_status(purchase_requisition)
+#    user = User.find(purchase_requisition.requested_by)
+#    if user.level_two == purchase_requisition.tasks
+#      status = PurchaseRequisition::LEVEL_TWO
+#    elsif user.level_three == purchase_requisition.tasks
+#      status = PurchaseRequisition::LEVEL_THREE
+#    elsif purchase_requisition.approved_by_level_five.blank?
+#      status = PurchaseRequisition::LEVEL_FIVE
+#    else
+#      status = PurchaseRequisition::RECOVERED
+#    end
+#    return status
+#  end
   
   def self.level_one_to(user, boss)
     ret = {}

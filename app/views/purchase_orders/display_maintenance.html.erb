@@ -17,8 +17,8 @@
     
     <table>
       <tr>
-        <td width="200"><b>Supplier Name</b></td>
-        <%# if @pr_item.Xtemporary_sources.present? %>
+        <td width="200"><b>Vendor Name</b></td>
+        <%# if @pr_item.temporary_sources.present? %>
           <!--td><%#= text_field_tag "trade_company_id", @pr_item.temporary_sources.first.company_name, :style => "width:380px;", :class => "autoComplete_trade_company_#{@pr_item.id.to_s}" %></td-->
         <%# else %>
           <!--td><%#= select_tag "trade_company_id", options_from_collection_for_select(trade_company_vendor, :name, :name, params[:trade_company_id]), :style => "width: 500px", :id => "combox_company", :include_blank => true %></td-->
@@ -42,7 +42,7 @@
       
       <% if @pr_item.approval_remark.present? %>
         <tr>
-          <td>Vendor Selection wrote the remark:</td>
+          <td><b>Vendor Selection wrote the remark:</b></td>
           <td class="red_alert"><%= @pr_item.approval_remark %></td>
         </tr>
       <% end %>

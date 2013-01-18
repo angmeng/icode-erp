@@ -6,8 +6,8 @@ class PurchaseOrdersController < ApplicationController
   def index
     @po_title = PurchaseOrder.title
     @search = PurchaseOrder.search(params[:search])
-    @purchase_orders = PurchaseOrder.ordered(@search)
-    if User.is_boss(current_user)
+    @purchase_orders = PurchaseOrder.search_purchase_orders(@search)
+    if user_is_admin?
       @purchase_orders = @purchase_orders.all
     else
       @purchase_orders = @purchase_orders.find_all_by_purchase_by(current_user.id)
@@ -16,7 +16,7 @@ class PurchaseOrdersController < ApplicationController
   
   def kiv
     @search = PurchaseOrder.search(params[:search])
-    @purchase_orders = PurchaseOrder.ordered_kiv(@search)
+    @purchase_orders = PurchaseOrder.search_purchase_orders_kiv(@search)
   end
 
   def show
@@ -108,53 +108,12 @@ class PurchaseOrdersController < ApplicationController
     end
   end
   
-  def approved_pr
-    @option_product_id = PurchaseRequisitionItem.collect_pid
-    if params[:item_status].present? or params[:pr_no].present? or params[:product_id].present?
-      @approved_pr = PurchaseRequisitionItem.search_item_status(params[:item_status]) if params[:item_status].present?
-      @approved_pr = PurchaseRequisitionItem.search_pr_no(params[:pr_no]) if params[:pr_no].present?
-      @approved_pr = PurchaseRequisitionItem.search_product_id(params[:product_id]) if params[:product_id].present?
-    else
-      @approved_pr = PurchaseRequisitionItem.ordered_purchase_requisition_id
-    end
-  end
   
+
+
+
   
-  
-#  =========================== Maintenance ===========================
-  def maintenance
-    @maintenance = PurchaseRequisitionItem.where("status = ? and maintenance = ?", PurchaseRequisitionItem::APPROVED, PurchaseRequisitionItem::MAINTENANCE)
-  end
-  
-  # Popup Maintenance
-  def display_maintenance
-    @pr_item = PurchaseRequisitionItem.find(params[:id])
-  end
-  
-  def add_vendor
-    @pr_item = PurchaseRequisitionItem.find(params[:purchase_requisition_item_id])
-    
-    if params[:company_name].present? and params[:unit_price].present?
-      goto_create_sources(@pr_item, params[:company_name], params[:unit_price])
-      redirect_to display_maintenance_purchase_order_path(@pr_item), :notice => "Update Successfully."
-    else
-      flash[:alert] = "Supplier Name or Unit Price can't blank."
-      render "display_maintenance"
-    end
-  end
-  
-  def submit_vselect    #Submit Vendor Selection
-    pr_item = PurchaseRequisitionItem.find(params[:id])
-    @eta, msg = PurchaseRequisitionItem.present_date(pr_item.eta)
-    if @eta.present?
-      pr_item.update_attributes(:maintenance => 0, :proposed_vendor => 1)
-      redirect_to maintenance_purchase_orders_path, :notice => "Submit to Vendor Selection successfully."
-    else
-      flash[:alert] = msg
-      redirect_to maintenance_purchase_orders_path #      render "maintenance"
-    end
-  end
-#  =========================== Maintenance (END) ===========================
+#  =========================== Other ==================================================
   
   def cancel
     @pr  = PurchaseRequisition.find(params[:pr_id])
@@ -180,7 +139,55 @@ class PurchaseOrdersController < ApplicationController
 #    redirect_to purchase_orders_path, :notice => "The PR has cancelled successfully."
 #  end
   
+#  =========================== Approved From Purchase Requisition ===========================
+  def approved_pr
+    @option_product_id = PurchaseRequisitionItem.collect_pid
+    if params[:item_status].present? or params[:pr_no].present? or params[:product_id].present?
+      @approved_pr = PurchaseRequisitionItem.search_item_status(params[:item_status]) if params[:item_status].present?
+      @approved_pr = PurchaseRequisitionItem.search_pr_no(params[:pr_no]) if params[:pr_no].present?
+      @approved_pr = PurchaseRequisitionItem.search_product_id(params[:product_id]) if params[:product_id].present?
+    else
+      @approved_pr = PurchaseRequisitionItem.ordered_purchase_requisition_id
+    end
+  end
+  #  =========================== Approved From Purchase Requisition (End) ===========================
   
+#  =========================== Maintenance ==================================================
+  def maintenance
+    @maintenance = PurchaseRequisitionItem.where("status = ? and maintenance = ?", PurchaseRequisitionItem::APPROVED, PurchaseRequisitionItem::MAINTENANCE)
+  end
+  
+  # Popup Maintenance
+  def display_maintenance
+    @pr_item = PurchaseRequisitionItem.find(params[:id])
+  end
+  
+  # when click apply
+  def add_vendor
+    @pr_item = PurchaseRequisitionItem.find(params[:purchase_requisition_item_id])
+    
+    if params[:company_name].present? and params[:unit_price].present?
+      PurchaseOrderManagement.goto_create_sources(@pr_item, params[:company_name], params[:unit_price])
+      redirect_to display_maintenance_purchase_order_path(@pr_item), :notice => "Update Successfully."
+    else
+      flash[:alert] = "Supplier Name or Unit Price can't blank."
+      render "display_maintenance"
+    end
+  end
+  
+  #Submit Vendor Selection
+  def submit_vselect    
+    @pr_item = PurchaseRequisitionItem.find(params[:id])
+#    @eta, msg = PurchaseRequisitionItem.present_date(pr_item.eta)
+#    if @eta.present?
+    if @pr_item.update_attributes(:maintenance => 0, :proposed_vendor => 1)
+      redirect_to maintenance_purchase_orders_path, :notice => "Submit to Vendor Selection successfully."
+    else
+      flash[:alert] = @pr_item.errors.full_messages.join(", ")
+      redirect_to maintenance_purchase_orders_path #      render "maintenance"
+    end
+  end
+#  =========================== Maintenance (End) ==================================================
   
 #  ====================== PROPOSED VENDOR ============================
   def proposed_vendor
@@ -202,19 +209,17 @@ class PurchaseOrdersController < ApplicationController
   
   def proposed_approval
     @pri = PurchaseRequisitionItem.find(params[:id])
-    @eta, msg = PurchaseRequisitionItem.present_date(@pri.eta)
-    if @eta.present?
-      @pri.update_attributes(:proposed_vendor => TRUE)
+#    @eta, msg = PurchaseRequisitionItem.present_date(@pri.eta)
+#    if @eta.present?
+    if @pri.update_attributes(:proposed_vendor => TRUE)
       redirect_to proposed_vendor_purchase_orders_path, :notice => "Submit to Vendor Selection successfully."
     else
-      flash[:alert] = msg
+      flash[:alert] = @pri.errors.full_messages.join(", ")
       redirect_to proposed_vendor_purchase_orders_path
     end
   end
 #  ====================== PROPOSED VENDOR (END) ============================
-  
-  
-  
+
 #  ====================== VENDOR SELECTION ============================  
   def pending_approval
     @pending_vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, false)
@@ -226,13 +231,13 @@ class PurchaseOrdersController < ApplicationController
   
   def approval_yes
     @pri = PurchaseRequisitionItem.find(params[:id])
-    @eta, msg = PurchaseRequisitionItem.present_date(@pri.eta)
-    if @eta.present?
+#    @eta, msg = PurchaseRequisitionItem.present_date(@pri.eta)
+#    if @eta.present?
 #      PurchaseRequisitionItem.running_approval(@pri)
-      @pri.update_attributes!(:approval_proposed => TRUE)
+    if @pri.update_attributes!(:approval_proposed => TRUE)
       redirect_to show_select_vendor_purchase_order_path(@pri), :notice => "You have Approved. This form was sent to Vendor Registration or PO Entry."
     else
-      flash[:alert] = msg
+      flash[:alert] = @pri.errors.full_messages.join(", ")
       redirect_to show_select_vendor_purchase_order_path(@pri)
     end
   end
@@ -253,12 +258,12 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 #  ====================== VENDOR SELECTION (END) =======================
-  
-  
+    
 #  ====================== VENDOR REGISTRATION ============================ 
   def vendor
     filter_matching_vendor
   end
+  
 #  ====================== VENDOR REGISTRATION (END) ============================ 
   
   def no_product_id
@@ -279,13 +284,13 @@ class PurchaseOrdersController < ApplicationController
     PurchaseOrder.generator_match_vendor(@vendor, trade_company_vendor) #Auto vendor if exist?
   end
   
-  def goto_create_sources(pr_item, company_name, unit_price)
-    if pr_item.temporary_sources.present?
-      pr_item.temporary_sources.find_by_select_vendor(TRUE).update_attributes(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)
-    else
-      pr_item.temporary_sources.create(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)
-    end
-  end
+#  def goto_create_sources(pr_item, company_name, unit_price)
+#    if pr_item.temporary_sources.present?
+#      pr_item.temporary_sources.find_by_select_vendor(TRUE).update_attributes(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)
+#    else
+#      pr_item.temporary_sources.create(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)
+#    end
+#  end
   
 #  def expired_date
 #    if ste_no_with_valid.present?

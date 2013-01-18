@@ -16,69 +16,70 @@
     
     <tbody>
       <% maintenance.each do |item| %>
+        <% unless item.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
       
-        <% if item.temporary_sources.present? %> 
-          <% if item.temporary_sources.find_by_select_vendor(TRUE).present? %>
-            <% source = item.temporary_sources.find_by_select_vendor(TRUE) %>
+          <% if item.temporary_sources.present? %> 
+            <% if item.temporary_sources.find_by_select_vendor(TRUE).present? %>
+              <% source = item.temporary_sources.find_by_select_vendor(TRUE) %>
+            <% end %>
           <% end %>
-        <% end %>
 
-        <% if item.urgent == TRUE %>
-          <% if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
+          <% if item.urgent == TRUE %>
+            <% if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
+            <% else %>
+              <tr class="<%= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
+            <% end %>
           <% else %>
-            <tr class="<%= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
+            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
           <% end %>
-        <% else %>
-          <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
-        <% end %>
-            <td></td>
-          <td align="center"><%= item.purchase_requisition.pr_no rescue '-' %></td>
+              <td></td>
+            <td align="center"><%= item.purchase_requisition.pr_no rescue '-' %></td>
 
-          <td>
-            <% if source.present? %>
-              <% if company = TradeCompany.find_by_name(source.company_name) %>
-                <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
-                  <%= source.company_name rescue '-' %>
+            <td>
+              <% if source.present? %>
+                <% if company = TradeCompany.find_by_name(source.company_name) %>
+                  <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                    <%= source.company_name rescue '-' %>
+                  <% end %>
+                <% else %>
+                  <span class="red_alert"><%= source.company_name rescue '-' %></span>
                 <% end %>
-              <% else %>
-                <span class="red_alert"><%= source.company_name rescue '-' %></span>
               <% end %>
-            <% end %>
-          </td>
+            </td>
 
-          <td><%= simple_format(item.description) rescue '0' %></td>
-          
-          <td align="center">
-            <% if item.eta < Date.today %>
-              <span class="red_alert"><%= item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-            <% else %>
-              <%= item.eta.strftime("%d-%m-%Y") rescue '-' %>
-            <% end %>
-          </td>
-          
-          <td align="center"><%= item.quantity rescue '0' %></td>
-          
-          <td align="center"><%= item.unit_measurement.code rescue '-' %></td>
-          
-          <td align="right">
-            <% if source.present? %>
-              <%= four_precision(source.unit_price) rescue '-' %>
-            <% else %>
-              -
-            <% end %>
-          </td>
-          
-          <td align="right">
-            <% if source.present? %>
-              <%= iproduct(item.quantity, source.unit_price) %>
-            <% else %>
-              -
-            <% end %>
-          </td>
-        </tr>
+            <td><%= simple_format(item.description) rescue '0' %></td>
+
+            <td align="center">
+              <% if item.eta < Date.today %>
+                <span class="red_alert"><%= item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+              <% else %>
+                <%= item.eta.strftime("%d-%m-%Y") rescue '-' %>
+              <% end %>
+            </td>
+
+            <td align="center"><%= item.quantity rescue '0' %></td>
+
+            <td align="center"><%= item.unit_measurement.code rescue '-' %></td>
+
+            <td align="right">
+              <% if source.present? %>
+                <%= four_precision(source.unit_price) rescue '-' %>
+              <% else %>
+                -
+              <% end %>
+            </td>
+
+            <td align="right">
+              <% if source.present? %>
+                <%= iproduct(item.quantity, source.unit_price) %>
+              <% else %>
+                -
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-        
     </tbody>
   </table>
 <% end %> 

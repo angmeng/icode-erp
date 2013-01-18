@@ -17,39 +17,42 @@
     <tbody>
       <% pending.each do |proposed| %>
 
-        <% if proposed.temporary_sources.present? %>
-          <% if proposed.temporary_sources.find_by_select_vendor(TRUE).present? %>
-            <% sources = proposed.temporary_sources.find_by_select_vendor(TRUE) %>
-          <% end %>
-        <% end %>
+        <% unless proposed.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
 
-        <% unless proposed.trade_company.present? %>
-      
-          <% if proposed.urgent == TRUE %>
-            <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="trade_companies" rowsId="<%= sources.id %>">
-            <% else %>
-              <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="trade_companies" rowsId="<%= sources.id %>">
+          <% if proposed.temporary_sources.present? %>
+            <% if proposed.temporary_sources.find_by_select_vendor(TRUE).present? %>
+              <% sources = proposed.temporary_sources.find_by_select_vendor(TRUE) %>
             <% end %>
-          <% else %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="trade_companies" rowsId="<%= sources.id %>">
           <% end %>
-              <td></td>
-              <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
-              <td><%= render "/product_categories/join_product_category", :pc => proposed %></td>
-              <td class="red_alert"><%= sources.company_name rescue '-' %></td>
-              <td align="center"><%= proposed.quantity rescue '0' %></td>
-              <td align="center"><%= proposed.unit_measurement.code rescue '-' %></td>
-              <td align="center">
-                <% if proposed.eta < Date.today %>
-                  <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-                <% else %>
-                  <%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %>
-                <% end %>
-              </td>
-              <td align="right"><%= four_precision(sources.unit_price) %></td>
-              <td align="right"><%= iproduct(proposed.quantity, sources.unit_price) rescue '-' %></td>
-            </tr>
+
+          <% unless proposed.trade_company.present? %>
+
+            <% if proposed.urgent == TRUE %>
+              <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="trade_companies" rowsId="<%= sources.id %>">
+              <% else %>
+                <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="trade_companies" rowsId="<%= sources.id %>">
+              <% end %>
+            <% else %>
+              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="trade_companies" rowsId="<%= sources.id %>">
+            <% end %>
+                <td></td>
+                <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
+                <td><%= render "/product_categories/join_product_category", :pc => proposed %></td>
+                <td class="red_alert"><%= sources.company_name rescue '-' %></td>
+                <td align="center"><%= proposed.quantity rescue '0' %></td>
+                <td align="center"><%= proposed.unit_measurement.code rescue '-' %></td>
+                <td align="center">
+                  <% if proposed.eta < Date.today %>
+                    <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+                  <% else %>
+                    <%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %>
+                  <% end %>
+                </td>
+                <td align="right"><%= four_precision(sources.unit_price) %></td>
+                <td align="right"><%= iproduct(proposed.quantity, sources.unit_price) rescue '-' %></td>
+              </tr>
+          <% end %>
         <% end %>
 
       <% end %>

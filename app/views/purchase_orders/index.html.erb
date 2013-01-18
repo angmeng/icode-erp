@@ -1,26 +1,23 @@
-<%= render "linking" %>
+<div id="popup_container">
+  <%= render "linking" %>
 
-<table width="100%">
-  <tr>
-    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
-  </tr>
-</table>
+  <table width="100%">
+    <tr>
+      <td><%= link_to 'Search', "#", :class => "search_link" %></td>
+    </tr>
+  </table>
 
-<%= render "search_po" %>
-  
-<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS</strong></div>
+  <%= render "search_po" %>
 
-<div class="fix_1600x900">
-  <% if @purchase_orders.present? %>
-    <%= render "/purchase_orders/success_approved_from_purchase_requisition_items", :success => @purchase_orders %>
-  <% else %>
-    No Record Found.
-  <% end %>
+  <div style="background-color:blue"><strong style="color:white;">TRANSACTIONS</strong></div>
+
+  <div class="fix_1600x900_h450">
+    <% if @purchase_orders.present? %>
+      <%= render "/purchase_orders/success_approved_from_purchase_requisition_items", :success => @purchase_orders %>
+    <% else %>
+      No Record Found.
+    <% end %>
+  </div>
+
+  <%= render "action_purchase_order_transaction" %>
 </div>
-
-<%= render "action_purchase_order_transaction" %>
-
-
-  
-
-  

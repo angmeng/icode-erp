@@ -16,57 +16,60 @@
       </thead>
       <tbody>
         <% proposed.each do |proposed| %>
-          <% if proposed.temporary_sources.present? %>
-            <% if proposed.temporary_sources.find_by_select_vendor(TRUE).present? %>
-              <% sources = proposed.temporary_sources.find_by_select_vendor(TRUE) %>
-            <% end %>
-          <% end %>
-
-          <% if proposed.urgent == TRUE %>
-            <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-            <% else %>
-              <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-            <% end %>
-          <% else %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-          <% end %>
-              <td></td>
-            <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
-            <!--td align="center"><%#= render "/product_categories/join_product_category", :pc => proposed %></td>
-            <td><%#= @sources.company_name if @sources.present? %></td-->
-            <td align="center">
-              <% if proposed.product_id? %>
-                <%= link_to(product_path(proposed.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-                  <%= render '/product_categories/join_product_category', :pc => proposed %>
-                <% end %>
+          <% unless proposed.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
+        
+            <% if proposed.temporary_sources.present? %>
+              <% if proposed.temporary_sources.find_by_select_vendor(TRUE).present? %>
+                <% sources = proposed.temporary_sources.find_by_select_vendor(TRUE) %>
               <% end %>
-            </td>
-            <td>
-              <% unless proposed.maintenance == TRUE %>
-                <% if sources.present? %>
-                  <% if company = TradeCompany.find_by_name(sources.company_name) %>
-                    <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
-                      <%= sources.company_name rescue '-' %>
-                    <% end %>
-                  <% else %>
-                    <span class="red_alert"><%= sources.company_name rescue '-' %></span>
+            <% end %>
+
+            <% if proposed.urgent == TRUE %>
+              <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
+              <% else %>
+                <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
+              <% end %>
+            <% else %>
+              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
+            <% end %>
+              <td></td>
+              <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
+              <!--td align="center"><%#= render "/product_categories/join_product_category", :pc => proposed %></td>
+              <td><%#= @sources.company_name if @sources.present? %></td-->
+              <td align="center">
+                <% if proposed.product_id? %>
+                  <%= link_to(product_path(proposed.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                    <%= render '/product_categories/join_product_category', :pc => proposed %>
                   <% end %>
                 <% end %>
-              <% end %>
-            </td>
-            <td align="center"><%= proposed.quantity rescue '0' %></td>
-            <td align="center"><%= proposed.unit_measurement.code rescue '-' %></td>
-            <td align="center">
-              <% if proposed.eta < Date.today %>
-                <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
-                <%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %>
-              <% end %>
-            </td>
-            <td align="right"><%= four_precision(sources.unit_price) %></td>
-            <td align="right"><%= iproduct(proposed.quantity, sources.unit_price) %></td>
-          </tr>
+              </td>
+              <td>
+                <% unless proposed.maintenance == TRUE %>
+                  <% if sources.present? %>
+                    <% if company = TradeCompany.find_by_name(sources.company_name) %>
+                      <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                        <%= sources.company_name rescue '-' %>
+                      <% end %>
+                    <% else %>
+                      <span class="red_alert"><%= sources.company_name rescue '-' %></span>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td align="center"><%= proposed.quantity rescue '0' %></td>
+              <td align="center"><%= proposed.unit_measurement.code rescue '-' %></td>
+              <td align="center">
+                <% if proposed.eta < Date.today %>
+                  <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+                <% else %>
+                  <%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %>
+                <% end %>
+              </td>
+              <td align="right"><%= four_precision(sources.unit_price) %></td>
+              <td align="right"><%= iproduct(proposed.quantity, sources.unit_price) %></td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>

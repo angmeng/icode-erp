@@ -87,8 +87,8 @@
             </tr>
           <% else %>
             <tr>
-              <td><b>Supplier Address</b></td>
-              <td><%= f.text_area :address_1, :validType => "maxLength[255]", :class => "easyui-validatebox", :size => "40x3", :placeholder => "Supplier Address" %></td>
+              <td><b>Vendor Address *</b></td>
+              <td><%= f.text_area :address_1, :validType => "maxLength[255]", :class => "easyui-validatebox", :size => "40x3", :placeholder => "Vendor Address" %></td>
             </tr>
             <tr>
               <td></td>
@@ -108,7 +108,8 @@
           
           <tr>
             <td><b>Phone/Mobile No. *</b></td>
-            <td><%= f.text_field :tel_area_code_one, :size => 1,:class => "k-textbox" "required validationMessage" => "Please Enter Phone/Mobile No."  %>-<%= f.text_field :tel_no_1, :size => 8 , :class => "k-textbox" "required validationMessage" => "Please Enter Phone Number" %> / <%= f.text_field :tel_area_code_two, :size => 1 %>-<%= f.text_field :tel_no_2, :size => 8 %></td>
+            <td>
+              <%= f.text_field :tel_area_code_one, :size => 1, :class => "k-textbox", "required validationMessage" => "Please Enter Phone/Mobile No.", :style => "width: 40px;" %>-<%= f.text_field :tel_no_1, :size => 8 , :class => "k-textbox", "required validationMessage" => "Please Enter Phone Number" %> / <%= f.text_field :tel_area_code_two, :size => 1 %>-<%= f.text_field :tel_no_2, :size => 8 %></td>
           </tr>
           
           <tr>
@@ -135,7 +136,7 @@
             
           <tr>
             <td><b>Attn *</b></td>
-            <td><%= f.text_field :contact_person  , :class => "k-textbox" "required validationMessage" => "Please Enter Contact Person"%></td>
+            <td><%= f.text_field :contact_person, :class => "k-textbox", "required validationMessage" => "Please Enter Contact Person"%></td>
           </tr>
           
           <tr>

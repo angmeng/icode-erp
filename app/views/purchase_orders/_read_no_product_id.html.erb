@@ -1,16 +1,17 @@
-<table id="grid_h495" class="white-line-table zebraLight">
+<table id="grid_h430" class="white-line-table zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>Description</th>
       <th>U/M</th>
       <th>Unit Price</th>
-      <th>Supplier Name</th>
+      <th>Vendor Name</th>
     </tr>
   </thead>
   
   <tbody>
     <% product_id.each do |prod| %>
+      <% unless prod.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
 
         <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="purchase_requisition_items" rowsId="<%= prod.id %>">
             <td></td>
@@ -20,6 +21,7 @@
             <td>[<%= prod.trade_company.code rescue '-' %>] <%= prod.trade_company.name rescue "-" %></td>
         </tr>
         
+      <% end %>
     <% end %>
   </tbody>  
 </table>

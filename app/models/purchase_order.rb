@@ -56,11 +56,15 @@ class PurchaseOrder < ActiveRecord::Base
   
   default_scope order("po_no DESC")
   
-  def self.ordered(search)
+#  def self.ordered(search)
+#    search.where(:status => PurchaseOrder::ACTIVE)
+#  end
+
+  def self.search_purchase_orders(search)
     search.where(:status => PurchaseOrder::ACTIVE)
   end
   
-  def self.ordered_kiv(search)
+  def self.search_purchase_orders_kiv(search)
     search.where(:status => PurchaseOrder::KEEP_IN_VIEW)
   end
   
@@ -126,6 +130,7 @@ class PurchaseOrder < ActiveRecord::Base
     end
   end
   
+  # if vendor name must matching common vendor name, will overwrite them...
   def self.generator_match_vendor(vendor, tc_vendor)
     if vendor.present?
       vendor.each do |v|

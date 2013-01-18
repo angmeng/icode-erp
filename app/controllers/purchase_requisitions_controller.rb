@@ -1,7 +1,6 @@
 class PurchaseRequisitionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
-  
 
   def index
     @search = PurchaseRequisition.search(params[:search])
@@ -22,9 +21,6 @@ class PurchaseRequisitionsController < ApplicationController
   end
   
   def show
-#    @purchase_requisition = PurchaseRequisition.find(params[:id])
-#    @user = User.find(@purchase_requisition.requested_by)
-#    @logic = PurchaseRequisition.logic(@user)
     loading_logic(params[:id])
     @show_items = @purchase_requisition.purchase_requisition_items
   end
@@ -53,9 +49,6 @@ class PurchaseRequisitionsController < ApplicationController
   end
   
   def edit
-#    @purchase_requisition = PurchaseRequisition.find(params[:id])
-#    @user = User.find(@purchase_requisition.requested_by)
-#    @logic = PurchaseRequisition.logic(@user)
     loading_logic(params[:id])
     @edit_items = @purchase_requisition.purchase_requisition_items
     @app_lvl2 = User.find(@purchase_requisition.approved_by_level_two)    if @purchase_requisition.approved_by_level_two.present?
@@ -79,7 +72,7 @@ class PurchaseRequisitionsController < ApplicationController
 
   def destroy
     @purchase_requisition = PurchaseRequisition.find(params[:id])
-    @purchase_requisition.update_attributes(:status => PurchaseRequisition::KEEP_IN_VIEW)
+    @purchase_requisition.update_attributes(:status => PurchaseRequisition::KEEP_IN_VIEW, :recover_status => @purchase_requisition.status)
 
     respond_to do |format|
       format.html { redirect_to purchase_requisitions_path, :notice => "The PR has dropped to KIV." }
@@ -89,19 +82,8 @@ class PurchaseRequisitionsController < ApplicationController
   
   def recover
     @purchase_requisition = PurchaseRequisition.find(params[:id])
-    user = User.find(@purchase_requisition.requested_by)
-    if user.level_two == @purchase_requisition.tasks
-      status = PurchaseRequisition::LEVEL_TWO
-    elsif user.level_three == @purchase_requisition.tasks
-      status = PurchaseRequisition::LEVEL_THREE
-    elsif user.approved_by_level_five.blank?
-      status = PurchaseRequisition::LEVEL_FIVE
-    else
-      status = PurchaseRequisition::RECOVERED
-    end
-    
-    @purchase_requisition.update_attributes(:status => status)
-
+    @purchase_requisition.update_attributes(:status => @purchase_requisition.recover_status, :recover_status => "")
+#
     respond_to do |format|
       format.html { redirect_to kiv_purchase_requisitions_path, :notice => "The PR has recovered from KIV." }
       format.json { head :no_content }
@@ -150,7 +132,6 @@ class PurchaseRequisitionsController < ApplicationController
     end
   end
   
-  
   def yes_approval_om
     @app_om = PurchaseRequisition.find(params[:id])
     if @app_om.update_attributes(:status => PurchaseRequisition::LEVEL_FIVE, :approved_by_level_three => current_user.id, :approved_by_level_three_date => Date.today, :tasks => director_data.id)
@@ -172,7 +153,6 @@ class PurchaseRequisitionsController < ApplicationController
       redirect_to edit_purchase_requisition_path(@app_om)
     end
   end
-  
   
   def yes_approval_three
     @app_three = PurchaseRequisition.find(params[:id])
@@ -267,13 +247,7 @@ class PurchaseRequisitionsController < ApplicationController
   end
   
   def generate_add_status(user)
-#      if user.level == User::LEVEL_ONE
-        PurchaseRequisition::LEVEL_ONE
-#      elsif user.level == User::LEVEL_TWO
-#        PurchaseRequisition::LEVEL_TWO
-#      elsif user.level == User::LEVEL_THREE
-#        PurchaseRequisition::LEVEL_THREE
-#      end
+    PurchaseRequisition::LEVEL_ONE
   end
   
   def loading_logic(id)
