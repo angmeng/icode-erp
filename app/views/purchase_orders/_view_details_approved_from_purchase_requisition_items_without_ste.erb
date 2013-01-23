@@ -14,6 +14,9 @@
           <th style="font-size: 12px;">PRODUCT ID</th>
           <th style="font-size: 12px;">DESCRIPTION</th>
           <th style="font-size: 12px;">ETA</th>
+          <% unless action_name == "printable" or "show" %>
+            <th style="font-size: 12px;" width="100">Correct ETA</th>
+          <% end %>
           <th style="font-size: 12px;">QUANTITY</th>
           <th style="font-size: 12px;">U/M</th>
           <th style="font-size: 12px;">UNIT PRICE</th>
@@ -44,7 +47,7 @@
 
           <td align="center">
             <% if k.product.blank? %>
-              <%= link_to "Add Product", message_products_path(:pri_id => k.id, :po_desc => k.description, :po_um_id => k.unit_measurement_id, :po_up => k.unit_price, :po_vendor_id => k.trade_company_id) %>
+              <%#= link_to "Add Product", message_products_path(:pri_id => k.id, :po_desc => k.description, :po_um_id => k.unit_measurement_id, :po_up => k.unit_price, :po_vendor_id => k.trade_company_id) %>
             <% else %>
               <%= link_to(product_path(k.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
                 <%= render "/product_categories/join_product_category", :pc => k %>
@@ -61,6 +64,13 @@
               <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
             <% end %>
           </td>
+          
+          <% unless action_name == "printable" or "show" %>
+            <td>
+              <%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %>
+            </td>
+          <% end %>
+          
           <td align="center"><%= k.quantity rescue '0' %></td>
           <td align="center"><%= k.unit_measurement.code rescue '-' %></td>
           <td align="right"><%= four_precision(k.unit_price) %></td>
@@ -74,26 +84,28 @@
       <% gt = cal_grandtotal(subtotal.sum(), @purchase_order.tax.to_f) %>
 
       <tr class="footer_line">
-        <% unless action_name == "printable" %>
-          <td align="right" colspan="9">Sub-Total</td>
+        <% unless action_name == "printable" or "show" %>
+          <td align="right" colspan="11">Sub-Total</td>
         <% else %>
-          <td align="right" colspan="7">Sub-Total</td>
+          <td align="right" colspan="8">Sub-Total</td>
         <% end %>
         <td align="right" title="<%= two_precision(subtotal.sum()) %>" class="po_subtotal"><%= two_precision(subtotal.sum()) %></td>
       </tr>
+      
       <tr class="footer_line">
-        <% unless action_name == "printable" %>
-          <td align="right" colspan="9">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
+        <% unless action_name == "printable" or "show" %>
+          <td align="right" colspan="11">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
         <% else %>
-          <td align="right" colspan="7">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
+          <td align="right" colspan="8">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
         <% end %>
         <td align="right" class="add_s_tax"><%= two_precision(@purchase_order.tax.to_f / 100) %></td>
       </tr>
+      
       <tr class="footer_line">
-        <% unless action_name == "printable" %>
-          <td align="right" colspan="9">Grand Total</td>
+        <% unless action_name == "printable" or "show" %>
+          <td align="right" colspan="11">Grand Total</td>
         <% else %>
-          <td align="right" colspan="7">Grand Total</td>
+          <td align="right" colspan="8">Grand Total</td>
         <% end %>
         <td align="right" class="po_grandtotal"><%= two_precision(gt) %></td>
       </tr>

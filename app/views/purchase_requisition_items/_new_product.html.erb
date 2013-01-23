@@ -69,7 +69,7 @@
                 <% if @purchase_requisition_item.eta.present? %>
                   <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA" %>
                 <% else %>
-                  <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date"  , "required validationMessage" => "Please Enter ETA"%>
+                  <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date", "required validationMessage" => "Please Enter ETA" %>
                 <% end %>
               </td>
             </tr>
@@ -103,6 +103,11 @@
             <tr>
               <td><b>Urgent</b></td>
               <td><%= f.check_box :urgent %></td>
+            </tr>
+            
+            <tr>
+              <td><b>Skip To Purchase Order</b></td>
+              <td><%= f.check_box "skip_to_purchase_order" %></td>
             </tr>
           </table>
         </td>

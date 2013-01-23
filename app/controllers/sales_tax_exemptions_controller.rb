@@ -67,6 +67,7 @@ class SalesTaxExemptionsController < ApplicationController
     respond_to do |format|
       if @sales_tax_exemption.save
         format.html { 
+          SalesTaxExemptionManagement.connect_company(@sales_tax_exemption)
           company.update_attributes(:sn_sales_tax_exemption_no => ste)
           redirect_to @sales_tax_exemption, notice: 'Sales tax exemption was successfully created.' 
         }

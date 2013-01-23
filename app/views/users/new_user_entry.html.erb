@@ -1,33 +1,30 @@
-
 <div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
   
-    
+  <div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
 
-
-<%= form_tag generator_user_users_path do  %>
-  <div id="user_strip">
-    <ul>
-      <li class="k-state-active">User Account</li>
-      <li>Inventory Management System</li>
-      <li>Inventory Management System II - Product</li>
-    </ul>
-    <div><%= render "user_account" %></div>
-    <div><%= render "management" %></div>
-  <div class="user_management">
-    <div><%= render "management_product" %></div>
-  </div>
-
-      <div class="icon_tag">
-        <%= link_save_button %>
-        <%= link_close_button %>
+  <%= form_tag generator_user_users_path do  %>
+    <div id="user_strip">
+      <ul>
+        <li class="k-state-active">User Account</li>
+        <li>Inventory Management System</li>
+        <li>Inventory Management System II - Product</li>
+      </ul>
+      <div><%= render "user_account" %></div>
+      <div>
+        <div class="user_management"><%= render "management_checkbox" %></div>
       </div>
-   
-  </div>
-<% end %>
+      <div>
+        <div class="user_management"><%= render "management_product" %></div>
+      </div>
+    </div>
+    <div class="icon_tag">
+      <%= link_save_button %>
+      <%= link_close_button %>
+    </div>
+  <% end %>
 
-<% content_for :jquery_script do %>
-   <script>
+  <% content_for :jquery_script do %>
+    <script>
       $(document).ready(function() {
           $("#new_name").keyup(function(){
             var string = $(this).val();
@@ -36,5 +33,5 @@
           });
       });
     </script>
-<% end %>
+  <% end %>
 </div>

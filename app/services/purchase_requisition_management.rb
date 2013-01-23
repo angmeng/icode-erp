@@ -1,6 +1,6 @@
 class PurchaseRequisitionManagement
   
-  def self.arrange(user, purchase_requisition, pr_value)
+  def self.arrange(user, purchase_requisition, pr_value, boss)
     @user = user
     @purchase_requisition           = purchase_requisition
     @purchase_requisition.pr_no     = pr_value
@@ -12,7 +12,7 @@ class PurchaseRequisitionManagement
       @purchase_requisition.tasks   = user.level_three
     else
       @purchase_requisition.status  = PurchaseRequisition::LEVEL_FIVE
-      @purchase_requisition.tasks   = director_data.id
+      @purchase_requisition.tasks   = boss.id
     end
     return @purchase_requisition
   end
@@ -30,15 +30,20 @@ class PurchaseRequisitionManagement
   
   def self.running_new_temporary(purchase_requisition_item, company_name, estimated_price)
     @purchase_requisition_item = purchase_requisition_item
+    @purchase_requisition_item.temporary_sources.delete_all if @purchase_requisition_item.temporary_sources.present?
     if @purchase_requisition_item.product_id.present?
       prod = Product.find(@purchase_requisition_item.product_id)
       @purchase_requisition_item.description = prod.desc
       @purchase_requisition_item.unit_measurement_id = prod.unit_measurement_id
     end
-    @purchase_requisition_item.temporary_sources.delete_all if @purchase_requisition_item.temporary_sources.present?
-    @purchase_requisition_item.temporary_sources.new(:company_name => company_name, :select_vendor => TRUE, :unit_price => estimated_price)
-    @purchase_requisition_item.temporary_sources.new(:company_name => "-",          :select_vendor => FALSE, :unit_price => 0)
-    @purchase_requisition_item.temporary_sources.new(:company_name => "-",          :select_vendor => FALSE, :unit_price => 0)
+    # Include New Product ID and Exist Product ID, except in maintenance
+    if @purchase_requisition_item.is_skip_to_po?
+      @purchase_requisition_item.temporary_sources.new(:company_name => company_name, :select_vendor => TRUE, :unit_price => estimated_price)
+    else
+      @purchase_requisition_item.temporary_sources.new(:company_name => company_name, :select_vendor => TRUE, :unit_price => estimated_price)
+      @purchase_requisition_item.temporary_sources.new(:company_name => "-",          :select_vendor => FALSE, :unit_price => 0)
+      @purchase_requisition_item.temporary_sources.new(:company_name => "-",          :select_vendor => FALSE, :unit_price => 0)
+    end
     return @purchase_requisition_item
   end
   

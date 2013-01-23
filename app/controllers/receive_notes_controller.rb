@@ -2,14 +2,14 @@ class ReceiveNotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :implement_product_id
   before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox"
+#  layout "sheetbox"
 
   def index
     @search = ReceiveNote.search(params[:search])
     @receive_notes = ReceiveNote.ordered(@search)
     @rn_updater = ReceiveNote.uniq_updater
     
-    if User.is_boss(current_user)
+    if user_is_admin?
       @receive_notes = @receive_notes.all
     else
       @receive_notes = @receive_notes.find_all_by_updated_by(current_user.id)

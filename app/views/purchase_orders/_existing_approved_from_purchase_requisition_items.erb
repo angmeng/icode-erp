@@ -1,6 +1,7 @@
 <table id="grid_h430" class="white-line-table zebraLight">
   <thead>
     <tr class="header_line">
+      <th class="check_highlight"></th>
       <th>PR No.</th>
       <th>Vendor</th>
       <th>Sales Tax Exemption</th>
@@ -15,6 +16,7 @@
         <% trade_company = TradeCompany.find(k) %>
 
         <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= k %>">
+            <td></td>
             <td align="center"><%= v.first.purchase_requisition.pr_no rescue '-' %></td>
             <td>[<%= trade_company.code rescue '-' %>] <%= trade_company.name rescue "-" %></td>
             <td align="center">

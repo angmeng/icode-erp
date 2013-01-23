@@ -8,7 +8,7 @@
     <td width="50"></td>
   </tr>
   <tr>
-    <td><b>Supplier Company</b></td>
+    <td><b>Vendor Company</b></td>
     <% if action_name == "edit" %>
       <td>[<%= @receive_note.trade_company.code rescue '-' %>] <%= @receive_note.trade_company.name rescue '-' %></td>
     <% else %>
@@ -33,7 +33,7 @@
   </tr>
 </table>
 
-<div class="fix_1600x900">
+<div class="fix_1600x900_h450">
   <%= render "/receive_notes/search_from_purchase_order", :po_no => @po_no %>
 </div>
 

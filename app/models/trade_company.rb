@@ -2,26 +2,6 @@ class TradeCompany < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  belongs_to :type_of_sale
-  belongs_to :trade_term
-  belongs_to :payment_type
-  
-  has_one  :product_price
-  has_one  :purchase_order
-  has_one  :purchase_requisition
-  has_one  :quotation_request_form
-  has_one  :sales_tax_exemption
-  has_one  :price_control
-  has_one  :delivery_order
-  
-  has_many :product_vendors
-  has_many :product_customers
-  has_many :purchase_requisition_items
-  has_many :receive_notes
-  has_many :sales_orders
-  
-  has_many :contacts, :dependent => :destroy
-  
   attr_accessible :address_3, :code, :name, :sales_rep, :contact_attributes,
     :sales_tax_no, :status, :trade_term_id, :type_of_sale_id, :customer_approval, 
     :company_reg_no, :payment_type_id, :opening_ac_date, :opening_ac_amount, :limit_amount, :banking_name, 
@@ -30,6 +10,27 @@ class TradeCompany < ActiveRecord::Base
     :tel_area_code_one, :tel_no_1, :tel_area_code_two, :tel_no_2, :fax_area_code, :fax_no,
     :address_1, :postcode_one, :city_one, :state_one, :country_one, 
     :address_2, :postcode_two, :city_two, :state_two, :country_two
+  
+  belongs_to :type_of_sale
+  belongs_to :trade_term
+  belongs_to :payment_type
+  belongs_to :sales_tax_exemption
+  
+  has_one  :product_price
+  has_one  :purchase_order
+  has_one  :purchase_requisition
+  has_one  :quotation_request_form
+  has_one  :price_control
+  has_one  :delivery_order
+#  has_one  :sales_tax_exemption
+  
+  has_many :product_vendors
+  has_many :product_customers
+  has_many :purchase_requisition_items
+  has_many :receive_notes
+  has_many :sales_orders
+  
+  has_many :contacts, :dependent => :destroy
   
   validates_associated :contacts
   

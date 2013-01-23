@@ -36,9 +36,14 @@
       </tr>
       
       <tr>
-        <td><b><%= f.label :trade_company_id, "Supplier Company" %></b></td>
+        <td><b><%= f.label :trade_company_id, "Vendor Company" %></b></td>
         <td>
-          <%= f.select :trade_company_id, options_from_collection_for_select(trade_company_vendor, 'id', 'code', @sales_tax_exemption.trade_company_id.to_i), { :include_blank => true }, :onchange => "getCombo_tradecompany_code(this)" %>
+          <% if action_name == "edit" %>
+           <%= f.select "trade_company_id", options_for_select(trade_company_vendor_with_code, @sales_tax_exemption.trade_company_id.to_i), {:include_blank => true}, {:style => "width:400px;", :id => "kendo_combobox_two"} %>
+          <% else %>
+           <%= f.select "trade_company_id", options_for_select(trade_company_vendor_with_code), { :include_blank => true }, { :style => "width:400px;", :id => "kendo_combobox_two" } %>
+          <% end %>
+          <%#= f.select :trade_company_id, options_from_collection_for_select(trade_company_vendor, 'id', 'code', @sales_tax_exemption.trade_company_id.to_i), { :include_blank => true }, :onchange => "getCombo_tradecompany_code(this)" %>
           <span id="ste_company_name"><%= @sales_tax_exemption.trade_company.name if @sales_tax_exemption.trade_company_id.present? %></span>
         </td>
       </tr>
@@ -63,8 +68,8 @@
           <th>Perihal Barang</th>
           <th>Tarif Code</th>
           <th>Apply Qty</th>
-          <th>Completed Qty</th>
           <th>U/M</th>
+          <th>Completed Qty</th>
         </tr>
       </thead>
       
@@ -76,8 +81,8 @@
               <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true %></td>
               <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :size => 20 %></td>
               <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :size => 8 %>
-              <td align="right">0<%= hidden_field_tag "datarow[#{index}][complete_qty]", goods.complete_qty %></td>
               <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), { :include_blank => true } %></td>        
+              <td align="right">0<%= hidden_field_tag "datarow[#{index}][complete_qty]", goods.complete_qty %></td>
             </tr>
           <% end %>
           
@@ -87,8 +92,8 @@
             <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true %></td>
             <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :size => 20 %></td>
             <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :size => 8 %>
-            <td align="right">0<%= hidden_field_tag "datarow[0][complete_qty]", 0 %></td>
             <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', @sales_tax_exemption.unit_measurement_id.to_i), { :include_blank => true } %></td>        
+            <td align="right">0<%= hidden_field_tag "datarow[0][complete_qty]", 0 %></td>
           </tr>
           
         <% end %>

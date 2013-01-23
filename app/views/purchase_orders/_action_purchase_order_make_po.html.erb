@@ -1,13 +1,15 @@
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY) %>
-    <span id="on_apply_make_po" applyClass="iframe_1600x900"><%= not_link_apply %></span>
+    <span id="on_apply_make_po" applyClass="iframe_1600x900">
+      <span class="k-button" style="color: grey; background-color: white;">Add New PO</span>
+    </span>
   <% else %>
-    <span class="word_opac"><%= not_link_apply %></span>
+    <span><span class="k-button" style="color: grey; background-color: white;">Add New PO</span></span>
   <% end %>
     
   <span class="word_opac"><%= not_link_submit_to %></span>
    
-  <%= link_close_button %>
-
+  <%#= link_close_button %>
+  <%= link_home_button %>
 </div>

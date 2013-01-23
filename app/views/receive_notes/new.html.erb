@@ -1,3 +1,4 @@
+<div id="popup_container">
 <table width="100%">
   <tr>
     <td align="right">
@@ -10,23 +11,24 @@
 
 <div style="background-color:blue"><strong style="color:white;">NEW RECEIVE NOTE</strong></div>
 
-<% if @po_no.present? %>
-      <%= form_for(@receive_note) do |f| %>
+<%= form_for(@receive_note) do |f| %>
+  <% if @po_no.present? %>
+      
         <%= render 'form', :f => f %>
 
-        <div class="icon_tag">
-          <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
-            <%= link_save_button %>
-          <% else %>
-            <%= not_link_save %>
-          <% end %>
-          <%= link_close_button  %>
-        </div>
-      <% end %>
-<% else %>
-  No Record Found.
+        
+      
+  <% else %>
+    No Record Found.
+  <% end %>
+    
+  <div class="icon_tag">
+    <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
+      <%= link_save_button %>
+    <% else %>
+      <%= not_link_save %>
+    <% end %>
+    <%= link_home_button  %>
+  </div>
 <% end %>
-
-
-
-
+</div>

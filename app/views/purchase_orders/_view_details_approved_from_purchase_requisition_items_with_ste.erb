@@ -18,10 +18,9 @@
           <th style="font-size: 12px;">U/M</th>
           <th style="font-size: 12px;">UNIT PRICE</th>
           <th style="font-size: 12px;">AMOUNT</th>
-          <%# unless action_name == "show" or action_name == "printable" %>
           <% if action_name == "new" %>
             <th style="font-size: 12px;">TARIF CODE</th>
-            <th style="font-size: 12px;">TOTAL KGS</th>
+            <th style="font-size: 12px;">TOTAL</th>
             <th style="font-size: 12px;">COMPLETE QTY</th>
           <% end %>
       </tr>
@@ -76,15 +75,17 @@
             <% subtotal << k.quantity * k.unit_price %>
           </td>
 
-          <%# unless action_name == "show" or action_name == "printable" %>
           <% if action_name == "new" %>
-            <% if @ste.present? %>
+          
+            <% if @vendor_id.sales_tax_exemption.present? %>
+          
               <% if k.product_id.present? %>
-                <% if k.product.sales_tax_exemption_barang_id.present? %>
+                <%# if k.product.sales_tax_exemption_barang_id.present? %>
+                <% if k.product.tarif_code.present? %>
           
                   <%# @find_vendor = ste_no_with_valid.find_by_id_and_trade_company_id(k.product.sales_tax_exemption_id, k.trade_company_id) %>
                   <%# if @find_vendor.present? %>
-                    <td align="center"><%= k.product.sales_tax_exemption_barang.tarif_code rescue '-' %></td>
+                    <td align="center"><%= k.product.tarif_code rescue '-' %></td>
                     <td align="center">
                       <% if params[:kgs].present? %>
                         <%= text_field_tag "kgs[#{k.id.to_s}][qty]", params[:kgs]["#{k.id.to_s}"][:qty], :size => 5  %>
@@ -92,7 +93,13 @@
                         <%= text_field_tag "kgs[#{k.id.to_s}][qty]", 0, :size => 5  %>
                       <% end %>
                     </td>
-                    <td align="center"><%= find_completed_qty(@vendor_id.id, k.product.tarif_code) %></td>
+                    <td align="center">
+                      <%#= find_completed_qty(@vendor_id.id, k.product.tarif_code) %>
+                      <% if @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs.present? %>
+                        <% available = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs.find_by_tarif_code(k.product.tarif_code) %>
+                        <%= available.complete_qty  %>
+                      <% end %>
+                    </td>
                   <%# end %>
                     
                 <% else %>
@@ -100,6 +107,7 @@
                 <% end %>
               <% end %>
             <% end %>
+                  
           <% end %>
         </tr>
       <% end %>      

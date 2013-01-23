@@ -35,7 +35,8 @@ class SalesTaxExemption < ActiveRecord::Base
   validates :type_of_exemption, :sales_tax_exemption_no, :trade_company_id, :period_start, :period_end, :presence => true
   
   belongs_to :unit_measurement
-  belongs_to :trade_company
+#  belongs_to :trade_company
+  has_one :trade_company
   
   has_many :sales_tax_exemption_barangs, :dependent => :destroy
   accepts_nested_attributes_for :sales_tax_exemption_barangs, :allow_destroy => true

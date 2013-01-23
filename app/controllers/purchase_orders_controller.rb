@@ -1,7 +1,7 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox"
+#  layout "sheetbox"
 
   def index
     @po_title = PurchaseOrder.title
@@ -30,6 +30,7 @@ class PurchaseOrdersController < ApplicationController
   def new
     @purchase_order = PurchaseOrder.new #with ste
     callback_module(params[:company_id]) if params[:company_id].present?
+    render :layout => "sheetbox"
   end
 
   def edit
@@ -38,14 +39,15 @@ class PurchaseOrdersController < ApplicationController
   end
   
   def create
-    a = company.sn_purchase_order_no
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
+    a = company.sn_purchase_order_no.to_i + 1
+    @purchase_order.po_no = a
     callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
     @chk_weight, msg = PurchaseOrder.chk_weight(params[:kgs])
     if @chk_weight.present?
       if @purchase_order.save
-        company.update_attributes(:sn_purchase_order_no => a + 1)
-        @purchase_order.update_attributes(:po_no => a + 1)
+        company.update_attributes(:sn_purchase_order_no => a)
+        
         @aa = PurchaseRequisitionItem.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id, params[:kgs])
         redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
       else
@@ -56,16 +58,20 @@ class PurchaseOrdersController < ApplicationController
       flash[:alert] = msg
       render action: "new"
     end
+    
   end
   
   def create_without_sales_tax_exemption
-    a = company.sn_purchase_order_no
-    @purchase_order = PurchaseOrder.new(:po_date => params[:po_date], :trade_company_id => params[:trade_company_id], :purchase_by => params[:purchase_by], :request_by => params[:request_by], :currency_id => params[:currency_id], :trade_term_id => params[:trade_term_id], :transport_id => params[:transport_id], :revision => params[:revision], :tax => params[:tax], :purchase_requisition_id => params[:purchase_requisition_id])
+    a = company.sn_purchase_order_no.to_i + 1
+#    @purchase_order = PurchaseOrder.new(:po_date => params[:po_date], :trade_company_id => params[:trade_company_id], :purchase_by => params[:purchase_by], :request_by => params[:request_by], :currency_id => params[:currency_id], :trade_term_id => params[:trade_term_id], :transport_id => params[:transport_id], :revision => params[:revision], :tax => params[:tax], :purchase_requisition_id => params[:purchase_requisition_id])
+    @purchase_order = PurchaseOrder.new(params[:purchase_order])
+    @purchase_order.po_no = a + 1
     callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
 
     if @purchase_order.save
-      company.update_attributes(:sn_purchase_order_no => a + 1)
-      @purchase_order.update_attributes(:po_no => a + 1)
+      company.update_attributes(:sn_purchase_order_no => a)
+#      @purchase_order.update_attributes(:po_no => a + 1)
+      PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
       PurchaseRequisitionItem.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
       redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
     else
@@ -266,12 +272,15 @@ class PurchaseOrdersController < ApplicationController
   
 #  ====================== VENDOR REGISTRATION (END) ============================ 
   
+#  ====================== PRODUCT ID Registration (non operation and Operation) ============================ 
   def no_product_id
     @no_product_id = PurchaseRequisitionItem.where(:status => PurchaseRequisitionItem::APPROVED)
                                             .reject { |attr_a| attr_a['trade_company_id'].blank? }
                                             .select { |attr_b| attr_b['product_id'].blank? }
   end
+#  ====================== PRODUCT ID Registration (non operation and Operation) (end) ============================ 
   
+#finally
   def make_purchase_order
     filter_matching_vendor
     @pr_items = PurchaseRequisitionItem.where(:status => PurchaseRequisitionItem::APPROVED).group_by(&:trade_company_id)
@@ -307,8 +316,9 @@ class PurchaseOrdersController < ApplicationController
   def callback_module(trade_company_id)
     @pri_company = PurchaseRequisitionItem.grouping_companies(trade_company_id)
     @vendor_id = TradeCompany.find(trade_company_id)
-    @ste = ste_no_with_valid.find_by_trade_company_id(trade_company_id) # for single and if valid_condition is TRUE
-    @exist_sales_tax = ste_no_with_not_valid.find_all_by_trade_company_id(trade_company_id) # if need to renew STE
+    
+#    @ste = ste_no_with_valid.find_by_trade_company_id(trade_company_id) # for single and if valid_condition is TRUE
+#    @exist_sales_tax = ste_no_with_not_valid.find_all_by_trade_company_id(trade_company_id) # if need to renew STE
   end
 
   def inventory_management_system

@@ -35,7 +35,7 @@ class PurchaseRequisitionsController < ApplicationController
     @purchase_requisition = PurchaseRequisition.new(params[:purchase_requisition])
     pr_value = company.sn_purchase_req_no.to_i + 1
     @manage, msg = PurchaseRequisition.managing_validate(current_user, params[:select_items])
-    PurchaseRequisitionManagement.arrange(current_user, @purchase_requisition, pr_value) if @manage.present?
+    PurchaseRequisitionManagement.arrange(current_user, @purchase_requisition, pr_value, director_data) if @manage.present?
 
     if @manage.present? && @purchase_requisition.save
       company.update_attributes(:sn_purchase_req_no => pr_value)
@@ -54,6 +54,7 @@ class PurchaseRequisitionsController < ApplicationController
     @app_lvl2 = User.find(@purchase_requisition.approved_by_level_two)    if @purchase_requisition.approved_by_level_two.present?
     @app_lvl3 = User.find(@purchase_requisition.approved_by_level_three)  if @purchase_requisition.approved_by_level_three.present?
     @app_lvl4 = User.find(@purchase_requisition.approved_by_level_five)   if @purchase_requisition.approved_by_level_five.present?
+    render :layout => "sheetbox"
   end
 
   def update

@@ -28,7 +28,6 @@ class PurchaseRequisitionItemsController < ApplicationController
     @eta, msg = PurchaseRequisitionItem.present_date(@purchase_requisition_item.eta)
     if @eta.present?
       unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
-#        PurchaseRequisitionItem.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price])
         PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price])
       end
       if @purchase_requisition_item.save

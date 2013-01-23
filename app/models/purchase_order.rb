@@ -19,6 +19,7 @@ class PurchaseOrder < ActiveRecord::Base
   NO = 2
   ACTIVE = "ACTIVE"
   KEEP_IN_VIEW = "KIV"
+  STOPPED = "stop"
   
   ROLE = [
     InventoryManagementSystem::PURCHASE_ORDER_MENU,  

@@ -285,15 +285,15 @@
             <ul>
               <!-- For Suppliers -->   
               <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID) %>
-                <li><%= link_to "Listing Sales Tax Exemption for Suppliers", sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Sales Tax Exemption for Vendors", sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
-                <li class="text_gray">Listing Sales Tax Exemption for Suppliers</li>
+                <li class="text_gray">Listing Sales Tax Exemption for Vendors</li>
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER) %>
-                <li><%= link_to "New Sales Tax Exemption for Supplier", new_sales_tax_exemption_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "New Sales Tax Exemption for Vendor", new_sales_tax_exemption_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
               <% else %>
-                <li class="text_gray">New Sales Tax Exemption for Supplier</li>
+                <li class="text_gray">New Sales Tax Exemption for Vendor</li>
               <% end %>
                 
               <%# if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID) %>
@@ -303,9 +303,9 @@
               <%# end %>
 
               <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER) %>
-                <li><%= link_to "Listing Sales Tax Exemption for Suppliers - KIV", kiv_supplier_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Sales Tax Exemption for Vendors - KIV", kiv_supplier_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
-                <li class="text_gray">Listing Sales Tax Exemption for Suppliers - KIV</li>
+                <li class="text_gray">Listing Sales Tax Exemption for Vendors - KIV</li>
               <% end %>
                 
               <li><hr/></li>

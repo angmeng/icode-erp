@@ -1,5 +1,5 @@
 # valid rollback from 16/1/2013
-# close rollback at dd/mm/yyyy
+# close rollback at 23/1/2013
 
 class AddAdminToUser < ActiveRecord::Migration
   def change

@@ -649,6 +649,7 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
     t.string   "approval_remark"
     t.boolean  "urgent",                  :default => false
     t.string   "status"
+    t.boolean  "skip_to_purchase_order",  :default => false
   end
 
   add_index "purchase_requisition_items", ["product_id"], :name => "index_purchase_requisition_items_on_product_id"

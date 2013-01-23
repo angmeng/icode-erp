@@ -2,9 +2,11 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   
+#  validate :present_eta_date
+  
   attr_accessible :description, :eta, :product_id, :purchase_order_no, :purchase_requisition_id, :quantity, :remark, 
                   :trade_company_id, :unit_measurement_id, :unit_price, :status, :trade_company_new_name, :user_id, :maintenance,
-                  :proposed_vendor, :temporary_sources_attributes, :approval_proposed, :approval_remark, :urgent
+                  :proposed_vendor, :temporary_sources_attributes, :approval_proposed, :approval_remark, :urgent, :skip_to_purchase_order
                 
   validates :description, :length => { :maximum => 255 }
   validates :eta, :unit_measurement_id, :presence => true
@@ -147,6 +149,8 @@ class PurchaseRequisitionItem < ActiveRecord::Base
       return false, "ETA should not blank."
     end
   end
+  
+  
 
 #  def self.running_new_temporary(purchase_requisition_item, company_name, estimated_price)
 #    if purchase_requisition_item.product_id.present?
@@ -230,5 +234,30 @@ class PurchaseRequisitionItem < ActiveRecord::Base
     end
     return array
   end
+  
+  def is_skip_to_po?
+    skip_to_purchase_order == TRUE
+  end
+  
+  
+  private
+  
+#  def present_date
+#    if eta.present?
+#      if eta < Date.today
+#        return false, "ETA should be future date."
+#      else 
+#        return true
+#      end
+#    else
+#      return false, "ETA should not blank."
+#    end
+#  end
+
+#  def present_eta_date
+#    if eta < Date.today
+#      errors.add(:scheduled_for, 'should be before starts at') 
+#    end
+#  end
 end
     

@@ -1,3 +1,4 @@
+
 <h1>Product Report</h1>
 
 <div>
@@ -39,6 +40,7 @@
 	<table id="grid_h495" class="white-line-table zebraLight">
 			<thead>
 			<tr class="header_line" >
+                          <th></th>
 				<th>No.</th>
 				<%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %><%#= submit_tag "show" %>
 				<th>Product ID / Product Name</th>
@@ -54,6 +56,7 @@
 	<% @show_product_report.each_with_index do |p , index| %>
 	<tbody>
 	<tr>
+          <td></td>
 		<td align="center"><%= index + 1 %></td>
 		<%#= check_box_tag "pri_ids[]" , pri.id %>
 		<td><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
