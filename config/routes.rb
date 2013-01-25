@@ -1,6 +1,8 @@
 Merp::Application.routes.draw do
 
 
+  resources :stock_outs
+
   resources :reports do
     collection do
     get "pr_report"

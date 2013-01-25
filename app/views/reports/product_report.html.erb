@@ -34,16 +34,16 @@
 </div>
 
 <div>
-	
-		<%#= form_tag detail_product_report_reports_path ,:name=>"myform",:url =>
-		detail_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-	<table id="grid_h495" class="white-line-table zebraLight">
+	<fieldset>
+	<%= form_tag pdf_product_report_reports_path ,:name=>"myform",:url =>
+		pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+	<table id="grid_h495">
 			<thead>
 			<tr class="header_line" >
-                          <th></th>
-				<th>No.</th>
-				<%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %><%#= submit_tag "show" %>
-				<th>Product ID / Product Name</th>
+                
+				<th>No.
+				<%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %></th>
+				<th>Product ID</th>
 				<th>Description</th>
 				<th>Part No.</th>
 				<th>Tarif Code</th>
@@ -53,33 +53,39 @@
 			</tr>
 		</thead>	
 		
-	<% @show_product_report.each_with_index do |p , index| %>
+	<% @show_product_report.each_with_index do |pri , index| %>
 	<tbody>
 	<tr>
-          <td></td>
-		<td align="center"><%= index + 1 %></td>
-		<%#= check_box_tag "pri_ids[]" , pri.id %>
-		<td><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
-		<td align="center"><%= p.product.code rescue '-' %> / <%= p.product.product_name rescue '-' %></td>
-		<td align="center"><%= p.product.desc rescue '-'%></td>
-		<td align="center"><%= p.product.part_no rescue '-'%></td>
-		<td align="center"><%= p.product.part_weight rescue '-' %>
-		<td align="center"><%= p.product.selling_price rescue '-'%></td>
-		<td align="center"><%= p.product.current_stock rescue '-'%></td>
-		<td align="center"><%= p.product.unit_measurement.code rescue '-'%></td>
+        
+		<td align="center"><%= index + 1 %>
+		<%= check_box_tag "pri_ids[]" , pri.id %></td>
+		<%#= render '/product_categories/join_product_category' , :pc => pri.product_category %>
+		<td align="center"><%= pri.product_code rescue '-' %>  <%#= pri.product.product_name rescue '-' %></td>
+		<td align="center"><%= pri.product.desc rescue '-'%></td>
+		<td align="center"><%= pri.product.part_no rescue '-'%></td>
+		<td align="center"><%= pri.product.part_weight rescue '-' %>
+		<td align="center"><%= pri.product.selling_price rescue '-'%></td>
+		<td align="center"><%= pri.product.current_stock rescue '-'%></td>
+		<td align="center"><%= pri.product.unit_measurement.code rescue '-'%></td>
 	</tr>
 	</tbody>
 	<% end %>
 	 
 	</table>
 
-		<%# end %>
-		
+	</fieldset>
 	
 <div style="float:right;">
-  <span><%= button_to "Print PDF" , pdf_product_report_reports_path(:pri_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" %></span>
 
-  <span><%= link_close_button %></span>
+	<span><%= submit_tag "show" , :class => "k-button" %> </span>
+	<span><%= link_to "Print PDF" , pdf_product_report_reports_path(:pri_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+
+ 	<%= link_close_button %>
+  <% end %>
+</from>
 </div>
 </div>
+
+  
+
 

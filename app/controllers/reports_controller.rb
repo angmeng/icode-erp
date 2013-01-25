@@ -64,10 +64,11 @@ def pdf_po_report
 end
 
 
+
 def pdf_product_report
   #render :text => params[:pri_ids]
     if params[:pri_ids].present?
-      @product_detail_report = Product.find(params[:pri_ids])
+      @product_detail_report = ProductCombobox.find(params[:pri_ids])
       respond_to do |format|
       format.html
       format.pdf {

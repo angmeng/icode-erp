@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Transfer note:</b>
+  <%= @stock_out.transfer_note %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @stock_out.product_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @stock_out.amount %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @stock_out.balance %>
+</p>
+
+
+<%#= link_to 'Edit', edit_stock_out_path(@stock_out) ,:class => "k-button" %>
+<%= link_to 'Back', stock_outs_path ,:class => "k-button" %>
