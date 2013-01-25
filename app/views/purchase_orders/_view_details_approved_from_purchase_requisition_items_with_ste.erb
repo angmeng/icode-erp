@@ -6,30 +6,47 @@
     
     <thead>
       <tr class="header_line">
-          <th style="font-size: 12px;">NO.</th>
+          <th style="font-size: 12px;">No.</th>
           <% unless action_name == "printable" %>
             <th style="font-size: 12px;">RN Status</th>
             <th style="font-size: 12px;">PR No.</th>
           <% end %>
-          <th style="font-size: 12px;">PRODUCT ID</th>
-          <th style="font-size: 12px;">DESCRIPTION</th>
+          <th style="font-size: 12px;">Product ID</th>
+          <th style="font-size: 12px;">Description</th>
           <th style="font-size: 12px;">ETA</th>
-          <th style="font-size: 12px;">QUANTITY</th>
-          <th style="font-size: 12px;">U/M</th>
-          <th style="font-size: 12px;">UNIT PRICE</th>
-          <th style="font-size: 12px;">AMOUNT</th>
           <% if action_name == "new" %>
-            <th style="font-size: 12px;">TARIF CODE</th>
-            <th style="font-size: 12px;">TOTAL</th>
-            <th style="font-size: 12px;">COMPLETE QTY</th>
+            <th style="font-size: 12px;" width="100">Correct ETA</th>
+          <% end %>
+          <th style="font-size: 12px;">Quantity</th>
+          <th style="font-size: 12px;">U/M</th>
+          <th style="font-size: 12px;">Unit Price</th>
+          <th style="font-size: 12px;">Amount</th>
+          <% if action_name == "new" %>
+            <th style="font-size: 12px;">Tarif Code</th>
+            <th style="font-size: 12px;">Balance Amount</th>
+            <th style="font-size: 12px;">Balance</th>
+            <th style="font-size: 12px;">Complete Qty</th>
           <% end %>
       </tr>
     </thead>
     
     <tbody>
       <% subtotal = [] %>
+      <% a = {} %>
+      <% b = {} %>
+      
+      <% if action_name == "new" %>
+          <% @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs %>
+          <% @barangs.each do |brg| %>
+            <% if brg.tarif_code.present? %>
+              <% a["#{brg.tarif_code}"] = brg.available_qty %>
+              <% b["#{brg.tarif_code}"] = brg.complete_qty %>
+            <% end %>
+          <% end %>
+      <% end %>
 
       <% approved.each_with_index do |k, index| %>
+      
         <tr class="<%= cycle("odd_line", "even_line") %>">
           <td align="center"><%= index + 1 %></td>
           <% unless action_name == "printable" %>
@@ -42,9 +59,7 @@
                 <span title="Not Received Yet">N.R</span>
               <% end %>
             </td>
-            <td align="center">
-              <%= link_to(k.purchase_requisition.pr_no, purchase_requisition_path(k.purchase_requisition_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" ) %>
-            </td>
+            <td align="center"><%= link_to(k.purchase_requisition.pr_no, purchase_requisition_path(k.purchase_requisition_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" ) %></td>
           <% end %>
           <td align="center">
             <% if k.product.blank? %>
@@ -67,6 +82,9 @@
               <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
             <% end %>
           </td>
+          <% if action_name == "new" %>
+            <td><%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %></td>
+          <% end %>
           <td align="center"><%= k.quantity rescue '0' %></td>
           <td align="center"><%= k.unit_measurement.code rescue '-' %></td>
           <td align="right"><%= four_precision(k.unit_price) %></td>
@@ -76,47 +94,50 @@
           </td>
 
           <% if action_name == "new" %>
+            <% @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs %>
+            
+            <% if @barangs.present? && k.product.present? %>
+              <% if k.product.tarif_code.present? %>
           
-            <% if @vendor_id.sales_tax_exemption.present? %>
+                <% barang = @barangs.find_by_tarif_code(k.product.tarif_code) %>
           
-              <% if k.product_id.present? %>
-                <%# if k.product.sales_tax_exemption_barang_id.present? %>
-                <% if k.product.tarif_code.present? %>
-          
-                  <%# @find_vendor = ste_no_with_valid.find_by_id_and_trade_company_id(k.product.sales_tax_exemption_id, k.trade_company_id) %>
-                  <%# if @find_vendor.present? %>
-                    <td align="center"><%= k.product.tarif_code rescue '-' %></td>
-                    <td align="center">
-                      <% if params[:kgs].present? %>
-                        <%= text_field_tag "kgs[#{k.id.to_s}][qty]", params[:kgs]["#{k.id.to_s}"][:qty], :size => 5  %>
-                      <% else %>
-                        <%= text_field_tag "kgs[#{k.id.to_s}][qty]", 0, :size => 5  %>
-                      <% end %>
-                    </td>
-                    <td align="center">
-                      <%#= find_completed_qty(@vendor_id.id, k.product.tarif_code) %>
-                      <% if @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs.present? %>
-                        <% available = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs.find_by_tarif_code(k.product.tarif_code) %>
-                        <%= available.complete_qty  %>
-                      <% end %>
-                    </td>
-                  <%# end %>
-                    
-                <% else %>
-                  <td><i class="red_alert">Please Entry Tarif Code from Product ID.</i></td>
-                <% end %>
+                <td align="center"><%= k.product.tarif_code rescue '-' %></td>
+                <td align="center">
+                  <%= a["#{barang.tarif_code}"] rescue '-' %>&nbsp;<%= barang.belongs_to_cal_um.code rescue '-' %>
+                  <%#= hidden_field_tag "datarow[#{k.id}][before_available_qty]", a["#{barang.tarif_code}"] %>
+                </td>
+                <td align="center">
+                  <%= a["#{barang.tarif_code}"] = a["#{barang.tarif_code}"].to_f - k.quantity.to_f %>
+                  <%#= hidden_field_tag "datarow[#{k.id}][after_available_qty]", a["#{barang.tarif_code}"] %>
+                </td>
+                <td align="center">
+                  <%= b["#{barang.tarif_code}"] = b["#{barang.tarif_code}"].to_f + k.quantity.to_f %>
+                  <%#= hidden_field_tag "datarow[#{k.id}][complete_qty]", b["#{barang.tarif_code}"] %>
+                </td>
+                
               <% end %>
             <% end %>
-                  
           <% end %>
         </tr>
-      <% end %>      
+        
+      <% end %>  
+        
+      <% if action_name == "new" %>
+        <% @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs %>
+        <% @barangs.each do |brg| %>
+          <% if brg.tarif_code.present? %>
+            <% if a["#{brg.tarif_code}"] <= 0 %>
+              <% @overweight = PurchaseOrder::OVERWEIGHT %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
 
       <% gt = cal_grandtotal(subtotal.sum(), @purchase_order.tax.to_f) %>
 
       <tr class="footer_line">
         <% unless action_name == "printable" %>
-          <td align="right" colspan="9">Sub-Total</td>
+          <td align="right" colspan="10">Sub-Total</td>
         <% else %>
           <td align="right" colspan="7">Sub-Total</td>
         <% end %>
@@ -124,7 +145,7 @@
       </tr>
       <tr class="footer_line">
         <% unless action_name == "printable" %>
-          <td align="right" colspan="9">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
+          <td align="right" colspan="10">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
         <% else %>
           <td align="right" colspan="7">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
         <% end %>
@@ -132,7 +153,7 @@
       </tr>
       <tr class="footer_line">
         <% unless action_name == "printable" %>
-          <td align="right" colspan="9">Grand Total</td>
+          <td align="right" colspan="10">Grand Total</td>
         <% else %>
           <td align="right" colspan="7">Grand Total</td>
         <% end %>

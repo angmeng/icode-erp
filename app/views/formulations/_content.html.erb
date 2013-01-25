@@ -1,0 +1,25 @@
+<div id="fix_1600x900">
+  <table id="grid_h495" class="white-line-table zebraLight">
+    <thead>
+      <tr class="header_line">
+        <th class="check_highlight"></th>
+        <th>From Value</th>
+        <th>From Unit Measurement</th>
+        <th>To Value</th>
+        <th>To Unit Measurement</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% fmts.each do |formulation| %>
+        <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= formulation.id %>">
+          <td></td>
+          <td align="center"><%= formulation.per_value %></td>
+          <td align="center"><%= two_precision(formulation.belongs_from_um.code) rescue '-' %></td>
+          <td align="center"><%= formulation.convert_value %></td>
+          <td align="center"><%= two_precision(formulation.belongs_to_um.code) rescue '-' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

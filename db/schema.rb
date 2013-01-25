@@ -309,13 +309,6 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
     t.datetime "updated_at",                                             :null => false
   end
 
-  create_table "group_running_nos", :force => true do |t|
-    t.string   "code"
-    t.integer  "current_no", :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
   create_table "incoming_rejects", :force => true do |t|
     t.integer  "incoming_reject_no"
     t.integer  "purpose"
@@ -488,20 +481,6 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  create_table "product_prices", :force => true do |t|
-    t.integer  "trade_company_id"
-    t.integer  "product_category_id"
-    t.integer  "currency_id"
-    t.decimal  "unit_price",          :precision => 10, :scale => 5, :default => 0.0
-    t.integer  "price_in"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
-    t.string   "part_no"
-  end
-
-  add_index "product_prices", ["product_category_id"], :name => "index_product_prices_on_product_category_id"
-  add_index "product_prices", ["trade_company_id"], :name => "index_product_prices_on_trade_company_id"
 
   create_table "product_vendors", :force => true do |t|
     t.integer  "product_id"
@@ -855,6 +834,8 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
     t.boolean  "valid_condition",        :default => true
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.float    "available_qty",          :default => 0.0
+    t.integer  "calculate_um_id"
   end
 
   add_index "sales_tax_exemption_barangs", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_barangs_on_sales_tax_exemption_id"
@@ -863,12 +844,13 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
   create_table "sales_tax_exemption_items", :force => true do |t|
     t.integer  "sales_tax_exemption_id"
     t.integer  "product_id"
-    t.float    "remaining_total"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "receive_note_item_id"
-    t.float    "kgs"
     t.integer  "purchase_order_id"
+    t.integer  "before_available_qty",      :default => 0
+    t.integer  "after_available_qty",       :default => 0
+    t.integer  "accumulative_complete_qty", :default => 0
   end
 
   create_table "sales_tax_exemptions", :force => true do |t|
@@ -1004,11 +986,6 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
   end
 
   add_index "temporary_sources", ["purchase_requisition_item_id"], :name => "index_temporary_sources_on_purchase_requisition_item_id"
-
-  create_table "temporary_tarif_codes", :force => true do |t|
-    t.string "tarif_code"
-    t.float  "remaining_total"
-  end
 
   create_table "trade_companies", :force => true do |t|
     t.string   "code"

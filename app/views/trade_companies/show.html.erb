@@ -21,6 +21,7 @@
               <td style="vertical-align: top;"><b>Bill To</b></td>
               <td><%= raw(@trade_company.address_1.gsub(/\n/,'<br/>')) rescue '-' %></td>
             </tr>
+            
             <tr>
               <td></td>
               <td>
@@ -60,10 +61,11 @@
                   <%= @trade_company.country_two rescue '-' %>.
                 <% end %>
             </tr>
+            
           <% else %>
             
             <tr>
-              <td style="vertical-align: top;"><b>Supplier Address</b></td>
+              <td style="vertical-align: top;"><b>Vendor Address</b></td>
               <td><%= raw(@trade_company.address_1.gsub(/\n/,'<br/>')) rescue '-' %></td>
             </tr>
             
@@ -88,108 +90,121 @@
           <% end %>
         <% end %>
            
-        <% if @trade_company.email.present? %>
           <tr>
             <td><b>Email</b></td>
-            <td><%= @trade_company.email rescue '-' %></td>
+            <td>
+              <% if @trade_company.email.present? %>
+                <%= @trade_company.email rescue '-' %>
+              <% else %>
+                -
+              <% end %>
+            </td>
           </tr>
-        <% end %>
         
-        <tr>
-          <td><b>Phone/Mobile No.</b></td>
-          <td>
-            <%= @trade_company.tel_area_code_one rescue '-' %>-<%= @trade_company.tel_no_1 rescue '-' %> 
-            <% unless @trade_company.tel_no_2.blank? %>
-              / <%= @trade_company.tel_area_code_two rescue '-' %>-<%= @trade_company.tel_no_2 rescue '-' %>
-            <% end %>
-          </td>
-        </tr>
+          <tr>
+            <td><b>Phone/Mobile No.</b></td>
+            <td>
+              <%= @trade_company.tel_area_code_one rescue '-' %>-<%= @trade_company.tel_no_1 rescue '-' %> 
+              <% unless @trade_company.tel_no_2.blank? %>
+                / <%= @trade_company.tel_area_code_two rescue '-' %>-<%= @trade_company.tel_no_2 rescue '-' %>
+              <% end %>
+            </td>
+          </tr>
         
-        <% if @trade_company.fax_no.present? %>
           <tr>
             <td><b>Fax No.</b></td>
-            <td><%= @trade_company.fax_area_code rescue '-' %>-<%= @trade_company.fax_no rescue '-' %></td>
+            <td>
+              <% if @trade_company.fax_no.present? %>
+                <%= @trade_company.fax_area_code rescue '-' %>-<%= @trade_company.fax_no rescue '-' %>
+              <% else %>
+                -
+              <% end %>
+            </td>
           </tr>
-        <% end %>
 
-        <% if @trade_company.website.present? %>
           <tr>
             <td><b>Website</b></td>            
             <td>
               <% if @trade_company.website.present? %>
                 <%= link_to "#{@trade_company.website}", @trade_company.website, :target => "_blank"  %>
+              <% else %>
+                -
               <% end %>
             </td>
           </tr>
-        <% end %>
           
-        <% if @trade_company.company_reg_no.present? %>
+        
           <tr>
             <td><b>Company Reg. No.</b></td>
-            <td><%= @trade_company.company_reg_no rescue '-' %></td>
-          </tr>
-        <% end %>
-
-        <% if @trade_company.user_type == TradeCompany::SUPPLIER %>
-          <tr>
-            <td><b>Supplier Performance Monitoring Record</b></td>
             <td>
-              <% if @trade_company.performance_monitoring == TRUE %>
-                YES
+              <% if @trade_company.company_reg_no.present? %>
+                <%= @trade_company.company_reg_no rescue '-' %>
               <% else %>
-                NO
+                -
               <% end %>
             </td>
           </tr>
-        <% end %>
-          
-        <tr>
-          <td><b>Attn</b></td>
-          <td><%= @trade_company.contact_person %></td>
-        </tr>
 
-        <% if @trade_company.contacts.present? %>
-          <tr>
-            <td style="vertical-align: top;"><b>Listing Contacts</b></td>
-            <td>
-              <table class="black-line-table">
-                <tr style="background-color: gainsboro;">
-                  <th width="30">No.</th>
-                  <th width="100">Department</th>
-                  <th width="100">Name</th>
-                  <th width="200">Email</th>
-                  <th width="100">Phone No.</th>
-                  <th width="100">Mobile No.</th>
-                </tr>
-                <% @trade_company.contacts.each_with_index do |contact, index| %>
-                  <tr>
-                    <td align="center"><%= index + 1 %></td>
-                    <td align="center"><%= contact.department rescue '-' %></td>
-                    <td align="center"><%= contact.name rescue '-' %></td>
-                    <td align="center"><%= contact.email rescue '-' %></td>
-                    <td align="center"><%= contact.phone_area_code rescue '-' %>-<%= contact.phone_no rescue '-' %></td>
-                    <td align="center"><%= contact.mobile_area_code rescue '-' %>-<%= contact.mobile_no rescue '-' %></td>
-                  </tr>
+          <% if @trade_company.user_type == TradeCompany::SUPPLIER %>
+            <tr>
+              <td><b>Supplier Performance Monitoring Record</b></td>
+              <td>
+                <% if @trade_company.performance_monitoring == TRUE %>
+                  YES
+                <% else %>
+                  NO
                 <% end %>
-              </table>
+              </td>
+            </tr>
+          <% end %>
+          
+          <tr>
+            <td><b>Attn</b></td>
+            <td><%= @trade_company.contact_person %></td>
+          </tr>
+
+          <% if @trade_company.contacts.present? %>
+            <tr>
+              <td style="vertical-align: top;"><b>Listing Contacts</b></td>
+              <td>
+                <table class="black-line-table">
+                  <tr style="background-color: gainsboro;">
+                    <th width="30">No.</th>
+                    <th width="100">Department</th>
+                    <th width="100">Name</th>
+                    <th width="200">Email</th>
+                    <th width="100">Phone No.</th>
+                    <th width="100">Mobile No.</th>
+                  </tr>
+                  <% @trade_company.contacts.each_with_index do |contact, index| %>
+                    <tr>
+                      <td align="center"><%= index + 1 %></td>
+                      <td align="center"><%= contact.department rescue '-' %></td>
+                      <td align="center"><%= contact.name rescue '-' %></td>
+                      <td align="center"><%= contact.email rescue '-' %></td>
+                      <td align="center"><%= contact.phone_area_code rescue '-' %>-<%= contact.phone_no rescue '-' %></td>
+                      <td align="center"><%= contact.mobile_area_code rescue '-' %>-<%= contact.mobile_no rescue '-' %></td>
+                    </tr>
+                  <% end %>
+                </table>
+              </td>
+            </tr>
+          <% end %>
+
+          <tr>
+            <td><b>Status</b></td>
+            <td>
+              <% if @trade_company.status == TradeCompany::ACTIVE  %>
+                ACTIVE
+              <% elsif @trade_company.status == TradeCompany::INACTIVE %>
+                UNACTIVE
+              <% elsif @trade_company.status == TradeCompany::KIV %>
+                KIV
+              <% else %>
+                -
+              <% end %>
             </td>
           </tr>
-        <% end %>
-
-        <tr>
-          <td><b>Status</b></td>
-          <td>
-            <% if @trade_company.status == TradeCompany::ACTIVE  %>
-              ACTIVE
-            <% elsif @trade_company.status == TradeCompany::INACTIVE %>
-              UNACTIVE
-            <% elsif @trade_company.status == TradeCompany::KIV %>
-              KIV
-            <% else %>
-              -
-            <% end %>
-          </td>
-        </tr>
 
         <!--tr>
           <td><b>Subcon</b></td>
@@ -197,10 +212,7 @@
           <td><%#= @trade_company.subcon == TRUE ? "YES" : "NO" %></td>
         </tr-->
       </table>
-
     </div>
-
-    
     
     <div>
       <table>
@@ -242,7 +254,6 @@
       </table>
       <br/>
     </div>
-    
     
     <div>
        <table>

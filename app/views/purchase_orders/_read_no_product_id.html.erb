@@ -17,7 +17,7 @@
             <td></td>
             <td><%= simple_format(prod.description) rescue '-' %></td>
             <td align="center"><%= prod.unit_measurement.code rescue '-' %></td>
-            <td align="center"><%= prod.unit_price rescue '-' %></td>
+            <td align="center"><%= four_precision(prod.unit_price) rescue '-' %></td>
             <td>[<%= prod.trade_company.code rescue '-' %>] <%= prod.trade_company.name rescue "-" %></td>
         </tr>
         

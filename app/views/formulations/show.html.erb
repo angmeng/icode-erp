@@ -1,24 +1,10 @@
-<%= render "/layouts/block_scaffolds" %>
+<div style="background-color:blue"><strong style="color:white;">SHOW FORMULATION DETAILS</strong></div>
 
-<p>
-  <b>Per value:</b>
-  <%= @formulation.per_value %>
-</p>
+<div class="fix_800x450">
+  <b>From:</b> <%= two_precision(@formulation.per_value) %> <%= @formulation.belongs_from_um.code rescue '-' %>
+  <b>To:</b> <%= two_precision(@formulation.convert_value) %> <%= @formulation.belongs_to_um.code rescue '-' %>
+</div>
 
-<p>
-  <b>From unit measurement:</b>
-  <%= um_code(@formulation.from_unit_measurement_id) %>
-</p>
-
-<p>
-  <b>Convert value:</b>
-  <%= @formulation.convert_value %>
-</p>
-
-<p>
-  <b>To unit measurement:</b>
-  <%= um_code(@formulation.to_unit_measurement_id) %>
-  <%#= @formulation.to_unit_measurement_id.code rescue '-' %>
-</p>
-
-<%= link_close_button %>
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

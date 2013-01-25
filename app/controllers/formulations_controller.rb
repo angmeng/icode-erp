@@ -1,6 +1,5 @@
 class FormulationsController < ApplicationController
   before_filter :authenticate_user!
-  layout false
   
   # GET /formulations
   # GET /formulations.json
@@ -9,7 +8,6 @@ class FormulationsController < ApplicationController
     if params[:from_um].present? && params[:to_um].present? && params[:current_value].present?
       params[:convert_value] = Formulation.converting(params[:from_um].to_i, params[:to_um].to_i, params[:current_value].to_f)
     end
-    render :layout => "application"
   end
 
   # GET /formulations/1
@@ -27,11 +25,7 @@ class FormulationsController < ApplicationController
   # GET /formulations/new.json
   def new
     @formulation = Formulation.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @formulation }
-    end
+    render :layout => "sheetbox"
   end
 
   # GET /formulations/1/edit
@@ -43,7 +37,6 @@ class FormulationsController < ApplicationController
   # POST /formulations.json
   def create
     @formulation = Formulation.new(params[:formulation])
-
     if @formulation.save
       redirect_to @formulation, notice: 'Formulation was successfully created.'
     else

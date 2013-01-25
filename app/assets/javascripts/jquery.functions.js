@@ -1,5 +1,10 @@
 $(document).ready(function() {
     
+    $("#grid_userTable_h490").chromatable({
+        width: "1200px",
+        height: "490px",
+        scrolling: "yes"
+    });
 
     $("#grid_h295").chromatable({
         width: "1330px",
@@ -23,6 +28,12 @@ $(document).ready(function() {
     $("#grid_h370").chromatable({
         width: "1440px",
         height: "370px",
+        scrolling: "yes"
+    });	
+    
+    $("#grid_h445").chromatable({
+        width: "1400px",
+        height: "445px",
         scrolling: "yes"
     });	
     
@@ -1819,15 +1830,15 @@ $(document).ready(function() {
     }); 
     
     $("#show_purchase").click(function(e) { 
-        e.preventDefault();
         $("#main_qr").hide();
         $("#main_pr").slideDown();
+        return false;
     }); 
     
     $("#show_sales").click(function(e) { 
-        e.preventDefault();
         $("#main_pr").slideUp();
         $("#main_qr").slideDown();
+        return false;
     }); 
     
     $("#type_in").click(function(){

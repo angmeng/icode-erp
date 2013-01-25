@@ -26,7 +26,7 @@
       </tr>
       
       <tr>
-        <td><b><%= f.label :sales_tax_exemption_no, "Sales Tax Exemption No." %></b></td>
+        <td><b><%= f.label :sales_tax_exemption_no, "Sales Tax Exemption No. *" %></b></td>
         <td><%= f.text_field :sales_tax_exemption_no, :validType => "maxLength[50]", :class => "easyui-validatebox", :size => 50 %></td>
       </tr>
       
@@ -68,8 +68,10 @@
           <th>Perihal Barang</th>
           <th>Tarif Code</th>
           <th>Apply Qty</th>
-          <th>U/M</th>
-          <th>Completed Qty</th>
+          <th>Origin U/M</th>
+          <th>Calculate U/M</th>
+          <!--th>Completed Qty</th-->
+          <th>Action</th>
         </tr>
       </thead>
       
@@ -80,9 +82,11 @@
             <tr class="<%= cycle('odd_line', 'even_line') %>">
               <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true %></td>
               <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :size => 20 %></td>
-              <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :size => 8 %>
+              <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :size => 20 %>
               <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), { :include_blank => true } %></td>        
-              <td align="right">0<%= hidden_field_tag "datarow[#{index}][complete_qty]", goods.complete_qty %></td>
+              <td align="center"><%= select_tag       "datarow[#{index}][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', @sales_tax_exemption.calculate_um_id.to_i), { :include_blank => true } %></td>
+              <!--td align="right">0<%#= hidden_field_tag "datarow[#{index}][complete_qty]", goods.complete_qty %></td-->
+              <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
             </tr>
           <% end %>
           
@@ -91,9 +95,11 @@
           <tr class="<%= cycle('odd_line', 'even_line') %>">
             <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true %></td>
             <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :size => 20 %></td>
-            <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :size => 8 %>
+            <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :size => 20 %>
             <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', @sales_tax_exemption.unit_measurement_id.to_i), { :include_blank => true } %></td>        
-            <td align="right">0<%= hidden_field_tag "datarow[0][complete_qty]", 0 %></td>
+            <td align="center"><%= select_tag       "datarow[0][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), { :include_blank => true } %></td>
+            <!--td align="right">0<%#= hidden_field_tag "datarow[0][complete_qty]", 0 %></td-->
+            <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
           </tr>
           
         <% end %>

@@ -1,11 +1,11 @@
 <div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">APPROVE / REJECT PURCHASE REQUISITION TASKS</strong></div>
+  <div class="title_head"><strong style="color:white;">APPROVE / REJECT PURCHASE REQUISITION TASKS</strong></div>
 
-  <div class="fix_1600x900">
+  <div class="fix_1600x900_h450">
     <% if @user_report.present? %>
       <%= render "/purchase_requisitions/summary_from_purchase_requisition", :summary => @user_report %>
     <% else %>
-      No Tasks.
+      No Tasks
     <% end %>
   </div>
 

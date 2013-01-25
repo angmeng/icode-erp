@@ -671,6 +671,10 @@ module ApplicationHelper
       submit_tag "Save", :class => "k-button font_bold"
     end
     
+    def link_fsave_button(f)
+      f.submit "Save", :class => "k-button font_bold"
+    end
+    
     def not_link_save
       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
         "Save"
@@ -699,11 +703,13 @@ module ApplicationHelper
       end
     end
     
-
-    
     
     def um_code(unit_measurement_id)
       UnitMeasurement.find(unit_measurement_id).code rescue '-'
+    end
+    
+    def search_button
+      link_to 'Search', "#", :class => "search_link"
     end
 
 end

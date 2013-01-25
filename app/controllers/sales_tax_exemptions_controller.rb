@@ -1,7 +1,7 @@
 class SalesTaxExemptionsController < ApplicationController
   before_filter :authenticate_user!
 #  before_filter :inventory_management_system
-  layout "sheetbox"
+#  layout "sheetbox"
   
   def index                       # For Supplier with valid
     @search = SalesTaxExemption.search(params[:search])
@@ -45,6 +45,7 @@ class SalesTaxExemptionsController < ApplicationController
   def new
     @sales_tax_exemption = SalesTaxExemption.new
     @perihal_barang = SalesTaxExemption.perihal_barang_supplier
+    render :layout => "sheetbox"
   end
   
   def new_customer
@@ -62,7 +63,8 @@ class SalesTaxExemptionsController < ApplicationController
     @sales_tax_exemption = SalesTaxExemption.new(params[:sales_tax_exemption])
     ste = company.sn_sales_tax_exemption_no.to_i + 1
     @sales_tax_exemption.running_no = ste
-    SalesTaxExemption.running_items(params[:datarow], @sales_tax_exemption)
+#    SalesTaxExemption.running_items(params[:datarow], @sales_tax_exemption)
+    SalesTaxExemptionManagement.running_items(params[:datarow], @sales_tax_exemption)
     
     respond_to do |format|
       if @sales_tax_exemption.save

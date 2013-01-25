@@ -35,7 +35,6 @@ class SalesTaxExemption < ActiveRecord::Base
   validates :type_of_exemption, :sales_tax_exemption_no, :trade_company_id, :period_start, :period_end, :presence => true
   
   belongs_to :unit_measurement
-#  belongs_to :trade_company
   has_one :trade_company
   
   has_many :sales_tax_exemption_barangs, :dependent => :destroy
@@ -123,15 +122,16 @@ class SalesTaxExemption < ActiveRecord::Base
     end
   end
   
-  def self.running_items(data, ste)
-    if data.present?
-      ste.sales_tax_exemption_barangs.delete_all if ste.sales_tax_exemption_barangs.present?
-      
-      data.each do |barang, content|
-        ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => content[:complete_qty], :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code])
-      end
-    end
-  end
+#  def self.running_items(data, ste)
+#    if data.present?
+#      ste.sales_tax_exemption_barangs.delete_all if ste.sales_tax_exemption_barangs.present?
+#      
+#      data.each do |barang, content|
+#        # available_qty should be same value with apply_qty
+#        ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => content[:apply_qty])
+#      end
+#    end
+#  end
   
   private
   

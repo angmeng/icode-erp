@@ -20,6 +20,7 @@ class PurchaseOrder < ActiveRecord::Base
   ACTIVE = "ACTIVE"
   KEEP_IN_VIEW = "KIV"
   STOPPED = "stop"
+  OVERWEIGHT = "overweight"
   
   ROLE = [
     InventoryManagementSystem::PURCHASE_ORDER_MENU,  
@@ -131,27 +132,28 @@ class PurchaseOrder < ActiveRecord::Base
     end
   end
   
-  # if vendor name must matching common vendor name, will overwrite them...
-  def self.generator_match_vendor(vendor, tc_vendor)
-    if vendor.present?
-      vendor.each do |v|
-        if v.temporary_sources.present?
-          if v.temporary_sources.find_by_select_vendor(TRUE).present?
-            vv = v.temporary_sources.find_by_select_vendor(TRUE)
-            tc = tc_vendor.find_by_name(vv.company_name)
-            v.update_attributes(:trade_company_id => tc.id, :unit_price => vv.unit_price) if tc.present?
-          end
-        end
-      end
-    end
-  end
+#  # if vendor name must matching common vendor name, will overwrite them...
+#  def self.generator_match_vendor(vendor, tc_vendor)
+#    if vendor.present?
+#      vendor.each do |v|
+#        if v.temporary_sources.present?
+#          if v.temporary_sources.find_by_select_vendor(TRUE).present?
+#            vv = v.temporary_sources.find_by_select_vendor(TRUE)
+#            tc = tc_vendor.find_by_name(vv.company_name)
+#            v.update_attributes(:trade_company_id => tc.id, :unit_price => vv.unit_price) if tc.present?
+#          end
+#        end
+#      end
+#    end
+#  end
   
   def self.chk_weight(kgs)
     if kgs.present?
       # to store temporary tarif code
       kgs.each do |pri_id, content|
-        pri = PurchaseRequisitionItem.find(pri_id)  
-        ste_tarif_code = SalesTaxExemption.trade_company_id_and_valid_condition(pri.trade_company_id, FALSE)
+        pri = PurchaseRequisitionItem.find(pri_id)
+        
+        ste_tarif_code = SalesTaxExemption.trade_company_id_and_valid_condition(pri.trade_company_id, TRUE)
         if ste_tarif_code.present?
           if ttc = TemporaryTarifCode.find_by_tarif_code(ste_tarif_code.tarif_code)
             ttc.update_attributes!(:remaining_total => ste_tarif_code.remaining_total)
@@ -163,8 +165,8 @@ class PurchaseOrder < ActiveRecord::Base
       
       kgs.each do |pri_id, content|
         pri = PurchaseRequisitionItem.find(pri_id)  
-        ste_tarif_code = SalesTaxExemption.trade_company_id_and_valid_condition(pri.trade_company_id, FALSE)
-        ttc = TemporaryTarifCode.find_by_tarif_code(ste_tarif_code.tarif_code)
+        ste_tarif_code = SalesTaxExemption.trade_company_id_and_valid_condition(pri.trade_company_id, TRUE)
+#        ttc = TemporaryTarifCode.find_by_tarif_code(ste_tarif_code.tarif_code)
         
         remaining = ttc.remaining_total - content[:qty].to_f
         ttc.remaining_total = remaining

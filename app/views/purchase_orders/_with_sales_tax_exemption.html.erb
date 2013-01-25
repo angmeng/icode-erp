@@ -1,9 +1,8 @@
 <%= form_for(@purchase_order) do |f| %>
-  <div class="fix_1600x900_h450">
-      <%= render "form", :f => f  %>
-      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
-  </div>
-
+  
+  <%= render "form", :f => f  %>
+  <div class="fix_1600x900_h400"><%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %></div>
+  
   <div class="icon_tag">
     <% unless action_name == "edit" %>
       <% @pri_company.each do |k| %>
@@ -14,8 +13,7 @@
     <% end %>
 
     <% unless params[:blank_product] == "yes" %>
-      <%# unless @exist_sales_tax.present? %>
-      <% unless @ste_valid == PurchaseOrder::STOPPED %>
+      <% unless @ste_valid == PurchaseOrder::STOPPED or @overweight == PurchaseOrder::OVERWEIGHT %>
         <%= link_save_button %>
       <% end %>
     <% end %>

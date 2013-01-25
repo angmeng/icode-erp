@@ -1,9 +1,9 @@
-<table id="grid_h490" class="black-line-table zebraLight">
+<table id="grid_userTable_h490" class="black-line-table zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight" rowspan="2"></th>
       <th width="150" rowspan="2">MODULE</th>
-      <th width="150" rowspan="2">SUB-MODULE</th>
+      <th width="200" rowspan="2">SUB-MODULE</th>
       <th colspan="11">ACTION</th>
     </tr>
 
@@ -45,6 +45,7 @@
     <%= render "/inventory_management_systems/ims_delivery_order", :checkboxes => @checkboxes %>
     <!--OTHER-->
     <%= render "/inventory_management_systems/ims_sales_tax_exemption", :checkboxes => @checkboxes %>
+    <%= render "/inventory_management_systems/ims_formulation_for_all", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_formulation_for_costing", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_inventory", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_company_profile", :checkboxes => @checkboxes %>

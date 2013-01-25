@@ -1,66 +1,78 @@
-<div style="background-color:blue"><strong style="color:white;">SHOW SALES TAX EXEMPTION DETAILS</strong></div>
+<div id="popup_container">
+  <div style="background-color:blue"><strong style="color:white;">SHOW SALES TAX EXEMPTION DETAILS</strong></div>
 
-<div class="fix_800x450">
-  <table width="100%">
-    <tr>
-      <td><b>Running No#</b></td>
-      <td><%= @sales_tax_exemption.running_no rescue '-' %></td>
-    </tr>
-    
-    <tr>
-      <td><b>Type of Exemption</b></td>
-      <td><%= @sales_tax_exemption.type_of_exemption rescue '-' %></td>
-    </tr>
-    
-    <tr>
-      <td><b>Sales Tax Exemption No.</b></td>
-      <td><%= @sales_tax_exemption.sales_tax_exemption_no rescue '-' %></td>
-    </tr>
-    
-    <tr>
-      <td width="200"><b>Registraton No.</b></td>
-      <td><%= @sales_tax_exemption.registration_no rescue '-' %></td>
-    </tr>
-    
-    <tr>
-      <td><b><%= @sales_tax_exemption.company_type %> Company</b></td>
-      <td>[<%= @sales_tax_exemption.trade_company.code rescue '-' %>] <%= @sales_tax_exemption.trade_company.name rescue '-' %></td>
-    </tr>
+  <div class="fix_800x450">
+    <table width="100%">
+      <tr>
+        <td><b>Running No#</b></td>
+        <td><%= @sales_tax_exemption.running_no rescue '-' %></td>
+      </tr>
 
-    <tr>
-      <td><b>Period</b></td>
-      <td>
-        [Start] <%= @sales_tax_exemption.period_start.strftime("%d-%m-%Y") rescue '-' %>
-        [End]   <%= @sales_tax_exemption.period_end.strftime("%d-%m-%Y") rescue '-' %>
-      </td>
-    </tr>
-    
-    <tr><td colspan="10"><hr/></td></tr>
-  </table>
+      <tr>
+        <td><b>Type of Exemption</b></td>
+        <td><%= @sales_tax_exemption.type_of_exemption rescue '-' %></td>
+      </tr>
 
-  <table width="100%">
-    <tr style="background-color: gainsboro;">
-      <th>Perihal Barang</th>
-      <th>Tarif code</th>
-      <th>Apply Qty</th>
-      <th>Complete Qty</th>
-      <th>U/M</th>
-    </tr>
-    
-    <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
-      <% @sales_tax_exemption.sales_tax_exemption_barangs.each do |barang| %>
-        <tr class="<%= cycle('odd_line', 'even_line') %>">
-          <td align="center"><%= barang.perihal_barang rescue '-' %></td>
-          <td align="center"><%= barang.tarif_code rescue '-' %></td>
-          <td align="right"><%= two_precision(barang.apply_qty) rescue '-' %></td>
-          <td align="right"><%= two_precision(barang.complete_qty) rescue '-' %></td>
-          <td align="center"><%= barang.unit_measurement.code rescue '-' %></td>
+      <tr>
+        <td><b>Sales Tax Exemption No.</b></td>
+        <td><%= @sales_tax_exemption.sales_tax_exemption_no rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td width="200"><b>Registraton No.</b></td>
+        <td><%= @sales_tax_exemption.registration_no rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b><%= @sales_tax_exemption.company_type %> Company</b></td>
+        <td>[<%= @sales_tax_exemption.trade_company.code rescue '-' %>] <%= @sales_tax_exemption.trade_company.name rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Period</b></td>
+        <td>
+          [Start] <%= @sales_tax_exemption.period_start.strftime("%d-%m-%Y") rescue '-' %>
+          [End]   <%= @sales_tax_exemption.period_end.strftime("%d-%m-%Y") rescue '-' %>
+        </td>
+      </tr>
+
+      <tr><td colspan="10"><hr/></td></tr>
+    </table>
+
+    <table id="grid_h295" class="white-line-table zebraLight">
+      <thead>
+        <tr class="header_line">
+          <th class="check_highlight"></th>
+          <th>Perihal Barang</th>
+          <th>Tarif code</th>
+          <th>Apply Qty</th>
+          <th>Origin U/M</th>
+          <th>Complete Qty</th>
+          <th>Available Qty</th>
+          <th>Calculate U/M</th>
+
         </tr>
-      <% end %>
-    <% end %>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
+          <% @sales_tax_exemption.sales_tax_exemption_barangs.each do |barang| %>
+            <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= barang.id %>">
+              <td></td>
+              <td align="center" width="100"><%= barang.perihal_barang rescue '-' %></td>
+              <td align="center" width="100"><%= barang.tarif_code rescue '-' %></td>
+              <td align="center" width="100"><%= two_precision(barang.apply_qty) rescue '-' %></td>
+              <td align="center" width="100"><%= barang.unit_measurement.code rescue '-' %></td>
+              <td align="center" width="100"><%= two_precision(barang.complete_qty) rescue '-' %></td>
+              <td align="center" width="100"><%= two_precision(barang.available_qty) rescue '-' %></td>
+              <td align="center" width="100"><%= barang.belongs_to_cal_um.code rescue '-' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div class="icon_tag">
-  <%= link_close_button  %>
+  <div class="icon_tag">
+    <%= link_close_button  %>
+  </div>
 </div>

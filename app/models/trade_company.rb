@@ -22,7 +22,6 @@ class TradeCompany < ActiveRecord::Base
   has_one  :quotation_request_form
   has_one  :price_control
   has_one  :delivery_order
-#  has_one  :sales_tax_exemption
   
   has_many :product_vendors
   has_many :product_customers
@@ -39,15 +38,11 @@ class TradeCompany < ActiveRecord::Base
   validates :code, :length => { :in => 5..6 }
   validates :address_1, :address_2, :address_3, :length => { :maximum => 255 }
   validates :name, :length => { :in => 2..50 }
-  
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :messages => "Email is invalid." }, :allow_blank => true
-  
   validates :tel_area_code_one,                 :length => { :in => 2..3 }
   validates :tel_area_code_two, :fax_area_code, :length => { :in => 2..3 }, :allow_blank => true
-  
   validates :tel_no_1,          :length => { :in => 7..9 }
   validates :tel_no_2, :fax_no, :length => { :in => 7..9 }, :allow_blank => true
-  
   validates :company_reg_no, :length => { :maximum => 20 }
   
   def uppercase_text
@@ -168,6 +163,17 @@ class TradeCompany < ActiveRecord::Base
     return mix
   end
   
+
+  
+  def self.valid_code(change_company_code)
+    tc = TradeCompany.find_by_code(change_company_code.new_code)
+    if tc.present?
+      return false, "This code has taken already."
+    else
+      return true
+    end
+  end
+  
   def adding_contact(data)
     if data.present?
       contacts.delete_all if contacts.present?
@@ -179,12 +185,6 @@ class TradeCompany < ActiveRecord::Base
     end
   end
   
-  def self.valid_code(change_company_code)
-    tc = TradeCompany.find_by_code(change_company_code.new_code)
-    if tc.present?
-      return false, "This code has taken already."
-    else
-      return true
-    end
-  end
+  
+  
 end

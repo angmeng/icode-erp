@@ -17,8 +17,10 @@ class UnitMeasurement < ActiveRecord::Base
   validates :code, :presence => true
   validates :code, :uniqueness => true
   
-  has_one :from_unit_measurement_id, :class_name => "Formulation", :foreign_key => "from_unit_measurement_id"
-  has_one :to_unit_measurement_id, :class_name => "Formulation", :foreign_key => "to_unit_measurement_id"
+  has_one :hasone_from_um, :class_name => "Formulation", :foreign_key => "from_unit_measurement_id"
+  has_one :hasone_to_um, :class_name => "Formulation", :foreign_key => "to_unit_measurement_id"
+  
+  has_one :has_one_cal_um, :class_name => "SalesTaxExemptionBarang", :foreign_key => "calculate_um_id"
   has_one :quotation_request_form
   
   default_scope order("code")

@@ -1,19 +1,12 @@
 <div id="popup_container">
 
-<div style="background-color:blue"><strong style="color:white;">SHOW USER</strong></div>
+  <div style="background-color:blue"><strong style="color:white;">SHOW USER</strong></div>
 
   <div id="user_strip">
     <ul>
-        <li class="k-state-active">
-          User Account
-        </li>
-        <li>
-          Inventory Management System
-        </li>
-        <li>
-          Inventory Management System II- Product 
-        </li>
-
+        <li class="k-state-active">User Account</li>
+        <li>Inventory Management System</li>
+        <li>Inventory Management System II- Product</li>
     </ul>
 
     <div>
@@ -64,19 +57,20 @@
     </div>
 
     <div>
-      <%= render "management" %>
+      <%#= render "management" %>
+      <div class="user_management"><%= render "management_checkbox" %></div>
     </div>
     <div>
-      <div class="user_management">
-      <%= render "management_product" %>
-    </div>
+      <div class="user_management"><%= render "management_product" %></div>
     </div>
   
 
+  
+
+</div>
+  
   <div class="icon_tag">
     <%= link_close_button %>
   </div>
-
-</div>
 
 </div>

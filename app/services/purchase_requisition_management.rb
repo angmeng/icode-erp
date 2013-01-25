@@ -21,7 +21,11 @@ class PurchaseRequisitionManagement
     user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
     user_pending.each do |p|
       if user.is_admin?
-        p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::APPROVED)
+        if p.is_skip_to_po?
+          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::APPROVED, :maintenance => false, :proposed_vendor => true, :approval_proposed => true)
+        else
+          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::APPROVED)
+        end
       else
         p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::IN_PROCESSING)
       end
@@ -45,6 +49,19 @@ class PurchaseRequisitionManagement
       @purchase_requisition_item.temporary_sources.new(:company_name => "-",          :select_vendor => FALSE, :unit_price => 0)
     end
     return @purchase_requisition_item
+  end
+  
+  def self.completed_update(app_three)
+    all_pending = app_three.purchase_requisition_items.where(:status => PurchaseRequisitionItem::IN_PROCESSING)
+    if all_pending.present?
+      all_pending.each do |p|
+        if p.is_skip_to_po?
+          p.update_attributes(:status => PurchaseRequisitionItem::APPROVED, :maintenance => false, :proposed_vendor => true, :approval_proposed => true)
+        else
+          p.update_attributes(:status => PurchaseRequisitionItem::APPROVED)
+        end
+      end
+    end
   end
   
 end

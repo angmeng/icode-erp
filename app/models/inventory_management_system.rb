@@ -246,8 +246,18 @@ class InventoryManagementSystem < ActiveRecord::Base
   
 #===================================== SALES TAX EXEMPTION (END) ===========================================
 
+#===================================== FORMULATION FOR ALL (START) ===========================================  
+  FORMULATION_FOR_ALL_MODULE      = 239
+#  FORMULATION_FOR_ALL_SUB_MODULE  = 240
+  FORMULATION_FOR_ALL_INDEX       = 241
+  FORMULATION_FOR_ALL_NEW         = 242
+  FORMULATION_FOR_ALL_EDIT        = 243
+  FORMULATION_FOR_ALL_SHOW        = 244
+  FORMULATION_FOR_ALL_DROP_KIV    = 245
+  FORMULATION_FOR_ALL_PRINTABLE   = 246
+#===================================== FORMULATION FOR ALL (END) ===========================================  
+
 #===================================== COSTING SHEET (START) ===========================================  
-  
   FORMULATION_FOR_COSTING_MENU                = 208
   FORMULATION_FOR_COSTING                     = 209
   FORMULATION_FOR_COSTING_SHOW                = 210
@@ -354,5 +364,5 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_KIV                            = 222
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
   
-  #start at 239
+  #start at 247
 end

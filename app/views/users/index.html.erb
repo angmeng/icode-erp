@@ -1,13 +1,11 @@
 <div id="popup_container">
-  <table width="100%">
-    <tr>
-      <td><%= link_to "Search", '#', :class => "search_link" %></td>
-    </tr>
-  </table>
 
+  <div class="title_height">
+    <div class="title_font"><strong>LISTING USERS</strong></div>
+    <%= search_button %>
+  </div>
+  
   <div><%= render "search_user" %></div>
-
-  <div style="background-color:blue"><strong style="color:white;">LISTING USERS</strong></div>
 
   <!--div class="fix_1600x900"-->
   <div id="popup_content">

@@ -1,7 +1,7 @@
 <div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">NEW PURCHASE REQUISITION APPLICATION</strong></div>
+  <div class="title_head"><strong style="color:white;">NEW PURCHASE REQUISITION APPLICATION</strong></div>
 
-  <div>
+  <div class="new_purchase_form">
     <table width="100%" class="header_content">
       <tr>
         <td><h3>Pending PR Items</h3></td>
@@ -20,20 +20,19 @@
       </tr>
     </table>
 
-    <div class="new_purchase_form">
-        <% if @pending.present? %>
-          <%= render 'form' %>
-        <% end %>
+    
+      <% if @pending.present? %>
+        <%= render 'form' %>
+      <% end %>
 
-        <div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:400px;height:250px;'>
-          <div align="center">
-            <h3>New Item Request?</h3>
-            <br/>
-            <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
-            <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
-          </div>
+      <div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:400px;height:250px;'>
+        <div align="center">
+          <h3>New Item Request?</h3>
+          <br/>
+          <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
+          <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
         </div>
-    </div>
+      </div>
   </div>
 
   <%= render "action_purchase_requisition_new" %>

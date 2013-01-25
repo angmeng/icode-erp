@@ -1,6 +1,6 @@
 class PurchaseRequisitionItemsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+#  layout "sheetbox"
 
   def index
     @search = PurchaseRequisitionItem.search(params[:search])
@@ -21,6 +21,7 @@ class PurchaseRequisitionItemsController < ApplicationController
   def new
     @purchase_requisition_item = PurchaseRequisitionItem.new
     @new_product = params[:new_product].to_i
+    render :layout => "sheetbox"
   end
 
   def create
