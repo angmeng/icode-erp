@@ -19,8 +19,10 @@
 </div>
 
 <div>
+	<%= form_tag pdf_inventory_report_reports_path ,:name=>"myform",:url =>
+		pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
 	<fieldset>
-		<table id="grid_h495" class="white-line-table zebraLight">
+		<table id="grid_h495">
 			<thead>
 			<tr class="header_line">
 				<th>No.</th>
@@ -29,7 +31,7 @@
 				<th>Stock Out</th>
 				<th>Description</th>
 				<th>In / Out</th>
-				<th>Amount</th>
+				<th>Quantity</th>
 			</tr>
 		</thead>
 
@@ -37,8 +39,9 @@
 
 			<% @show_inventory_report.each_with_index do |pri , index| %>
 		<tbody>
-			<tr>
-				<td><%= index + 1 %></td>
+			<tr class="<%= cycle("odd_line", "even_line") %>">
+				<td><%= index + 1 %>
+				<%= check_box_tag "inventory_ids[]" , pri.id %></td>
 				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
 				<td><%= pri.stock_in rescue '-'%></td>
 				<td><%= pri.stock_out rescue '-'%></td>
@@ -57,7 +60,7 @@
 
 	<table>
 	    <tr style="float:right;">
-	    <td>Total Amount :</td>
+	    <td>Total Quantity :</td>
 	    <td ><%= two_precision(arr.sum) %></td>
 	    </tr>
   	</table>
@@ -66,11 +69,20 @@
 	</fieldset>
 
 	<div style="float:right;">
-   	<span><%= button_to "PDF report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" %></span>
+	<span><%= submit_tag "show" , :class=>"k-button" %></span>
 
-   	<span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+   	<span><%= link_to "PDF report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" , :class=>"k-button" %></span>
+
+   	<%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
 
    	<%= link_close_button %>
+
+
+   	<% end %>
 	</div>
 
 </div>
+<style type="text/css">
+
+
+</style>

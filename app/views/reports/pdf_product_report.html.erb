@@ -1,15 +1,16 @@
+<fieldset>
 <h1>Product ID Report</h1>
 
 <div>
 	 <% if @product_detail_report.present? %>
 	
 	
-	<table class="black-line-table" style="size:100%" >
+	<table border="1" style="size:100%" >
 			<thead>
 			<tr>
                           
 				<th>No.</th>
-                                <th>Product ID</th>
+                <th>Product ID</th>
                                 <!--td>Product Name</td-->
 				<th>Description</th>
 				<th>Part No.</th>
@@ -23,23 +24,25 @@
 	<tbody>
 	<tr>
 		<td><%= index + 1 %></td>
-                <td><%= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
+        <td><%= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
                 <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
-		<td><%= pri.desc rescue '-'%></td>
-		<td><%= pri.part_no rescue '-'%></td>
-		<td><%= pri.selling_price rescue '-'%></td>
-		<td><%= pri.current_stock rescue '-'%></td>
-		<td><%= pri.unit_measurement.code rescue '-'%></td>
+		<td><%= pri.product.desc rescue '-'%></td>
+		<td><%= pri.product.part_no rescue '-'%></td>
+		<td><%= pri.product.selling_price rescue '-'%></td>
+		<td><%= pri.product.current_stock rescue '-'%></td>
+		<td><%= pri.product.unit_measurement.code rescue '-'%></td>
 	</tr>
 	</tbody>
 	<% end %>
 	 
 	</table>
+
 	<% else %>
 	<h1>no record found</h1>
 		<% end %>
 		
 </div>
+</fieldset>
 
 
 

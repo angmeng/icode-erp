@@ -2,6 +2,20 @@ class ReportsController < ApplicationController
 
   before_filter :authenticate_user!
   layout "sheetbox"
+
+  def excel_product_report
+    if params[:product_ids].present?
+      @excel_product_report = ProductCombobox.find(params[:product_ids])
+      respond_to do |format|
+        format.html
+        format.csv { render text: @excel_product_report.to_csv}
+        format.xls #{ send_data @excel_pr_report.to_csv(col_sep: "\t") }
+      
+      end
+    else
+      redirect_to product_report_reports_path
+    end
+  end
   
 def pdf_pr_report
     #@search = PurchaseRequisition.search(params[:search])
@@ -39,6 +53,7 @@ def pdf_pr_report
                                   :dispositon => "attachement" )
         #return # to avoid double render call
         }
+      
      end
     else
       redirect_to pr_report_reports_path
@@ -64,10 +79,11 @@ def pdf_po_report
 end
 
 
+
 def pdf_product_report
   #render :text => params[:pri_ids]
     if params[:pri_ids].present?
-      @product_detail_report = Product.find(params[:pri_ids])
+      @product_detail_report = ProductCombobox.find(params[:pri_ids])
       respond_to do |format|
       format.html
       format.pdf {

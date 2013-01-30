@@ -1,6 +1,8 @@
 Merp::Application.routes.draw do
 
 
+  resources :stock_outs
+
   resources :reports do
     collection do
     get "pr_report"
@@ -23,6 +25,8 @@ Merp::Application.routes.draw do
     get "pdf_pr_report"
     get "pdf_po_report"
     get "pdf_rn_report"
+
+    get "excel_product_report"
     
     end 
     member do

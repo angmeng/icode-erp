@@ -1,0 +1,32 @@
+<%= form_for(@stock_out) do |f| %>
+  <% if @stock_out.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock_out.errors.count, "error") %> prohibited this stock_out from being saved:</h2>
+
+      <ul>
+      <% @stock_out.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<fieldset>
+  <div class="field">
+    <%#= f.label :transfer_note "Transfer Note" %><br />
+    Transfer Note: <%= CompanyProfile.first.sn_transfer_slip_no + 1 %>
+
+  </div>
+  <div class="field">
+    Product ID :<%= f.select :product_id , options_from_collection_for_select(product_non_operation_n_operation_with_combobox, :product_id, :product_code) %>
+  </div>
+  <div class="field">
+   Amount :<%= f.text_field :amount %>
+  </div>
+  <div class="field">
+   Balance :<%= f.text_field :balance %>
+  </div>
+</fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
