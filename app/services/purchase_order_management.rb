@@ -31,7 +31,7 @@ class PurchaseOrderManagement
   end
   
   def self.pr_items_status(company_id, po_id)
-    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
+    @pri = PurchaseRequisitionItem.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
     if @pri.present?
       @pri.each do |pri|
         PurchaseOrderItemLine.create(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
@@ -42,23 +42,25 @@ class PurchaseOrderManagement
   end
   
   def self.pri_status_with_ste(company_id, po_id)
-    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
+    @pri = PurchaseRequisitionItem.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
     @vendor_id = TradeCompany.find(company_id)
     
     if @pri.present?
       @pri.each do |pri|
-        PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id, :weight => content[:qty].to_f)
+        PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
         if @vendor_id.sales_tax_exemption.present?
           @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs
           if @barangs.present? && pri.product.present?
             if pri.product.tarif_code.present?
                 barang = @barangs.find_by_tarif_code(pri.product.tarif_code)
-                before_available_qty = barang.available_qty
-                after_available_qty = before_available_qty.to_f - pri.quantity.to_f
-                after_complete_qty = barang.complete_qty.to_f + pri.quantity.to_f
-                stei = SalesTaxExemptionItem.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
-                stei.save!
-                barang.update_attributes!(:complete_qty => after_complete_qty, :available_qty => after_available_qty)
+                if barang.present?
+                  before_available_qty = barang.available_qty
+                  after_available_qty = before_available_qty.to_f - pri.quantity.to_f
+                  after_complete_qty = barang.complete_qty.to_f + pri.quantity.to_f
+                  stei = SalesTaxExemptionItem.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+                  stei.save!
+                  barang.update_attributes!(:complete_qty => after_complete_qty, :available_qty => after_available_qty)
+                end
             end
           end
         else

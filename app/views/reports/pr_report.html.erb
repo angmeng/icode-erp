@@ -23,9 +23,9 @@
 <hr />
 <div>
     <fieldset>
-    <%#= form_tag pr_detail_report_reports_path ,:name=>"myform",:url =>detail_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+    <%= form_tag pdf_pr_report_reports_path ,:name=>"myform",:url =>pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
       <a>PR Report</a>
-      <table id="grid_h495" class="white-line-table zebraLight">
+      <table id="grid_h495" >
       <thead>
       <tr class="header_line">
 
@@ -43,7 +43,7 @@
         <tbody>
           <tr>
               <td><%= p.pr_no %>
-              <%#= check_box_tag "p_ids[]" , p.id %></td>   
+              <%= check_box_tag "pr_ids[]" , p.id %></td>   
               
               <td><%= p.requested_by_date.strftime("%d-%m-%Y")%></td>
               <td><%= p.status %></td>
@@ -51,21 +51,25 @@
         </tbody>
 
         <% end %>
-        <%#= submit_tag "show" %> 
+        
 
         
       
-      <%# end %>
-      </form>
+      
+     
     </table>
    
   </fieldset>
 <div style="float:right;">
-   <span><%= link_to "PDF report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
 
-   <span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+    <span><%#= submit_tag "show" ,:class =>"k-button"%> </span>
+   <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank",:class =>"k-button" %></span>
+
+   <span><%= link_to "Excel report" , pdf_pr_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
 
    <%= link_close_button %>
+   <% end %>
+    </form>
 </div>
-  </div>
+</div>
 

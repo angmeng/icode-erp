@@ -1,14 +1,12 @@
 <div id="popup_container">
-
-  <div class="title_height">
-    <div class="title_font"><strong>LISTING USERS</strong></div>
+  <div class="title_head">
+    <strong style="color: white;">LISTING USERS</strong>
     <%= search_button %>
   </div>
-  
   <div><%= render "search_user" %></div>
 
   <!--div class="fix_1600x900"-->
-  <div id="popup_content">
+  <div class="fix_1600x900_h450">
     <% if @users.present? %>
       <%= render "listing_users", :list_users => @users %>
     <% else %>
@@ -18,4 +16,3 @@
   
   <%= render "action_user" %>
 </div>
-  

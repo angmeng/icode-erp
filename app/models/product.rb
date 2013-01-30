@@ -130,6 +130,7 @@ class Product < ActiveRecord::Base
   
   def self.run_updating(comp, jump, product)
     a = comp.sn_product_id_no
+
     if jump == "yes"
       b = a + 2
       string = "%05d" % (b)
@@ -162,6 +163,8 @@ class Product < ActiveRecord::Base
 
   end
   
+  
+  
   def self.running_option(product_value, company_name)
     option = ""
     if company_name.present?
@@ -176,16 +179,16 @@ class Product < ActiveRecord::Base
     return option
   end
   
-  def self.update_id_from_po(desc, prod_id)
-    if desc.present?
-      pri = PurchaseRequisitionItem.find_all_by_description(desc)
-      if pri.present?
-        pri.each do |p|
-          p.update_attributes!(:product_id => prod_id)
-        end
-      end
-    end
-  end
+#  def self.update_id_from_po(desc, prod_id)
+#    if desc.present?
+#      pri = PurchaseRequisitionItem.find_all_by_description(desc)
+#      if pri.present?
+#        pri.each do |p|
+#          p.update_attributes!(:product_id => prod_id)
+#        end
+#      end
+#    end
+#  end
   
   def self.joining_category(cat_id)
     @category = ProductCategory.find(cat_id)
@@ -203,18 +206,20 @@ class Product < ActiveRecord::Base
     return joining.join('-')
   end
   
+
+  
   def self.packing_method_line(qty, per, product)
     product.packing_quantities.delete_all if product.packing_quantities.present?
     qty.each do |k1, v1|
       per.each do |k2, v2|
-        product.packing_quantities.create(:quantity => v1[:val], :packing_type => v2[:val]) if k1 == k2
+        product.packing_quantities.create!(:quantity => v1[:val], :packing_type => v2[:val]) if k1 == k2
       end
     end
   end
   
-  def self.add_product_vendor(product, po_up, po_vendor_id)
-    product.product_vendors.create(:trade_company_id => po_vendor_id, :unit_price => po_up)
-  end
+#  def self.add_product_vendor(product, po_up, po_vendor_id)
+#    product.product_vendors.create(:trade_company_id => po_vendor_id, :unit_price => po_up)
+#  end
   
   def self.matching_tarif_code(tarif_code)
     if find_tcode = SalesTaxExemptionBarang.find_by_tarif_code_and_valid_condition(tarif_code, TRUE)
@@ -267,6 +272,20 @@ class Product < ActiveRecord::Base
         ret << parents.desc
         ret.flatten!
         ret.reverse
+      else
+        ret << parents.desc
+        ret.flatten!
+        self.product_join_category_description(parents, ret)
+      end
+  end
+  
+  def self.parent_name_when_parent_id_is_zero(category, view)
+      ret = []
+      view ? ret << view : ret = []
+      parents = category.parent
+
+      if parents.parent_id == 0
+        base_name = parents.code
       else
         ret << parents.desc
         ret.flatten!

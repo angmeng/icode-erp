@@ -24,13 +24,13 @@ class ProductCategoriesController < ApplicationController
     @field_id = ProductCategory.gather_field_id(@refer_id) if @refer_id.present?
   end
   
-  def parent    # For Group
+  def parent            # For Group
     @new_category = ProductCategory.new
     @icon = ProductCategory::ICON_FOLDER
     @category_type = params[:category_type]
   end
   
-  def add_group # For Create Group
+  def add_group         # For Create Group
     parent = ProductCategory.find_by_id(params[:parent_id]) if params[:parent_id].present?
     
     if parent.present?
@@ -68,15 +68,15 @@ class ProductCategoriesController < ApplicationController
     end
   end
   
-  def new
+  def new               # For Sub Group / Product Type
     @new_category = ProductCategory.new
     @icon = ProductCategory::ICON_FOLDER
     @category_type = params[:category_type]
     @category_id   = params[:parent_id]
-    @refer_id = params[:refer_category_id]
+    @refer_id      = params[:refer_category_id]
   end
 
-  def create
+  def create            # For Create Sub Group / Product Type
     parent = ProductCategory.find_by_id(params[:product_category][:parent_id]) if params[:product_category][:parent_id].present?
     
     if parent.present?
@@ -87,7 +87,8 @@ class ProductCategoriesController < ApplicationController
     
     respond_to do |format|
       if @new_category.save
-        ProductField.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
+#        ProductField.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
+        ProductManagement.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
         format.html { redirect_to @new_category, :notice => 'Sub Group/Product Type was successfully created.' } 
         format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
       else
@@ -97,7 +98,7 @@ class ProductCategoriesController < ApplicationController
     end
   end
     
-  def edit
+  def edit              # For Edit Sub Group / Product Type
     @new_category = ProductCategory.find(params[:id])
     @edit_refer_id = @new_category.refer_category_id
     
@@ -108,12 +109,13 @@ class ProductCategoriesController < ApplicationController
     end
   end
   
-  def update
+  def update            # For Update Sub Group / Product Type
     @new_category = ProductCategory.find(params[:id])
 
     respond_to do |format|      
       if @new_category.update_attributes(params[:product_category])
-        ProductField.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
+#        ProductField.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
+        ProductManagement.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
         format.html { redirect_to @new_category, notice: 'Editing Sub Group/Product Type was successfully updated.' }
         format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
       else

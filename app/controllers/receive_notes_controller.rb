@@ -25,26 +25,17 @@ class ReceiveNotesController < ApplicationController
     @receive_note = ReceiveNote.new
     @search = PurchaseOrder.search(params[:search])
     @po_no = @search.order("po_no") 
-#    if params[:search].present?
-#      if params[:search][:trade_company_code_equals].present? or params[:search][:trade_company_name_equals].present?
-#        @po_no = @search.order("po_no") 
-#      end
-#    end
   end
   
   def info
     @search = PurchaseOrder.search(params[:search])
     @po_no = @search.order("po_no")
-#    if params[:search].present?
-#      if params[:search][:trade_company_code_equals].present? or params[:search][:trade_company_name_equals].present?
-#        @po_no = @search.order("po_no") 
-#      end
-#    end
   end
 
   def edit
     @receive_note = ReceiveNote.find(params[:id])
     @po_no = PurchaseOrder.find_company_id(@receive_note.trade_company_id)
+    render :layout => 'sheetbox'
   end
 
   def create

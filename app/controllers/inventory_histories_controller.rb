@@ -1,7 +1,7 @@
 class InventoryHistoriesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system
-  layout "sheetbox"
+#  layout "sheetbox"
 
   def index
 #    if params[:select_product].present?
@@ -14,6 +14,7 @@ class InventoryHistoriesController < ApplicationController
 #    end
 
     @search = InventoryHistory.search(params[:search])
+    @inventories = @search.order("created_at DESC")
     
   end
 
@@ -32,6 +33,7 @@ class InventoryHistoriesController < ApplicationController
   # GET /inventory_histories/new.json
   def new
     @inventory_history = InventoryHistory.new
+    render :layout => "sheetbox"
   end
 
   # GET /inventory_histories/1/edit

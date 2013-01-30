@@ -1,28 +1,27 @@
-<% if @search.present? %>
-  <% if @search.product_code_equals.present? %>
-    <%= render "product_details", :inventory_histories => @search %>
-  <% end %>
-<% end %>
+<div id="popup_container">
+  <%# if @search.present? %>
+    <%# if @search.product_code_equals.present? %>
+      <%#= render "product_details", :inventory_histories => @search %>
+    <%# end %>
+  <%# end %>
 
-<table width="100%">
-  <tr>
-    <td align="right">
-      <%= link_to 'Search', "#", :class => "search_link" %>
-    </td>
-  </tr>
-</table>
+  <div class="title_head">
+    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR INVENTORY</strong>
+    <%= search_button %>
+  </div>
+  <div><%= render "search_inventory" %></div>
 
-<div><%= render "search_inventory" %></div>
+  <div class="fix_1600x900_h450">
+    <% if @inventories.present? %>
+      <% if @search.product_code_equals.present? %>
+        <%= render "product_details", :inventory_histories => @search %>
+      <% else %>
+        <%= render "select_inventory", :inventory_histories => @inventories %>
+      <% end %>
+    <% else %>
+      Not Record Found.
+    <% end %>
+  </div>
 
-<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS & HISTORIES FOR INVENTORY</strong></div>
-
-<div class="fix_1600x900">
-  <% if @search.present? %>
-    <%= render "select_inventory", :inventory_histories => @search %>
-  <% else %>
-    Not Record Found.
-  <% end %>
+  <%= render "action_inventory" %> 
 </div>
-  
-<%= render "action_inventory" %> 
-

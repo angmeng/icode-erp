@@ -1,34 +1,24 @@
 <div id="popup_container">
-<table width="100%">
-  <tr>
-    <td align="right">
-      <%= link_to 'Search', "#", :class => "search_link" %>
-    </td>
-  </tr>
-</table>
-
-<div><%= render "search_receive_note" %></div>
-
-<div style="background-color:blue"><strong style="color:white;">NEW RECEIVE NOTE</strong></div>
-
-<%= form_for(@receive_note) do |f| %>
-  <% if @po_no.present? %>
-      
-        <%= render 'form', :f => f %>
-
-        
-      
-  <% else %>
-    No Record Found.
-  <% end %>
-    
-  <div class="icon_tag">
-    <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
-      <%= link_save_button %>
-    <% else %>
-      <%= not_link_save %>
-    <% end %>
-    <%= link_home_button  %>
+  <div class="title_head">
+    <strong style="color:white;">NEW RECEIVE NOTE</strong>
+    <%= search_button %>
   </div>
-<% end %>
+  <div><%= render "search_receive_note" %></div>
+
+  <%= form_for(@receive_note) do |f| %>
+    <% if @po_no.present? %>
+      <%= render 'form', :f => f %>
+    <% else %>
+      No Record Found.
+    <% end %>
+
+    <div class="icon_tag">
+      <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
+        <%= link_save_button %>
+      <% else %>
+        <%= not_link_save %>
+      <% end %>
+      <%= link_home_button  %>
+    </div>
+  <% end %>
 </div>

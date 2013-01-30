@@ -1,15 +1,17 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES) %>
-    <span id="on_show_history">Show Histories for Supplier</span>
+    <span id="on_show_history">
+      <span class="k-button" style="color: grey; background-color: white;">Show Histories for Supplier</span>
+    </span>
   <% else %>
-    Show Histories for Supplier
+    <span class="k-button" style="color: grey; background-color: white;">Show Histories for Supplier</span>
   <% end %>
 </div>
 
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW) %>
-    <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
+    <span id="on_show" showClass="show_without_refresh_page_800x600"><%= not_link_show %></span>
   <% else %>
     <span class="word_opac"><%= not_link_show %></span>
   <% end %>

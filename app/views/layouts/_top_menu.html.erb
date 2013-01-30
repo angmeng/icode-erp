@@ -427,9 +427,9 @@
             Inventory
             <ul>
               <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
-                <li><%= link_to "Inventory Transactions & Histories", inventory_histories_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Transactions & Histories For Inventory", inventory_histories_path %></li>
               <% else %>
-                <li class="text_gray">Inventory Transactions & Histories</li>
+                <li class="text_gray">Transactions & Histories For Inventory</li>
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
@@ -439,6 +439,16 @@
                   <li class="text_gray">New Inventory</li>
                 <% end %>
               <% end %>
+
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+                <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                  <li><%= link_to "Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                <%# else %>
+                  <!--li class="text_gray">Transfer Note</li-->
+                <%# end %>
+              <%# end %>
+
+              
 
               <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
                 <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
@@ -621,14 +631,30 @@
           </li>
         <% end %>
 
-        <li>
-          Product Price Control               
-          <ul>
-            <li><%= link_to "Listing Product Price Control", price_controls_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-            <li><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-            <li><%= link_to "Listing Product Price Control - KIV", kiv_price_controls_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-          </ul>
-        </li>
+        <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_MENU) %>
+          <li>
+            Product Price Control
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING) %>
+                <li><%= link_to "Listing Product Price Control", price_controls_path %></li>
+              <% else %>
+                <li class="text_gray">Listing Product Price Control</li>
+              <% end %>
+              
+              <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %>
+                <li><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Product Price Control</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %>
+                <li><%= link_to "Listing Product Price Control - KIV", kiv_price_controls_path %></li>
+              <% else %>
+                <li class="text_gray">Listing Product Price Control - KIV</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
         
         <li>
           <%#*Change Status / Coding%>

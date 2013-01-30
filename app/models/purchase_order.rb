@@ -21,6 +21,7 @@ class PurchaseOrder < ActiveRecord::Base
   KEEP_IN_VIEW = "KIV"
   STOPPED = "stop"
   OVERWEIGHT = "overweight"
+  MISSING = "missing"
   
   ROLE = [
     InventoryManagementSystem::PURCHASE_ORDER_MENU,  

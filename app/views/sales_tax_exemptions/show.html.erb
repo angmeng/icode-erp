@@ -1,7 +1,7 @@
 <div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">SHOW SALES TAX EXEMPTION DETAILS</strong></div>
+  <div class="title_head"><strong style="color:white;">SHOW SALES TAX EXEMPTION DETAILS</strong></div>
 
-  <div class="fix_800x450">
+  <div class="fix_800x600">
     <table width="100%">
       <tr>
         <td><b>Running No#</b></td>
@@ -39,37 +39,39 @@
       <tr><td colspan="10"><hr/></td></tr>
     </table>
 
-    <table id="grid_h295" class="white-line-table zebraLight">
-      <thead>
-        <tr class="header_line">
-          <th class="check_highlight"></th>
-          <th>Perihal Barang</th>
-          <th>Tarif code</th>
-          <th>Apply Qty</th>
-          <th>Origin U/M</th>
-          <th>Complete Qty</th>
-          <th>Available Qty</th>
-          <th>Calculate U/M</th>
+    <div>
+      <table id="grid_h295" class="white-line-table zebraLight">
+        <thead>
+          <tr class="header_line">
+            <th class="check_highlight"></th>
+            <th>Perihal Barang</th>
+            <th>Tarif code</th>
+            <th>Apply Qty</th>
+            <th>Origin U/M</th>
+            <th>Complete Qty</th>
+            <th>Available Qty</th>
+            <th>Calculate U/M</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
-          <% @sales_tax_exemption.sales_tax_exemption_barangs.each do |barang| %>
-            <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= barang.id %>">
-              <td></td>
-              <td align="center" width="100"><%= barang.perihal_barang rescue '-' %></td>
-              <td align="center" width="100"><%= barang.tarif_code rescue '-' %></td>
-              <td align="center" width="100"><%= two_precision(barang.apply_qty) rescue '-' %></td>
-              <td align="center" width="100"><%= barang.unit_measurement.code rescue '-' %></td>
-              <td align="center" width="100"><%= two_precision(barang.complete_qty) rescue '-' %></td>
-              <td align="center" width="100"><%= two_precision(barang.available_qty) rescue '-' %></td>
-              <td align="center" width="100"><%= barang.belongs_to_cal_um.code rescue '-' %></td>
-            </tr>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
+            <% @sales_tax_exemption.sales_tax_exemption_barangs.each do |barang| %>
+              <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= barang.id %>">
+                <td></td>
+                <td align="center" width="100"><%= barang.perihal_barang rescue '-' %></td>
+                <td align="center" width="100"><%= barang.tarif_code rescue '-' %></td>
+                <td align="center" width="100"><%= two_precision(barang.apply_qty) rescue '-' %></td>
+                <td align="center" width="100"><%= barang.unit_measurement.code rescue '-' %></td>
+                <td align="center" width="100"><%= two_precision(barang.complete_qty) rescue '-' %></td>
+                <td align="center" width="100"><%= two_precision(barang.available_qty) rescue '-' %></td>
+                <td align="center" width="100"><%= barang.belongs_to_cal_um.code rescue '-' %></td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="icon_tag">

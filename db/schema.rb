@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118125846) do
+ActiveRecord::Schema.define(:version => 20130130041009) do
 
   create_table "bill_of_materials", :force => true do |t|
     t.integer  "bom_no"
@@ -480,6 +480,14 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
     t.integer  "field_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "product_running_numbers", :force => true do |t|
+    t.string   "base_name"
+    t.string   "sub_name"
+    t.integer  "running_no", :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "product_vendors", :force => true do |t|
@@ -974,6 +982,17 @@ ActiveRecord::Schema.define(:version => 20130118125846) do
     t.datetime "updated_at",                :null => false
     t.string   "source_path"
   end
+
+  create_table "stock_outs", :force => true do |t|
+    t.string   "transfer_note_no"
+    t.integer  "product_id"
+    t.decimal  "amount",           :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "balance",          :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+  end
+
+  add_index "stock_outs", ["product_id"], :name => "index_stock_outs_on_product_id"
 
   create_table "temporary_sources", :force => true do |t|
     t.string   "company_name"

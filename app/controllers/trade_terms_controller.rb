@@ -1,6 +1,6 @@
 class TradeTermsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :is_director
+  before_filter :are_you_director?
   layout "sheetbox"
   
   # GET /trade_terms

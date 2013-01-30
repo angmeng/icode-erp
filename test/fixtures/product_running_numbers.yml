@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  base_name: MyString
+  sub_name: MyString
+  running_no: 1
+
+two:
+  base_name: MyString
+  sub_name: MyString
+  running_no: 1

@@ -2,7 +2,9 @@
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES) %>
     <span id="on_show_history">Show Histories for Customer</span>
   <% else %>
-    Show Histories for Customer
+    <% content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do %>
+      Show Histories for Customer
+    <% end %>
   <% end %>
 </div>
 

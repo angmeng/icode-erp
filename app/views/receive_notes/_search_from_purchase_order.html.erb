@@ -1,4 +1,4 @@
-<table id="grid_h430" class="white-line-table">
+<table id="grid_h445" class="white-line-table">
   <thead>
     <tr class="header_line">
       <th style="font-size: 12px;">PO No.</th>
@@ -7,7 +7,7 @@
       <th style="font-size: 12px;">PO Qty</th>
       <th style="font-size: 12px;">U/M</th>
       <th style="font-size: 12px;">ETA</th>
-      <th style="font-size: 12px;">Completed Qty</th>
+      <!--th style="font-size: 12px;">Completed Qty</th-->
       <th style="font-size: 12px;">RN Qty</th>
       <th style="font-size: 12px;">Vendor Part No.</th>
       <th style="font-size: 12px;">Action</th>
@@ -42,15 +42,15 @@
                 <td align="center"><%= rn.purchase_requisition_item.quantity %></td>
                 <td align="center"><%= rn.purchase_requisition_item.unit_measurement.code rescue '-' %></td>
                 <td align="center"><%= rn.purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></td>
-                <td align="center">
-                  <% unless rn.checked == TRUE %>
-                    <% if rn.receive_note_items.present? %>
-                      <%= rn.receive_note_items.map(&:received_qty).sum() rescue '0' %>
-                    <% else %>
+                <!--td align="center">
+                  <%# unless rn.checked == TRUE %>
+                    <%# if rn.receive_note_items.present? %>
+                      <%#= rn.receive_note_items.map(&:received_qty).sum() rescue '0' %>
+                    <%# else %>
                       0
-                    <% end %>
-                  <% end %>
-                </td>
+                    <%# end %>
+                  <%# end %>
+                </td-->
                 <td align="center">
                   <% unless rn.checked == TRUE %>
                     <% if params[:rn_qty].present? %>

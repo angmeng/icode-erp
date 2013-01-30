@@ -36,13 +36,14 @@ class PurchaseOrdersController < ApplicationController
   def edit
     @purchase_order = PurchaseOrder.find(params[:id])
     callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
+    render :layout => "sheetbox"
   end
   
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
     a = company.sn_purchase_order_no.to_i + 1
     @purchase_order.po_no = a
-    callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
+    
 #    @chk_weight, msg = PurchaseOrder.chk_weight(params[:kgs])
 #    if @chk_weight.present?
       if @purchase_order.save
@@ -52,8 +53,9 @@ class PurchaseOrdersController < ApplicationController
         PurchaseOrderManagement.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id)
         redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
       else
+        callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
         flash[:alert] = @purchase_order.errors.full_messages.join(", ")
-        render action: "new"
+        render action: "new", layout: "sheetbox"
       end
 #    else
 #      flash[:alert] = msg

@@ -2,7 +2,7 @@
   <%= hidden_field_tag "add_category_id", params[:add_category_id] %>
   <%= hidden_field_tag "category_type", params[:category_type] %>
   
-  <div class="fix_1024x800">
+  <div class="fix_1024x800_h450">
     <% if @field_id.present? %>
       <div><%= render "field_form", :f => f, :fielding => @field_id, :product => @product %></div>
     <% end %>

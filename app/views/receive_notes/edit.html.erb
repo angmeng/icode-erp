@@ -4,22 +4,22 @@
   <div class="fix_800x450">
     <table>
       <tr>
-        <td class="bolder">Current RN No.#</td>
+        <td><b>RN No.#</b></td>
         <td><%= @receive_note.receive_note_no rescue '-' %></td>
         <td width="50"></td>
-        <td class="bolder">RN Date</td>
+        <td><b>RN Date</b></td>
         <td><%= f.text_field :rn_date, :value => @receive_note.rn_date.strftime("%d-%m-%Y") %></td>
         <td width="50"></td>
       </tr>
       <tr>
-        <td class="bolder">Vendor</td>
+        <td><b>Vendor Company</b></td>
         <td>[<%= @receive_note.trade_company.code rescue '-' %>] <%= @receive_note.trade_company.name rescue '-' %></td>
         <td></td>
-        <td class="bolder">Updated By</td>
+        <td><b>Updated By</b></td>
         <td><%= User.find(@receive_note.updated_by).name rescue '-' %></td>
       </tr>
       <tr>
-        <td class="bolder">Vendor's D/O</td>
+        <td><b>Vendor's D/O</b></td>
         <td><%= f.text_field :vendor_delivery_no, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
         <td></td>
         <td></td>

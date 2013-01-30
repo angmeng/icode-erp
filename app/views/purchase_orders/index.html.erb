@@ -1,15 +1,12 @@
 <div id="popup_container">
   <%= render "linking" %>
-
-  <table width="100%">
-    <tr>
-      <td><%= link_to 'Search', "#", :class => "search_link" %></td>
-    </tr>
-  </table>
+  
+  <div class="title_head">
+    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE ORDERS</strong>
+    <%= search_button %>
+  </div>
 
   <%= render "search_po" %>
-
-  <div style="background-color:blue"><strong style="color:white;">TRANSACTIONS</strong></div>
 
   <div class="fix_1600x900_h450">
     <% if @purchase_orders.present? %>

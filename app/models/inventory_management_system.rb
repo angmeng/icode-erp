@@ -328,6 +328,9 @@ class InventoryManagementSystem < ActiveRecord::Base
 #  PRODUCT_CATEGORY_KIV                    = 119
 #  PRODUCT_CATEGORY_PRINTABLE              = 120
   
+  
+  
+  
   PRODUCT_MENU                                       = 121
   
   PRODUCT_NON_OPERATION                              = 139
@@ -364,5 +367,21 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_KIV                            = 222
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
   
-  #start at 247
+  PRICE_CONTROL_MENU                                 = 258
+  
+  PRICE_CONTROL_NEW                                  = 251
+  PRICE_CONTROL_ADD                                  = 252
+  PRICE_CONTROL_SAVE                                 = 253
+  
+  PRICE_CONTROL_LISTING                              = 254
+  PRICE_CONTROL_SHOW                                 = 247
+  PRICE_CONTROL_EDIT                                 = 248
+  PRICE_CONTROL_DROP_KIV                             = 249
+  PRICE_CONTROL_PRINTABLE                            = 250
+  
+  PRICE_CONTROL_LISTING_KIV                          = 255
+  PRICE_CONTROL_SHOW_KIV                             = 256
+  PRICE_CONTROL_RECOVER                              = 257
+  
+  #start at 259
 end

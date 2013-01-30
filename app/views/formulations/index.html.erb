@@ -1,11 +1,13 @@
 <div id="popup_container">
-  <div class="title_height">
-    <div class="title_font"><strong>LISTING FORMULATIONS</strong></div>
+  
+  <div class="title_head">
+    <strong style="color: white;">LISTING FORMULATIONS</strong>
     <%= search_button %>
   </div>
+
   <%#= render "search_sales_tax_exemption_supplier" %>
   
-  <div class="fix_1600x900">
+  <div class="fix_1600x900_h450">
     <% if @formulations.present? %>
       <%= render "content", :fmts => @formulations %>
     <% else %>

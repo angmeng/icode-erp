@@ -7,7 +7,7 @@
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE), :disabled => true %> Formulation For All</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX), :disabled => true %> Listing Formulation For all</td>
-          <td></td>
+          <td></td><td><%#= "save" %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV), :disabled => true %></td>
@@ -20,11 +20,8 @@
           <td></td>
           <td>New Formulation</td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_NEW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW), :disabled => true %></td>
-          <td></td>
-          <td align="center"></td>
-          <td align="center"></td>
-          <td align="center"></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%#= "save" %></td>
+          <% 10.times do |td| %><td></td><% end %>
         </tr>
         
       <% else %>
@@ -33,7 +30,7 @@
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE) %> Formulation For All</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX) %> Listing Formulation For all</td>
-          <td></td>
+          <td></td><td><%#= "save" %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV) %></td>
@@ -46,11 +43,8 @@
           <td></td>
           <td>New Formulation</td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_NEW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW) %></td>
-          <td></td>
-          <td align="center"></td>
-          <td align="center"></td>
-          <td align="center"></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%#= "save" %></td>
+          <% 10.times do |td| %><td></td><% end %>
         </tr>
       
       <% end %>
@@ -61,7 +55,7 @@
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE %> Formulation For All</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX %> Listing Formulation For all</td>
-          <td></td>
+          <td></td><td><%#= "save" %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV %></td>
@@ -74,11 +68,8 @@
           <td></td>
           <td>New Formulation</td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_NEW %></td>
-          <td></td>
-          <td align="center"></td>
-          <td align="center"></td>
-          <td align="center"></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%#= "save" %></td>
+          <% 10.times do |td| %><td></td><% end %>
         </tr>
 
     <% end %>

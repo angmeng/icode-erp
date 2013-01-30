@@ -47,7 +47,6 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     arr_prod = Product.json_um(@product)
-#    render :text => arr_prod
     manage_categories(@product.product_category.id) if @product.product_category.present?
     
     respond_to do |format|
@@ -56,53 +55,74 @@ class ProductsController < ApplicationController
     end
   end
 
+#  def new
+#    @product        = Product.new
+#    @source         = Product.joining_category(params[:add_category_id])
+#    @source_desc    = Product.joining_category_description(params[:add_category_id])
+#    
+#    @base_sub_name  = Product.base_sub_name(params[:add_category_id])
+#    @running_no     = ProductRunningNumber.find_by_base_name_and_sub_name(@base_sub_name[:base_name], @base_sub_name[:sub_name]) if @base_sub_name.present?
+#    
+#    manage_categories(params[:refer_category_id])
+#  end
+  
   def new
-    @product = Product.new
-    @source = Product.joining_category(params[:add_category_id])
-    @source_desc = Product.joining_category_description(params[:add_category_id])
+    @product          = Product.new
+    @manage_product   = ProductManagement.manage(params[:add_category_id]) if params[:add_category_id].present?
     manage_categories(params[:refer_category_id])
   end
-
+  
   def create
-    @product = Product.new(params[:product])
-    @product_category = ProductCategory.new(:desc => params[:category_name], :parent_id => params[:add_category_id], :icon => ProductCategory::ICON_FILE, :category_type => params[:category_type], :exist_field => true, :refer_category_id => ProductCategory.get_data(params[:add_category_id], 1), :level => ProductCategory.get_data(params[:add_category_id], 2))
-    @product_category.save!
-    @product.product_category_id = @product_category.id
-    if @product.save
-      Product.packing_method_line(params[:packing_method_qty], params[:packing_method_per], @product) if params[:packing_method_qty].present?
-      @valid, msg = Product.run_updating(company, params[:jump], @product)  # jump, company_profile, product code, product_category code, product_comboboxes
-      if @valid.present?
-        @product.inventory_histories.create(:stock_in => @product.opening_stock, :stock_out => 0, :inventory_issue_id => 9)
-        
-        # When in PO
-        Product.update_id_from_po(session[:po_desc], @product.id) if session[:pri_id].present?
-        Product.add_product_vendor(@product, session[:po_up], session[:po_vendor_id]) if session[:po_up].present? and session[:po_vendor_id].present?
-
-        session[:pri_id]       = nil #ok
-        session[:po_desc]      = nil #ok
-        session[:po_um_id]     = nil #ok
-        session[:po_up]        = nil #ok
-        session[:po_vendor_id] = nil #ok
-        session[:qr_id]        = nil
-
-        redirect_to @product, notice: 'Product ID was successfully created.'
-      else
-        @product_category.destroy
-        @product.destroy
-        flash[:alert] = msg
-        render action: "new"
-      end
-    else
-      @product_category.destroy
-      flash[:alert] = @product.errors.full_messages.join(", ")
-      render action: "new"
-    end
+    
+    ProductManagement.manage_product_category(params[:category_name], params[:add_category_id], params[:category_type], params[:product], params[:packing_method_qty], params[:packing_method_per], params[:jump])
+    ProductManagement.update_id_from_po(session[:po_desc], @product.id) if session[:pri_id].present?
+    ProductManagement.add_product_vendor(@product, session[:po_up], session[:po_vendor_id]) if session[:po_up].present? and session[:po_vendor_id].present?
+    clearing_function
+    redirect_to @product, notice: 'Product ID was successfully created.'
+    
   end
+
+#  def create
+#    @product = Product.new(params[:product])
+#    @product_category = ProductCategory.new(:desc => params[:category_name], :parent_id => params[:add_category_id], :icon => ProductCategory::ICON_FILE, :category_type => params[:category_type], :exist_field => true, :refer_category_id => ProductCategory.get_data(params[:add_category_id], 1), :level => ProductCategory.get_data(params[:add_category_id], 2))
+#    @product_category.save!
+#    @product.product_category_id = @product_category.id
+#    if @product.save
+#      Product.packing_method_line(params[:packing_method_qty], params[:packing_method_per], @product) if params[:packing_method_qty].present?
+#      @valid, msg = Product.run_updating(company, params[:jump], @product)  # jump, company_profile, product code, product_category code, product_comboboxes
+#      if @valid.present?
+#        @product.inventory_histories.create(:stock_in => @product.opening_stock, :stock_out => 0, :inventory_issue_id => 9)
+#        
+#        # When in PO
+#        Product.update_id_from_po(session[:po_desc], @product.id) if session[:pri_id].present?
+#        Product.add_product_vendor(@product, session[:po_up], session[:po_vendor_id]) if session[:po_up].present? and session[:po_vendor_id].present?
+#
+#        session[:pri_id]       = nil 
+#        session[:po_desc]      = nil 
+#        session[:po_um_id]     = nil 
+#        session[:po_up]        = nil 
+#        session[:po_vendor_id] = nil 
+#        session[:qr_id]        = nil
+#
+#        redirect_to @product, notice: 'Product ID was successfully created.'
+#      else
+#        @product_category.destroy
+#        @product.destroy
+#        flash[:alert] = msg
+#        render action: "new"
+#      end
+#    else
+#      @product_category.destroy
+#      flash[:alert] = @product.errors.full_messages.join(", ")
+#      render action: "new"
+#    end
+#  end
+  
+  
   
   def edit
     @product = Product.find(params[:id])
     manage_categories(@product.product_category.refer_category_id) if @product.present?
-#    @product.product_vendors.build
   end
 
   def update
@@ -161,9 +181,23 @@ class ProductsController < ApplicationController
   end
   
   def manage_categories(cat_id)
+    @category_id        = cat_id
+    @listing_categories = ProductCategory.find(@category_id)                if @category_id.present?
+    @field_id           = ProductCategory.all_field_id(@listing_categories) if @listing_categories.present?
+    @show_product       = @listing_categories.product                       if @listing_categories.present?
+  end
+  
+  def sub_name(cat_id)
     @category_id = cat_id
-    @listing_categories = ProductCategory.find(@category_id) if @category_id.present?
-    @field_id = ProductCategory.all_field_id(@listing_categories) if @listing_categories.present?
-    @show_product = @listing_categories.product if @listing_categories.present?
+    @sub_name = ProductCategory.find(@category_id).code if @category_id.present?
+  end
+  
+  def clearing_function
+    session[:pri_id]       = nil #ok
+    session[:po_desc]      = nil #ok
+    session[:po_um_id]     = nil #ok
+    session[:po_up]        = nil #ok
+    session[:po_vendor_id] = nil #ok
+    session[:qr_id]        = nil
   end
 end

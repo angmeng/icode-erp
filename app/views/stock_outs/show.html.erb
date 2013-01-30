@@ -1,0 +1,21 @@
+<p>
+  <b>Transfer note:</b>
+  <%= @stock_out.transfer_note_no %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <% prod = ProductCombobox.find_by_product_id(@stock_out.product_id) %>
+  <%= prod.product_code rescue '-' %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @stock_out.amount %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @stock_out.balance %>
+</p>
+<%= link_close_button %>

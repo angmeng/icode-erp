@@ -14,14 +14,14 @@
           <th style="font-size: 12px;">Product ID</th>
           <th style="font-size: 12px;">Description</th>
           <th style="font-size: 12px;">ETA</th>
-          <% if action_name == "new" %>
+          <% if action_name == "new" or action_name == "create" %>
             <th style="font-size: 12px;" width="100">Correct ETA</th>
           <% end %>
           <th style="font-size: 12px;">Quantity</th>
           <th style="font-size: 12px;">U/M</th>
           <th style="font-size: 12px;">Unit Price</th>
           <th style="font-size: 12px;">Amount</th>
-          <% if action_name == "new" %>
+          <% if action_name == "new" or action_name == "create" %>
             <th style="font-size: 12px;">Tarif Code</th>
             <th style="font-size: 12px;">Balance Amount</th>
             <th style="font-size: 12px;">Balance</th>
@@ -35,7 +35,7 @@
       <% a = {} %>
       <% b = {} %>
       
-      <% if action_name == "new" %>
+      <% if action_name == "new" or action_name == "create" %>
           <% @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs %>
           <% @barangs.each do |brg| %>
             <% if brg.tarif_code.present? %>
@@ -82,7 +82,7 @@
               <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
             <% end %>
           </td>
-          <% if action_name == "new" %>
+          <% if action_name == "new" or action_name == "create" %>
             <td><%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %></td>
           <% end %>
           <td align="center"><%= k.quantity rescue '0' %></td>
@@ -93,7 +93,7 @@
             <% subtotal << k.quantity * k.unit_price %>
           </td>
 
-          <% if action_name == "new" %>
+          <% if action_name == "new" or action_name == "create" %>
             <% @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs %>
             
             <% if @barangs.present? && k.product.present? %>
@@ -102,18 +102,25 @@
                 <% barang = @barangs.find_by_tarif_code(k.product.tarif_code) %>
           
                 <td align="center"><%= k.product.tarif_code rescue '-' %></td>
-                <td align="center">
-                  <%= a["#{barang.tarif_code}"] rescue '-' %>&nbsp;<%= barang.belongs_to_cal_um.code rescue '-' %>
-                  <%#= hidden_field_tag "datarow[#{k.id}][before_available_qty]", a["#{barang.tarif_code}"] %>
-                </td>
-                <td align="center">
-                  <%= a["#{barang.tarif_code}"] = a["#{barang.tarif_code}"].to_f - k.quantity.to_f %>
-                  <%#= hidden_field_tag "datarow[#{k.id}][after_available_qty]", a["#{barang.tarif_code}"] %>
-                </td>
-                <td align="center">
-                  <%= b["#{barang.tarif_code}"] = b["#{barang.tarif_code}"].to_f + k.quantity.to_f %>
-                  <%#= hidden_field_tag "datarow[#{k.id}][complete_qty]", b["#{barang.tarif_code}"] %>
-                </td>
+                <% if barang.present? %>
+                  <td align="center">
+                    <%= a["#{barang.tarif_code}"] rescue '-' %>&nbsp;<%= barang.belongs_to_cal_um.code rescue '-' %>
+                    <%#= hidden_field_tag "datarow[#{k.id}][before_available_qty]", a["#{barang.tarif_code}"] %>
+                  </td>
+                  <td align="center">
+                    <%= a["#{barang.tarif_code}"] = a["#{barang.tarif_code}"].to_f - k.quantity.to_f %>
+                    <%#= hidden_field_tag "datarow[#{k.id}][after_available_qty]", a["#{barang.tarif_code}"] %>
+                  </td>
+                  <td align="center">
+                    <%= b["#{barang.tarif_code}"] = b["#{barang.tarif_code}"].to_f + k.quantity.to_f %>
+                    <%#= hidden_field_tag "datarow[#{k.id}][complete_qty]", b["#{barang.tarif_code}"] %>
+                  </td>
+                <% else %>
+                  <% @barang_missing = PurchaseOrder::MISSING %>
+                  <% 3.times.each do |t| %>
+                    <td></td>
+                  <% end %>
+                <% end %>
                 
               <% end %>
             <% end %>
@@ -122,7 +129,7 @@
         
       <% end %>  
         
-      <% if action_name == "new" %>
+      <% if action_name == "new" or action_name == "create" %>
         <% @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs %>
         <% @barangs.each do |brg| %>
           <% if brg.tarif_code.present? %>

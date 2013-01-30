@@ -3,13 +3,13 @@
   <%#= link_add_1600x900(new__path) %>
   
   <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_SHOW) %>
-    <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
+    <span id="on_show" ><%= not_link_show %></span>
   <%# else %>
     <!--span class="word_opac"><%#= not_link_show %></span-->
   <%# end %>
 
   <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_EDIT) %>
-    <span id="on_edit" editClass="iframe_800x450"><%= not_link_edit %></span>
+    <span id="on_edit"><%= not_link_edit %></span>
   <%# else %>
     <!--span class="word_opac"><%#= not_link_edit %></span-->
   <%# end %>

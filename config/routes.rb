@@ -1,6 +1,10 @@
 Merp::Application.routes.draw do
 
 
+  resources :product_running_numbers
+
+  resources :stock_outs
+
   resources :reports do
     collection do
     get "pr_report"
@@ -179,8 +183,6 @@ Merp::Application.routes.draw do
       get "production"
     end
   end
-
-  resources :temporary_tarif_codes
 
   resources :sales_tax_exemption_items
 

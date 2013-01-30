@@ -13,7 +13,7 @@
     <% end %>
 
     <% unless params[:blank_product] == "yes" %>
-      <% unless @ste_valid == PurchaseOrder::STOPPED or @overweight == PurchaseOrder::OVERWEIGHT %>
+      <% unless @ste_valid == PurchaseOrder::STOPPED or @overweight == PurchaseOrder::OVERWEIGHT or @barang_missing == PurchaseOrder::MISSING %>
         <%= link_save_button %>
       <% end %>
     <% end %>

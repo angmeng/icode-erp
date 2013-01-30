@@ -120,6 +120,7 @@ class SalesTaxExemptionsController < ApplicationController
   
   def display_items
     @ste = SalesTaxExemption.find(params[:id])
+    render :layout => "sheetbox"
   end
   
   

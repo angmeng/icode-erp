@@ -2,8 +2,8 @@
   <div class="fix_800x450">
     <table>
       <tr>
-        <td><b>Code</b></td>
-        <td><%= f.text_field :code, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
+        <td><b>Code *</b></td>
+        <td><%= f.text_field :code, :class => "easyui-validatebox k-textbox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
       </tr>
       <tr>
         <td><b>Description *</b></td>
@@ -46,9 +46,7 @@
           </td>
         </tr>
         
-        <tr>
-          <td><%= f.check_box  :exist_field, { checked: true } %></td>
-        </tr>
+        <tr><td><%= f.check_box  :exist_field, { checked: true } %></td></tr>
         
         <tr>
           <td>
@@ -64,7 +62,7 @@
       </table>
     </div>
     
-    <div style="background-color: gainsboro;"><b>Field For Product ID</b></div>
+    <div style="background-color: gainsboro; padding: 0px 5px 0px 5px;"><b>Field For Product ID</b></div>
     
     <% if action_name == "edit" %>
       <%= render "checkboxes_forms" %>
