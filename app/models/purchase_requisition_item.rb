@@ -20,7 +20,7 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   has_one    :receive_note
   has_one    :incoming_reject
   
-  has_one   :purchase_order_item_line, :dependent => :destroy
+  has_one    :purchase_order_item_line, :dependent => :destroy
   has_many   :purchase_orders, :through => :purchase_order_item_lines
   has_many   :temporary_sources, :dependent => :destroy
   accepts_nested_attributes_for :temporary_sources, :allow_destroy => true
@@ -69,51 +69,61 @@ class PurchaseRequisitionItem < ActiveRecord::Base
 #      end
 #    end
 #  end
-  
-  def self.completed_update(app_three)
-    all_pending = app_three.purchase_requisition_items.where(:status => PurchaseRequisitionItem::IN_PROCESSING)
-    if all_pending.present?
-      all_pending.each do |p|
-        p.update_attributes(:status => PurchaseRequisitionItem::APPROVED)
-      end
-    end
+
+  def is_skip_to_po?
+    skip_to_purchase_order == TRUE
   end
+  
+#  def self.completed_update(app_three)
+#    all_pending = app_three.purchase_requisition_items.where(:status => PurchaseRequisitionItem::IN_PROCESSING)
+#    if all_pending.present?
+#      all_pending.each do |p|
+#        if p.is_skip_to_po?
+#          p.update_attributes(:status => PurchaseRequisitionItem::APPROVED)
+#        else
+#          p.update_attributes(:status => PurchaseRequisitionItem::APPROVED)
+#        end
+#      end
+#    end
+#  end
           
-  def self.pr_items_status(company_id, po_id)
-    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
-    if @pri.present?
-      @pri.each do |pri|
-        PurchaseOrderItemLine.create(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
-        pri.update_attributes(:status => PurchaseRequisitionItem::RECEIVE_NOTE)
-        pri.purchase_requisition.update_attributes(:status => PurchaseRequisition::SUBMIT_RN)
-      end
-    end
-  end
+#  def self.pr_items_status(company_id, po_id)
+#    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
+#    if @pri.present?
+#      @pri.each do |pri|
+#        PurchaseOrderItemLine.create(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
+#        pri.update_attributes(:status => PurchaseRequisitionItem::RECEIVE_NOTE)
+#        pri.purchase_requisition.update_attributes(:status => PurchaseRequisition::SUBMIT_RN)
+#      end
+#    end
+#  end
   
-  def self.pri_status_with_ste(company_id, po_id, kgs)
-    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
-    
-    if @pri.present?
-      @pri.each do |pri|
-        kgs.each do |pri_id, content|
-          if pri.id == pri_id.to_i
-            ste_tarif_code = SalesTaxExemption.find_by_id_and_trade_company_id_and_valid_condition(pri.product.sales_tax_exemption_id, pri.trade_company_id, FALSE)
-            if ste_tarif_code.present?
-              remaining = ste_tarif_code.remaining_total - content[:qty].to_f
-              PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id, :weight => content[:qty].to_f)
-              stei = SalesTaxExemptionItem.create!(:sales_tax_exemption_id => ste_tarif_code.id, :product_id => pri.product_id, :remaining_total => remaining, :kgs => content[:qty].to_f, :purchase_order_id => po_id)
-              ste_tarif_code.update_attributes(:remaining_total => remaining)
-              stei.sales_tax_exemption.update_attributes!(:valid_condition => TRUE) if stei.remaining_total == 0
-            else
-              PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
-            end
-          end
-        end
-        pri.update_attributes(:status => PurchaseRequisitionItem::RECEIVE_NOTE)
-        pri.purchase_requisition.update_attributes(:status => PurchaseRequisition::SUBMIT_RN)
-      end
-    end
-  end
+#  def self.pri_status_with_ste(company_id, po_id, kgs)
+#    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
+#    
+#    if @pri.present?
+#      @pri.each do |pri|
+#        kgs.each do |pri_id, content|
+#          if pri.id == pri_id.to_i
+#            ste_tarif_code = SalesTaxExemption.find_by_id_and_trade_company_id_and_valid_condition(pri.product.sales_tax_exemption_id, pri.trade_company_id, TRUE)
+#            if ste_tarif_code.present?
+#              
+#              remaining = ste_tarif_code.remaining_total - content[:qty].to_f
+#              PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id, :weight => content[:qty].to_f)
+#              stei = SalesTaxExemptionItem.create!(:sales_tax_exemption_id => ste_tarif_code.id, :product_id => pri.product_id, :remaining_total => remaining, :kgs => content[:qty].to_f, :purchase_order_id => po_id)
+##              ste_tarif_code.update_attributes(:remaining_total => remaining)
+#              stei.sales_tax_exemption.update_attributes!(:valid_condition => FALSE) if stei.remaining_total == 0
+#              
+#            else
+#              PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
+#            end
+#          end
+#        end
+#        pri.update_attributes(:status => PurchaseRequisitionItem::RECEIVE_NOTE)
+#        pri.purchase_requisition.update_attributes(:status => PurchaseRequisition::SUBMIT_RN)
+#      end
+#    end
+#  end
   
   def uppercase_text
     self.description.upcase!
@@ -234,30 +244,5 @@ class PurchaseRequisitionItem < ActiveRecord::Base
     end
     return array
   end
-  
-  def is_skip_to_po?
-    skip_to_purchase_order == TRUE
-  end
-  
-  
-  private
-  
-#  def present_date
-#    if eta.present?
-#      if eta < Date.today
-#        return false, "ETA should be future date."
-#      else 
-#        return true
-#      end
-#    else
-#      return false, "ETA should not blank."
-#    end
-#  end
-
-#  def present_eta_date
-#    if eta < Date.today
-#      errors.add(:scheduled_for, 'should be before starts at') 
-#    end
-#  end
 end
     

@@ -1,15 +1,17 @@
-<%= render "/home/search_button" %>
+<div id="popup_container">
+  <div class="title_head">
+    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong>
+    <%= search_button %>
+  </div>
+  <div><%= render "search_purchase_requisition" %></div>
 
-<%= render "search_purchase_requisition" %>
+  <div class="fix_1600x900_h450">
+    <% if @purchase_requisitions.present? %>
+      <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
+    <% else %>
+      Not Record Found.
+    <% end %>
+  </div>
 
-<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong></div>
-
-<div class="fix_1600x900">
-  <% if @purchase_requisitions.present? %>
-    <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
-  <% else %>
-    Not Record Found.
-  <% end %>
+  <%= render "action_purchase_requisition" %>  
 </div>
-
-<%= render "action_purchase_requisition" %>  

@@ -1,13 +1,24 @@
+<<<<<<< HEAD
 <p id="notice"><%= notice %></p>
 
 <p>
   <b>Transfer note:</b>
   <%= @stock_out.transfer_note %>
+=======
+<p>
+  <b>Transfer note:</b>
+  <%= @stock_out.transfer_note_no %>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
 </p>
 
 <p>
   <b>Product:</b>
+<<<<<<< HEAD
   <%= @stock_out.product_id %>
+=======
+  <% prod = ProductCombobox.find_by_product_id(@stock_out.product_id) %>
+  <%= prod.product_code rescue '-' %>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
 </p>
 
 <p>
@@ -19,7 +30,11 @@
   <b>Balance:</b>
   <%= @stock_out.balance %>
 </p>
+<<<<<<< HEAD
 
 
 <%#= link_to 'Edit', edit_stock_out_path(@stock_out) ,:class => "k-button" %>
 <%= link_to 'Back', stock_outs_path ,:class => "k-button" %>
+=======
+<%= link_close_button %>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269

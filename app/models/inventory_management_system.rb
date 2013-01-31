@@ -246,8 +246,18 @@ class InventoryManagementSystem < ActiveRecord::Base
   
 #===================================== SALES TAX EXEMPTION (END) ===========================================
 
+#===================================== FORMULATION FOR ALL (START) ===========================================  
+  FORMULATION_FOR_ALL_MODULE      = 239
+#  FORMULATION_FOR_ALL_SUB_MODULE  = 240
+  FORMULATION_FOR_ALL_INDEX       = 241
+  FORMULATION_FOR_ALL_NEW         = 242
+  FORMULATION_FOR_ALL_EDIT        = 243
+  FORMULATION_FOR_ALL_SHOW        = 244
+  FORMULATION_FOR_ALL_DROP_KIV    = 245
+  FORMULATION_FOR_ALL_PRINTABLE   = 246
+#===================================== FORMULATION FOR ALL (END) ===========================================  
+
 #===================================== COSTING SHEET (START) ===========================================  
-  
   FORMULATION_FOR_COSTING_MENU                = 208
   FORMULATION_FOR_COSTING                     = 209
   FORMULATION_FOR_COSTING_SHOW                = 210
@@ -318,6 +328,9 @@ class InventoryManagementSystem < ActiveRecord::Base
 #  PRODUCT_CATEGORY_KIV                    = 119
 #  PRODUCT_CATEGORY_PRINTABLE              = 120
   
+  
+  
+  
   PRODUCT_MENU                                       = 121
   
   PRODUCT_NON_OPERATION                              = 139
@@ -354,5 +367,21 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_KIV                            = 222
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
   
-  #start at 239
+  PRICE_CONTROL_MENU                                 = 258
+  
+  PRICE_CONTROL_NEW                                  = 251
+  PRICE_CONTROL_ADD                                  = 252
+  PRICE_CONTROL_SAVE                                 = 253
+  
+  PRICE_CONTROL_LISTING                              = 254
+  PRICE_CONTROL_SHOW                                 = 247
+  PRICE_CONTROL_EDIT                                 = 248
+  PRICE_CONTROL_DROP_KIV                             = 249
+  PRICE_CONTROL_PRINTABLE                            = 250
+  
+  PRICE_CONTROL_LISTING_KIV                          = 255
+  PRICE_CONTROL_SHOW_KIV                             = 256
+  PRICE_CONTROL_RECOVER                              = 257
+  
+  #start at 259
 end

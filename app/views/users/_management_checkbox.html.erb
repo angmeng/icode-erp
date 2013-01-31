@@ -1,37 +1,30 @@
-<table id="grid_h490" class="black-line-table zebraLight">
+<table id="grid_userTable_h490" class="black-line-table zebraLight">
   <thead>
-    <tr class="header_line">
-      <th class="check_highlight" rowspan="2"></th>
-      <th width="150" rowspan="2">MODULE</th>
-      <th width="150" rowspan="2">SUB-MODULE</th>
-      <th colspan="11">ACTION</th>
-    </tr>
+    <%#*<tr class="header_line">%>
+      <%#*<th class="check_highlight"></th>%>
+      <%#*<th width="150">MODULE</th>%>
+      <%#*<th width="200">SUB-MODULE</th>%>
+      <%#*<th colspan="12">ACTION</th>%>
+    <%#*</tr>%>
 
     <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th width="150">MODULE</th>
+      <th width="200">SUB-MODULE</th>
       <th width="50">Add or Exist Files</th>
+      <th width="50">Save</th>
       <th width="50">Show</th>
       <th width="50">Edit</th>
-      <!-- <th width="50">Drop to KIV</th> -->
       <th width="50">Drop To KIV</th>
       <th width="50">Printer</th>
-      <!-- <th width="50">Show KIV</th> -->
       <th width="50">Show KIV</th>
       <th width="50">Recover</th>
       <th width="50">Apply</th>
       <th width="50">Submit to</th>
-      
-      <!-- <th width="50">Create Group</th>
-      <th width="50">Edit Group</th>
-      <th width="50">Add Sub Group/Product Type</th>
-      <th width="50">Edit Sub Group/Product Type</th>
-      <th width="50">Add Product ID</th>
-      <th width="50">Edit Product ID</th> -->
       <th width="50">Send Mail</th>
       <th width="50">Costing Sheet</th>
     </tr>
   </thead>
-
-
   
   <tbody>
 
@@ -45,18 +38,12 @@
     <%= render "/inventory_management_systems/ims_delivery_order", :checkboxes => @checkboxes %>
     <!--OTHER-->
     <%= render "/inventory_management_systems/ims_sales_tax_exemption", :checkboxes => @checkboxes %>
+    <%= render "/inventory_management_systems/ims_formulation_for_all", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_formulation_for_costing", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_inventory", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_company_profile", :checkboxes => @checkboxes %>
     <%= render "/inventory_management_systems/ims_trade_company", :checkboxes => @checkboxes %>
-    <%#= render "/inventory_management_systems/ims_product", :checkboxes => @checkboxes %>
+    <%= render "/inventory_management_systems/ims_price_control", :checkboxes => @checkboxes %>
     
-    
-    
-  <!--   <tr><td colspan="20">&nbsp;</td></tr>
-    <tr><td colspan="20">&nbsp;</td></tr>
-    <tr><td colspan="20">&nbsp;</td></tr>
-    
- -->
   </tbody>
 </table>

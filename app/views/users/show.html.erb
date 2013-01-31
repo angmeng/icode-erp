@@ -1,19 +1,12 @@
 <div id="popup_container">
 
-<div style="background-color:blue"><strong style="color:white;">SHOW USER</strong></div>
+  <div class="title_head"><strong style="color:white;">SHOW USER</strong></div>
 
   <div id="user_strip">
     <ul>
-        <li class="k-state-active">
-          User Account
-        </li>
-        <li>
-          Inventory Management System
-        </li>
-        <li>
-          Inventory Management System II- Product 
-        </li>
-
+        <li class="k-state-active">User Account</li>
+        <li>Inventory Management System</li>
+        <li>Inventory Management System II- Product</li>
     </ul>
 
     <div>
@@ -36,26 +29,26 @@
             <td valign="top"><b>Report Flow</b></td>
             <td>
 
-                  <table>
-                    <thead>
-                      <tr style="background-color: gainsboro;">
-                        <th width="100">Level 1</th>
-                        <th width="100">Level 2</th>
-                        <th width="100">Level 3</th>
-                        <th width="100">Level 5</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% lv2 = User.find_by_id(@user.level_two) %>
-                      <% lv3 = User.find_by_id(@user.level_three) %>
-                      <tr>
-                        <td align="center"><%= @user.name rescue '-' %></td>
-                        <td align="center"><%= lv2.name rescue '-' %></td>
-                        <td align="center"><%= lv3.name rescue '-' %></td>
-                        <td align="center"><%= director_data.name rescue '-' %></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <table>
+                  <thead>
+                    <tr style="background-color: gainsboro;">
+                      <th width="100">Level 1</th>
+                      <th width="100">Level 2</th>
+                      <th width="100">Level 3</th>
+                      <th width="100">Level 5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% lv2 = User.find_by_id(@user.level_two) %>
+                    <% lv3 = User.find_by_id(@user.level_three) %>
+                    <tr>
+                      <td align="center"><%= @user.name rescue '-' %></td>
+                      <td align="center"><%= lv2.name rescue '-' %></td>
+                      <td align="center"><%= lv3.name rescue '-' %></td>
+                      <td align="center"><%= director_data.name rescue '-' %></td>
+                    </tr>
+                  </tbody>
+                </table>
 
             </td>
           </tr>
@@ -63,20 +56,13 @@
       </table>
     </div>
 
-    <div>
-      <%= render "management" %>
-    </div>
-    <div>
-      <div class="user_management">
-      <%= render "management_product" %>
-    </div>
-    </div>
-  
+    <div><div class="user_management"><%= render "management_checkbox" %></div></div>
+    <div><div class="user_management"><%= render "management_product" %></div></div>
 
+</div>
+  
   <div class="icon_tag">
     <%= link_close_button %>
   </div>
-
-</div>
 
 </div>

@@ -1,9 +1,13 @@
 $(document).ready(function() {
     
+    $("#grid_userTable_h490").chromatable({
+        width: "1200px",
+        height: "490px",
+        scrolling: "yes"
+    });
 
     $("#grid_h295").chromatable({
         width: "1330px",
-//        width: "1510px",
         height: "295px",
         scrolling: "yes"
     });	
@@ -23,6 +27,12 @@ $(document).ready(function() {
     $("#grid_h370").chromatable({
         width: "1440px",
         height: "370px",
+        scrolling: "yes"
+    });	
+    
+    $("#grid_h445").chromatable({
+        width: "1400px",
+        height: "445px",
         scrolling: "yes"
     });	
     
@@ -1358,50 +1368,50 @@ $(document).ready(function() {
                     })
                 }
                 break;
-//                
-//            case 215:
-//                if (checked == true){  
-//                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
-//                        if           ($(this).attr("value") == '231')  {$(this).attr('checked', true);}
-//                        else if      ($(this).attr("value") == '232')  {$(this).attr('checked', true);}
-//                        else if      ($(this).attr("value") == '233')  {$(this).attr('checked', true);}
-//                        else if      ($(this).attr("value") == '234')  {$(this).attr('checked', true);}
-//                        else if      ($(this).attr("value") == '235')  {$(this).attr('checked', true);}
-//                    })
-//                } else {
-//                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
-//                        if           ($(this).attr("value") == '231')  {$(this).attr('checked', false);}
-//                        else if      ($(this).attr("value") == '232')  {$(this).attr('checked', false);}
-//                        else if      ($(this).attr("value") == '233')  {$(this).attr('checked', false);}
-//                        else if      ($(this).attr("value") == '234')  {$(this).attr('checked', false);}
-//                        else if      ($(this).attr("value") == '235')  {$(this).attr('checked', false);}
-//                    })
-//                }
-//                break;
-//                
-//            case 246:
-//                if (checked == true){  
-//                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
-//                        if           ($(this).attr("value") == '239')  {$(this).attr('checked', true);}
-//                    })
-//                } else {
-//                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
-//                        if           ($(this).attr("value") == '239')  {$(this).attr('checked', false);}
-//                    })
-//                }
-//                break;
-//                
-//            case 247:
-//                if (checked == true){  
-//                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
-//                        if           ($(this).attr("value") == '241')  {$(this).attr('checked', true);}
-//                    })
-//                } else {
-//                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
-//                        if           ($(this).attr("value") == '241')  {$(this).attr('checked', false);}
-//                    })
-//                }
-//                break;
+                
+            case 251:
+                if (checked == true){  
+                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                        if           ($(this).attr("value") == '252')  {$(this).attr('checked', true);}
+                        else if      ($(this).attr("value") == '253')  {$(this).attr('checked', true);}
+                    })
+                } else {
+                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                        if           ($(this).attr("value") == '252')  {$(this).attr('checked', false);}
+                        else if      ($(this).attr("value") == '253')  {$(this).attr('checked', false);}
+                    })
+                }
+                break;
+                
+            case 254:
+                if (checked == true){  
+                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                        if           ($(this).attr("value") == '247')  {$(this).attr('checked', true);}
+                        else if      ($(this).attr("value") == '248')  {$(this).attr('checked', true);}
+                        else if      ($(this).attr("value") == '249')  {$(this).attr('checked', true);}
+                    })
+                } else {
+                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                        if           ($(this).attr("value") == '247')  {$(this).attr('checked', false);}
+                        else if      ($(this).attr("value") == '248')  {$(this).attr('checked', false);}
+                        else if      ($(this).attr("value") == '249')  {$(this).attr('checked', false);}
+                        else if      ($(this).attr("value") == '250')  {$(this).attr('checked', false);}
+                    })
+                }
+                break;
+                
+            case 255:
+                if (checked == true){  
+                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                        if           ($(this).attr("value") == '256')  {$(this).attr('checked', true);}
+                    })
+                } else {
+                    $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                        if           ($(this).attr("value") == '256')  {$(this).attr('checked', false);}
+                        else if      ($(this).attr("value") == '257')  {$(this).attr('checked', false);}
+                    })
+                }
+                break;
 //                
 //            case 248:
 //                if (checked == true){  
@@ -1819,15 +1829,15 @@ $(document).ready(function() {
     }); 
     
     $("#show_purchase").click(function(e) { 
-        e.preventDefault();
         $("#main_qr").hide();
         $("#main_pr").slideDown();
+        return false;
     }); 
     
     $("#show_sales").click(function(e) { 
-        e.preventDefault();
         $("#main_pr").slideUp();
         $("#main_qr").slideDown();
+        return false;
     }); 
     
     $("#type_in").click(function(){
@@ -2080,6 +2090,7 @@ function getCombo_in_out(sel) {
 
 function getCombo_product(sel) {
     var product = sel.options[sel.selectedIndex].value; 
+//    alert(product);
 
     $.ajax({
         dataType: "json",
@@ -2092,6 +2103,7 @@ function getCombo_product(sel) {
         success: function(data){
             var vhtml = "Current Stock: " + data.current_stock;
             $("#current_product_stock").html(vhtml);
+            $("#stock_value").html(data.current_stock);
         }
     });
 }

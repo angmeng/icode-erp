@@ -33,8 +33,7 @@ class TradeCompaniesController < ApplicationController
   end
 
   def new
-    @trade_company = TradeCompany.new
-    
+    @trade_company = TradeCompany.new  
     if params[:temp_source_id].present?
       @vendor = TemporarySource.find_by_id(params[:temp_source_id]).company_name  #Vendor
       session[:option] = TradeCompany::SUPPLIER

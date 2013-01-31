@@ -12,7 +12,7 @@
         <tr>
           <td>Product ID *</td>
           <td>
-            <%= select_tag :product_id, options_from_collection_for_select(Product.all, 'id', 'code', @inventory_history.product_id.to_i), :include_blank => true, :onchange => "getCombo_product(this)",:class => "k-textbox", "required validationMessage" => "Please Enter an Product ID"  %>
+            <%= select_tag :product_id, options_from_collection_for_select(Product.all, 'id', 'code', @inventory_history.product_id.to_i), :include_blank => true, :onchange => "getCombo_product(this)", "required validationMessage" => "Please Enter an Product ID"  %>
             <span id="current_product_stock"></span>
           </td>
         </tr>

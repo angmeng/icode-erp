@@ -1,8 +1,8 @@
 class Formulation < ActiveRecord::Base
   attr_accessible :convert_value, :from_unit_measurement_id, :per_value, :to_unit_measurement_id
   
-#  belongs_to :from_unit_measurement_id, :class_name => "UnitMeasurement", :foreign_key => "from_unit_measurement_id"
-#  belongs_to :to_unit_measurement_id, :class_name => "UnitMeasurement", :foreign_key => "to_unit_measurement_id"
+  belongs_to :belongs_from_um, :class_name => "UnitMeasurement", :foreign_key => "from_unit_measurement_id"
+  belongs_to :belongs_to_um, :class_name => "UnitMeasurement", :foreign_key => "to_unit_measurement_id"
 
   validates :convert_value, :from_unit_measurement_id, :per_value, :to_unit_measurement_id, :presence => true
   

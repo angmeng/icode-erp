@@ -4,6 +4,7 @@ class ProductCombobox < ActiveRecord::Base
   ACTIVE = "Active"
   KEEP_IN_VIEW = "KIV"
   
+  has_one :stock_out
   belongs_to :product
   
   validates :product_code, :uniqueness => true

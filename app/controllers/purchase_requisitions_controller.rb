@@ -31,7 +31,7 @@ class PurchaseRequisitionsController < ApplicationController
   end
 
   def create
-    #validate should checking whether select items and eta date are valid?
+    # Validate should checking whether select items and eta date are valid?
     @purchase_requisition = PurchaseRequisition.new(params[:purchase_requisition])
     pr_value = company.sn_purchase_req_no.to_i + 1
     @manage, msg = PurchaseRequisition.managing_validate(current_user, params[:select_items])
@@ -40,7 +40,7 @@ class PurchaseRequisitionsController < ApplicationController
     if @manage.present? && @purchase_requisition.save
       company.update_attributes(:sn_purchase_req_no => pr_value)
       PurchaseRequisitionManagement.run_update(current_user, @purchase_requisition, params[:select_items])
-      redirect_to new_purchase_requisition_path, notice: 'Purchase requisition was successfully created.'
+      redirect_to new_purchase_requisition_path, notice: "PR No.#{@purchase_requisition.pr_no} has #{@purchase_requisition.purchase_requisition_items.size} items was created."
     else
       msg << @purchase_requisition.errors.full_messages.join(", ")
       flash[:alert] = msg
@@ -158,7 +158,8 @@ class PurchaseRequisitionsController < ApplicationController
   def yes_approval_three
     @app_three = PurchaseRequisition.find(params[:id])
     if @app_three.update_attributes(:status => PurchaseRequisition::SUBMIT_PO, :approved_by_level_five => current_user.id, :approved_by_level_five_date => Date.today, :tasks => 0)
-      PurchaseRequisitionItem.completed_update(@app_three)
+      PurchaseRequisitionManagement.completed_update(@app_three)
+#      PurchaseRequisitionItem.completed_update(@app_three)
       redirect_to edit_purchase_requisition_path(@app_three), :notice => "Update Successfully."
     else
       flash[:alert] = @app_three.errors.full_messages.join(",")

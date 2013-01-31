@@ -1,6 +1,6 @@
 class PriceControlsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+#  layout "sheetbox"
   
   # GET /price_controls
   # GET /price_controls.json
@@ -28,6 +28,7 @@ class PriceControlsController < ApplicationController
   # GET /price_controls/new.json
   def new
     @price_control = PriceControl.new
+    render :layout => "sheetbox"
 #    @pri = current_user.price_control_items.db_active if current_user.price_control_items.db_active.present?
   end
 

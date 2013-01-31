@@ -55,10 +55,17 @@
 		
 	<% @show_product_report.each_with_index do |pri , index| %>
 	<tbody>
+<<<<<<< HEAD
 	<tr class="<%= cycle("odd_line", "even_line") %>">
         
 		<td align="center"><%= index + 1 %>
 		<%= check_box_tag "product_ids[]" , pri.id %></td>
+=======
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+        
+		<td align="center"><%= index + 1 %>
+		<%= check_box_tag "pri_ids[]" , pri.id %></td>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
 		<%#= render '/product_categories/join_product_category' , :pc => pri.product_category %>
 		<td align="center"><%= pri.product_code rescue '-' %>  <%#= pri.product.product_name rescue '-' %></td>
 		<td align="center"><%= pri.product.desc rescue '-'%></td>
@@ -78,9 +85,13 @@
 <div style="float:right;">
 
 	<span><%= submit_tag "show" , :class => "k-button" %> </span>
+<<<<<<< HEAD
 	<span><%= link_to "Print PDF" , pdf_product_report_reports_path(:product_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
 
 	<span><%= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button" %></span>
+=======
+	<span><%= link_to "Print PDF" , pdf_product_report_reports_path(:pri_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
 
  	<%= link_close_button %>
   <% end %>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TemporaryTarifCodeTest < ActiveSupport::TestCase
+class ProductRunningNumberTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

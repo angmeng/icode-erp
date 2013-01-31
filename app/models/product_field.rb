@@ -57,21 +57,21 @@ class ProductField < ActiveRecord::Base
   
   
   # only available level 0
-  def self.checkbox_field(category, prod_field)
-    if prod_field.present?
-      prod_field.each { |pf| self.create!(:category_id => category.id, :field_id => pf) }
-    else
-      self.create!(:category_id => category.id, :field_id => ProductField::DESCRIPTION)
-    end
-    category.update_attributes(:exist_field => TRUE, :refer_category_id => category.id, :level => category.level)
-  end
+#  def self.checkbox_field(category, prod_field)
+#    if prod_field.present?
+#      prod_field.each { |pf| self.create!(:category_id => category.id, :field_id => pf) }
+#    else
+#      self.create!(:category_id => category.id, :field_id => ProductField::DESCRIPTION)
+#    end
+#    category.update_attributes(:exist_field => TRUE, :refer_category_id => category.id, :level => category.level)
+#  end
   
   # when edit sub group/product type, only available level 1
-  def self.checkbox_field_edit(category, prod_field)
-    if prod_field.present?
-      @pf = self.where(:category_id => category.refer_category_id)
-      @pf.delete_all if @pf.present?
-      prod_field.each { |pf| self.create!(:category_id => category.refer_category_id, :field_id => pf) }
-    end
-  end
+#  def self.checkbox_field_edit(category, prod_field)
+#    if prod_field.present?
+#      @pf = self.where(:category_id => category.refer_category_id)
+#      @pf.delete_all if @pf.present?
+#      prod_field.each { |pf| self.create!(:category_id => category.refer_category_id, :field_id => pf) }
+#    end
+#  end
 end

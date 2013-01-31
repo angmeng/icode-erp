@@ -29,25 +29,11 @@ body {
 }
 
 #container, #popup_container{
-/*    border: 1px solid #aaa;
-    width: 100%;
-    height: 600px;
-    margin: auto;
-    overflow: auto;*/
-
     background-color: #fff;
     color: #000;
     font-family: Tahoma, arial, helvetica, sans-serif;
     font-size: 12px;
-/*    line-height: 18px; */
-    
-    
-/*    background: #EEE;*/
-/*    border-left: 1px solid #000;*/
-/*    border-right: 1px solid #000;*/
-/*    padding: 0 20px 0 20px;*/
     margin: auto;
-/*    font: 1.5em arial, verdana, sans-serif;*/
     width: 100%;
     min-height: 100%;
 }
@@ -77,15 +63,13 @@ a:hover   { color: #fff; background-color:#000; }
 p#notice {
     background-color: green;
     color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
     padding: 5px; }
 
 p#alert {
     background-color: red; 
     color: white;  
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
     padding: 5px; }
 
 .field_with_errors {
@@ -240,25 +224,24 @@ table.black-line-table td {
     width: 35px;
     height: 35px; }
 
-.opac_word {
-    color: grey;
-}
+.opac_word { color: grey; }
 
 #inline { display:none; }
 
-.search_link { 
+.search_link {
     float: right;
-    border-radius: 5px;  /* IE 9*/
-    -moz-border-radius: 5px;  /* Safari*/
-    -webkit-border-radius: 5px;  /* Chrome 9*/
-    background-color: palegreen;
+/*    border-radius: 5px;   IE 9*/
+/*    -moz-border-radius: 5px;   Safari*/
+/*    -webkit-border-radius: 5px;   Chrome 9*/
+    background-color: gainsboro;
     color: brown;
-    padding: 5px;
-    font-size: 12px;
+    padding: 0px 5px 0px 5px;
+/*    font-size: 12px;*/
     text-decoration: none;
-    font-weight: bold;}
+    font-weight: bold;
+}
 
-#run_size, #generate, .generate_button { 
+#run_size, #generate { 
     border-radius: 5px;  /* IE 9*/
     -moz-border-radius: 5px;  /* Safari*/
     -webkit-border-radius: 5px;  /* Chrome 9*/
@@ -269,6 +252,7 @@ table.black-line-table td {
     font-weight: bold;
     width: 40px;
     cursor: pointer; }
+/*, .generate_button*/
 
 .new_button { 
     border-radius: 5px;
@@ -313,6 +297,8 @@ legend { font-size: 15px; font-weight: bold; }
 #get_size       { display:none; float: right; background-color: orange; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding-left:5px; padding-right: 5px; cursor: pointer; }
 .padding_10     { padding: 10px; }
 .check_highlight{ width: 25px; }
+.title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
+
 
 
 .search_engine { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 97.8%; z-index: 50;}
@@ -322,7 +308,7 @@ legend { font-size: 15px; font-weight: bold; }
 /* new_form */
 .new_purchase_form {
     border: 1px solid black;
-    height: 400px;
+    height: 450px;
     overflow: auto;
 }
 
@@ -349,38 +335,46 @@ legend { font-size: 15px; font-weight: bold; }
     height: 320px;}
 
 .fix_800x450 {
-    border: 1px solid grey;
-    overflow:auto;
-    height: 345px;
-/*    width: 100%;*/
+    border: 1px solid black;
+    overflow: auto;
+    height: 348px;
 }
 
 .fix_800x600 {
     border: 1px solid grey;
     overflow:auto;
     height: 450px;
-/*    width: 100%;*/
 }
 
 .fix_1600x900 {
     border: 1px solid black;
     overflow:auto;
     height: 500px;
-/*    width: 100%;*/
 }
 
 .fix_1600x900_h450 {
     border: 1px solid black;
     overflow:auto;
     height: 450px;
-/*    width: 100%;*/
+}
+
+.fix_1600x900_h400 {
+    border: 1px solid black;
+    overflow:auto;
+    height: 400px;
 }
 
 .fix_1024x800 {
-    border: 1px solid grey  ;
+    border: 1px solid black;
     overflow:auto;
     height: 540px;
-    width: 100%;}
+}
+
+.fix_1024x800_h450 {
+    border: 1px solid black;
+    overflow:auto;
+    height: 450px;
+}
 
 .fix_po_show_listing {
     border: 1px solid grey;
@@ -401,8 +395,8 @@ legend { font-size: 15px; font-weight: bold; }
 }
 
 .user_management {
-    overflow-y: hidden;
-    overflow-x: scroll;
+/*    overflow-y: hidden;*/
+/*    overflow-x: scroll;*/
     width: 100%;
     height: 500px; }
 

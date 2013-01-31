@@ -11,7 +11,7 @@
     <td><b>P/O Date</b></td>
     <td>
       <% if action_name == "edit" %>
-        <%= f.text_field :po_date, @purchase_order.po_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+        <%= f.text_field :po_date, :value => @purchase_order.po_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
       <% else %>
         <%= f.text_field :po_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
       <% end %>
@@ -68,28 +68,17 @@
   </tr>
   
   <% if @vendor_id.sales_tax_exemption.present? %>
-    
     <tr>
       <td width="140" title="Sales Tax Exemption No."><b>STE No.</b></td>
-
-      <%# if @ste.present? %>
-        <td>
-          [<%=  @vendor_id.sales_tax_exemption.running_no rescue '-' %>] <%=  @vendor_id.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
-          <% if @vendor_id.sales_tax_exemption.valid_condition == FALSE %>
-            <% @ste_valid = PurchaseOrder::STOPPED %>
-            <span style="color: red">INVALID!!</span>
-          <% end %>
-          <%= f.hidden_field :sales_tax_exemption_id, :value =>  @vendor_id.sales_tax_exemption.id %> 
-        </td>
-      <%# else %>
-        <%#*<td>%>
-          <%# if @exist_sales_tax.present? %>
-            <%#*<i style="color:red;">STE has invalid. Please updated latest.</i>%>
-          <%# else %>
-            <%#*-%>
-          <%# end %>
-        <%#*</td>%>
-      <%# end %>
+      <td>
+        [<%=  @vendor_id.sales_tax_exemption.running_no rescue '-' %>] <%=  @vendor_id.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
+        <% if @vendor_id.sales_tax_exemption.valid_condition == FALSE %> <!-- this is for expire date -->
+          <% @ste_valid = PurchaseOrder::STOPPED %>
+          <span style="color: red">Expired Date!!</span>
+        <% end %>
+        <%= f.hidden_field :sales_tax_exemption_id, :value =>  @vendor_id.sales_tax_exemption.id %> 
+      </td>
     </tr>
   <% end %>
 </table>
+<hr/>

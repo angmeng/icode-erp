@@ -36,29 +36,31 @@ class PurchaseOrdersController < ApplicationController
   def edit
     @purchase_order = PurchaseOrder.find(params[:id])
     callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
+    render :layout => "sheetbox"
   end
   
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
     a = company.sn_purchase_order_no.to_i + 1
     @purchase_order.po_no = a
-    callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
-    @chk_weight, msg = PurchaseOrder.chk_weight(params[:kgs])
-    if @chk_weight.present?
+    
+#    @chk_weight, msg = PurchaseOrder.chk_weight(params[:kgs])
+#    if @chk_weight.present?
       if @purchase_order.save
         company.update_attributes(:sn_purchase_order_no => a)
-        
-        @aa = PurchaseRequisitionItem.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id, params[:kgs])
+        PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
+#        PurchaseRequisitionItem.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id, params[:kgs])
+        PurchaseOrderManagement.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id)
         redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
       else
+        callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
         flash[:alert] = @purchase_order.errors.full_messages.join(", ")
-        render action: "new"
+        render action: "new", layout: "sheetbox"
       end
-    else
-      flash[:alert] = msg
-      render action: "new"
-    end
-    
+#    else
+#      flash[:alert] = msg
+#      render action: "new"
+#    end
   end
   
   def create_without_sales_tax_exemption
@@ -70,9 +72,9 @@ class PurchaseOrdersController < ApplicationController
 
     if @purchase_order.save
       company.update_attributes(:sn_purchase_order_no => a)
-#      @purchase_order.update_attributes(:po_no => a + 1)
       PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
-      PurchaseRequisitionItem.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
+#      PurchaseRequisitionItem.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
+      PurchaseOrderManagement.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
       redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
     else
       flash[:alert] = @purchase_order.errors.full_messages.join(", ")
@@ -184,8 +186,6 @@ class PurchaseOrdersController < ApplicationController
   #Submit Vendor Selection
   def submit_vselect    
     @pr_item = PurchaseRequisitionItem.find(params[:id])
-#    @eta, msg = PurchaseRequisitionItem.present_date(pr_item.eta)
-#    if @eta.present?
     if @pr_item.update_attributes(:maintenance => 0, :proposed_vendor => 1)
       redirect_to maintenance_purchase_orders_path, :notice => "Submit to Vendor Selection successfully."
     else
@@ -202,6 +202,7 @@ class PurchaseOrdersController < ApplicationController
   
   def select_vendor   #PROPOSED VENDOR - APPLY
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
+    render :layout => "sheetbox"
   end
   
   def change_vendor
@@ -215,8 +216,6 @@ class PurchaseOrdersController < ApplicationController
   
   def proposed_approval
     @pri = PurchaseRequisitionItem.find(params[:id])
-#    @eta, msg = PurchaseRequisitionItem.present_date(@pri.eta)
-#    if @eta.present?
     if @pri.update_attributes(:proposed_vendor => TRUE)
       redirect_to proposed_vendor_purchase_orders_path, :notice => "Submit to Vendor Selection successfully."
     else
@@ -233,6 +232,7 @@ class PurchaseOrdersController < ApplicationController
   
   def show_select_vendor
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
+    render :layout => "sheetbox"
   end
   
   def approval_yes
@@ -269,7 +269,6 @@ class PurchaseOrdersController < ApplicationController
   def vendor
     filter_matching_vendor
   end
-  
 #  ====================== VENDOR REGISTRATION (END) ============================ 
   
 #  ====================== PRODUCT ID Registration (non operation and Operation) ============================ 
@@ -290,7 +289,8 @@ class PurchaseOrdersController < ApplicationController
   
   def filter_matching_vendor
     @vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, true)
-    PurchaseOrder.generator_match_vendor(@vendor, trade_company_vendor) #Auto vendor if exist?
+#    PurchaseOrder.generator_match_vendor(@vendor, trade_company_vendor) #{Auto vendor if exist?}
+    PurchaseOrderManagement.generator_match_vendor(@vendor, trade_company_vendor) #Auto vendor if exist?
   end
   
 #  def goto_create_sources(pr_item, company_name, unit_price)

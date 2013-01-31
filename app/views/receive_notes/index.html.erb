@@ -1,19 +1,15 @@
-<table width="100%">
-  <tr>
-    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
-  </tr>
-</table>
+<div id="popup_container">
+  
+  <div class="title_head"><strong style="color:white;">TRANSACTIONS & HISTORIES FOR RECEIVE NOTES</strong></div> 
+  <div><%= render "search_engine_receive_notes" %></div>
 
-<div><%= render "search_engine_receive_notes" %></div>
+  <div class="fix_1600x900_h450">
+    <% if @receive_notes.present? %>
+      <%= render "/receive_notes/success_rn" %>
+    <% else %>
+      No Record Found.
+    <% end %>
+  </div>
 
-<div style="background-color:blue"><strong style="color:white;">TRANSACTIONS - RECEIVE NOTES</strong></div> 
-
-<div class="fix_1600x900">
-  <% if @receive_notes.present? %>
-    <%= render "/receive_notes/success_rn" %>
-  <% else %>
-    No Record Found.
-  <% end %>
+  <%= render "action_receive_note" %>
 </div>
-
-<%= render "action_receive_note" %>

@@ -14,7 +14,7 @@
           <th style="font-size: 12px;">PRODUCT ID</th>
           <th style="font-size: 12px;">DESCRIPTION</th>
           <th style="font-size: 12px;">ETA</th>
-          <% unless action_name == "printable" or "show" %>
+          <% if action_name == "new" %>
             <th style="font-size: 12px;" width="100">Correct ETA</th>
           <% end %>
           <th style="font-size: 12px;">QUANTITY</th>
@@ -65,7 +65,7 @@
             <% end %>
           </td>
           
-          <% unless action_name == "printable" or "show" %>
+          <% if action_name == "new" %>
             <td>
               <%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %>
             </td>

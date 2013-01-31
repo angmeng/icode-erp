@@ -1,16 +1,12 @@
 <div id="popup_container">
-  <table width="100%">
-    <tr>
-      <td><%= link_to "Search", '#', :class => "search_link" %></td>
-    </tr>
-  </table>
-
+  <div class="title_head">
+    <strong style="color: white;">LISTING USERS</strong>
+    <%= search_button %>
+  </div>
   <div><%= render "search_user" %></div>
 
-  <div style="background-color:blue"><strong style="color:white;">LISTING USERS</strong></div>
-
   <!--div class="fix_1600x900"-->
-  <div id="popup_content">
+  <div class="fix_1600x900_h450">
     <% if @users.present? %>
       <%= render "listing_users", :list_users => @users %>
     <% else %>
@@ -20,4 +16,3 @@
   
   <%= render "action_user" %>
 </div>
-  

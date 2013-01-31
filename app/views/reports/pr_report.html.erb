@@ -41,8 +41,13 @@
 
         <% @show_pr_report.each do |p| %>
         <tbody>
+<<<<<<< HEAD
           <tr class="<%= cycle("odd_line", "even_line") %>">
               <td ><%= p.pr_no %>
+=======
+          <tr>
+              <td><%= p.pr_no %>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
               <%= check_box_tag "pr_ids[]" , p.id %></td>   
               
               <td><%= p.requested_by_date.strftime("%d-%m-%Y")%></td>
@@ -51,18 +56,34 @@
         </tbody>
 
         <% end %>
+<<<<<<< HEAD
         
+=======
+        
+
+        
+      
+      
+     
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
     </table>
    
   </fieldset>
 <div style="float:right;">
 
+<<<<<<< HEAD
     <span><%= submit_tag "show" ,:class =>"k-button"%> </span>
     
    <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get",:class =>"k-button" %></span>
 
 
    <span><%= link_to "Excel report" , excel_pr_report_reports_path(:pr_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
+=======
+    <span><%#= submit_tag "show" ,:class =>"k-button"%> </span>
+   <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank",:class =>"k-button" %></span>
+
+   <span><%= link_to "Excel report" , pdf_pr_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
+>>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
 
    <%= link_close_button %>
    <% end %>

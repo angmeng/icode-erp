@@ -119,26 +119,21 @@ class User < ActiveRecord::Base
   end
   
   def self.clearing
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE inventory_histories")
+
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_categories")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_prices")
+#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_comboboxes")
+#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_fields")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_vendors")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE products")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_order_item_lines")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_orders")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_requisition_items")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_requisitions")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE receive_note_items")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE receive_notes")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE roles")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE sales_tax_exemption_items")
+#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE purchase_requisition_items")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE sales_tax_exemptions")
+#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE sales_tax_exemption_barangs")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE temporary_sources")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE temporary_tarif_codes")
-#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE trade_companies")
+    
 
-    ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
-    user = User.new(:name => "DIRECTOR", :password => '12345678', :password_confirmation => "12345678" , :department_id => 1, :job_title => "Director", :admin => true, :level => UserLevel::LEVEL_FIVE)
-    user.save!
+#    ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
+#    user = User.new(:name => "DIRECTOR", :password => '12345678', :password_confirmation => "12345678" , :department_id => 1, :job_title => "Director", :admin => true, :level => UserLevel::LEVEL_FIVE)
+#    user.save!
   end
 end

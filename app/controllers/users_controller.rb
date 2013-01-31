@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :are_you_director?
-  layout "sheetbox"
   
   def index
     @search = User.search(params[:search])
@@ -16,6 +15,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     checkboxes
+    render :layout => "sheetbox"
   end
 
   def new
@@ -83,6 +83,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     checkboxes
+    render :layout => "sheetbox"
   end
   
   def update

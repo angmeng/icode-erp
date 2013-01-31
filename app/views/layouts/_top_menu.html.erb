@@ -37,13 +37,13 @@
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::PR_KIV_VIEW) %>
-                <li><%= link_to "Listing Purchase Requisitions - KIV", kiv_purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Purchase Requisitions - KIV", kiv_purchase_requisitions_path %></li>
               <% else %>
                 <li class="text_gray">Listing Purchase Requisitions - KIV</li>
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %>
-                <li><%= link_to "Listing Purchase Requisitions Items - KIV", kiv_purchase_requisition_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Purchase Requisitions Items - KIV", kiv_purchase_requisition_items_path %></li>
               <% else %>
                 <li class="text_gray">Listing Purchase Requisitions Items - KIV</li>
               <% end %>
@@ -285,7 +285,7 @@
             <ul>
               <!-- For Suppliers -->   
               <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID) %>
-                <li><%= link_to "Listing Sales Tax Exemption for Vendors", sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Sales Tax Exemption for Vendors", sales_tax_exemptions_path %></li>
               <% else %>
                 <li class="text_gray">Listing Sales Tax Exemption for Vendors</li>
               <% end %>
@@ -303,7 +303,7 @@
               <%# end %>
 
               <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER) %>
-                <li><%= link_to "Listing Sales Tax Exemption for Vendors - KIV", kiv_supplier_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Sales Tax Exemption for Vendors - KIV", kiv_supplier_sales_tax_exemptions_path %></li>
               <% else %>
                 <li class="text_gray">Listing Sales Tax Exemption for Vendors - KIV</li>
               <% end %>
@@ -333,6 +333,25 @@
                 <li><%= link_to "Lisiting Sales Tax Exemption for Customers - KIV", kiv_customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
                 <li class="text_gray">Listing Sales Tax Exemption for Customers - KIV</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+          
+        <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE) %>
+          <li style="width:200px;">
+            Formulation For All
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX) %>
+                <li><%= link_to "Listing formulation for all", formulations_path %></li>
+              <% else %>
+                <li class="text_gray">Listing formulation for all</li>
+              <% end %>
+
+              <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW) %>
+                <li><%= link_to "New Formulation", new_formulation_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Formulation</li>
               <% end %>
             </ul>
           </li>
@@ -408,9 +427,9 @@
             Inventory
             <ul>
               <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
-                <li><%= link_to "Inventory Transactions & Histories", inventory_histories_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Transactions & Histories For Inventory", inventory_histories_path %></li>
               <% else %>
-                <li class="text_gray">Inventory Transactions & Histories</li>
+                <li class="text_gray">Transactions & Histories For Inventory</li>
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
@@ -428,6 +447,16 @@
                   <li class="text_gray">Stock Out</li>
                 <% end %>
               <% end %>
+
+              
+
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+                <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                  <li><%= link_to "Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                <%# else %>
+                  <!--li class="text_gray">Transfer Note</li-->
+                <%# end %>
+              <%# end %>
 
               
 
@@ -470,9 +499,9 @@
           <li>
             User
             <ul>
-              <li><%= link_to "Listing Users", users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-              <li><%= link_to "New User", new_user_entry_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-              <li><%= link_to "Listing Users - KIV", kiv_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Listing Users", users_path %></li>
+              <li><%= link_to "New User", new_user_entry_users_path %></li>
+              <li><%= link_to "Listing Users - KIV", kiv_users_path %></li>
               <!--li><%#= link_to "Clearing Database", clear_database_users_path, :confirm => "Are you sure to clear database?" %></li-->
             </ul>
           </li>
@@ -612,14 +641,30 @@
           </li>
         <% end %>
 
-        <li>
-          Product Price Control               
-          <ul>
-            <li><%= link_to "Listing Product Price Control", price_controls_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-            <li><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-            <li><%= link_to "Listing Product Price Control - KIV", kiv_price_controls_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-          </ul>
-        </li>
+        <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_MENU) %>
+          <li>
+            Product Price Control
+            <ul>
+              <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING) %>
+                <li><%= link_to "Listing Product Price Control", price_controls_path %></li>
+              <% else %>
+                <li class="text_gray">Listing Product Price Control</li>
+              <% end %>
+              
+              <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %>
+                <li><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Product Price Control</li>
+              <% end %>
+                
+              <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %>
+                <li><%= link_to "Listing Product Price Control - KIV", kiv_price_controls_path %></li>
+              <% else %>
+                <li class="text_gray">Listing Product Price Control - KIV</li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
         
         <li>
           <%#*Change Status / Coding%>
