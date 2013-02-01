@@ -17,18 +17,13 @@ class StockOutsController < ApplicationController
   # GET /stock_outs/1.json
   def show
     @stock_out = StockOut.find(params[:id])
-<<<<<<< HEAD
+
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @stock_out }
     end
-=======
-#    respond_to do |format|
-#      format.html # show.html.erb
-#      format.json { render json: @stock_out }
-#    end
->>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
+
   end
 
   # GET /stock_outs/new
@@ -51,15 +46,7 @@ class StockOutsController < ApplicationController
   # POST /stock_outs.json
   def create
     @stock_out = StockOut.new(params[:stock_out])
-<<<<<<< HEAD
 
-    respond_to do |format|
-      if @stock_out.save
-        format.html { redirect_to @stock_out, notice: 'Stock out was successfully created.' }
-        format.json { render json: @stock_out, status: :created, location: @stock_out }
-      else
-        format.html { render action: "new" }
-=======
     a = company.sn_transfer_slip_no.to_i + 1
     @stock_out.transfer_note_no = a
     respond_to do |format|
@@ -73,7 +60,7 @@ class StockOutsController < ApplicationController
           flash[:alert] = @stock_out.errors.full_messages.join(", ")
           render action: "new" 
           }
->>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
+
         format.json { render json: @stock_out.errors, status: :unprocessable_entity }
       end
     end

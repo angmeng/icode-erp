@@ -1,36 +1,4 @@
 <%= form_for(@stock_out) do |f| %>
-<<<<<<< HEAD
-  <% if @stock_out.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@stock_out.errors.count, "error") %> prohibited this stock_out from being saved:</h2>
-
-      <ul>
-      <% @stock_out.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<fieldset>
-  <div class="field">
-    <%#= f.label :transfer_note "Transfer Note" %><br />
-    Transfer Note: <%= CompanyProfile.first.sn_transfer_slip_no + 1 %>
-
-  </div>
-  <div class="field">
-    Product ID :<%= f.select :product_id , options_from_collection_for_select(product_non_operation_n_operation_with_combobox, :product_id, :product_code) %>
-  </div>
-  <div class="field">
-   Amount :<%= f.text_field :amount %>
-  </div>
-  <div class="field">
-   Balance :<%= f.text_field :balance %>
-  </div>
-</fieldset>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-=======
   <div class="fix_800x450">
     <table>
       <tr>
@@ -46,19 +14,37 @@
         </td>
       </tr>
       <tr>
-        <td><b>Amount</b></td>
+        <td><b>Quantity</b></td>
         <td>
-          <%= f.text_field :amount %>
+          <%= f.text_field :quantity %>
         </td>
+        <td><b>U/M</b></td>
+        <td><%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code'), { :include_blank => true }, { :id => "kendo_combobox" } %></td>
       </tr>
       <tr>
         <td><b>Balance</b></td>
         <td><%= f.text_field :balance %></td>
       </tr>
+      <tr>
+        <td><b>Collector Name</b></td>
+        <td><%= f.text_field :collector_name %></td>
+      </tr>
+      <tr>
+        <td><b>Location</b></td>
+        <td><%= f.text_field :location %></td>
+      </tr>
+      <tr>
+        <td><b>Reference_no</b></td>
+        <td><%= f.text_field :reference_no %></td>
+      </tr>
+      <tr>
+        <td><b>Issued By</b></td>
+        <td><%= f.text_field :issued_by %></td>
+      </tr>
     </table>
   </div>
   <div class="icon_tag">
-    <%= link_save_button %>
+    <span id="stock_out_save_button"><%= link_save_button %></span>
     <%= link_close_button %>
   </div>
   
@@ -73,7 +59,9 @@
           balance = a - b;
           $("#stock_out_balance").val(balance);
         });
+
     });
+
   </script>
->>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
+
 <% end %>

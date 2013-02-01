@@ -49,8 +49,8 @@ gem "squeel"
 gem "meta_search"
 gem "paperclip"
 gem 'turbolinks'
-<<<<<<< HEAD
-#gem 'wkhtmltopdf-binary' #for linux and mac
+
+gem 'wkhtmltopdf-binary' #for linux and mac
 ## sudo aptitude install openssl build-essential xorg libssl-dev
 # for 64bits OS
 

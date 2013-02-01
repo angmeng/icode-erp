@@ -40,11 +40,9 @@
     <tbody>
       <tr>
         <td><%= index + 1 %></td>
-<<<<<<< HEAD
-        <td><%#= pri.product_code %><%= render '/product_categories/join_product_category' , :pc => pri  %></td>
-=======
+
         <td><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
->>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
+
         <td><%= pri.product.description %></td>
         <td><%= pri.product.unit_price rescue '-' %></td>
         <td><%= pri.product.trade_company.name rescue '-' %></td>

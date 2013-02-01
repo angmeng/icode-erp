@@ -1,11 +1,10 @@
 Merp::Application.routes.draw do
 
 
-<<<<<<< HEAD
-=======
+
   resources :product_running_numbers
 
->>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
+
   resources :stock_outs
 
   resources :reports do
@@ -32,6 +31,7 @@ Merp::Application.routes.draw do
     get "pdf_rn_report"
 
     get "excel_product_report"
+    get "excel_inventory_report"
     
     end 
     member do

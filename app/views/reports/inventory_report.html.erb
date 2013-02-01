@@ -19,8 +19,7 @@
 </div>
 
 <div>
-	<%= form_tag pdf_inventory_report_reports_path ,:name=>"myform",:url =>
-		pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+	<%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
 	<fieldset>
 		<table id="grid_h495">
 			<thead>
@@ -41,7 +40,7 @@
 		<tbody>
 			<tr class="<%= cycle("odd_line", "even_line") %>">
 				<td><%= index + 1 %>
-				<%= check_box_tag "inventory_ids[]" , pri.id %></td>
+				<%#= check_box_tag "inventory_ids[]" , pri.id %></td>
 				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
 				<td><%= pri.stock_in rescue '-'%></td>
 				<td><%= pri.stock_out rescue '-'%></td>
@@ -69,16 +68,16 @@
 	</fieldset>
 
 	<div style="float:right;">
-	<span><%= submit_tag "show" , :class=>"k-button" %></span>
+	<%#= submit_tag "show" , :class=>"k-button" %>
 
-   	<span><%= link_to "PDF report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" , :class=>"k-button" %></span>
+   	<span><%= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
 
-   	<%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+	<span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
 
    	<%= link_close_button %>
 
 
-   	<% end %>
+   	<%# end %>
 	</div>
 
 </div>

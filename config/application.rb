@@ -2,11 +2,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-<<<<<<< HEAD
-require 'csv'
-=======
 
->>>>>>> 4127eef4ca7305cceee9cbb695e58987c99b7269
+require 'csv'
+
 
 require 'pdfkit'
 

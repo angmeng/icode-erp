@@ -2104,6 +2104,15 @@ function getCombo_product(sel) {
             var vhtml = "Current Stock: " + data.current_stock;
             $("#current_product_stock").html(vhtml);
             $("#stock_value").html(data.current_stock);
+
+            if (data.current_stock == 0){
+                alert("Current stock has not available now.")   
+                $("#stock_out_save_button").hide();
+}
+
+
+
+
         }
     });
 }
