@@ -1,7 +1,6 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
-#  layout "sheetbox"
 
   def index
     @po_title = PurchaseOrder.title
@@ -25,6 +24,7 @@ class PurchaseOrdersController < ApplicationController
   
   def printable
     @purchase_order = PurchaseOrder.find(params[:id])
+    render :layout => "sheetbox"
   end
   
   def new
@@ -35,7 +35,10 @@ class PurchaseOrdersController < ApplicationController
 
   def edit
     @purchase_order = PurchaseOrder.find(params[:id])
-    callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
+    if @purchase_order.trade_company_id.present?
+      callback_module(@purchase_order.trade_company_id) 
+      @pri_company = @purchase_order.purchase_requisition_items
+    end
     render :layout => "sheetbox"
   end
   

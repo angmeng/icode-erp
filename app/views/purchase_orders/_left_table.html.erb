@@ -1,0 +1,40 @@
+<table>
+      <tr>
+        <td width="60"><b>Vendor</b></td>
+        <td>:</td>
+        <td>[<%= @purchase_order.trade_company.code rescue '-' %>] <%= @purchase_order.trade_company.name rescue "-" %></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td rowspan="3" style="display: block; vertical-align: top;">
+          <%= simple_format(@purchase_order.trade_company.address_1) rescue '-' %>
+          <% if @purchase_order.trade_company.postcode_one.present? %>
+            <%= @purchase_order.trade_company.postcode_one rescue '-' %>&nbsp;
+          <% end %>
+          <% if @purchase_order.trade_company.city_one.present? %>
+            <%= @purchase_order.trade_company.city_one rescue '-' %>,&nbsp;
+          <% end %>
+          <% if @purchase_order.trade_company.state_one.present? %>
+            <%= @purchase_order.trade_company.state_one rescue '-' %>,&nbsp;
+          <% end %>
+          <% if @purchase_order.trade_company.country_one.present? %>
+            <%= @purchase_order.trade_company.country_one rescue '-' %>.
+          <% end %>
+        </td>
+      </tr> 
+
+      <tr>
+        <td><b>Fax #</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Attn.</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
+      </tr>
+      <tr><td>&nbsp;</td></tr>
+  </table>

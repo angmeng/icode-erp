@@ -2,6 +2,7 @@ class ProductCategory < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   validate      :validate_code_length
+  validate      :uniqueness_if_parent_id_is_zero
   
   attr_accessible :code, :desc, :parent_id, :icon, :operation, :more_category, :keep_in_view, :category_type, :status, 
                   :exist_field, :refer_category_id, :level
@@ -164,5 +165,10 @@ class ProductCategory < ActiveRecord::Base
     if self.icon == ProductCategory::ICON_FOLDER
       errors.add(:code, "should be between 2 and 4 characters") unless self.code.length > 1 && self.code.length < 5
     end
+  end
+  
+  def uniqueness_if_parent_id_is_zero
+    @pc = ProductCategory.find_by_code_and_parent_id(self.code, 0)
+    errors.add(:code, "have uniqueness in group") if @pc.present?
   end
 end

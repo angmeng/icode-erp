@@ -7,7 +7,7 @@ class ProductCombobox < ActiveRecord::Base
   has_one :stock_out
   belongs_to :product
   
-  validates :product_code, :uniqueness => true
+  validates :product_id, :product_code, :uniqueness => true
   
   scope :fg_active ,where(:category_type => ProductCategory::FINISH_GOOD, :status => ProductCombobox::ACTIVE)
   scope :category, where(:category_type => ProductCategory::FINISH_GOOD)

@@ -70,16 +70,23 @@ class ProductsController < ApplicationController
     @product          = Product.new
     @manage_product   = ProductManagement.manage(params[:add_category_id]) if params[:add_category_id].present?
     manage_categories(params[:refer_category_id])
+    session[:refer_category_id] = params[:refer_category_id]
   end
   
   def create
-    
-    ProductManagement.manage_product_category(params[:category_name], params[:add_category_id], params[:category_type], params[:product], params[:packing_method_qty], params[:packing_method_per], params[:jump])
-    ProductManagement.update_id_from_po(session[:po_desc], @product.id) if session[:pri_id].present?
-    ProductManagement.add_product_vendor(@product, session[:po_up], session[:po_vendor_id]) if session[:po_up].present? and session[:po_vendor_id].present?
-    clearing_function
-    redirect_to @product, notice: 'Product ID was successfully created.'
-    
+    begin
+      @product = ProductManagement.manage_product_category(params[:category_name], params[:add_category_id], params[:category_type], params[:product], params[:packing_method_qty], params[:packing_method_per], params[:jump])
+      # business transaction (start)
+      ProductManagement.update_id_from_po(session[:po_desc], @product.id) if session[:pri_id].present?
+      ProductManagement.add_product_vendor(@product, session[:po_up], session[:po_vendor_id]) if session[:po_up].present? and session[:po_vendor_id].present?
+      # business transaction (end)
+      clearing_function
+      redirect_to @product, notice: "Product ID##{@product.product_combobox.product_code} was successfully created."
+    rescue ActiveRecord::StatementInvalid
+      manage_categories(session[:refer_category_id])
+      flash[:alert] = "Sorry. The process has failed. Please try again. Thanks."
+      render :action => "new"
+    end
   end
 
 #  def create
@@ -199,5 +206,6 @@ class ProductsController < ApplicationController
     session[:po_up]        = nil #ok
     session[:po_vendor_id] = nil #ok
     session[:qr_id]        = nil
+    session[:refer_category_id] = nil
   end
 end

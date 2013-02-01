@@ -5,6 +5,9 @@
     <td width="50"></td>
     <td width="100"><b>Revision</b></td>
     <td><%= f.text_field :revision, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %></td>
+    <td width="50"></td>
+    <td><b>Remark</b></td>
+    <td rowspan="2"><%= f.text_area :remark, :value => "Please arrange delivery according the date advise, TQ.", :rows => 3 %></td>
   </tr> 
 
   <tr>

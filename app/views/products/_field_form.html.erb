@@ -14,17 +14,14 @@
       <% if action_name == 'edit' %>
         <%= @product.code rescue '-' %>
       <% else %>
-      
         <% if @manage_product[:running_no].present? %>
-          <%#= @source %><%#= ("%05d" % (company.sn_product_id_no + 1)) rescue '0' %>
           <%= @manage_product[:source_name] %>-<%= ("%05d" % (@manage_product[:running_no].running_no.to_i + 1)) rescue '0' %>
           <%= hidden_field_tag "product_running_number_id", @manage_product[:running_no].id %>
         <% else %>
-          <%= @manage_product[:source_name] %>-<%= ("%05d" % 0) rescue '0' %>
-          <%= hidden_field_tag "base_name", @manage_product[:base_name] %>
-          <%= hidden_field_tag "sub_name",  @manage_product[:sub_name] %>
+          <%= @manage_product[:source_name] %>-<%= ("%05d" % 1) rescue '0' %>
+          <%#= hidden_field_tag "base_name", @manage_product[:base_name] %>
+          <%#= hidden_field_tag "sub_name",  @manage_product[:sub_name] %>
         <% end %>
-          
       <% end %>
     </td>
 
@@ -39,7 +36,6 @@
   
   <tr>
     <td><b>Category Description</b></td>
-    
     <td>
       <% if product.product_category.present? %>
         <%= product.product_category.desc rescue '-' %>

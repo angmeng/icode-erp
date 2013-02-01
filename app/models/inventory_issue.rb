@@ -22,4 +22,6 @@ class InventoryIssue < ActiveRecord::Base
   ON_LOAN = 7
   EXPIRED_SCRAF_DAMAGED = 8
   NEW_PRODUCT = 9
+  
 end
+

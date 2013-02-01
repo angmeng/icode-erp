@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130041009) do
+ActiveRecord::Schema.define(:version => 20130201070947) do
 
   create_table "bill_of_materials", :force => true do |t|
     t.integer  "bom_no"
@@ -442,9 +442,6 @@ ActiveRecord::Schema.define(:version => 20130130041009) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.integer  "icon"
-    t.boolean  "operation"
-    t.integer  "more_category"
-    t.boolean  "keep_in_view",      :default => false
     t.integer  "category_type"
     t.string   "status",            :default => "Active"
     t.boolean  "exist_field",       :default => false
@@ -609,6 +606,7 @@ ActiveRecord::Schema.define(:version => 20130130041009) do
     t.integer  "sales_tax_exemption_id"
     t.float    "kgs",                     :default => 0.0
     t.string   "status",                  :default => "ACTIVE"
+    t.string   "remark"
   end
 
   add_index "purchase_orders", ["trade_company_id"], :name => "index_purchase_orders_on_trade_company_id"

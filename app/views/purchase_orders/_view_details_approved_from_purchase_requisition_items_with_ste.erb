@@ -65,12 +65,12 @@
             <% if k.product.blank? %>
               <%= link_to "Add Product", message_products_path(:pri_id => k.id, :po_desc => k.description, :po_um_id => k.unit_measurement_id, :po_up => k.unit_price, :po_vendor_id => k.trade_company_id), :class => "add_product" %>
             <% else %>
-              <% unless action_name == "printable" %>
+              <% if action_name == "printable" %>
+                <%= render "/product_categories/join_product_category", :pc => k %>
+              <% else %>
                 <%= link_to(product_path(k.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
                   <%= render "/product_categories/join_product_category", :pc => k %>
                 <% end %>
-              <% else %>
-                <%= render "/product_categories/join_product_category", :pc => k %>
               <% end %>
             <% end %>
           </td>

@@ -7,7 +7,8 @@ $(document).ready(function() {
     });
 
     $("#grid_h295").chromatable({
-        width: "1330px",
+//        width: "1330px",
+        width: "1400px",
         height: "295px",
         scrolling: "yes"
     });	
@@ -18,9 +19,9 @@ $(document).ready(function() {
         scrolling: "yes"
     });	
     
-    $("#grid_h360").chromatable({
-        width: "1440px",
-        height: "360px",
+    $("#grid_h320").chromatable({
+        width: "1340px",
+        height: "320px",
         scrolling: "yes"
     });	
     
@@ -1972,7 +1973,6 @@ $(function() {
                             "background-color": "orange",
                             "color": "blue", 
                             "font-weight": "bold", 
-                            "padding": "5px",
                             "border-radius": "8px", 
                             "-moz-border-radius": "8px", 
                             "-webkit-border-radius": "8px",
