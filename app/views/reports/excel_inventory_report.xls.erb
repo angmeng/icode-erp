@@ -1,0 +1,40 @@
+<h2>Inventory Report</h2>
+
+<div>
+	 <% if @excel_inventory_report.present? %>
+	 
+	<fieldset>
+		<table border="1">
+			<tr>
+				<th>No.</th>
+				<th>Product ID</th>
+				<th>Stock In</th>
+				<th>Stock Out</th>
+				<th>Description</th>
+				<th>In / Out</th>
+				
+			</tr>
+
+			<%# arr = [] %>
+
+			<% @excel_inventory_report.each_with_index do |pri , index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
+				<td><%= pri.stock_in rescue '-'%></td>
+				<td><%= pri.stock_out rescue '-'%></td>
+				<td>
+                                  <%= inventory_issue_description(pri.inventory_issue_id) %>
+<%#= pri.inventory_issue.description rescue '-'%>
+                                </td>
+				<td><%= pri.inventory_issue.in_out rescue '-' %></td>
+				<%#= iproduct(pri.amount) rescue '-'%>
+			</tr>
+			<% end %>
+
+		</table>
+
+	
+  		<% end %>
+	</fieldset>
+</div>

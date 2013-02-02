@@ -15,7 +15,7 @@
 /*==================== SCAFFOLDS STYLE ==================================================================================*/
 html { 
     height: 100%; /* For 100% height */ 
-/*    overflow-y: hidden;*/
+    overflow-y: hidden;
 }
 
 body {

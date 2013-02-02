@@ -1,7 +1,7 @@
   <% if action_name == "printable" %>
-    <table id="grid_h320" class="black-line-table" width="100%">
+    <table id="grid_h390" class="black-line-table" width="100%">
   <% else %>
-    <table id="grid_h320" class="white-line-table" width="100%">
+    <table id="grid_h390" class="white-line-table" width="100%">
   <% end %>
 
       <thead>
@@ -14,7 +14,7 @@
             <th style="font-size: 12px;">PRODUCT ID</th>
             <th style="font-size: 12px;">DESCRIPTION</th>
             <th style="font-size: 12px;">ETA</th>
-            <% if action_name == "new" %>
+            <% if action_name == "new" or action_name == "create" %>
               <th style="font-size: 12px;" width="100">Correct ETA</th>
             <% end %>
             <th style="font-size: 12px;">QUANTITY</th>
@@ -91,7 +91,7 @@
         <tr class="footer_line">
           <% if action_name == "printable" %>
             <td align="right" colspan="7"><b>Sub-Total</b></td>
-          <% elsif action_name == "show" %>
+          <% elsif action_name == "show" or action_name == "edit" %>
             <td align="right" colspan="9"><b>Sub-Total</b></td>
           <% else %>
             <td align="right" colspan="11"><b>Sub-Total</b></td>
@@ -102,7 +102,7 @@
         <tr class="footer_line">
           <% if action_name == "printable" %>
             <td align="right" colspan="7"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
-          <% elsif action_name == "show" %>
+          <% elsif action_name == "show" or action_name == "edit" %>
             <td align="right" colspan="9"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
           <% else %>
             <td align="right" colspan="11"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
@@ -113,7 +113,7 @@
         <tr class="footer_line">
           <% if action_name == "printable" %>
             <td align="right" colspan="7"><b>Grand Total</b></td>
-          <% elsif action_name == "show" %>
+          <% elsif action_name == "show" or action_name == "edit" %>
             <td align="right" colspan="9"><b>Grand Total</b></td>
           <% else %>
             <td align="right" colspan="11"><b>Grand Total</b></td>

@@ -93,11 +93,11 @@ module ApplicationHelper
 #              end
             else
               if category.category_type == ProductCategory::FINISH_GOOD
-                ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
+                ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a>  [#{category.product.desc rescue '-'}]</div></td></tr></table>"
               elsif category.category_type == ProductCategory::NON_OPERATION
-                ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
+                ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a>  [#{category.product.desc rescue '-'}]</div></td></tr></table>"
               elsif category.category_type == ProductCategory::OPERATION
-                ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
+                ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a>  [#{category.product.desc rescue '-'}]</div></td></tr></table>"
               end
             end
             
@@ -184,11 +184,11 @@ module ApplicationHelper
             if category.status == ProductCategory::KEEP_IN_VIEW
               if current_user.level == User::LEVEL_FIVE
                 if category.category_type == ProductCategory::FINISH_GOOD
-                  ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
+                  ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
                 elsif category.category_type == ProductCategory::NON_OPERATION
-                  ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
+                  ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
                 elsif category.category_type == ProductCategory::OPERATION
-                  ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
+                  ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
 #                elsif category.category_type == ProductCategory::RAW_MATERIAL
 #                  ret << "<td><div><a href='/products/raw_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
 #                elsif category.category_type == ProductCategory::SUB_MATERIAL

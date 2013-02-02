@@ -1,9 +1,23 @@
 <div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">EDITING PURCHASE ORDER NO.</strong></div>
+  <div class="title_head"><strong style="color:white;">EDITING PURCHASE ORDER NO.</strong></div>
   
-  <% if @vendor_id.sales_tax_exemption.present? %>
-    <%= render "/purchase_orders/with_sales_tax_exemption"  %>
-  <% else %>
-    <%= render "/purchase_orders/without_sales_tax_exemption" %>
+  <%= form_for @purchase_order, :method => :put do |f| %>
+
+    <%= render "form", :f => f %>
+  
+    <div class="fix_1600x900_h400"> 
+      <% if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
+        <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
+      <% else %>
+        <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %>
+      <% end %>
+    </div>
+
+    <div class="icon_tag">
+      <%= link_save_button %>
+      <%= link_close_button %>
+    </div>
+
   <% end %>
+
 </div>

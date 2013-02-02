@@ -1,26 +1,28 @@
-  <div>
-    <%= form_for @pr_report, :url => pr_report_reports_path  do |f| %>
-      <table>
-        <tr>
-          <td>PR No.</td>
-          <td><%= f.text_field :pr_no_gte, :size => 12 %> - 
-            <%= f.text_field :pr_no_lte, :size => 12 %></td>
-          <td>Status </td>
-          <td><%= f.text_field :status_starts_with , :size => 10 %></td>
-        </tr>
-        <tr>
-          <td>Date</td>
-          <td><%= f.text_field :requested_by_date_gte, :size => 9 , :id=> "kendo_date" %> To 
-          <%= f.text_field :requested_by_date_lte , :size => 9 , :id=> "kendo_date" %></td>
-        </tr>
-        
-        <tr>
-        <td><%= f.submit "Search" %></td>
-         </tr>
-      </table>
+<div>
+  <%= form_for @pr_report, :url => pr_report_reports_path  do |f| %>
+    <table>
+      <tr>
+        <td>PR No.</td>
+        <td><%= f.text_field :pr_no_gte, :size => 12 %> - 
+          <%= f.text_field :pr_no_lte, :size => 12 %></td>
+        <td>Status </td>
+        <td><%= f.text_field :status_starts_with , :size => 10 %></td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td><%= f.text_field :requested_by_date_gte, :size => 9 , :id=> "kendo_date" %> To 
+        <%= f.text_field :requested_by_date_lte , :size => 9 , :id=> "kendo_date" %></td>
+      </tr>
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
   <% end %>
-  </div>
+</div>
+
 <hr />
+
 <div>
     <fieldset>
     <%= form_tag pdf_pr_report_reports_path ,:name=>"myform",:url =>pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
@@ -39,33 +41,33 @@
 
     
 
-        <% @show_pr_report.each do |p| %>
+      <% @show_pr_report.each do |p| %>
         <tbody>
-          <tr>
-              <td><%= p.pr_no %>
-              <%= check_box_tag "pr_ids[]" , p.id %></td>   
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+              <td>
+                <%= p.pr_no %>
+                <%= check_box_tag "pr_ids[]" , p.id %>
+              </td>   
               
               <td><%= p.requested_by_date.strftime("%d-%m-%Y")%></td>
               <td><%= p.status %></td>
           </tr>
         </tbody>
 
-        <% end %>
+      <% end %>
         
 
         
-      
-      
-     
     </table>
    
   </fieldset>
-<div style="float:right;">
+<div class="icon_tag">
+    <span><%= submit_tag "show" ,:class =>"k-button"%> </span>
+    
+   <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get",:class =>"k-button" %></span>
 
-    <span><%#= submit_tag "show" ,:class =>"k-button"%> </span>
-   <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank",:class =>"k-button" %></span>
 
-   <span><%= link_to "Excel report" , pdf_pr_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
+   <span><%#= link_to "Excel report" , excel_pr_report_reports_path(:pr_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
 
    <%= link_close_button %>
    <% end %>

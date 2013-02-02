@@ -1,13 +1,24 @@
 <table>
   <tr>
-    <td width="140"><b>Current PO No.</b></td>
-    <td><%= company.sn_purchase_order_no + 1 %></td>
+    <% if action_name == "edit" %>
+      <td width="140"><b>PO No.#</b></td>
+      <td><%= @purchase_order.po_no rescue '-' %></td>
+    <% else %>
+      <td width="140"><b>Current PO No.</b></td>
+      <td><%= company.sn_purchase_order_no + 1 %></td>
+    <% end %>
     <td width="50"></td>
     <td width="100"><b>Revision</b></td>
-    <td><%= f.text_field :revision, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %></td>
+    <td>
+      <% if action_name == "edit" %>
+        <%= f.text_field :revision, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
+      <% else %>
+        <%= f.text_field :revision, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
+      <% end %>
+    </td>
     <td width="50"></td>
     <td><b>Remark</b></td>
-    <td rowspan="2"><%= f.text_area :remark, :value => "Please arrange delivery according the date advise, TQ.", :rows => 3 %></td>
+    <td rowspan="2"><%= f.text_area :remark, :rows => 3 %></td>
   </tr> 
 
   <tr>
@@ -21,7 +32,13 @@
     </td>
     <td></td>
     <td><b>S/Tax</b></td>
-    <td><%= f.text_field :tax, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %></td>
+    <td>
+      <% if action_name == "edit" %>
+        <%= f.text_field :tax, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
+      <% else %>
+        <%= f.text_field :tax, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
@@ -42,20 +59,29 @@
   <tr>
     <td><b>Purchase By</b></td>
     <td>
-      <%= current_user.name %>
-      <%= f.hidden_field :purchase_by, :value => current_user.id %>
+      <% if action_name == "edit" %>
+        <%= User.find(@purchase_order.purchase_by).name rescue '-' %>
+      <% else %>
+        <%= current_user.name %>
+        <%= f.hidden_field :purchase_by, :value => current_user.id %>
+      <% end %>
     </td>
     <td></td>
     <td><b>Trade Term</b></td>
-    <td><%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @vendor_id.trade_term_id) %></td>
+    <td>
+      <% if action_name == "edit" %>
+        <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @purchase_order.trade_term_id) %>
+      <% else %>
+        <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @vendor_id.trade_term_id) %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
     <td><b>Requested By</b></td>
     <td>
       <% if action_name == "edit" %>
-        <% req = User.find(@purchase_order.request_by) %>
-        <%= req.name if req.present? %>
+        <%= User.find(@purchase_order.request_by).name rescue '-' %>
       <% else %>
         <% @req = @pri_company.first.purchase_requisition %>
         <% if @req.present? %>

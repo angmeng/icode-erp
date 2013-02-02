@@ -1,7 +1,42 @@
 class ReportsController < ApplicationController
-
   before_filter :authenticate_user!
   layout "sheetbox"
+
+  def excel_product_report
+#    if params[:product_ids].present?
+#      @excel_product_report = ProductCombobox.find(params[:product_ids])
+    if params[:inventory_ids].present?
+      @excel_product_report = ProductCombobox.find(params[:inventory_ids])
+      respond_to do |format|
+        format.html
+        format.csv { render text: @excel_product_report.to_csv}
+        format.xls #{ render text: @excel_product_report.to_csv}
+        #format.xls #{ send_data @excel_pr_report.to_csv(col_sep: "\t") }
+      
+      end
+    else
+      redirect_to product_report_reports_path
+    end
+  end
+
+  def excel_inventory_report
+    if params[:inventory_ids].present?
+      @excel_inventory_report = InventoryHistory.find(params[:inventory_ids])
+      respond_to do |format|
+      format.html
+      format.csv{ render text: @excel_inventory_report.to_csv }
+      
+      format.xls { send_data @excel_inventory_report.xls,
+                   :type =>'application/xls',
+                   :filename => "excel_inventory_report.pdf"
+      }
+    end
+  else
+    redirect_to inventory_report_reports_path
+  end
+end
+
+  
   
 def pdf_pr_report
     #@search = PurchaseRequisition.search(params[:search])
@@ -39,6 +74,7 @@ def pdf_pr_report
                                   :dispositon => "attachement" )
         #return # to avoid double render call
         }
+      
      end
     else
       redirect_to pr_report_reports_path
@@ -56,7 +92,7 @@ def pdf_po_report
                                :type => 'application/pdf' ,
                                :disposition => "attachement" )
       }
-      end
+  end
   else
     redirect_to po_report_reports_path
     #render action: "po_report"
@@ -83,27 +119,45 @@ def pdf_product_report
       redirect_to product_report_reports_path
     end
 
-  
 end
 
-def pdf_inventory_report
-  #render :text => params[:pri_ids]
-    if params[:inventory_ids].present?
-      @inventory_detail_report = InventoryHistory.find(params[:inventory_ids])
-      respond_to do |format|
-      format.html
-      format.pdf {
-        @kit = PDFKit.new(html)
-        send_data(@kit.to_pdf ,:filename => "pdf_inventory_report.pdf" ,
-                              :type => 'application/pdf' , 
-                              :disposition => "attachement" )
-      }
+def pdf_inventory_report 
+     if params[:inventory_ids].present?
+       @pdf_inventory_report = InventoryHistory.find(params[:inventory_ids])
+       respond_to do |format|
+       format.html
+       format.pdf {
+         @kit = PDFKit.new(html)
+         send_data(@kit.to_pdf ,:filename => "pdf_inventory_report.pdf" ,
+                               :type => 'application/pdf' , 
+                               :disposition => "attachement" )
+       }
       end
-    else
-      
-       redirect_to inventory_report_reports_path
+     else
+       flash[:alert]="please check the checkbox"
+       redirect_to inventory_report_reports_path 
     end
 end
+  
+
+    # if params[:commit] == "Excel report"
+    
+    #    if params[:inventory_ids].present?
+        
+    #    @excel_inventory_report = InventoryHistory.find(params[:inventory_ids])
+    # render :text => @excel_inventory_report.to_
+    #   respond_to do |format|
+    #     format.html
+    #     format.csv { render text: @excel_product_report.to_csv}
+    #     format.xls 
+    #    end
+    #   end
+    #   else
+    #   flash[:alert]="please check the checkbox"
+    #    redirect_to inventory_report_reports_path
+#       end
+#      end
+# end
 
 
 
@@ -119,7 +173,7 @@ def pdf_sale_tax_exemption_report
                               :type => 'application/pdf' , 
                               :disposition => "attachement" )
      }
-      end
+  end
   else
     
     redirect_to sale_tax_exemption_reports_path

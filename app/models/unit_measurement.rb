@@ -22,6 +22,7 @@ class UnitMeasurement < ActiveRecord::Base
   
   has_one :has_one_cal_um, :class_name => "SalesTaxExemptionBarang", :foreign_key => "calculate_um_id"
   has_one :quotation_request_form
+  has_one :stock_out
   
   default_scope order("code")
   

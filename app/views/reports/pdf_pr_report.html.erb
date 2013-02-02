@@ -23,7 +23,7 @@
     <thead>
     <tr>
       <th>No.</th>
-      <th>PROD.CODE</th>
+      <th></th>
       <th>Description</th>
       <th>RM</th>
       <th>Vendor</th>
@@ -40,7 +40,9 @@
     <tbody>
       <tr>
         <td><%= index + 1 %></td>
+
         <td><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
+
         <td><%= pri.product.description %></td>
         <td><%= pri.product.unit_price rescue '-' %></td>
         <td><%= pri.product.trade_company.name rescue '-' %></td>

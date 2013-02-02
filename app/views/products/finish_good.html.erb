@@ -2,7 +2,7 @@
   <%= render "finish_goods_top_icon", :data => @listing_categories, :match_field => @field_id %><br/><br/>
 
   <div id="product_layout" class="easyui-layout" style="width:100%;height:500px;">  
-    <div region="west" split="true" title="Finish Goods Product Categories" style="width:300px;">
+    <div region="west" split="true" title="Finish Goods Product Categories" style="width:600px;">
       <%= render "/products/category", :categories => @categories %>
     </div>  
     <div region="center" title="Finish Goods Product Details" style="padding:5px;background:#eee;width:100%;">

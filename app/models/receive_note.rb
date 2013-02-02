@@ -117,7 +117,6 @@ class ReceiveNote < ActiveRecord::Base
               if item.receive_note_items.present?
                 stock_qty = item.receive_note_items.map(&:received_qty).sum()
               else
-#                stock_qty = order_qty
                 stock_qty = 0
               end
               

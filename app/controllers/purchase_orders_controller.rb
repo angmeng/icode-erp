@@ -32,43 +32,26 @@ class PurchaseOrdersController < ApplicationController
     callback_module(params[:company_id]) if params[:company_id].present?
     render :layout => "sheetbox"
   end
-
-  def edit
-    @purchase_order = PurchaseOrder.find(params[:id])
-    if @purchase_order.trade_company_id.present?
-      callback_module(@purchase_order.trade_company_id) 
-      @pri_company = @purchase_order.purchase_requisition_items
-    end
-    render :layout => "sheetbox"
-  end
   
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
     a = company.sn_purchase_order_no.to_i + 1
     @purchase_order.po_no = a
-    
-#    @chk_weight, msg = PurchaseOrder.chk_weight(params[:kgs])
-#    if @chk_weight.present?
-      if @purchase_order.save
-        company.update_attributes(:sn_purchase_order_no => a)
-        PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
-#        PurchaseRequisitionItem.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id, params[:kgs])
-        PurchaseOrderManagement.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id)
-        redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
-      else
-        callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
-        flash[:alert] = @purchase_order.errors.full_messages.join(", ")
-        render action: "new", layout: "sheetbox"
-      end
-#    else
-#      flash[:alert] = msg
-#      render action: "new"
-#    end
+
+    if @purchase_order.save
+      company.update_attributes(:sn_purchase_order_no => a)
+      PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
+      PurchaseOrderManagement.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id)
+      redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
+    else
+      callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
+      flash[:alert] = @purchase_order.errors.full_messages.join(", ")
+      render action: "new", layout: "sheetbox"
+    end
   end
   
   def create_without_sales_tax_exemption
     a = company.sn_purchase_order_no.to_i + 1
-#    @purchase_order = PurchaseOrder.new(:po_date => params[:po_date], :trade_company_id => params[:trade_company_id], :purchase_by => params[:purchase_by], :request_by => params[:request_by], :currency_id => params[:currency_id], :trade_term_id => params[:trade_term_id], :transport_id => params[:transport_id], :revision => params[:revision], :tax => params[:tax], :purchase_requisition_id => params[:purchase_requisition_id])
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
     @purchase_order.po_no = a + 1
     callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
@@ -76,13 +59,21 @@ class PurchaseOrdersController < ApplicationController
     if @purchase_order.save
       company.update_attributes(:sn_purchase_order_no => a)
       PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
-#      PurchaseRequisitionItem.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
       PurchaseOrderManagement.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
       redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
     else
       flash[:alert] = @purchase_order.errors.full_messages.join(", ")
       render "new"
     end
+  end
+  
+  def edit
+    @purchase_order = PurchaseOrder.find(params[:id])
+    if @purchase_order.trade_company_id.present?
+      callback_module(@purchase_order.trade_company_id) 
+      @pri_company = @purchase_order.purchase_requisition_items
+    end
+    render :layout => "sheetbox"
   end
 
   def update

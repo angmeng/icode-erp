@@ -137,6 +137,7 @@ DEPENDENCIES
   jquery-rails
   json
   meta_search
+  mime-types
   mysql2
   omniauth
   paperclip

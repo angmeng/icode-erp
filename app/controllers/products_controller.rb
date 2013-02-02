@@ -157,6 +157,7 @@ class ProductsController < ApplicationController
   
   def current_stock
     @product = Product.find(params[:id])
+    @product[:um] = @product.unit_measurement.code if @product.unit_measurement.present?
     
     respond_to do |format|
       format.html # show.html.erb

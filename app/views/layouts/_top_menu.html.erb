@@ -442,7 +442,17 @@
 
               <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
                 <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                  <li><%= link_to "Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <li><%= link_to "Listing Transfer Notes", stock_outs_path %></li>
+                <%# else %>
+                  <!-- <li class="text_gray">Stock Out</li> -->
+                <%# end %>
+              <%# end %>
+
+              
+
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+                <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                  <li><%= link_to "New Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
                 <%# else %>
                   <!--li class="text_gray">Transfer Note</li-->
                 <%# end %>
@@ -674,7 +684,7 @@
           <li style="width:200px;">
               Listing Report
               <ul>
-                <li><%= link_to "Company", company_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%#= link_to "Company", company_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
 
                 <li><%#= link_to "Category", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
                   
@@ -684,7 +694,7 @@
                   
                 <li><%#= link_to "Price", price_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
 
-                <li><%= link_to "Product - customer", customer_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%#= link_to "Product - customer", customer_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               </ul>
             </li>
             

@@ -984,13 +984,19 @@ ActiveRecord::Schema.define(:version => 20130201070947) do
   create_table "stock_outs", :force => true do |t|
     t.string   "transfer_note_no"
     t.integer  "product_id"
-    t.decimal  "amount",           :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "balance",          :precision => 10, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                       :null => false
-    t.datetime "updated_at",                                                       :null => false
+    t.decimal  "quantity",            :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "balance",             :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+    t.integer  "unit_measurement_id"
+    t.string   "collector_name"
+    t.integer  "issued_by"
+    t.string   "location"
+    t.string   "reference_no"
   end
 
   add_index "stock_outs", ["product_id"], :name => "index_stock_outs_on_product_id"
+  add_index "stock_outs", ["unit_measurement_id"], :name => "index_stock_outs_on_unit_measurement_id"
 
   create_table "temporary_sources", :force => true do |t|
     t.string   "company_name"

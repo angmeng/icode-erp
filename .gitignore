@@ -19,3 +19,5 @@
 
 #ignore netbean folder
 /nbproject
+
+/db/schema.rb

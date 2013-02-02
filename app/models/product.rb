@@ -20,6 +20,7 @@ class Product < ActiveRecord::Base
   has_one    :sales_order_item
   has_one    :product_combobox
   has_one    :product_customer
+  has_one    :stock_out
   
   has_many   :price_control_items, :dependent => :destroy
   has_many   :purchase_requisition_items
