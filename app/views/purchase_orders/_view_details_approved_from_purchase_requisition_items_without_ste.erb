@@ -1,113 +1,125 @@
-<% if action_name == "printable" %>
-  <table id="grid_h360" class="black-line-table" width="100%">
-<% else %>
-  <table id="grid_h360" class="white-line-table" width="100%">
-<% end %>
-    
-    <thead>
-      <tr class="header_line">
-          <th style="font-size: 12px;">NO.</th>
-          <% unless action_name == "printable" %>
-            <th style="font-size: 12px;">RN STATUS</th>
-            <th style="font-size: 12px;">PR NO.</th>
-          <% end %>
-          <th style="font-size: 12px;">PRODUCT ID</th>
-          <th style="font-size: 12px;">DESCRIPTION</th>
-          <th style="font-size: 12px;">ETA</th>
-          <% if action_name == "new" %>
-            <th style="font-size: 12px;" width="100">Correct ETA</th>
-          <% end %>
-          <th style="font-size: 12px;">QUANTITY</th>
-          <th style="font-size: 12px;">U/M</th>
-          <th style="font-size: 12px;">UNIT PRICE</th>
-          <th style="font-size: 12px;">AMOUNT</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% subtotal = [] %>
+  <% if action_name == "printable" %>
+    <table id="grid_h390" class="black-line-table" width="100%">
+  <% else %>
+    <table id="grid_h390" class="white-line-table" width="100%">
+  <% end %>
 
-      <% approved.each_with_index do |k, index| %>
-        <tr class="<%= cycle("odd_line", "even_line") %>">
-          <td align="center"><%= index + 1 %></td>
-          <% unless action_name == "printable" %>
-            <td align="center">
-              <% if k.status == PurchaseRequisitionItem::RECEIVED_PARTIAL %>
-                <%= link_to "Received Partial", receive_note_path(k.purchase_order_item_line.receive_note_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
-              <% elsif k.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-                <%= link_to "Received Full", receive_note_path(k.purchase_order_item_line.receive_note_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
-              <% else %>
-                <span title="Not Received Yet">N.R</span>
-              <% end %>
-            </td>
-            <td align="center">
-              <%= link_to(k.purchase_requisition.pr_no, purchase_requisition_path(k.purchase_requisition_id) , :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" ) %>
-            </td>
-          <% end %>
-
-          <td align="center">
-            <% if k.product.blank? %>
-              <%#= link_to "Add Product", message_products_path(:pri_id => k.id, :po_desc => k.description, :po_um_id => k.unit_measurement_id, :po_up => k.unit_price, :po_vendor_id => k.trade_company_id) %>
-            <% else %>
-              <%= link_to(product_path(k.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-                <%= render "/product_categories/join_product_category", :pc => k %>
-              <% end %>
+      <thead>
+        <tr class="header_line">
+            <th style="font-size: 12px;">NO.</th>
+            <% unless action_name == "printable" %>
+              <th style="font-size: 12px;">RN STATUS</th>
+              <th style="font-size: 12px;">PR NO.</th>
             <% end %>
-          </td>
-
-          <td><%= simple_format(k.description) %></td>
-
-          <td align="center">
-            <% if k.eta < Date.today %>
-              <span class="red_alert"><%= k.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-            <% else %>
-              <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
+            <th style="font-size: 12px;">PRODUCT ID</th>
+            <th style="font-size: 12px;">DESCRIPTION</th>
+            <th style="font-size: 12px;">ETA</th>
+            <% if action_name == "new" or action_name == "create" %>
+              <th style="font-size: 12px;" width="100">Correct ETA</th>
             <% end %>
-          </td>
-          
-          <% if action_name == "new" %>
-            <td>
-              <%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %>
-            </td>
-          <% end %>
-          
-          <td align="center"><%= k.quantity rescue '0' %></td>
-          <td align="center"><%= k.unit_measurement.code rescue '-' %></td>
-          <td align="right"><%= four_precision(k.unit_price) %></td>
-          <td align="right">
-            <%= iproduct(k.quantity, k.unit_price) %>
-            <% subtotal << k.quantity * k.unit_price %>
-          </td>
+            <th style="font-size: 12px;">QUANTITY</th>
+            <th style="font-size: 12px;">U/M</th>
+            <th style="font-size: 12px;">UNIT PRICE</th>
+            <th style="font-size: 12px;">AMOUNT</th>
         </tr>
-      <% end %>      
+      </thead>
 
-      <% gt = cal_grandtotal(subtotal.sum(), @purchase_order.tax.to_f) %>
+      <tbody>
 
-      <tr class="footer_line">
-        <% unless action_name == "printable" or "show" %>
-          <td align="right" colspan="11">Sub-Total</td>
-        <% else %>
-          <td align="right" colspan="8">Sub-Total</td>
-        <% end %>
-        <td align="right" title="<%= two_precision(subtotal.sum()) %>" class="po_subtotal"><%= two_precision(subtotal.sum()) %></td>
-      </tr>
-      
-      <tr class="footer_line">
-        <% unless action_name == "printable" or "show" %>
-          <td align="right" colspan="11">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
-        <% else %>
-          <td align="right" colspan="8">Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</td>
-        <% end %>
-        <td align="right" class="add_s_tax"><%= two_precision(@purchase_order.tax.to_f / 100) %></td>
-      </tr>
-      
-      <tr class="footer_line">
-        <% unless action_name == "printable" or "show" %>
-          <td align="right" colspan="11">Grand Total</td>
-        <% else %>
-          <td align="right" colspan="8">Grand Total</td>
-        <% end %>
-        <td align="right" class="po_grandtotal"><%= two_precision(gt) %></td>
-      </tr>
-    </tbody>
-</table>
+        <% subtotal = [] %>
+
+        <% approved.each_with_index do |k, index| %>
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+            <td align="center"><%= index + 1 %></td>
+            <% unless action_name == "printable" %>
+              <td align="center">
+                <% if k.status == PurchaseRequisitionItem::RECEIVED_PARTIAL %>
+                  <%= link_to "Received Partial", receive_note_path(k.purchase_order_item_line.receive_note_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+                <% elsif k.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                  <%= link_to "Received Full", receive_note_path(k.purchase_order_item_line.receive_note_id), :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+                <% else %>
+                  <span title="Not Received Yet">N.R</span>
+                <% end %>
+              </td>
+              <td align="center">
+                <%= link_to(k.purchase_requisition.pr_no, purchase_requisition_path(k.purchase_requisition_id) , :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" ) %>
+              </td>
+            <% end %>
+
+            <td align="center">
+              <% if k.product.blank? %>
+                <%#= link_to "Add Product", message_products_path(:pri_id => k.id, :po_desc => k.description, :po_um_id => k.unit_measurement_id, :po_up => k.unit_price, :po_vendor_id => k.trade_company_id) %>
+              <% else %>
+                <% if action_name == "printable" %>
+                  <%= render "/product_categories/join_product_category", :pc => k %>
+                <% else %>
+                  <%= link_to(product_path(k.product_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                    <%= render "/product_categories/join_product_category", :pc => k %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+
+            <td><%= simple_format(k.description) %></td>
+
+            <td align="center">
+              <% if k.eta < Date.today %>
+                <span class="red_alert"><%= k.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+              <% else %>
+                <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
+              <% end %>
+            </td>
+
+            <% if action_name == "new" %>
+              <td>
+                <%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %>
+              </td>
+            <% end %>
+
+            <td align="center"><%= k.quantity rescue '0' %></td>
+            <td align="center"><%= k.unit_measurement.code rescue '-' %></td>
+            <td align="right"><%= four_precision(k.unit_price) %></td>
+            <td align="right">
+              <%= iproduct(k.quantity, k.unit_price) %>
+              <% subtotal << k.quantity * k.unit_price %>
+            </td>
+          </tr>
+        <% end %>      
+
+        <% gt = cal_grandtotal(subtotal.sum(), @purchase_order.tax.to_f) %>
+
+        <tr class="footer_line">
+          <% if action_name == "printable" %>
+            <td align="right" colspan="7"><b>Sub-Total</b></td>
+          <% elsif action_name == "show" or action_name == "edit" %>
+            <td align="right" colspan="9"><b>Sub-Total</b></td>
+          <% else %>
+            <td align="right" colspan="11"><b>Sub-Total</b></td>
+          <% end %>
+          <td align="right" title="<%= two_precision(subtotal.sum()) %>" class="po_subtotal"><%= two_precision(subtotal.sum()) %></td>
+        </tr>
+
+        <tr class="footer_line">
+          <% if action_name == "printable" %>
+            <td align="right" colspan="7"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
+          <% elsif action_name == "show" or action_name == "edit" %>
+            <td align="right" colspan="9"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
+          <% else %>
+            <td align="right" colspan="11"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
+          <% end %>
+          <td align="right" class="add_s_tax"><%= two_precision(@purchase_order.tax.to_f / 100) %></td>
+        </tr>
+
+        <tr class="footer_line">
+          <% if action_name == "printable" %>
+            <td align="right" colspan="7"><b>Grand Total</b></td>
+          <% elsif action_name == "show" or action_name == "edit" %>
+            <td align="right" colspan="9"><b>Grand Total</b></td>
+          <% else %>
+            <td align="right" colspan="11"><b>Grand Total</b></td>
+          <% end %>
+          <td align="right" class="po_grandtotal"><%= two_precision(gt) %></td>
+        </tr>
+
+      </tbody>
+  </table>

@@ -1,0 +1,29 @@
+<table id="grid_h445" class="white-line-table zebraLight">
+  <tr class="header_line">
+    <th class="check_highlight"></th>
+    <th>Transfer Note No</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Balance</th>
+    <th>Collector Name</th>
+    <th>Location</th>
+    <th>Reference No.</th>
+    <th>Issued By</th>
+    <th>Unit Measurement</th>
+  </tr>
+
+  <% lists.each do |stock_out| %>
+    <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= stock_out.id %>">
+      <td></td>
+      <td align="center"><%= stock_out.transfer_note_no rescue '-' %></td>
+      <td align="center"><%= stock_out.product.product_combobox.product_code rescue '-' %></td>
+      <td align="center"><%= two_precision(stock_out.quantity) rescue '-' %></td>
+      <td align="center"><%= two_precision(stock_out.balance) rescue '-' %></td>
+      <td align="center"><%= stock_out.collector_name rescue '-' %></td>
+      <td align="center"><%= stock_out.location rescue '-' %></td>
+      <td align="center"><%= stock_out.reference_no rescue '-' %></td>
+      <td align="center"><%= User.find(stock_out.issued_by).name rescue '-' %></td>
+      <td align="center"><%= stock_out.unit_measurement.code rescue '-' %></td>
+    </tr>
+  <% end %>
+</table> 

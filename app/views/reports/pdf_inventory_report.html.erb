@@ -8,11 +8,13 @@
 			<thead>
 			<tr>
 				<th>No.</th>
-				<th>Product ID</th>
+				<th width="200">Product ID</th>
+                                <th>Description</th>
 				<th>Stock In</th>
 				<th>Stock Out</th>
-				<th>Description</th>
-				<th>In / Out</th>
+                                <th>Remaining</th>
+				<th>Transaction</th>
+			
 				
 			</tr>
 		</thead>
@@ -26,10 +28,12 @@
 			<tr>
 				<td><%= index + 1 %></td>
 				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
+                                <td><%= pri.product.desc rescue '-' %></td>
 				<td><%= pri.stock_in rescue '-'%></td>
 				<td><%= pri.stock_out rescue '-'%></td>
-				<td><%= pri.inventory_issue.description rescue '-'%></td>
-				<td><%= pri.inventory_issue.in_out rescue '-' %></td>
+                                <td><%= pri.amount rescue '-' %></td>
+				<td><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
+				<!--td><%#= pri.inventory_issue.in_out rescue '-' %></td-->
 				<%#= iproduct(pri.amount) rescue '-'%>
 			</tr>
 			</body>

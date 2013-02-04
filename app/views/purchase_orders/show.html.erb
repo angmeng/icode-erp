@@ -1,19 +1,25 @@
 <div id="popup_container">
-<h2>PURCHASE ORDER [<span style="color:red;"><%= @purchase_order.po_no %></span>]</h2>
-
-<div class="fix_1600x900_h450">
+  <div class="title_head"><strong style="color: white;">PURCHASE ORDER# <%= @purchase_order.po_no %></strong></div>
   
   <table>
       <tr>
         <td width="100"><b>Vendor</b></td>
         <td>[<%= @purchase_order.trade_company.code %>] <%= @purchase_order.trade_company.name rescue "-" %></td>
+
         <td width="100"></td>
+
         <td width="100"><b>P/O Date</b></td>
         <td><%= @purchase_order.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
+
+        <td width="100"></td>
+
+        <td width="100"><b>Remark</b></td>
+        <td><%= @purchase_order.remark rescue '-' %></td>
       </tr>
+
       <tr>
         <td></td>
-        <td rowspan="3">
+        <td rowspan="3" style="display: block;">
           <%= simple_format(@purchase_order.trade_company.address_1) rescue '-' %>
           <% if @purchase_order.trade_company.postcode_one.present? %>
             <%= @purchase_order.trade_company.postcode_one rescue '-' %>&nbsp;
@@ -28,38 +34,40 @@
             <%= @purchase_order.trade_company.country_one rescue '-' %>.
           <% end %>
         </td>
+
         <td></td>
-        <td></td>
-        <td></td>
-      </tr> 
-      <tr>
-        <td></td>
-        <td></td>
+
         <td><b>Trade Term</b></td>
         <td><%= @purchase_order.trade_term.name rescue '-' %></td>
-        <td></td>
-      </tr>
+      </tr> 
+
       <tr>
         <td></td>
         <td></td>
         <td><b>Currency</b></td>
         <td><%= @purchase_order.currency.name rescue '-' %></td>
-        <td></td>
       </tr>
+
       <tr>
-        <td><b>Fax #</b></td>
-        <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
+        <td></td>
         <td></td>
         <td><b>Revision</b></td>
         <td><%= @purchase_order.revision rescue '-' %></td>
       </tr>
+
       <tr>
-        <td><b>Attn.</b></td>
-        <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
+        <td><b>Fax #</b></td>
+        <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
         <td></td>
         <td><b>Transport</b></td>
         <td><%= @purchase_order.transport.name rescue "-" %></td>
       </tr>
+
+      <tr>
+        <td><b>Attn.</b></td>
+        <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
+      </tr>
+
       <tr>
         <td><b>Purchased By</b></td>
         <td>
@@ -72,18 +80,17 @@
       </tr>
   </table>
 
-  <%#*<div class="fix_po_show_listing">%>
+  <hr/>
+
+  <div class="fix_1600x900_h400">
     <% if @purchase_order.trade_company.sales_tax_exemption.present? %>
       <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @purchase_order.purchase_requisition_items %>
     <% else %>
       <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @purchase_order.purchase_requisition_items %>
     <% end %>
-  <%#*</div>%>
+  </div>
 
-
-</div>
-
-<div class="icon_tag">
-  <%= link_close_button %>
-</div>
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
 </div>

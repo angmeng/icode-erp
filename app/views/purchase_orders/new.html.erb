@@ -1,5 +1,5 @@
 <div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">CREATE NEW PURCHASE ORDER NO.</strong></div>
+  <div class="title_head"><strong style="color:white;">CREATE NEW PURCHASE ORDER NO.</strong></div>
   
   <% if @vendor_id.sales_tax_exemption.present? %>
     <%= render "/purchase_orders/with_sales_tax_exemption"  %>

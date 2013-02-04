@@ -1,0 +1,38 @@
+<table>
+      <tr>
+        <td width="100"><b>P/O No.</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.po_no rescue "-" %></td>
+      </tr>
+
+      <tr>        
+        <td><b>Date</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.created_at.strftime("%d-%m-%Y") %></td>
+      </tr> 
+
+      <tr>        
+        <td><b>Term</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.trade_term.name rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Currency</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.currency.name rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Revision</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.revision rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Tax Exemption</b></td>
+        <td>:</td>
+        <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
+      </tr>
+      <tr><td>&nbsp;</td></tr>
+  </table>

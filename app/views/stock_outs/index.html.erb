@@ -1,41 +1,17 @@
-<h1>Listing stock_outs</h1>
+<div id="popup_container">
+  <div class="title_head">
+    <strong style="color:white;">LISTING TRANSFER NOTES</strong>
+    <%= search_button %>
+  </div>
+  <div><%#= render "" %></div>
 
-<table class="white-line-table zebraLight" width="100%" border="1"> 
-  <tr class="header_line">
-   
-    <th>Transfer note</th>
-    <th>Product</th>
-    <th>Quantity</th>
-    <th>Balance</th>
-    <th>Collector Name</th>
-    <th>Location</th>
-    <th>refernce No.</th>
-    <th>Issued By</th>
-    <th>Unit Measurement</th>
-    
-  </tr>
+  <div class="fix_1600x900_h450">
+    <% if @stock_outs.present? %>
+      <%= render "listing_transfer_notes", :lists => @stock_outs %>
+    <% else %>
+      Not Record Found.
+    <% end %>
+  </div>
 
-<% @stock_outs.each do |stock_out| %>
-  <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= stock_out.id %>">
-   
-    <td><%= stock_out.transfer_note %></td>
-    <td><%= stock_out.product_id %></td>
-    <td><%= stock_out.quantity %></td>
-    <td><%= stock_out.balance %></td>
-    <td><%= stock_out.collector_name %></td>
-    <td><%= stock_out.location %></td>
-    <td><%= stock_out.reference_no %></td>
-    <td><%= stock_out.issued_by %></td>
-    <td><%= stock_out.unit_measurement.code rescue '-' %></td>
-    <%#= link_to 'Show', stock_out , :class => "k-button" %>
-    <%#= link_to 'Edit', edit_stock_out_path(stock_out) %>
-    <%#= link_to 'Destroy', stock_out, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </tr>
-<% end %>
-</table> 
-
-<br />
-
-<span><%= link_to 'New Stock out', new_stock_out_path , :class => "k-button" %></span>
-
-<%= render "action_stock_outs" %>
+  <%= render "action_stock_outs" %>
+</div>

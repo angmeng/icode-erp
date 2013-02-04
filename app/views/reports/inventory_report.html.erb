@@ -1,87 +1,93 @@
-<h1> Inventory history Report </h1>
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
-<div>
-	<table>
-		<%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
-		<tr>
-			<td>Product ID :
-			<%= f.text_field :product_code_contains , :size => 9 %></td>
-			<td>Description : 
-			<%= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
-			<td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
-		</tr>
-		<tr>
-			<td><%= submit_tag "search" %></td>
-		</tr>
-		<% end %>
-	</table>
+  <div>
+          <table>
+                  <%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
+                  <tr>
+                          <td>Product ID :
+                          <%= f.text_field :product_code_contains , :size => 9 %></td>
+                          <td>Description : 
+                          <%= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
+                          <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
+                  </tr>
+                  <tr>
+                          <td><%= submit_tag "search" %></td>
+                  </tr>
+                  <% end %>
+          </table>
 
+  </div>
+
+  <div class="fix_1600x900_h450">
+          <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
+          <%#*<fieldset>%>
+                  <table id="grid_h445" class="white-line-table zebraLight">
+                          <thead>
+                          <tr class="header_line">
+                            <th class="check_highlight"></th>
+                                  <th>No.</th>
+                                  <th>Product ID</th>
+                                  <th>Description</th>
+                                  <th>Stock In</th>
+                                  <th>Stock Out</th>
+                                  <th>Remaining</th>
+                                  <th>Transaction</th>
+                                  <%#*<th>Quantity</th>%>
+                          </tr>
+                  </thead>
+                  <tbody>
+                          <% arr = [] %>
+
+                          <% @show_inventory_report.each_with_index do |pri , index| %>
+                  
+                              <tr class="<%= cycle("odd_line", "even_line") %>">
+                                <td></td>
+                                      <td><%= index + 1 %>
+                                      <%#= check_box_tag "inventory_ids[]" , pri.id %></td>
+                                      <td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
+                                      <td><%= pri.product.desc rescue '-' %></td>
+                                      <td><%= pri.stock_in rescue '-'%></td>
+                                      <td><%= pri.stock_out rescue '-'%></td>
+                                      <td><%= pri.amount %></td>
+                                      <td><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
+                                      
+                              </tr>
+                  
+
+                              <% if pri.amount.present? %>
+                                <% arr << pri.amount * pri.amount %>
+                              <% end %>
+
+                          <% end %>
+                      </tbody>
+                  </table>
+
+          <%#*<table>%>
+    <%#*<div style="float:right;">%>
+              <%#*<tr >%>
+              <%#*<td>%>
+                <%#*Total Quantity :%>
+    <%#*</td>%>
+              <%#*<td >%>
+<%#= two_precision(arr.sum) %>
+    <%#*</td>%>
+              <%#*</tr>%>
+              <%#*</div>%>
+          <%#*</table>%>
+    </div>
+
+
+          <%#*</fieldset>%>
+
+          <div class="icon_tag">
+
+            <span><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
+
+            <span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+
+            <%= link_close_button %>
+          </div>
+
+  
 </div>
-
-<div>
-	<%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
-	<fieldset>
-		<table id="grid_h495">
-			<thead>
-			<tr class="header_line">
-				<th>No.</th>
-				<th>Product ID</th>
-				<th>Stock In</th>
-				<th>Stock Out</th>
-				<th>Description</th>
-				<th>In / Out</th>
-				<th>Quantity</th>
-			</tr>
-		</thead>
-
-			<% arr = [] %>
-
-			<% @show_inventory_report.each_with_index do |pri , index| %>
-		<tbody>
-			<tr class="<%= cycle("odd_line", "even_line") %>">
-				<td><%= index + 1 %>
-				<%#= check_box_tag "inventory_ids[]" , pri.id %></td>
-				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
-				<td><%= pri.stock_in rescue '-'%></td>
-				<td><%= pri.stock_out rescue '-'%></td>
-				<td><%= pri.inventory_issue.description rescue '-'%></td>
-				<td><%= pri.inventory_issue.in_out rescue '-' %></td>
-				<td><%= pri.amount %></td>
-			</tr>
-		</tbody>
-
-		<% if pri.amount.present? %>
-      <% arr << pri.amount * pri.amount %>
-        <% end %>
-
-			<% end %>
-		</table>
-
-	<table>
-	    <tr style="float:right;">
-	    <td>Total Quantity :</td>
-	    <td ><%= two_precision(arr.sum) %></td>
-	    </tr>
-  	</table>
-
-
-	</fieldset>
-
-	<div style="float:right;">
-	<%#= submit_tag "show" , :class=>"k-button" %>
-
-   	<span><%= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
-
-	<span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
-
-   	<%= link_close_button %>
-
-
-   	<%# end %>
-	</div>
-
-</div>
-<style type="text/css">
-
-
-</style>

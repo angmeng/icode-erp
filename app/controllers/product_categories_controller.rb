@@ -44,7 +44,9 @@ class ProductCategoriesController < ApplicationController
         format.html { redirect_to @new_category, :notice => 'Group was successfully created.' }
         format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
       else
-        format.html { render action: 'parent' }
+        format.html { 
+          flash[:alert] = @new_category.errors.full_messages.join(", ")
+          render action: 'parent' }
         format.js   { render js: "alert('#{@new_category.errors.full_messages.join(", ")}');" }
       end
     end

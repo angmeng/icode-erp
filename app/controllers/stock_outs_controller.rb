@@ -1,11 +1,9 @@
 class StockOutsController < ApplicationController
-  # GET /stock_outs
-  # GET /stock_outs.json
-
-  layout "sheetbox"
+  before_filter :authenticate_user!
   
   def index
-    @stock_outs = StockOut.all
+    @search = StockOut.search(params[:search])
+    @stock_outs = @search.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +16,6 @@ class StockOutsController < ApplicationController
   def show
     @stock_out = StockOut.find(params[:id])
 
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @stock_out }
@@ -30,11 +27,7 @@ class StockOutsController < ApplicationController
   # GET /stock_outs/new.json
   def new
     @stock_out = StockOut.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @stock_out }
-    end
+    render :layout => "sheetbox"
   end
 
   # GET /stock_outs/1/edit
@@ -46,21 +39,20 @@ class StockOutsController < ApplicationController
   # POST /stock_outs.json
   def create
     @stock_out = StockOut.new(params[:stock_out])
-
     a = company.sn_transfer_slip_no.to_i + 1
     @stock_out.transfer_note_no = a
     respond_to do |format|
       if @stock_out.save
         format.html { 
           company.update_attributes(:sn_transfer_slip_no => a)
-          redirect_to @stock_out, notice: 'Stock out was successfully created.' }
+          InventoryManagement.generate_stock_out(@stock_out, InventoryIssue::TRANSFER_NOTE)
+          redirect_to @stock_out, notice: 'Transfer Note was successfully created.' }
         format.json { render json: @stock_out, status: :created, location: @stock_out }
       else
         format.html { 
           flash[:alert] = @stock_out.errors.full_messages.join(", ")
           render action: "new" 
           }
-
         format.json { render json: @stock_out.errors, status: :unprocessable_entity }
       end
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130131091647) do
+ActiveRecord::Schema.define(:version => 20130201070947) do
 
   create_table "bill_of_materials", :force => true do |t|
     t.integer  "bom_no"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.integer  "sn_product_id_no"
     t.integer  "sn_sales_tax_exemption_no", :default => 0
     t.integer  "sn_quotation_request_no",   :default => 0
+    t.integer  "sn_bom_no",                 :default => 0
   end
 
   create_table "contacts", :force => true do |t|
@@ -308,13 +309,6 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.datetime "updated_at",                                             :null => false
   end
 
-  create_table "group_running_nos", :force => true do |t|
-    t.string   "code"
-    t.integer  "current_no", :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
   create_table "incoming_rejects", :force => true do |t|
     t.integer  "incoming_reject_no"
     t.integer  "purpose"
@@ -448,9 +442,6 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.integer  "icon"
-    t.boolean  "operation"
-    t.integer  "more_category"
-    t.boolean  "keep_in_view",      :default => false
     t.integer  "category_type"
     t.string   "status",            :default => "Active"
     t.boolean  "exist_field",       :default => false
@@ -488,20 +479,6 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "product_prices", :force => true do |t|
-    t.integer  "trade_company_id"
-    t.integer  "product_category_id"
-    t.integer  "currency_id"
-    t.decimal  "unit_price",          :precision => 10, :scale => 5, :default => 0.0
-    t.integer  "price_in"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
-    t.string   "part_no"
-  end
-
-  add_index "product_prices", ["product_category_id"], :name => "index_product_prices_on_product_category_id"
-  add_index "product_prices", ["trade_company_id"], :name => "index_product_prices_on_trade_company_id"
-
   create_table "product_running_numbers", :force => true do |t|
     t.string   "base_name"
     t.string   "sub_name"
@@ -530,32 +507,32 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.string   "model"
     t.string   "part_no"
     t.string   "tarif_code"
-    t.decimal  "part_weight",               :precision => 10, :scale => 6, :default => 0.0
-    t.decimal  "selling_price",             :precision => 10, :scale => 5, :default => 0.0
+    t.decimal  "part_weight",                   :precision => 10, :scale => 6, :default => 0.0
+    t.decimal  "selling_price",                 :precision => 10, :scale => 5, :default => 0.0
     t.date     "cutoff_date"
-    t.integer  "opening_stock",                                            :default => 0
-    t.integer  "current_stock",                                            :default => 0
-    t.datetime "created_at",                                                                     :null => false
-    t.datetime "updated_at",                                                                     :null => false
+    t.integer  "opening_stock",                                                :default => 0
+    t.integer  "current_stock",                                                :default => 0
+    t.datetime "created_at",                                                                         :null => false
+    t.datetime "updated_at",                                                                         :null => false
     t.integer  "product_category_id"
     t.string   "product_name"
     t.integer  "sales_tax_exemption_id"
-    t.integer  "quotation_request_form_id"
-    t.string   "status",                                                   :default => "Active"
-    t.integer  "gsm",                                                      :default => 0
-    t.float    "width",                                                    :default => 0.0
+    t.float    "buying_price",                                                 :default => 0.0
+    t.string   "status",                                                       :default => "Active"
+    t.integer  "gsm",                                                          :default => 0
+    t.float    "width",                                                        :default => 0.0
     t.string   "width_um"
-    t.float    "length",                                                   :default => 0.0
+    t.float    "length",                                                       :default => 0.0
     t.string   "length_um"
-    t.float    "height",                                                   :default => 0.0
+    t.float    "height",                                                       :default => 0.0
     t.string   "height_um"
-    t.float    "tickness",                                                 :default => 0.0
+    t.float    "tickness",                                                     :default => 0.0
     t.string   "tickness_um"
     t.string   "origin"
     t.string   "brand"
     t.string   "grade"
     t.string   "packing_method"
-    t.float    "packing_qty",                                              :default => 0.0
+    t.float    "packing_qty",                                                  :default => 0.0
     t.string   "container_no"
     t.string   "seal_no"
     t.string   "despatch_advise"
@@ -577,20 +554,21 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.string   "serial_no"
     t.string   "warranty"
     t.string   "capacity"
-    t.float    "diameter",                                                 :default => 0.0
-    t.integer  "voltage",                                                  :default => 0
-    t.integer  "watt",                                                     :default => 0
-    t.integer  "pin",                                                      :default => 0
-    t.integer  "ampere",                                                   :default => 0
-    t.float    "hp",                                                       :default => 0.0
-    t.float    "hz",                                                       :default => 0.0
-    t.float    "pureness",                                                 :default => 0.0
-    t.float    "ton",                                                      :default => 0.0
+    t.float    "diameter",                                                     :default => 0.0
+    t.integer  "voltage",                                                      :default => 0
+    t.integer  "watt",                                                         :default => 0
+    t.integer  "pin",                                                          :default => 0
+    t.integer  "ampere",                                                       :default => 0
+    t.float    "hp",                                                           :default => 0.0
+    t.float    "hz",                                                           :default => 0.0
+    t.float    "pureness",                                                     :default => 0.0
+    t.float    "ton",                                                          :default => 0.0
     t.string   "consignee"
     t.string   "destination"
     t.string   "process"
     t.integer  "buffer_stock"
     t.string   "mould_no"
+    t.integer  "sales_tax_exemption_barang_id"
   end
 
   add_index "products", ["sales_tax_exemption_id"], :name => "index_products_on_sales_tax_exemption_id"
@@ -628,6 +606,7 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.integer  "sales_tax_exemption_id"
     t.float    "kgs",                     :default => 0.0
     t.string   "status",                  :default => "ACTIVE"
+    t.string   "remark"
   end
 
   add_index "purchase_orders", ["trade_company_id"], :name => "index_purchase_orders_on_trade_company_id"
@@ -647,7 +626,6 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.text     "remark"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
-    t.string   "status"
     t.string   "trade_company_new_name"
     t.integer  "user_id"
     t.boolean  "maintenance",             :default => false
@@ -655,6 +633,7 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.boolean  "approval_proposed",       :default => false
     t.string   "approval_remark"
     t.boolean  "urgent",                  :default => false
+    t.string   "status"
     t.boolean  "skip_to_purchase_order",  :default => false
   end
 
@@ -665,7 +644,6 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
 
   create_table "purchase_requisitions", :force => true do |t|
     t.integer  "pr_no"
-    t.string   "status"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "requested_by"
@@ -678,6 +656,7 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.date     "approved_by_level_five_date"
     t.string   "remark"
     t.integer  "tasks"
+    t.string   "status"
     t.string   "recover_status"
   end
 
@@ -727,24 +706,49 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.string   "status_remark"
     t.integer  "trade_company_id"
     t.integer  "unit_measurement_id"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "material_type"
     t.integer  "material_gramme",             :default => 0
+    t.string   "material_remark"
+    t.string   "surface_remark"
+    t.string   "lamination_remark"
     t.float    "paper_width",                 :default => 0.0
     t.float    "paper_length",                :default => 0.0
     t.integer  "paper_no_of_ups",             :default => 0
-    t.float    "printing_width",              :default => 0.0
-    t.float    "printing_length",             :default => 0.0
-    t.integer  "printing_no_of_ups",          :default => 0
+    t.string   "option_size"
     t.integer  "ratio",                       :default => 0
-    t.string   "lamination_type"
     t.float    "window_width",                :default => 0.0
     t.float    "window_length",               :default => 0.0
     t.integer  "window_usage",                :default => 0
     t.integer  "no_of_moq",                   :default => 0
     t.string   "barcode"
+    t.string   "barcode_other"
     t.string   "shortage"
+    t.string   "pre_print_textbox"
+    t.string   "glueing_material"
+    t.string   "stamping_per_box"
+    t.string   "lamination_type"
+    t.integer  "lamination_type_joints",      :default => 0
+    t.string   "flute_type"
+    t.string   "flute_type_other"
+    t.string   "flute_material"
+    t.string   "flute_material_other"
+    t.string   "packing_type"
+    t.string   "packing_type_other"
+    t.integer  "packed_quantity",             :default => 0
+    t.string   "collect_sequence"
+    t.integer  "user_id"
+    t.string   "custom_stock_code"
+    t.string   "box_part_no"
+    t.integer  "lot_size_no"
+    t.integer  "qr_task"
+    t.string   "qr_status"
+    t.boolean  "director_approved",           :default => false
+    t.integer  "send_count",                  :default => 0
+    t.integer  "confirmed_by"
+    t.string   "customer_code"
+    t.string   "customer_po_no"
   end
 
   create_table "receive_note_items", :force => true do |t|
@@ -794,6 +798,8 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "user_id"
+    t.string   "um_name"
+    t.integer  "trade_company_id"
   end
 
   add_index "sales_order_items", ["product_id"], :name => "index_sales_order_items_on_product_id"
@@ -811,9 +817,10 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.integer  "revision"
     t.integer  "purpose"
     t.integer  "updated_by"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.date     "so_date"
+    t.string   "status",            :default => "Active"
     t.string   "lot_no"
     t.date     "mfg_date"
     t.date     "exp_date"
@@ -833,6 +840,8 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.boolean  "valid_condition",        :default => true
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.float    "available_qty",          :default => 0.0
+    t.integer  "calculate_um_id"
   end
 
   add_index "sales_tax_exemption_barangs", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_barangs_on_sales_tax_exemption_id"
@@ -841,12 +850,13 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
   create_table "sales_tax_exemption_items", :force => true do |t|
     t.integer  "sales_tax_exemption_id"
     t.integer  "product_id"
-    t.float    "remaining_total"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "receive_note_item_id"
-    t.float    "kgs"
     t.integer  "purchase_order_id"
+    t.integer  "before_available_qty",      :default => 0
+    t.integer  "after_available_qty",       :default => 0
+    t.integer  "accumulative_complete_qty", :default => 0
   end
 
   create_table "sales_tax_exemptions", :force => true do |t|
@@ -972,18 +982,21 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
   end
 
   create_table "stock_outs", :force => true do |t|
-    t.string   "transfer_note"
+    t.string   "transfer_note_no"
     t.integer  "product_id"
     t.decimal  "quantity",            :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "balance",             :precision => 10, :scale => 2
+    t.decimal  "balance",             :precision => 10, :scale => 2, :default => 0.0
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
     t.integer  "unit_measurement_id"
     t.string   "collector_name"
-    t.string   "issued_by"
+    t.integer  "issued_by"
     t.string   "location"
     t.string   "reference_no"
   end
+
+  add_index "stock_outs", ["product_id"], :name => "index_stock_outs_on_product_id"
+  add_index "stock_outs", ["unit_measurement_id"], :name => "index_stock_outs_on_unit_measurement_id"
 
   create_table "temporary_sources", :force => true do |t|
     t.string   "company_name"
@@ -997,11 +1010,6 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
 
   add_index "temporary_sources", ["purchase_requisition_item_id"], :name => "index_temporary_sources_on_purchase_requisition_item_id"
 
-  create_table "temporary_tarif_codes", :force => true do |t|
-    t.string "tarif_code"
-    t.float  "remaining_total"
-  end
-
   create_table "trade_companies", :force => true do |t|
     t.string   "code"
     t.string   "name"
@@ -1012,7 +1020,7 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.string   "tel_no_2"
     t.string   "fax_no"
     t.string   "contact_person"
-    t.string   "type_of_sale_id"
+    t.integer  "type_of_sale_id"
     t.string   "sales_tax_no"
     t.integer  "sales_tax_exemption_id",                                  :default => 0
     t.string   "sales_rep"
@@ -1048,6 +1056,9 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.string   "state_two"
     t.string   "country_two"
   end
+
+  add_index "trade_companies", ["trade_term_id"], :name => "index_trade_companies_on_trade_term_id"
+  add_index "trade_companies", ["type_of_sale_id"], :name => "index_trade_companies_on_type_of_sale_id"
 
   create_table "trade_terms", :force => true do |t|
     t.string   "name"
@@ -1103,12 +1114,12 @@ ActiveRecord::Schema.define(:version => 20130131091647) do
     t.datetime "updated_at",                                   :null => false
     t.string   "name"
     t.integer  "department_id"
-    t.integer  "level"
-    t.string   "status",                 :default => "ACTIVE"
     t.string   "job_title"
+    t.integer  "level"
     t.boolean  "admin",                  :default => false
     t.integer  "level_two"
     t.integer  "level_three"
+    t.string   "status",                 :default => "ACTIVE"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

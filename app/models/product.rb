@@ -20,6 +20,7 @@ class Product < ActiveRecord::Base
   has_one    :sales_order_item
   has_one    :product_combobox
   has_one    :product_customer
+  has_one    :stock_out
   
   has_many   :price_control_items, :dependent => :destroy
   has_many   :purchase_requisition_items
@@ -124,9 +125,11 @@ class Product < ActiveRecord::Base
   end
   
   def self.json_um(product)
-    a = { :id => product.id, :desc => product.desc, :um => product.unit_measurement.code }
+    a = { :id => product.id, :desc => product.desc, :um =>  self.unit_measurement_code(product) }
     return a
   end
+  
+  
   
   def self.run_updating(comp, jump, product)
     a = comp.sn_product_id_no
@@ -291,5 +294,14 @@ class Product < ActiveRecord::Base
         ret.flatten!
         self.product_join_category_description(parents, ret)
       end
+  end
+  
+  def self.unit_measurement_code(product)
+    if product.unit_measurement.present?
+      code = product.unit_measurement.code
+    else
+      code = '-'
+    end
+    return code
   end
 end

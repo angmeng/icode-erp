@@ -34,7 +34,6 @@ GEM
     better_errors (0.3.2)
       coderay (>= 1.0.0)
       erubis (>= 2.7.0)
-    binding_of_caller (0.6.8)
     builder (3.0.0)
     cocaine (0.2.1)
     coderay (1.0.8)
@@ -126,7 +125,6 @@ GEM
     warden (1.1.1)
       rack (>= 1.0)
     will_paginate (3.0.3)
-    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -134,12 +132,12 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
-  binding_of_caller (~> 0.6.8)
   devise (~> 2.1.0)
   devise-encryptable
   jquery-rails
   json
   meta_search
+  mime-types
   mysql2
   omniauth
   paperclip
@@ -149,4 +147,3 @@ DEPENDENCIES
   squeel
   turbolinks
   will_paginate (~> 3.0)
-  wkhtmltopdf-binary

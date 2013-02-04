@@ -41,6 +41,8 @@
                 Pending PO
               <% elsif p.status == PurchaseRequisition::SUBMIT_RN %>
                 PO Issued
+              <% elsif p.status == PurchaseRequisition::COMPLETED %>
+                Completed
               <% elsif p.status == PurchaseRequisition::KEEP_IN_VIEW %>
                 Keep In View
               <% else %>

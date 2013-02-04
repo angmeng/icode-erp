@@ -2,44 +2,53 @@
   <div class="fix_800x450">
     <table>
       <tr>
-        <td><b>Transfer Note No</b></td>
+        <td width="130"><b>Transfer Note No</b></td>
         <td><%= company.sn_transfer_slip_no + 1 %></td>
       </tr>
       <tr>
-        <td><b>Product ID</b></td>
+        <td><b>Product ID *</b></td>
         <td>
-          <%= f.select :product_id , options_from_collection_for_select(product_non_operation_n_operation_with_combobox, :product_id, :product_code), { :include_blank => true }, { :onchange => "getCombo_product(this)" }  %>
-          <span id="current_product_stock"></span>
+          <%= f.select :product_id , options_from_collection_for_select(product_non_operation_n_operation_with_combobox, :product_id, :product_code), { :include_blank => true }, { :onchange => "getCombo_product(this)", :id => "kendo_combobox" }  %>&nbsp;<span id="current_product_stock"></span>
           <span id="stock_value" style="display: none;"></span>
         </td>
+        
       </tr>
       <tr>
-        <td><b>Quantity</b></td>
+        <td><b>Description</b></td>
+        <td id="stock_out_description"></td>
+      </tr>
+      <tr>
+        <td><b>Quantity *</b></td>
         <td>
-          <%= f.text_field :quantity %>
+          <%= f.text_field :quantity, :size => 8 %>&nbsp;<b>U/M</b>&nbsp;<span id="stock_out_um"></span>
+          <%= f.hidden_field "unit_measurement_id" %>
         </td>
-        <td><b>U/M</b></td>
-        <td><%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code'), { :include_blank => true }, { :id => "kendo_combobox" } %></td>
       </tr>
       <tr>
         <td><b>Balance</b></td>
-        <td><%= f.text_field :balance %></td>
+        <td>
+          <span id="stock_out_balance_span"></span>
+          <%= f.hidden_field :balance %>
+        </td>
       </tr>
       <tr>
-        <td><b>Collector Name</b></td>
+        <td><b>Collector Name *</b></td>
         <td><%= f.text_field :collector_name %></td>
       </tr>
       <tr>
-        <td><b>Location</b></td>
+        <td><b>Location *</b></td>
         <td><%= f.text_field :location %></td>
       </tr>
       <tr>
-        <td><b>Reference_no</b></td>
+        <td><b>Reference No</b></td>
         <td><%= f.text_field :reference_no %></td>
       </tr>
       <tr>
         <td><b>Issued By</b></td>
-        <td><%= f.text_field :issued_by %></td>
+        <td>
+          <%= current_user.name %>
+          <%= f.hidden_field :issued_by, :value => current_user.id %>
+        </td>
       </tr>
     </table>
   </div>
@@ -53,13 +62,22 @@
 <% content_for :jquery_script do %>
   <script>
     $(document).ready(function() {
-        $("#stock_out_amount").keyup(function(){
+        $("#stock_out_quantity").keyup(function(){
           var a = $("#stock_value").html();
-          var b = $("#stock_out_amount").val();
+          var b = $("#stock_out_quantity").val();
           balance = a - b;
           $("#stock_out_balance").val(balance);
+          $("#stock_out_balance_span").html(balance);
+          
+          if (balance < 0){ 
+            if (balance){ alert("Over Stock"); }
+            else { alert("Should not use negative value."); }
+            $("#stock_out_save_button").hide(); 
+          } 
+          else {
+            $("#stock_out_save_button").show();
+          }
         });
-
     });
 
   </script>

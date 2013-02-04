@@ -23,7 +23,10 @@
 				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
 				<td><%= pri.stock_in rescue '-'%></td>
 				<td><%= pri.stock_out rescue '-'%></td>
-				<td><%= pri.inventory_issue.description rescue '-'%></td>
+				<td>
+                                  <%= inventory_issue_description(pri.inventory_issue_id) %>
+<%#= pri.inventory_issue.description rescue '-'%>
+                                </td>
 				<td><%= pri.inventory_issue.in_out rescue '-' %></td>
 				<%#= iproduct(pri.amount) rescue '-'%>
 			</tr>

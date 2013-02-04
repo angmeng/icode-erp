@@ -1,15 +1,17 @@
 class ReportsController < ApplicationController
-
   before_filter :authenticate_user!
   layout "sheetbox"
 
   def excel_product_report
-    if params[:product_ids].present?
-      @excel_product_report = ProductCombobox.find(params[:product_ids])
+#    if params[:product_ids].present?
+#      @excel_product_report = ProductCombobox.find(params[:product_ids])
+    if params[:inventory_ids].present?
+      @excel_product_report = ProductCombobox.find(params[:inventory_ids])
       respond_to do |format|
         format.html
         format.csv { render text: @excel_product_report.to_csv}
-        format.xls #{ send_data @excel_pr_report.to_csv(col_sep: "\t") }
+        format.xls #{ render text: @excel_product_report.to_csv}
+        #format.xls #{ send_data @excel_pr_report.to_csv(col_sep: "\t") }
       
       end
     else
@@ -23,7 +25,11 @@ class ReportsController < ApplicationController
       respond_to do |format|
       format.html
       format.csv{ render text: @excel_inventory_report.to_csv }
-      format.xls
+      
+      format.xls { send_data @excel_inventory_report.xls,
+                   :type =>'application/xls',
+                   :filename => "excel_inventory_report.pdf"
+      }
     end
   else
     redirect_to inventory_report_reports_path
@@ -113,11 +119,9 @@ def pdf_product_report
       redirect_to product_report_reports_path
     end
 
-  
 end
 
 def pdf_inventory_report 
-  # #render :text => params[:inventory_ids]
      if params[:inventory_ids].present?
        @pdf_inventory_report = InventoryHistory.find(params[:inventory_ids])
        respond_to do |format|
@@ -128,8 +132,7 @@ def pdf_inventory_report
                                :type => 'application/pdf' , 
                                :disposition => "attachement" )
        }
-       
-        end
+      end
      else
        flash[:alert]="please check the checkbox"
        redirect_to inventory_report_reports_path 

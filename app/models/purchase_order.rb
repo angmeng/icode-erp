@@ -1,5 +1,5 @@
 class PurchaseOrder < ActiveRecord::Base
-  attr_accessible :currency_id, :po_date, :po_no, :purchase_by, :request_by, :revision, :tax, :trade_company_id, :trade_term_id, :transport_id, :updated_by, :user_id, :verify, :purchase_requisition_id, :sales_tax_exemption_id, :status
+  attr_accessible :currency_id, :po_date, :po_no, :purchase_by, :request_by, :revision, :tax, :trade_company_id, :trade_term_id, :transport_id, :updated_by, :user_id, :verify, :purchase_requisition_id, :sales_tax_exemption_id, :status, :remark
   
   validates :revision, :tax, :currency_id, :trade_term_id, :transport_id, :presence => true
   
