@@ -20,7 +20,7 @@
 			<% @excel_inventory_report.each_with_index do |pri , index| %>
 			<tr>
 				<td><%= index + 1 %></td>
-				<td><%= render '/product_categories/join_product_category' , :pc => pri rescue '-' %></td>
+				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
 				<td><%= pri.stock_in rescue '-'%></td>
 				<td><%= pri.stock_out rescue '-'%></td>
 				<td><%= pri.inventory_issue.description rescue '-'%></td>
