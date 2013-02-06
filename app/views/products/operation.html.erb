@@ -1,5 +1,5 @@
 <div id="popup_container">
-  <%#= render "operation_top_icon", :data => @listing_categories, :match_field => @field_id %><br/><br/>
+  <%#= render "operation_top_icon", :data => @listing_categories, :match_field => @field_id %>
 
   <div id="example" class="k-content">
   <div id="horizontal">
@@ -22,7 +22,8 @@
       </div>
       <br/>
       <div id="bottom-pane">
-        <div class="pane-content"><%= render "/products/product_details", :data => @listing_categories, :field_id => @field_id %></div>
+        <div class="pane-content"><%= render "/products/product_details", :data => @listing_categories, :field_id => @field_id %>
+        </div>
       </div>
       </div>
     <!-- </div>  -->
@@ -37,7 +38,7 @@
 </div>
 
 
-
+ 
 <script>
                 $(document).ready(function() {
                     $("#vertical").kendoSplitter({
