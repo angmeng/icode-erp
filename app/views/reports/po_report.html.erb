@@ -21,11 +21,10 @@
   <% end %>
   </div>
 <hr />
-<div>
-  <fieldset>
 
-    
-  	<table id="grid_h495" class="white-line-table zebraLight">
+
+<div class="fix_1600x900_h450">
+  	<table id="grid_h495">
   		<thead>
   			<tr class="header_line">
           
@@ -42,16 +41,16 @@
 
   	<% @show_po_report.each do |p | %>
   	<tbody>
-  		<tr>
+  		<tr class="<%= cycle("odd_line", "even_line") %>">
         
-  			<td><%= p.po_no rescue'-' %></td>
-  			<td><%= p.trade_company.name rescue '-' %></td>
-  			<td><%= p.po_date rescue '-' %></td>
-  			<td><%= p.currency.name rescue '-' %></td>
-  			<td><%= p.trade_term.name rescue '-' %></td>
-  			<td><%= p.transport.name rescue '-' %></td>
-  			<td><%= p.purchase_by.name rescue '-' %></td>
-  			<td><%= p.request_by.name rescue '-' %></td>
+  			<td align="center"><%= p.po_no rescue'-' %></td>
+  			<td align="center"><%= p.trade_company.name rescue '-' %></td>
+  			<td align="center"><%= p.po_date rescue '-' %></td>
+  			<td align="center"><%= p.currency.name rescue '-' %></td>
+  			<td align="center"><%= p.trade_term.name rescue '-' %></td>
+  			<td align="center"><%= p.transport.name rescue '-' %></td>
+  			<td align="center"><%= p.purchase_by.name rescue '-' %></td>
+  			<td align="center"><%= p.request_by.name rescue '-' %></td>
   		</tr>
   	</tbody>
   	<% end %>
@@ -59,10 +58,16 @@
   </fieldset>
 </div>
 
-<div style="float:right;">
-  <span><%= link_to "PDF report" , pdf_po_report_reports_path(:po_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
+<div style="float:left">
+   <span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%></span>
+  </div>
 
-  <span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+<div style="float:right;">
+
+  <span><%= not_link_show %></span>
+  <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+  <span><%= not_link_recover %></span>
+  <span><%= link_to "PDF report" , pdf_po_report_reports_path(:po_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
 
   <%= link_close_button %>
 </div>

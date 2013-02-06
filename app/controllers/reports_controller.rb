@@ -25,11 +25,11 @@ class ReportsController < ApplicationController
       respond_to do |format|
       format.html
       format.csv{ render text: @excel_inventory_report.to_csv }
-      
-      format.xls { send_data @excel_inventory_report.xls,
-                   :type =>'application/xls',
-                   :filename => "excel_inventory_report.pdf"
-      }
+      format.xls
+      #format.xls { send_data @excel_inventory_report.to_xls,
+      #             :type =>'application/xls',
+      #             :filename => "excel_inventory_report.pdf"
+      #}
     end
   else
     redirect_to inventory_report_reports_path
@@ -134,7 +134,7 @@ def pdf_inventory_report
        }
       end
      else
-       flash[:alert]="please check the checkbox"
+       #flash[:alert]="please check the checkbox"
        redirect_to inventory_report_reports_path 
     end
 end

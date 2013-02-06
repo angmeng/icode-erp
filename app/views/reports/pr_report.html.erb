@@ -23,10 +23,9 @@
 
 <hr />
 
-<div>
-    <fieldset>
-    <%= form_tag pdf_pr_report_reports_path ,:name=>"myform",:url =>pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-      <a>PR Report</a>
+<div class="fix_1600x900_h450">
+    <!-- <fieldset> -->
+    <%#= form_tag pdf_pr_report_reports_path ,:name=>"myform",:url =>pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
       <table id="grid_h495" >
       <thead>
       <tr class="header_line">
@@ -54,23 +53,28 @@
           </tr>
         </tbody>
 
-      <% end %>
+      
         
 
         
     </table>
    
-  </fieldset>
+  <!-- </fieldset> -->
+  <div style:"float:left">
+     <span><%#= link_to "Excel report" , excel_pr_report_reports_path(:pr_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
+  </div>
+
 <div class="icon_tag">
     <span><%= submit_tag "show" ,:class =>"k-button"%> </span>
     
    <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get",:class =>"k-button" %></span>
 
 
-   <span><%#= link_to "Excel report" , excel_pr_report_reports_path(:pr_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
+  
 
    <%= link_close_button %>
    <% end %>
+   <%# end %>
     </form>
 </div>
 </div>

@@ -73,5 +73,3 @@ $(function() {
 //}
 
 //<input type=”text” name=”mytext” onKeyPress=”return disableEnterKey(event)”>
-
-

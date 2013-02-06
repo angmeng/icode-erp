@@ -80,14 +80,21 @@
 
           <%#*</fieldset>%>
 
-          <div class="icon_tag">
+    <div class="icon_tag" style="float:left">
+      <span><%= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+    </div>
 
-            <span><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
+    <div class="icon_tag" style="float:right;">
 
-            <span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+      <span><%= not_link_show %></span>
+      <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+      <span><%= not_link_recover %></span>
 
-            <%= link_close_button %>
-          </div>
+      
+      <span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+
+      <%= link_close_button %>
+    </div>
 
   
 </div>

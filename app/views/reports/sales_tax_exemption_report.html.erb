@@ -25,32 +25,32 @@
 
 <hr />
 
-<div>
+<div class="fix_1600x900_h450">
 	<fieldset>
-	<a>Sales Tax Exemption Report</a>
-	<table class="table table-striped">
+	
+	<table id="grid_h495">
 	<thead>
-		<tr>
+		<tr  class="header_line">
 			<th>No.</th>
 			<th>Trade company</th>
 			<th>Sales Tax Exemption</th>
-			<th>Date</th>
-			<th>Inv No.</th>
 			<th>Tarif Code</th>
+			<th>Inv No.</th>
+			<th>Date</th>
 			<th>Amount</th>
 		</tr>
 	</thead>
 	
 	<tbody>
 	<% @show_sale_tax_exemption_report.each_with_index do |pri , index| %>
-		<tr>
-			<td><%= index + 1 %></td>
-			<td><%= pri.trade_company.name rescue '-'%></td>
-			<td><%#= p. %></td>
-			<td><%= pri.period_start rescue '-' %></td>
-			<td><%= pri.ste_no rescue '-' %></td>
-			<td><%= pri.tarif_code rescue '-' %></td>
-			<td><%= pri.remaining_total rescue '-' %></td>
+		<tr class="<%= cycle("odd_line", "even_line") %>">
+			<td align="center"><%= index + 1 %></td>
+			<td align="center"><%= pri.trade_company.name rescue '-'%></td>
+			<td align="center"><%= pri.sales_exemption_no rescue'-' %></td>
+			<td align="center"><%= pri.tarif_code rescue '-' %></td>
+			<td align="center"><%= pri.ste_no rescue '-' %></td>
+			<td align="center"><%= pri.period_start rescue '-' %></td>
+			<td align="center"><%= pri.remaining_total rescue '-' %></td>
 
 		</tr>
 		<% end %>
@@ -60,10 +60,20 @@
 	
 
 	</fieldset>
-<div style="float:right;">
-   <span><%= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:ste_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
 
-   <span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%>
+	<div style="float:left">
+	<span><%#= link_to "Excel report" , detail_po_report_reports_path(:po_excel_ids => @take_ids, :format => "xls" )%></span>
+	</div>
+
+	<div style="float:right;">
+
+	<span><%= not_link_show %></span>
+
+	<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+
+	<span><%= not_link_recover %></span>
+
+   <span><%= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:ste_ids => @take_ids, :format => "pdf" ), :target=>"_blank" %></span>
 
    <%= link_close_button %>
 </div>
