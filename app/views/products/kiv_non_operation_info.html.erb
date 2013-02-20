@@ -1,0 +1,17 @@
+<div class="product_button">
+  
+  <% if @listing_categories.present? %>
+    <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER) %>
+      <%= link_recover(recover_product_category_path(@listing_categories)) %>
+    <% else %>
+      <%= not_link_recover %>
+    <% end %>
+  <% else %>
+    <%= not_link_recover %>
+  <% end %>
+  
+</div>
+
+<div class="product_container">
+  <%= render "/products/product_details", :data => @listing_categories, :field_id => @field_id %>
+</div>

@@ -11,33 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201070947) do
-
-  create_table "bill_of_materials", :force => true do |t|
-    t.integer  "bom_no"
-    t.string   "type"
-    t.integer  "sales_order_item_id"
-    t.date     "bom_date"
-    t.string   "other_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "bill_of_materials", ["sales_order_item_id"], :name => "index_bill_of_materials_on_sales_order_item_id"
-
-  create_table "bom_materials", :force => true do |t|
-    t.integer  "material_id"
-    t.integer  "bill_of_material_id"
-    t.integer  "quantity"
-    t.integer  "unit_measurement_id"
-    t.string   "remark"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "bom_materials", ["bill_of_material_id"], :name => "index_bom_materials_on_bill_of_material_id"
-  add_index "bom_materials", ["material_id"], :name => "index_bom_materials_on_material_id"
-  add_index "bom_materials", ["unit_measurement_id"], :name => "index_bom_materials_on_unit_measurement_id"
+ActiveRecord::Schema.define(:version => 20130220130918) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -367,14 +341,6 @@ ActiveRecord::Schema.define(:version => 20130201070947) do
   end
 
   add_index "material_of_quantities", ["quotation_request_form_id"], :name => "index_material_of_quantities_on_quotation_request_form_id"
-
-  create_table "materials", :force => true do |t|
-    t.string   "code"
-    t.string   "description"
-    t.string   "status",      :default => "Active"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-  end
 
   create_table "packing_quantities", :force => true do |t|
     t.float   "quantity",     :default => 0.0

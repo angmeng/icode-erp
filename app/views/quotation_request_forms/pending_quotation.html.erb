@@ -1,25 +1,26 @@
-<div style="background-color:blue"><strong style="color:white;">NEW QUOTATION REQUISITION APPLICATION</strong></div>
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">NEW QUOTATION REQUISITION APPLICATION</strong></div>
 
-<table width="100%" class="header_content">
-  <tr>
-    <td><h3>Pending QR Items</h3></td>
-  </tr>
-</table>
+  <table width="100%" class="header_content">
+    <tr>
+      <td><h3>Pending QR Items</h3></td>
+    </tr>
+  </table>
 
-<div class="fix_1600x900">
-  <%= form_tag update_checkboxes_quotation_request_forms_path do %>
-    <div class="new_qr_form">
-      <% if @quotation_request_forms.present? %>
-          <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
-      <% else %>
-        Not Record Found 
-      <% end %>
-    </div>
-    <div style="padding: 5px;">
-      <%= submit_tag "Submit", :confirm => "Are you sure to submit?" %>
-    </div>
-  <% end %>
+  <div class="fix_1600x900">
+    <%= form_tag update_checkboxes_quotation_request_forms_path do %>
+      <div class="new_qr_form">
+        <% if @quotation_request_forms.present? %>
+            <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+        <% else %>
+          Not Record Found 
+        <% end %>
+      </div>
+      <div style="padding: 5px;">
+        <%= submit_tag "Submit", :confirm => "Are you sure to submit?" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render "action_quotation_new_pending" %>
 </div>
-
-<%= render "action_quotation_new_pending" %>
-

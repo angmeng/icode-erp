@@ -19,9 +19,19 @@ class ProductsController < ApplicationController
     manage_categories(params[:category_id])
   end
   
+  def non_operation_info
+    non_operation
+    render :layout => false
+  end
+  
   def operation
     @categories = ProductCategory.db_operation
     manage_categories(params[:category_id])
+  end
+  
+  def operation_info
+    operation
+    render :layout => false
   end
   
   def finish_good
@@ -29,9 +39,23 @@ class ProductsController < ApplicationController
     manage_categories(params[:category_id])
   end
   
+  def finish_good_info
+    finish_good
+    render :layout => false
+  end
+  
+  
+  
+  
+  
   def kiv_non_operation
     @categories = ProductCategory.non_operation_kiv
     manage_categories(params[:category_id])
+  end
+  
+  def kiv_non_operation_info
+    kiv_non_operation
+    render :layout => false
   end
   
   def kiv_operation
@@ -39,11 +63,25 @@ class ProductsController < ApplicationController
     manage_categories(params[:category_id])
   end
   
+  def kiv_operation_info
+    kiv_operation
+    render :layout => false
+  end
+  
   def kiv_finish_good
     @categories = ProductCategory.finish_goods_kiv
     manage_categories(params[:category_id])
   end
+  
+  def kiv_finish_good_info
+    kiv_finish_good
+    render :layout => false
+  end
 
+  
+  
+  
+  
   def show
     @product = Product.find(params[:id])
     arr_prod = Product.json_um(@product)
@@ -54,17 +92,6 @@ class ProductsController < ApplicationController
       format.json { render json: arr_prod }
     end
   end
-
-#  def new
-#    @product        = Product.new
-#    @source         = Product.joining_category(params[:add_category_id])
-#    @source_desc    = Product.joining_category_description(params[:add_category_id])
-#    
-#    @base_sub_name  = Product.base_sub_name(params[:add_category_id])
-#    @running_no     = ProductRunningNumber.find_by_base_name_and_sub_name(@base_sub_name[:base_name], @base_sub_name[:sub_name]) if @base_sub_name.present?
-#    
-#    manage_categories(params[:refer_category_id])
-#  end
   
   def new
     @product          = Product.new
@@ -125,8 +152,6 @@ class ProductsController < ApplicationController
 #    end
 #  end
   
-  
-  
   def edit
     @product = Product.find(params[:id])
     manage_categories(@product.product_category.refer_category_id) if @product.present?
@@ -143,10 +168,6 @@ class ProductsController < ApplicationController
       flash[:alert] = @product.errors.full_messages.join(",")
       render action: "edit"
     end
-  end
-  
-  def destroy
-    
   end
   
   def new_for_receive_note

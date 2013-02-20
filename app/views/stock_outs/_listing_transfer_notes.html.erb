@@ -3,13 +3,14 @@
     <th class="check_highlight"></th>
     <th>Transfer Note No</th>
     <th>Product</th>
+    <th>Description</th>
     <th>Quantity</th>
     <th>Balance</th>
     <th>Collector Name</th>
     <th>Location</th>
     <th>Reference No.</th>
     <th>Issued By</th>
-    <th>Unit Measurement</th>
+    <th>U/M</th>
   </tr>
 
   <% lists.each do |stock_out| %>
@@ -17,6 +18,7 @@
       <td></td>
       <td align="center"><%= stock_out.transfer_note_no rescue '-' %></td>
       <td align="center"><%= stock_out.product.product_combobox.product_code rescue '-' %></td>
+      <td><%= simple_format(stock_out.product.desc) rescue '-' %></td>
       <td align="center"><%= two_precision(stock_out.quantity) rescue '-' %></td>
       <td align="center"><%= two_precision(stock_out.balance) rescue '-' %></td>
       <td align="center"><%= stock_out.collector_name rescue '-' %></td>

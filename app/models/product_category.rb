@@ -1,8 +1,8 @@
 class ProductCategory < ActiveRecord::Base
+#  before_save   :uniqueness_if_parent_id_is_zero
   before_save   :uppercase_text
   before_update :uppercase_text
   validate      :validate_code_length
-  validate      :uniqueness_if_parent_id_is_zero
   
   attr_accessible :code, :desc, :parent_id, :icon, :operation, :more_category, :keep_in_view, :category_type, :status, 
                   :exist_field, :refer_category_id, :level
@@ -55,27 +55,6 @@ class ProductCategory < ActiveRecord::Base
   def uppercase_text
     self.code.upcase! if self.code
     self.desc.upcase! if self.desc
-  end
-  
-  def self.update_all_kiv(pc)
-    @ret = []
-    if pc.children.present?
-      self.take_child_id(pc)
-    else
-      pc.destroy
-    end
-    
-    self.update_ret(@ret) if @ret.present?
-  end
-  
-  def self.update_file_kiv(pc)
-    if pc.present?
-      pc.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FILE)
-      if pc.product.present?
-        pc.product.update_attributes(:status => Product::KEEP_IN_VIEW)
-        pc.product.product_combobox.update_attributes(:status => ProductCombobox::KEEP_IN_VIEW) if pc.product.product_combobox.present?
-      end
-    end
   end
   
   def self.recover_product(pc)
@@ -131,35 +110,40 @@ class ProductCategory < ActiveRecord::Base
 #    @field_id = field_id
 #    @level = level
 #  end
+
+  def self.uniqueness_if_parent_id_is_zero(code)
+    @pc = self.find_by_code_and_parent_id(code, 0)
+    return false, "have uniqueness in group" if @pc.present?
+  end
   
   private
     
-  def self.take_child_id(pc)
-    @ret << pc.id
-    
-    if pc.children.present?
-      pc.children.each do |child|
-        self.take_child_id(child) 
-      end
-    end
-    
-    @ret
-  end
+#  def self.take_child_id(pc)
+#    @ret << pc.id
+#    
+#    if pc.children.present?
+#      pc.children.each do |child|
+#        self.take_child_id(child) 
+#      end
+#    end
+#    
+#    @ret
+#  end
   
-  def self.update_ret(ret)
-    @take = ProductCategory.find(ret)
-    @take.each do |r|
-      if r.icon == ProductCategory::ICON_FOLDER
-        r.destroy
-      elsif r.icon == ProductCategory::ICON_FILE
-        r.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FILE)
-      end
-      if r.product.present?
-        r.product.update_attributes(:status => Product::KEEP_IN_VIEW)
-        r.product.product_combobox.update_attributes(:status => ProductCombobox::KEEP_IN_VIEW) if r.product.product_combobox.present?
-      end
-    end
-  end
+#  def self.update_ret(ret)
+#    @take = ProductCategory.find(ret)
+#    @take.each do |r|
+#      if r.icon == ProductCategory::ICON_FOLDER
+#        r.destroy
+#      elsif r.icon == ProductCategory::ICON_FILE
+#        r.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FILE)
+#      end
+#      if r.product.present?
+#        r.product.update_attributes(:status => Product::KEEP_IN_VIEW)
+#        r.product.product_combobox.update_attributes(:status => ProductCombobox::KEEP_IN_VIEW) if r.product.product_combobox.present?
+#      end
+#    end
+#  end
   
   def validate_code_length
     if self.icon == ProductCategory::ICON_FOLDER
@@ -167,8 +151,5 @@ class ProductCategory < ActiveRecord::Base
     end
   end
   
-  def uniqueness_if_parent_id_is_zero
-    @pc = ProductCategory.find_by_code_and_parent_id(self.code, 0)
-    errors.add(:code, "have uniqueness in group") if @pc.present?
-  end
+
 end

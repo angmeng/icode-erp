@@ -44,7 +44,7 @@
     <%= not_link_edit_subfolder %>
   <% end %>
 
-  <% unless data.parent_id == 0 %>
+  <% if data.level == 1 %>
     <% unless data.icon == ProductCategory::ICON_FILE %>
         <% if data.children.present? %>
               <% if data.children.first.icon.present? %>
@@ -84,6 +84,20 @@
     <%= link_kiv(product_category_path(data)) %>
   <% else %>
     <%= not_link_kiv %>
+  <% end %>
+
+  <% unless data.children.present? %>
+    <% if data.icon == ProductCategory::ICON_FOLDER %>
+      <% if roles.include?(InventoryManagementSystem::PRODUCT_OPERATION_DELETE) %>
+        <%= link_delete(delete_data_product_category_path(data)) %>
+      <% else %>
+        <%= not_link_delete %>
+      <% end %>
+    <% else %>
+      <%= not_link_delete %>
+    <% end %>
+  <% else %>
+    <%= not_link_delete %>
   <% end %>
 
 <% end %>

@@ -19,6 +19,7 @@ class ReceiveNotesController < ApplicationController
   def show
     @receive_note = ReceiveNote.find(params[:id])
     @poil = @receive_note.receive_note_items.first.purchase_order_item_line
+    render :layout => "sheetbox"
   end
 
   def new

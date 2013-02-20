@@ -2,9 +2,6 @@ class ProductCategoriesController < ApplicationController
   before_filter :authenticate_user!
   layout "sheetbox"
   
-  def index
-  end
-  
   def non_operation
     @categories = ProductCategory.db_non_operation
   end
@@ -31,6 +28,7 @@ class ProductCategoriesController < ApplicationController
   end
   
   def add_group         # For Create Group
+    err_msg = []
     parent = ProductCategory.find_by_id(params[:parent_id]) if params[:parent_id].present?
     
     if parent.present?
@@ -39,16 +37,15 @@ class ProductCategoriesController < ApplicationController
       @new_category = ProductCategory.new(:code => params[:code], :desc => params[:desc], :parent_id => params[:parent_id], :icon => params[:icon], :category_type => params[:category_type])
     end
     
-    respond_to do |format|
-      if @new_category.save
-        format.html { redirect_to @new_category, :notice => 'Group was successfully created.' }
-        format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
-      else
-        format.html { 
-          flash[:alert] = @new_category.errors.full_messages.join(", ")
-          render action: 'parent' }
-        format.js   { render js: "alert('#{@new_category.errors.full_messages.join(", ")}');" }
-      end
+    cat, msg = ProductCategory.uniqueness_if_parent_id_is_zero(@new_category.code)
+    
+    if cat.present? and @new_category.save
+      redirect_to @new_category, :notice => 'Group was successfully created.'
+    else
+      err_msg << msg
+      err_msg << @new_category.errors.full_messages
+      flash[:alert] = err_msg.join(", ")
+      render action: 'parent'
     end
   end
   
@@ -62,10 +59,13 @@ class ProductCategoriesController < ApplicationController
     respond_to do |format|
       if @edit_group.update_attributes(:code => params[:code], :desc => params[:desc])
         format.html { redirect_to @edit_group, notice: 'Editing Group was successfully updated.' }
-        format.js   { render js: "window.location.pathname='#{product_category_path(@edit_group)}'" }
+#        format.js   { render js: "window.location.pathname='#{product_category_path(@edit_group)}'" }
       else
-        format.html { render action: 'click_edit_group' }
-        format.js   { render js: "alert('#{@edit_group.errors.full_messages.join(", ")}');" }
+        format.html { 
+          flash[:alert] = @edit_group.errors.full_messages.join(", ")
+          render action: 'click_edit_group'
+        }
+#        format.js   { render js: "alert('#{@edit_group.errors.full_messages.join(", ")}');" }
       end
     end
   end
@@ -142,25 +142,18 @@ class ProductCategoriesController < ApplicationController
   def destroy
     @product_category = ProductCategory.find(params[:id])
     if @product_category.icon == ProductCategory::ICON_FILE
-      ProductCategory.update_file_kiv(@product_category)
+      ProductManagement.update_file_kiv(@product_category)
     elsif @product_category.icon == ProductCategory::ICON_FOLDER
-      ProductCategory.update_all_kiv(@product_category)
+      ProductManagement.update_all_kiv(@product_category)
     end
     goto_direction(@product_category)
   end
   
-#  def edit_window
-#    @category = ProductCategory.find(params[:parent_id])
-#    params[:code] = @category.code if params[:code].empty?
-#    params[:desc] = @category.desc if params[:desc].empty?
-#    if @category.update_attributes(:code => params[:code], :desc => params[:desc])
-#      flash[:notice] = 'Product category was successfully created.'
-#      goto_direction(@category)
-#    else
-#      flash[:alert] = @category.errors.full_messages.join(",")
-#      goto_direction(@category)
-#    end
-#  end
+  def delete_data
+    @product_category = ProductCategory.find(params[:id])
+    ProductManagement.delete_folder(@product_category) if @product_category.icon == ProductCategory::ICON_FOLDER
+    goto_direction(@product_category)
+  end
   
   def remove
     @product_category = ProductCategory.find(params[:id])

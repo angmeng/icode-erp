@@ -1,0 +1,29 @@
+<div id="linking">
+  <table>
+      <tr>
+          <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> 
+            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
+              <td><%= link_to "New RNs", new_receive_note_path,:class => "k-button" %></td>
+            <% else %>
+              <td>New RNs</td>
+            <% end %>
+
+            <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+
+            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+              <td><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "k-button" %></td>
+            <% else %>
+              <td>RN Transactions & Histories</td>
+            <% end %>
+
+            <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+
+            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
+              <td><%= link_to "Received Notes Completed", info_receive_notes_path, :class => "k-button" %></td>
+            <% else %>
+              <td>Received Notes Completed</td>
+            <% end %>
+          <% end %>
+      </tr>
+  </table>
+</div>

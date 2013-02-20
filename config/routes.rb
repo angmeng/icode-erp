@@ -1,10 +1,6 @@
 Merp::Application.routes.draw do
 
-
-
   resources :product_running_numbers
-
-
   resources :stock_outs
 
   resources :reports do
@@ -54,12 +50,6 @@ Merp::Application.routes.draw do
   resources :contacts
 
   resources :product_fields
-
-  resources :bom_materials
-
-  resources :materials
-
-  resources :bill_of_materials
 
   resources :quotation_attachment_pos
 
@@ -337,11 +327,18 @@ Merp::Application.routes.draw do
   resources :products do
     collection do
       get "non_operation"
+      get "non_operation_info"
       get "operation"
+      get "operation_info"
       get "finish_good"
+      get "finish_good_info"
+      
       get "kiv_non_operation"
+      get "kiv_non_operation_info"
       get "kiv_operation"
+      get "kiv_operation_info"
       get "kiv_finish_good"
+      get "kiv_finish_good_info"
       
       get "new_for_receive_note"
       post "post_for_receive_note"
@@ -358,7 +355,6 @@ Merp::Application.routes.draw do
 
   resources :product_categories do
     collection do
-      post "edit_window"
       post "new_folder"
       post "add_group"
       
@@ -374,6 +370,7 @@ Merp::Application.routes.draw do
       put "remove"
       put "recover"
       put "edit_group"
+      delete "delete_data"
     end
   end
 
