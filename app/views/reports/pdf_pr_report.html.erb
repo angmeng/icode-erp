@@ -1,25 +1,30 @@
 <h2><u>Purchase Requisition Report</u></h2>
 
 <fieldset>
-  <% if @detail_pr_report.present? %>
-  <% @detail_pr_report.each do |f| %>
+<% if @detail_pr_report.present? %>
+  <% @detail_pr_report.each_with_index do |pri , index| %>
 
 
-  <div style="float:left;">
-      <h1>PR.No :
-      <u><b><%= f.pr_no rescue '-' %></b></u>
-      </h1>
-  </div>
+      <div style="float:left;">
+          <h1>PR.No :
+          <u><b><%= f.purchase_requsition_pr_no rescue '-' %></b></u>
+          </h1>
+      </div>
 
-  <div style="float:right;">
+  
+  
+  
+  
+
+  <!--div style="float:right;">
       <h1>Date :
-      <b><%= f.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
+      <b><%#= f.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
     </h1>
-  </div>
+  </div-->
   
 
 
-  <table border="1" >
+  <!--table border="1" >
     <thead>
     <tr>
       <th>No.</th>
@@ -33,45 +38,83 @@
     </thead>
 
     
-  <% arr = [] %>
+  <%# arr = [] %>
 
   
-    <% f.purchase_requisition_items.each_with_index do |pri, index| %>
+    <%# f.purchase_requisition_items.each_with_index do |pri, index| %>
     <tbody>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%#= index + 1 %></td>
 
-        <td><%= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
+        <td><%#= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
 
-        <td><%= pri.product.description rescue '-' %></td>
-        <td><%= pri.product.unit_price rescue '-' %></td>
-        <td><%= pri.product.trade_company.name rescue '-' %></td>
-        <td><%= pri.product.quantity  rescue '-' %></td>
-        <td><%= iproduct(pri.quantity, pri.unit_price) %></td>
-      </tr>
+        <td><%#= pri.product.description rescue '-' %></td>
+        <td><%#= pri.product.unit_price rescue '-' %></td>
+        <td><%#= pri.product.trade_company.name rescue '-' %></td>
+        <td><%#= pri.product.quantity  rescue '-' %></td>
+        <td><%#= iproduct(pri.quantity, pri.unit_price) %></td>
+      </tr-->
+
+
+
+
+
+      <div style="float:right;">
+          <h1>Date :
+          <b><%= f.purchase_requsition_requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
+        </h1>
+      </div>
       
-      </tbody>
-
-      <% if iproduct(pri.quantity, pri.unit_price).present? %>
-      <% arr << pri.quantity * pri.unit_price %>
-        <% end %>
-
-    <% end %>
-    
-  
-  </table>
-  <table>
-    <tr style="float:right;">
-    <td>Total Amount :</td>
-    <td ><%= two_precision(arr.sum) %></td>
-    </tr>
-  </table>
 
 
+      <table border="1" style="width:100%" >
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Product Code</th>
+            <th>Description</th>
+            <th>RM</th>
+            <th>Vendor</th>
+            <th>ORDER QTY</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
 
+            
+          <% arr = [] %>
 
-    <% end %>
+          
+            <%# f.each_with_index do |pri, index| %>
+        <tbody>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%#= pri.product_code rescue '-' %><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %></td>
+            <td><%= pri.description rescue '-'%></td>
+            <td><%= pri.unit_price rescue '-' %></td>
+            <td><%= pri.trade_company.name rescue '-' %></td>
+            <td><%= pri.quantity rescue '-'%></td>
+            <td><%= iproduct(pri.quantity, pri.unit_price) %></td>
+          </tr>
+          
+        </tbody>
+
+              <% if iproduct(pri.quantity, pri.unit_price).present? %>
+              <% arr << pri.quantity * pri.unit_price %>
+              <% end %>
+
+            
+            
+      
+      </table>
+      <table>
+        <tr style="float:right;">
+          <td>Total Amount :</td>
+          <td ><%= two_precision(arr.sum) %></td>
+        </tr>
+      </table>
+
+  <% end %>
     <% else %>
-    No record found.
-    <% end %>
+    <div>No record found.</div>
+<% end %>
   </fieldset>

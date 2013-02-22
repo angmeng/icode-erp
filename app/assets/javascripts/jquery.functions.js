@@ -2171,3 +2171,8 @@ function addTableRow_for_delivery_order(table)
     
     $(table).find("tbody tr:last").after($tr);
 };
+
+$('#checkall:checkbox').change(function () {
+    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
+    else $('input:checkbox').removeAttr('checked');
+});

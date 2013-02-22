@@ -1,0 +1,88 @@
+<div id="popup_container">
+<div class="title_head"><strong style="color:white;">Receive Note Report</strong></div>
+
+		<div>
+			<table>
+				<%= form_for @receive_note_report, :url => rn_report_reports_path  do |f| %>
+				<tr>
+					<td>Receive Note :</td>
+					<td><%= f.text_field :receive_note_receive_note_no_gte ,:size => 9 %> - <%= f.text_field :receive_note_receive_note_no_lte , :size => 9 %> </td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Vendor's D/O :</td>
+					<td><%= f.text_field :receive_note_vendor_delivery_no_contains ,:size => 9 %></td>
+				</tr>
+				<tr>
+					<td><%= f.submit "Search" %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+
+		<input type="checkbox" name="all" id="checkall" />Check All
+
+		<div class="fix_1600x900_h450">
+			<fieldset>
+			<table id="grid_h495" class="white-line-table zebraLight">
+				<thead>
+				<tr class="header_line">
+					<th class="check_highlight"></th>
+					<th></th>
+					<th>No.</th>
+					<th>Date</th>
+					<th>Received From</th>
+					<th>Vendor's D/O</th>
+					<th>Update By</th>
+				</tr>
+			</thead>
+			</tbody>
+				<% @show_receive_note_report.each_with_index do |pri , index| %>
+				<tr>
+					<td></td>
+					<td><%= check_box_tag "receive_note_ids[]", pri.id %></td>
+					<td><%= index + 1 %></td>
+					<td><%= pri.receive_note.rn_date rescue '-' %></td>
+					<td><%= pri.receive_note.trade_company.code rescue '-'%> / 
+					<%= pri.receive_note.trade_company.name rescue '-' %></td>
+					<td><%= pri.receive_note.vendor_delivery_no rescue '-' %></td>
+					<td><%= pri.receive_note.update_by rescue '-' %></td>
+				</tr>
+				<% end %>
+			</tbody>
+			</table>
+		</fieldset>
+
+		</div>
+</div>
+
+	<div style="float:left">
+		<span><%= not_link_excel %><%#= link_to "Excel", excel_product_report_reports_path( :sales_ids => @take_ids,:format=>"xls") 	, :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
+	</div>
+
+	<div style="float:right;">
+
+			<span><%= not_link_show %></span>
+
+			<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+
+			<span><%= not_link_recover %></span>
+
+		   <span><%= not_link_printable %><%#= link_to "PDF report" , pdf_receive_note_report_reports_path(:rn_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %></span>
+
+		   <%= link_close_button %>
+	</div>
+
+	 <script type="text/javascript">
+
+ $('#checkall:checkbox').change(function () {
+    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
+    else $('input:checkbox').removeAttr('checked');
+});
+  </script>
+
+
+
+
+
+

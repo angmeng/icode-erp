@@ -1,3 +1,5 @@
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">Purchase requsition Report</strong></div>
 <div>
   <%= form_for @pr_report, :url => pr_report_reports_path  do |f| %>
     <table>
@@ -29,53 +31,68 @@
       <table id="grid_h495" >
       <thead>
       <tr class="header_line">
-
-        <th>Pr No.
+        <th class="check_highlight"></th>
+        <th></th>
+        <th>No.</th>
+        
+        <th>Pr No.</th>
           <%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %>
-        </th>
+        <th>Status</th>
         <th>Date</th>
-        <th>status</th>
+        <th>Remark</th>
       </tr>
     </thead>
 
     
 
-      <% @show_pr_report.each do |p| %>
+    <% @show_pr_report.each_with_index do |pri , index| %>
         <tbody>
           <tr class="<%= cycle("odd_line", "even_line") %>">
-              <td>
-                <%= p.pr_no %>
-                <%= check_box_tag "pr_ids[]" , p.id %>
-              </td>   
-              
-              <td><%= p.requested_by_date.strftime("%d-%m-%Y")%></td>
-              <td><%= p.status %></td>
+            <td></td>
+            <td align="center"><%= check_box_tag "pr_ids[]" , pri.id %></td>
+            <td align="center"><%= index + 1 %></td>
+            <td align="center"><%= pri.pr_no rescue'-' %><%#= render '/product_categories/join_product_category' , :pc => pri rescue'-' %><%#= pri.pr_no %></td>
+            <td align="center"><%= pri.status rescue'-' %></td>
+            <td align="center"><%= pri.requested_by_date.strftime("%d-%m-%Y") rescue'-' %></td>
+            <td align="center"><%= pri.remark rescue '-'%></td>
           </tr>
         </tbody>
 
       
         
 
-        
+         <% end %>
     </table>
-   
+  
+</div>
   <!-- </fieldset> -->
-  <div style:"float:left">
-     <span><%#= link_to "Excel report" , excel_pr_report_reports_path(:pr_ids => @take_ids, :format => "xls" ),:target=>"_blank" , :class => "k-button" %></span>
+
+
+  <div class="icon_tag" style="float:left">
+      <span><%= link_to "Excel Report", excel_pr_report_reports_path(:pr_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
   </div>
 
-<div class="icon_tag">
-    <span><%= submit_tag "show" ,:class =>"k-button"%> </span>
-    
-   <span><%= link_to "PDF report" ,pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get",:class =>"k-button" %></span>
+    <div class="icon_tag" style="float:right;">
 
+      <span><%= not_link_show %></span>
+      <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+      <span><%= not_link_recover %></span>
 
-  
+      
+      <span><%= link_to "PDF Report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
 
-   <%= link_close_button %>
-   <% end %>
-   <%# end %>
-    </form>
+      <%= link_close_button %>
+    </div>
 </div>
-</div>
+   
+
+ <script type="text/javascript">
+
+ $('#checkall:checkbox').change(function () {
+    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
+    else $('input:checkbox').removeAttr('checked');
+});
+  </script>
+
+
 

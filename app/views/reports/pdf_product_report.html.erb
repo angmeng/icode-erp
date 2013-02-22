@@ -26,7 +26,7 @@
 	<tbody>
 	<tr>
 		<td><%= index + 1 %></td>
-        <td><%= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
+        <td><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
                 <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
 		<td><%= pri.product.desc rescue '-'%></td>
 		<td><%= pri.product.part_no rescue '-'%></td>
