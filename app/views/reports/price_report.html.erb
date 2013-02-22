@@ -1,58 +1,81 @@
-<h2>Price Report</h2>
+<div id="popup_container">
+<h3>Price Report</h3>
  
-<div>
-<fieldset>
 
 	<table>
 		<%= form_for @price_report , :url => price_report_reports_path  do |f| %>
 		<tr>
-			<td>Company Code - Name :
-			<%= f.text_field :price_control_trade_company_code_contains , :size => 9 %> - 
-			<%= f.text_field :price_control_trade_company_name_contains , :size => 9 %></td>
-			<td></td>
+			<td>Company Code :</td>
+			<td><%= f.text_field :price_control_trade_company_code_contains , :size => 9 %></td> 
+			<td>Company Name :</td>
+			<td><%= f.text_field :price_control_trade_company_name_contains , :size => 9 %></td>
 		</tr>
-		
+		<tr>
+			<td>Product ID :</td>
+			<td><%= f.text_field :product_id_gte, :size => 9 %> - 
+				<%= f.text_field :product_id_lte , :size => 9 %></td>
+		</tr>
+
 		<tr>
 			<td><%= f.submit "Search" %></td>
 		</tr>
 			<% end %>
 	</table>
 	
-
-	<table class="table table-striped" >
+<div class="fix_1600x900_h450">
+	<fieldset>
+	<table id="grid_h495" class="white-line-table zebraLight" >
 		<thead>
-			<tr>
+			<tr class="head-line">
+				<th class="check_highlight"></th>
+				<th>No .</th>
 				<th>Product code</th>
-				<th>Part No.</th>
-				<th>Status</th>
-				<th>Reference</th>
 				<th>Old Unit Price</th>
 				<th>Old Eff Date</th>
 				<th>New Unit Price</th>
 				<th>New Eff Price</th>
+				<th>Status</th>
+				<th>Reference</th>
+				<th>Part No.</th>
 			</tr>
 		</thead>	
 
 	
 	<tbody>
-	<% @price_report.each do |pri| %>
-	<tr>
-		
-		<td><%= pri.product_product_code rescue '-'%></td>
-		<td><%= pri.part_no rescue '-'%></td>
-		<td><%= pri.status rescue '-'%></td>
-		<td><%= pri.price_control_reference rescue '-'%></td>
-		<td><%= pri.old_unit_price rescue '-'%></td>
-		<td><%= pri.old_eff_date rescue '-'%></td>
-		<td><%= pri.new_unit_date rescue '-'%></td>
-		<td><%= pri.new_eff_date rescue '-'%></td>
-	</tr>
+	<% @show_price_report.each_with_index do |pri, index| %>
+		<tr class="<%= cycle("odd_line", "even_line") %>">
+			<td align="center"><%= index + 1 %></td>
+			<td align="center"><%= pri.product_product_code rescue '-'%></td>
+			<td align="center"><%= pri.old_unit_price rescue '-'%></td>
+			<td align="center"><%= pri.old_eff_date rescue '-'%></td>
+			<td align="center"><%= pri.new_unit_date rescue '-'%></td>
+			<td align="center"><%= pri.new_eff_date rescue '-'%></td>
+			<td align="center"><%= pri.status rescue '-'%></td>
+			<td align="center"><%= pri.price_control_reference rescue '-'%></td>
+			<td align="center"><%= pri.part_no rescue '-'%></td>
+		</tr>
 	</tbody>
 	<% end %>
 	 
 	</table>
-
-	
-		
 	</fieldset>
+	</div>
 </div>
+
+	 <div class="icon_tag" style="float:left">
+      <span><%= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+    </div>
+
+	<div class="icon_tag" style="float:right;">
+
+		<span><%= not_link_show %></span>
+		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+		<span><%= not_link_recover %></span>
+		
+		<span><%= not_link_printable %></span>
+
+	 	<%= link_close_button %>
+  <%# end %>
+	</div>
+
+

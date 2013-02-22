@@ -608,6 +608,12 @@ module ApplicationHelper
         "Remove"
       end
     end
+
+    def not_link_excel
+      content_tag :span, :class => "k-button", :style => "color:grey ; background-color: white;" do 
+      "Excel"
+      end 
+    end
     
     
     
