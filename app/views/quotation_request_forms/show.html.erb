@@ -1,855 +1,878 @@
-<div style="background-color:blue"><strong style="color:white;">SHOW QUOTATION REQUEST FORM DETAILS</strong></div>
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">SHOW QUOTATION REQUEST FORM DETAIL</strong></div>
 
-<div class="fix_1600x900">
-      <div id="qr_strip">
-          <ul>
-            <li class="k-state-active">CUSTOM REQUEST</li>
-            <li>MATERIAL</li>
-            <li>PRINTING PROCESS</li>
-            <li>FINISHING PROCESS</li>
-            <li>OTHERS</li>
-            <li>MOQ</li>
-          </ul>
+  <div class="fix_h450">
+        <div id="qr_strip">
+            <ul>
+              <li class="k-state-active">CUSTOM REQUEST</li>
+              <li>MATERIAL</li>
+              <li>PRINTING PROCESS</li>
+              <li>FINISHING PROCESS</li>
+              <li>OTHERS</li>
+              <li>MOQ</li>
+            </ul>
 
-          <div>
-
-            <!--p>CUSTOM REQUEST</p-->
-            <table>
-              <tr>
-                <td>
-                  <table>
-                    <tr>
-                      <td width="200"><b>QR No.#</b></td>
-                      <td><%= @quotation_request_form.quotation_request_no rescue '-' %></td>
-                    </tr>
-  
-                    <% if @quotation_request_form.status == QuotationRequestForm::CONFIRMED %>
-                      <tr>
-                        <td><b>Customer PO No#</b></td>
-                        <td><%= @quotation_request_form.customer_po_no rescue '-' %></td>
-                      </tr>
-                    <% end %>
-
-                    <tr>
-                      <td><b>Customer Company</b></td>
-                      <td>
-                        <%= @quotation_request_form.customer_name rescue '-' %>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                        <b>QRF Date</b>: <%= @quotation_request_form.qrf_date.strftime('%d-%m-%Y') rescue '-' %>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td><b>Description</b></td>
-                      <td><%= @quotation_request_form.description rescue '-' %></td>
-                    </tr>    
-                  </table>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>
-                  <table>
-                    <% if @quotation_request_form.internal_dimensen_length.present? and @quotation_request_form.internal_dimensen_width.present? and @quotation_request_form.internal_dimensen_height.present? %>
-                      <tr>
-                        <td width="200"><b>Internal Dimension, mm</b></td>
-                        <td>(L)</td><td><%= two_precision(@quotation_request_form.internal_dimensen_length) rescue '0' %></td>
-                        <td>(W)</td><td><%= two_precision(@quotation_request_form.internal_dimensen_width) rescue '0' %></td>
-                        <td>(H)</td><td><%= two_precision(@quotation_request_form.internal_dimensen_height) rescue '0' %></td>
-                        <td>(<b>Tolerance</b>: &plusmn; <%= two_precision(@quotation_request_form.internal_dimensen_tolerance) rescue '0' %>)</td>
-                      </tr>
-                    <% end %>
-
-                    <% if @quotation_request_form.external_dimensen_length.present? and @quotation_request_form.external_dimensen_width.present? and @quotation_request_form.external_dimensen_height.present? %>
-                      <tr>
-                        <td width="200"><b>External Dimension, mm</b></td>
-                        <td>(L)</td><td><%= two_precision(@quotation_request_form.external_dimensen_length) rescue '0' %></td>
-                        <td>(W)</td><td><%= two_precision(@quotation_request_form.external_dimensen_width) rescue '0' %></td>
-                        <td>(H)</td><td><%= two_precision(@quotation_request_form.external_dimensen_height) rescue '0' %></td>
-                        <td>(<b>Tolerance</b>: &plusmn; <%= two_precision(@quotation_request_form.external_dimensen_tolerance) rescue '0' %>)</td>
-                      </tr>
-                    <% end %>
-
-                    <tr>
-                      <td width="200"><b>Open Size, inch</b></td>
-                      <td>(L)</td><td><%= two_precision(@quotation_request_form.open_size_length) rescue '0' %></td>
-                      <td>(W)</td><td><%= two_precision(@quotation_request_form.open_size_width) rescue '0' %></td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-            
-            <% if @field_sets.present? %>
-              <% if @field_sets.include?(QuotationRequestForm::CUSTOM_FIELDSET) %>
-                <fieldset style="width: 800px;">
-                  <legend>PRODUCTION</legend>
-                  <table>
-                    <tr>
-                      <td width="120"><b>Brand</b></td>
-                      <td><%= @quotation_request_form.custom_stock_code rescue '' %></td>
-                    </tr>
-                    <tr>
-                      <td><b>Category</b></td>
-                      <td><%= @quotation_request_form.box_part_no rescue '' %></td>
-                    </tr>
-                    <tr>
-                      <td><b>No of Size</b></td>
-                      <td><%= @quotation_request_form.lot_size_no rescue '' %></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>
-                        <table class="black-line-table">
-                          <tr>
-                            <th>Size</th>
-                            <th>Part/Art No.</th>
-                            <th>Cat/Reorder No.</th>
-                            <th>Customer Stock Code</th>
-                          </tr>
-
-                          <% @quotation_request_form.custom_productions.each do |cp| %>
-                            <tr>
-                              <td width="40" align="center"><%= cp.lot_size rescue '' %></td>
-                              <td width="200"><%= cp.part_no rescue '' %></td>
-                              <td width="200"><%= cp.category_no rescue '' %></td>
-                              <td width="300"><%= cp.stock_reference rescue '' %></td>
-                            </tr>
-                          <% end %>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </fieldset>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div>
-            <div style="height: 445px; width: 500px;">
-              <table>
-                <tr>
-                  <td width="130"><b>Material Gramme</b></td>
-                  <td>
-                    <%= @quotation_request_form.material_gramme rescue '0' %>
-                    <%= @quotation_request_form.unit_measurement.code rescue '-' %>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td><b>Material Type</b></td>
-                  <td><%= @quotation_request_form.material_type rescue '-' %></td>
-                </tr>
-                
-                <tr>
-                  <td><b>Remark</b></td>
-                  <td><%= @quotation_request_form.material_remark rescue '-' %></td>
-                </tr>
-                
-                <tr>
-                  <td><b>Paper Size, inch</b></td>
-                  <td>
-                    (W) <%= two_precision(@quotation_request_form.paper_width) rescue '0' %>
-                    (L) <%= two_precision(@quotation_request_form.paper_length) rescue '0' %>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>Ratio</b>: <%= @quotation_request_form.ratio rescue '0' %>
-                  </td>
-                </tr>
-              </table>
-
-              <fieldset>
-                <legend>Printing Size, inch</legend>
-                
-                <% if @quotation_request_form.selection_printing_sizes.present? %>
-                  <table>
-                    <% @quotation_request_form.selection_printing_sizes.each do |sps| %>
-                    
-                      <tr>
-                        <td width="100">(W)<%= two_precision(sps.width) rescue '0' %></td>
-                        <td width="100">(L)<%= two_precision(sps.length) rescue '0' %></td>
-                        <td align="right">UPS: </td>
-                        <td><%= sps.ups rescue '0' %></td>
-                      </tr>
-                      
-                    <% end %>
-
-                    <tr>
-                      <td colspan="2"></td>
-                      <td>Total UPS: </td>
-                      <td><%= @quotation_request_form.selection_printing_sizes.sum(&:ups) rescue 0 %></td>
-                    </tr>
-                    
-                  </table>
-                <% end %>
-
-              </fieldset>
-              
-              <div id="paper_size_show">
-                <table class="black-line-table">
-                  <% if @quotation_request_form.paper_length.present? and @quotation_request_form.paper_width.present? %>
-                    <tr>
-                      <!--td style="width: <%#= (@quotation_request_form.paper_length.to_f * 3) rescue '0' %>px; height: <%#= (@quotation_request_form.paper_width.to_f * 3) rescue '0' %>px;"></td-->
-                      
-                        <% if @quotation_request_form.paper_length.to_f <= 200 %>
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f * 2) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f * 2) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 200 and @quotation_request_form.paper_length.to_f <= 400 %>
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 400 and @quotation_request_form.paper_length.to_f <= 800 %>
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f / 2) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 2) rescue '0' %>px;"></td> 
-                        <% elsif @quotation_request_form.paper_length.to_f > 800 and @quotation_request_form.paper_length.to_f <= 1200 %>
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f / 3) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 3) rescue '0' %>px;"></td>   
-                        <% elsif @quotation_request_form.paper_length.to_f > 1200 and @quotation_request_form.paper_length.to_f <= 1600 %>
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f / 4) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 4) rescue '0' %>px;"></td>  
-                        <% elsif @quotation_request_form.paper_length.to_f > 1600 and @quotation_request_form.paper_length.to_f <= 2000 %>
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f / 5) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 5) rescue '0' %>px;"></td>     
-                        <% else %>  
-                          <td style="width: <%= (@quotation_request_form.paper_length.to_f / 6) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 6) rescue '0' %>px;"></td>     
-                        <% end %>
-                    </tr>
-                  <% end %>
-                </table>
-              </div>
-              
-
-              
-              <div id="printing_size_show">
-                <% if @quotation_request_form.selection_printing_sizes.present? %>
-                  <table class="black-line-table">
-                    <% @quotation_request_form.selection_printing_sizes.each do |sps| %>
-                      <tr>
-                        <!--td style="width: <%#= (sps.length.to_f * 3) rescue '0' %>px; height: <%#= (sps.width.to_f * 3) rescue '0' %>px;"></td-->
-                        
-                        <% if @quotation_request_form.paper_length.to_f <= 200 %>
-                          <td style="width: <%= (sps.length.to_f * 2) rescue '0' %>px; height: <%= (sps.width.to_f * 2) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 200 and @quotation_request_form.paper_length.to_f <= 400 %>
-                          <td style="width: <%= (sps.length.to_f) rescue '0' %>px; height: <%= (sps.width.to_f) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 400 and @quotation_request_form.paper_length.to_f <= 800 %>
-                          <td style="width: <%= (sps.length.to_f / 2) rescue '0' %>px; height: <%= (sps.width.to_f / 2) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 800 and @quotation_request_form.paper_length.to_f <= 1200 %>
-                          <td style="width: <%= (sps.length.to_f / 3) rescue '0' %>px; height: <%= (sps.width.to_f / 3) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 1200 and @quotation_request_form.paper_length.to_f <= 1600 %>
-                          <td style="width: <%= (sps.length.to_f / 4) rescue '0' %>px; height: <%= (sps.width.to_f / 4) rescue '0' %>px;"></td>
-                        <% elsif @quotation_request_form.paper_length.to_f > 1600 and @quotation_request_form.paper_length.to_f <= 2000 %>
-                          <td style="width: <%= (sps.length.to_f / 5) rescue '0' %>px; height: <%= (sps.width.to_f / 5) rescue '0' %>px;"></td>
-                        <% else %>  
-                          <td style="width: <%= (sps.length.to_f / 6) rescue '0' %>px; height: <%= (sps.width.to_f / 6) rescue '0' %>px;"></td>
-                        <% end %>
-                      </tr>
-                    <% end %>
-                  </table>
-                <% end %>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <% if @field_sets.present? %>
-              <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) or @field_sets.include?(QuotationRequestForm::SURFACE_FIELDSET) %>
-                <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) %>
-                  <fieldset style="width: 700px;">
-                    <legend>COLOR</legend>
-                    <table>
-                      <tr>
-                        <td width="150"><b>No of Color</b></td>
-                        <td><%= @quotation_request_form.color_no rescue '-' %></td>
-                      </tr>
-
-                      <tr>
-                        <td><b>Type of Color</b></td>
-                        <td><%= @quotation_request_form.color_type rescue '-' %></td>
-                      </tr>
-
-                      <tr>
-                        <td><b>Color Name</b></td>
-                        <td>
-                          <% if @quotation_request_form.colors.present? %>
-                            <table class="black-line-table">
-                              <tr>
-                                <% @quotation_request_form.colors.each do |name| %>
-                                  <td width="60"><%= name.color_name %></td>
-                                <% end %>
-                              </tr>
-                            </table>
-                          <% end %>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td><b>Color Code</b></td>
-                        <td>
-                          <% if @quotation_request_form.colors.present? %>
-                            <table class="black-line-table">
-                              <tr>
-                                <% @quotation_request_form.colors.each do |code| %>
-                                  <td width="60"><%= code.color_code %></td>
-                                <% end %>
-                              </tr>
-                            </table>
-                          <% end %>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td><b>Pre-Print</b></td>
-                        <td>
-                          <% if @pre_print_types_join.present? %>
-                          
-                            <% arr_pre_print_types = [] %>
-                            
-                            <% @pre_print_types_join.each do |pre_print_type| %>
-                              <% if pre_print_type.pre_print == QuotationRequestForm::OTHERS %>
-                                <% arr_pre_print_types << "OTHERS: #{pre_print_type.other}" %>
-                              <% else %>
-                                <% arr_pre_print_types << pre_print_type.pre_print %>
-                              <% end %>
-                            <% end %>
-                          
-                            <%= arr_pre_print_types.join(", ")  %>
-                              
-                          <% else %>
-                            -
-                          <% end %>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td><b>Barcode</b></td>
-                        <td>
-                          <% if @quotation_request_form.barcode == QuotationRequestForm::OTHERS %>
-                            <%= @quotation_request_form.barcode_other rescue '-' %>
-                          <% else %>
-                            <%= @quotation_request_form.barcode rescue '-' %>
-                          <% end %>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td><b>If shortage</b></td>
-                        <td><%= @quotation_request_form.shortage rescue '-' %></td>
-                      </tr>
-                    </table>
-                  </fieldset>
-                <% end %>
-
-                <% if @field_sets.include?(QuotationRequestForm::SURFACE_FIELDSET) %>
-                  <fieldset style="width: 700px;">
-                    <legend>SURFACE FINISHING</legend>
-                    <table>
-                      <tr>
-                        <td width="150"><b>Varnish</b></td>
-                        <td>
-                          <%= @quotation_request_form.varnish rescue '-' %> 
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <% if @quotation_request_form.varnish == QuotationRequestForm::SPOT %>
-                          <b>Remark</b>: <%= @quotation_request_form.surface_remark rescue '-' %>
-                          <% end %>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td><b>Type of Varnish</b></td>
-                        <td><%= @varnish_types.join(", ") rescue '-' %></td>
-                      </tr>
-                    </table>
-                  </fieldset>
-                <% end %> 
-              <% else %>
-                NONE
-              <% end %>
-            <% else %>
-              NONE
-            <% end %>
-          </div>
-
-          <div>
-            <% if @field_sets.present? %>
-              <% if @field_sets.include?(QuotationRequestForm::LAMINATION_FIELDSET) or @field_sets.include?(QuotationRequestForm::STAMPING_FIELDSET) or @field_sets.include?(QuotationRequestForm::DIE_CUT_FIELDSET) or @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) or @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) or @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>
+            <div>
+              <div class="tabbing_h400">
+                <!--p>CUSTOM REQUEST</p-->
                 <table>
                   <tr>
-                    <td width="700" style="vertical-align: top;">
-                      <% if @field_sets.include?(QuotationRequestForm::LAMINATION_FIELDSET) %>
-                        <fieldset>
-                          <legend>LAMINATION</legend>
-                          <table>
-                            <tr>
-                              <td width="160"><b>Lamination</b></td>
-                              <td>
-                                <%= @quotation_request_form.lamination rescue '-' %>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <% if @quotation_request_form.lamination == QuotationRequestForm::SPOT %>
-                                  <b>Remark</b>: <%= @quotation_request_form.lamination_remark rescue '-' %>
-                                <% end %>
-                              </td>
-                            </tr>
+                    <td>
+                      <table>
+                        <tr>
+                          <td width="200"><b>QR No #</b></td>
+                          <td><%= @quotation_request_form.quotation_request_no rescue '-' %></td>
+                        </tr>
 
-                            <tr>
-                              <td><b>Type of Lamination</b></td>
-                              <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
-                                <td><%= @quotation_request_form.lamination_type %>: <%= @quotation_request_form.lamination_type_joints rescue '0' %> joints</td>
-                              <% else %>
-                                <td><%= @quotation_request_form.lamination_type rescue '-' %></td>
-                              <% end %>
-                            </tr>
+                        <% if @quotation_request_form.status == QuotationRequestForm::CONFIRMED %>
+                          <tr>
+                            <td><b>Customer PO No#</b></td>
+                            <td><%= @quotation_request_form.customer_po_no rescue '-' %></td>
+                          </tr>
+                        <% end %>
 
-                            <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
-                              <tr>
-                                <td><b>Type of Flute</b></td>
-                                <% if @quotation_request_form.flute_type == QuotationRequestForm::OTHERS %>
-                                  <td><%= @quotation_request_form.flute_type_other rescue '-' %></td>
-                                <% else %>
-                                  <td><%= @quotation_request_form.flute_type rescue '-' %></td>
-                                <% end %>
-                              </tr>
-                              
-                              <tr>
-                                <td><b>Material of Flute</b></td>
-                                <% if @quotation_request_form.flute_material == QuotationRequestForm::OTHERS %>
-                                  <td><%= @quotation_request_form.flute_material_other rescue '-' %></td>
-                                <% else %>
-                                  <td><%= @quotation_request_form.flute_material rescue '-' %></td>
-                                <% end %>
-                              </tr>
-                              
-                              <tr>
-                                <td style="vertical-align: top;"><b>Flute Size</b></td>
-                                <td>
-                                  <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
-                                    <% if @quotation_request_form.selection_flute_sizes.present? %>
-                                      <% @quotation_request_form.selection_flute_sizes.each do |sfs| %>
-                                        (W)<%= two_precision(sfs.flute_width) %>
-                                        (L)<%= two_precision(sfs.flute_length) %><br/>
-                                      <% end %>
-                                    <% end %>
-                                  <% end %>
-                                </td>
-                              </tr>
-                            <% end %>
-                          </table>
-                        </fieldset>
-                      <% end %>
+                        <tr>
+                          <td><b>Customer Company</b></td>
+                          <td>
+                            <%= @quotation_request_form.customer_name rescue '-' %>
 
-                      <% if @field_sets.include?(QuotationRequestForm::STAMPING_FIELDSET) %>
-                        <fieldset>
-                          <legend>STAMPING</legend>
-                          <table>
-                            <tr>
-                              <td width="160"><b>Type of Stamping</b></td>
-                              <td>
-                                <% if @stampings_join.present? %>
-                                  <% arr_stm = [] %>
-                                
-                                  <% @stampings_join.each do |stm| %>
-                                    <% if stm.stamping_type == QuotationRequestForm::OTHERS %>
-                                      <% arr_stm << "OTHERS: #{stm.stamping_other}" %>
-                                    <% else %>
-                                      <% arr_stm << stm.stamping_type %>
-                                    <% end %>
-                                  <% end %>
-                                
-                                  <%= arr_stm.join(", ") %>
-                                        
-                                <% else %>
-                                  -
-                                <% end %>
-                              </td>
-                            </tr>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                            <tr>
-                              <td><b>No of Location per Box</b></td>
-                              <td><%= @quotation_request_form.stamping_per_box rescue '0' %></td>
-                            </tr>
+                            <b>QRF Date</b>: <%= @quotation_request_form.qrf_date.strftime('%d-%m-%Y') rescue '-' %>
+                          </td>
+                        </tr>
 
-                            <tr>
-                              <td style="vertical-align: top;"><b>Stamping Size</b></td>
-                              <td>
-                                <% if @quotation_request_form.selection_stamping_sizes.present? %>
-                                  <% @quotation_request_form.selection_stamping_sizes.each do |sss| %>
-                                    (W)<%= two_precision(sss.stamping_width) rescue '-' %>
-                                    (L)<%= two_precision(sss.stamping_length) rescue '-' %><br/>
-                                  <% end %>
-                                <% end %>
-                              </td>
-                            </tr>
-                          </table>
-                        </fieldset>
-                      <% end %>
-
-                      <% if @field_sets.include?(QuotationRequestForm::DIE_CUT_FIELDSET) %>
-                        <fieldset>
-                          <legend>DIE CUT</legend>
-                          <table>
-                            <tr>
-                              <td width="160"><b>Die Cut</b></td>
-                              <td><%= @die_cut.join(", ") rescue '-' %></td>
-                            </tr>
-
-                            <tr>
-                              <td><b>Type of Die Cut</b></td>
-                              <td>
-                                <% if @quotation_request_form.die_cut_type == QuotationRequestForm::OTHERS %>
-                                  <%= @quotation_request_form.die_cut_type_other rescue '-' %>
-                                <% else %>
-                                  <%= @quotation_request_form.die_cut_type rescue '-' %>
-                                <% end %>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><b>Window Shape</b></td>
-                              <td>
-                                <% if @quotation_request_form.window_shape == QuotationRequestForm::OTHERS %>
-                                  <%= @quotation_request_form.window_shape_other rescue '-' %>
-                                <% else %>
-                                  <%= @quotation_request_form.window_shape rescue '-' %>
-                                <% end %>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><b>Mould No</b></td>
-                              <td>
-                                <% if @quotation_request_form.selection_die_cut_moulds.present? %>
-                                  <%= @quotation_request_form.selection_die_cut_moulds.map(&:mould_no).join(", ") %>
-                                <% end %>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><b>Window No</b></td>
-                              <td>
-                                <% if @quotation_request_form.selection_die_cut_moulds.present? %>
-                                  <%= @quotation_request_form.selection_die_cut_moulds.map(&:window_no).join(", ") %>
-                                <% end %>
-                              </td>
-                            </tr>
-                          </table>
-                        </fieldset>
-                      <% end %>
+                        <tr>
+                          <td><b>Description</b></td>
+                          <td><%= @quotation_request_form.description rescue '-' %></td>
+                        </tr>    
+                      </table>
                     </td>
-                    
-                    <td width="700" style="vertical-align: top;">
-                      <% if @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) %>
-                        <fieldset>
-                          <legend>WINDOW PATCHING</legend>
-                          <table>
-                            <tr>
-                              <td width="160"><b>Window Patching</b></td>
-                              <td>
-                                <% if @quotation_request_form.window_patching == TRUE %>
-                                  YES
-                                <% else %>
-                                  NO
-                                <% end %>
-                              </td>
-                            </tr>
+                  </tr>
 
-                            <% if @quotation_request_form.window_patching == TRUE %>
-                              <tr>
-                                <td><b>Type of Win. Patching</b></td>
-                                <td>
-                                  <% if @quotation_request_form.window_patching_type == QuotationRequestForm::OTHERS %>
-                                    <%= @quotation_request_form.window_patching_type_other rescue '-' %>
-                                  <% elsif @quotation_request_form.window_patching_type == QuotationRequestForm::PRE_PRINT %>
-                                    <%= @quotation_request_form.window_patching_type %>: <%= @quotation_request_form.pre_print_textbox rescue '-' %>
-                                  <% else %>
-                                    <%= @quotation_request_form.window_patching_type rescue '-' %>
-                                  <% end %>
-                                </td>
-                              </tr>
+                  <tr>
+                    <td>
+                      <table>
+                        <% if @quotation_request_form.internal_dimensen_length.present? and @quotation_request_form.internal_dimensen_width.present? and @quotation_request_form.internal_dimensen_height.present? %>
+                          <tr>
+                            <td width="200"><b>Internal Dimension, mm</b></td>
+                            <td>(L)</td><td><%= two_precision(@quotation_request_form.internal_dimensen_length) rescue '0' %></td>
+                            <td>(W)</td><td><%= two_precision(@quotation_request_form.internal_dimensen_width) rescue '0' %></td>
+                            <td>(H)</td><td><%= two_precision(@quotation_request_form.internal_dimensen_height) rescue '0' %></td>
+                            <td>(<b>Tolerance</b>: &plusmn; <%= two_precision(@quotation_request_form.internal_dimensen_tolerance) rescue '0' %>)</td>
+                          </tr>
+                        <% end %>
 
-                              <% if @quotation_request_form.window_width.present? and @quotation_request_form.window_length.present? %>
-                                <tr>
-                                  <td><b>Size</b></td>
-                                  <td>
-                                    (W)<%= two_precision(@quotation_request_form.window_width) rescue '-' %> 
-                                    (L)<%= two_precision(@quotation_request_form.window_length) rescue '-' %>
-                                  </td>
-                                </tr>
-                              <% end %>
+                        <% if @quotation_request_form.external_dimensen_length.present? and @quotation_request_form.external_dimensen_width.present? and @quotation_request_form.external_dimensen_height.present? %>
+                          <tr>
+                            <td width="200"><b>External Dimension, mm</b></td>
+                            <td>(L)</td><td><%= two_precision(@quotation_request_form.external_dimensen_length) rescue '0' %></td>
+                            <td>(W)</td><td><%= two_precision(@quotation_request_form.external_dimensen_width) rescue '0' %></td>
+                            <td>(H)</td><td><%= two_precision(@quotation_request_form.external_dimensen_height) rescue '0' %></td>
+                            <td>(<b>Tolerance</b>: &plusmn; <%= two_precision(@quotation_request_form.external_dimensen_tolerance) rescue '0' %>)</td>
+                          </tr>
+                        <% end %>
 
-                              <% if @quotation_request_form.window_usage.present? %>
-                                <tr>
-                                  <td><b>Usage</b></td>
-                                  <td><%= @quotation_request_form.window_usage rescue '0' %> PCS</td>
-                                </tr>
-                              <% end %>
-                            <% end %>
-                          </table>
-                        </fieldset>
-                      <% end %>
-
-                      <% if @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) %>
-                        <fieldset>
-                          <legend>GLUEING</legend>
-                          <table>
-                            <tr>
-                              <td width="160"><b>Glueing</b></td>
-                              <td>
-                                <% if @glueing_types_join.present? %>
-                                  <% arr_glueing = [] %>
-                                
-                                  <% @glueing_types_join.each do |gt| %>
-                                    <% if gt.glueing == QuotationRequestForm::OTHERS %>
-                                      <% arr_glueing << "OTHERS: #{gt.glueing_other}" %>
-                                    <% else %>
-                                      <% arr_glueing << gt.glueing %>
-                                    <% end %>
-                                  <% end %>
-                                
-                                  <%= arr_glueing.join(", ") %> 
-                                <% else %>
-                                  -
-                                <% end %>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><b>Glueing Material</b></td>
-                              <td><%= @quotation_request_form.glueing_material rescue '-' %></td>
-                            </tr>
-                          </table>
-                        </fieldset>
-                      <% end %>
-
-                      <% if @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>
-                        <fieldset>
-                          <legend>PACKING</legend>
-                          <table>
-                            <tr>
-                              <td width="160"><b>Type of Packing</b></td>
-                              <td>
-                                <% if @quotation_request_form.packing_type == QuotationRequestForm::OTHERS %>
-                                  <%= @quotation_request_form.packing_type %>: <%= @quotation_request_form.packing_type_other %>
-                                <% else %>
-                                  <%= @quotation_request_form.packing_type %>
-                                <% end %>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td><b>Packed Qty</b></td>
-                              <td><%= @quotation_request_form.packed_quantity rescue '0' %> PCS</td>
-                            </tr>
-                          </table>
-                        </fieldset>
-                      <% end %>
+                        <tr>
+                          <td width="200"><b>Open Size, inch</b></td>
+                          <td>(L)</td><td><%= two_precision(@quotation_request_form.open_size_length) rescue '0' %></td>
+                          <td>(W)</td><td><%= two_precision(@quotation_request_form.open_size_width) rescue '0' %></td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
-              <% else %>
-                NONE
-              <% end %>
-            <% else %>
-              NONE
-            <% end %>
-          </div>
 
-          <div>
-            <fieldset style="width: 700px;">
-              <legend>WAX</legend>
-              <table>
-                <tr>
-                  <td width="160"><b>Wax</b></td>
-                  <td>
-                    <% if @quotation_request_form.wax == TRUE %>
-                      <%= check_box_tag "wax", {}, true, :disabled => true %>
-                    <% else %>
-                      <%= check_box_tag "wax", {}, false, :disabled => true %>
-                    <% end %>
-                  </td>
-                </tr>
-              </table>
-            </fieldset>
-            
-            <fieldset style="width: 700px;">
-              <legend>FOLDING</legend>
-              <table>
-                <tr>
-                  <td width="160"><b>Folding</b></td>
-                  <td>
-                    <% if @quotation_request_form.folding == TRUE %>
-                      <%= check_box_tag "folding", {}, true, :disabled => true %>
-                    <% else %>
-                      <%= check_box_tag "folding", {}, false, :disabled => true %>
-                    <% end %>
-                  </td>
-                </tr>
-              </table>
-            </fieldset>
+                <% if @field_sets.present? %>
+                  <% if @field_sets.include?(QuotationRequestForm::CUSTOM_FIELDSET) %>
+                    <fieldset style="width: 800px;">
+                      <legend>PRODUCTION</legend>
+                      <table>
+                        <tr>
+                          <td width="120"><b>Brand</b></td>
+                          <td><%= @quotation_request_form.custom_stock_code rescue '' %></td>
+                        </tr>
+                        <tr>
+                          <td><b>Category</b></td>
+                          <td><%= @quotation_request_form.box_part_no rescue '' %></td>
+                        </tr>
+                        <tr>
+                          <td><b>No of Size</b></td>
+                          <td><%= @quotation_request_form.lot_size_no rescue '' %></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td>
+                            <table class="normal_table_black">
+                              <tr>
+                                <th>Size</th>
+                                <th>Part/Art No.</th>
+                                <th>Cat/Reorder No.</th>
+                                <th>Customer Stock Code</th>
+                              </tr>
+
+                              <% @quotation_request_form.custom_productions.each do |cp| %>
+                                <tr>
+                                  <td width="50" align="center"><%= cp.lot_size rescue '' %></td>
+                                  <td width="200"><%= cp.part_no rescue '' %></td>
+                                  <td width="200"><%= cp.category_no rescue '' %></td>
+                                  <td width="300"><%= cp.stock_reference rescue '' %></td>
+                                </tr>
+                              <% end %>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </fieldset>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+
+            <div>
+              <div class="tabbing_h400">
+                
+                <table>
+                  <tr>
+                    <td width="400">
+                      
+                      <table>
+                        <tr>
+                          <td width="130"><b>Material Gramme</b></td>
+                          <td>
+                            <%= @quotation_request_form.material_gramme rescue '0' %>
+                            <%= @quotation_request_form.unit_measurement.code rescue '-' %>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><b>Material Type</b></td>
+                          <td><%= @quotation_request_form.material_type rescue '-' %></td>
+                        </tr>
+
+                        <tr>
+                          <td><b>Remark</b></td>
+                          <td><%= @quotation_request_form.material_remark rescue '-' %></td>
+                        </tr>
+
+                        <tr>
+                          <td><b>Paper Size, inch</b></td>
+                          <td>
+                            (W) <%= two_precision(@quotation_request_form.paper_width) rescue '0' %>
+                            (L) <%= two_precision(@quotation_request_form.paper_length) rescue '0' %>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>Ratio</b>: <%= @quotation_request_form.ratio rescue '0' %>
+                          </td>
+                        </tr>
+                      </table>
+                      
+                      <fieldset>
+                        <legend>Printing Size, inch</legend>
+
+                        <% if @quotation_request_form.selection_printing_sizes.present? %>
+                          <table>
+                            <% @quotation_request_form.selection_printing_sizes.each do |sps| %>
+
+                              <tr>
+                                <td width="100">(W)<%= two_precision(sps.width) rescue '0' %></td>
+                                <td width="100">(L)<%= two_precision(sps.length) rescue '0' %></td>
+                                <td align="right">UPS: </td>
+                                <td><%= sps.ups rescue '0' %></td>
+                              </tr>
+
+                            <% end %>
+
+                            <tr>
+                              <td colspan="2"></td>
+                              <td>Total UPS: </td>
+                              <td><%= @quotation_request_form.selection_printing_sizes.sum(&:ups) rescue 0 %></td>
+                            </tr>
+
+                          </table>
+                        <% end %>
+                      </fieldset>
+                      
+                    </td>
+                    
+                    <td style="vertical-align: top; position: relative; top: 0px; left: 0px; width: 1000px;">
+                        
+                        <div id="paper_size_show">
+                          <table class="normal_table_black">
+                            <% if @quotation_request_form.paper_length.present? and @quotation_request_form.paper_width.present? %>
+                              <tr>
+                                <!--td style="width: <%#= (@quotation_request_form.paper_length.to_f * 3) rescue '0' %>px; height: <%#= (@quotation_request_form.paper_width.to_f * 3) rescue '0' %>px;"></td-->
+
+                                  <% if @quotation_request_form.paper_length.to_f <= 200 %>
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f * 2) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f * 2) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 200 and @quotation_request_form.paper_length.to_f <= 400 %>
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 400 and @quotation_request_form.paper_length.to_f <= 800 %>
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f / 2) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 2) rescue '0' %>px;"></td> 
+                                  <% elsif @quotation_request_form.paper_length.to_f > 800 and @quotation_request_form.paper_length.to_f <= 1200 %>
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f / 3) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 3) rescue '0' %>px;"></td>   
+                                  <% elsif @quotation_request_form.paper_length.to_f > 1200 and @quotation_request_form.paper_length.to_f <= 1600 %>
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f / 4) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 4) rescue '0' %>px;"></td>  
+                                  <% elsif @quotation_request_form.paper_length.to_f > 1600 and @quotation_request_form.paper_length.to_f <= 2000 %>
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f / 5) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 5) rescue '0' %>px;"></td>     
+                                  <% else %>  
+                                    <td style="width: <%= (@quotation_request_form.paper_length.to_f / 6) rescue '0' %>px; height: <%= (@quotation_request_form.paper_width.to_f / 6) rescue '0' %>px;"></td>     
+                                  <% end %>
+                              </tr>
+                            <% end %>
+                          </table>
+                        </div>
+
+                        <div id="printing_size_show">
+                          <% if @quotation_request_form.selection_printing_sizes.present? %>
+                            <table class="normal_table_black">
+                              <% @quotation_request_form.selection_printing_sizes.each do |sps| %>
+                                <tr>
+                                  <!--td style="width: <%#= (sps.length.to_f * 3) rescue '0' %>px; height: <%#= (sps.width.to_f * 3) rescue '0' %>px;"></td-->
+
+                                  <% if @quotation_request_form.paper_length.to_f <= 200 %>
+                                    <td style="width: <%= (sps.length.to_f * 2) rescue '0' %>px; height: <%= (sps.width.to_f * 2) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 200 and @quotation_request_form.paper_length.to_f <= 400 %>
+                                    <td style="width: <%= (sps.length.to_f) rescue '0' %>px; height: <%= (sps.width.to_f) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 400 and @quotation_request_form.paper_length.to_f <= 800 %>
+                                    <td style="width: <%= (sps.length.to_f / 2) rescue '0' %>px; height: <%= (sps.width.to_f / 2) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 800 and @quotation_request_form.paper_length.to_f <= 1200 %>
+                                    <td style="width: <%= (sps.length.to_f / 3) rescue '0' %>px; height: <%= (sps.width.to_f / 3) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 1200 and @quotation_request_form.paper_length.to_f <= 1600 %>
+                                    <td style="width: <%= (sps.length.to_f / 4) rescue '0' %>px; height: <%= (sps.width.to_f / 4) rescue '0' %>px;"></td>
+                                  <% elsif @quotation_request_form.paper_length.to_f > 1600 and @quotation_request_form.paper_length.to_f <= 2000 %>
+                                    <td style="width: <%= (sps.length.to_f / 5) rescue '0' %>px; height: <%= (sps.width.to_f / 5) rescue '0' %>px;"></td>
+                                  <% else %>  
+                                    <td style="width: <%= (sps.length.to_f / 6) rescue '0' %>px; height: <%= (sps.width.to_f / 6) rescue '0' %>px;"></td>
+                                  <% end %>
+                                </tr>
+                              <% end %>
+                            </table>
+                          <% end %>
+                        </div>
+                        
+                    </td>
+                  </tr>
+                </table>
               
-            <% if @field_sets.present? %>
-              <% if @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>
+              </div>
+            </div>
+
+            <div>
+              <div class="tabbing_h400">
+                <% if @field_sets.present? %>
+                  <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) or @field_sets.include?(QuotationRequestForm::SURFACE_FIELDSET) %>
+                    <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) %>
+                      <fieldset style="width: 700px;">
+                        <legend>COLOR</legend>
+                        <table>
+                          <tr>
+                            <td width="150"><b>No of Color</b></td>
+                            <td><%= @quotation_request_form.color_no rescue '-' %></td>
+                          </tr>
+
+                          <tr>
+                            <td><b>Type of Color</b></td>
+                            <td><%= @quotation_request_form.color_type rescue '-' %></td>
+                          </tr>
+
+                          <tr>
+                            <td><b>Color Name</b></td>
+                            <td>
+                              <% if @quotation_request_form.colors.present? %>
+                                <table class="black-line-table">
+                                  <tr>
+                                    <% @quotation_request_form.colors.each do |name| %>
+                                      <td width="60"><%= name.color_name %></td>
+                                    <% end %>
+                                  </tr>
+                                </table>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><b>Color Code</b></td>
+                            <td>
+                              <% if @quotation_request_form.colors.present? %>
+                                <table class="black-line-table">
+                                  <tr>
+                                    <% @quotation_request_form.colors.each do |code| %>
+                                      <td width="60"><%= code.color_code %></td>
+                                    <% end %>
+                                  </tr>
+                                </table>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><b>Pre-Print</b></td>
+                            <td>
+                              <% if @pre_print_types_join.present? %>
+
+                                <% arr_pre_print_types = [] %>
+
+                                <% @pre_print_types_join.each do |pre_print_type| %>
+                                  <% if pre_print_type.pre_print == QuotationRequestForm::OTHERS %>
+                                    <% arr_pre_print_types << "OTHERS: #{pre_print_type.other}" %>
+                                  <% else %>
+                                    <% arr_pre_print_types << pre_print_type.pre_print %>
+                                  <% end %>
+                                <% end %>
+
+                                <%= arr_pre_print_types.join(", ")  %>
+
+                              <% else %>
+                                -
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><b>Barcode</b></td>
+                            <td>
+                              <% if @quotation_request_form.barcode == QuotationRequestForm::OTHERS %>
+                                <%= @quotation_request_form.barcode_other rescue '-' %>
+                              <% else %>
+                                <%= @quotation_request_form.barcode rescue '-' %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><b>If shortage</b></td>
+                            <td><%= @quotation_request_form.shortage rescue '-' %></td>
+                          </tr>
+                        </table>
+                      </fieldset>
+                    <% end %>
+
+                    <% if @field_sets.include?(QuotationRequestForm::SURFACE_FIELDSET) %>
+                      <fieldset style="width: 700px;">
+                        <legend>SURFACE FINISHING</legend>
+                        <table>
+                          <tr>
+                            <td width="150"><b>Varnish</b></td>
+                            <td>
+                              <%= @quotation_request_form.varnish rescue '-' %> 
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <% if @quotation_request_form.varnish == QuotationRequestForm::SPOT %>
+                              <b>Remark</b>: <%= @quotation_request_form.surface_remark rescue '-' %>
+                              <% end %>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><b>Type of Varnish</b></td>
+                            <td><%= @varnish_types.join(", ") rescue '-' %></td>
+                          </tr>
+                        </table>
+                      </fieldset>
+                    <% end %> 
+                  <% else %>
+                    NONE
+                  <% end %>
+                <% else %>
+                  NONE
+                <% end %>
+              </div>
+            </div>
+
+            <div>
+              <div class="tabbing_h400">
+                <% if @field_sets.present? %>
+                  <% if @field_sets.include?(QuotationRequestForm::LAMINATION_FIELDSET) or @field_sets.include?(QuotationRequestForm::STAMPING_FIELDSET) or @field_sets.include?(QuotationRequestForm::DIE_CUT_FIELDSET) or @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) or @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) or @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>
+                    <table>
+                      <tr>
+                        <td width="700" style="vertical-align: top;">
+                          <% if @field_sets.include?(QuotationRequestForm::LAMINATION_FIELDSET) %>
+                            <fieldset>
+                              <legend>LAMINATION</legend>
+                              <table>
+                                <tr>
+                                  <td width="160"><b>Lamination</b></td>
+                                  <td>
+                                    <%= @quotation_request_form.lamination rescue '-' %>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <% if @quotation_request_form.lamination == QuotationRequestForm::SPOT %>
+                                      <b>Remark</b>: <%= @quotation_request_form.lamination_remark rescue '-' %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Type of Lamination</b></td>
+                                  <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
+                                    <td><%= @quotation_request_form.lamination_type %>: <%= @quotation_request_form.lamination_type_joints rescue '0' %> joints</td>
+                                  <% else %>
+                                    <td><%= @quotation_request_form.lamination_type rescue '-' %></td>
+                                  <% end %>
+                                </tr>
+
+                                <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
+                                  <tr>
+                                    <td><b>Type of Flute</b></td>
+                                    <% if @quotation_request_form.flute_type == QuotationRequestForm::OTHERS %>
+                                      <td><%= @quotation_request_form.flute_type_other rescue '-' %></td>
+                                    <% else %>
+                                      <td><%= @quotation_request_form.flute_type rescue '-' %></td>
+                                    <% end %>
+                                  </tr>
+
+                                  <tr>
+                                    <td><b>Material of Flute</b></td>
+                                    <% if @quotation_request_form.flute_material == QuotationRequestForm::OTHERS %>
+                                      <td><%= @quotation_request_form.flute_material_other rescue '-' %></td>
+                                    <% else %>
+                                      <td><%= @quotation_request_form.flute_material rescue '-' %></td>
+                                    <% end %>
+                                  </tr>
+
+                                  <tr>
+                                    <td style="vertical-align: top;"><b>Flute Size</b></td>
+                                    <td>
+                                      <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
+                                        <% if @quotation_request_form.selection_flute_sizes.present? %>
+                                          <% @quotation_request_form.selection_flute_sizes.each do |sfs| %>
+                                            (W)<%= two_precision(sfs.flute_width) %>
+                                            (L)<%= two_precision(sfs.flute_length) %><br/>
+                                          <% end %>
+                                        <% end %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+                                <% end %>
+                              </table>
+                            </fieldset>
+                          <% end %>
+
+                          <% if @field_sets.include?(QuotationRequestForm::STAMPING_FIELDSET) %>
+                            <fieldset>
+                              <legend>STAMPING</legend>
+                              <table>
+                                <tr>
+                                  <td width="160"><b>Type of Stamping</b></td>
+                                  <td>
+                                    <% if @stampings_join.present? %>
+                                      <% arr_stm = [] %>
+
+                                      <% @stampings_join.each do |stm| %>
+                                        <% if stm.stamping_type == QuotationRequestForm::OTHERS %>
+                                          <% arr_stm << "OTHERS: #{stm.stamping_other}" %>
+                                        <% else %>
+                                          <% arr_stm << stm.stamping_type %>
+                                        <% end %>
+                                      <% end %>
+
+                                      <%= arr_stm.join(", ") %>
+
+                                    <% else %>
+                                      -
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>No of Location per Box</b></td>
+                                  <td><%= @quotation_request_form.stamping_per_box rescue '0' %></td>
+                                </tr>
+
+                                <tr>
+                                  <td style="vertical-align: top;"><b>Stamping Size</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.selection_stamping_sizes.present? %>
+                                      <% @quotation_request_form.selection_stamping_sizes.each do |sss| %>
+                                        (W)<%= two_precision(sss.stamping_width) rescue '-' %>
+                                        (L)<%= two_precision(sss.stamping_length) rescue '-' %><br/>
+                                      <% end %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+                              </table>
+                            </fieldset>
+                          <% end %>
+
+                          <% if @field_sets.include?(QuotationRequestForm::DIE_CUT_FIELDSET) %>
+                            <fieldset>
+                              <legend>DIE CUT</legend>
+                              <table>
+                                <tr>
+                                  <td width="160"><b>Die Cut</b></td>
+                                  <td><%= @die_cut.join(", ") rescue '-' %></td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Type of Die Cut</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.die_cut_type == QuotationRequestForm::OTHERS %>
+                                      <%= @quotation_request_form.die_cut_type_other rescue '-' %>
+                                    <% else %>
+                                      <%= @quotation_request_form.die_cut_type rescue '-' %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Window Shape</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.window_shape == QuotationRequestForm::OTHERS %>
+                                      <%= @quotation_request_form.window_shape_other rescue '-' %>
+                                    <% else %>
+                                      <%= @quotation_request_form.window_shape rescue '-' %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Mould No</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.selection_die_cut_moulds.present? %>
+                                      <%= @quotation_request_form.selection_die_cut_moulds.map(&:mould_no).join(", ") %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Window No</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.selection_die_cut_moulds.present? %>
+                                      <%= @quotation_request_form.selection_die_cut_moulds.map(&:window_no).join(", ") %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+                              </table>
+                            </fieldset>
+                          <% end %>
+                        </td>
+
+                        <td width="700" style="vertical-align: top;">
+                          <% if @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) %>
+                            <fieldset>
+                              <legend>WINDOW PATCHING</legend>
+                              <table>
+                                <tr>
+                                  <td width="160"><b>Window Patching</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.window_patching == TRUE %>
+                                      YES
+                                    <% else %>
+                                      NO
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <% if @quotation_request_form.window_patching == TRUE %>
+                                  <tr>
+                                    <td><b>Type of Win. Patching</b></td>
+                                    <td>
+                                      <% if @quotation_request_form.window_patching_type == QuotationRequestForm::OTHERS %>
+                                        <%= @quotation_request_form.window_patching_type_other rescue '-' %>
+                                      <% elsif @quotation_request_form.window_patching_type == QuotationRequestForm::PRE_PRINT %>
+                                        <%= @quotation_request_form.window_patching_type %>: <%= @quotation_request_form.pre_print_textbox rescue '-' %>
+                                      <% else %>
+                                        <%= @quotation_request_form.window_patching_type rescue '-' %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+
+                                  <% if @quotation_request_form.window_width.present? and @quotation_request_form.window_length.present? %>
+                                    <tr>
+                                      <td><b>Size</b></td>
+                                      <td>
+                                        (W)<%= two_precision(@quotation_request_form.window_width) rescue '-' %> 
+                                        (L)<%= two_precision(@quotation_request_form.window_length) rescue '-' %>
+                                      </td>
+                                    </tr>
+                                  <% end %>
+
+                                  <% if @quotation_request_form.window_usage.present? %>
+                                    <tr>
+                                      <td><b>Usage</b></td>
+                                      <td><%= @quotation_request_form.window_usage rescue '0' %> PCS</td>
+                                    </tr>
+                                  <% end %>
+                                <% end %>
+                              </table>
+                            </fieldset>
+                          <% end %>
+
+                          <% if @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) %>
+                            <fieldset>
+                              <legend>GLUEING</legend>
+                              <table>
+                                <tr>
+                                  <td width="160"><b>Glueing</b></td>
+                                  <td>
+                                    <% if @glueing_types_join.present? %>
+                                      <% arr_glueing = [] %>
+
+                                      <% @glueing_types_join.each do |gt| %>
+                                        <% if gt.glueing == QuotationRequestForm::OTHERS %>
+                                          <% arr_glueing << "OTHERS: #{gt.glueing_other}" %>
+                                        <% else %>
+                                          <% arr_glueing << gt.glueing %>
+                                        <% end %>
+                                      <% end %>
+
+                                      <%= arr_glueing.join(", ") %> 
+                                    <% else %>
+                                      -
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Glueing Material</b></td>
+                                  <td><%= @quotation_request_form.glueing_material rescue '-' %></td>
+                                </tr>
+                              </table>
+                            </fieldset>
+                          <% end %>
+
+                          <% if @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>
+                            <fieldset>
+                              <legend>PACKING</legend>
+                              <table>
+                                <tr>
+                                  <td width="160"><b>Type of Packing</b></td>
+                                  <td>
+                                    <% if @quotation_request_form.packing_type == QuotationRequestForm::OTHERS %>
+                                      <%= @quotation_request_form.packing_type %>: <%= @quotation_request_form.packing_type_other %>
+                                    <% else %>
+                                      <%= @quotation_request_form.packing_type %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td><b>Packed Qty</b></td>
+                                  <td><%= @quotation_request_form.packed_quantity rescue '0' %> PCS</td>
+                                </tr>
+                              </table>
+                            </fieldset>
+                          <% end %>
+                        </td>
+                      </tr>
+                    </table>
+                  <% else %>
+                    NONE
+                  <% end %>
+                <% else %>
+                  NONE
+                <% end %>
+              </div>
+            </div>
+
+            <div>
+              <div class="tabbing_h400">
                 <fieldset style="width: 700px;">
-                  <legend>COLLATING</legend>
+                  <legend>WAX</legend>
                   <table>
                     <tr>
-                      <td width="160"><b>Collating No of Design</b></td>
-                      <td><%= @quotation_request_form.collating_no rescue '-' %></td>
-                    </tr>
-
-                    <tr>
-                      <td><b>Collect Sequence</b></td>
-                      <td><%= @quotation_request_form.collect_sequence rescue '-' %></td>
-                    </tr>
-
-                    <tr>
-                      <td style="vertical-align: top;"><b>Sequent</b></td>
-
-                      <% if @quotation_request_form.collect_sequence == QuotationRequestForm::BIN %>
-                        <td>
-                          <table class="black-line-table">
-                            <tr>
-                              <% if @sequents.present? %>
-                                <% @sequents.each_with_index do |seq, index| %>
-                                  <td width="80" align="center"><%= index + 1 %>/<%= @sequents.size %></td>
-                                <% end %>
-                              <% end %>
-                            </tr>
-                            
-                            <tr>
-                              <% if @sequents.present? %>
-                                <% @sequents.each do |seq| %>
-                                  <td align="center"><%= seq rescue '-' %></td>
-                                <% end %>
-                              <% end %>
-                            </tr>
-                          </table>
-                        </td>
-                      <% elsif @quotation_request_form.collect_sequence == QuotationRequestForm::CARTON %>
-                        <td>
-                          <table class="black-line-table">
-                            <tr>
-                              <% if @sequents.present? %>
-                                <% x = @sequents.size %>
-                                <% @sequents.each do |seq| %>
-                                  <td width="80" align="center"><%= x %>/<%= @sequents.size %></td>
-                                  <% x -= 1 %>
-                                <% end %>
-                              <% end %>
-                            </tr>
-                            <tr>
-                              <% if @sequents.present? %>
-                                <% @sequents.reverse.each do |seq| %>
-                                  <td align="center"><%= seq rescue '-' %></td>
-                                <% end %>
-                              <% end %>
-                            </tr>
-                          </table>
-                        </td>
-                      <% else %>
-                        <td>-</td>
-                      <% end %>
-                    </tr>
-                  </table>
-                </fieldset>
-              <% end %>
-            <% end %>
-          </div>
-        
-          <div>
-            <% if @field_sets.present? %>
-              <% if @field_sets.include?(QuotationRequestForm::MOQ_FIELDSET) %>
-                <fieldset style="width: 700px;">
-                  <legend>MOQ</legend>
-                  <table>
-                    <tr>
-                      <td width="100"><b>No of MOQ</b></td>
-                      <td><%= @quotation_request_form.no_of_moq rescue '0' %></td>
-                    </tr>
-                    <tr>
-                      <td><b>MOQ</b></td>
+                      <td width="160"><b>Wax</b></td>
                       <td>
-                        <% if @quotation_request_form.material_of_quantities.present? %>
-                          <table class="black-line-table">
-
-                                <tr>
-                                  <td width="100"><b>Quantity</b></td>
-                                  <% @quotation_request_form.material_of_quantities.each do |moq| %>
-                                    <td width="80" align="center"><%= moq.quantity rescue '-' %></td>
-                                  <% end %>
-                                </tr>
-
-                                <tr>
-                                  <td width="100"><b>Unit Price</b></td>
-                                  <% @quotation_request_form.material_of_quantities.each do |moq| %>
-                                    <td width="80" align="center"><%= two_precision(moq.unit_price) rescue '-' %></td>
-                                  <% end %>
-                                </tr>
-
-                          </table>
+                        <% if @quotation_request_form.wax == TRUE %>
+                          <%= check_box_tag "wax", {}, true, :disabled => true %>
+                        <% else %>
+                          <%= check_box_tag "wax", {}, false, :disabled => true %>
                         <% end %>
                       </td>
                     </tr>
+                  </table>
+                </fieldset>
+
+                <fieldset style="width: 700px;">
+                  <legend>FOLDING</legend>
+                  <table>
                     <tr>
-                      <td width="100"><b>Remarks</b></td>
-                      <td><%= @quotation_request_form.remarks rescue '-' %></td>
+                      <td width="160"><b>Folding</b></td>
+                      <td>
+                        <% if @quotation_request_form.folding == TRUE %>
+                          <%= check_box_tag "folding", {}, true, :disabled => true %>
+                        <% else %>
+                          <%= check_box_tag "folding", {}, false, :disabled => true %>
+                        <% end %>
+                      </td>
                     </tr>
                   </table>
                 </fieldset>
-              <% else %>
-                MOQ NONE
-              <% end %>
-            <% else %>
-              MOQ NONE
-            <% end %>
-              
-              <br/><br/>
-              
-            <% if @cs.present? %>
-              <% @cs.each do |cs| %>
-                <% if cs.costing_sheet_changelogs.present? %>
-                  <% @changelog = cs.costing_sheet_changelogs %>
+
+                <% if @field_sets.present? %>
+                  <% if @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>
                     <fieldset style="width: 700px;">
-                      <legend>COSTING SHEET CHANGE LOG</legend>
+                      <legend>COLLATING</legend>
                       <table>
                         <tr>
-                          <th width="100">Date</th>
-                          <th>Change Log</th>
+                          <td width="160"><b>Collating No of Design</b></td>
+                          <td><%= @quotation_request_form.collating_no rescue '-' %></td>
                         </tr>
-                        <% @changelog.each do |log| %>
-                          <tr>
-                            <td><%= log.created_at.strftime("%d-%m-%Y") %></td>
-                            <td><%= log.change_log rescue '0' %></td>
-                          </tr>
-                        <% end %>
+
+                        <tr>
+                          <td><b>Collect Sequence</b></td>
+                          <td><%= @quotation_request_form.collect_sequence rescue '-' %></td>
+                        </tr>
+
+                        <tr>
+                          <td style="vertical-align: top;"><b>Sequent</b></td>
+
+                          <% if @quotation_request_form.collect_sequence == QuotationRequestForm::BIN %>
+                            <td>
+                              <table class="black-line-table">
+                                <tr>
+                                  <% if @sequents.present? %>
+                                    <% @sequents.each_with_index do |seq, index| %>
+                                      <td width="80" align="center"><%= index + 1 %>/<%= @sequents.size %></td>
+                                    <% end %>
+                                  <% end %>
+                                </tr>
+
+                                <tr>
+                                  <% if @sequents.present? %>
+                                    <% @sequents.each do |seq| %>
+                                      <td align="center"><%= seq rescue '-' %></td>
+                                    <% end %>
+                                  <% end %>
+                                </tr>
+                              </table>
+                            </td>
+                          <% elsif @quotation_request_form.collect_sequence == QuotationRequestForm::CARTON %>
+                            <td>
+                              <table class="black-line-table">
+                                <tr>
+                                  <% if @sequents.present? %>
+                                    <% x = @sequents.size %>
+                                    <% @sequents.each do |seq| %>
+                                      <td width="80" align="center"><%= x %>/<%= @sequents.size %></td>
+                                      <% x -= 1 %>
+                                    <% end %>
+                                  <% end %>
+                                </tr>
+                                <tr>
+                                  <% if @sequents.present? %>
+                                    <% @sequents.reverse.each do |seq| %>
+                                      <td align="center"><%= seq rescue '-' %></td>
+                                    <% end %>
+                                  <% end %>
+                                </tr>
+                              </table>
+                            </td>
+                          <% else %>
+                            <td>-</td>
+                          <% end %>
+                        </tr>
                       </table>
                     </fieldset>
+                  <% end %>
                 <% end %>
-              <% end %>
-            <% end %>
-          </div>
-      </div>
-</div>
+              </div>
+            </div>
 
-<div class="icon_tag">
-  <%= link_close_button %>
-</div>
-  
-<table>
-  <tr>
-    <td><b>Updated By</b></td>
-    <td width="150">
-      <% if @quotation_request_form.user_id.present? %>
-        <%= @quotation_request_form.user.name rescue '-' %>
-      <% else %>
-        <%= current_user.name %>
-      <% end %>
-    </td>
-    <td>
-      <% if @quotation_request_form.status_remark.present? %>
-        <span style="background:red; color:white;">Status Remark: <%= @quotation_request_form.status_remark rescue '-' %></span>
-      <% end %>
-    </td>
-  </tr>
+            <div>
+              <div class="tabbing_h400">
 
-  <tr>
-    <td><b>Authorized By</b></td>
-    <td width="150">
-      <% if @quotation_request_form.director_approved == TRUE %>
-        <%= User.find_by_level(User::LEVEL_FIVE).name rescue '-' %>
-      <% end %>
-    </td>
-  </tr>
-</table>
+                <% if @field_sets.present? %>
+                  <% if @field_sets.include?(QuotationRequestForm::MOQ_FIELDSET) %>
+                    <fieldset style="width: 700px;">
+                      <legend>MOQ</legend>
+                      <table>
+                        <tr>
+                          <td width="100"><b>No of MOQ</b></td>
+                          <td><%= @quotation_request_form.no_of_moq rescue '0' %></td>
+                        </tr>
+                        <tr>
+                          <td valign="top"><b>MOQ</b></td>
+                          <td>
+                            <% if @quotation_request_form.material_of_quantities.present? %>
+                              <table class="normal_table_black">
+
+                                    <tr>
+                                      <td width="100"><b>Quantity</b></td>
+                                      <% @quotation_request_form.material_of_quantities.each do |moq| %>
+                                        <td width="80" align="center"><%= moq.quantity rescue '-' %></td>
+                                      <% end %>
+                                    </tr>
+
+                                    <tr>
+                                      <td width="100"><b>Unit Price</b></td>
+                                      <% @quotation_request_form.material_of_quantities.each do |moq| %>
+                                        <td width="80" align="center"><%= two_precision(moq.unit_price) rescue '-' %></td>
+                                      <% end %>
+                                    </tr>
+
+                              </table>
+                            <% end %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top"><b>Remarks</b></td>
+                          <td><%= @quotation_request_form.remarks rescue '-' %></td>
+                        </tr>
+                      </table>
+                    </fieldset>
+                  <% else %>
+                    NONE
+                  <% end %>
+                <% else %>
+                  NONE
+                <% end %>
+
+                <br/><br/>
+
+                <% if @cs.present? %>
+                  <% @cs.each do |cs| %>
+                    <% if cs.costing_sheet_changelogs.present? %>
+                      <% @changelog = cs.costing_sheet_changelogs %>
+                        <fieldset style="width: 700px;">
+                          <legend>COSTING SHEET CHANGE LOG</legend>
+                          <table>
+                            <tr>
+                              <th width="100">Date</th>
+                              <th>Change Log</th>
+                            </tr>
+                            <% @changelog.each do |log| %>
+                              <tr>
+                                <td><%= log.created_at.strftime("%d-%m-%Y") %></td>
+                                <td><%= log.change_log rescue '0' %></td>
+                              </tr>
+                            <% end %>
+                          </table>
+                        </fieldset>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+        </div>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
+
+  <table>
+    <tr>
+      <td><b>Updated By</b></td>
+      <td width="150">
+        <% if @quotation_request_form.user_id.present? %>
+          <%= @quotation_request_form.user.name rescue '-' %>
+        <% else %>
+          <%= current_user.name %>
+        <% end %>
+      </td>
+      <td>
+        <% if @quotation_request_form.status_remark.present? %>
+          <span style="background:red; color:white;">Status Remark: <%= @quotation_request_form.status_remark rescue '-' %></span>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>Authorized By</b></td>
+      <td width="150">
+        <% if @quotation_request_form.director_approved == TRUE %>
+          <%= User.find_by_level(User::LEVEL_FIVE).name rescue '-' %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>

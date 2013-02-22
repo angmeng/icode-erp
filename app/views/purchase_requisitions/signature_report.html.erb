@@ -1,9 +1,9 @@
-<%= render "linking" %>
-
 <div id="popup_container">
+  <%= render "linking" %>
+  
   <div class="title_head"><strong style="color:white;">APPROVE / REJECT PURCHASE REQUISITION TASKS</strong></div>
 
-  <div class="fix_1600x900_h450">
+  <div class="fix_h450">
     <% if @user_report.present? %>
       <%= render "/purchase_requisitions/summary_from_purchase_requisition", :summary => @user_report %>
     <% else %>

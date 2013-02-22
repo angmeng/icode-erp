@@ -626,7 +626,7 @@ module ApplicationHelper
     end
     
     def link_save_button
-      submit_tag "Save", :class => "k-button font_bold"
+      submit_tag "Save", :class => "k-button font_bold", :id => "save_button"
     end
     
     def link_fsave_button(f)

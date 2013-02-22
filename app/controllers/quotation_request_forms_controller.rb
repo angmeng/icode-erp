@@ -1,15 +1,18 @@
 class QuotationRequestFormsController < ApplicationController
   before_filter :authenticate_user!
-#  layout "sheetbox"
+  layout "sheetbox", :except => [:index, :pending_quotation]
   
   def index
     @search = QuotationRequestForm.search(params[:search])
     @quotation_request_forms = QuotationRequestForm.ordered_search_qrno(@search)
+    @quotation_request_forms = @quotation_request_forms.where(:user_id => current_user.id) unless user_is_admin?
   end
   
   def pending_quotation
-    if current_user.quotation_request_forms.present?
-      @quotation_request_forms = current_user.quotation_request_forms.order("quotation_request_no DESC").where("status = ?", QuotationRequestForm::PENDING)
+    if user_is_admin?
+      @quotation_request_forms = QuotationRequestForm.where("status = ?", QuotationRequestForm::PENDING)
+    else
+      @quotation_request_forms = current_user.quotation_request_forms.where("status = ?", QuotationRequestForm::PENDING) if current_user.quotation_request_forms.present?
     end
   end
   

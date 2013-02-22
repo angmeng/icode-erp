@@ -1,8 +1,8 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::QR_NEW_ADD) %>
-    <%= link_to image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "cube35"), new_quotation_request_form_path, :class => "iframe_1600x900", "data-fancybox-type" => "iframe" %>
+    <%= link_to "Add Item", new_quotation_request_form_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <%= image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "opac_icon") %>
+    Add Item
   <% end %>
 </div>
 

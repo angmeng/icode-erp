@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :are_you_director?
+  layout "sheetbox", :except => [:index, :kiv]
   
   def index
     @search = User.search(params[:search])
@@ -15,13 +16,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     checkboxes
-    render :layout => "sheetbox"
-  end
-
-  def new
-  end
-  
-  def create
   end
   
   def destroy
@@ -69,7 +63,7 @@ class UsersController < ApplicationController
       @user = User.new(:name => params[:new_name], :department_id => params[:department_id], :job_title => params[:job_title], :password => take_password(params[:password]), :level_two => params[:lvl_two], :level_three => params[:lvl_three])
       if @user.save
         UserRegister.generate_role(@user, params[:inventory_management_system])
-        redirect_to users_path, :notice => "User has created successfully."
+        redirect_to user_path(@user), :notice => "User has created successfully."
       else
         flash[:alert] = @user.errors.full_messages.join(", ")
         render "new_user_entry"
@@ -83,7 +77,6 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     checkboxes
-    render :layout => "sheetbox"
   end
   
   def update

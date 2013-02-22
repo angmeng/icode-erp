@@ -1,13 +1,11 @@
-<div class="icon_tag">
-  
-  <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
+<div class="left_icon_tag">
+  <%= link_to "Add", new_user_entry_users_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %>
+</div>
 
+<div class="icon_tag">
+  <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
   <span id="on_edit" editClass="iframe_1600x900"><%= not_link_edit %></span>
-  
   <span id="on_kiv"><%= not_link_kiv %></span>
-  
   <span id="on_printable"><%= not_link_printable %></span>
-  
   <%= link_home_button %>
-   
 </div>

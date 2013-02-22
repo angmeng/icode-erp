@@ -3,7 +3,7 @@
 
   <div class="title_head"><strong style="color:white;">VENDOR SELECTION</strong></div>
 
-  <div class="fix_1600x900_h450">
+  <div class="fix_h450">
     <% if @pending_vendor.present? %>
       <%= render "/purchase_orders/pending_approval", :pending => @pending_vendor %>
     <% else %>

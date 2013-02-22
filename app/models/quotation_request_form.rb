@@ -35,10 +35,10 @@ class QuotationRequestForm < ActiveRecord::Base
   APPROVED      = "A"
   CONFIRMED     = "CONFIRMED"
   KEEP_IN_VIEW  = "KIV"
-#  
+
   # approving or rejecting
   APPROVING = "Approving"
-  REJECTED = "Rejecting"
+  REJECTED  = "Rejecting"
   
   SPOT = "SPOT"
   FULL = "FULL"
@@ -149,7 +149,6 @@ class QuotationRequestForm < ActiveRecord::Base
   default_scope :order => "quotation_request_no DESC"
   
   def self.ordered_search_qrno(search)
-#    search.order("quotation_request_no DESC").where("status != ?", QuotationRequestForm::KEEP_IN_VIEW)
     search.where("status != ?", QuotationRequestForm::KEEP_IN_VIEW)
   end
   

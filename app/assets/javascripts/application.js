@@ -16,25 +16,7 @@
 //= require turbolinks
 
 $(document).ready(function () {
-    
     $("#timedout").hide();
-    
-//    $("button").click(function(){
-//        $.ajax({url:"demo_test.txt", 
-//            beforeSend:function(xhr) {
-//                $("#spinner").show();
-//            },
-//         complete:function(xhr) {
-//           $("#spinner").delay(3000).hide();
-//         },
-//          success:function(result){
-//            $("#div1").html(result);
-//              },
-//          error:function(xhr){
-//              alert("An error occured: " + xhr.status + " " + xhr.statusText);
-//          }
-//        });
-//    });
 });
 
 
@@ -48,48 +30,25 @@ $(function() {
                 return false;
             } 
         }
-//        if ($(this).attr("value") == "Log In"){
-//            if (e.keyCode == 13) return true;
-//        } else{
-//            if (e.keyCode == 13) return false;
-//        }
     });
  
 });
 
-//function disableEnterKey(e)
-//{
-//     var key;
+//$(document).ready(function() {
+//    $("#vertical").kendoSplitter({
+//        orientation: "vertical",
+//        panes: [
+//            { collapsible: false },
+//            { collapsible: false, size: "100px" },
+//            { collapsible: false, resizable: false, size: "100px" }
+//        ]
+//    });
 //
-//     if(window.event)
-//          key = window.event.keyCode;     //IE
-//     else
-//          key = e.which;     //firefox
-//
-//     if(key == 13)
-//          return false;
-//     else
-//          return true;
-//}
-
-//<input type=”text” name=”mytext” onKeyPress=”return disableEnterKey(event)”>
-
-
-$(document).ready(function() {
-    $("#vertical").kendoSplitter({
-        orientation: "vertical",
-        panes: [
-            { collapsible: false },
-            { collapsible: false, size: "100px" },
-            { collapsible: false, resizable: false, size: "100px" }
-        ]
-    });
-
-    $("#horizontal").kendoSplitter({
-        panes: [
-            { collapsible: true, size: "220px" },
-            { collapsible: false },
-            { collapsible: true, size: "220px" }
-        ]
-    });
-});
+//    $("#horizontal").kendoSplitter({
+//        panes: [
+//            { collapsible: true, size: "220px" },
+//            { collapsible: false },
+//            { collapsible: true, size: "220px" }
+//        ]
+//    });
+//});

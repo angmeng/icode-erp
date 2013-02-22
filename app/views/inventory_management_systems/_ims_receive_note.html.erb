@@ -6,8 +6,8 @@
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU), :disabled => true %> RECEIVE NOTE</td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW), :disabled => true %> New RNs</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD), :disabled => true %></td>
-        <td><%#= "save" %></td>
+        <td></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SAVE, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_SAVE), :disabled => true %></td>
         <% 10.times do |td| %><td></td><% end %>
       </tr>
 
@@ -38,8 +38,8 @@
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> RECEIVE NOTE</td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %> New RNs</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %></td>
-        <td><%#= "save" %></td>
+        <td></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SAVE, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_SAVE) %></td>
         <% 10.times do |td| %><td></td><% end %>
       </tr>
 
@@ -72,8 +72,8 @@
       <td></td>
       <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU %> RECEIVE NOTE</td>
       <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW %> New RNs</td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD %></td>
-      <td><%#= "save" %></td>
+      <td></td>
+      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SAVE %></td>
       <% 10.times do |td| %><td></td><% end %>
     </tr>
     

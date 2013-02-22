@@ -15,7 +15,7 @@
 /*==================== SCAFFOLDS STYLE ==================================================================================*/
 html { 
     height: 100%; /* For 100% height */ 
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 body {
@@ -203,6 +203,32 @@ table.black-line-table td {
 	-moz-border-radius: 0px 0px 0px 0px; }
 /*=================================== BLACK TABLE (END) =====================================*/
 
+/*=================================== BLACK TABLE - without 100% width =====================================*/
+table.normal_table_black {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: black;
+	border-collapse: collapse;
+	background-color: transparent; }
+
+table.normal_table_black th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+        
+table.normal_table_black td {
+	border-width: 1px;
+        padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+/*=================================== BLACK TABLE (END) =====================================*/
+
 /*=================================== STANDARD TABLE WIDTH =====================================*/
 .std_no             { width: 30px; }
 .std_check          { width: 40px; }
@@ -283,8 +309,7 @@ table.black-line-table td {
 .type_window_patching { display:none; }
 .type_varnish { display:none; }
     
-fieldset { border: 1px solid gray; } 
-legend { font-size: 15px; font-weight: bold; }
+
 
 .font_bold      { font-weight: bold; }
 .header_content { background-color: #FE9B00; }
@@ -320,7 +345,7 @@ legend { font-size: 15px; font-weight: bold; }
 #fix_height { overflow:auto; height:650px; }
 
 /* new_form */
-.new_purchase_form {
+.fix_1600x900_h450, .fix_h450 {
     border: 1px solid black;
     height: 450px;
     overflow: auto;
@@ -332,10 +357,10 @@ legend { font-size: 15px; font-weight: bold; }
     overflow: auto;
 }
 
-.new_qr_form {
+/*.new_qr_form {
     border: 1px solid grey;
     width: 99.80%;
-    height: 400px;}
+    height: 400px;}*/
 
 .new_costingsheet {
 /*    border: 1px solid grey;*/
@@ -372,12 +397,7 @@ legend { font-size: 15px; font-weight: bold; }
     height: 550px;
 }
 
-.fix_1600x900_h450 {
-    border: 1px solid black;
-    overflow:auto;
-    height: 450px;
-/*    margin: 5px;*/
-}
+
 
 .fix_1600x900_h400 {
     border: 1px solid black;
@@ -437,24 +457,7 @@ legend { font-size: 15px; font-weight: bold; }
 tr.over td{ background: gold; }
 tr.selected_row td{ background: gold; }
 
-#paper_size {
-    position: absolute;
-    top: 100px;
-    left: 600px;
-    border: 1px solid blue;
-}
 
-#paper_size_show {
-    position: absolute;
-    top: 100px;
-    left: 600px;
-}
-
-#printing_size_show {
-    position: absolute;
-    top: 100px;
-    left: 1050px;
-}
 
 #company_strip{ width: 99.70%; }
 
@@ -471,4 +474,31 @@ tr.selected_row td{ background: gold; }
 .product_button{ padding: 5px; }
 .product_container { margin: 5px; height: 450px; overflow: auto; }
 #right-pane { background-color: gainsboro; }
+
+
+fieldset { border: 1px solid green; padding: 5px; }
+legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color: green; font-weight: bold;  }
+
+/* Quotation Tabbing */
+.tabbing_h400 { height: 400px; overflow: auto; }
+
+/* Quotation - Material */
+#paper_size {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    border: 1px solid blue;
+}
+
+#paper_size_show {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#printing_size_show {
+    position: absolute;
+    top: 0px;
+    left: 500px;
+}
 

@@ -1,0 +1,67 @@
+<table>
+  <tr>
+    <td width="120"><b>Paper Quality *</b></td>
+    <td><%= f.text_field :material_gramme, :class => "kendo_precision_0" , "required validationMessage" => "Please Enter Paper Quality", :style => "width: 80px;" %> GSM</td>
+    <% if unit_measurement.find_by_code('GSM').present? %>
+      <%= f.hidden_field :unit_measurement_id, :value => unit_measurement.find_by_code('GSM').id, :size => 3 %>
+    <% else %>
+      <%= f.hidden_field :unit_measurement_id, :value => 40, :size => 3 %>
+    <% end %>
+  </tr>
+
+  <tr>
+    <td><b>Type of Paper</b></td>
+    <td><%= f.text_field :material_type, :class => "k-textbox" %></td>
+  </tr>
+
+  <tr>
+    <td><b>Remark</b></td>
+    <td colspan="3"><%= f.text_area :material_remark, :rows => '3', :cols => '40' %></td>
+  </tr>
+
+  <tr>
+    <td><b>Paper Size, inch *</b></td>
+    <td>
+      (W)<%= f.text_field :paper_width, :class => "kendo_precision_2", "required validationMessage" => "Please Enter Paper Size of Width", :style => "width: 80px;" %>
+      (L)<%= f.text_field :paper_length, :class => "kendo_precision_2", "required validationMessage" => "Please Enter Paper Size of Length", :style => "width: 80px;" %>  
+    </td>
+    <td><b>Ratio *</b></td>
+    <td>
+      <%= f.text_field :ratio, :style => "width: 60px;", :class => "kendo_precision_0", "required validationMessage" => "Please Enter Ratio", :style => "width: 80px;" %>
+      <span id="run_size">RUN</span>
+    </td>
+  </tr>
+</table>
+
+<fieldset>
+  <legend>Printing Size, inch</legend>
+
+  <div>
+    <span id="calculate_size">
+
+      <% x = @quotation_request_form.ratio %>
+
+      <% if @quotation_request_form.paper_length.present? and @quotation_request_form.paper_width.present? %>
+        <% if @quotation_request_form.selection_printing_sizes.present? %>
+          <table>
+            <% @quotation_request_form.selection_printing_sizes.each do |sps| %>
+              <tr>
+                <td width="100">(W)<%= two_precision(sps.width) %></td>
+                <td width="100">(L)<%= two_precision(sps.length) %></td>
+                <td align="right">UPS:</td> <td><%= sps.ups %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td colspan="2"></td>
+              <td>Total UPS:</td>
+              <td><%= @quotation_request_form.selection_printing_sizes.sum(&:ups) rescue '0' %></td>
+            </tr>
+          </table>
+        <% end %>
+      <% end %>
+
+    </span>
+  </div>
+
+  <div id="get_size" align="right">Check</div>
+</fieldset>

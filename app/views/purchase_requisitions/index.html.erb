@@ -1,13 +1,13 @@
-<%= render "linking" %>
-
 <div id="popup_container">
+  <%= render "linking" %>
+  
   <div class="title_head">
     <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong>
     <%= search_button %>
   </div>
   <div><%= render "search_purchase_requisition" %></div>
 
-  <div class="fix_1600x900_h450">
+  <div class="fix_h450">
     <% if @purchase_requisitions.present? %>
       <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
     <% else %>

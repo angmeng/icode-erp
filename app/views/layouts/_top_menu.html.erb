@@ -2,20 +2,20 @@
   <div id="main_header">ETHEOS IMPRINT E-RESOURCE PLANNING SYSTEM</div>
   
   <ul id="menu">
-    <li style="width:210px;">
+    <li style="width:150px;">
       Home (<strong><%= current_user.name %></strong>)
       <ul>
-        <li style = "width:200px;"><%= link_to "Main", root_url %></li>
+        <li style = "width:150px;"><%= link_to "Main", root_url %></li>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
       </ul>
     </li>
 
-    <li style="width:130px;">
+    <li style="width:120px;">
       Purchase Flow
       <ul>
 
         <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Purchase Requisition
             <ul>
               <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
@@ -52,7 +52,7 @@
         <% end %>
 
         <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Purchase Order
             <ul>
               <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
@@ -109,7 +109,7 @@
         <% end %>
 
         <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Received Notes
             <ul>
               <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
@@ -137,7 +137,7 @@
           </li>
         <% end %>
 
-        <li style="width:200px;">
+        <li style="width:150px;">
               Purchase Report
               <ul>                 
                   <li><%= link_to "Purchase requisitions report", pr_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -152,7 +152,7 @@
               </ul>
           </li>  
 
-          <li style="width:200px;">
+          <li style="width:150px;">
               Purchase Order Report
               <ul>
                   <li><%= link_to "Purchase Order Report", po_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -160,7 +160,7 @@
               </ul>
             </li>   
 
-            <li style="width:200px;">
+            <li style="width:150px;">
               Received Note Report
               <ul>
                   <li><%= link_to "Received Note Report", rn_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -185,11 +185,11 @@
       </ul>
     </li>
 
-    <li style="width:130px;">
+    <li style="width:120px;">
       Sales Flow
       <ul>
         <% if roles.include?(InventoryManagementSystem::QR_MENU) %>
-          <li>
+          <li style="width:150px;">
             Quotation Requisition
             <ul>
               <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
@@ -232,7 +232,7 @@
         <% end %>
           
         <% if roles.include?(InventoryManagementSystem::SO_MENU) %>
-          <li>
+          <li style="width:150px;">
             Sales Order
             <ul>
               <li><%= link_to "SO Transactions & Histories", sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -265,7 +265,7 @@
         <% end %>
           
         <% if roles.include?(InventoryManagementSystem::DO_MENU) %>
-          <li>
+          <li style="width:150px;">
             Delivery Order
             <ul>
               <li><%#= link_to "Transactions", delivery_orders_path %></li>
@@ -276,11 +276,11 @@
       </ul>
     </li>
 
-    <li style="width:130px;">
+    <li style="width:120px;">
       Custom
       <ul>
         <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Sales Tax Exemption
             <ul>
               <!-- For Suppliers -->   
@@ -339,7 +339,7 @@
         <% end %>
           
         <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Formulation For All
             <ul>
               <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX) %>
@@ -358,7 +358,7 @@
         <% end %>
 
         <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Costing Sheet
             <ul>
               <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
@@ -395,35 +395,22 @@
           </li-->
         <%# end %>
 
-        <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %>
-          <li style="width:200px;">
-            Sub-Material
-            <ul>
-              <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
-                <li><%= link_to "Requisition Form", new_bill_of_material_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-              <%# else %>
-                <%#*<li class="text_gray">Formulation</li>%>
-              <%# end %>
-            </ul>
-          </li>
-        <%# end %>
-
-        <li style="width:200px;">
+        <li style="width:150px;">
               Report
               <ul>
                <li><%= link_to "Sales Tax Exemptions Report", sales_tax_exemption_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               </ul>
-          </li>
+        </li>
 
       </ul>
     </li>
 
-    <li style="width:130px;">
+    <li style="width:120px;">
       Inventory Flow
       <ul>
 
         <% if roles.include?(InventoryManagementSystem::INVENTORY_MENU) %>
-          <li style="width:200px;">
+          <li style="width:150px;">
             Inventory
             <ul>
               <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
@@ -472,7 +459,7 @@
           </li>
         <% end %>
 
-        <li style="width:200px;">
+        <li style="width:150px;">
             Inventory Report
             <ul>
                <li><%= link_to "Inventory", inventory_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -486,7 +473,7 @@
       <!--li><%#= link_to "Backup", backup_users_path, :confirm => "Are you sure you want to run backup now ?" %></li-->
       <!--li><%#= link_to "Profile", profile_user_path(current_user.id) %></li-->
 
-    <li style="width:130px;">
+    <li style="width:120px;">
       Housekeeping
       <ul>
         <% if roles.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU) %>
@@ -500,7 +487,7 @@
             User
             <ul>
               <li><%= link_to "Listing Users", users_path %></li>
-              <li><%= link_to "New User", new_user_entry_users_path %></li>
+              <li><%= link_to "New User", new_user_entry_users_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <li><%= link_to "Listing Users - KIV", kiv_users_path %></li>
               <!--li><%#= link_to "Clearing Database", clear_database_users_path, :confirm => "Are you sure to clear database?" %></li-->
             </ul>
@@ -677,11 +664,11 @@
       </ul>
     </li>
 
-    <li style="width:200px;">
+    <li style="width:120px;">
         Report
         <ul>
 
-          <li style="width:200px;">
+          <li style="width:150px;">
               Listing Report
               <ul>
                 <li><%#= link_to "Company", company_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -699,7 +686,7 @@
             </li>
             
 
-            <li style="width:200px;">
+            <li style="width:150px;">
               Stock Flow Tracking
               <ul>
                   <li><%#= link_to "FG Transaction C/W U/P", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -708,7 +695,7 @@
               </ul>
             </li>
         
-            <li style="width:200px;">
+            <li style="width:150px;">
               Sales Report
               <ul>
                   <li><%#= link_to "Daily Turnover", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -729,7 +716,7 @@
               </ul>
             </li>
 
-            <li style="width:200px;">
+            <li style="width:150px;">
               Production Report
               <ul>
                   <li><%#= link_to "A", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>

@@ -108,7 +108,8 @@ class InventoryManagementSystem < ActiveRecord::Base
   RECEIVE_NOTE_KIV_VIEW                 = 53
   
   #action new
-  RECEIVE_NOTE_NEW_ADD                 = 54
+  RECEIVE_NOTE_NEW_ADD                  = 54
+  RECEIVE_NOTE_SAVE                     = 262
   
   #action transaction
   RECEIVE_NOTE_TRANSACTION_SHOW         = 55
@@ -386,5 +387,5 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRICE_CONTROL_SHOW_KIV                             = 256
   PRICE_CONTROL_RECOVER                              = 257
   
-  #start at 262
+  #start at 263
 end

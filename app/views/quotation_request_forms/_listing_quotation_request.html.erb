@@ -62,22 +62,7 @@
           <% end %>
         </td>
         
-        <td>
-          <%# if action_name == "feedback" %>
-            <%# if quotation_request_form.trade_company_id.present? %>
-              <%#= hidden_field_tag :company_exist, "yes" %>
-              <%#= quotation_request_form.customer_name rescue '-' %>
-            <%# else %>
-              <%#= hidden_field_tag :company_exist, "no" %>
-              <!--span class="red_text">
-                <%#= quotation_request_form.customer_name rescue '-' %>
-              </span-->
-              <!--&nbsp;(<%#= link_to "Create Customer ID", new_trade_company_path(:option => "customer", :qr_id => quotation_request_form.id), :class => "iframe_800x600", "data-fancybox-type" => "iframe" %>)-->
-            <%# end %>
-          <%# else %>
-            <%#= quotation_request_form.customer_name rescue '-' %>
-          <%# end %>
-              
+        <td>  
           <% if quotation_request_form.trade_company_id.present? %>
             <%= quotation_request_form.customer_name rescue '-' %>
           <% else %>

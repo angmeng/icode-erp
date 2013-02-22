@@ -1,0 +1,302 @@
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+      
+        $('input:checkbox[name="field_set[]"]').click(function() {
+            var checkbox_value = $(this).attr("value");
+            var checked = $(this).is(':checked');
+    //        alert(checkbox_value);
+
+            switch(parseInt(checkbox_value)){
+                /* Color Fieldset */
+                case 1:
+                    if (checked == true){
+                            $("#quotation_request_form_color_no").val('').attr('disabled', false);
+                            $('input[id^="quotation_request_form_color_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#color_name").empty();
+                            $("#color_code").empty();
+                            $('input[id^="pre_print_type_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', false);
+                            });
+                            $("#pre_print_type_other").val('').attr('disabled', false);
+                            $('input[id^="quotation_request_form_barcode_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', false);
+                            });
+                            $("#other_barcode").val('').attr("disabled", false);
+                            $('input[id^="quotation_request_form_shortage_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', false);
+                            });
+                    } else {
+                            $("#quotation_request_form_color_no").val('').attr('disabled', true);
+                            $('input[id^="quotation_request_form_color_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#color_name").empty();
+                            $("#color_code").empty();
+                            $('input[id^="pre_print_type_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', true);
+                            });
+                            $("#pre_print_type_other").val('').attr('disabled', true);
+                            $('input[id^="quotation_request_form_barcode_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', true);
+                            });
+                            $("#other_barcode").val('').attr("disabled", true);
+                            $('input[id^="quotation_request_form_shortage_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', true);
+                            });
+                    }
+                    break;
+
+                /* Surface Fieldset */
+                case 2:
+                    if (checked == true){
+                            $('input[id^="quotation_request_form_varnish_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $('input[id^="varnish_type_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', false);
+                            });
+                            $("#quotation_request_form_surface_remark").val('').attr("disabled", false);
+                    } else {
+                            $('input[id^="quotation_request_form_varnish_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $('input[id^="varnish_type_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', true);
+                            });
+                            $("#quotation_request_form_surface_remark").val('').attr("disabled", true);
+                    }
+                    break;
+
+                /* Lamination Fieldset */
+                case 3:
+                    if (checked == true){                        
+                            $('input[id^="quotation_request_form_lamination_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $('input[id^="quotation_request_form_lamination_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#quotation_request_form_lamination_type_joints").val('0').attr("disabled", false);
+                    } else {
+                            $('input[id^="quotation_request_form_lamination_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $('input[id^="quotation_request_form_lamination_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#quotation_request_form_lamination_type_joints").val('0').attr("disabled", true);
+                            $('input[id^="quotation_request_form_flute_type_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', true);
+                            });
+                            $("#quotation_request_form_flute_type_other").val('').attr('disabled', true);
+                            $('input[id^="quotation_request_form_flute_material_"]').each(function(){
+                                $(this).attr('checked', false).attr('disabled', true);
+                            });
+                            $("#quotation_request_form_flute_material_other").val('').attr('disabled', true);
+                            $("#quotation_request_form_lamination_remark").val('').attr("disabled", true);
+                            $("#generate_flute_size").empty();
+                            $("#generate_flute_size").append('(W)<input id="generate_flute_width_" size="5" type="text" disabled="true" name="generate_flute_width[1][val]">');
+                            $("#generate_flute_size").append('(L)<input id="generate_flute_length_" size="5" type="text" disabled="true" name="generate_flute_length[1][val]">');
+                            $("#mould_no, #window_no").empty();
+                            $("#mould_no").append('<input class="mould_no_" size="10" type="text" name="mould_no[1][val]" disabled="disabled"/>');
+                            $("#window_no").append('<input class="window_no_" size="10" type="text" name="window_no[1][val]" disabled="disabled"/>');
+                    }
+                    break;
+
+                /* Stamping Fieldset */    
+                case 4:
+                    if (checked == true){
+                             $('input[id^="stamping_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#stamping_other").val('').attr('disabled', false);
+                            $("#quotation_request_form_stamping_per_box").val('').attr('disabled', false);
+                            $("#quotation_request_form_stamping_width").val('').attr('disabled', false);
+                            $("#quotation_request_form_stamping_length").val('').attr('disabled', false);
+                    } else {
+                            $('input[id^="stamping_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#stamping_other").val('').attr('disabled', true);
+                            $("#quotation_request_form_stamping_per_box").val('').attr('disabled', true);
+                            $("#quotation_request_form_stamping_width").val('').attr('disabled', true);
+                            $("#quotation_request_form_stamping_length").val('').attr('disabled', true);
+                    }
+                    break;            
+
+                /* Die Cut Fieldset */   
+                case 5:
+                    if (checked == true){
+    //                        var joint = $("quotation_request_form_lamination_type_joints").val();
+    //                        alert(joint);
+
+                            $('input[id^="die_cut_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $('input[id^="quotation_request_form_die_cut_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#other_die_cut").val('').attr('disabled', false);
+                            $('input[id^="quotation_request_form_window_shape_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#window_shape_other").val('').attr('disabled', false);
+                            
+                            $('input[name^="mould_no"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $('input[name^="window_no"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                    } else {
+                            $('input[id^="die_cut_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $('input[id^="quotation_request_form_die_cut_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#other_die_cut").val('').attr('disabled', true);
+                            $('input[id^="quotation_request_form_window_shape_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#window_shape_other").val('').attr('disabled', true);
+                            
+                            $('input[name^="mould_no"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $('input[name^="window_no"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                    }
+                    break;
+
+                /* Window Fieldset */   
+                case 6:
+                    if (checked == true){
+                            $('input[id^="quotation_request_form_window_patching_false"]').attr("checked", false).attr("disabled", false);
+                            $('input[id^="quotation_request_form_window_patching_true"]').attr("checked", false).attr("disabled", false);
+                    } else {
+                            $('input[id^="quotation_request_form_window_patching_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $('input[id^="quotation_request_form_window_patching_type_plain_film"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#quotation_request_form_pre_print_textbox").val('').attr('disabled', true);
+                            $("#other_window_patching").val('').attr('disabled', true);
+                            $("#quotation_request_form_window_width").val('').attr('disabled', true);
+                            $("#quotation_request_form_window_length").val('').attr('disabled', true);
+                            $("#quotation_request_form_window_usage").val('').attr('disabled', true);
+                    }
+                    break;
+
+                /* Glueing Fieldset */ 
+                case 7:
+                    if (checked == true){
+                            $('input[id^="glueing_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#glueing_text").val('').attr('disabled', false);
+                            $("#quotation_request_form_glueing_material").val('').attr('disabled', false);
+                    } else {
+                            $('input[id^="glueing_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#glueing_text").val('').attr('disabled', true);
+                            $("#quotation_request_form_glueing_material").val('').attr('disabled', true);
+                    }
+                    break;
+
+                /* Packing Fieldset */ 
+                case 8:
+                    if (checked == true){
+                            $('input[id^="quotation_request_form_packing_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#quotation_request_form_packing_type_other").val('').attr('disabled', false);
+                            $("#quotation_request_form_packed_quantity").val('0').attr('disabled', false);
+                    } else {
+                            $('input[id^="quotation_request_form_packing_type_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#quotation_request_form_packing_type_other").val('').attr('disabled', true);
+                            $("#quotation_request_form_packed_quantity").val('0').attr('disabled', true);
+                    }
+                    break;
+
+                /* Collating Fieldset */     
+                case 11:
+                    if (checked == true){
+                            $('input[id^="quotation_request_form_collect_sequence_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", false);
+                            });
+                            $("#quotation_request_form_collating_no").val('0').attr('disabled', false);
+                            $("#sequent_no").empty();
+                    } else {
+                            $('input[id^="quotation_request_form_collect_sequence_"]').each(function(){
+                                $(this).attr("checked", false).attr("disabled", true);
+                            });
+                            $("#quotation_request_form_collating_no").val('0').attr('disabled', true);
+                            $("#sequent_no").empty();
+                    }
+                    break;
+
+                /* MOQ Fieldset */ 
+                case 12:
+                    if (checked == true){
+                            $("#quotation_request_form_no_of_moq").val('').attr('disabled', false);
+                            $("#quantity_no").empty();
+                            $("#pricing").empty();
+                            $("#quotation_request_form_remarks").val('').attr('disabled', false);
+                    } else {
+                            $("#quotation_request_form_no_of_moq").val('').attr('disabled', true);
+                            $("#quantity_no").empty();
+                            $("#pricing").empty();
+                            $("#quotation_request_form_remarks").val('').attr('disabled', true);
+                    }
+                    break;
+
+                /* Custom Fieldset */ 
+                case 13:
+                    if (checked == true){
+                            $("#quotation_request_form_custom_stock_code").val('').attr('disabled', false);
+                            $("#quotation_request_form_box_part_no").val('').attr('disabled', false);
+                            $("#quotation_request_form_lot_size_no").val('').attr('disabled', false);
+                            $("#lot_size").empty();
+                    } else {
+                            $("#quotation_request_form_custom_stock_code").val('').attr('disabled', true);
+                            $("#quotation_request_form_box_part_no").val('').attr('disabled', true);
+                            $("#quotation_request_form_lot_size_no").val('').attr('disabled', true);
+                            $("#lot_size").empty();
+                    }
+                    break;
+
+                default:break;
+            }
+        });
+          
+          
+          
+          
+          
+        var validator = $("#quotation_form").kendoValidator().data("kendoValidator")
+        status = $(".alert_msg");
+
+        $("#save_button").click(function() {
+            if (validator.validate()) {
+              
+            } else {
+              alert("Oop, there is invalid data in the form.");
+            }
+        });
+        
+        
+        
+        
+    });
+
+  </script>
+<% end %>
