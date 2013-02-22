@@ -14,12 +14,12 @@
     <% @receive_notes.each do |receive_note| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= receive_note.id %>">
         <td></td>
-        <td align="center"><%= receive_note.receive_note_no %></td>
+        <td align="center"><%= receive_note.receive_note_no rescue '-' %></td>
         <td align="center"><%= receive_note.rn_date.strftime("%d-%m-%Y") rescue '-' %></td>
         <td align="center"><%= receive_note.receive_note_items.count rescue '0' %></td>
         <td><%= User.find_by_id(receive_note.updated_by).name rescue '-' %></td>
         <td>
-          <%= link_to(trade_company_path(receive_note.trade_company_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+          <%= link_to(trade_company_path(receive_note.trade_company_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
             [<%= receive_note.trade_company.code rescue'-' %>] <%= receive_note.trade_company.name rescue'-' %>
           <% end %>
         </td>

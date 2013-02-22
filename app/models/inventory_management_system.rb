@@ -346,6 +346,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_NON_OPERATION_SUB_GROUP_EDIT               = 125
   PRODUCT_NON_OPERATION_FILE                         = 126
   PRODUCT_NON_OPERATION_FILE_EDIT                    = 215
+  PRODUCT_NON_OPERATION_DELETE                       = 259
   PRODUCT_NON_OPERATION_KIV                          = 216
   PRODUCT_NON_OPERATION_RECOVER                      = 217
   
@@ -355,6 +356,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_OPERATION_SUB_GROUP_EDIT                   = 145
   PRODUCT_OPERATION_FILE                             = 146
   PRODUCT_OPERATION_FILE_EDIT                        = 218
+  PRODUCT_OPERATION_DELETE                           = 260
   PRODUCT_OPERATION_KIV                              = 219
   PRODUCT_OPERATION_RECOVER                          = 220
   
@@ -364,6 +366,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT                 = 150
   PRODUCT_FINISH_GOOD_FILE                           = 151
   PRODUCT_FINISH_GOOD_FILE_EDIT                      = 221
+  PRODUCT_FINISH_GOOD_DELETE                         = 261
   PRODUCT_FINISH_GOOD_KIV                            = 222
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
   
@@ -383,5 +386,5 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRICE_CONTROL_SHOW_KIV                             = 256
   PRICE_CONTROL_RECOVER                              = 257
   
-  #start at 259
+  #start at 262
 end

@@ -10,6 +10,7 @@
         <% end %>
       <% end %>
 
+      <th>Description</th>
       <th>Transaction</th>
       <th>Stock in</th>
       <th>Stock out</th>
@@ -30,7 +31,7 @@
                 <td><%= render "/product_categories/join_product_category", :pc => inventory_history %></td>
               <% end %>
             <% end %>
-
+            <td><%= inventory_history.product.desc rescue '-' %></td>
             <td align="center"><%= inventory_issue_description(inventory_history.inventory_issue_id) rescue '-' %></td>
             <td align="center"><%= inventory_history.stock_in %></td>
             <td align="center"><%= inventory_history.stock_out rescue '0' %></td>

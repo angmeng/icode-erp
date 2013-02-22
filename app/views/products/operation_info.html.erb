@@ -1,0 +1,7 @@
+<div class="product_button">
+  <%= render "operation_top_icon", :data => @listing_categories, :match_field => @field_id %>
+</div>
+
+<div class="product_container">
+  <%= render "/products/product_details", :data => @listing_categories, :field_id => @field_id %>
+</div>

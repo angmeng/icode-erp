@@ -3,7 +3,7 @@ class StockOutsController < ApplicationController
   
   def index
     @search = StockOut.search(params[:search])
-    @stock_outs = @search.all
+    @stock_outs = @search.order("transfer_note_no DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,12 +15,7 @@ class StockOutsController < ApplicationController
   # GET /stock_outs/1.json
   def show
     @stock_out = StockOut.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @stock_out }
-    end
-
+#    render :layout => "sheetbox"
   end
 
   # GET /stock_outs/new

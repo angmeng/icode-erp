@@ -42,7 +42,7 @@
             <td align="center"><%= purchase_requisition_item_status(p) %></td>
             <td align="center">
               <% if p.product_id? %>
-                <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
                   <%= render '/product_categories/join_product_category', :pc => p %>
                 <% end %>
               <% end %>
@@ -62,10 +62,14 @@
             </td>
             <td><%= simple_format(p.description) %></td>
             <td align="center">
-              <% if p.eta < Date.today %>
-                <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
+              <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
                 <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
+              <% else %>
+                <% if p.eta < Date.today %>
+                  <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+                <% else %>
+                  <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
+                <% end %>
               <% end %>
             </td>
             <td align="center"><%= p.quantity %></td>

@@ -8,8 +8,6 @@
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_MENU, checkboxes.include?(InventoryManagementSystem::PRODUCT_MENU), :disabled => true %> PRODUCT</td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION), :disabled => true %> OPEN NON OPERATION</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV), :disabled => true %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP_EDIT), :disabled => true %></td>
@@ -17,17 +15,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT), :disabled => true %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV), :disabled => true %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE), :disabled => true %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION, checkboxes.include?(InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION), :disabled => true %> OPEN NON OPERATION KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
       <!-- OPERATION -->
@@ -35,8 +32,7 @@
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION), :disabled => true %> OPEN OPERATION</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_KIV), :disabled => true %></td>
+        
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_GROUP, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_GROUP), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_GROUP_EDIT), :disabled => true %></td>
@@ -44,17 +40,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_FILE, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_FILE), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT), :disabled => true %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_KIV), :disabled => true %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_DELETE, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_DELETE), :disabled => true %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_OPERATION, checkboxes.include?(InventoryManagementSystem::KIV_PRODUCT_OPERATION), :disabled => true %> OPEN OPERATION KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_RECOVER, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_RECOVER), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
       <!-- FINISH GOODS -->
@@ -62,8 +57,7 @@
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD), :disabled => true %> OPEN FINISH GOODS</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV), :disabled => true %></td>
+        
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP_EDIT), :disabled => true %></td>
@@ -71,17 +65,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE), :disabled => true %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT), :disabled => true %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV), :disabled => true %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_DELETE, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_DELETE), :disabled => true %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD, checkboxes.include?(InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD), :disabled => true %> OPEN FINISH GOODS KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
   
     <% else %>
@@ -91,8 +84,6 @@
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_MENU, checkboxes.include?(InventoryManagementSystem::PRODUCT_MENU) %> PRODUCT</td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION) %> OPEN NON OPERATION</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV) %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP_EDIT) %></td>
@@ -100,17 +91,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT) %></td>
-       
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV) %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE) %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION, checkboxes.include?(InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION) %> OPEN NON OPERATION KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER, checkboxes.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER) %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
       <!-- OPERATION -->
@@ -118,8 +108,6 @@
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION) %> OPEN OPERATION</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_KIV) %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_GROUP, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_GROUP) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_GROUP_EDIT) %></td>
@@ -127,17 +115,17 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_FILE, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_FILE) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT) %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_KIV) %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_DELETE, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_DELETE) %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_OPERATION, checkboxes.include?(InventoryManagementSystem::KIV_PRODUCT_OPERATION) %> OPEN OPERATION KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
+
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_RECOVER, checkboxes.include?(InventoryManagementSystem::PRODUCT_OPERATION_RECOVER) %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
       <!-- FINISH GOODS -->
@@ -145,8 +133,6 @@
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD) %> OPEN FINISH GOODS</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV) %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP_EDIT) %></td>
@@ -154,17 +140,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE) %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT) %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV) %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_DELETE, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_DELETE) %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD, checkboxes.include?(InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD) %> OPEN FINISH GOODS KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER, checkboxes.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER) %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
     <% end %>
@@ -176,8 +161,6 @@
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_MENU %> PRODUCT</td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION %> OPEN NON OPERATION</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP_EDIT %></td>
@@ -185,17 +168,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION %> OPEN NON OPERATION KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
       <!-- OPERATION -->
@@ -203,8 +185,6 @@
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION %> OPEN OPERATION</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_KIV %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_GROUP %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_GROUP_EDIT %></td>
@@ -212,17 +192,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_FILE %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_KIV %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_DELETE %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_OPERATION %> OPEN OPERATION KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_OPERATION_RECOVER %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
       
       <!-- FINISH GOODS -->
@@ -230,8 +209,6 @@
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD %> OPEN FINISH GOODS</td>
-        <td><%= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV %></td>
         <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP_EDIT %></td>
@@ -239,17 +216,16 @@
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE %></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT %></td>
-        
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV %></td>
+        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_DELETE %></td>
       </tr>
       
       <tr>
         <td></td>
         <td></td>
         <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD %> OPEN FINISH GOODS KIV</td>
-        <td><%= "save" %></td>
-        <% 1.times do |td| %><td></td><% end %>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <% 8.times do |td| %><td></td><% end %>
       </tr>
 
   <% end %>

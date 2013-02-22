@@ -1,81 +1,90 @@
-<div class="title_head"><strong style="color:white;">SHOW RECEIVED NOTE DETAIL</strong></div> 
+<div id="popup_container">
 
-<table width="100%">
-  <tr>
-    <td><b>Receive note no:</b></td>
-    <td><%= @receive_note.receive_note_no %></td>
-    <td width="50"></td>
-    <td><b>Receive note date:</b></td>
-    <td><%= @receive_note.rn_date.strftime("%d %B %Y") rescue '-' %></td>
-    <td colspan="5"></td>
-  </tr>
-  <tr>
-    <td><b>Vendor</b></td>
-    <td>
-      [<%= @poil.purchase_requisition_item.trade_company.code rescue '-' %>]
-      <%= @poil.purchase_requisition_item.trade_company.name rescue '-' %>
-    </td>
-    <td></td>
-    <td><b>Updated by:</b></td>
-    <td><%= User.find_by_id(@receive_note.updated_by).name rescue '-' %></td>
-    <td colspan="5"></td>
-  </tr>
-  <tr>
-    <td><b>Currency</b></td>
-    <td><%= @poil.purchase_order.currency.name rescue '-' %></td>
-    <td colspan="8"></td>
-  </tr>
-  <tr>
-    <td><b>Trade Term</b></td>
-    <td><%= @poil.purchase_order.trade_term.name rescue '-' %></td>
-    <td colspan="8"></td>
-  </tr>
-  <tr>
-    <td><b>Vendor's D/O</b></td>
-    <td><%= @receive_note.vendor_delivery_no rescue '-' %></td>
-    <td colspan="8"></td>
-  </tr>
-  
-  <% unless @receive_note.sales_tax_exemption_id.blank? %>
+  <div class="title_head"><strong style="color:white;">SHOW RECEIVED NOTE DETAIL</strong></div> 
+
+  <table>
     <tr>
-      <td><b>Sales Tax Exempt</b></td>
-      <td><%= @receive_note.licence_no rescue '-' %></td>
+      <td><b>Receive Note No</b></td>
+      <td><%= @receive_note.receive_note_no %></td>
+      <td width="50"></td>
+      <td><b>Receive Note Date</b></td>
+      <td><%= @receive_note.rn_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      <td colspan="5"></td>
+    </tr>
+    <tr>
+      <td><b>Vendor</b></td>
+      <td>
+        [<%= @poil.purchase_requisition_item.trade_company.code rescue '-' %>]
+        <%= @poil.purchase_requisition_item.trade_company.name rescue '-' %>
+      </td>
+      <td></td>
+      <td><b>Updated By</b></td>
+      <td><%= User.find_by_id(@receive_note.updated_by).name rescue '-' %></td>
+      <td colspan="5"></td>
+    </tr>
+    <tr>
+      <td><b>Currency</b></td>
+      <td><%= @poil.purchase_order.currency.name rescue '-' %></td>
       <td colspan="8"></td>
     </tr>
-  <% end %>
-</table>
-
-<hr/>
-
-<div class="fix_1600x900_h450">
-  <table class="white-line-table">
-    <tr class="header_line">
-      <th>P/O No.</th>
-      <th>Product ID</th>
-      <th>Description</th>
-      <th>Received Qty</th>
+    <tr>
+      <td><b>Trade Term</b></td>
+      <td><%= @poil.purchase_order.trade_term.name rescue '-' %></td>
+      <td colspan="8"></td>
     </tr>
-    <% @receive_note.receive_note_items.each do |rni|   %>
-      <tr class="<%= cycle("odd_line", "even_line") %>">
-        <td align="center">
-          <%= link_to(purchase_order_path(rni.purchase_order_item_line.purchase_order_id), { :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"}) do %>
-            <%= rni.purchase_order_item_line.purchase_order.po_no rescue '-' %>
-          <% end %>
-        </td>
-        <td align="center">
-          <%= link_to(product_path(rni.purchase_order_item_line.purchase_requisition_item.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-            <%= render "/product_categories/join_product_category", :pc => rni.purchase_order_item_line.purchase_requisition_item %>
-          <% end %>
-        </td>
-        <td><%= rni.purchase_order_item_line.purchase_requisition_item.description rescue '-' %></td>
-        <td align="center"><%= rni.received_qty rescue '-' %></td>
+    <tr>
+      <td><b>Vendor's D/O</b></td>
+      <td><%= @receive_note.vendor_delivery_no rescue '-' %></td>
+      <td colspan="8"></td>
+    </tr>
+
+    <% unless @receive_note.sales_tax_exemption_id.blank? %>
+      <tr>
+        <td><b>Sales Tax Exempt</b></td>
+        <td><%= @receive_note.licence_no rescue '-' %></td>
+        <td colspan="8"></td>
       </tr>
     <% end %>
   </table>
-</div>
 
-<div class="icon_tag">
-  <%= link_close_button %>
+  <hr/>
+
+  <div class="fix_1600x900_h450">
+    <table id="grid_h430" class="white-line-table ">
+      <thead>
+        <tr class="header_line">
+          <th>P/O No.</th>
+          <th>Product ID</th>
+          <th>Description</th>
+          <th>Received Qty</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @receive_note.receive_note_items.each do |rni|   %>
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+            <td align="center">
+              <%= link_to(purchase_order_path(rni.purchase_order_item_line.purchase_order_id), { :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"}) do %>
+                <%= rni.purchase_order_item_line.purchase_order.po_no rescue '-' %>
+              <% end %>
+            </td>
+            <td align="center">
+              <%= link_to(product_path(rni.purchase_order_item_line.purchase_requisition_item.product_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                <%= render "/product_categories/join_product_category", :pc => rni.purchase_order_item_line.purchase_requisition_item %>
+              <% end %>
+            </td>
+            <td><%= rni.purchase_order_item_line.purchase_requisition_item.description rescue '-' %></td>
+            <td align="center"><%= rni.received_qty rescue '-' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
+
 </div>
 
 
