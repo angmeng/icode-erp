@@ -113,7 +113,11 @@ class ProductCategory < ActiveRecord::Base
 
   def self.uniqueness_if_parent_id_is_zero(code)
     @pc = self.find_by_code_and_parent_id(code, 0)
-    return false, "have uniqueness in group" if @pc.present?
+    if @pc.present?
+      return false, "have uniqueness in group" 
+    else
+      return true
+    end
   end
   
   private

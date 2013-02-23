@@ -654,9 +654,7 @@ module ApplicationHelper
     end
     
     def link_mail_button
-      content_tag :span, :class => "k-button" do 
-        "Send Mail"
-      end
+       submit_tag "Send Mail", :class => "k-button font_bold"
     end
     
     

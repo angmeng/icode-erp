@@ -79,7 +79,7 @@
       <span><%= not_link_recover %></span>
 
       
-      <span><%= link_to "PDF Report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+      <span><%= not_link_printable %><%#= link_to "PDF Report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
 
       <%= link_close_button %>
     </div>

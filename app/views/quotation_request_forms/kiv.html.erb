@@ -1,11 +1,13 @@
-<div style="background-color:blue"><strong style="color:white;">LISTING KIV - QUOTATION REQUISITION</strong></div>
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">LISTING KIV - QUOTATION REQUISITION</strong></div>
 
-<% if @quotation_request_forms.present? %>
-  <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
-<% else %>
-  Not Record Found.
-<% end %>
-
-<div class="icon_tag">
+  <div class="fix_h450">
+    <% if @quotation_request_forms.present? %>
+      <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+    <% else %>
+      Not Record Found.
+    <% end %>
+  </div>
+  
   <%= render "action_quotation_kiv_item" %>
 </div>

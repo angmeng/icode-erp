@@ -98,9 +98,9 @@
               <% end %>
                 
               <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_KIV_VIEW) %>
-                <li><%= link_to "PO Transactions & Histories - KIV", kiv_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Purchase Orders - KIV", kiv_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
-                <li class="text_gray">PO Transactions & Histories - KIV</li>
+                <li class="text_gray">Listing Purchase Orders - KIV</li>
               <% end %>
                 
                 
@@ -211,9 +211,9 @@
               <% end %>
               
               <% if roles.include?(InventoryManagementSystem::QR_KIV) %>
-                <li><%= link_to 'QR No# - KIV', kiv_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to 'Listing Quotation Request - KIV', kiv_quotation_request_forms_path %></li>
               <% else %>
-                <li class="text_gray">QR No# - KIV</li>
+                <li class="text_gray">Listing Quotation Request - KIV</li>
               <% end %>
                 
               <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %>

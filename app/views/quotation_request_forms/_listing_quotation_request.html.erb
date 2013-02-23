@@ -1,4 +1,8 @@
-<table id="grid_h400" class="white-line-table zebraLight">
+<% if action_name == "pending_quotation" or action_name == "feedback" %>
+  <table id="grid_h400" class="white-line-table zebraLight">
+<% else %>
+  <table id="grid_h445" class="white-line-table zebraLight">
+<% end %>
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>

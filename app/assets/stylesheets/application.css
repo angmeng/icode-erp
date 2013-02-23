@@ -357,21 +357,10 @@ table.normal_table_black td {
     overflow: auto;
 }
 
-/*.new_qr_form {
-    border: 1px solid grey;
-    width: 99.80%;
-    height: 400px;}*/
-
 .new_costingsheet {
 /*    border: 1px solid grey;*/
     width: 100%;
     height: 410px;}
-
-.item_scroll {
-    border: 1px solid gainsboro;
-    overflow: auto;
-    width: 99.7%;
-    height: 320px;}
 
 .fix_800x450 {
     border: 1px solid black;

@@ -1,5 +1,10 @@
 $(document).ready(function() {
     
+    $('#checkall:checkbox').change(function () {
+        if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
+        else $('input:checkbox').removeAttr('checked');
+    });
+    
     $("#grid_userTable_h490").chromatable({
         width: "1200px",
         height: "490px",
@@ -7,7 +12,7 @@ $(document).ready(function() {
     });
 
     $("#grid_h295").chromatable({
-        width: "1400px",
+        width: "1340px",
         height: "295px",
         scrolling: "yes"
     });	
@@ -2171,8 +2176,3 @@ function addTableRow_for_delivery_order(table)
     
     $(table).find("tbody tr:last").after($tr);
 };
-
-$('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});

@@ -16,7 +16,9 @@
   <div><%#= render "search_purchase_requisition" %></div>
 
   <div id="horizontal">
-    <div id="left-pane"><%= render "/products/category", :categories => @categories %></div>
+    <div id="left-pane">
+      <%= render "/products/category", :categories => @categories %>
+    </div>
     <div id="right-pane"><div id="product_ajax"></div></div>
   </div>
 
@@ -45,6 +47,7 @@
                     $("#product_ajax").html(data);
                   }
                })
+               return false;
           });
       });
   </script>

@@ -1,17 +1,19 @@
-<table width="100%">
-  <tr>
-    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
-  </tr>
-</table>
-
-<div><%= render "search_delivery_order" %></div>
-
-<div style="background-color:blue"><strong style="color:white;">LISTING DELIVERY ORDER</strong></div>
-
-<% if @delivery_orders.present? %>
-  <%= render "listing_delivery_order", :listing_delivery_no => @delivery_orders %>
-<% else %>
-  Not Record Found.
-<% end %>
+<div id="popup_container">
   
-<%= render "action_delivery_order_index" %>
+  <div class="title_head">
+    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR DELIVERY ORDERS</strong>
+    <%= search_button %>
+  </div>
+
+  <div><%= render "search_delivery_order" %></div>
+
+  <div class="fix_h450">
+    <% if @delivery_orders.present? %>
+      <%= render "listing_delivery_order", :listing_delivery_no => @delivery_orders %>
+    <% else %>
+      Not Record Found.
+    <% end %>
+  </div>
+  
+  <%= render "action_delivery_order_index" %>
+</div>

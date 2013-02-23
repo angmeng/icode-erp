@@ -1,5 +1,5 @@
 <%= form_for(@price_control) do |f| %>
-  <div class="fix_1600x900">
+  <div class="fix_h450">
     <table>
       <tr>
         <% if action_name == "edit" %>
@@ -48,6 +48,7 @@
     
     <hr/>
     
+    <%# if  %>
     <%= render "new_price_control_items", :price_control => @price_control %>
     
   </div>

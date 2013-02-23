@@ -1,6 +1,6 @@
 class QuotationRequestFormsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox", :except => [:index, :pending_quotation]
+  layout "sheetbox", :only => [:show, :new, :edit, :printable, :mailing]
   
   def index
     @search = QuotationRequestForm.search(params[:search])
@@ -95,7 +95,11 @@ class QuotationRequestFormsController < ApplicationController
   def destroy
     @quotation_request_form = QuotationRequestForm.find(params[:id])
     @quotation_request_form.update_attributes(:status => QuotationRequestForm::KEEP_IN_VIEW)
-    redirect_to quotation_request_forms_url, :notice => "QR no. #{@quotation_request_form.quotation_request_no} has moved to KIV successfully."
+    if action_name == "pending_quotation"
+      redirect_to pending_quotation_quotation_request_forms_url, :notice => "QR No ##{@quotation_request_form.quotation_request_no} has dropped to KIV successfully."
+    else
+      redirect_to quotation_request_forms_url, :notice => "QR No ##{@quotation_request_form.quotation_request_no} has dropped to KIV successfully."
+    end
   end
   
   def no_button
@@ -128,7 +132,7 @@ class QuotationRequestFormsController < ApplicationController
   def recover
     @quotation_request_forms = QuotationRequestForm.find(params[:id])
     @quotation_request_forms.update_attributes(:status => QuotationRequestForm::PENDING, :status_remark => nil, :qr_task => nil, :qr_status => nil, :director_approved => false)
-    redirect_to kiv_quotation_request_forms_path, :notice => "QR no. #{@quotation_request_forms.quotation_request_no} has recovered from KIV." 
+    redirect_to kiv_quotation_request_forms_path, :notice => "QR No #{@quotation_request_forms.quotation_request_no} has recovered from KIV." 
   end
   
   def printable
@@ -143,12 +147,10 @@ class QuotationRequestFormsController < ApplicationController
   def sending_mail
     @quotation_request_form = QuotationRequestForm.find(params[:id])
     collect_all_process_types(@quotation_request_form)
-    
     if params[:user_from].present? and params[:user_to].present? and params[:user_subject].present? and params[:user_message].present? and params[:user_pdf_link].present?
       email = render_to_string(:action => 'printable', :layout => false)  
       email = PDFKit.new(email)  
       email = email.to_pdf 
-      
       UserMailer.welcome_email(@quotation_request_form, params[:user_from], params[:user_to], params[:user_subject], params[:user_message], email).deliver
       @quotation_request_form.update_attributes(:send_count => @quotation_request_form.send_count.to_i + 1)
       render :text => "Email has been Sent successfully."
@@ -159,7 +161,7 @@ class QuotationRequestFormsController < ApplicationController
   end
   
   def feedback
-    if current_user.level == User::LEVEL_FIVE
+    if user_is_admin?
       @quotation_request_forms = QuotationRequestForm.quotation_approved
     else
       @quotation_request_forms = current_user.quotation_request_forms.quotation_approved
@@ -189,16 +191,16 @@ class QuotationRequestFormsController < ApplicationController
   private
   
   def collect_all_process_types(quotation_request_form)
-    @field_sets = quotation_request_form.selection_fieldsets.map(&:select_no) if quotation_request_form.selection_fieldsets.present?
-    @pre_print_types = quotation_request_form.pre_print_types.map(&:pre_print) if quotation_request_form.pre_print_types.present?
-    @pre_print_types_join = quotation_request_form.pre_print_types if quotation_request_form.pre_print_types.present?
+    @field_sets = quotation_request_form.selection_fieldsets.map(&:select_no)           if quotation_request_form.selection_fieldsets.present?
+    @pre_print_types = quotation_request_form.pre_print_types.map(&:pre_print)          if quotation_request_form.pre_print_types.present?
+    @pre_print_types_join = quotation_request_form.pre_print_types                      if quotation_request_form.pre_print_types.present?
     @varnish_types = quotation_request_form.selection_varnish_types.map(&:varnish_type) if quotation_request_form.selection_varnish_types.present?
-    @stampings = quotation_request_form.selection_stampings.map(&:stamping_type) if quotation_request_form.selection_stampings.present?
-    @stampings_join = quotation_request_form.selection_stampings if quotation_request_form.selection_stampings.present?
-    @die_cut = quotation_request_form.selection_die_cuts.map(&:content) if quotation_request_form.selection_die_cuts.present?
-    @glueing_types = quotation_request_form.selection_glueings.map(&:glueing) if quotation_request_form.selection_glueings.present?
-    @glueing_types_join = quotation_request_form.selection_glueings if quotation_request_form.selection_glueings.present?
-    @sequents = quotation_request_form.sequents.map(&:sequent_color) if quotation_request_form.sequents.present?
+    @stampings = quotation_request_form.selection_stampings.map(&:stamping_type)        if quotation_request_form.selection_stampings.present?
+    @stampings_join = quotation_request_form.selection_stampings                        if quotation_request_form.selection_stampings.present?
+    @die_cut = quotation_request_form.selection_die_cuts.map(&:content)                 if quotation_request_form.selection_die_cuts.present?
+    @glueing_types = quotation_request_form.selection_glueings.map(&:glueing)           if quotation_request_form.selection_glueings.present?
+    @glueing_types_join = quotation_request_form.selection_glueings                     if quotation_request_form.selection_glueings.present?
+    @sequents = quotation_request_form.sequents.map(&:sequent_color)                    if quotation_request_form.sequents.present?
   end
   
   def migrater

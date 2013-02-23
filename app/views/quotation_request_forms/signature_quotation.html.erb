@@ -1,11 +1,13 @@
-<div style="background-color:blue"><strong style="color:white;">APPROVE / REJECT QUOTATION REQUEST TASKS</strong></div>
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">APPROVE / REJECT QUOTATION REQUEST TASKS</strong></div>
 
-<div class="fix_1600x900">
-  <% if @quotation_request_forms.present? %>
-    <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
-  <% else %>
-    No Tasks.
-  <% end %>
+  <div class="fix_h450">
+    <% if @quotation_request_forms.present? %>
+      <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+    <% else %>
+      No Tasks.
+    <% end %>
+  </div>
+
+  <%= render "action_quotation_signature" %>
 </div>
-
-<%= render "action_quotation_signature" %>
