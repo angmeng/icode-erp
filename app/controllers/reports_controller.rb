@@ -5,14 +5,12 @@ class ReportsController < ApplicationController
   def excel_product_report
 #    if params[:product_ids].present?
 #      @excel_product_report = ProductCombobox.find(params[:product_ids])
-    if params[:inventory_ids].present?
-      @excel_product_report = ProductCombobox.find(params[:inventory_ids])
+    if params[:product_ids].present?
+      @excel_product_report = ProductCombobox.find(params[:product_ids])
       respond_to do |format|
         format.html
         format.csv { render text: @excel_product_report.to_csv}
-        format.xls #{ render text: @excel_product_report.to_csv}
-        #format.xls #{ send_data @excel_pr_report.to_csv(col_sep: "\t") }
-      
+        format.xls 
       end
     else
       redirect_to product_report_reports_path
@@ -26,13 +24,44 @@ class ReportsController < ApplicationController
       format.html
       format.csv{ render text: @excel_inventory_report.to_csv }
       format.xls
-      #format.xls { send_data @excel_inventory_report.to_xls,
-      #             :type =>'application/xls',
-      #             :filename => "excel_inventory_report.pdf"
-      #}
+      format.pdf {
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf, :filename => "pdf_inventory_report.pdf", 
+                                  :type => 'application/pdf' , 
+                                  :dispositon => "attachement" )
+        #return # to avoid double render call
+        }
+      
     end
   else
     redirect_to inventory_report_reports_path
+  end
+end
+
+def excel_pr_report
+  if params[:pr_ids].present?
+    @excel_pr_report = PurchaseRequisition.search(params[:search])
+    respond_to do |format|
+      format.html
+      format.csv{ render text: @excel_pr_report.to_csv }
+      format.xls
+      
+    end
+  else
+    redirect_to pr_report_reports_path
+  end
+end
+
+def excel_po_report
+  if params[:po_ids].present?
+    @excel_po_report = PurchaseOrder.search(params[:search])
+    repond_to do |format|
+      format.html
+      format.csv {render text: @excel_po_report.to_csv }
+      format.xls
+    end
+  else
+    redirect_to po_report_reports_path
   end
 end
 
@@ -64,7 +93,7 @@ def pdf_pr_report
      # end
 
     if params[:pr_ids].present?
-      @detail_pr_report = PurchaseRequisition.find(params[:pr_ids])
+      @detail_pr_report = PurchaseRequisitionItem.find(params[:pr_ids])
       respond_to do |format|
         format.html
         format.pdf {
@@ -176,21 +205,21 @@ def pdf_sale_tax_exemption_report
   end
   else
     
-    redirect_to sale_tax_exemption_reports_path
+    redirect_to sale_tax_exemption_report_reports_path
   end
 
 end
 
 
 
-def pdf_rn_report
+def pdf_receive_note_report
   if params[:rn_ids].present?
-    @rn_detail_report = ReceiveNoteItem.find(params[:rn_ids])
+    @receive_note_detail_report = ReceiveNoteItem.find(params[:rn_ids])
     respond_to do |format|
       format.html
       format.pdf {
         @kit = PDFKit.new(html)
-        send_data(@kit.to_pdf ,:filename => "pdf_rn_report.pdf" ,
+        send_data(@kit.to_pdf ,:filename => "pdf_receive_note_report.pdf" ,
                               :type => 'application/pdf' , 
                               :disposition => "attachement" )
         }
@@ -226,10 +255,15 @@ end
     @take_ids = @show_pr_report.map(&:id)
   end
 
-  def rn_report 
-    @rn_report = ReceiveNoteItem.search(params[:search])
-    @show_rn_report = @rn_report.all
-    @take_ids = @show_rn_report.map(&:id)
+  def receive_note_report 
+    @receive_note_report = ReceiveNoteItem.search(params[:search])
+    @show_receive_note_report = @receive_note_report.all
+    @take_ids = @show_receive_note_report.map(&:id)
+  end
+
+  def rn_part_summary_report
+    @rn_part_summary_report = ReceiveNoteItem.search(params[:search])
+    @show_rn_part_summary_report = @rn_part_summary_report.all
   end
 
   def po_report

@@ -21,17 +21,20 @@ Merp::Application.routes.draw do
     get "purchase_by_creditor_report"
     get "inventory_report"
     get "customer_report"
-    get "rn_report"
+    get "receive_note_report"
 
     get "pdf_sale_tax_exemption_report"
     get "pdf_product_report"
     get "pdf_inventory_report"
     get "pdf_pr_report"
     get "pdf_po_report"
-    get "pdf_rn_report"
+    get "pdf_receive_note_report"
 
     get "excel_product_report"
     get "excel_inventory_report"
+    get "excel_pr_report"
+    get "excel_po_report"
+    get "excel_sale_tax_exemption_report"
     
     end 
     member do

@@ -21,18 +21,18 @@
     </thead>  
 
   <% @excel_product_report.each_with_index do |pri , index| %>
-  <tbody>
-  <tr>
-    <td><%= index + 1 %></td>
-        <td><%= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
-                <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
-    <td><%= pri.product.desc rescue '-'%></td>
-    <td><%= pri.product.part_no rescue '-'%></td>
-    <td><%= pri.product.selling_price rescue '-'%></td>
-    <td><%= pri.product.current_stock rescue '-'%></td>
-    <td><%= pri.product.unit_measurement.code rescue '-'%></td>
-  </tr>
-  </tbody>
+      <tbody>
+      <tr>
+        <td><%= index + 1 %></td>
+            <td><%= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
+                    <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
+        <td><%= pri.product.desc rescue '-'%></td>
+        <td><%= pri.product.part_no rescue '-'%></td>
+        <td><%= pri.product.selling_price rescue '-'%></td>
+        <td><%= pri.product.current_stock rescue '-'%></td>
+        <td><%= pri.product.unit_measurement.code rescue '-'%></td>
+      </tr>
+      </tbody>
   <% end %>
    
   </table>

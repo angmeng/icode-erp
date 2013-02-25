@@ -2,24 +2,23 @@
 
 <div>
   <% if @po_detail_report.present? %>
-  <% @po_detail_report.each do |p| %>
+  <% @po_detail_report.each do |p | %>
   <fieldset>
      
       <div style="float:left">
-        <div>Vendor : <u><%= p.trade_company.name %></u></div>
-
+        <h4>Vendor : <u><%= p.trade_company.name %></u></h4>
       </div>
-
-      <div style="float:right">
-        <div>Purchase By. : <%= p.purchase_by.name rescue '-' %></div>
-  
-        <div>Request By. : <%= p.request_by.name rescue '-' %></div>
+    
+      <div style="float:right;">
+        Purchase By. : <%= p.purchase_by.name rescue '-' %>
       </div>
- 
+      <div style="float:right;">
+        Request By. : <%= p.request_by.name rescue '-' %>
+      </div>
       
     
 
-  	<table border="1">
+  	<table class="table table-striped" border="1">
   		<thead>
   			<tr>
   				<th>PO No.</th>
@@ -47,7 +46,5 @@
   </fieldset>
 
    <% end %>
-   <% else %>
-   no record found
     <% end %>
 </div>

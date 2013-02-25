@@ -1,12 +1,12 @@
-<div class="title_head"><strong style="color:white;">Sales tax exemption </strong></div>
+<div class="title_head"><strong style="color:white;">RN (Part Summary) </strong></div>
 
 <div>
-    <%= form_for @sales_tax_exemption, :url => sales_tax_exemption_report_reports_path  do |f| %>
+    <%= form_for @rn_part_summary_report, :url => rn_part_summary_report_reports_path  do |f| %>
       <table>
         <tr>
-          <td>Sales Tax Exemption :</td>
-          <td><%= f.text_field :sales_tax_exemption_no_sw, :size => 12 %> To
-            <%= f.text_field :sales_tax_exemption_no_ew, :size => 12 %></td>
+          <td>Part Code :</td>
+          <td><%= f.text_field :, :size => 12 %> -
+            <%= f.text_field :, :size => 12 %></td>
           <td>Tarif Code </td>
           <td><%= f.text_field :tarif_code_sw , :size => 10 %></td>
         </tr>
