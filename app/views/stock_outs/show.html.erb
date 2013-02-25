@@ -11,6 +11,10 @@
         <td><%= @stock_out.product.product_combobox.product_code rescue '-' %></td>
       </tr>
       <tr>
+        <td><b>Description</b></td>
+        <td><%= @stock_out.product.desc  rescue '-' %></td>
+      </tr>
+      <tr>
         <td><b>Quantity</b></td>
         <td><%= @stock_out.quantity rescue '-' %></td>
       </tr>

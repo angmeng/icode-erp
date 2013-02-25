@@ -3,7 +3,7 @@
 
   <div class="title_head"><strong style="color:white;">PROPOSED VENDOR</strong></div>
 
-  <div class="fix_1600x900_h450">
+  <div class="fix_h450">
     <% if @proposed_vendor.present? %>
       <%= render "/purchase_orders/proposed_vendor_from_purchase_requisition_items", :proposed => @proposed_vendor %>
     <% else %>

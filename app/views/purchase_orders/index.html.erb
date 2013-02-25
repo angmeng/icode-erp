@@ -8,7 +8,7 @@
 
   <%= render "search_po" %>
 
-  <div class="fix_1600x900_h450">
+  <div class="fix_h450">
     <% if @purchase_orders.present? %>
       <%= render "/purchase_orders/success_approved_from_purchase_requisition_items", :success => @purchase_orders %>
     <% else %>

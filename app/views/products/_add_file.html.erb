@@ -1,4 +1,4 @@
-<% if action_name == 'operation' %>
+<% if action_name == 'operation_info' %>
 
   <% if @field_id.present? %>
     <%= link_addfile_button(new_product_path(:add_category_id => listing_categories.id, :category_type => ProductCategory::OPERATION, :refer_category_id => listing_categories.refer_category_id)) %>
@@ -6,7 +6,7 @@
     <%= link_addfile_button(new_product_path(:add_category_id => listing_categories.id, :category_type => ProductCategory::OPERATION)) %>
   <% end %>
 
-<% elsif action_name == 'non_operation' %>
+<% elsif action_name == 'non_operation_info' %>
 
   <% if @field_id.present? %>
     <%= link_addfile_button(new_product_path(:add_category_id => listing_categories.id, :category_type => ProductCategory::NON_OPERATION, :refer_category_id => listing_categories.refer_category_id)) %>
@@ -14,7 +14,7 @@
     <%= link_addfile_button(new_product_path(:add_category_id => listing_categories.id, :category_type => ProductCategory::NON_OPERATION)) %>
   <% end %>
 
-<% elsif action_name == 'finish_good' %>
+<% elsif action_name == 'finish_good_info' %>
 
   <% if @field_id.present? %>
     <%= link_addfile_button(new_product_path(:add_category_id => listing_categories.id, :category_type => ProductCategory::FINISH_GOOD, :refer_category_id => listing_categories.refer_category_id)) %>

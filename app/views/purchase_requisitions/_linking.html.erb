@@ -1,0 +1,31 @@
+<div id="linking">
+  <table>
+      <tr>
+
+        <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
+          <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
+            <td><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "k-button" %></td>
+          <% else %>
+            <td>New & Pending PRs</td>
+          <% end %>
+
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+
+          <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
+            <td><%= link_to "Approve / Reject PRs Tasks", signature_report_purchase_requisitions_path, :class => "k-button" %></td>
+          <% else %>
+            <td>Approve / Reject PRs Tasks</td>
+          <% end %>
+
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+
+          <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
+            <td><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "k-button"%></td>
+          <% else %>
+            <td>PR Transactions & Histories</td>
+          <% end %>
+        <% end %>
+
+      </tr>
+  </table>
+</div>

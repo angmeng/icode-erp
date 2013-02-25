@@ -3,7 +3,7 @@
 
   <div class="title_head"><strong style="color:white;">PO ENTRY</strong></div>
 
-  <div class="fix_1600x900_h450">
+  <div class="fix_h450">
     <% if @pr_items.present? %>
       <%= render "/purchase_orders/existing_approved_from_purchase_requisition_items", :pending => @pr_items %>
     <% else %>

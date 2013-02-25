@@ -1,70 +1,72 @@
-<fieldset>
-  <legend>WAX</legend>
-  <table>
-    <tr>
-      <td>
-        <%= f.check_box("wax") %> YES, FULL
-      </td>
-    </tr>
-  </table>
-</fieldset>
+<div class="tabbing_h400">
+  <fieldset style="width: 700px;">
+    <legend>WAX</legend>
+    <table>
+      <tr>
+        <td>
+          <%= f.check_box("wax") %> YES, FULL
+        </td>
+      </tr>
+    </table>
+  </fieldset>
 
-<fieldset>
-  <legend>FOLDING</legend>
-  <table>
-    <tr>
-      <td>
-        <%= f.check_box "folding" %> YES
-      </td>
-    </tr>
-  </table>
-</fieldset>
+  <fieldset style="width: 700px;">
+    <legend>FOLDING</legend>
+    <table>
+      <tr>
+        <td>
+          <%= f.check_box "folding" %> YES
+        </td>
+      </tr>
+    </table>
+  </fieldset>
 
-<fieldset>
-  <legend>
+  <fieldset style="width: 700px;">
+    <legend>
+      <% if @field_sets.present? %>
+        <%= check_box_tag "field_set[]", QuotationRequestForm::COLLATING_FIELDSET, @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>COLLATING
+      <% else %>
+        <%= check_box_tag "field_set[]", QuotationRequestForm::COLLATING_FIELDSET %>COLLATING
+      <% end %>
+    </legend>
+
     <% if @field_sets.present? %>
-      <%= check_box_tag "field_set[]", QuotationRequestForm::COLLATING_FIELDSET, @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>COLLATING
-    <% else %>
-      <%= check_box_tag "field_set[]", QuotationRequestForm::COLLATING_FIELDSET %>COLLATING
-    <% end %>
-  </legend>
-  
-  <% if @field_sets.present? %>
-    <% if @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>
-      <table>
-        <tr>
-          <td><b>No of Design</b></td>
-          <td>    
-            <%= f.text_field :collating_no, :size => 3, :onblur => "dropdown_sequent(this)" %>
-          </td>
-        </tr>
+      <% if @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>
+        <table>
+          <tr>
+            <td width="150"><b>No of Design</b></td>
+            <td>    
+              <%= f.text_field :collating_no, :size => 3, :onblur => "dropdown_sequent(this)" %>
+            </td>
+          </tr>
 
-        <tr>
-          <td><b>Collect Sequence</b></td>
-          <td>
-            <%= f.radio_button :collect_sequence, QuotationRequestForm::BIN %><%= QuotationRequestForm::BIN %>
-            <%= f.radio_button :collect_sequence, QuotationRequestForm::CARTON %><%= QuotationRequestForm::CARTON %>
-          </td>
-        </tr>
+          <tr>
+            <td><b>Collect Sequence</b></td>
+            <td>
+              <%= f.radio_button :collect_sequence, QuotationRequestForm::BIN %><%= QuotationRequestForm::BIN %>
+              <%= f.radio_button :collect_sequence, QuotationRequestForm::CARTON %><%= QuotationRequestForm::CARTON %>
+            </td>
+          </tr>
 
-        <tr>
-          <td><b>Sequent</b></td>
-          <td>
-            <span id="sequent_no">
-              <% if @quotation_request_form.sequents.present? %>
-                <% @quotation_request_form.sequents.each_with_index do |se, index| %>
-                  <%= index + 1 %>/<%= @quotation_request_form.sequents.size %>
-                  <%= text_field_tag "sequent[]", se.sequent_color, :size => 8 rescue '-'  %>
+          <tr>
+            <td><b>Sequent</b></td>
+            <td>
+              <span id="sequent_no">
+                <% if @quotation_request_form.sequents.present? %>
+                  <% @quotation_request_form.sequents.each_with_index do |se, index| %>
+                    <%= index + 1 %>/<%= @quotation_request_form.sequents.size %>
+                    <%= text_field_tag "sequent[]", se.sequent_color, :size => 8 rescue '-'  %>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </span>
-          </td>
-        </tr>
-      </table>
+              </span>
+            </td>
+          </tr>
+        </table>
+      <% else %>
+        <%= render "disabled_collating", :f => f %>
+      <% end %>
     <% else %>
       <%= render "disabled_collating", :f => f %>
     <% end %>
-  <% else %>
-    <%= render "disabled_collating", :f => f %>
-  <% end %>
-</fieldset>
+  </fieldset>
+</div>

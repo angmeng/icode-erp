@@ -1,4 +1,6 @@
 <div id="popup_container">
+  <%= render "linking" %>
+  
   <div class="title_head">
     <strong style="color:white;">NEW RECEIVE NOTE</strong>
     <%= search_button %>
@@ -13,7 +15,7 @@
     <% end %>
 
     <div class="icon_tag">
-      <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
+      <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_SAVE) %>
         <%= link_save_button %>
       <% else %>
         <%= not_link_save %>

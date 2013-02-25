@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default :from => "jc_lin7@hotmail.com"
+
   def welcome_email(qr_id, user_from, user_to, user_subject, user_message, email)
     @user_from = user_from
     @user_to = user_to

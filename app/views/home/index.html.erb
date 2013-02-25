@@ -209,8 +209,7 @@
 
           <% if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
             <td>
-              <%#= link_to "Product ID Registration (Finish Goods)", product_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
-              <%= link_to "Product ID Registration (Finish Goods)", finish_good_products_path,:class => "k-button"%>
+              <%= link_to "Product ID Registration (Finish Goods)", finish_good_products_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %>
             </td>
           <% else %>
             <td>Product ID Registration</td>
@@ -219,7 +218,7 @@
           <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
           <%# if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
-            <td><%= link_to "Product Price Control", new_price_control_path,:class => "k-button" %></td>
+            <td><%= link_to "Product Price Control", new_price_control_path,  :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
           <%# else %>
             <%#*<td>Product ID Registration</td>%>
           <%# end %>
@@ -244,7 +243,7 @@
         <!--td rowspan="2"><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
 
         <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
-          <td><%= link_to "Sales Order Entry", new_sales_order_path, :class => "k-button" %></td>
+          <td><%= link_to "Sales Order Entry", new_sales_order_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
         <% else %>
           <td>Sales Order Entry</td>
         <% end %>
@@ -273,7 +272,7 @@
       <tr>
           <th class="block_box">DELIVERY ORDER</th>
           <%# if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
-            <td><%= link_to "Delivery Order Entry", new_delivery_order_path,:class => "k-button" %></td>
+            <td><%= link_to "Delivery Order Entry", new_delivery_order_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
           <%# else %>
             <%#*<td>Production</td>%>
           <%# end %>

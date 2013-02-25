@@ -6,6 +6,11 @@
     <td><b>RN Date</b></td>
     <td><%= f.text_field :rn_date, :value => Date.today.strftime("%d-%m-%Y") %></td>
     <td width="50"></td>
+    <td><b>Updated By</b></td>
+    <td>
+      <%= current_user.name %>
+      <%= f.hidden_field :updated_by, :value => current_user.id %>
+    </td>
   </tr>
   <tr>
     <td><b>Vendor Company</b></td>
@@ -18,13 +23,6 @@
       </td>
     <% end %>
     <td></td>
-    <td><b>Updated By</b></td>
-    <td>
-      <%= current_user.name %>
-      <%= f.hidden_field :updated_by, :value => current_user.id %>
-    </td>
-  </tr>
-  <tr>
     <td><b>Vendor's D/O</b></td>
     <td><%= f.text_field :vendor_delivery_no, :required => "true", :validType => "maxLength[50]", :class => "easyui-validatebox" %></td>
     <td></td>

@@ -15,7 +15,6 @@
   <% else %>
     <%= not_link_parent_folder_edit %>
   <% end %>
-  
 
   <% unless data.icon == ProductCategory::ICON_FILE %>
     <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP) %>
@@ -45,30 +44,26 @@
     <%= not_link_edit_subfolder %>
   <% end %>
 
-  <% unless data.parent_id == 0 %>
-    <% unless data.icon == ProductCategory::ICON_FILE %>
-        <% if data.children.present? %>
-              <% if data.children.first.icon.present? %>
-                    <% unless data.children.first.icon == ProductCategory::ICON_FOLDER %>
-                        <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE) %>
-                          <%= render "/products/add_file", :listing_categories => data %>
-                        <% else %>
-                          <%= not_link_addfile_button %>
-                        <% end %>
-                    <% else %>
-                      <%= not_link_addfile_button %>
-                    <% end %>
-              <% else %>
-                <%= not_link_addfile_button %>
-              <% end %>
-        <% else %>
-          <%= render "/products/add_file", :listing_categories => data %>
-        <% end %>
-    <% else %>
-      <%= not_link_addfile_button %>
-    <% end %>
+  <% unless data.icon == ProductCategory::ICON_FILE %>
+      <% if data.children.present? %>
+            <% if data.children.first.icon.present? %>
+                  <% unless data.children.first.icon == ProductCategory::ICON_FOLDER %>
+                      <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE) %>
+                        <%= render "/products/add_file", :listing_categories => data %>
+                      <% else %>
+                        <%= not_link_addfile_button %>
+                      <% end %>
+                  <% else %>
+                    <%= not_link_addfile_button %>
+                  <% end %>
+            <% else %>
+              <%= not_link_addfile_button %>
+            <% end %>
+      <% else %>
+        <%= render "/products/add_file", :listing_categories => data %>
+      <% end %>
   <% else %>
-      <%= not_link_addfile_button %>
+    <%= not_link_addfile_button %>
   <% end %>
   
   <% if data.product.present? %>
@@ -85,6 +80,26 @@
     <%= link_kiv(product_category_path(data)) %>
   <% else %>
     <%= not_link_kiv %>
+  <% end %>
+
+  <%# if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE) %>
+    <%#= link_delete(delete_data_product_category_path(data)) %>
+  <%# else %>
+    <%#= not_link_delete %>
+  <%# end %>
+
+  <% unless data.children.present? %>
+    <% if data.icon == ProductCategory::ICON_FOLDER %>
+      <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE) %>
+        <%= link_delete(delete_data_product_category_path(data)) %>
+      <% else %>
+        <%= not_link_delete %>
+      <% end %>
+    <% else %>
+      <%= not_link_delete %>
+    <% end %>
+  <% else %>
+    <%= not_link_delete %>
   <% end %>
 
 <% end %>

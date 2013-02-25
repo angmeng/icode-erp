@@ -1,6 +1,6 @@
 <div id="popup_container">
   
-  <div style="background-color:blue"><strong style="color:white;">NEW USER</strong></div>
+  <div class="title_head"><strong style="color:white;">NEW USER</strong></div>
 
   <%= form_tag generator_user_users_path do  %>
     <div id="user_strip">
@@ -10,12 +10,8 @@
         <li>Inventory Management System II - Product</li>
       </ul>
       <div><%= render "user_account" %></div>
-      <div>
-        <div class="user_management"><%= render "management_checkbox" %></div>
-      </div>
-      <div>
-        <div class="user_management"><%= render "management_product" %></div>
-      </div>
+      <div><div class="user_management"><%= render "management_checkbox" %></div></div>
+      <div><div class="user_management"><%= render "management_product" %></div></div>
     </div>
     <div class="icon_tag">
       <%= link_save_button %>

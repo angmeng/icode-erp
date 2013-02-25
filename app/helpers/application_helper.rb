@@ -1,106 +1,55 @@
 module ApplicationHelper
-    def generate_posting_form(category)
-        add_icon     = link_to "New", "#", :class => "add-category-link", :id => "add-category-link-#{category.id}"
-        edit_icon    = link_to "Edit", "#", :class => "edit-category-link", :id => "edit-category-link-#{category.id}"
-        remove_icon  = link_to "Remove", remove_product_category_path(category), :method => :put, :confirm => "Are you sure to remove?"
-        delete_icon  = link_to "Delete", category, :method => :delete, :confirm => "Are you sure to delete?"
-        recover_icon = link_to "Restore", recover_product_category_path(category), :method => :put, :confirm => "Are you sure to restore?"
-       
-        if category.keep_in_view == TRUE
-          if current_user.level == User::LEVEL_FIVE
-            "#{recover_icon} #{delete_icon}"
-          end
-        else
-          if current_user.level == User::LEVEL_FIVE
-           "#{add_icon} #{edit_icon} #{remove_icon}"
-          else
-           "#{add_icon} #{edit_icon}"
-          end
-        end
-    end
-    
+  
     def treeview_with_parent(category, view, customize_mode = true, with_form = false)
         view ? ret = view : ret = ""
         downlines = category.children
         
         if category.status == ProductCategory::KEEP_IN_VIEW
-#          if current_user.level == User::LEVEL_FIVE
-#            ret << "<li data-expanded='true'>"
-#          end
+          
         else
           ret << "<li data-expanded='true'>"
         end
         
         if with_form  #false
-#          if category.icon == ProductCategory::ICON_FILE
-#            ret << "<table><tr><td><span class='k-sprite file'></span></td>"
-#          elsif category.icon == ProductCategory::ICON_FOLDER
-#            ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
-#          else
-#            if category.status == ProductCategory::KEEP_IN_VIEW
-#              if current_user.level == User::LEVEL_FIVE
-#                ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-#              end
-#            else
-#              ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-#            end
-#          end
-#          
-#          if category.status == ProductCategory::KEEP_IN_VIEW
-#            if current_user.level == User::LEVEL_FIVE
-#              ret << "<td><div>#{category.code}</div></td>"
-#              ret << "<td>[" << generate_posting_form(category) << "]</td></tr></table>"
-#            end
-#          else
-#            ret << "<td><div>#{category.code}</div></td>"
-#            ret << "<td>[" << generate_posting_form(category) << "]</td></tr></table>"
-#          end
+          
         else
           if customize_mode #false
-#            ret << "<div class='display-category' id='category-id-#{category.id}' data-url=''><a href='/product?category_id=#{category.id}'>#{category.code}</a></div>" 
+            
           else
-            if category.icon == ProductCategory::ICON_FILE
-              ret << "<table><tr><td><span class='k-sprite file'></span></td>"
-            elsif category.icon == ProductCategory::ICON_FOLDER
-              ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
-            else
-#              if category.status == ProductCategory::KEEP_IN_VIEW
-#                if current_user.level == User::LEVEL_FIVE
-#                  if category.icon == ProductCategory::ICON_REMOVE_FILE
-#                    ret << "<table><tr><td><span class='k-sprite kiv_file'></span></td>"
-#                  elsif category.icon == ProductCategory::ICON_REMOVE_FOLDER
-#                    ret << "<table><tr><td><span class='k-sprite kiv_folder'></span></td>"
-#                  end
-#                end
-#              else
-#                ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-#              end
-            end
 
             if category.status == ProductCategory::KEEP_IN_VIEW
-#              if current_user.level == User::LEVEL_FIVE
-#                if category.category_type == ProductCategory::FINISH_GOOD
-#                  ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-#                elsif category.category_type == ProductCategory::RAW_MATERIAL
-#                  ret << "<td><div><a href='/products/raw_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-#                elsif category.category_type == ProductCategory::SUB_MATERIAL
-#                  ret << "<td><div><a href='/products/sub_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-#                elsif category.category_type == ProductCategory::PACKAGING
-#                  ret << "<td><div><a href='/products/packaging?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-#                elsif category.category_type == ProductCategory::COMMERCIAL
-#                  ret << "<td><div><a href='/products/commercial?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-#                end
-#              end
+              
             else
-              if category.category_type == ProductCategory::FINISH_GOOD
-                ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a>  [#{category.product.desc rescue '-'}]</div></td></tr></table>"
-              elsif category.category_type == ProductCategory::NON_OPERATION
-                ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a>  [#{category.product.desc rescue '-'}]</div></td></tr></table>"
-              elsif category.category_type == ProductCategory::OPERATION
-                ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a>  [#{category.product.desc rescue '-'}]</div></td></tr></table>"
+              
+              if category.icon == ProductCategory::ICON_FILE
+                ret << "<table><tr><td><span class='k-sprite file'></span></td>"
+              elsif category.icon == ProductCategory::ICON_FOLDER
+                ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
+              else
+                ret << "<table><tr><td><span class='k-sprite'>-</span></td>"
               end
-            end
             
+              if category.category_type == ProductCategory::FINISH_GOOD
+                if category.product.present?
+                  ret << "<td><div><a href='/products/finish_good_info?category_id=#{category.id}'>[#{category.code}]</a>  #{category.product.desc rescue '-'}</div></td></tr></table>"
+                else
+                  ret << "<td><div><a href='/products/finish_good_info?category_id=#{category.id}'>[#{category.code}]</a></div></td></tr></table>"
+                end
+              elsif category.category_type == ProductCategory::NON_OPERATION
+                if category.product.present?
+                  ret << "<td><div><a href='/products/non_operation_info?category_id=#{category.id}'>[#{category.code}]</a>  #{category.product.desc rescue '-'}</div></td></tr></table>"
+                else
+                  ret << "<td><div><a href='/products/non_operation_info?category_id=#{category.id}'>[#{category.code}]</a></div></td></tr></table>"
+                end
+              elsif category.category_type == ProductCategory::OPERATION
+                if category.product.present?
+                  ret << "<td><div><a href='/products/operation_info?category_id=#{category.id}'>[#{category.code}]</a>  #{category.product.desc rescue '-'}</div></td></tr></table>"
+                else
+                  ret << "<td><div><a href='/products/operation_info?category_id=#{category.id}'>[#{category.code}]</a></div></td></tr></table>"
+                end
+              end
+              
+            end
           end        
         end
         
@@ -113,9 +62,7 @@ module ApplicationHelper
         end
         
         if category.status == ProductCategory::KEEP_IN_VIEW
-#          if current_user.level == User::LEVEL_FIVE
-#            ret << "</li>" 
-#          end
+          
         else
           ret << "</li>" 
         end
@@ -432,7 +379,7 @@ module ApplicationHelper
     end
     
     def not_link_add_item
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Add"
       end
     end
@@ -442,7 +389,7 @@ module ApplicationHelper
     end
     
     def not_link_add
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Add"
       end
     end
@@ -455,7 +402,7 @@ module ApplicationHelper
     end
     
     def not_link_addnew
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Add New"
       end
     end
@@ -475,13 +422,13 @@ module ApplicationHelper
     end
     
     def not_link_show
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Show"
       end
     end
     
     def not_link_remove_row
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Remove Item"
       end
     end
@@ -489,7 +436,7 @@ module ApplicationHelper
     
     
     def not_link_binary
-     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Show KIV"
       end
     end
@@ -509,7 +456,7 @@ module ApplicationHelper
     end
     
     def not_link_edit
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Edit"
       end
     end
@@ -520,13 +467,13 @@ module ApplicationHelper
     end
     
     def not_link_apply
-       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Apply"
       end
     end
     
     def not_link_submit_to
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Submit to"
       end
     end
@@ -540,7 +487,7 @@ module ApplicationHelper
     end
     
     def not_link_parent_folder
-     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do
         "Create Group"
       end
     end
@@ -550,7 +497,7 @@ module ApplicationHelper
     end
     
     def not_link_parent_folder_edit
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Edit Group"
       end
     end
@@ -560,7 +507,7 @@ module ApplicationHelper
     end
     
     def not_link_subfolder
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Add Sub Group / Product Type"
       end
     end
@@ -570,7 +517,7 @@ module ApplicationHelper
     end
     
     def not_link_edit_subfolder
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Edit Sub Group / Product Type"
       end
     end
@@ -580,7 +527,7 @@ module ApplicationHelper
     end
     
     def not_link_addfile_button
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Add Product ID"
       end
     end
@@ -590,7 +537,7 @@ module ApplicationHelper
     end
     
     def not_link_document_edit
-       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Edit Product ID"
       end
     end
@@ -604,7 +551,7 @@ module ApplicationHelper
     end
     
     def not_link_remove
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Remove"
       end
     end
@@ -618,12 +565,23 @@ module ApplicationHelper
     
     
     
+    def link_delete(linked)
+      link_to "Delete", linked, confirm: "Are you sure to delete?", method: :delete, :class => "k-button"
+    end
+    
+    def not_link_delete
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
+        "Delete"
+      end
+    end
+    
+    
     def link_kiv(linked)
-      link_to "Drop to KIV", linked, confirm: 'Are you sure move to KIV?', method: :delete ,:class => " k-button"
+      link_to "Drop to KIV", linked, confirm: 'Are you sure move to KIV?', method: :delete ,:class => "k-button"
     end
     
     def not_link_kiv
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Drop To KIV"
       end
     end
@@ -636,7 +594,7 @@ module ApplicationHelper
     end
     
     def not_link_recover
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Recover"
       end
     end
@@ -648,7 +606,7 @@ module ApplicationHelper
     end
     
     def not_link_recycle
-       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+       content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Delete"
       end
     end
@@ -660,7 +618,7 @@ module ApplicationHelper
     end
     
     def not_link_printable
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Printer"
       end
     end
@@ -674,7 +632,7 @@ module ApplicationHelper
     end
     
     def link_save_button
-      submit_tag "Save", :class => "k-button font_bold"
+      submit_tag "Save", :class => "k-button font_bold", :id => "save_button"
     end
     
     def link_fsave_button(f)
@@ -682,7 +640,7 @@ module ApplicationHelper
     end
     
     def not_link_save
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
         "Save"
       end
     end
@@ -696,15 +654,13 @@ module ApplicationHelper
     end
     
     def link_mail_button
-      content_tag :span, :class => "k-button" do 
-        "Send Mail"
-      end
+       submit_tag "Send Mail", :class => "k-button font_bold"
     end
     
     
     
     def not_link_cost
-      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do 
+      content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
        "Costing Sheet"
       end
     end
@@ -716,6 +672,12 @@ module ApplicationHelper
     
     def search_button
       link_to 'Search', "#", :class => "search_link"
+    end
+    
+    def popup_product_id(product)
+      link_to(product_path(product.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do
+        product.product_combobox.product_code rescue '-'
+      end
     end
 
 end

@@ -47,7 +47,11 @@
         	<tbody>
         		<tr class="<%= cycle("odd_line", "even_line") %>">
               <td></td>
+<<<<<<< HEAD
               <td align="center"><%= check_box_tag "po_ids[]" , p.id %></td>
+=======
+              <td><%= check_box_tag "po_ids[]" , p.id %></td>
+>>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9
         			<td align="center"><%= p.po_no rescue'-' %></td>
         			<td align="center"><%= p.trade_company.name rescue '-' %></td>
         			<td align="center"><%= p.po_date rescue '-' %></td>

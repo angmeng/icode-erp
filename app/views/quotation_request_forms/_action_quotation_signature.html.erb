@@ -2,7 +2,7 @@
   <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING) %>
     <span id="on_cost" costClass="iframe_1600x900"><%= not_link_cost %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_cost %></span>
+    <%= not_link_cost %>
   <% end %>
 </div>
 
@@ -11,23 +11,23 @@
   <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_SHOW) %>
     <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_show %></span>
+    <%= not_link_show %>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_EDIT) %>
     <span id="on_edit" editClass="iframe_1600x900"><%= not_link_edit %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_edit %></span>
+    <%= not_link_edit %>
   <% end %>
 
-  <%= not_link_kiv %></span>
+  <%= not_link_kiv %>
 
   <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %>
     <span id="on_printable_qr"><%= not_link_printable %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_printable %></span>
+    <%= not_link_printable %>
   <% end %>
    
-  <%= link_close_button %>
+  <%= link_home_button %>
 
 </div>

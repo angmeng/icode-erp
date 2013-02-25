@@ -1,113 +1,119 @@
-<div style="background-color:blue"><strong style="color:white;">SHOW DETAILS OF DELIVERY ORDER</strong></div>
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">SHOW DELIVERY ORDER DETAIL</strong></div>
 
-<div class="fix_1600x900">
-  <table>
-    <tr>
-      <td width="130"><b>D/O No#</b></td>
-      <td><%= @delivery_order.do_no rescue '-' %></td>
+  <div class="fix_h450">
+    <table>
+      <tr>
+        <td width="130"><b>D/O No#</b></td>
+        <td><%= @delivery_order.do_no rescue '-' %></td>
 
-      <td width="30"></td>
+        <td width="30"></td>
 
-      <td width="130"><b>D/O Date</b></td>
-      <td><%= @delivery_order.do_date.strftime("%d-%m-%Y") rescue '-' %></td>
-    </tr>
-
-    <tr>
-      <td><b>Customer Company</b></td>
-      <td><%= @delivery_order.trade_company.name rescue '-'%></td>
-      <td></td>
-      <td><b>Sales Tax</b></td>
-      <td><%= @delivery_order.sales_tax rescue '-' %></td>
-    </tr>
-
-    <tr>
-      <td><b>Type of Sales</b></td>
-      <td><%= @delivery_order.type_of_sale.name rescue'-' %></td>
-      <td></td>
-      <td><b>T'port C.</b></td>
-      <td><%= @delivery_order.tport_c %></td>
-    </tr>
-
-    <tr>
-      <td><b>Currency</b></td>
-      <td><%= @delivery_order.currency.name rescue '-' %></td>
-      <td></td>
-      <td><b>BK. 2#</b></td>
-      <td><%= @delivery_order.bk_two %></td>
-    </tr>
-
-    <tr>
-      <td><b>Trade Term</b></td>
-      <td><%= @delivery_order.trade_term.name rescue '-' %></td>
-      <td></td>
-      <td><b>Update By</b></td>
-      <td><%= User.find(@delivery_order.updated_by).name rescue '-' %></td>
-    </tr>
-
-    <tr>
-      <td><b>Transport</b></td>
-      <td><%= @delivery_order.transport.name rescue '-' %></td>
-    </tr>
-
-    <tr>
-      <td><b>Sales Rep.</b></td>
-      <td><%= @delivery_order.sales_rep %></td>
-    </tr>
-
-    <tr>
-      <td><b>Sales Tax Exemption</b></td>
-      <td><%= @delivery_order.sales_tax_exemption %></td>
-    </tr>
-  </table>
-
-  <hr/>
-
-  <table id="delivery_order_h200" class="white-line-table target_table">
-    <thead>
-      <tr style="background-color: gainsboro;">
-        <th width="400">[SO No][Product ID][Description]</th>
-        <th width="150">SO Date</th>
-        <th width="150">Delivery Qty</th>
-        <th width="150">Order Qty</th>
-        <th width="150">Unit Price</th>
-        <th width="150">Balance Qty</th>
-        <th width="150">No. of Carton</th>
-        <th width="150">Gen Cur Stock</th>
-        <!--th width="150">D/O Status</th-->
-        <th width="150">Part No.</th>
-        <th width="150">Client's Lot#</th>
-        <th width="150">Client's P/O</th>
-        <th width="150">Dept Cur Stock</th>
+        <td width="130"><b>D/O Date</b></td>
+        <td><%= @delivery_order.do_date.strftime("%d-%m-%Y") rescue '-' %></td>
       </tr>
-    </thead>
 
-    <tbody>
-      <% if @delivery_order.delivery_order_items.present? %>
-      
-        <% @delivery_order.delivery_order_items.each do |delivery| %>
+      <tr>
+        <td><b>Customer Company</b></td>
+        <td><%= @delivery_order.trade_company.name rescue '-'%></td>
+        <td></td>
+        <td><b>Sales Tax</b></td>
+        <td><%= @delivery_order.sales_tax rescue '-' %></td>
+      </tr>
 
-        <tr class="<%= cycle('odd_line', 'even_line') %>">
+      <tr>
+        <td><b>Type of Sales</b></td>
+        <td><%= @delivery_order.type_of_sale.name rescue'-' %></td>
+        <td></td>
+        <td><b>T'port C.</b></td>
+        <td><%= @delivery_order.tport_c %></td>
+      </tr>
 
-          <td align="center"><%= delivery.sales_order_item_id %></td>
-          <td align="center"><%= delivery.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
-          <td align="center"><%= delivery.delivery_qty %></td>
-          <td align="center"><%= delivery.order_qty %></td>
-          <td align="center"><%= delivery.unit_price %></td>
-          <td align="center"><%= delivery.balance_qty %></td>
-          <td align="center"><%= delivery.no_of_carton %></td>
-          <td align="center"><%= delivery.gen_current_stock %></td>
-          <td align="center"><%= delivery.part_no %></td> 
-          <td align="center"><%= delivery.client_lot %></td> 
-          <td align="center"><%= delivery.client_po %></td> 
-          <td align="center"><%= delivery.department %> <%= delivery.dept_current_stock %></td>
+      <tr>
+        <td><b>Currency</b></td>
+        <td><%= @delivery_order.currency.name rescue '-' %></td>
+        <td></td>
+        <td><b>BK. 2#</b></td>
+        <td><%= @delivery_order.bk_two %></td>
+      </tr>
+
+      <tr>
+        <td><b>Trade Term</b></td>
+        <td><%= @delivery_order.trade_term.name rescue '-' %></td>
+        <td></td>
+        <td><b>Update By</b></td>
+        <td><%= User.find(@delivery_order.updated_by).name rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Transport</b></td>
+        <td><%= @delivery_order.transport.name rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Sales Rep.</b></td>
+        <td><%= @delivery_order.sales_rep %></td>
+      </tr>
+
+      <tr>
+        <td><b>Sales Tax Exemption</b></td>
+        <td><%= @delivery_order.sales_tax_exemption %></td>
+      </tr>
+    </table>
+
+    <hr/>
+
+    <table id="delivery_order_h200" class="white-line-table target_table">
+      <thead>
+        <tr style="background-color: gainsboro;">
+          <th width="400">[SO No][Product ID][Description]</th>
+          <th width="150">SO Date</th>
+          <th width="150">Delivery Qty</th>
+          <th width="150">Order Qty</th>
+          <th width="150">Unit Price</th>
+          <th width="150">Balance Qty</th>
+          <th width="150">No. of Carton</th>
+          <th width="150">Gen Cur Stock</th>
+          <!--th width="150">D/O Status</th-->
+          <th width="150">Part No.</th>
+          <th width="150">Client's Lot#</th>
+          <th width="150">Client's P/O</th>
+          <th width="150">Dept Cur Stock</th>
         </tr>
+      </thead>
+
+      <tbody>
+        <% if @delivery_order.delivery_order_items.present? %>
+
+          <% @delivery_order.delivery_order_items.each do |delivery| %>
+
+          <tr class="<%= cycle('odd_line', 'even_line') %>">
+
+            <td align="center"><%= delivery.sales_order_item_id %></td>
+            <td align="center"><%= delivery.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+            <td align="center"><%= delivery.delivery_qty %></td>
+            <td align="center"><%= delivery.order_qty %></td>
+            <td align="center"><%= delivery.unit_price %></td>
+            <td align="center"><%= delivery.balance_qty %></td>
+            <td align="center"><%= delivery.no_of_carton %></td>
+            <td align="center"><%= delivery.gen_current_stock %></td>
+            <td align="center"><%= delivery.part_no %></td> 
+            <td align="center"><%= delivery.client_lot %></td> 
+            <td align="center"><%= delivery.client_po %></td> 
+            <td align="center"><%= delivery.department %> <%= delivery.dept_current_stock %></td>
+          </tr>
+
+          <% end %>
 
         <% end %>
-        
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
+  </div>
+  
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
 </div>
 
 

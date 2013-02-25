@@ -5,8 +5,8 @@
     <%= f.hidden_field :user_id, :value => current_user.id %>
   <% end %>
 
-  <div class="fix_1600x900">
-        <div id="qr_strip" style="width: 99.90%">
+  <div class="fix_h450">
+        <div id="qr_strip">
             <ul>
               <li class="k-state-active">CUSTOM REQUEST</li>
               <li>MATERIAL</li>
@@ -27,12 +27,14 @@
           
             <!-- OK -->
             <div>
-              <table>
-                <tr>
-                  <td width="800" style="vertical-align: top;"><%= render "finish_process_left", :f => f %></td>
-                  <td width="800" style="vertical-align: top;"><%= render "finish_process_right", :f => f %></td>
-                </tr>
-              </table>
+              <div class="tabbing_h400">
+                <table width="100%">
+                  <tr>
+                    <td width="50%" style="vertical-align: top;"><%= render "finish_process_left", :f => f %></td>
+                    <td width="50%" style="vertical-align: top;"><%= render "finish_process_right", :f => f %></td>
+                  </tr>
+                </table>
+              </div>
             </div>
             
             <div><%= render "others", :f => f %></div>
@@ -42,11 +44,8 @@
   </div>
 
   <div class="icon_tag">
-    <%# if @quotation_request_form.user_id == current_user.id or User.find_by_level(User::LEVEL_FIVE).id == current_user.id %>
+    <span class="alert_msg"></span>
     <%= link_save_button %>
-    <%# else %>
-      <%#= not_link_save %>
-    <%# end %>
     <%= link_close_button %>
   </div>
 <% end %>
@@ -63,11 +62,11 @@
     </td>
     <td rowspan="2">
       <% if @quotation_request_form.status_remark.present? %>
-        <span style="background:red; color:white;">Status Remark: <%= @quotation_request_form.status_remark rescue '-' %></span><br/>
+        <span style="background:red; color:white; padding: 5px;">Status Remark: <%= @quotation_request_form.status_remark rescue '-' %></span><br/>
         <% if @quotation_request_form.qr_status == QuotationRequestForm::REJECTED %>
           <% if current_user.id == @quotation_request_form.qr_task %>
             <b>Finished?</b>
-            <%= link_to "YES", quoter_press_yes_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?" %>
+            <%= link_to "YES", quoter_press_yes_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
           <% end %>
         <% end %>
       <% end %>
@@ -82,8 +81,8 @@
             <% if current_user.level == User::LEVEL_FIVE %>
               <% if @quotation_request_form.qr_status == QuotationRequestForm::APPROVING %>
                 <b>Approve?</b>
-                <%= link_to "YES", yes_button_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?" %>
-                <%= link_to "NO", '#', :class => "pop_remark" %>
+                <%= link_to "YES", yes_button_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                <%= link_to "NO", '#', :class => "pop_remark k-button" %>
               <% end %>
             <% end %>
           <% end %>

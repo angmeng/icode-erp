@@ -1,6 +1,6 @@
 class DeliveryOrdersController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+  layout "sheetbox", :only => [:new, :show, :edit]
   
   def index
     @search = DeliveryOrder.search(params[:search])

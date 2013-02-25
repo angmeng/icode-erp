@@ -1,6 +1,6 @@
 class SalesOrdersController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+  layout "sheetbox", :only => [:show, :new, :edit]
   
   def index
     @search = SalesOrder.search(params[:search])

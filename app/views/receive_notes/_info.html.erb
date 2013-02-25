@@ -3,8 +3,8 @@
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th style="font-size: 12px;">PO No.</th>
-      <th style="font-size: 12px;">Product I/D</th>
-      <th style="font-size: 12px;">Description(in Detail)</th>
+      <th style="font-size: 12px;">Product ID</th>
+      <th style="font-size: 12px;">Description</th>
       <th style="font-size: 12px;">PO Qty</th>
       <th style="font-size: 12px;">U/M</th>
       <th style="font-size: 12px;">ETA</th>
@@ -38,10 +38,10 @@
                         <td></td>
                         <td align="center">
                           <% if item.product.present? %>
-                            <%= render "/product_categories/join_product_category", :pc => item %>
+                            <%= popup_product_id(item.product) %>
                           <% end %>
                         </td>
-                        <td><%= simple_format(item.description) %></td>
+                        <td><%= item.product.desc rescue '-' %></td>
                         <td align="center"><%= item.quantity %></td>
                         <td align="center"><%= item.unit_measurement.code rescue '-' %></td>
                         <td align="center"><%= item.eta.strftime("%d-%m-%Y") rescue '-' %></td>

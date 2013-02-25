@@ -8,10 +8,9 @@
       <tr>
         <td><b>Product ID *</b></td>
         <td>
-          <%= f.select :product_id , options_from_collection_for_select(product_non_operation_n_operation_with_combobox, :product_id, :product_code), { :include_blank => true }, { :onchange => "getCombo_product(this)", :id => "kendo_combobox" }  %>&nbsp;<span id="current_product_stock"></span>
+          <%= f.select :product_id , options_for_select(product_non_operation_n_operation_with_pr_combobox, @stock_out.product_id), { :include_blank => true }, { :onchange => "getCombo_product(this)", :id => "kendo_combobox", :style => "width: 400px;" }  %>&nbsp;<span id="current_product_stock"></span>
           <span id="stock_value" style="display: none;"></span>
         </td>
-        
       </tr>
       <tr>
         <td><b>Description</b></td>

@@ -11,6 +11,7 @@
           </h1>
       </div>
 
+<<<<<<< HEAD
       <div style="float:right;">
           <h1>Date :
           <b><%= f.purchase_requsition_requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
@@ -19,6 +20,64 @@
       
 
 
+=======
+  
+  
+  
+  
+
+  <!--div style="float:right;">
+      <h1>Date :
+      <b><%#= f.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
+    </h1>
+  </div-->
+  
+
+
+  <!--table border="1" >
+    <thead>
+    <tr>
+      <th>No.</th>
+      <th></th>
+      <th>Description</th>
+      <th>RM</th>
+      <th>Vendor</th>
+      <th>ORDER QTY</th>
+      <th>Amount</th>
+    </tr>
+    </thead>
+
+    
+  <%# arr = [] %>
+
+  
+    <%# f.purchase_requisition_items.each_with_index do |pri, index| %>
+    <tbody>
+      <tr>
+        <td><%#= index + 1 %></td>
+
+        <td><%#= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
+
+        <td><%#= pri.product.description rescue '-' %></td>
+        <td><%#= pri.product.unit_price rescue '-' %></td>
+        <td><%#= pri.product.trade_company.name rescue '-' %></td>
+        <td><%#= pri.product.quantity  rescue '-' %></td>
+        <td><%#= iproduct(pri.quantity, pri.unit_price) %></td>
+      </tr-->
+
+
+
+
+
+      <div style="float:right;">
+          <h1>Date :
+          <b><%= f.purchase_requsition_requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
+        </h1>
+      </div>
+      
+
+
+>>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9
       <table border="1" style="width:100%" >
         <thead>
           <tr>

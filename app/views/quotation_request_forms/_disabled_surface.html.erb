@@ -2,7 +2,7 @@
   <tr>
     <td width="120"><b>Varnish</b></td>
     <td>
-        <%= f.radio_button("varnish", QuotationRequestForm::SPOT, :disabled => true) %><%= QuotationRequestForm::SPOT %> <%= f.text_field :surface_remark, :disabled => true %>
+        <%= f.radio_button("varnish", QuotationRequestForm::SPOT, :disabled => true) %><%= QuotationRequestForm::SPOT %> <%= f.text_field :surface_remark, :disabled => true, :size => 20 %>
         <%= f.radio_button("varnish", QuotationRequestForm::FULL, :disabled => true) %><%= QuotationRequestForm::FULL %>
     </td>
   </tr>
@@ -13,13 +13,13 @@
       <% if @quotation_request_form.selection_varnish_types.present? %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::WATERBASED, @varnish_types.include?(QuotationRequestForm::WATERBASED)) %><%= QuotationRequestForm::WATERBASED %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::SOLVENT, @varnish_types.include?(QuotationRequestForm::SOLVENT)) %><%= QuotationRequestForm::SOLVENT %>
-        <%= check_box_tag("varnish_type[]", QuotationRequestForm::CALENDARING_COAT, @varnish_types.include?(QuotationRequestForm::CALENDARING_COAT)) %><%= QuotationRequestForm::CALENDARING_COAT %><br/>
+        <%= check_box_tag("varnish_type[]", QuotationRequestForm::CALENDARING_COAT, @varnish_types.include?(QuotationRequestForm::CALENDARING_COAT)) %><%= QuotationRequestForm::CALENDARING_COAT %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::UV_COAT, @varnish_types.include?(QuotationRequestForm::UV_COAT)) %><%= QuotationRequestForm::UV_COAT %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::MATT_COAT, @varnish_types.include?(QuotationRequestForm::MATT_COAT)) %><%= QuotationRequestForm::MATT_COAT %>
       <% else %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::WATERBASED, false, :disabled => true) %><%= QuotationRequestForm::WATERBASED %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::SOLVENT, false, :disabled => true) %><%= QuotationRequestForm::SOLVENT %>
-        <%= check_box_tag("varnish_type[]", QuotationRequestForm::CALENDARING_COAT, false, :disabled => true) %><%= QuotationRequestForm::CALENDARING_COAT %><br/>
+        <%= check_box_tag("varnish_type[]", QuotationRequestForm::CALENDARING_COAT, false, :disabled => true) %><%= QuotationRequestForm::CALENDARING_COAT %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::UV_COAT, false, :disabled => true) %><%= QuotationRequestForm::UV_COAT %>
         <%= check_box_tag("varnish_type[]", QuotationRequestForm::MATT_COAT, false, :disabled => true) %><%= QuotationRequestForm::MATT_COAT %>
       <% end %>

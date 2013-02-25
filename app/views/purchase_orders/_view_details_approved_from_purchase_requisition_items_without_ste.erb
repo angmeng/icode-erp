@@ -1,7 +1,7 @@
   <% if action_name == "printable" %>
-    <table id="grid_h390" class="black-line-table" width="100%">
+    <table id="grid_h390" class="black-line-table">
   <% else %>
-    <table id="grid_h390" class="white-line-table" width="100%">
+    <table id="grid_h390" class="white-line-table">
   <% end %>
 
       <thead>
@@ -63,17 +63,19 @@
             <td><%= simple_format(k.description) %></td>
 
             <td align="center">
-              <% if k.eta < Date.today %>
-                <span class="red_alert"><%= k.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
+              <% if k.status == PurchaseRequisitionItem::RECEIVED_FULL %>
                 <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
+              <% else %>
+                <% if k.eta < Date.today %>
+                  <span class="red_alert"><%= k.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+                <% else %>
+                  <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>
+                <% end %>
               <% end %>
             </td>
 
-            <% if action_name == "new" %>
-              <td>
-                <%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %>
-              </td>
+            <% if action_name == "new" or action_name == "create" %>
+              <td><%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %></td>
             <% end %>
 
             <td align="center"><%= k.quantity rescue '0' %></td>
@@ -96,6 +98,7 @@
           <% else %>
             <td align="right" colspan="11"><b>Sub-Total</b></td>
           <% end %>
+            
           <td align="right" title="<%= two_precision(subtotal.sum()) %>" class="po_subtotal"><%= two_precision(subtotal.sum()) %></td>
         </tr>
 
@@ -107,6 +110,7 @@
           <% else %>
             <td align="right" colspan="11"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
           <% end %>
+            
           <td align="right" class="add_s_tax"><%= two_precision(@purchase_order.tax.to_f / 100) %></td>
         </tr>
 
@@ -118,6 +122,7 @@
           <% else %>
             <td align="right" colspan="11"><b>Grand Total</b></td>
           <% end %>
+            
           <td align="right" class="po_grandtotal"><%= two_precision(gt) %></td>
         </tr>
 

@@ -98,4 +98,75 @@ class ProductManagement
     product.product_vendors.create!(:trade_company_id => po_vendor_id, :unit_price => po_up)
   end
   
+  # Product - Delete Module
+  def self.delete_folder(pc)
+    @ret = []
+    pc.children.present? ? self.take_child_id(pc) : pc.destroy
+    self.ready_delete(@ret) if @ret.present?
+  end
+  
+  def self.update_all_kiv(pc)
+    @ret = []
+    pc.children.present? ? self.take_child_id(pc) : pc.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FOLDER)
+    self.update_ret(@ret) if @ret.present?
+  end
+  
+  def self.update_file_kiv(pc)
+    if pc.present?
+      pc.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FILE)
+      if pc.product.present?
+        pc.product.update_attributes(:status => Product::KEEP_IN_VIEW)
+        pc.product.product_combobox.update_attributes(:status => ProductCombobox::KEEP_IN_VIEW) if pc.product.product_combobox.present?
+      end
+    end
+  end
+  
+  private
+  
+  def self.take_child_id(pc)
+    @ret << pc.id
+    if pc.children.present?
+      pc.children.each do |child|
+        self.take_child_id(child) 
+      end
+    end
+    @ret
+  end
+  
+  def self.update_ret(ret)
+    @take = ProductCategory.find(ret)
+    @take.each do |r|
+      if r.icon == ProductCategory::ICON_FOLDER
+        r.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FOLDER)
+      elsif r.icon == ProductCategory::ICON_FILE
+        r.update_attributes(:status => ProductCategory::KEEP_IN_VIEW, :icon => ProductCategory::ICON_REMOVE_FILE)
+      end
+      if r.product.present?
+        r.product.update_attributes(:status => Product::KEEP_IN_VIEW)
+        r.product.product_combobox.update_attributes(:status => ProductCombobox::KEEP_IN_VIEW) if r.product.product_combobox.present?
+      end
+    end
+  end
+
+  def self.ready_delete(ret)
+    @take_file    = ProductCategory.where(:id => ret, :icon => ProductCategory::ICON_FILE)
+    @take_folder  = ProductCategory.where(:id => ret, :icon => ProductCategory::ICON_FOLDER)
+    
+    if @take_file.present?
+      @take_file.each do |file|
+        self.base_and_sub_name(file)
+        prod = file.product
+        pri  = ProductRequisitionItem.find_all_by_product_id(prod.id)
+        inv  = InventoryHistory.find_all_by_product_id(prod.id)
+        prod.product_vendors.delete_all       if prod.product_vendors.present?
+        pri.delete_all                        if pri.present?
+        prod.packing_quantities.delete_all    if prod.packing_quantities.present?
+        inv.delete_all                        if inv.present?
+        prod.product_combobox.destroy         if product.product_combobox.present?
+        @manage_product[:running_no].destroy  if @manage_product[:running_no].present?
+        product.destroy                       if product.present?
+        file.destroy                          if file.present?
+      end
+    end
+  end
 end

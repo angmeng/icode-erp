@@ -16,25 +16,7 @@
 //= require turbolinks
 
 $(document).ready(function () {
-    
     $("#timedout").hide();
-    
-//    $("button").click(function(){
-//        $.ajax({url:"demo_test.txt", 
-//            beforeSend:function(xhr) {
-//                $("#spinner").show();
-//            },
-//         complete:function(xhr) {
-//           $("#spinner").delay(3000).hide();
-//         },
-//          success:function(result){
-//            $("#div1").html(result);
-//              },
-//          error:function(xhr){
-//              alert("An error occured: " + xhr.status + " " + xhr.statusText);
-//          }
-//        });
-//    });
 });
 
 
@@ -48,14 +30,10 @@ $(function() {
                 return false;
             } 
         }
-//        if ($(this).attr("value") == "Log In"){
-//            if (e.keyCode == 13) return true;
-//        } else{
-//            if (e.keyCode == 13) return false;
-//        }
     });
  
 });
+<<<<<<< HEAD
 
 //function disableEnterKey(e)
 //{
@@ -95,3 +73,5 @@ $(document).ready(function() {
 });
 
 
+=======
+>>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9

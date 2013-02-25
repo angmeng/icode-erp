@@ -30,23 +30,18 @@
       <%= f.radio_button("window_shape", QuotationRequestForm::RECTANGLE, :disabled => true) %><%= QuotationRequestForm::RECTANGLE %>
       <%= f.radio_button("window_shape", QuotationRequestForm::KIDNEY, :disabled => true) %><%= QuotationRequestForm::KIDNEY %>
       <%= f.radio_button("window_shape", QuotationRequestForm::OVAL, :disabled => true) %><%= QuotationRequestForm::OVAL %>
-      <%= f.radio_button("window_shape", QuotationRequestForm::TRIANGLE, :disabled => true) %><%= QuotationRequestForm::TRIANGLE %><br/>
-      <%= f.radio_button("window_shape", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_shape_other", :id => "window_shape_other", :size => 13, :disabled => true %>
+      <%= f.radio_button("window_shape", QuotationRequestForm::TRIANGLE, :disabled => true) %><%= QuotationRequestForm::TRIANGLE %>
+      <%= f.radio_button("window_shape", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_shape_other", :id => "window_shape_other", :size => 20, :disabled => true %>
     </td>
   </tr>
 
   <tr>
     <td><b>Mould No.</b></td>
-    <td id="mould_no">
-      <input id="mould_no_" size="10" type="text" name="mould_no[1][val]"/>
-      
-    </td>
+    <td id="mould_no"><input class="mould_no_" size="10" type="text" name="mould_no[1][val]" disabled="disabled"/></td>
   </tr>
 
   <tr>
     <td><b>Window No.</b></td>
-    <td id="window_no">
-      <input id="window_no_" size="10" type="text" name="window_no[1][val]"/>
-    </td>
+    <td id="window_no"><input class="window_no_" size="10" type="text" name="window_no[1][val]" disabled="disabled"/></td>
   </tr>
 </table>

@@ -66,15 +66,9 @@
 
   <hr/>
   
-  <%#*<div class="new_form">%>
-    <div class="item_scroll">
-      <%# if @sales_order.sales_order_items.present?  %>
-      <%= render "so_items", :items => @sales_order.sales_order_items %>
-      <%# else %>
-        <%#*No Record Found.%>
-      <%# end %>
-    </div>
-  <%#*</div>%>
+  <div class="item_scroll">
+    <%= render "so_items", :items => @sales_order.sales_order_items %>
+  </div>
   
   <div class="icon_tag">
     <%= link_close_button %>

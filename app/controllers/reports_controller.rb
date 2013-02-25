@@ -24,6 +24,7 @@ class ReportsController < ApplicationController
       format.html
       format.csv{ render text: @excel_inventory_report.to_csv }
       format.xls
+<<<<<<< HEAD
       format.pdf {
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf, :filename => "pdf_inventory_report.pdf", 
@@ -31,6 +32,8 @@ class ReportsController < ApplicationController
                                   :dispositon => "attachement" )
         #return # to avoid double render call
         }
+=======
+>>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9
       
     end
   else
@@ -45,7 +48,10 @@ def excel_pr_report
       format.html
       format.csv{ render text: @excel_pr_report.to_csv }
       format.xls
+<<<<<<< HEAD
       
+=======
+>>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9
     end
   else
     redirect_to pr_report_reports_path

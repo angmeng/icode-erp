@@ -1,6 +1,6 @@
 <div id="popup_container">
   
-  <div style="background-color:blue"><strong style="color:white;">EDIT USER</strong></div>
+  <div class="title_head"><strong style="color:white;">EDIT USER</strong></div>
 
   <%= form_tag @user, :url => edit_user_path(@user), :method => :put do  %>
     <div id="user_strip">
@@ -25,19 +25,14 @@
   
 </div>
 
-
-
-
-
-
 <% content_for :jquery_script do %>
-   <script>
-      $(document).ready(function() {
-          $("#new_name").keyup(function(){
-            var string = $(this).val();
-            $("#insert_name").html(string);
-            return false;
-          });
-      });
-    </script>
+  <script>
+    $(document).ready(function() {
+        $("#new_name").keyup(function(){
+          var string = $(this).val();
+          $("#insert_name").html(string);
+          return false;
+        });
+    });
+  </script>
 <% end %>

@@ -1,8 +1,10 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::SO_ENTRY_ADD) %>
-    <%= link_to image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "cube35"), "#", :id => "add_bottom_row_for_sales_order" %>
+    <% unless action_name = "edit" %>
+      <%= link_to "Add Item", "#", :id => "add_bottom_row_for_sales_order", :class=>"k-button" %>
+    <% end %>
   <% else %>
-    <%= image_tag("add_item_button.png", :alt => "Add Items", :title => "Add Items", :class => "opac_icon") %>
+    <span class="k-button" style = "color: grey; background-color: white; cursor: default;">Add Item</span>
   <% end %>
 </div>
 

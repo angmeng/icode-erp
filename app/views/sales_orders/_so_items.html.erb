@@ -8,6 +8,7 @@
     
     <thead>
       <tr style="background-color: gainsboro;">
+        <th class="check_highlight"></th>
         <th>Status</th>
         <th>Product ID</th>
         <th>Description</th>
@@ -26,6 +27,7 @@
       
       <% items.each do |sales_order_item| %>
         <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="sales_order_items" rowsId="<%= sales_order_item.id %>">
+          <td></td>
           <td align="center">
             <% if sales_order_item.status == SalesOrderItem::APPROVED %>
               APPROVED

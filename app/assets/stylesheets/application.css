@@ -109,8 +109,7 @@ p#alert {
 
 /*=================================== MENU TOOL =====================================*/
 #main_header { 
-    padding: 5px; font-weight: bold; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 15px; color:blue  ;
-/*    color: whitesmoke;*/
+    padding: 5px; font-weight: bold; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 15px; color:blue;
     
     background-color: #A6DEFF;
     /* For WebKit (Safari, Chrome, etc) */
@@ -133,6 +132,22 @@ p#alert {
 #template:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 #template .k-button { float: left; clear: left; margin: 5px 0 5px 12px; }*/
 /*=================================== MENU TOOL (END) =====================================*/
+
+/*=================================== Footer =====================================*/
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   
+   padding: 5px; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
+   background-color: #A6DEFF;
+   background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
+   background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#A6DEFF) no-repeat;
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
+}
+/*=================================== Footer (end) =====================================*/
 
 /*=================================== WHITE TABLE =====================================*/
 table.white-line-table {
@@ -188,6 +203,32 @@ table.black-line-table td {
 	-moz-border-radius: 0px 0px 0px 0px; }
 /*=================================== BLACK TABLE (END) =====================================*/
 
+/*=================================== BLACK TABLE - without 100% width =====================================*/
+table.normal_table_black {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: black;
+	border-collapse: collapse;
+	background-color: transparent; }
+
+table.normal_table_black th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+        
+table.normal_table_black td {
+	border-width: 1px;
+        padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+/*=================================== BLACK TABLE (END) =====================================*/
+
 /*=================================== STANDARD TABLE WIDTH =====================================*/
 .std_no             { width: 30px; }
 .std_check          { width: 40px; }
@@ -208,10 +249,10 @@ table.black-line-table td {
 #treeview .k-sprite     { background-image: url("/assets/coloricons-sprite.png") }
 #treeview .rootfolder   { background-image: url("/assets/treeview_folder.gif") }
 #treeview .folder       { background-image: url("/assets/treeview_folder_open.gif") }
-#treeview .file         { background-image:url("/assets/treeview_file.gif") }
-#treeview .remove_file  { background-image:url("/assets/remove_file.png") }
-#treeview .kiv_file     { background-image:url("/assets/remove_file.png") }
-#treeview .kiv_folder   { background-image:url("/assets/remove_folder.png") }
+#treeview .file         { background-image: url("/assets/treeview_file.gif") }
+#treeview .remove_file  { background-image: url("/assets/remove_file.png") }
+#treeview .kiv_file     { background-image: url("/assets/remove_file.png") }
+#treeview .kiv_folder   { background-image: url("/assets/remove_folder.png") }
 
 .approval_remark{ background-color:red; color:white; padding:5px; width: 450px; }
 
@@ -268,8 +309,7 @@ table.black-line-table td {
 .type_window_patching { display:none; }
 .type_varnish { display:none; }
     
-fieldset { border: 1px solid gray; } 
-legend { font-size: 15px; font-weight: bold; }
+
 
 .font_bold      { font-weight: bold; }
 .header_content { background-color: #FE9B00; }
@@ -305,7 +345,7 @@ legend { font-size: 15px; font-weight: bold; }
 #fix_height { overflow:auto; height:650px; }
 
 /* new_form */
-.new_purchase_form {
+.fix_1600x900_h450, .fix_h450 {
     border: 1px solid black;
     height: 450px;
     overflow: auto;
@@ -317,21 +357,10 @@ legend { font-size: 15px; font-weight: bold; }
     overflow: auto;
 }
 
-.new_qr_form {
-    border: 1px solid grey;
-    width: 99.80%;
-    height: 400px;}
-
 .new_costingsheet {
 /*    border: 1px solid grey;*/
     width: 100%;
     height: 410px;}
-
-.item_scroll {
-    border: 1px solid gainsboro;
-    overflow: auto;
-    width: 99.7%;
-    height: 320px;}
 
 .fix_800x450 {
     border: 1px solid black;
@@ -351,11 +380,13 @@ legend { font-size: 15px; font-weight: bold; }
     height: 500px;
 }
 
-.fix_1600x900_h450 {
+.fix_1600x900_h550 {
     border: 1px solid black;
     overflow:auto;
-    height: 450px;
+    height: 550px;
 }
+
+
 
 .fix_1600x900_h400 {
     border: 1px solid black;
@@ -415,24 +446,7 @@ legend { font-size: 15px; font-weight: bold; }
 tr.over td{ background: gold; }
 tr.selected_row td{ background: gold; }
 
-#paper_size {
-    position: absolute;
-    top: 100px;
-    left: 600px;
-    border: 1px solid blue;
-}
 
-#paper_size_show {
-    position: absolute;
-    top: 100px;
-    left: 600px;
-}
-
-#printing_size_show {
-    position: absolute;
-    top: 100px;
-    left: 1050px;
-}
 
 #company_strip{ width: 99.70%; }
 
@@ -442,5 +456,38 @@ tr.selected_row td{ background: gold; }
 
 .check_picture {
     background-image: url("/assets/checking.png");
+}
+
+/* Product Layout */
+#horizontal { height: 500px; margin: 0 auto; }
+.product_button{ padding: 5px; }
+.product_container { margin: 5px; height: 450px; overflow: auto; }
+#right-pane { background-color: gainsboro; }
+
+
+fieldset { border: 1px solid green; padding: 5px; }
+legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color: green; font-weight: bold;  }
+
+/* Quotation Tabbing */
+.tabbing_h400 { height: 400px; overflow: auto; }
+
+/* Quotation - Material */
+#paper_size {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    border: 1px solid blue;
+}
+
+#paper_size_show {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#printing_size_show {
+    position: absolute;
+    top: 0px;
+    left: 500px;
 }
 
