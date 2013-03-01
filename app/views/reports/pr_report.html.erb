@@ -25,10 +25,12 @@
 
 <hr />
 
+<input type="checkbox" name="all" id="checkall" />Check All
+
 <div class="fix_1600x900_h450">
     <!-- <fieldset> -->
-    <%#= form_tag pdf_pr_report_reports_path ,:name=>"myform",:url =>pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-      <table id="grid_h495" >
+    <%= form_tag pdf_pr_report_reports_path,:url =>pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+      <table id="grid_h495" class="white-line-table zebraLight">
       <thead>
       <tr class="header_line">
         <th class="check_highlight"></th>
@@ -69,34 +71,29 @@
 
 
   <div class="icon_tag" style="float:left">
-      <span><%= link_to "Excel Report", excel_pr_report_reports_path(:pr_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <span><%= not_link_excel %><%#= link_to "Excel Report", excel_pr_report_reports_path(:pr_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
   </div>
 
     <div class="icon_tag" style="float:right;">
 
-      <span><%= not_link_show %></span>
+      <span><%= submit_tag "show" , :class => "k-button" %></span>
+      
       <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
       <span><%= not_link_recover %></span>
 
       
-<<<<<<< HEAD
-      <span><%= not_link_printable %><%= link_to "PDF Report" , excel_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
-=======
-      <span><%= not_link_printable %><%#= link_to "PDF Report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
->>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9
+
+      <span><%#= not_link_printable %><%#= link_to "PDF Report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %>
+
+      <%= submit_tag "PDF Report",:class => "k-button" %>
+      <% end %>
+    </span>
+
 
       <%= link_close_button %>
     </div>
 </div>
    
-
- <script type="text/javascript">
-
- $('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});
-  </script>
 
 
 

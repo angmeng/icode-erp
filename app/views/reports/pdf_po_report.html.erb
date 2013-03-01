@@ -1,30 +1,20 @@
 <h2>Purchase Order Report</h1>
 
 <div>
-  <% if @po_detail_report.present? %>
-  <% @po_detail_report.each do |p| %>
+  
+  
   <fieldset>
      
-      <div style="float:left">
-        <div>Vendor : <u><%= p.trade_company.name %></u></div>
-
-      </div>
-
-      <div style="float:right">
-        <div>Purchase By. : <%= p.purchase_by.name rescue '-' %></div>
-  
-        <div>Request By. : <%= p.request_by.name rescue '-' %></div>
-      </div>
- 
-      
-    
-
-  	<table border="1">
+      <% if @po_detail_report.present? %>
+  	<table class="black-line-table">
   		<thead>
   			<tr>
   				<th>PO No.</th>
+          <th>Vendor</th>
   				<th>Order date</th>
   				<th>Currency</th>
+          <th>Purchase By</th>
+          <th>Request By</th>
   				<th>Term</th>
   				<th>Transport</th>
   				
@@ -32,22 +22,69 @@
   		</thead>
       
   	<tbody>
+      
+      <% @po_detail_report.each do |p| %>
   		<tr>
   			<td><%= p.po_no rescue'-' %></td>
-  			<td><%= p.po_date rescue '-' %></td>
+        <td><%= p.trade_company.name %></td>
+  			<td><%= p.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
   			<td><%= p.currency.name rescue '-' %></td>
+        <td><%= User.find_by_id(purchase_by).name rescue '-' %></td>
+        <td><%= User.find_by_id(request_by).name rescue '-' %></td>
   			<td><%= p.trade_term.name rescue '-' %></td>
   			<td><%= p.transport.name rescue '-' %></td>
-  			
+  			 
   		</tr>
+      <% end %>
   	</tbody>
   	
     </table>
    
   </fieldset>
 
-   <% end %>
+  
    <% else %>
    no record found
     <% end %>
 </div>
+
+
+<style>
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+        }
+</style>

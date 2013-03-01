@@ -27,6 +27,7 @@
 
 <div class="fix_1600x900_h450">
 	<fieldset>
+	<%= form_tag pdf_sales_tax_exemption_report_reports_path ,:url =>pdf_sales_tax_exemption_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
 	<table id="grid_h495" class="white-line-table zebraLight">
 	<thead>
 		<tr class="header_line">
@@ -44,17 +45,17 @@
 	</thead>
 	
 	<tbody>
-	<% @show_sale_tax_exemption_report.each_with_index do |pri , index| %>
+	<% @show_sales_tax_exemption_report.each_with_index do |p , index| %>
 		<tr class="<%= cycle("odd_line", "even_line") %>">
 			<td></td>
-			<td><%= check_box_tag "sales_ids[]", pri.id %></td>
+			<td><%= check_box_tag "ste_ids[]", p.id %></td>
 			<td align="center"><%= index + 1 %></td>
-			<td align="center"><%= pri.trade_company.name rescue '-'%></td>
-			<td align="center"><%= pri.sales_exemption_no rescue'-' %></td>
-			<td align="center"><%= pri.tarif_code rescue '-' %></td>
-			<td align="center"><%= pri.ste_no rescue '-' %></td>
-			<td align="center"><%= pri.remaining_total rescue '-' %></td>
-			<td align="center"><%= pri.period_start rescue '-' %></td>
+			<td align="center"><%= p.trade_company.name rescue '-'%></td>
+			<td align="center"><%= p.sales_tax_exemption_no rescue'-' %></td>
+			<td align="center"><%= p.tarif_code rescue '-' %></td>
+			<td align="center"><%= p.ste_no rescue '-' %></td>
+			<td align="center"><%= p.remaining_total rescue '-' %></td>
+			<td align="center"><%= p.period_start rescue '-' %></td>
 		</tr>
 		<% end %>
 	</tbody>
@@ -71,22 +72,16 @@
 
 	<div style="float:right;">
 
-			<span><%= not_link_show %></span>
+			<span><%#= not_link_show %><%= submit_tag "show" , :class => "k-button" %></span>
 
 			<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
 
 			<span><%= not_link_recover %></span>
 
-		   <span><%= not_link_printable %><%#= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:sales_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %></span>
-
+		   <span><%#= not_link_printable %><%#= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:sales_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %>
+		   	<%= submit_tag "PDF report" , :class => "k-button" %></span>
+		   	<% end %>
 		   <%= link_close_button %>
 	</div>
 
 
- <script type="text/javascript">
-
- $('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});
-  </script>

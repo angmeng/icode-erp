@@ -18,8 +18,9 @@ Merp::Application.routes.draw do
     get "inventory_report"
     get "customer_report"
     get "receive_note_report"
+    get "rn_part_summary_report"
 
-    get "pdf_sale_tax_exemption_report"
+    get "pdf_sales_tax_exemption_report"
     get "pdf_product_report"
     get "pdf_inventory_report"
     get "pdf_pr_report"

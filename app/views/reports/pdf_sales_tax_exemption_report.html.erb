@@ -1,40 +1,49 @@
-<h1>Receive Note Report</h1>
+<h2> Sales Tax Exemption Report</h2>
+
 
 <div>
-	<fieldset>
-		<% if @detail_receive_note_report.present? %>
-		<% @rn_detail_report.each do |d| %>
-		<table class="black-line-table">
-			<thead>
+
+
+		<% if @detail_sales_tax_exemption_report.present? %>
+	<table class="black-line-table" >
+		<thead>
 			<tr>
-				<th>Product Id / Description</th>
-				<th>Received Qty</th>
-				<th>P/O No.</th>
-				<th>Update By</th>
+				<th>No.</th>
+				<th>Trade company / Sales Tax Exemption</th>
+				<th>Date</th>
+				<th>Inv No.</th>
+				<th>Tarif Code</th>
+				<th>Remaining Total</th>
 			</tr>
-		</head>
-		<% arr = [] %>
-		</tbody>
-		
-		<tr>
+		</thead>
 
-			<td><%= render '/product_categories/join_product_category' , :pc => pr.pri rescue'-' %> / <%= d. rescue '-'%></td>
+		<tbody>
+		<% @detail_sales_tax_exemption_report.each_with_index do |ste , index| %>
+			<tr>
+				<td><%= index + 1 %></td>
+				<td><%= ste.trade_company.name rescue '-' %> / <%= ste.sales_tax_exemption_no %></td>
+				<td><%= ste.period_start rescue '-' %></td>
+				<td><%= ste.ste_no rescue '-' %></td>
+				<td><%= ste.tarif_code rescue '-' %></td>
+				<td><%= ste.remaining_total rescue '-' %></td>
 
-			<% d.received_note_items.each do |pri| %>
-			<td><%= pri.received_qty rescue '-'%></td>
-			<% end %>
-			<td><% d. %></td>
-			<td><%= d. rescue '-' %></td>
-			<td><%= d. rescue '-' %></td>
-		</tr>
-		
-	</tbody>
-	<% end %>
-		</table>
-		<% else %>
-		No Report Found
+			</tr>
+			
 		<% end %>
-	</fieldset>
+		
+
+		
+		</tbody>
+
+		<% else %>
+			no report found
+		<% end %>
+	</table>
+
+
+	
+  	
+
 </div>
 
 

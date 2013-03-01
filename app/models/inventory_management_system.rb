@@ -388,4 +388,12 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRICE_CONTROL_RECOVER                              = 257
   
   #start at 263
+  # REPORT_CONTROL_SHOW
+  # REPORT_CONTROL_PDF
+  # REPORT_CONTROL_EXCEL   
+
+  #po , rn , pr , STE , qr , DO , inventory , so , ( company , customer , 
+                       #   price [no belong to department see...])
+
+  #300 - 400
 end

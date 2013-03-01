@@ -35,8 +35,7 @@
 
 <div class="fix_1600x900_h450">
 	<fieldset>
-	<%#= form_tag pdf_product_report_reports_path ,:name=>"myform",:url =>
-		pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+	<%= form_tag pdf_product_report_reports_path ,:url =>pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
 	<table id="grid_h495" class="white-line-table zebraLight table">
 			<thead>
 			<tr class="header_line">
@@ -56,19 +55,19 @@
 		
 	
 		<tbody>
-		<% @show_product_report.each_with_index do |pri , index| %>
+		<% @show_product_report.each_with_index do |pro , index| %>
 			<tr class="<%= cycle("odd_line", "even_line") %>">
 		        <td></td>
-		        <td align="center"><%= check_box_tag "product_ids[]", pri.id %></td>
+		        <td align="center"><%= check_box_tag "pro_ids[]", pro.id %></td>
 				<td align="center"><%= index + 1 %></td>
 				<%#= render '/product_categories/join_product_category' , :pc => pri.product_category %>
-				<td align="center"><%= pri.product_code %></td> <%#= pri.product.product_name rescue '-' %>
-				<td align="center"><%= pri.product.desc rescue '-'%></td>
-				<td align="center"><%= pri.product.part_no rescue '-'%></td>
-				<td align="center"><%= pri.product.part_weight rescue '-' %>
-				<td align="center"><%= pri.product.selling_price rescue '-'%></td>
-				<td align="center"><%= pri.product.current_stock rescue '-'%></td>
-				<td align="center"><%= pri.product.unit_measurement.code rescue '-'%></td>
+				<td align="center"><%= pro.product_code %></td> <%#= pri.product.product_name rescue '-' %>
+				<td align="center"><%= pro.product.desc rescue '-'%></td>
+				<td align="center"><%= pro.product.part_no rescue '-'%></td>
+				<td align="center"><%= pro.product.part_weight rescue '-' %>
+				<td align="center"><%= pro.product.selling_price rescue '-'%></td>
+				<td align="center"><%= pro.product.current_stock rescue '-'%></td>
+				<td align="center"><%= pro.product.unit_measurement.code rescue '-'%></td>
 			</tr>
 		</tbody>
 	<% end %>
@@ -76,47 +75,28 @@
 	</fieldset>
 </div>
 	<div class="icon_tag" style="float:left">
-		<span><%= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
+		<span><%= not_link_excel %><%#= submit_tag "Excel" ,:url => excel_product_report_reports_path , :target => "_blank" ,  %>
+			<%#= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
 
 	</div>
 
 	
 	<div class="icon_tag" style="float:right;">
 
-		<span><%= not_link_show %></span>
+		<span><%= submit_tag "show" , :class => "k-button" %><%#= not_link_show %></span>
 		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
 		<span><%= not_link_recover %></span>
 		
-		<span><%= link_to "Print PDF" , pdf_product_report_reports_path(:pri_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
-<<<<<<< HEAD
+		<span><%= submit_tag "PDF report" , :class=>"k-button" %></span>
+		<% end %>
 
 	 	<%= link_close_button %>
   <%# end %>
 	</div>
 
-=======
-
-	 	<%= link_close_button %>
-  <%# end %>
-	</div>
-
-<<<<<<< HEAD
-=======
- 	<%= link_close_button %>
-  <% end %>
-<%#*</from>%>
-</div>
->>>>>>> 7a9b4348857fbef541a8437c0bb1941148a8b974
->>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9
-</div>
 
 
- <script type="text/javascript">
 
- $('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});
-  </script>
+
 
 

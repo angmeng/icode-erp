@@ -22,6 +22,7 @@
 <input type="checkbox" name="all" id="checkall" />Check All
 
   <div class="fix_1600x900_h450">
+          <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
                   <table id="grid_h445" class="white-line-table zebraLight">
@@ -84,26 +85,19 @@
           <%#*</fieldset>%>
 
     <div class="icon_tag" style="float:left">
-      <span><%= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <span><%= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
     </div>
 
     <div class="icon_tag" style="float:right;">
 
-      <span><%= not_link_show %></span>
-      <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+      <span><%#= not_link_show %><%= submit_tag "show" , :class => "k-button" %></span>
+      <% end %>
+      <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
 
       
-      <span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+      <span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
 
       <%= link_close_button %>
     </div>
 
-
- <script type="text/javascript">
-
- $('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});
-  </script>
