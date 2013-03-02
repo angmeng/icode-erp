@@ -45,9 +45,9 @@
             <td><%= pri.trade_company.name rescue '-' %></td>
             <td><%= pri.quantity rescue '-'%></td>
             <td><%= iproduct(pri.quantity, pri.unit_price) %></td>
-              <%# if iproduct(pri.quantity, pri.unit_price).present? %>
-              <%# arr << pri.quantity * pri.unit_price %>
-              <%# end %>
+              <% if iproduct(pri.quantity, pri.unit_price).present? %>
+              <% arr << pri.quantity * pri.unit_price %>
+              <% end %>
             
           </tr>
           <% end %>
