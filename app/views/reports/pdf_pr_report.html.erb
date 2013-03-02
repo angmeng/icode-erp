@@ -1,120 +1,116 @@
-<h2><u>Purchase Requisition Report</u></h2>
-
-<fieldset>
-<% if @detail_pr_report.present? %>
-  <% @detail_pr_report.each_with_index do |pri , index| %>
-
-
-      <div style="float:left;">
-          <h1>PR.No :
-          <u><b><%= f.purchase_requsition_pr_no rescue '-' %></b></u>
-          </h1>
-      </div>
-
-  
-  
-  
+<div id="container">
   
 
-  <!--div style="float:right;">
-      <h1>Date :
-      <b><%#= f.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
-    </h1>
-  </div-->
-  
+  <h2><u>Purchase Requisition Report</u></h2>
 
 
-  <!--table border="1" >
-    <thead>
-    <tr>
-      <th>No.</th>
-      <th></th>
-      <th>Description</th>
-      <th>RM</th>
-      <th>Vendor</th>
-      <th>ORDER QTY</th>
-      <th>Amount</th>
-    </tr>
-    </thead>
-
+  <% if @detail_pr_report.present? %>
     
-  <%# arr = [] %>
-
-  
-    <%# f.purchase_requisition_items.each_with_index do |pri, index| %>
-    <tbody>
-      <tr>
-        <td><%#= index + 1 %></td>
-
-        <td><%#= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
-
-        <td><%#= pri.product.description rescue '-' %></td>
-        <td><%#= pri.product.unit_price rescue '-' %></td>
-        <td><%#= pri.product.trade_company.name rescue '-' %></td>
-        <td><%#= pri.product.quantity  rescue '-' %></td>
-        <td><%#= iproduct(pri.quantity, pri.unit_price) %></td>
-      </tr-->
+        
+    <!-- it will take the choice of purchase requisition which related to pr_no -->
 
 
+        <table id="jgrid">
+          <thead>
+            <tr class="header_line">
+              <th>Pr.No</th>
+              <th>Product Code</th>
+              <th>Description</th>
+              <th>RM</th>
+              <th>Date</th>
+              <th>Vendor</th>
+              <th>ORDER QTY</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
 
+          <tbody>
+            <% @detail_pr_report.each do |pr| %>
+              <% arr = [] %>
+              <% pr.purchase_requisition_items.each_with_index do |pri, index| %>
+                <tr class="<%= cycle('odd_line', 'even_line') %>">
+                    <% if index == 0 %>
+                      <td align="center" rowspan="<%= pr.purchase_requisition_items.count %>"><%= pr.pr_no rescue '-' %></td>
+                    <% end %>
 
-
-      <div style="float:right;">
-          <h1>Date :
-          <b><%= f.purchase_requsition_requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
-        </h1>
-      </div>
-      
-
-
-      <table border="1" style="width:100%" >
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Product Code</th>
-            <th>Description</th>
-            <th>RM</th>
-            <th>Vendor</th>
-            <th>ORDER QTY</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-
-            
-          <% arr = [] %>
-
-          
-            <%# f.each_with_index do |pri, index| %>
-        <tbody>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td><%#= pri.product_code rescue '-' %><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %></td>
-            <td><%= pri.description rescue '-'%></td>
-            <td><%= pri.unit_price rescue '-' %></td>
-            <td><%= pri.trade_company.name rescue '-' %></td>
-            <td><%= pri.quantity rescue '-'%></td>
-            <td><%= iproduct(pri.quantity, pri.unit_price) %></td>
-          </tr>
-          
-        </tbody>
-
-              <% if iproduct(pri.quantity, pri.unit_price).present? %>
-              <% arr << pri.quantity * pri.unit_price %>
+                    <!-- <div style="cellpadding:3 cellspacing:1"> -->
+                    <td align="center"><%= pri.product.product_combobox.product_code rescue '-' %></td>
+                    <td><%= pri.description rescue '-'%></td>
+                    <td align="right"><%= two_precision(pri.unit_price) %></td>
+                    <!-- </div> -->
+                    <% if index == 0 %>
+                    <td align="center" rowspan="<%= pr.purchase_requisition_items.count %>"><%= pr.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></td>
+                    <% end %>
+                    <td><%= pri.trade_company.name rescue '-' %></td>
+                    <td><%= pri.quantity rescue '-'%></td>
+                    <td>
+                      <%= iproduct(pri.quantity, pri.unit_price) %>
+                      <% arr << pri.quantity * pri.unit_price %>
+                    </td>
+                </tr>
               <% end %>
 
-            
-            
-      
-      </table>
-      <table>
-        <tr style="float:right;">
-          <td>Total Amount :</td>
-          <td ><%= two_precision(arr.sum) %></td>
-        </tr>
-      </table>
+              <tr class="header_line">
+                <td colspan="7" align="right">Total Amount :</td>
+                <td><%= two_precision(arr.sum) %></td>
+              </tr>
+          
 
+            <% end %>
+          </tbody>
+        </table>
+
+    
+  <% else %>
+      <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
   <% end %>
-    <% else %>
-    <div>No record found.</div>
-<% end %>
-  </fieldset>
+</div>
+
+
+<style>
+
+  table{
+    width:100%;
+  }
+  
+  body {
+    width:100%;
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+         
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+
+        }
+
+        </style>

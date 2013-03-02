@@ -5,15 +5,15 @@
       <table>
         <tr>
           <td>Part Code :</td>
-          <td><%= f.text_field :, :size => 12 %> -
-            <%= f.text_field :, :size => 12 %></td>
+          <td><%#= f.text_field :, :size => 12 %> -
+            <%#= f.text_field :, :size => 12 %></td>
           <td>Tarif Code </td>
-          <td><%= f.text_field :tarif_code_sw , :size => 10 %></td>
+          <td><%#= f.text_field :tarif_code_sw , :size => 10 %></td>
         </tr>
         <tr>
           <td>Invoice Period</th>
-          <td><%= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
-          <%= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
+          <td><%#= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
+          <%#= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
         </tr>
         
         <tr>
@@ -33,12 +33,12 @@
 			<th class="check_highlight"></th>
 			<th></th>
 			<th>No.</th>
-			<th>Trade company</th>
-			<th>Sales Tax Exemption</th>
-			<th>Tarif Code</th>
-			<th>Inv No.</th>
+			<th>P/O No.</th>
+			<th>Ref Doc</th>
+			<th>Qty</th>
+			<th>U/M</th>
+			<th>U/P</th>
 			<th>Amount</th>
-			<th>Date</th>
 			
 		</tr>
 	</thead>
@@ -81,12 +81,3 @@
 
 		   <%= link_close_button %>
 	</div>
-
-
- <script type="text/javascript">
-
- $('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});
-  </script>

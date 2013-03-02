@@ -1,37 +1,36 @@
-<fieldset>
+
 <h2>Inventory Report</h2>
 
 <div>
 	 
-	
-		<table border="1" width="100%">
+	<fieldset>
+		<!-- <table style="border:1 cellpadding:3 cellspacing:1 width:100%; "> -->
+		<table class="black-line-table">
 			<thead>
-			<tr>
-				<th>No.</th>
-				<th width="200">Product ID</th>
-                                <th>Description</th>
-				<th>Stock In</th>
-				<th>Stock Out</th>
-                                <th>Remaining</th>
-				<th>Transaction</th>
-			
-				
-			</tr>
-		</thead>
+				<tr>
+					<th>No.</th>
+					<th>Product ID</th>
+	        <th>Description</th>
+				  <th>Stock In</th>
+					<th>Stock Out</th>
+          <th>Remaining</th>
+					<th>Transaction</th>
+				</tr>
+			</thead>
 
 			<%# arr = [] %>
 
-	<% if @pdf_inventory_report.present? %>
-	 <% @pdf_inventory_report.each_with_index do |pri , index| %>
+	<% if @detail_inventory_report.present? %>
+	 <% @detail_inventory_report.each_with_index do |pri , index| %>
 
 			<tbody>
 			<tr>
 				<td><%= index + 1 %></td>
-				<td><%= render '/product_categories/join_product_category' , :pc => pri %></td>
-                                <td><%= pri.product.desc rescue '-' %></td>
+				<td><%= render '/product_categories/join_product_category' , :pc => pri  rescue'-' %></td>
+        <td><%= pri.product.desc rescue '-' %></td>
 				<td><%= pri.stock_in rescue '-'%></td>
 				<td><%= pri.stock_out rescue '-'%></td>
-                                <td><%= pri.amount rescue '-' %></td>
+        <td><%= pri.amount rescue '-' %></td>
 				<td><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
 				<!--td><%#= pri.inventory_issue.in_out rescue '-' %></td-->
 				<%#= iproduct(pri.amount) rescue '-'%>
@@ -40,9 +39,52 @@
 			<% end %>
 
 		</table>
-
-	
-  		<% end %>
+     <% else %>
+   no record found
+    <% end %>
+  		
+      </fieldset>
 	
 </div>
-</fieldset>
+
+
+
+<style>
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+  
+</style>

@@ -33,3 +33,45 @@ $(function() {
     });
  
 });
+<<<<<<< HEAD
+
+//function disableEnterKey(e)
+//{
+//     var key;
+//
+//     if(window.event)
+//          key = window.event.keyCode;     //IE
+//     else
+//          key = e.which;     //firefox
+//
+//     if(key == 13)
+//          return false;
+//     else
+//          return true;
+//}
+
+//<input type=”text” name=”mytext” onKeyPress=”return disableEnterKey(event)”>
+
+
+$(document).ready(function() {
+    $("#vertical").kendoSplitter({
+        orientation: "vertical",
+        panes: [
+            { collapsible: false },
+            { collapsible: false, size: "100px" },
+            { collapsible: false, resizable: false, size: "100px" }
+        ]
+    });
+
+    $("#horizontal").kendoSplitter({
+        panes: [
+            { collapsible: true, size: "220px" },
+            { collapsible: false },
+            { collapsible: true, size: "220px" }
+        ]
+    });
+});
+
+
+=======
+>>>>>>> ab1e81044f9b75a805e2b04a3899e06677ecdbf9

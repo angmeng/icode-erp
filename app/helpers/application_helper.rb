@@ -54,11 +54,17 @@ module ApplicationHelper
         end
         
         unless downlines.empty?
-          ret << "<ul>"
-          downlines.each do |d|
-            treeview_with_parent(d, ret, customize_mode, with_form)
+          if category.status == ProductCategory::KEEP_IN_VIEW
+            downlines.each do |d|
+              treeview_with_parent(d, ret, customize_mode, with_form)
+            end
+          else
+            ret << "<ul>"
+            downlines.each do |d|
+              treeview_with_parent(d, ret, customize_mode, with_form)
+            end
+            ret << "</ul>"
           end
-          ret << "</ul>"
         end
         
         if category.status == ProductCategory::KEEP_IN_VIEW

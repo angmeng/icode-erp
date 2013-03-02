@@ -6,8 +6,7 @@
 	
 	
 
-	<table border="1" >
-
+	<table class="black-line-table" >
 			<thead>
 			<tr>
                           
@@ -53,3 +52,44 @@
 <%#
       <td width="170"><b>Product ID</b></td>
       <td><%= product_id.product_combobox.product_code if product_id.product_combobox.present? %>
+
+
+
+<style>
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+        }

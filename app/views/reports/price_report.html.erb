@@ -1,5 +1,7 @@
 <div id="popup_container">
-<h3>Price Report</h3>
+
+<div class="title_head"><strong style="color:white;">Price Report</strong></div>
+
  
 
 	<table>
@@ -44,6 +46,7 @@
 	<tbody>
 	<% @show_price_report.each_with_index do |pri, index| %>
 		<tr class="<%= cycle("odd_line", "even_line") %>">
+			<td></td>
 			<td align="center"><%= index + 1 %></td>
 			<td align="center"><%= pri.product_product_code rescue '-'%></td>
 			<td align="center"><%= pri.old_unit_price rescue '-'%></td>
