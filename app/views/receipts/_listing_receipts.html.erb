@@ -1,0 +1,32 @@
+<table id="jgrid" class="zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Receipt No</th>
+      <th>Receipt Date</th>
+      <th>Trade Company</th>
+      <th>Cash Amount</th>
+      <th>Cheque Amount</th>
+      <th>Total Amount</th>
+      <th>Journal Voucher No</th>
+      <th>Remark</th>
+      <th>Updated By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% receipts.each do |receipt| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= receipt.id %>">
+        <td></td>
+        <td align="center"><%= receipt.receipt_no %></td>
+        <td align="center"><%= receipt.receipt_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td><%= company_code_and_name(receipt.trade_company) rescue '-' %></td>
+        <td align="right"><%= four_precision(receipt.cash_amount) %></td>
+        <td align="right"><%= four_precision(receipt.cheque_amount) %></td>
+        <td align="right"><%= four_precision(receipt.total_amount) %></td>
+        <td align="center"><%= receipt.journal_voucher_no rescue '-' %></td>
+        <td><%= receipt.remark rescue '-' %></td>
+        <td align="center"><%= updater_name(receipt.updated_by) rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

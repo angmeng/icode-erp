@@ -12,30 +12,43 @@
  *= require_tree .
 */
 
-/*==================== SCAFFOLDS STYLE ==================================================================================*/
-html { 
-    height: 100%; /* For 100% height */ 
-    overflow-y: hidden;
-}
+/*===== ===== SCAFFOLDS STYLE ===== =====*/
+
+* { margin: 0; padding: 0; }
+
+html { height: 100%; overflow-y:hidden; }
 
 body {
-  margin: 0; padding: 0; height: 100%; /* For 100% height */
-  
-  background-color: #fff;
-  color: #000;
-  font-family: Tahoma, arial, helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 18px; 
+    height: 100%;
+    color: #000; /* background-color: green; */
+    font-family: Tahoma, arial, helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 18px; 
 }
 
-#container, #popup_container{
+#container, #popup_container {
     background-color: #fff;
     color: #000;
     font-family: Tahoma, arial, helvetica, sans-serif;
     font-size: 12px;
+    min-height: 80%;
+    height: 100%;
+    height: auto !important;
     margin: auto;
-    width: 100%;
-    min-height: 100%;
+}
+
+#footer {
+   position: fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
+   padding: 5px; 
+   background-color: #A6DEFF;
+   background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
+   background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#A6DEFF) no-repeat;
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
 }
 
 #popup_content {
@@ -133,23 +146,10 @@ p#alert {
 #template .k-button { float: left; clear: left; margin: 5px 0 5px 12px; }*/
 /*=================================== MENU TOOL (END) =====================================*/
 
-/*=================================== Footer =====================================*/
-#footer {
-   position:fixed;
-   left:0px;
-   bottom:0px;
-   width:100%;
-   
-   padding: 5px; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
-   background-color: #A6DEFF;
-   background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
-   background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
-   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#A6DEFF) no-repeat;
-   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
-}
-/*=================================== Footer (end) =====================================*/
+/* Table Layout Design */
+table th, table td { padding: 0 5px 0 5px; }
 
-/*=================================== WHITE TABLE =====================================*/
+/*=================================== WHITE TABLE - 100% width =====================================*/
 table.white-line-table {
         width:100%;
 	border-width: 1px;
@@ -174,9 +174,9 @@ table.white-line-table td {
 	border-style: solid;
 	border-color: white;
 	background-color: transparent; }
-/*=================================== WHITE TABLE (END) =====================================*/
+/*=================================== WHITE TABLE - 100% width (END) =====================================*/
       
-/*=================================== BLACK TABLE =====================================*/
+/*=================================== BLACK TABLE - 100% width =====================================*/
 table.black-line-table {
         width:100%;
 	border-width: 1px;
@@ -201,7 +201,7 @@ table.black-line-table td {
 	border-color: black;
 	background-color: transparent;
 	-moz-border-radius: 0px 0px 0px 0px; }
-/*=================================== BLACK TABLE (END) =====================================*/
+/*=================================== BLACK TABLE - 100% width (END) =====================================*/
 
 /*=================================== BLACK TABLE - without 100% width =====================================*/
 table.normal_table_black {
@@ -221,6 +221,32 @@ table.normal_table_black th {
 	-moz-border-radius: 0px 0px 0px 0px; }
         
 table.normal_table_black td {
+	border-width: 1px;
+        padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+/*=================================== BLACK TABLE (END) =====================================*/
+
+/*=================================== White TABLE - without 100% width =====================================*/
+table.normal_table_white {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: black;
+	border-collapse: collapse;
+	background-color: transparent; }
+
+table.normal_table_white th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: solid;
+	border-color: black;
+	background-color: transparent;
+	-moz-border-radius: 0px 0px 0px 0px; }
+        
+table.normal_table_white td {
 	border-width: 1px;
         padding: 1px;
 	border-style: solid;
@@ -337,10 +363,7 @@ table.normal_table_black td {
 .padding_10     { padding: 10px; }
 .check_highlight{ width: 25px; }
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
-
-
-
-.search_engine { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 97.8%; z-index: 50;}
+.search_engine  { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 100%; z-index: 50;}
 
 #fix_height { overflow:auto; height:650px; }
 
@@ -348,6 +371,12 @@ table.normal_table_black td {
 .fix_1600x900_h450, .fix_h450 {
     border: 1px solid black;
     height: 450px;
+    overflow: auto;
+}
+
+.fix_h550{
+    border: 1px solid black;
+    height: 550px;
     overflow: auto;
 }
 
@@ -469,7 +498,7 @@ fieldset { border: 1px solid green; padding: 5px; }
 legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color: green; font-weight: bold;  }
 
 /* Quotation Tabbing */
-.tabbing_h400 { height: 400px; overflow: auto; }
+.tabbing_h400 { overflow: auto; }
 
 /* Quotation - Material */
 #paper_size {
@@ -490,4 +519,7 @@ legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color:
     top: 0px;
     left: 500px;
 }
+
+#sheetbox_height { border: 1px solid black; }
+
 

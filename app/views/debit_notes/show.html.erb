@@ -1,0 +1,37 @@
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">SHOW DEBIT NOTE DETAIL</strong></div>
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td><b>D/N No #</b></td>
+        <td><%= @debit_note.debit_note_no rescue '-' %></td>
+        <td>
+          <b>D/N Date</b>
+          <%= @debit_note.debit_note_date.strftime("%d-%m-%Y") rescue '-' %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Trade Company</b></td>
+        <td colspan="2"><%= company_code_and_name(@debit_note.trade_company) rescue '-' %></td>
+      </tr>        
+      <tr>
+        <td colspan="3"><b>Your A/C Has Been Debited For Being</b>&nbsp;<%= @debit_note.debit_type rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Currency</b></td>
+        <td><%= @debit_note.currency.name rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Updated By</b></td>
+        <td><%= @debit_note.updater_name rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Amount</b></td>
+        <td><%= four_precision(@debit_note.amount) %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
+</div>

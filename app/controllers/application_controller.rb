@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
   helper_method :currency
   helper_method :transport
   helper_method :trade_company_both
+  helper_method :trade_company_both_with_code
   helper_method :trade_company_vendor
   helper_method :trade_company_vendor_with_code
   helper_method :trade_company_customer
@@ -51,7 +52,10 @@ class ApplicationController < ActionController::Base
   
   
   
-  
+  helper_method :version
+  def version
+    "Version 0.2.6"
+  end
   
   helper_method :company
   def company
@@ -117,6 +121,10 @@ class ApplicationController < ActionController::Base
   
   def trade_company_both
     @trade_company_both ||= TradeCompany.ordered_with_both
+  end
+  
+  def trade_company_both_with_code
+    @vendor_and_customer_with_code ||= TradeCompany.vendor_and_customer_with_code
   end
   
   #vendor only, including in Purchase Order

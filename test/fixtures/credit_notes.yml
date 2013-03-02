@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  credit_note_no: MyString
+  credit_note_date: 2013-02-28
+  trade_company_id: 1
+  credit_type: MyString
+  account_id: 1
+  currency_id: 1
+  updated_by: 1
+  amount: 9.99
+
+two:
+  credit_note_no: MyString
+  credit_note_date: 2013-02-28
+  trade_company_id: 1
+  credit_type: MyString
+  account_id: 1
+  currency_id: 1
+  updated_by: 1
+  amount: 9.99

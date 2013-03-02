@@ -1,0 +1,37 @@
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">SHOW CREDIT NOTE DETAIL</strong></div>
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td><b>C/N No #</b></td>
+        <td><%= @credit_note.credit_note_no rescue '-' %></td>
+        <td>
+          <b>C/N Date</b>
+          <%= @credit_note.credit_note_date.strftime("%d-%m-%Y") rescue '-' %>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Trade Company</b></td>
+        <td colspan="2"><%= company_code_and_name(@credit_note.trade_company) rescue '-' %></td>
+      </tr>        
+      <tr>
+        <td colspan="3"><b>Your A/C Has Been Credited For Being</b>&nbsp;<%= @credit_note.credit_type rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Currency</b></td>
+        <td><%= @credit_note.currency.name rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Updated By</b></td>
+        <td><%= @credit_note.updater_name rescue '-' %></td>
+      </tr>
+      <tr>
+        <td><b>Amount</b></td>
+        <td><%= four_precision(@credit_note.amount) %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
+</div>

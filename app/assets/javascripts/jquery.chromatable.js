@@ -39,10 +39,10 @@
 				$(this).wrap('<div class="scrolling_outer"><div id="'+$uniqueID+'" class="scrolling_inner"></div></div>');
 								
 				$(".scrolling_outer").css({'position':'relative'});
-				$("#"+$uniqueID).css(
-																	
-					 {'border':'1px solid #CCCCCC',
-						'overflow-x':'hidden',
+				$("#"+$uniqueID).css(							
+					 {
+                                                'border':'1px solid #CCCCCC',
+                                                'overflow-x':'auto',
 						'overflow-y':'auto',
 						'padding-right':'17px'						
                                         });
@@ -55,8 +55,6 @@
 				$(this).before($(this).clone().attr("id", "").addClass("_thead").css(
 																																															 
 						{
-//                                                    'width' : '100%',
-//                                                    'width' : 'auto',
                                                     'display' : 'block', 
                                                     'position':'absolute', 
                                                     'border':'none', 
@@ -125,7 +123,7 @@
 
 				
 				//check to see if the width is set to auto, if not, we don't need to call the resizer function
-				if (options.width == "100%" || "auto"){
+                                if (options.width == "100%" || options.width == "auto") {
 					
 											
 						// call the resizer function whenever the table width has been adjusted
@@ -155,9 +153,3 @@
   	};
 		
 })(jQuery);
-
-
- $('#checkall:checkbox').change(function () {
-    if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-    else $('input:checkbox').removeAttr('checked');
-});

@@ -1,0 +1,87 @@
+<div id="container">
+  <div class="title_head"><strong style="color:white;">SHOW RECEIPT DETAIL</strong></div>
+
+  <div id="sheetbox_height">
+    <table>
+      <tr>
+        <td><b>Receipt No #</b></td>
+        <td><%= @receipt.receipt_no rescue '-' %></td>
+        <td><b>Receipt Date</b>&nbsp;<%= @receipt.receipt_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Trade Company</b></td>
+        <td><%= company_code_and_name(@receipt.trade_company) rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td colspan="10">
+          <b>Cash Amount</b>:&nbsp;<%= four_precision(@receipt.cash_amount) %>&nbsp;&nbsp;
+          <b>Cheque Amount</b>:&nbsp;<%= four_precision(@receipt.cheque_amount) %>&nbsp;&nbsp;
+          <b>Total Amount</b>:&nbsp;<%= four_precision(@receipt.total_amount) %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><b>Journal Voucher No</b></td>
+        <td><%= @receipt.journal_voucher_no %></td>
+      </tr>
+
+      <tr>
+        <td><b>Updated By</b></td>
+        <td><%= updater_name(@receipt.updated_by) rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td valign="top"><b>Remark</b></td>
+        <td colspan="2"><%= @receipt.remark rescue '-' %>
+        </td>
+      </tr>
+    </table>
+
+    <hr/>
+
+    <table id="jgrid" class="zebraLight">
+      <thead>
+        <tr class="header_line">
+          <th class="check_highlight"></th>
+          <th>No.</th>
+          <th>Receipt Type</th>
+          <th>Document No.</th>
+          <th>Document Date</th>
+          <th>Document Amount</th>
+          <th>Balance Amount</th>
+          <th>F/P</th>
+          <th>O/S Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if @receipt.receipt_items.present? %>
+        
+          <% @receipt.receipt_items.each_with_index do |item, index| %>
+
+            <tr class="<%= cycle('odd_line', 'even_line') %>">
+              <td></td>
+              <td align="center"><%= index + 1 %></td>
+              <td align="center"><%= item.receipt_type rescue '-' %></td>
+              <td align="center"><%= item.document_no rescue '-' %></td>
+              <td align="center"><%= item.document_date.strftime("%d-%m-%Y") rescue '-' %>
+              <td align="right"><%= four_precision(item.document_amount) %></td>
+              <td align="right"><%= four_precision(item.balance_amount) %></td>
+              <td align="center"><%= item.fp rescue '-' %></td>
+              <td align="right"><%= four_precision(item.os_amount) %></td>
+            </tr>
+          
+          <% end %>
+          
+        <% end %>
+      </tbody>
+    </table>        
+  </div>
+
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
+    
+</div>

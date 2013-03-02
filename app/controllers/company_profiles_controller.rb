@@ -1,42 +1,14 @@
 class CompanyProfilesController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
   
-  # GET /company_profiles
-  # GET /company_profiles.json
   def index
-#    render :layout => "application"
+    render :layout => "sheetbox" if params[:change_layout].present?
   end
 
-  # GET /company_profiles/1
-  # GET /company_profiles/1.json
-  def show
-    @company_profile = CompanyProfile.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @company_profile }
-    end
-  end
-
-  # GET /company_profiles/new
-  # GET /company_profiles/new.json
-  def new
-    @company_profile = CompanyProfile.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @company_profile }
-    end
-  end
-
-  # GET /company_profiles/1/edit
   def edit
     @company_profile = CompanyProfile.find(params[:id])
   end
-
-  # POST /company_profiles
-  # POST /company_profiles.json
+  
   def create
     @company_profile = CompanyProfile.new(params[:company_profile])
 
@@ -51,8 +23,6 @@ class CompanyProfilesController < ApplicationController
     end
   end
 
-  # PUT /company_profiles/1
-  # PUT /company_profiles/1.json
   def update
     @company_profile = CompanyProfile.find(params[:id])
     
@@ -67,8 +37,6 @@ class CompanyProfilesController < ApplicationController
     end
   end
 
-  # DELETE /company_profiles/1
-  # DELETE /company_profiles/1.json
   def destroy
     @company_profile = CompanyProfile.find(params[:id])
     @company_profile.destroy

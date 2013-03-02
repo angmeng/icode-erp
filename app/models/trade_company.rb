@@ -22,6 +22,9 @@ class TradeCompany < ActiveRecord::Base
   has_one  :quotation_request_form
   has_one  :price_control
   has_one  :delivery_order
+  has_one  :credit_note
+  has_one  :receipt
+  has_one  :payment_received
   
   has_many :product_vendors
   has_many :product_customers
@@ -149,6 +152,12 @@ class TradeCompany < ActiveRecord::Base
   
   def self.ordered_with_kiv_cutomers
     where(:user_type => TradeCompany::CUSTOMER, :status => TradeCompany::KIV)
+  end
+  
+  def self.vendor_and_customer_with_code
+    combobox = self.ordered_with_both
+    mix = combobox.collect { |pcombo| ["[#{pcombo.code}] #{pcombo.name}", pcombo.id] }
+    return mix
   end
   
   def self.vendor_with_code

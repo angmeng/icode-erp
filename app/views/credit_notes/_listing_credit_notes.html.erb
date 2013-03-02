@@ -1,0 +1,28 @@
+<table id="jgrid" class="zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>C/N No</th>
+      <th>C/N Date</th>
+      <th>Trade Company</th>
+      <th>Credit Type</th>
+      <th>Currency</th>
+      <th>Updated by</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% credit_notes.each do |credit_note| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= credit_note.id %>">
+        <td></td>
+        <td align="center"><%= credit_note.credit_note_no rescue '-' %></td>
+        <td align="center"><%= credit_note.credit_note_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td><%= company_code_and_name(credit_note.trade_company) rescue '-' %></td>
+        <td><%= credit_note.credit_type rescue '-' %></td>
+        <td align="center"><%= credit_note.currency.name rescue '-' %></td>
+        <td align="center"><%= credit_note.updater_name rescue '-' %></td>
+        <td align="right"><%= credit_note.amount rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

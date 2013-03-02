@@ -1,4 +1,4 @@
-<div id="popup_container">
+<div id="container">
   <%= render "linking" %>
   
   <div class="title_head">
@@ -8,13 +8,13 @@
 
   <%= render "search_po" %>
 
-  <div class="fix_h450">
+  <%#*<div class="fix_h450">%>
     <% if @purchase_orders.present? %>
       <%= render "/purchase_orders/success_approved_from_purchase_requisition_items", :success => @purchase_orders %>
     <% else %>
       No Record Found.
     <% end %>
-  </div>
+  <%#*</div>%>
 
   <%= render "action_purchase_order_transaction" %>
 </div>

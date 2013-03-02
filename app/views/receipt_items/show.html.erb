@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Receipt type:</b>
+  <%= @receipt_item.receipt_type %>
+</p>
+
+<p>
+  <b>Document no:</b>
+  <%= @receipt_item.document_no %>
+</p>
+
+<p>
+  <b>Document date:</b>
+  <%= @receipt_item.document_date %>
+</p>
+
+<p>
+  <b>Document amount:</b>
+  <%= @receipt_item.document_amount %>
+</p>
+
+<p>
+  <b>Balance amount:</b>
+  <%= @receipt_item.balance_amount %>
+</p>
+
+<p>
+  <b>Fp:</b>
+  <%= @receipt_item.fp %>
+</p>
+
+<p>
+  <b>Os amount:</b>
+  <%= @receipt_item.os_amount %>
+</p>
+
+<p>
+  <b>Receipt:</b>
+  <%= @receipt_item.receipt_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_receipt_item_path(@receipt_item) %> |
+<%= link_to 'Back', receipt_items_path %>

@@ -1,0 +1,35 @@
+<table id="jgrid" class="zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>      
+      <th>Trade Company</th>
+      <th>Payment Date</th>
+      <th>Bank</th>
+      <th>Place</th>
+      <th>Cheque No</th>
+      <th>Cheque Date</th>
+      <th>Cheque Amount</th>
+      <th>Outport Cheque</th>
+      <th>Third Party Cheque</th>
+      <th>Updated By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% payment_receiveds.each do |payment| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= payment.id %>">
+        <td></td>
+        <td><%= company_code_and_name(payment.trade_company) %></td>
+        <td align="center"><%= payment.payment_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="center"><%= payment.bank rescue '-' %></td>
+        <td align="center"><%= payment.place rescue '-' %></td>
+        <td align="center"><%= payment.cheque_no rescue '-' %></td>
+        <td align="center"><%= payment.cheque_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="right"><%= two_precision(payment.cheque_amount) rescue '-' %></td>
+        <td align="center"><%= payment.outport_cheque == true ? "YES" : "NO" %></td>
+        <td align="center"><%= payment.third_party_cheque == true ? "YES" : "NO" %></td>
+        <td align="center"><%= updater_name(payment.updated_by) rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

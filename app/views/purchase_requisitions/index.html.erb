@@ -1,19 +1,19 @@
-<div id="popup_container">
-  <%= render "linking" %>
-  
-  <div class="title_head">
-    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong>
-    <%= search_button %>
-  </div>
-  <div><%= render "search_purchase_requisition" %></div>
+<%= render "linking" %>
 
-  <div class="fix_h450">
+<div class="title_head">
+  <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong>
+  <%= search_button %>
+</div>
+<div><%= render "search_purchase_requisition" %></div>
+
+<div id="container">
+
     <% if @purchase_requisitions.present? %>
       <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
     <% else %>
       Not Record Found.
     <% end %>
-  </div>
 
-  <%= render "action_purchase_requisition" %>  
+    <%= render "action_purchase_requisition" %>  
+      
 </div>

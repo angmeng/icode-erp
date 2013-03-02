@@ -370,6 +370,10 @@ module ApplicationHelper
       end
     end
     
+    
+    
+    
+    
     def link_add_item_1600x900(linked)
       link_to "Add", linked, :class => "iframe_1600x900 k-button opac-icon", "data-fancybox-type" => "iframe"
     end
@@ -395,10 +399,12 @@ module ApplicationHelper
     end
     
     
-    
+    def link_addnew_800x450(linked)
+      link_to "Add New", linked, :class => "iframe_800x450 k-button opac-icon", "data-fancybox-type" => "iframe"
+    end
     
     def link_addnew_1600x900(linked)
-      link_to "Add New", linked, :class => "show_without_refresh_page_1600x900  k-button opac-icon", "data-fancybox-type" => "iframe"
+      link_to "Add New", linked, :class => "iframe_1600x900 k-button opac-icon", "data-fancybox-type" => "iframe"
     end
     
     def not_link_addnew
@@ -679,6 +685,13 @@ module ApplicationHelper
         product.product_combobox.product_code rescue '-'
       end
     end
+    
+    def company_code_and_name(trade_company)
+      "[#{trade_company.code}] #{trade_company.name}" rescue '-'
+    end
 
+    def updater_name(user_id)
+      User.find_by_id(user_id).name rescue '-'
+    end
 end
 

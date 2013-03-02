@@ -1,0 +1,18 @@
+<div class="title_head">
+  <strong style="color:white;">LISITING CREDIT NOTES</strong>
+  <%= search_button %>
+</div>
+<div><%= render "search_credit_note" %></div>
+
+<div id="container">
+
+  <% if @credit_notes.present? %>
+    <%= render "listing_credit_notes", :credit_notes => @credit_notes %>
+  <% else %>
+    <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
+  <% end %>
+
+  <%= render "action_credit_note" %>  
+      
+</div>
+

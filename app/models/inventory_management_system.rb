@@ -387,5 +387,16 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRICE_CONTROL_SHOW_KIV                             = 256
   PRICE_CONTROL_RECOVER                              = 257
   
-  #start at 263
+  #===== ===== Accounts ===== =====
+  
+  ACCOUNT_RECEIPT_ENTRY                             = 263
+  ACCOUNT_RECEIPT_SHOW                              = 264
+  ACCOUNT_RECEIPT_EDIT                              = 265
+  ACCOUNT_RECEIPT_KIV                               = 266
+  ACCOUNT_RECEIPT_PRINTABLE                         = 267
+  
+  
+  
+  #start at 268
+  #kai kean use 300-400
 end

@@ -1,0 +1,18 @@
+<div class="title_head">
+  <strong style="color:white;">LISITING DEBIT NOTES - KIV</strong>
+  <%= search_button %>
+</div>
+<div><%= render "search_debit_note_kiv" %></div>
+
+<div id="container">
+
+  <% if @debit_notes.present? %>
+    <%= render "listing_debit_notes", :debit_notes => @debit_notes %>
+  <% else %>
+    <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
+  <% end %>
+
+  <%= render "action_debit_note_kiv" %>  
+      
+</div>
+

@@ -18,28 +18,29 @@
 
 <body>
   
-  <div id="container">
-    <% if user_signed_in? %>
-      <% unless action_name == "show" %>
-        <%= render "/layouts/top_menu" %>
-      <% end %>
-    <% end %>
-    
-    <% flash.each do |key, msg| %>
-      <%= content_tag :p, :id => key do %>
-        <%= msg %>
-        <span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
-      <% end %>
-    <% end %>
-
-    <%= yield %>
-  </div>
+  <!-- Dont place div id = 'container' here -->
   
-</body>
+  <% if user_signed_in? %>
+    <% unless action_name == "show" %>
+      <%= render "/layouts/top_menu" %>
+    <% end %>
+  <% end %>
 
+  <% flash.each do |key, msg| %>
+    <%= content_tag :p, :id => key do %>
+      <%= msg %>
+      <span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
+    <% end %>
+  <% end %>
+
+  <%= yield %>
+  
   <% unless action_name == "show" %>
     <div id="footer">Copyright &copy; iCode Solution 2012-2013. All rights reserved.</div>
   <% end %>
+    
+</body>
+
 </html>
 
 

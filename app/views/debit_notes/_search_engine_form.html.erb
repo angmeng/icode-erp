@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td><b>D/N No.</b></td>
+    <td><%= f.text_field :debit_note_no_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>D/N Date</b></td>
+    <td>
+      <% if @search.debit_note_date_gte.present? %>
+        <%= f.text_field :debit_note_date_gte, :value => @search.debit_note_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :debit_note_date_gte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+       - 
+      <% if @search.debit_note_date_lte.present? %>
+        <%= f.text_field :debit_note_date_lte, :value => @search.debit_note_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :debit_note_date_lte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="10" align="right"><%= f.submit 'Search',:class => "k-button" %></td>
+  </tr>
+</table>

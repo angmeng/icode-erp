@@ -10,6 +10,7 @@ class Currency < ActiveRecord::Base
   has_one :sales_orders
   has_one :price_control
   has_one :delivery_order
+  has_one :credit_note
   
   ACTIVE = "ACTIVE"
   KEEP_IN_VIEW = "KIV"

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trade_company_id: 1
+  payment_date: 2013-03-02
+  bank: MyString
+  place: MyString
+  cheque_no: MyString
+  cheque_date: 2013-03-02
+  cheque_amount: 9.99
+  outport_cheque: false
+  third_party_cheque: false
+  status_id: 1
+  updated_by: 1
+
+two:
+  trade_company_id: 1
+  payment_date: 2013-03-02
+  bank: MyString
+  place: MyString
+  cheque_no: MyString
+  cheque_date: 2013-03-02
+  cheque_amount: 9.99
+  outport_cheque: false
+  third_party_cheque: false
+  status_id: 1
+  updated_by: 1

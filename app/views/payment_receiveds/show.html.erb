@@ -1,0 +1,60 @@
+<div class="title_head"><strong style="color:white;">SHOW PAYMENT RECEIVED DETAIL</strong></div>
+
+<div id="popup_container">
+  <div class="fix_800x450">
+    <table>
+      <tr>
+        <td><b>Trade Company</b></td>
+        <td><%= company_code_and_name(@payment_received.trade_company) %></td>
+      </tr>
+
+      <tr>
+        <td><b>Payment Date</b></td>
+        <td><%= @payment_received.payment_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Bank</b></td>
+        <td><%= @payment_received.bank rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Place</b></td>
+        <td><%= @payment_received.place rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cheque No</b></td>
+        <td><%= @payment_received.cheque_no %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cheque Date</b></td>
+        <td><%= @payment_received.cheque_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cheque Amount</b></td>
+        <td><%= two_precision(@payment_received.cheque_amount) %></td>
+      </tr>
+
+      <tr>
+        <td><b>Outport Cheque</b></td>
+        <td><%= @payment_received.outport_cheque == true ? "YES" : "NO" %></td>
+      </tr>
+
+      <tr>
+        <td><b>Third Party Cheque</b></td>
+        <td><%= @payment_received.third_party_cheque == true ? "YES" : "NO" %></td>
+      </tr>
+
+      <tr>
+        <td><b>Updated By</b></td>
+        <td><%= updater_name(@payment_received.updated_by) rescue '-' %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>
+</div>

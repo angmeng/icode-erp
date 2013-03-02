@@ -1,18 +1,17 @@
-<div id="popup_container">
+<div id="container">
   <div class="title_head">
     <strong style="color: white;">LISTING USERS</strong>
     <%= search_button %>
   </div>
-  <div><%= render "search_user" %></div>
+  <div class="search_engine"><%= render "search_user" %></div>
 
-  <!--div class="fix_1600x900"-->
-  <div class="fix_1600x900_h450">
+  <%#*<div class="fix_h450">%>
     <% if @users.present? %>
       <%= render "listing_users", :list_users => @users %>
     <% else %>
       No record found.
     <% end %>
-  </div>
+  <%#*</div>%>
   
   <%= render "action_user" %>
 </div>

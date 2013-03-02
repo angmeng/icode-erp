@@ -1,0 +1,101 @@
+<%= form_for(@debit_note) do |f| %>
+  <div id="valid_debit_note">
+    <div class="fix_800x450">
+      <table>
+        <tr>
+          <% if @debit_note.debit_note_no.present? %>
+            <td><b>D/N No #</b></td>
+            <td><%= @debit_note.debit_note_no rescue '-' %></td>
+          <% else %>
+            <td><b>Current D/N No.</b></td>
+            <td>
+              <%= dn_no = company.sn_debit_note_no + 1 %>
+              <%= f.hidden_field "debit_note_no", :value => dn_no  %>
+            </td>
+          <% end %>
+
+          <td>
+            <b>D/N Date</b>&nbsp;
+            <% if @debit_note.debit_note_date.present? %>
+              <%= f.text_field :debit_note_date, :value => @debit_note.debit_note_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
+            <% else %>
+              <%= f.text_field :debit_note_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Debit Note Date" %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><b>Trade Company</b></td>
+          <td>
+            <% if @debit_note.trade_company_id.present? %>
+              <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code, @debit_note.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
+            <% else %>
+              <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code),                               { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
+            <% end %>
+          </td>
+          <td colspan="2"><span class="k-invalid-msg" data-for="debit_note[trade_company_id]"></span></td>
+        </tr>
+        
+        <tr>
+          <td colspan="3">
+            <b>Your A/C Has Been Debited For Being</b>&nbsp;
+            <%= f.text_field :debit_type, :class=> "k-textbox", :style => "width: 250px;", "required validationMessage" => "Please Enter.." %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><b>Currency</b></td>
+          <td colspan="2">
+            <%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @debit_note.currency_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %>
+            <span class="k-invalid-msg" data-for="debit_note[currency_id]"></span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><b>Updated By</b></td>
+          <td>
+            <% if @debit_note.updated_by.present? %>
+              <%= @debit_note.updater_name rescue '-' %>
+            <% else %>
+              <%= current_user.name %>
+              <%= f.hidden_field :updated_by, :value => current_user.id %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><b>Amount</b></td>
+          <% if @debit_note.amount > 0 %>
+            <td><%= four_precision(@debit_note.amount) %></td>
+          <% else %>
+            <td colspan="2">
+              <%= f.text_field :amount, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Amount" %>
+              <span class="k-invalid-msg" data-for="debit_note[amount]"></span>
+            </td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+    <div class="left_icon_tag" style="color: red;">
+      <span class="k-invalid-msg" data-for="debit_note[debit_note_date]"></span>
+    </div>
+    <%= render "action_debit_note_entry" %>
+  </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var validator = $("#valid_debit_note").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            var amount = parseFloat($("#debit_note_amount").val());
+            if (amount <= 0){ alert("You should key-in the amount value."); return false; }
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
+<% end %>
+

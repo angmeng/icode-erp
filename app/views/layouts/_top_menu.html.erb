@@ -9,7 +9,7 @@
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
       </ul>
     </li>
-
+    
     <li style="width:120px;">
       Purchase Flow
       <ul>
@@ -19,7 +19,7 @@
             Purchase Requisition
             <ul>
               <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
-                <li><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "PR Transactions & Histories", purchase_requisitions_path %></li>
               <% else %>
                 <li class="text_gray">PR Transactions & Histories</li>
               <% end %>
@@ -184,7 +184,7 @@
         <%#*</li>%>
       </ul>
     </li>
-
+    
     <li style="width:120px;">
       Sales Flow
       <ul>
@@ -275,7 +275,7 @@
         <% end %>
       </ul>
     </li>
-
+    
     <li style="width:120px;">
       Custom
       <ul>
@@ -404,7 +404,7 @@
 
       </ul>
     </li>
-
+    
     <li style="width:120px;">
       Inventory Flow
       <ul>
@@ -468,16 +468,12 @@
 
       </ul>
     </li>
-
-      <!--li><%#= link_to "Setting", settings_url %></li-->
-      <!--li><%#= link_to "Backup", backup_users_path, :confirm => "Are you sure you want to run backup now ?" %></li-->
-      <!--li><%#= link_to "Profile", profile_user_path(current_user.id) %></li-->
-
+  
     <li style="width:120px;">
       Housekeeping
       <ul>
         <% if roles.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU) %>
-          <li><%= link_to "Company Profile", company_profiles_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+          <li><%= link_to "Company Profile", company_profiles_path %></li>
         <% else %>
           <li class="text_gray">Company Profile</li>
         <% end %>
@@ -663,12 +659,12 @@
         </li>
       </ul>
     </li>
-
+  
     <li style="width:120px;">
         Report
         <ul>
 
-          <li style="width:150px;">
+            <li style="width:150px;">
               Listing Report
               <ul>
                 <li><%#= link_to "Company", company_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -685,7 +681,6 @@
               </ul>
             </li>
             
-
             <li style="width:150px;">
               Stock Flow Tracking
               <ul>
@@ -727,6 +722,263 @@
               </ul>
             </li>
 
+        </ul>
+    </li>
+  
+    <li style="width:120px;">
+      Accounts
+      <ul>
+
+        <%# if roles.include?(InventoryManagementSystem::PR_MENU) %>
+          <li style="width:150px;">
+            A/C Receivable
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
+                <!--li><%#= link_to "Sales Journal" %></li-->
+              <%# else %>
+                <li class="text_gray">Sales Journal</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
+                <!--li><%#= link_to "Debtor Ledger" %></li-->
+              <%# else %>
+                <li class="text_gray">Debtor Ledger</li>
+              <%# end %>
+              
+              <%# if roles.include?(InventoryManagementSystem::PR_NEW) %>
+                <!--li><%#= link_to "A/C Statement" %></li-->
+              <%# else %>
+                <li class="text_gray">A/C Statement</li>
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::PR_KIV_VIEW) %>
+                <li>
+                  Payment Processing
+                  
+                  <ul>
+                    <li><%= link_to "Listing Receipts", receipts_path %></li>
+                    <li><%= link_to "Listing Receipts - KIV", kiv_receipts_path %></li>
+                    
+                    <%# if roles.include?(InventoryManagementSystem::ACCOUNT_RECEIPT_ENTRY) %>
+                      <!--li><%#= link_to "Receipt Entry", new_receipt_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"  %></li-->
+                    <%# else %>
+                      <!--li clas="text_gray">Receipt Entry</li-->
+                    <%# end %>
+                      
+                    <li><%= link_to "Listing Payment Received Record", payment_receiveds_path %></li>
+                    <li><%= link_to "Listing Payment Received Record - KIV", kiv_payment_receiveds_path %></li>
+                    <!--li class="text_gray">Payment Received Record</li-->
+                    <li class="text_gray">List Payment Recv By Debtor</li>
+                    <li class="text_gray">List Payment Recv By Period</li>
+                    <li class="text_gray">Bank-In Slip Entry</li>
+                    <li class="text_gray">Print Bank-In Slip</li>
+                    <li class="text_gray">View Bank-In Slip</li>
+                    <li class="text_gray">List Bank-In Slip By Bank/Prd</li>
+                    <li class="text_gray">Receipt Cancellation</li>
+                    <li class="text_gray">List Payment Recv By Period</li>
+                  </ul>
+                </li>
+              <%# else %>
+                <!--li class="text_gray">Payment Processing</li-->
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %>
+                <!--li><%#= link_to "Transaction Processing" %></li-->
+                <li>
+                  Transaction Processing
+                  <ul>
+                    <li>
+                      Credit Notes
+                      <ul>
+                        <li><%= link_to "Listing Credit Notes", credit_notes_path %></li>
+                        <li><%= link_to "Listing Credit Notes - KIV", kiv_credit_notes_path %></li>
+                      </ul>
+                    </li>
+                    
+                    <li>
+                      Debit Notes
+                      <ul>
+                        <li><%= link_to "Listing Debit Notes", debit_notes_path %></li>
+                        <li><%= link_to "Listing Debit Notes - KIV", kiv_debit_notes_path %></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="text_gray">Others</li>
+                    <li class="text_gray">Print CN/DN/OR - Period</li>
+                    <li class="text_gray">Print CN/DN/OR - Debtor</li>
+                    <li class="text_gray">Print Invoice Summary</li>
+                    <li class="text_gray">Down Load Document</li>
+                  </ul>
+                </li>
+              <%# else %>
+                <!--li class="text_gray">Transaction Processing</li-->
+              <%# end %>
+            </ul>
+          </li>
+        <%# end %>
+
+        <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+          <li style="width:150px;">
+            A/C Payable
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Purchase Journal" %></li-->
+              <%# else %>
+                <li class="text_gray">Purchase Journal</li>
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Creditors Ledger" %></li-->
+              <%# else %>
+                <li class="text_gray">Creditors Ledger</li>
+              <%# end %>
+                  
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Purchase Billing" %></li-->
+              <%# else %>
+                <li class="text_gray">Purchase Billing</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Payment Processing" %></li-->
+              <%# else %>
+                <li class="text_gray">Payment Processing</li>
+              <%# end %>
+            </ul>
+          </li>
+        <%# end %>
+          
+        <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+          <li style="width:150px;">
+            General
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "General Journal" %></li-->
+              <%# else %>
+                <li class="text_gray">General Journal</li>
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "General Ledger" %></li-->
+              <%# else %>
+                <li class="text_gray">General Ledger</li>
+              <%# end %>
+                  
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Posting G/L" %></li-->
+              <%# else %>
+                <li class="text_gray">Posting G/L</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Balance B/F" %></li-->
+              <%# else %>
+                <li class="text_gray">Balance B/F</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Trial Balance" %></li-->
+              <%# else %>
+                <li class="text_gray">Trial Balance</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Balance Sheet" %></li-->
+              <%# else %>
+                <li class="text_gray">Balance Sheet</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Trading And P&L A/C" %></li-->
+              <%# else %>
+                <li class="text_gray">Trading And P&L A/C</li>
+              <%# end %>
+            </ul>
+          </li>
+        <%# end %>
+          
+        <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+          <li style="width:150px;">
+            Housekeeping
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "A/C Sub Code" %></li-->
+              <%# else %>
+                <li class="text_gray">A/C Sub Code</li>
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "A/C ID" %></li-->
+              <%# else %>
+                <li class="text_gray">A/C ID</li>
+              <%# end %>
+                  
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Company Profile" %></li-->
+              <%# else %>
+                <li class="text_gray">Company Profile</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Customer / Vendor Profile" %></li-->
+              <%# else %>
+                <li class="text_gray">Customer / Vendor Profile</li>
+              <%# end %>
+                
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Bank" %></li-->
+              <%# else %>
+                <li class="text_gray">Bank</li>
+              <%# end %>
+            </ul>
+          </li>
+        <%# end %>
+          
+        <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+          <li style="width:150px;">
+            Listing
+            <ul>
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "A/C Sub Code" %></li-->
+              <%# else %>
+                <li class="text_gray">A/C Sub Code</li>
+              <%# end %>
+
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "A/C Coding" %></li-->
+              <%# else %>
+                <li class="text_gray">A/C Coding</li>
+              <%# end %>
+                  
+              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+                <!--li><%#= link_to "Creditors / Debtors" %></li-->
+              <%# else %>
+                <li class="text_gray">Creditors / Debtors</li>
+              <%# end %>
+            </ul>
+          </li>
+        <%# end %>
+      </ul>
+    </li>
   </ul>
+
+
+
+
+    
+
+    
+
+    
+
+      <!--li><%#= link_to "Setting", settings_url %></li-->
+      <!--li><%#= link_to "Backup", backup_users_path, :confirm => "Are you sure you want to run backup now ?" %></li-->
+      <!--li><%#= link_to "Profile", profile_user_path(current_user.id) %></li-->
+
+    
+
+
+
+        
 </div>
 

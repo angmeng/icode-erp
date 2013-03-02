@@ -1,0 +1,17 @@
+<div class="title_head">
+  <strong style="color:white;">LISITING RECEIPTS</strong>
+  <%= search_button %>
+</div>
+<div><%= render "search_receipt" %></div>
+
+<div id="container">
+
+    <% if @receipts.present? %>
+      <%= render "listing_receipts", :receipts => @receipts %>
+    <% else %>
+      <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
+    <% end %>
+
+    <%= render "action_receipt" %>  
+      
+</div>

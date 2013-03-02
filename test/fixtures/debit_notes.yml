@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  debit_note_no: MyString
+  debit_note_date: 2013-03-01
+  trade_company_id: 1
+  debit_type: MyString
+  account_id: 1
+  currency_id: 1
+  updated_by: 1
+  status_id: 1
+
+two:
+  debit_note_no: MyString
+  debit_note_date: 2013-03-01
+  trade_company_id: 1
+  debit_type: MyString
+  account_id: 1
+  currency_id: 1
+  updated_by: 1
+  status_id: 1

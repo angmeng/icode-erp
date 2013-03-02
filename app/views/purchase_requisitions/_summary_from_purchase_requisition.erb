@@ -1,62 +1,62 @@
 <% if summary.present? %>
-    <table id="grid_h445" class="white-line-table zebraLight">
-      <thead>
-        <tr class="header_line">
-          <th class="check_highlight"></th>
-            <% if action_name == "signature_report" %>
-              <th>Tasks</th>
-            <% end %>
-            <th>PR No.#</th>
-            <th>Status</th>
-            <th>Requestor</th>
-            <th>Department</th>
-            <th>Items</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        
-        <% summary.each do |p| %>
-
-          <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= p.id %>">
-            <td></td>
-            <% if action_name == "signature_report" %>
-              <% if p.remark.blank? %>
-                <td align="center">Approve</td>
-              <% else %>
-                <td align="center">Reject</td>
-              <% end %>
-            <% end %>
-            <td align="center"><%= p.pr_no %></td>
-            <td align="center">
-              <% if p.status == PurchaseRequisition::LEVEL_ONE %>
-                Level 1
-              <% elsif p.status == PurchaseRequisition::LEVEL_TWO %>
-                Level 2
-              <% elsif p.status == PurchaseRequisition::LEVEL_THREE %>
-                Level 3
-              <% elsif p.status == PurchaseRequisition::LEVEL_FIVE %>
-                Level 5
-              <% elsif p.status == PurchaseRequisition::SUBMIT_PO %>
-                Pending PO
-              <% elsif p.status == PurchaseRequisition::SUBMIT_RN %>
-                PO Issued
-              <% elsif p.status == PurchaseRequisition::COMPLETED %>
-                Completed
-              <% elsif p.status == PurchaseRequisition::KEEP_IN_VIEW %>
-                Keep In View
-              <% else %>
-                -
-              <% end %>
-            </td>
-            <td align="center"><%= p.user.name rescue '-' %></td>
-            <td align="center"><%= p.user.department.name rescue '-' %></td>
-            <td align="center"><%= p.purchase_requisition_items.count rescue '-' %></td>
-          </tr>
-
+  <table id="jgrid" class="zebraLight">
+    <thead>
+      <tr class="header_line">
+        <th class="check_highlight"></th>
+        <% if action_name == "signature_report" %>
+          <th>Tasks</th>
         <% end %>
-          
-      </tbody>
-    </table>
+        <th>PR No.#</th>
+        <th>Status</th>
+        <th>Requestor</th>
+        <th>Department</th>
+        <th>Items</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% summary.each do |p| %>
+
+        <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= p.id %>">
+          <td></td>
+          <% if action_name == "signature_report" %>
+            <% if p.remark.blank? %>
+              <td align="center">Approve</td>
+            <% else %>
+              <td align="center">Reject</td>
+            <% end %>
+          <% end %>
+          <td align="center"><%= p.pr_no %></td>
+          <td align="center">
+            <% if p.status == PurchaseRequisition::LEVEL_ONE %>
+              Level 1
+            <% elsif p.status == PurchaseRequisition::LEVEL_TWO %>
+              Level 2
+            <% elsif p.status == PurchaseRequisition::LEVEL_THREE %>
+              Level 3
+            <% elsif p.status == PurchaseRequisition::LEVEL_FIVE %>
+              Level 5
+            <% elsif p.status == PurchaseRequisition::SUBMIT_PO %>
+              Pending PO
+            <% elsif p.status == PurchaseRequisition::SUBMIT_RN %>
+              PO Issued
+            <% elsif p.status == PurchaseRequisition::COMPLETED %>
+              Completed
+            <% elsif p.status == PurchaseRequisition::KEEP_IN_VIEW %>
+              Keep In View
+            <% else %>
+              -
+            <% end %>
+          </td>
+          <td align="center"><%= p.user.name rescue '-' %></td>
+          <td align="center"><%= p.user.department.name rescue '-' %></td>
+          <td align="center"><%= p.purchase_requisition_items.count rescue '-' %></td>
+        </tr>
+
+      <% end %>
+
+    </tbody>
+  </table>
 <% end %>
 

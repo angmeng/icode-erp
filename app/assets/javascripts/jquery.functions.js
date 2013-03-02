@@ -42,6 +42,7 @@ $(document).ready(function() {
     });	
     
     $("#grid_h445").chromatable({
+//        width: "auto",  // It is working fine!!
         width: "1400px",
         height: "445px",
         scrolling: "yes"
@@ -70,8 +71,7 @@ $(document).ready(function() {
         height: "430px",
         scrolling: "yes"
     });
-    
-    
+        
 
     $("#autowidth_h400").chromatable({
         width: "1510px",
@@ -115,10 +115,11 @@ $(document).ready(function() {
     $("#sales_order_trade_company_id").width(400);
     $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
     
-    $('input[class^="kendo_date_multiple"]').kendoDatePicker({ format: "dd-MM-yyyy" });
     $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
+    $('input[class^="kendo_date_multiple"]').kendoDatePicker({ format: "dd-MM-yyyy" });
+    $('input[class^="mkendo_date"]').kendoDatePicker({ format: "dd-MM-yyyy" });
     $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({ format: "dd-MM-yyyy" }); 
-    $("#kendo_combobox, #kendo_combobox_two").kendoComboBox({filter: "contains"});
+    $("#kendo_combobox, #kendo_combobox_two, .mkendo_combobox").kendoComboBox({filter: "contains"});
     $("#kendo_price").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
     
     $(".kendo_precision_4").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
@@ -1418,7 +1419,23 @@ $(document).ready(function() {
         return false;
     });
     
-
+    // Here must be bottom script.. Dont do it at top script
+    var ctn_width       = $("#container").width() - 20;
+    var ctn_height      = $("#container").height();
+    var popup_height    = $(window).height();
+    var footer_height   = $("#footer").height();
+    var icon_height     = $(".icon_tag").height();
+    var ctn_height      = ctn_height - footer_height - icon_height - 10;
+    var sheetbox        = popup_height - icon_height - 40;
+    
+    $("#jgrid").chromatable({
+        width:  ctn_width,
+        height: ctn_height,
+        scrolling: "yes"
+    });	
+    
+    $("#auto_height").height(ctn_height);
+    $("#sheetbox_height").height(sheetbox);
 
 });  
 

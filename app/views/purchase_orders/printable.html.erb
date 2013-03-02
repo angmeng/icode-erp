@@ -24,7 +24,7 @@
 
   <table class="black-line-table" width="100%">
     <tr>
-      <td style="vertical-align: top;">
+      <td style="vertical-align: top;" widtn="50%">
         <font size="1">
           NOTES TO VENDOR :-<br/>
           1. Goods of Inferior Quality will be rejected.<br/>
@@ -32,17 +32,19 @@
           3. Please quote P/O No. in your invoices & D/Os.<br/>
         </font>
       </td>
-      <td style="vertical-align: top;">
+      <td style="vertical-align: top;" widtn="50%">
         <font size="1">
          REMARKS :<br/>
          <%= @purchase_order.remark rescue '-' %>
         </font>
       </td>
     </tr>
+  </table>
 
-    <tr>
-      <td colspan="2">
-        <table style="border-collapse: collapse;">
+  <%#*<table class="black-line-table" width="100%">%>
+    <%#*<tr>%>
+      <%#*<td colspan="2">%>
+        <table style="border-collapse: collapse;" class="black-line-table">
           <tr>
             <td class="bolder" width="300" align="center">PURCHASED BY</td>
             <td class="bolder" width="300" align="center">REQUESTED BY</td>
@@ -68,9 +70,9 @@
             <td colspan="3" align="center">VENDOR'S STAMP & SIGNATURE</td>
           </tr>
         </table>
-      </td>
-    </tr>
-  </table>
+      <%#*</td>%>
+    <%#*</tr>%>
+  <%#*</table>%>
 </div>
 
 <style>
@@ -91,7 +93,6 @@
     table.black-line-table {
       width:100%;
       border-width: 1px;
-      <%#*border-spacing: 0px;%>
       border-style: none;
       border-color: black;
       border-collapse: collapse;

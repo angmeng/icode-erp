@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220130918) do
+ActiveRecord::Schema.define(:version => 20130301190251) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -42,34 +42,35 @@ ActiveRecord::Schema.define(:version => 20130220130918) do
     t.string   "fax_no"
     t.string   "sales_tax_no"
     t.string   "reg_no"
-    t.integer  "sn_sales_order_no",         :default => 0
-    t.integer  "sn_purchase_order_no",      :default => 0
-    t.integer  "sn_deliver_order_no",       :default => 0
-    t.integer  "sn_receive_note_no",        :default => 0
-    t.integer  "sn_transfer_slip_no",       :default => 0
-    t.integer  "sn_store_voucher_no",       :default => 0
-    t.integer  "sn_incoming_reject_no",     :default => 0
-    t.integer  "sn_outgoing_reject_no",     :default => 0
-    t.integer  "sn_credit_note_no",         :default => 0
-    t.integer  "sn_debit_note_no",          :default => 0
-    t.integer  "sn_billing_order_no",       :default => 0
-    t.integer  "sn_purchase_req_no",        :default => 0
-    t.integer  "sn_product_price_no",       :default => 0
-    t.integer  "sn_job_order_no",           :default => 0
-    t.integer  "sn_shipment_schedule",      :default => 0
-    t.integer  "sn_scrap_sheet_no",         :default => 0
-    t.integer  "sn_receiving_instr_no",     :default => 0
-    t.integer  "sn_shipping_instr_no",      :default => 0
-    t.integer  "sn_receipt_no",             :default => 0
-    t.integer  "sn_bankin_slip_no",         :default => 0
-    t.integer  "sn_journal_voucher_no",     :default => 0
-    t.integer  "sn_payment_voucher_no",     :default => 0
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "sn_sales_order_no",                                        :default => 0
+    t.integer  "sn_purchase_order_no",                                     :default => 0
+    t.integer  "sn_deliver_order_no",                                      :default => 0
+    t.integer  "sn_receive_note_no",                                       :default => 0
+    t.integer  "sn_transfer_slip_no",                                      :default => 0
+    t.integer  "sn_store_voucher_no",                                      :default => 0
+    t.integer  "sn_incoming_reject_no",                                    :default => 0
+    t.integer  "sn_outgoing_reject_no",                                    :default => 0
+    t.integer  "sn_credit_note_no",                                        :default => 0
+    t.integer  "sn_debit_note_no",                                         :default => 0
+    t.integer  "sn_billing_order_no",                                      :default => 0
+    t.integer  "sn_purchase_req_no",                                       :default => 0
+    t.integer  "sn_product_price_no",                                      :default => 0
+    t.integer  "sn_job_order_no",                                          :default => 0
+    t.integer  "sn_shipment_schedule",                                     :default => 0
+    t.integer  "sn_scrap_sheet_no",                                        :default => 0
+    t.integer  "sn_receiving_instr_no",                                    :default => 0
+    t.integer  "sn_shipping_instr_no",                                     :default => 0
+    t.integer  "sn_receipt_no",                                            :default => 0
+    t.integer  "sn_bankin_slip_no",                                        :default => 0
+    t.integer  "sn_journal_voucher_no",                                    :default => 0
+    t.integer  "sn_payment_voucher_no",                                    :default => 0
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
     t.integer  "sn_product_id_no"
-    t.integer  "sn_sales_tax_exemption_no", :default => 0
-    t.integer  "sn_quotation_request_no",   :default => 0
-    t.integer  "sn_bom_no",                 :default => 0
+    t.integer  "sn_sales_tax_exemption_no",                                :default => 0
+    t.integer  "sn_quotation_request_no",                                  :default => 0
+    t.integer  "sn_bom_no",                                                :default => 0
+    t.decimal  "total_amount",              :precision => 10, :scale => 2, :default => 0.0
   end
 
   create_table "contacts", :force => true do |t|
@@ -199,6 +200,22 @@ ActiveRecord::Schema.define(:version => 20130220130918) do
 
   add_index "costing_sheets", ["quotation_request_form_id"], :name => "index_costing_sheets_on_quotation_request_form_id"
 
+  create_table "credit_notes", :force => true do |t|
+    t.string   "credit_note_no"
+    t.date     "credit_note_date"
+    t.integer  "trade_company_id"
+    t.integer  "currency_id"
+    t.string   "credit_type"
+    t.integer  "updated_by"
+    t.decimal  "amount",           :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "status_id",                                       :default => 1
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+  end
+
+  add_index "credit_notes", ["currency_id"], :name => "index_credit_notes_on_currency_id"
+  add_index "credit_notes", ["trade_company_id"], :name => "index_credit_notes_on_trade_company_id"
+
   create_table "currencies", :force => true do |t|
     t.string   "name"
     t.string   "status",      :default => "ACTIVE"
@@ -218,6 +235,23 @@ ActiveRecord::Schema.define(:version => 20130220130918) do
   end
 
   add_index "custom_productions", ["quotation_request_form_id"], :name => "index_custom_productions_on_quotation_request_form_id"
+
+  create_table "debit_notes", :force => true do |t|
+    t.string   "debit_note_no"
+    t.date     "debit_note_date"
+    t.integer  "trade_company_id"
+    t.string   "debit_type"
+    t.integer  "currency_id"
+    t.integer  "updated_by"
+    t.decimal  "amount",           :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "status_id",                                       :default => 1
+    t.integer  "account_id"
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+  end
+
+  add_index "debit_notes", ["currency_id"], :name => "index_debit_notes_on_currency_id"
+  add_index "debit_notes", ["trade_company_id"], :name => "index_debit_notes_on_trade_company_id"
 
   create_table "delivery_order_items", :force => true do |t|
     t.integer  "sales_order_item_id"
@@ -349,6 +383,24 @@ ActiveRecord::Schema.define(:version => 20130220130918) do
   end
 
   add_index "packing_quantities", ["product_id"], :name => "index_packing_quantities_on_product_id"
+
+  create_table "payment_receiveds", :force => true do |t|
+    t.integer  "trade_company_id"
+    t.date     "payment_date"
+    t.string   "bank"
+    t.string   "place"
+    t.string   "cheque_no"
+    t.date     "cheque_date"
+    t.decimal  "cheque_amount",      :precision => 10, :scale => 2, :default => 0.0
+    t.boolean  "outport_cheque",                                    :default => false
+    t.boolean  "third_party_cheque",                                :default => false
+    t.integer  "status_id",                                         :default => 1
+    t.integer  "updated_by"
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
+  end
+
+  add_index "payment_receiveds", ["trade_company_id"], :name => "index_payment_receiveds_on_trade_company_id"
 
   create_table "payment_types", :force => true do |t|
     t.string   "name"
@@ -716,6 +768,39 @@ ActiveRecord::Schema.define(:version => 20130220130918) do
     t.string   "customer_code"
     t.string   "customer_po_no"
   end
+
+  create_table "receipt_items", :force => true do |t|
+    t.integer  "receipt_type"
+    t.string   "document_no"
+    t.date     "document_date"
+    t.decimal  "document_amount", :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "balance_amount",  :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "os_amount",       :precision => 10, :scale => 2, :default => 0.0
+    t.string   "fp",                                             :default => "F"
+    t.integer  "receipt_id"
+    t.integer  "status_id",                                      :default => 1
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+  end
+
+  add_index "receipt_items", ["receipt_id"], :name => "index_receipt_items_on_receipt_id"
+
+  create_table "receipts", :force => true do |t|
+    t.string   "receipt_no"
+    t.date     "receipt_date"
+    t.integer  "trade_company_id"
+    t.decimal  "cash_amount",        :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "cheque_amount",      :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "total_amount",       :precision => 10, :scale => 2, :default => 0.0
+    t.string   "journal_voucher_no"
+    t.string   "remark"
+    t.integer  "updated_by"
+    t.integer  "status_id",                                         :default => 1
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
+  end
+
+  add_index "receipts", ["trade_company_id"], :name => "index_receipts_on_trade_company_id"
 
   create_table "receive_note_items", :force => true do |t|
     t.integer  "receive_note_id"

@@ -1,5 +1,27 @@
 Merp::Application.routes.draw do
 
+  resources :payment_receiveds do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
+
+  resources :debit_notes do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
+
+  resources :credit_notes do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
+
+  resources :receipt_items
+
+  resources :receipts do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
+
   resources :product_running_numbers
   resources :stock_outs
 

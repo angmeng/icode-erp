@@ -1,0 +1,49 @@
+<%= form_for(@receipt_item) do |f| %>
+  <% if @receipt_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@receipt_item.errors.count, "error") %> prohibited this receipt_item from being saved:</h2>
+
+      <ul>
+      <% @receipt_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :receipt_type %><br />
+    <%= f.number_field :receipt_type %>
+  </div>
+  <div class="field">
+    <%= f.label :document_no %><br />
+    <%= f.text_field :document_no %>
+  </div>
+  <div class="field">
+    <%= f.label :document_date %><br />
+    <%= f.date_select :document_date %>
+  </div>
+  <div class="field">
+    <%= f.label :document_amount %><br />
+    <%= f.text_field :document_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_amount %><br />
+    <%= f.text_field :balance_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :fp %><br />
+    <%= f.number_field :fp %>
+  </div>
+  <div class="field">
+    <%= f.label :os_amount %><br />
+    <%= f.text_field :os_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :receipt_id %><br />
+    <%= f.number_field :receipt_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
