@@ -26,7 +26,20 @@ body {
     line-height: 18px; 
 }
 
-#container, #popup_container {
+#page_height { height: 100%; }
+
+/* It is use for addClass in the javascript */
+.page_wrapper {
+    /* Ignore the height to 100%, bcos jquery will help us to calculate.. */
+    background-color: #fff;
+    color: #000;
+    font-family: Tahoma, arial, helvetica, sans-serif;
+    font-size: 12px;
+    overflow: auto;
+/*    border: 1px solid red;*/
+}
+
+/*#container, #popup_container {
     background-color: #fff;
     color: #000;
     font-family: Tahoma, arial, helvetica, sans-serif;
@@ -35,21 +48,9 @@ body {
     height: 100%;
     height: auto !important;
     margin: auto;
-}
+}*/
 
-#footer {
-   position: fixed;
-   left:0px;
-   bottom:0px;
-   width:100%;
-   font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
-   padding: 5px; 
-   background-color: #A6DEFF;
-   background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
-   background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
-   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#A6DEFF) no-repeat;
-   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
-}
+
 
 #popup_content {
     height: 500px;
@@ -123,7 +124,6 @@ p#alert {
 /*=================================== MENU TOOL =====================================*/
 #main_header { 
     padding: 5px; font-weight: bold; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 15px; color:blue;
-    
     background-color: #A6DEFF;
     /* For WebKit (Safari, Chrome, etc) */
     background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
@@ -134,16 +134,23 @@ p#alert {
     /* IE 8 */
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
 }
-#main_menu  { width: auto; }
+
+#footer {
+   position: fixed; left:0px; bottom:0px; 
+   width:100%; 
+   padding: 5px; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
+   background-color: #A6DEFF;
+   background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
+   background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#A6DEFF) no-repeat;
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
+}
+
+/*#main_menu  { width: auto; }*/
 #main_pr    { height: 300px; padding: 10px; /* background-color: #DCF0F7; */ background-color: gainsboro; }
 #main_qr    { height: 300px; padding: 10px; /* background-color: #C5EFFD; */ background-color: gainsboro; display: none; }
-#menu h2    { font-size: 13px; text-transform: uppercase; padding: 5px 10px; }
+/*#menu h2    { font-size: 13px; text-transform: uppercase; padding: 5px 10px; }*/
 #menu a:hover { background-color: gold; }
-/*#template img { margin: 5px 20px 0 0; float: left;}
-#template { width: 380px; }
-#template ol { float: left; margin: 0; padding: 10px 10px 0 10px; }
-#template:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-#template .k-button { float: left; clear: left; margin: 5px 0 5px 12px; }*/
 /*=================================== MENU TOOL (END) =====================================*/
 
 /* Table Layout Design */
@@ -362,6 +369,7 @@ table.normal_table_white td {
 #get_size       { display:none; float: right; background-color: orange; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding-left:5px; padding-right: 5px; cursor: pointer; }
 .padding_10     { padding: 10px; }
 .check_highlight{ width: 25px; }
+
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
 .search_engine  { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 100%; z-index: 50;}
 

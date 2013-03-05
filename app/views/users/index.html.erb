@@ -1,17 +1,15 @@
-<div id="container">
+<%#*<div id="container">%>
   <div class="title_head">
     <strong style="color: white;">LISTING USERS</strong>
     <%= search_button %>
   </div>
   <div class="search_engine"><%= render "search_user" %></div>
 
-  <%#*<div class="fix_h450">%>
-    <% if @users.present? %>
-      <%= render "listing_users", :list_users => @users %>
-    <% else %>
-      No record found.
-    <% end %>
-  <%#*</div>%>
+  <% if @users.present? %>
+    <%= render "listing_users", :list_users => @users %>
+  <% else %>
+    No record found.
+  <% end %>
   
   <%= render "action_user" %>
-</div>
+<%#*</div>%>

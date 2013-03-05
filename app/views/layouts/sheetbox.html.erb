@@ -12,14 +12,13 @@
   <%= javascript_include_tag "application" %>
   <%= yield :head %>
   <%= csrf_meta_tags %>
-  <!-- Javascript -->
-  <%= yield(:jquery_script) %> 
+  <%= yield(:jquery_script) %>  <!-- Javascript -->
+  <%#= yield(:css_style) %>      <!-- CSS -->
 </head>
 
 <body>
   
   <div>
-    <div style="float:right;"></div>
     <% flash.each do |key, msg| %>
       <%= content_tag :p, :id => key do %>
         <%= msg %>

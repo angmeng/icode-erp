@@ -12,35 +12,33 @@
   <%= javascript_include_tag "application" %>
   <%= yield :head %>
   <%= csrf_meta_tags %>
-  <!-- Javascript -->
-  <%= yield(:jquery_script) %> 
+  <%= yield(:jquery_script) %>  <!-- Javascript -->
+  <%#= yield(:css_style) %>      <!-- CSS -->
 </head>
 
 <body>
-  
-  <!-- Dont place div id = 'container' here -->
-  
-  <% if user_signed_in? %>
+  <div id="page_height">
+    <!-- Dont place div id = 'container' here -->
+    <% if user_signed_in? %>
+      <% unless action_name == "show" %>
+        <%= render "/layouts/top_menu" %>
+      <% end %>
+    <% end %>
+
+    <div id="wrapper"><!-- waiting for command -->
+      <% flash.each do |key, msg| %>
+        <%= content_tag :p, :id => key do %>
+          <%= msg %><span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
+        <% end %>
+      <% end %>
+      
+      <%= yield %>
+    </div>
+
     <% unless action_name == "show" %>
-      <%= render "/layouts/top_menu" %>
+      <div id="footer"><i>Copyright &copy; iCode Solution 2012-2013. All rights reserved.</i></div>
     <% end %>
-  <% end %>
-
-  <% flash.each do |key, msg| %>
-    <%= content_tag :p, :id => key do %>
-      <%= msg %>
-      <span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
-    <% end %>
-  <% end %>
-
-  <%= yield %>
-  
-  <% unless action_name == "show" %>
-    <div id="footer">Copyright &copy; iCode Solution 2012-2013. All rights reserved.</div>
-  <% end %>
-    
+  </div>
 </body>
 
 </html>
-
-

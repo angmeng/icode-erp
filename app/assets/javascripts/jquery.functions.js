@@ -1423,24 +1423,6 @@ $(document).ready(function() {
         // prevent button redirecting to new page
         return false;
     });
-    
-    // Here must be bottom script.. Dont do it at top script
-    var ctn_width       = $("#container").width() - 20;
-    var ctn_height      = $("#container").height();
-    var popup_height    = $(window).height();
-    var footer_height   = $("#footer").height();
-    var icon_height     = $(".icon_tag").height();
-    var ctn_height      = ctn_height - footer_height - icon_height - 10;
-    var sheetbox        = popup_height - icon_height - 40;
-    
-    $("#jgrid").chromatable({
-        width:  ctn_width,
-        height: ctn_height,
-        scrolling: "yes"
-    });	
-    
-    $("#auto_height").height(ctn_height);
-    $("#sheetbox_height").height(sheetbox);
 
 });  
 
