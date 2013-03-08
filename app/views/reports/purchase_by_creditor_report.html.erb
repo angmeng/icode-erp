@@ -1,4 +1,5 @@
-<h1>purchase by creditor</h1>
+<div id="popup_container">
+<div class="title_head"><strong style="color:white;">purchase by creditor</strong></div>
 
 <div>
 	<table>
@@ -12,9 +13,9 @@
 		</tr>
 		<% end %>
 	</table>
-	</div>
+</div>
 
-	<div>
+	
 		<table>
 			<thead>
 			<tr>
@@ -39,4 +40,24 @@
 		</tbody>
 		<% end %>
 		</table>
+</div>
+
+	<div class="icon_tag" style="float:left">
+		<span><%= not_link_excel %><%#= submit_tag "Excel", :target => "_blank" ,  %>
+			<%#= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
+
+	</div>
+
+	
+	<div class="icon_tag" style="float:right;">
+
+		<span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
+		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+		<span><%= not_link_recover %></span>
+		
+		<span><%#= submit_tag "PDF Report" , :class=>"k-button" %></span>
+		<% end %>
+
+	 	<%= link_close_button %>
+  <%# end %>
 	</div>

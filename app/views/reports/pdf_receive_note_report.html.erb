@@ -1,44 +1,48 @@
-<h1>Receive Note Report</h1>
-
-<div>
-	<fieldset>
-		<% if @detail_receive_note_report.present? %>
-		<% @rn_detail_report.each do |d| %>
-		<table class="black-line-table">
+<div id="container">
+<h2><u>Receive Note Report</u></h2>
+	<% if @detail_receive_note_report.present? %>
+		
+		<table id="jgrid" class="black-line-table">
 			<thead>
-			<tr>
+			<tr class="header_line">
+				<th>No.</th>
 				<th>Product Id / Description</th>
 				<th>Received Qty</th>
 				<th>P/O No.</th>
-				<th>Update By</th>
+				<th>Part No.</th>
 			</tr>
 		</head>
-		<% arr = [] %>
+		<%# arr = [] %>
 		</tbody>
 		
 		<tr>
+			<% @detail_receive_note_report.each_with_index do |pri , index| %>
 
-			<td><%= render '/product_categories/join_product_category' , :pc => pr.pri rescue'-' %> / <%= d. rescue '-'%></td>
-
-			<% d.received_note_items.each do |pri| %>
-			<td><%= pri.received_qty rescue '-'%></td>
-			<% end %>
-			<td><% d. %></td>
-			<td><%= d. rescue '-' %></td>
-			<td><%= d. rescue '-' %></td>
+			<td align="center"><%= index + 1 %></td>
+			<td align="center"><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %> / <%= purchse_order_item_line_purchase_requisition_item_product.desc rescue '-' %></td>
+			<%# d.received_note_items.each do |pri| %>
+			<td align="center"><%= pri.received_qty rescue '-'%></td>
+			<%# end %>
+			<td align="center"><%= pri.purchase_order_item_line_purcahse_order.po_no rescue '-' %></td>
+			<td align="center"><%= pri.purchase_order_item_line_purcahse_order.part_no rescue '-' %></td>
 		</tr>
-		
-	</tbody>
-	<% end %>
+		<% end %>
+		</tbody>
 		</table>
+		
+		
 		<% else %>
 		No Report Found
-		<% end %>
-	</fieldset>
+	<% end %>
+	
 </div>
 
 
 <style>
+
+table {
+	width: 100%;
+}
   
   body {
     background-color: #fff;
@@ -75,5 +79,8 @@
           border-style: solid;
           border-color: black;
           background-color: transparent; }
+  tbody tr {
+    border-top:2pt solid white;
+ }
   
 </style>

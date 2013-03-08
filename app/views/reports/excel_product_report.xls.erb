@@ -1,17 +1,17 @@
-<fieldset>
+<div id="container">
 <h1>Product ID Report</h1>
 
-<div>
+
    <% if @excel_product_report.present? %>
   
   
-  <table border="1" style="size:100%" >
+  <table id="jgrid" class="zebraLight normal_table_black">
       <thead>
       <tr>
                           
         <th>No.</th>
         <th>Product ID</th>
-                                <!--td>Product Name</td-->
+       <!--td>Product Name</td-->
         <th>Description</th>
         <th>Part No.</th>
         <th>U/P(RM)</th>
@@ -20,29 +20,83 @@
       </tr>
     </thead>  
 
-  <% @excel_product_report.each_with_index do |pri , index| %>
+    <% @excel_product_report.each_with_index do |pro , index| %>
       <tbody>
-      <tr>
-        <td><%= index + 1 %></td>
-            <td><%= pri.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
-                    <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
-        <td><%= pri.product.desc rescue '-'%></td>
-        <td><%= pri.product.part_no rescue '-'%></td>
-        <td><%= pri.product.selling_price rescue '-'%></td>
-        <td><%= pri.product.current_stock rescue '-'%></td>
-        <td><%= pri.product.unit_measurement.code rescue '-'%></td>
-      </tr>
+        <tr>
+          <td><%= index + 1 %></td>
+              <td><%= pro.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
+                      <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
+          <td><%= pro.product.desc rescue '-'%></td>
+          <td><%= pro.product.part_no rescue '-'%></td>
+          <td><%= pro.product.selling_price rescue '-'%></td>
+          <td><%= pro.product.current_stock rescue '-'%></td>
+          <td><%= pro.product.unit_measurement.code rescue '-'%></td>
+        </tr>
+        <% end %>
       </tbody>
-  <% end %>
-   
   </table>
 
   <% else %>
-  <h1>no record found</h1>
+  <div class="fix_h450" style="padding: 5px;">no record found</div>
     <% end %>
     
 </div>
-</fieldset>
+
+
+<style>
+
+  table{
+    width:100%;
+  }
+  
+  body {
+    width:100%;
+    background-color: white;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+         
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+
+        }
+    thead td {
+        border-style: none none solid none;
+        border-width: thick;
+        border-color: red;
+        margin: 4pt;
+        border-bottom: 5pt short(4pt) solid red
+    }
+
+</style>
 
 
 

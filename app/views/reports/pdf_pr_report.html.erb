@@ -10,7 +10,7 @@
     <!-- it will take the choice of purchase requisition which related to pr_no -->
 
 
-        <table id="jgrid">
+        <table id="jgrid" class="black-line-table">
           <thead>
             <tr class="header_line">
               <th>Pr.No</th>
@@ -28,31 +28,34 @@
             <% @detail_pr_report.each do |pr| %>
               <% arr = [] %>
               <% pr.purchase_requisition_items.each_with_index do |pri, index| %>
-                <tr class="<%= cycle('odd_line', 'even_line') %>">
+                
+                <tr >
                     <% if index == 0 %>
                       <td align="center" rowspan="<%= pr.purchase_requisition_items.count %>"><%= pr.pr_no rescue '-' %></td>
                     <% end %>
 
                     <!-- <div style="cellpadding:3 cellspacing:1"> -->
                     <td align="center"><%= pri.product.product_combobox.product_code rescue '-' %></td>
-                    <td><%= pri.description rescue '-'%></td>
+                    <td align="center"><%= pri.description rescue '-'%></td>
                     <td align="right"><%= two_precision(pri.unit_price) %></td>
+
                     <!-- </div> -->
                     <% if index == 0 %>
                     <td align="center" rowspan="<%= pr.purchase_requisition_items.count %>"><%= pr.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></td>
                     <% end %>
-                    <td><%= pri.trade_company.name rescue '-' %></td>
-                    <td><%= pri.quantity rescue '-'%></td>
-                    <td>
+
+                    <td algin="center"><%= pri.trade_company.name rescue '-' %></td>
+                    <td align="center"><%= pri.quantity rescue '-'%></td>
+                    <td align="right">
                       <%= iproduct(pri.quantity, pri.unit_price) %>
                       <% arr << pri.quantity * pri.unit_price %>
                     </td>
                 </tr>
               <% end %>
 
-              <tr class="header_line">
-                <td colspan="7" align="right">Total Amount :</td>
-                <td><%= two_precision(arr.sum) %></td>
+              <tr class="header_line" style="border-top: 2px solid;">
+                <td align="right" colspan="7">Total Amount :</td>
+                <td align="right" style="font-style:bolt" ><%= two_precision(arr.sum) %></td>
               </tr>
           
 
@@ -75,7 +78,7 @@
   
   body {
     width:100%;
-    background-color: #fff;
+    background-color: white;
     color: #333;
     font-family: "Courier New", Courier, monospace;
     font-size: 11px;
@@ -112,13 +115,8 @@
           border-color: black;
 
         }
-  thead td {
-      border-style: none none solid none;
-      border-width: thick;
-      border-color: red;
-      margin: 4pt;
-  }
   tbody tr {
-    border-top: 2pt transparent;
+    border-top:2pt solid white;
  }
+
 </style>

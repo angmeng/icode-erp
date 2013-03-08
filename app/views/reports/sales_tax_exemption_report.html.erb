@@ -27,11 +27,10 @@
 
 <div class="fix_1600x900_h450">
 	<fieldset>
-	<%= form_tag pdf_sales_tax_exemption_report_reports_path ,:url =>pdf_sales_tax_exemption_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-	<table id="grid_h495" class="white-line-table zebraLight">
+	<%= form_tag pdf_sales_tax_exemption_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+	<table id="grid_h495">
 	<thead>
 		<tr class="header_line">
-			<th class="check_highlight"></th>
 			<th></th>
 			<th>No.</th>
 			<th>Trade company</th>
@@ -47,8 +46,7 @@
 	<tbody>
 	<% @show_sales_tax_exemption_report.each_with_index do |p , index| %>
 		<tr class="<%= cycle("odd_line", "even_line") %>">
-			<td></td>
-			<td><%= check_box_tag "ste_ids[]", p.id %></td>
+			<td align="center"><%= check_box_tag "ste_ids[]", p.id %></td>
 			<td align="center"><%= index + 1 %></td>
 			<td align="center"><%= p.trade_company.name rescue '-'%></td>
 			<td align="center"><%= p.sales_tax_exemption_no rescue'-' %></td>
@@ -66,20 +64,16 @@
 	</fieldset>
 </div>
 
-	<div style="float:left">
-		<span><%= not_link_excel %><%#= link_to "Excel", excel_product_report_reports_path( :sales_ids => @take_ids,:format=>"xls") 	, :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
+	<div class="icon_tag" style="float:left">
+		<span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel", excel_product_report_reports_path( :sales_ids => @take_ids,:format=>"xls") 	, :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
 	</div>
 
-	<div style="float:right;">
-
-			<span><%#= not_link_show %><%= submit_tag "show" , :class => "k-button" %></span>
-
-			<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
-
-			<span><%= not_link_recover %></span>
-
-		   <span><%#= not_link_printable %><%#= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:sales_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %>
-		   	<%= submit_tag "PDF report" , :class => "k-button" %></span>
+	<div class="icon_tag" style="float:right;">
+		<span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
+		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+		<span><%= not_link_recover %></span>
+		<span><%#= not_link_printable %><%#= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:sales_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %>
+		   	<%= submit_tag "PDF Report" , :class => "k-button" %></span>
 		   	<% end %>
 		   <%= link_close_button %>
 	</div>

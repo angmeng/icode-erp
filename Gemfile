@@ -19,7 +19,7 @@ gem 'json'
 
 group :development do
   gem "better_errors"
-#  gem "binding_of_caller", "~> 0.6.8"
+  gem "binding_of_caller", "~> 0.6.8"
 end
 
 gem 'jquery-rails'
@@ -51,6 +51,6 @@ gem "paperclip"
 gem 'turbolinks'
 gem 'mime-types'
 
-#gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary'
 
 

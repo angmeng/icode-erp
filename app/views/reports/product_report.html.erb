@@ -6,7 +6,7 @@
 	<table>
 		<thead>
 		<tr>
-			<td>[Group]-[sub-group] :</td>
+			<td>Product ID :</td>
 			<td><%= f.text_field :product_code_contains, :size => 10 %></td>
 			<%#= f.text_field :product_category_code_contains ,:size => 12 %>
 			<td>Product Name :</td>
@@ -35,11 +35,10 @@
 
 <div class="fix_1600x900_h450">
 	<fieldset>
-	<%= form_tag pdf_product_report_reports_path ,:url =>pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-	<table id="grid_h495" class="white-line-table zebraLight table">
+	<%= form_tag pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+	<table id="grid_h495">
 			<thead>
 			<tr class="header_line">
-                <th class="check_highlight"></th>
                 <th></th>
 				<th>No.</th>
 				 <%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %>
@@ -57,7 +56,7 @@
 		<tbody>
 		<% @show_product_report.each_with_index do |pro , index| %>
 			<tr class="<%= cycle("odd_line", "even_line") %>">
-		        <td></td>
+		       
 		        <td align="center"><%= check_box_tag "pro_ids[]", pro.id %></td>
 				<td align="center"><%= index + 1 %></td>
 				<%#= render '/product_categories/join_product_category' , :pc => pri.product_category %>
@@ -75,7 +74,7 @@
 	</fieldset>
 </div>
 	<div class="icon_tag" style="float:left">
-		<span><%= not_link_excel %><%#= submit_tag "Excel" ,:url => excel_product_report_reports_path , :target => "_blank" ,  %>
+		<span><%#= submit_tag "Excel Report" , :class=>"k-button"  %><%= not_link_excel %><%#= submit_tag "Excel", :target => "_blank" ,  %>
 			<%#= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
 
 	</div>
@@ -83,11 +82,11 @@
 	
 	<div class="icon_tag" style="float:right;">
 
-		<span><%= submit_tag "show" , :class => "k-button" %><%#= not_link_show %></span>
+		<span><%= submit_tag "Show" , :class => "k-button" %><%#= not_link_show %></span>
 		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
 		<span><%= not_link_recover %></span>
 		
-		<span><%= submit_tag "PDF report" , :class=>"k-button" %></span>
+		<span><%= submit_tag "PDF Report" , :class=>"k-button" %></span>
 		<% end %>
 
 	 	<%= link_close_button %>
