@@ -8,7 +8,7 @@
 	<table id="jgrid" class="zebraLight normal_table_black" >
 		<thead>
 			<tr>
-				<th>No.</th>
+				
         <th>Product Id / Description</th>
         <th>Received Qty</th>
         <th>P/O No.</th>
@@ -17,9 +17,9 @@
 		</thead>
 
 		<tbody>
-		<% @excel_receive_note_report.each_with_index do |ste , index| %>
+		<% @excel_receive_note_report.each do |ste| %>
 			<tr>
-			<td align="center"><%= index + 1 %></td>
+			
       <td align="center"><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %> / <%= purchse_order_item_line_purchase_requisition_item_product.desc rescue '-' %></td>
         
       <%# d.received_note_items.each do |pri| %>

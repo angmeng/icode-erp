@@ -282,7 +282,7 @@ def pdf_receive_note_report
     end
   elsif params[:commit] == "Excel Report"
     if params[:rn_ids].present?
-      redirect_to receive_note_report_reports_path(:rn_ids => params[:rn_ids] , :format => "xls")
+      redirect_to excel_receive_note_report_reports_path(:rn_ids => params[:rn_ids] , :format => "xls")
     end
     else
       redirect_to receive_note_report_reports_path
@@ -304,7 +304,7 @@ end
       end
     elsif params[:commit] == "Excel Report"
       if params[:purchase_ids].present?
-      redirect_to purchase_by_creditor_report_reports_path(:purchase_ids => params[:purchase_ids] , :format => "xls")
+      redirect_to excel_purchase_by_creditor_report_reports_path(:purchase_ids => params[:purchase_ids] , :format => "xls")
     end
     else 
       redirect_to purchase_by_creditor_report_reports_path
