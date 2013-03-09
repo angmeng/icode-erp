@@ -5,18 +5,17 @@ class ProductCategory < ActiveRecord::Base
   validate      :validate_code_length
   
   attr_accessible :code, :desc, :parent_id, :icon, :operation, :more_category, :keep_in_view, :category_type, :status, 
-                  :exist_field, :refer_category_id, :level
+                  :exist_field, :refer_category_id, :level, :open_product_id, :active_common
   
   has_one :product, :dependent => :destroy
   has_one :product_price
+  has_one :product_running_number
   
   has_many   :children, :foreign_key => "parent_id", :class_name => "ProductCategory", :order => "code"
   belongs_to :parent,   :foreign_key => "parent_id", :class_name => "ProductCategory"
   
-#  validates :code, :uniqueness => { :case_sensitive => false, :message => "%{value} has taken already." }
-  
 # Dont use :code as presence is true, bcos Product Category will update after make new Product ID.
-# Dont use :desc as uniqueness...
+# Dont use :code, :desc as uniqueness...
   validates :desc, :parent_id, :category_type, :icon, :presence => true
   validates :desc, :length => { :in => 2..40 }
   
@@ -118,6 +117,14 @@ class ProductCategory < ActiveRecord::Base
     else
       return true
     end
+  end
+  
+  def is_file?
+    self.icon == ProductCategory::ICON_FILE
+  end
+  
+  def is_folder?
+    self.icon == ProductCategory::ICON_FOLDER
   end
   
   private

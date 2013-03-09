@@ -1,19 +1,13 @@
-<div id="popup_container">
-  
-  <div class="title_head">
-    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR QUOTATION REQUISITIONS</strong>
-    <%= search_button %>
-  </div>
-  <div><%= render "search_quotation_request" %></div>
-
-  <div class="fix_h450">
-    <% if @quotation_request_forms.present? %>
-      <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
-    <% else %>
-      Not Record Found.
-    <% end %>
-  </div>
-
-  <%= render "action_quotation_transaction" %>
-
+<div class="title_head">
+  <strong style="color:white;">TRANSACTIONS & HISTORIES FOR QUOTATION REQUISITIONS</strong>
+  <%= search_button %>
 </div>
+<div><%= render "search_quotation_request" %></div>
+
+  <% if @quotation_request_forms.present? %>
+    <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
+  <% else %>
+    <div class="content">Not Record Found</div>
+  <% end %>
+
+<%= render "action_quotation_transaction" %>

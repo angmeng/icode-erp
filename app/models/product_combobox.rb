@@ -1,5 +1,5 @@
 class ProductCombobox < ActiveRecord::Base
-  attr_accessible :product_code, :product_id, :category_type, :status
+  attr_accessible :product_code, :product_id, :category_type, :status, :old_product_code
   
   ACTIVE = "Active"
   KEEP_IN_VIEW = "KIV"
@@ -8,6 +8,8 @@ class ProductCombobox < ActiveRecord::Base
   belongs_to :product
   
   validates :product_id, :product_code, :uniqueness => true
+  
+  default_scope order("product_code")
   
   scope :fg_active ,where(:category_type => ProductCategory::FINISH_GOOD, :status => ProductCombobox::ACTIVE)
   scope :category, where(:category_type => ProductCategory::FINISH_GOOD)

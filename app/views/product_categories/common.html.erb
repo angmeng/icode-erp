@@ -1,0 +1,37 @@
+<div class="title_head"><strong style="color:white;">COMMON CODE</strong></div>
+
+<%= form_tag update_common_product_category_path(@product_category) do %>
+  <div id="valid_common_form">
+    <div class="popup_content">
+      <table>
+        <tr>
+          <td><b>Original Product ID</b></td>
+          <td><%= @product_category.product.product_combobox.product_code rescue '-' %></td>
+        </tr>
+        <tr>
+          <td><b>Common Code</b></td>
+          <td><%= Product.product_join(@product_category.parent, false).join("-") rescue '-' %>-<%= text_field_tag :common_code, '', :class => "k-textbox", "required validationMessage" => "Please Enter Common Code" %>-<%= @product_category.product.code rescue '-' %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var validator = $("#valid_common_form").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
+<% end %>

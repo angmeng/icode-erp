@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301190251) do
+ActiveRecord::Schema.define(:version => 20130307134328) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -465,15 +465,18 @@ ActiveRecord::Schema.define(:version => 20130301190251) do
     t.boolean  "exist_field",       :default => false
     t.integer  "refer_category_id"
     t.integer  "level",             :default => 0
+    t.boolean  "open_product_id",   :default => false
+    t.boolean  "active_common",     :default => false
   end
 
   create_table "product_comboboxes", :force => true do |t|
     t.integer  "product_id"
     t.string   "product_code"
-    t.string   "status",        :default => "Active"
+    t.string   "status",           :default => "Active"
     t.integer  "category_type"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "old_product_code"
   end
 
   add_index "product_comboboxes", ["product_id"], :name => "index_product_comboboxes_on_product_id"
@@ -500,10 +503,13 @@ ActiveRecord::Schema.define(:version => 20130301190251) do
   create_table "product_running_numbers", :force => true do |t|
     t.string   "base_name"
     t.string   "sub_name"
-    t.integer  "running_no", :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "running_no",          :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "product_category_id"
   end
+
+  add_index "product_running_numbers", ["product_category_id"], :name => "index_product_running_numbers_on_product_category_id"
 
   create_table "product_vendors", :force => true do |t|
     t.integer  "product_id"
@@ -587,6 +593,10 @@ ActiveRecord::Schema.define(:version => 20130301190251) do
     t.integer  "buffer_stock"
     t.string   "mould_no"
     t.integer  "sales_tax_exemption_barang_id"
+    t.string   "category"
+    t.string   "window_code"
+    t.string   "revision"
+    t.decimal  "current_price",                 :precision => 10, :scale => 2, :default => 0.0
   end
 
   add_index "products", ["sales_tax_exemption_id"], :name => "index_products_on_sales_tax_exemption_id"

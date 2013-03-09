@@ -44,10 +44,6 @@ class ProductsController < ApplicationController
     render :layout => false
   end
   
-  
-  
-  
-  
   def kiv_non_operation
     @categories = ProductCategory.non_operation_kiv
     manage_categories(params[:category_id])
@@ -110,7 +106,7 @@ class ProductsController < ApplicationController
       clearing_function
       redirect_to @product, notice: "Product ID##{@product.product_combobox.product_code} was successfully created."
     rescue ActiveRecord::StatementInvalid
-      manage_categories(session[:refer_category_id])
+      new
       flash[:alert] = "Sorry. The process has failed. Please try again. Thanks."
       render :action => "new"
     end

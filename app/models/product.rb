@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
                   :size, :model_no, :reorder_no, :art_no, :ref_no, :work_order_no, :mfg_date, :exp_date, :film_no, :bar_code,
                   :item_code, :part_code, :pantone_code, :color, :serial_no, :warranty, :capacity, :diameter,
                   :voltage, :watt, :pin, :ampere, :hp, :hz, :pureness, :ton, :consignee, :destination, :process, :status, :buffer_stock, :lot_no, :mould_no,
-                  :sales_tax_exemption_barang_id
+                  :sales_tax_exemption_barang_id, :category, :window_code, :revision,:current_price
   
   belongs_to :product_category
   belongs_to :unit_measurement
@@ -33,7 +33,6 @@ class Product < ActiveRecord::Base
   
   validates :product_category_id, :presence => true
   validates :part_no, :tarif_code, :length => { :maximum => 40 }
-  validates :desc, :uniqueness => true
   validates :desc, :length => { :maximum => 255 }
   
   ACTIVE = "Active"
@@ -106,6 +105,9 @@ class Product < ActiveRecord::Base
     self.destination.upcase! if self.destination.present?
     self.process.upcase! if self.process.present?
     self.mould_no.upcase! if self.mould_no.present?
+    self.category.upcase! if self.category.present?
+    self.revision.upcase! if self.revision.present?
+    self.window_code.upcase! if self.window_code.present?
   end
   
   def sample_action
@@ -131,40 +133,40 @@ class Product < ActiveRecord::Base
   
   
   
-  def self.run_updating(comp, jump, product)
-    a = comp.sn_product_id_no
-
-    if jump == "yes"
-      b = a + 2
-      string = "%05d" % (b)
-    else
-      b = a + 1
-      string = "%05d" % (b)
-    end
-    
-    if comp.update_attributes(:sn_product_id_no => b)
-      if product.update_attributes(:code => string)
-        if product.product_category.update_attributes(:code => string)
-          @combo = ProductCombobox.new(:product_code => self.category(product), :product_id => product.id, :category_type => product.product_category.category_type)
-          if @combo.save
-            return true
-          else
-            comp.update_attributes(:sn_product_id_no => a)
-            return false, @combo.errors.full_messages.join(", ")
-          end
-        else
-          comp.update_attributes(:sn_product_id_no => a)
-          return false, product.errors.full_messages.join(", ")
-        end
-      else
-        comp.update_attributes(:sn_product_id_no => a)
-        return false, product.errors.full_messages.join(", ")
-      end
-    else
-      return false, comp.errors.full_messages.join(", ")
-    end
-
-  end
+#  def self.run_updating(comp, jump, product)
+#    a = comp.sn_product_id_no
+#
+#    if jump == "yes"
+#      b = a + 2
+#      string = "%05d" % (b)
+#    else
+#      b = a + 1
+#      string = "%05d" % (b)
+#    end
+#    
+#    if comp.update_attributes(:sn_product_id_no => b)
+#      if product.update_attributes(:code => string)
+#        if product.product_category.update_attributes(:code => string)
+#          @combo = ProductCombobox.new(:product_code => self.category(product), :product_id => product.id, :category_type => product.product_category.category_type)
+#          if @combo.save
+#            return true
+#          else
+#            comp.update_attributes(:sn_product_id_no => a)
+#            return false, @combo.errors.full_messages.join(", ")
+#          end
+#        else
+#          comp.update_attributes(:sn_product_id_no => a)
+#          return false, product.errors.full_messages.join(", ")
+#        end
+#      else
+#        comp.update_attributes(:sn_product_id_no => a)
+#        return false, product.errors.full_messages.join(", ")
+#      end
+#    else
+#      return false, comp.errors.full_messages.join(", ")
+#    end
+#
+#  end
   
   
   
@@ -193,21 +195,7 @@ class Product < ActiveRecord::Base
 #    end
 #  end
   
-  def self.joining_category(cat_id)
-    @category = ProductCategory.find(cat_id)
-    joining = []
-    joining = self.product_join(@category, false)
-    joining << @category.code
-    return joining.join('-')
-  end
   
-  def self.joining_category_description(cat_id)
-    @category = ProductCategory.find(cat_id)
-    joining = []
-    joining = self.product_join_category_description(@category, false)
-    joining << @category.desc
-    return joining.join('-')
-  end
   
 
   
@@ -237,7 +225,21 @@ class Product < ActiveRecord::Base
     return a
   end
   
-  private
+  def self.joining_category(cat_id)
+    @category = ProductCategory.find(cat_id)
+    joining = []
+    joining = self.product_join(@category, false)
+    joining << @category.code
+    return joining.join('-')
+  end
+  
+  def self.joining_category_description(cat_id)
+    @category = ProductCategory.find(cat_id)
+    joining = []
+    joining = self.product_join_category_description(@category, false)
+    joining << @category.desc
+    return joining.join('-')
+  end
   
   def self.category(pc)
     if pc.present?
@@ -249,6 +251,8 @@ class Product < ActiveRecord::Base
       end 
     end
   end
+  
+  private
     
   def self.product_join(category, view)
       ret = []
@@ -275,20 +279,6 @@ class Product < ActiveRecord::Base
         ret << parents.desc
         ret.flatten!
         ret.reverse
-      else
-        ret << parents.desc
-        ret.flatten!
-        self.product_join_category_description(parents, ret)
-      end
-  end
-  
-  def self.parent_name_when_parent_id_is_zero(category, view)
-      ret = []
-      view ? ret << view : ret = []
-      parents = category.parent
-
-      if parents.parent_id == 0
-        base_name = parents.code
       else
         ret << parents.desc
         ret.flatten!

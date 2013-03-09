@@ -1,11 +1,9 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">SHOW PRODUCT ID</strong></div>
+<div class="title_head"><strong style="color:white;">SHOW PRODUCT ID</strong></div>
 
-  <div class="fix_1024x800_h450">
-    <%= render "read_product_id", :product_id => @product %>
-  </div>
+<div class="popup_content">
+  <%= render "read_product_id", :product_id => @product %>
+</div>
 
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+<div class="icon_tag">
+  <%= link_close_button %>
 </div>

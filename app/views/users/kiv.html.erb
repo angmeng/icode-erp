@@ -1,21 +1,13 @@
-<div id="popup_container">
-  <table width="100%">
-    <tr>
-      <td><%= link_to "Search", '#', :class => "search_link" %></td>
-    </tr>
-  </table>
-
-  <%= render "search_user_kiv" %>
-
-  <div style="background-color:blue"><strong style="color:white;">LISTING KIV - USERS</strong></div>
-
-  <div class="fix_1600x900">
-    <% if @users.present? %>
-      <%= render "listing_users", :list_users => @users %>
-    <% else %>
-      No record found.
-    <% end %>
-  </div>
-
-  <%= render "action_user_kiv" %>
+<div class="title_head">
+  <strong style="color:white;">LISTING USERS - KIV</strong>
+  <%= search_button %>
 </div>
+<div class="search_engine"><%= render "search_user_kiv" %></div>
+
+<% if @users.present? %>
+  <%= render "listing_users", :list_users => @users %>
+<% else %>
+  <div id="content" style="padding: 0px 5px; border: 1px solid grey;">Not Record Found</div>
+<% end %>
+
+<%= render "action_user_kiv" %>

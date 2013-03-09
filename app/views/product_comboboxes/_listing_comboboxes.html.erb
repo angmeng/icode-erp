@@ -1,0 +1,53 @@
+<table id="jgrid" class="zebraLight">
+
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Product ID</th>
+      <th>Description</th>
+      <th>Part No.</th>
+      <th>U/P(RM)</th>
+      <th>Current Stock</th>
+      <th>U/M</th>
+      <th>Category Type</th>
+      <th>Old Product ID</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% combobox.each do |pid| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="products" rowsId="<%= pid.product_id %>">
+        <td></td>
+        <td><%= pid.product_code rescue '-' %></td>
+        <td><%= pid.product.desc rescue '-' %></td>
+        <td align="center"><%= pid.product.part_no rescue '-' %></td>
+        <td align="right"><%= pid.product.current_price rescue '-' %></td>
+        <td align="center"><%= pid.product.current_stock rescue '-' %></td>
+        <td align="center"><%= pid.product.unit_measurement.code rescue '-' %></td>
+        <td align="center">
+          <% if pid.category_type == ProductCategory::NON_OPERATION %>
+            Non Operation
+          <% elsif pid.category_type == ProductCategory::OPERATION %>
+            Operation
+          <% elsif pid.category_type == ProductCategory::FINISH_GOOD %>
+            Finish Goods
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td><%= pid.old_product_code rescue '-' %></td>
+        <td align="center">
+          <% if pid.status == Product::ACTIVE %>
+            Active
+          <% elsif pid.status == Product::KEEP_IN_VIEW %>
+            KIV
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

@@ -55,6 +55,9 @@ class ProductField < ActiveRecord::Base
   BUFFER_STOCK      = 49
   MOULD_NO          = 50
   
+  CATEGORY          = 51
+  REVISION          = 52
+  WINDOW_CODE       = 53
   
   # only available level 0
 #  def self.checkbox_field(category, prod_field)

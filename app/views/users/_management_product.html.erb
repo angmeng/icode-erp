@@ -1,4 +1,5 @@
-<table id="grid_userTable_h490" class="normal_table_black zebraLight">
+<%#*<table id="grid_userTable_h490" class="normal_table_black zebraLight">%>
+<table id="ims_product" class="normal_table_black zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -11,12 +12,13 @@
       <th width="50">Edit Sub Group/<br/>Product Type</th>
       <th width="50">Add Product ID</th>
       <th width="50">Edit Product ID</th>
+      <th width="50">Common</th>
       <th width="50">Drop to KIV</th>
       <th width="50">Delete</th>
     </tr>
   </thead>
   
   <tbody>
-    <%= render "/inventory_management_systems/ims_product", :checkboxes => @checkboxes %>  
+    <%= render "/inventory_management_systems/ims_product", :checkboxes => @checkboxes %>
   </tbody>
 </table>

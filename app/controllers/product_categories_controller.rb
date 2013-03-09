@@ -16,7 +16,6 @@ class ProductCategoriesController < ApplicationController
   
   def show
     @product_category = ProductCategory.find(params[:id])
-    
     @refer_id = @product_category.refer_category_id
     @field_id = ProductCategory.gather_field_id(@refer_id) if @refer_id.present?
   end
@@ -54,19 +53,13 @@ class ProductCategoriesController < ApplicationController
   end
   
   def edit_group        # For Update Group
-    @edit_group = ProductCategory.find(params[:id])
-
-    respond_to do |format|
-      if @edit_group.update_attributes(:code => params[:code], :desc => params[:desc])
-        format.html { redirect_to @edit_group, notice: 'Editing Group was successfully updated.' }
-#        format.js   { render js: "window.location.pathname='#{product_category_path(@edit_group)}'" }
-      else
-        format.html { 
-          flash[:alert] = @edit_group.errors.full_messages.join(", ")
-          render action: 'click_edit_group'
-        }
-#        format.js   { render js: "alert('#{@edit_group.errors.full_messages.join(", ")}');" }
-      end
+    begin
+      @edit_group = ProductCategory.find(params[:id])
+      ProductManagement.update_group(@edit_group, params[:code], params[:desc])
+      redirect_to @edit_group, notice: 'Editing Group was successfully updated.'
+    rescue ActiveRecord::StatementInvalid
+      flash[:alert] = "Sorry. Something wrong. Please try again. Thanks."
+      render action: 'click_edit_group'
     end
   end
   
@@ -89,7 +82,6 @@ class ProductCategoriesController < ApplicationController
     
     respond_to do |format|
       if @new_category.save
-#        ProductField.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
         ProductManagement.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
         format.html { redirect_to @new_category, :notice => 'Sub Group/Product Type was successfully created.' } 
         format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
@@ -103,28 +95,33 @@ class ProductCategoriesController < ApplicationController
   def edit              # For Edit Sub Group / Product Type
     @new_category = ProductCategory.find(params[:id])
     @edit_refer_id = @new_category.refer_category_id
-    
     if @new_category.level == 1
-      @edit_field_id = ProductCategory.gather_field_id(@edit_refer_id) if @edit_refer_id.present?
+      @edit_field_id          = ProductCategory.gather_field_id(@edit_refer_id) if @edit_refer_id.present?
     else
-      @edit_field_id_lvl_two = ProductCategory.gather_field_id(@edit_refer_id) if @edit_refer_id.present?
+      @edit_field_id_lvl_two  = ProductCategory.gather_field_id(@edit_refer_id) if @edit_refer_id.present?
     end
   end
   
-  def update            # For Update Sub Group / Product Type
-    @new_category = ProductCategory.find(params[:id])
-
-    respond_to do |format|      
-      if @new_category.update_attributes(params[:product_category])
-#        ProductField.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
-        ProductManagement.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
-        format.html { redirect_to @new_category, notice: 'Editing Sub Group/Product Type was successfully updated.' }
-        format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
-      else
-        format.html { render action: 'edit' }
-        format.js   { render js: "alert('#{@new_category.errors.full_messages.join(", ")}');" }
-      end
+  def update            # For Update Sub Group / Product Type    
+    begin
+      @new_category = ProductCategory.find(params[:id])
+      ProductManagement.update_product_type(@new_category, params[:product_category], params[:active_pid])
+      ProductManagement.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
+      redirect_to @new_category, notice: 'Editing Sub Group/Product Type was successfully updated.'
+    rescue ActiveRecord::StatementInvalid
+      flash[:alert] = "Sorry. Something wrong. Please try again. Thanks."
+      render action: 'edit'
     end
+  end
+  
+  def common
+    @product_category = ProductCategory.find(params[:id])
+  end
+  
+  def update_common
+    @product_category = ProductCategory.find(params[:id])
+    ProductManagement.updating_common_code(@product_category, params[:common_code])
+    redirect_to @product_category, notice: 'Common Code was successfully updated.'
   end
   
   #new folder is ok
@@ -151,7 +148,9 @@ class ProductCategoriesController < ApplicationController
   
   def delete_data
     @product_category = ProductCategory.find(params[:id])
-    ProductManagement.delete_folder(@product_category) if @product_category.icon == ProductCategory::ICON_FOLDER
+    ProductManagement.delete_folder(@product_category)  if @product_category.icon == ProductCategory::ICON_FOLDER
+    # Please remain below code for delete product id in the future...
+#    ProductManagement.delete_folder_and_file(@product_category)
     goto_direction(@product_category)
   end
   

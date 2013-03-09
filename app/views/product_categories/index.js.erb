@@ -1,5 +1,0 @@
-<% if @product_categories.present? %>
-  $("#categories").html("<%= escape_javascript(render(@product_categories)) %>");
-<% else %>
-  $("#categories").html("");
-<% end %>

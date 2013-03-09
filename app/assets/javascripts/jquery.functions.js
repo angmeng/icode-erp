@@ -5,11 +5,6 @@ $(document).ready(function() {
         else $('input:checkbox').removeAttr('checked');
     });
     
-    $('#checkall:checkbox').change(function () {
-        if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-        else $('input:checkbox').removeAttr('checked');
-    });
-    
     $("#grid_userTable_h490").chromatable({
         width: "1200px",
         height: "490px",
@@ -163,7 +158,9 @@ $(document).ready(function() {
         })
     })
     
-    $(".pr_iframe, .ste_iframe, .iframe_1600x900").fancybox({
+    $(".iframe_1600x900").fancybox({
+//        .pr_iframe, .ste_iframe, 
+            padding     : 5,
             maxWidth	: 1600,
             maxHeight	: 900,
             fitToView	: false,
@@ -176,7 +173,9 @@ $(document).ready(function() {
             afterClose  : function() {location.reload();return false;}
     });
     
-    $(".ste_iframe_800x450, .inventory_iframe_800x450, .iframe_800x450").fancybox({
+//    .ste_iframe_800x450, .inventory_iframe_800x450, 
+    $(".iframe_800x450").fancybox({
+            padding     : 5,
             maxWidth	: 800,
             maxHeight	: 450,
             fitToView	: false,
@@ -202,7 +201,9 @@ $(document).ready(function() {
             afterClose  : function() {location.reload();return false;}
     });
     
-    $(".rn_iframe, .ir_iframe, .iframe_1024x800").fancybox({
+    $(".iframe_1024x800").fancybox({
+//        .rn_iframe, .ir_iframe, 
+            padding     : 5,
             maxWidth	: 1024,
             maxHeight	: 800,
             fitToView	: false,
@@ -216,8 +217,9 @@ $(document).ready(function() {
     });
     
     $(".show_without_refresh_page_1600x900").fancybox({
-            maxWidth	: 1600,
-            maxHeight	: 900,
+            padding     : 5,
+//            maxWidth	: 1600,
+//            maxHeight	: 900,
             fitToView	: false,
             width	: '100%',
             height	: '100%',
@@ -879,6 +881,7 @@ $(document).ready(function() {
                         else if ($(this).attr("value") == '125') {$(this).attr('checked', true);}
                         else if ($(this).attr("value") == '126') {$(this).attr('checked', true);}
                         else if ($(this).attr("value") == '215') {$(this).attr('checked', true);}
+                        else if ($(this).attr("value") == '268') {$(this).attr('checked', true);}
                     })
                 } else {
                     $('input:checkbox[name="inventory_management_system[]"]').each( function() {
@@ -890,6 +893,7 @@ $(document).ready(function() {
                         else if ($(this).attr("value") == '126') {$(this).attr('checked', false);}
                         else if ($(this).attr("value") == '215') {$(this).attr('checked', false);}
                         else if ($(this).attr("value") == '259') {$(this).attr('checked', false);}
+                        else if ($(this).attr("value") == '268') {$(this).attr('checked', false);}
                     })
                 }
                 break;
@@ -903,6 +907,7 @@ $(document).ready(function() {
                         else if ($(this).attr("value") == '145') {$(this).attr('checked', true);}
                         else if ($(this).attr("value") == '146') {$(this).attr('checked', true);}
                         else if ($(this).attr("value") == '218') {$(this).attr('checked', true);}
+                        else if ($(this).attr("value") == '269') {$(this).attr('checked', true);}
                     })
                 } else {
                     $('input:checkbox[name="inventory_management_system[]"]').each( function() {
@@ -914,6 +919,7 @@ $(document).ready(function() {
                         else if ($(this).attr("value") == '146') {$(this).attr('checked', false);}
                         else if ($(this).attr("value") == '218') {$(this).attr('checked', false);}
                         else if ($(this).attr("value") == '260') {$(this).attr('checked', false);}
+                        else if ($(this).attr("value") == '269') {$(this).attr('checked', false);}
                     })
                 }
                 break;
@@ -927,6 +933,7 @@ $(document).ready(function() {
                         else if ($(this).attr("value") == '150') {$(this).attr('checked', true);}
                         else if ($(this).attr("value") == '151') {$(this).attr('checked', true);}
                         else if ($(this).attr("value") == '221') {$(this).attr('checked', true);}
+                        else if ($(this).attr("value") == '270') {$(this).attr('checked', true);}
                     })
                 } else {
                     $('input:checkbox[name="inventory_management_system[]"]').each( function() {
@@ -938,6 +945,7 @@ $(document).ready(function() {
                         else if ($(this).attr("value") == '151') {$(this).attr('checked', false);}
                         else if ($(this).attr("value") == '221') {$(this).attr('checked', false);}
                         else if ($(this).attr("value") == '261') {$(this).attr('checked', false);}
+                        else if ($(this).attr("value") == '270') {$(this).attr('checked', false);}
                     })
                 }
                 break;
@@ -1423,7 +1431,10 @@ $(document).ready(function() {
         // prevent button redirecting to new page
         return false;
     });
-
+    
+    
+    
+    
 });  
 
 

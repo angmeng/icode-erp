@@ -1,82 +1,101 @@
 <%= form_for @new_category do |f| %>
-  <div class="fix_800x450">
-    <table>
-      <tr>
-        <td><b>Code *</b></td>
-        <td><%= f.text_field :code, :class => "easyui-validatebox k-textbox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
-      </tr>
-      <tr>
-        <td><b>Description *</b></td>
-        <td><%= f.text_field :desc, :class => "easyui-validatebox k-textbox", "data-options" => "required: true, validType: 'length[2,40]'", "required validationMessage" => "Please Enter Description" %></td>
-      </tr>
-    </table>
-    
-    <div style="display: none;">
+  <% if @new_category.open_product_id == true  %>
+    <%= hidden_field_tag :active_pid, "yes"  %>
+  <% end %>
+  <div id="valid_product_form">
+    <div class="popup_content">
       <table>
         <tr>
-          <td>
-            <% if @category_id.present? %>
-              <%= f.text_field :parent_id, :value => @category_id , :class => "k-textbox" , "required validationMessage" => "Please Enter Parent Id" %>
-              <% @level = answer_level(@category_id) %>
-            <% else %>
-              <%= f.text_field :parent_id, :value => @new_category.parent_id , :class => "k-textbox" , "required validationMessage" => "Please Enter Parent Id"%>
-              <% @level = answer_level(@new_category.parent_id) %>
-            <% end %>
-            <%= f.text_field :level, :value => @level.to_i + 1 %>
-          </td>
+          <td><b>Code *</b></td>
+          <td><%= f.text_field :code, :class => "k-textbox", "required validationMessage" => "Please Enter Code" %></td>
         </tr>
-        
         <tr>
-          <td>
-            <% if @icon.present? %>
-              <%= f.text_field :icon, :value => @icon , :class => "k-textbox" , "required validationMessage" => "Please Enter An Icon" %>
-            <% else %>
-              <%= f.text_field :icon, :value => @new_category.icon , :class => "k-textbox" , "required validationMessage" => "Please Enter An Icon " %>
-            <% end %>
-          </td>
-        </tr>
-        
-        <tr>
-          <td>
-            <% if @category_type.present? %>
-              <%= f.text_field :category_type, :value => @category_type  , :class => "k-textbox" , "required validationMessage" => "Please Enter Category Type"%>
-            <% else %>
-              <%= f.text_field :category_type, :value => @new_category.category_type, :class => "k-textbox" , "required validationMessage" => "Please Enter Catedory Type" %>
-            <% end %>
-          </td>
-        </tr>
-        
-        <tr><td><%= f.check_box  :exist_field, { checked: true } %></td></tr>
-        
-        <tr>
-          <td>
-            <% if @refer_id.present? %>
-              <%= f.text_field :refer_category_id, :value => @refer_id %>
-              <% @field_id = gather_field_id(@refer_id) %>
-            <% else %>
-              <%= f.text_field :refer_category_id, :value => @new_category.refer_category_id %>
-              <% @field_id = gather_field_id(@new_category.refer_category_id) %>
-            <% end %>
-          </td>
+          <td><b>Description *</b></td>
+          <td><%= f.text_field :desc, :class => "k-textbox", "required validationMessage" => "Please Enter Description" %></td>
         </tr>
       </table>
-    </div>
-    
-    <div style="background-color: gainsboro; padding: 0px 5px 0px 5px;"><b>Field For Product ID</b></div>
-    
-    <% if action_name == "edit" %>
-      <%= render "checkboxes_forms" %>
-    <% else %>
-      <% if @field_id.present? %>
-        <%= render "/products/show_checkboxes_of_field", :field_id => @field_id %>
-      <% else %>
+
+      <div style="display: none;">
+        <table>
+          <tr>
+            <td>
+              <% if @category_id.present? %>
+                <%= f.text_field :parent_id, :value => @category_id %>
+                <% @level = answer_level(@category_id) %>
+              <% else %>
+                <%= f.text_field :parent_id, :value => @new_category.parent_id %>
+                <% @level = answer_level(@new_category.parent_id) %>
+              <% end %>
+              <%= f.text_field :level, :value => @level.to_i + 1 %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <% if @icon.present? %>
+                <%= f.text_field :icon, :value => @icon %>
+              <% else %>
+                <%= f.text_field :icon, :value => @new_category.icon %>
+              <% end %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <% if @category_type.present? %>
+                <%= f.text_field :category_type, :value => @category_type %>
+              <% else %>
+                <%= f.text_field :category_type, :value => @new_category.category_type %>
+              <% end %>
+            </td>
+          </tr>
+
+          <tr><td><%= f.check_box  :exist_field, { checked: true } %></td></tr>
+
+          <tr>
+            <td>
+              <% if @refer_id.present? %>
+                <%= f.text_field :refer_category_id, :value => @refer_id %>
+                <% @field_id = gather_field_id(@refer_id) %>
+              <% else %>
+                <%= f.text_field :refer_category_id, :value => @new_category.refer_category_id %>
+                <% @field_id = gather_field_id(@new_category.refer_category_id) %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="background-color: gainsboro; padding: 0px 5px 0px 5px;"><b>Field For Product ID</b></div>
+
+      <% if action_name == "edit" %>
         <%= render "checkboxes_forms" %>
+      <% else %>
+        <% if @field_id.present? %>
+          <%= render "/products/show_checkboxes_of_field", :field_id => @field_id %>
+        <% else %>
+          <%= render "checkboxes_forms" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <div class="icon_tag">
     <%= link_save_button %>
     <%= link_close_button %>
   </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var validator = $("#valid_product_form").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
 <% end %>

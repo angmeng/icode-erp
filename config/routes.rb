@@ -1,5 +1,7 @@
 Merp::Application.routes.draw do
 
+  get "documentation/product_rule"
+
   resources :payment_receiveds do
     get "kiv", :on => :collection
     put "recover", :on => :member
@@ -352,6 +354,7 @@ Merp::Application.routes.draw do
 
   resources :products do
     collection do
+      get "message"
       get "non_operation"
       get "non_operation_info"
       get "operation"
@@ -368,8 +371,6 @@ Merp::Application.routes.draw do
       
       get "new_for_receive_note"
       post "post_for_receive_note"
-      
-      get "message"
       get "look_product_desc"
     end
     
@@ -397,6 +398,8 @@ Merp::Application.routes.draw do
       put "recover"
       put "edit_group"
       delete "delete_data"
+      get "common"
+      post "update_common"
     end
   end
 

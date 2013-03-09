@@ -1,29 +1,23 @@
-<div id="popup_container">
-  
-  <div class="title_head"><strong style="color:white;">EDIT USER</strong></div>
+<div class="title_head"><strong style="color:white;">EDITING USER</strong></div>
 
-  <%= form_tag @user, :url => edit_user_path(@user), :method => :put do  %>
+<%= form_tag @user, :url => edit_user_path(@user), :method => :put do  %>
+  <div class="popup_content">
     <div id="user_strip">
       <ul>
         <li class="k-state-active">User Account</li>
         <li>Inventory Management System</li>
-        <li>Inventory Management System II - Product </li>
+        <li>Inventory Management System II - Product</li>
       </ul>
       <div><%= render "edit_user_account" %></div>
-      <div>
-        <div class="user_management"><%= render "management_checkbox" %></div>  
-      </div>
-      <div>
-        <div class="user_management"><%= render "management_product" %></div>
-      </div>
+      <div><%= render "management_checkbox" %></div>
+      <div><%= render "management_product" %></div>
     </div>
-    <div class="icon_tag">
-      <%= link_save_button %>
-      <%= link_close_button %>
-    </div>
-  <% end %>
-  
-</div>
+  </div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>
 
 <% content_for :jquery_script do %>
   <script>
