@@ -1,17 +1,17 @@
-<fieldset>
+<div id="container">
 <h1>Product ID Report</h1>
 
-<div>
+
 	 <% if @product_detail_report.present? %>
 	
 	
 
-	<table class="black-line-table" >
+	<table id="jgrid" class="black-line-table" >
 			<thead>
-			<tr>
+			<tr class="header_line">
                           
 				<th>No.</th>
-                <th>Product ID</th>
+        <th>Product ID</th>
                                 <!--td>Product Name</td-->
 				<th>Description</th>
 				<th>Part No.</th>
@@ -25,13 +25,13 @@
 	<tbody>
 	<tr>
 		<td><%= index + 1 %></td>
-        <td><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
+    <td align="center"><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
                 <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
-		<td><%= pri.product.desc rescue '-'%></td>
-		<td><%= pri.product.part_no rescue '-'%></td>
-		<td><%= pri.product.selling_price rescue '-'%></td>
-		<td><%= pri.product.current_stock rescue '-'%></td>
-		<td><%= pri.product.unit_measurement.code rescue '-'%></td>
+		<td align="center"><%= pri.product.desc rescue '-'%></td>
+		<td align="center"><%= pri.product.part_no rescue '-'%></td>
+		<td align="center"><%= pri.product.selling_price rescue '-'%></td>
+		<td align="center"><%= pri.product.current_stock rescue '-'%></td>
+		<td align="center"><%= pri.product.unit_measurement.code rescue '-'%></td>
 	</tr>
 	</tbody>
 	<% end %>
@@ -42,8 +42,8 @@
 	<h1>no record found</h1>
 		<% end %>
 		
+
 </div>
-</fieldset>
 
 
 
@@ -56,6 +56,9 @@
 
 
 <style>
+
+  table { width: 100px ;
+  }
   
   body {
     background-color: #fff;
@@ -93,3 +96,7 @@
           border-style: solid;
           border-color: black;
         }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+        </style>

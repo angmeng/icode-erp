@@ -1,4 +1,5 @@
-<h1>sales cj5 summary co</h1>
+<div id="popup_container">
+<div class="title_head"><strong style="color:white;">sales cj5 summary co</strong></div>
 
 <div>
 
@@ -18,7 +19,7 @@
 </div>
 <hr />
 <% @sales_cj5_summary_co_report.each_with_index do |p , index| %>
-<div>
+
 	
 	<table>
 		<tr>
@@ -58,4 +59,21 @@
 
 </div>
 <% end %>
+
+<div class="icon_tag" style="float:left">
+		<span><%= not_link_excel %><%#= link_to "Excel", excel_product_report_reports_path( :sales_ids => @take_ids,:format=>"xls") 	, :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
+	</div>
+
+	<div class="icon_tag" style="float:right;">
+
+			<span><%= not_link_show %></span>
+
+			<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+
+			<span><%= not_link_recover %></span>
+
+		   <span><%= not_link_printable %><%#= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:sales_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %></span>
+
+		   <%= link_close_button %>
+	</div>
 

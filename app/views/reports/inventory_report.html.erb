@@ -1,23 +1,26 @@
 <div id="popup_container">
   <div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
-  <div>
+ 
           <table>
-                  <%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
-                  <tr>
-                          <td>Product ID :
-                          <%= f.text_field :product_code_contains , :size => 9 %></td>
-                          <td>Description : 
-                          <%= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
-                          <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
-                  </tr>
-                  <tr>
-                          <td><%= submit_tag "search" %></td>
-                  </tr>
-                  <% end %>
+            <%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
+            <tr>
+                    <td>Product ID :
+                    <%= f.text_field :product_code_contains , :size => 9 %></td>
+                    <td>Description : 
+                    <%= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
+                    <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
+                    <td>Transaction
+                      <%= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
+
+            </tr>
+            <tr>
+                    <td><%= submit_tag "Search" %></td>
+            </tr>
+            <% end %>
           </table>
 
-  </div>
+  <hr />
 
 <input type="checkbox" name="all" id="checkall" />Check All
 
@@ -25,10 +28,10 @@
           <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
-                  <table id="grid_h445" class="white-line-table zebraLight">
+                  <table id="grid_h445">
                           <thead>
                           <tr class="header_line">
-                            <th class="check_highlight"></th>
+                            
                             <th></th>
                             <th>No.</th>
                             <th>Product ID</th>
@@ -46,7 +49,7 @@
                   <% @show_inventory_report.each_with_index do |pri , index| %>
           
                       <tr class="<%= cycle("odd_line", "even_line") %>">
-                        <td></td>
+                       
                         <td align="center"><%= check_box_tag "inventory_ids[]" , pri.id %></td>
                         <td align="center"><%= index + 1 %></td>
                         <td align="center"><%= render '/product_categories/join_product_category' , :pc => pri %></td>
@@ -85,18 +88,19 @@
           <%#*</fieldset>%>
 
     <div class="icon_tag" style="float:left">
-      <span><%= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
     </div>
 
     <div class="icon_tag" style="float:right;">
 
-      <span><%#= not_link_show %><%= submit_tag "show" , :class => "k-button" %></span>
-      <% end %>
+      <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
+      
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
 
       
-      <span><%= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+      <span><%= submit_tag "PDF Report" , :class => "k-button" %><%#= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+      <% end %>
 
       <%= link_close_button %>
     </div>

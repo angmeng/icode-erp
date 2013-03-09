@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-    $('#checkall:checkbox').change(function () {
-        if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
-        else $('input:checkbox').removeAttr('checked');
-    });
     
     $("#grid_userTable_h490").chromatable({
         width: "1200px",

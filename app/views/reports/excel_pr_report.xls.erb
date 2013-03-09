@@ -1,77 +1,123 @@
-<h2><u>Purchase Requisition Report</u></h2>
+<div id="container">
+  
 
-<fieldset>
+  <h2><u>Purchase Requisition Report</u></h2>
+
+
   <% if @excel_pr_report.present? %>
-  <% @excel_pr_report.each do |f| %>
-
-
-  <div style="float:left;">
-      <h1>PR.No :
-      <u><b><%= f.pr_no rescue '-' %></b></u>
-      </h1>
-  </div>
-
-  <div style="float:right;">
-      <h1>Date :
-      <b><%= f.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></b>
-    </h1>
-  </div>
-  
-
-
-  <table border="1" >
-    <thead>
-    <tr>
-      <th>No.</th>
-      <th></th>
-      <th>Description</th>
-      <th>RM</th>
-      <th>Vendor</th>
-      <th>ORDER QTY</th>
-      <th>Amount</th>
-    </tr>
-    </thead>
-
     
-  <% arr = [] %>
+        
+    <!-- it will take the choice of purchase requisition which related to pr_no -->
 
-  
-    <% f.purchase_requisition_items.each_with_index do |pri, index| %>
-    <tbody>
-      <tr>
-        <td><%= index + 1 %></td>
 
-        <td><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri  %></td>
+        <table id="jgrid" class="zebraLight normal_table_black">
+          <thead>
+            <tr class="header_line">
+              <th>Pr.No</th>
+              <th>Product Code</th>
+              <th>Description</th>
+              <th>RM</th>
+              <th>Date</th>
+              <th>Vendor</th>
+              <th>ORDER QTY</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
 
-        <td><%= pri.product.description %></td>
-        <td><%= pri.product.unit_price rescue '-' %></td>
-        <td><%= pri.product.trade_company.name rescue '-' %></td>
-        <td><%= pri.product.quantity%></td>
-        <td><%= iproduct(pri.quantity, pri.unit_price) %></td>
-      </tr>
-      
-      </tbody>
+          <tbody>
+            <% @excel_pr_report.each do |pr| %>
+              <% arr = [] %>
+              <% pr.purchase_requisition_items.each_with_index do |pri, index| %>
+                <!-- class="<%= cycle('odd_line', 'even_line') %>" -->
+                <tr >
+                    <% if index == 0 %>
+                      <td align="center" rowspan="<%= pr.purchase_requisition_items.count %>"><%= pr.pr_no rescue '-' %></td>
+                    <% end %>
 
-      <% if iproduct(pri.quantity, pri.unit_price).present? %>
-      <% arr << pri.quantity * pri.unit_price %>
-        <% end %>
+                    <!-- <div style="cellpadding:3 cellspacing:1"> -->
+                    <td align="center"><%= pri.product.product_combobox.product_code rescue '-' %></td>
+                    <td><%= pri.description rescue '-'%></td>
+                    <td align="right"><%= two_precision(pri.unit_price) %></td>
+                    <!-- </div> -->
+                    <% if index == 0 %>
+                    <td align="center" rowspan="<%= pr.purchase_requisition_items.count %>"><%= pr.requested_by_date.strftime("%d-%m-%Y") rescue '-'  %></td>
+                    <% end %>
+                    <td><%= pri.trade_company.name rescue '-' %></td>
+                    <td align="right"><%= pri.quantity rescue '-'%></td>
+                    <td align="right">
+                      <%= iproduct(pri.quantity, pri.unit_price) %>
+                      <% arr << pri.quantity * pri.unit_price %>
+                    </td>
+                </tr>
+              <% end %>
 
-    <% end %>
+              <tr class="header_line">
+                <td align="right" colspan="7" >Total Amount :</td>
+                <td><%= two_precision(arr.sum) %></td>
+              </tr>
+          
+
+            <% end %>
+          </tbody>
+        </table>
     
+  <% else %>
+      <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
+  <% end %>
+</div>
+
+
+<style>
+
+  table{
+    width:100%;
+  }
   
-  </table>
-  <table>
-    <tr style="float:right;">
-    <td>Total Amount :</td>
-    <td ><%= two_precision(arr.sum) %></td>
-    </tr>
-  </table>
+  body {
+    width:100%;
+    background-color: white;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
 
+  p, div { margin: 0; }
 
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
 
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
 
-    <% end %>
-    <% else %>
-    No record found.
-    <% end %>
-  </fieldset>
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+         
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+
+        }
+    thead td {
+        border-style: none none solid none;
+        border-width: thick;
+        border-color: red;
+        margin: 4pt;
+        border-bottom: 5pt short(4pt) solid red
+    }
+
+</style>

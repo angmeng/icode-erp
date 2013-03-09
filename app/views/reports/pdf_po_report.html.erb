@@ -1,14 +1,10 @@
+<div id="container">
 <h2>Purchase Order Report</h1>
 
-<div>
-  
-  
-  <fieldset>
-     
-      <% if @po_detail_report.present? %>
-  	<table class="black-line-table">
+      <% if @detail_po_report.present? %>
+  	<table id="jgrid" class="black-line-table">
   		<thead>
-  			<tr>
+  			<tr class="header_line">
   				<th>PO No.</th>
           <th>Vendor</th>
   				<th>Order date</th>
@@ -23,16 +19,16 @@
       
   	<tbody>
       
-      <% @po_detail_report.each do |p| %>
+      <% @detail_po_report.each do |p| %>
   		<tr>
-  			<td><%= p.po_no rescue'-' %></td>
-        <td><%= p.trade_company.name %></td>
-  			<td><%= p.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
-  			<td><%= p.currency.name rescue '-' %></td>
-        <td><%= User.find_by_id(purchase_by).name rescue '-' %></td>
-        <td><%= User.find_by_id(request_by).name rescue '-' %></td>
-  			<td><%= p.trade_term.name rescue '-' %></td>
-  			<td><%= p.transport.name rescue '-' %></td>
+  			<td align="center"><%= p.po_no rescue'-' %></td>
+        <td align="center"><%= p.trade_company.name %></td>
+  			<td align="center"><%= p.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
+  			<td align="center"><%= p.currency.name rescue '-' %></td>
+        <td align="center"><%= User.find_by_id(purchase_by).name rescue '-' %></td>
+        <td align="center"><%= User.find_by_id(request_by).name rescue '-' %></td>
+  			<td align="center"><%= p.trade_term.name rescue '-' %></td>
+  			<td align="center"><%= p.transport.name rescue '-' %></td>
   			 
   		</tr>
       <% end %>
@@ -40,16 +36,17 @@
   	
     </table>
    
-  </fieldset>
-
-  
    <% else %>
    no record found
     <% end %>
+  
 </div>
 
-
 <style>
+
+  table {
+    width: 100px;
+  }
   
   body {
     background-color: #fff;
@@ -87,4 +84,9 @@
           border-style: solid;
           border-color: black;
         }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+  
 </style>

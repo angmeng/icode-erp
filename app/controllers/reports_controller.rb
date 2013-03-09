@@ -3,10 +3,9 @@ class ReportsController < ApplicationController
   layout "sheetbox"
 
   def excel_product_report
-
     #if params[:commit] == "Excel"
-    if params[:product_ids].present?
-      @excel_product_report = ProductCombobox.find(params[:product_ids])
+    if params[:pro_ids].present?
+      @excel_product_report = ProductCombobox.find(params[:search])
       respond_to do |format|
         format.html
         format.csv { render text: @excel_product_report.to_csv}
@@ -19,18 +18,18 @@ class ReportsController < ApplicationController
 
   def excel_inventory_report
     if params[:inventory_ids].present?
-      @excel_inventory_report = InventoryHistory.find(params[:inventory_ids])
+      @excel_inventory_report = InventoryHistory.find(params[:search])
       respond_to do |format|
-      format.html
-      format.csv{ render text: @excel_inventory_report.to_csv }
-      format.xls
+        format.html
+        format.csv{ render text: @excel_inventory_report.to_csv }
+        format.xls
     end
   else
     redirect_to inventory_report_reports_path
   end
 end
 
-def excel_pr_report
+def excel_pr_report # link from pdf_pr_report
   if params[:pr_ids].present?
     @excel_pr_report = PurchaseRequisition.search(params[:search])
     respond_to do |format|
@@ -46,13 +45,39 @@ end
 def excel_po_report
   if params[:po_ids].present?
     @excel_po_report = PurchaseOrder.search(params[:search])
-    repond_to do |format|
+    respond_to do |format|
       format.html
       format.csv {render text: @excel_po_report.to_csv }
       format.xls
     end
   else
     redirect_to po_report_reports_path
+  end
+end
+
+def excel_sales_tax_exemption_report
+  if params[:ste_ids].present?
+    @excel_sales_tax_exemption_report = SalesTaxExemption.search(params[:search])
+    respond_to do |format|
+      format.html
+      format.csv {render text: @excel_sales_tax_exemption_report.to_csv }
+      format.xls
+    end
+  else
+    redirect_to sales_tax_exemption_report_reports_path
+  end
+end
+
+def excel_receive_note_report
+  if params[:rn_ids].present?
+    @excel_receive_note_report = ReceiveNote.search(params[:search])
+    respond_to do |format|
+      format.html
+      format.csv {render text: @excel_receive_note_report.to_csv }
+      format.xls
+    end
+  else
+    redirect_to receive_note_report_reports_path
   end
 end
 
@@ -66,11 +91,10 @@ def pdf_pr_report
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf, :filename => "pdf_pr_report.pdf", 
                                   :type => 'application/pdf' , 
-                                  :dispositon => "attachement" )
+                                  :disposition => "attachement" )
         #return # to avoid double render call
     end
-   
-    elsif params[:commit] == "show"
+    elsif params[:commit] == "Show"
       if params[:pr_ids].present?
       @detail_pr_report = PurchaseRequisition.find(params[:pr_ids])
         respond_to do |format|
@@ -78,32 +102,38 @@ def pdf_pr_report
         end
       end 
       #render :text => "this is show function"
+    elsif params[:commit] == "Excel Report"
+      if params[:pr_ids].present?
+        redirect_to excel_pr_report_reports_path(:pr_ids => params[:pr_ids] , :format => "xls")   #render to controller excel_pr_report
+      end
     else
-      render :text => "No reports found"
       redirect_to pr_report_reports_path
   end
     
 end
 
 def pdf_po_report
-  if params[:commit] == "PDf report"
-   if params[:po_ids].present?
-    @po_detail_report = PurchaseOrder.find(params[:po_ids])
-    html = render_to_string(:layout => false , :action => "pdf_po_report.html.erb")
-        @kit = PDFKit.new(html)
-        send_data(@kit.to_pdf, :filename => "pdf_po_report.pdf" ,
-                               :type => 'application/pdf' ,
-                               :disposition => "attachement" )
-  end
-  elsif params[:commit] == "show"
-    if params[:po_ids].present?
-    @po_detail_report = PurchaseOrder.find(params[:po_ids])
-    respond_to do |format|
-      format.html
+  if params[:commit] == "PDF Report"
+     if params[:po_ids].present?
+      @detail_po_report = PurchaseOrder.find(params[:po_ids])
+      html = render_to_string(:layout => false , :action => "pdf_po_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf, :filename => "pdf_po_report.pdf" ,
+                                 :type => 'application/pdf' ,
+                                 :disposition => "attachement" )
     end
-  end
-  else
-    render :test => "No report found"
+    elsif params[:commit] == "Show"
+      if params[:po_ids].present?
+      @detail_po_report = PurchaseOrder.find(params[:po_ids])
+      respond_to do |format|
+        format.html
+      end
+    end
+    elsif params[:commit] == "Excel Report"
+      if params[:po_ids].present?
+        redirect_to excel_po_report_reports_path(:po_ids => params[:po_ids] , :format => "xls")
+    end
+    else
     redirect_to po_report_reports_path
   end
 end
@@ -112,7 +142,7 @@ end
 
 def pdf_product_report
   #render :text => params[:pri_ids]
-  if params[:commit] == "PDF report"
+  if params[:commit] == "PDF Report"
     if params[:pro_ids].present?
       @product_detail_report = ProductCombobox.find(params[:pro_ids])
       html = render_to_string(:layout => false , :action => "pdf_product_report.html.erb")
@@ -122,22 +152,24 @@ def pdf_product_report
                               :disposition => "attachement" )
       end
       #manage_categories(params[:category_id])
-    elsif params[:commit] == "show"
+    elsif params[:commit] == "Show"
       if params[:pro_ids].present?
         @product_detail_report = ProductCombobox.find(params[:pro_ids])
         respond_to do |format|
           format.html
         end
       end
-    else
-      render :test => "No report found"
-      redirect_to product_report_reports_path
+    elsif params[:commit] == "Excel Report"
+      if params[:pro_ids].present?
+        redirect_to excel_product_report_reports_path(:pro_ids => params[:pro_ids] , :format => "xls")    
     end
-
+  else
+    redirect_to product_report_reports_path
+  end
 end
 
 def pdf_inventory_report 
-    if params[:commit] == "PDF report"
+    if params[:commit] == "PDF Report"
       if params[:inventory_ids].present?
         @detail_inventory_report = InventoryHistory.find(params[:inventory_ids])
         html = render_to_string(:layout => false , :action => "pdf_inventory_report.html.erb")
@@ -146,15 +178,18 @@ def pdf_inventory_report
                                 :type => 'application/pdf', 
                                 :disposition => "attachement")
       end
-    elsif params[:commit] = "show"
+    elsif params[:commit] = "Show"
       if params[:inventory_ids].present?
         @detail_inventory_report = InventoryHistory.find(params[:inventory_ids])
         respond_to do |format|
           format.html
         end
       end
+    elsif params[:commit] == "Excel Report"
+      if params[:inventory_ids].present?
+        redirect_to excel_inventory_report_reports_path(:inventory_ids => params[:inventory_ids] , :format => "xls")
+    end
     else
-      render :test => "No report found"
       redirect_to inventory_report_reports_path      
     end
 end
@@ -199,8 +234,9 @@ end
 # end
 
 
+
 def pdf_sales_tax_exemption_report
-  if params[:commit] == "PDF report"
+  if params[:commit] == "PDF Report"
     if params[:ste_ids].present?
     @detail_sales_tax_exemption_report = SalesTaxExemption.find(params[:ste_ids])
     html = render_to_string(:layout => false , :action => "pdf_sales_tax_exemption_report.html.erb")
@@ -210,19 +246,21 @@ def pdf_sales_tax_exemption_report
                               :disposition => "attachement" )
      
     end
-    elsif params[:commit] == "show"
+    elsif params[:commit] == "Show"
       if params[:ste_ids].present?
         @detail_sales_tax_exemption_report = SalesTaxExemption.find(params[:ste_ids])
         respond_to do |format|
           format.html
       end
     end
+  elsif params[:commit] == "Excel Report"
+    if params[:ste_ids].present?
+      redirect_to excel_sales_tax_exemption_report_reports_path(:ste_ids => params[:ste_ids] , :format => "xls")
+    end
     else
-        render :test => "No report found"
-        redirect_to sales_tax_exemption_report_reports_path
+       redirect_to sales_tax_exemption_report_reports_path
     end
 end
-
 
 
 def pdf_receive_note_report
@@ -231,25 +269,28 @@ def pdf_receive_note_report
       @detail_receive_note_report = ReceiveNote.find(params[:rn_ids])
       html = render_to_string(:layout => false , :action => "pdf_receive_note_report.html.erb")
           @kit = PDFKit.new(html)
-          send_data(@kit.to_pdf ,:filename => "pdf_receive_note_report.pdf" ,
+          send_data(@kit.to_pdf ,:filename => "pdf_receive_note_report.pdf",
                                 :type => 'application/pdf' , 
                                 :disposition => "attachement" )
         end
-    elsif params[:commit] == "show"
+    elsif params[:commit] == "Show"
       if params[:rn_ids].present?
         @detail_receive_note_report = ReceiveNote.find(params[:rn_ids])
         respond_to do |format|
           format.html
       end
     end
+  elsif params[:commit] == "Excel Report"
+    if params[:rn_ids].present?
+      redirect_to excel_receive_note_report_reports_path(:rn_ids => params[:rn_ids] , :format => "xls")
+    end
     else
-      render :test => "No report found"
       redirect_to receive_note_report_reports_path
     end
 end 
 
   def pdf_purchase_by_creditor_report
-    if params[:purchase_ids].present
+    if params[:purchase_ids].present?
       @detail_purchase_by_creditor_report = PurchaseRequisitionItem.find(params[:search])
       repond_to do |format|
         format.html
@@ -261,7 +302,11 @@ end
                               :disposition => "attachement" )
         }
       end
-    else
+    elsif params[:commit] == "Excel Report"
+      if params[:purchase_ids].present?
+      redirect_to excel_purchase_by_creditor_report_reports_path(:purchase_ids => params[:purchase_ids] , :format => "xls")
+    end
+    else 
       redirect_to purchase_by_creditor_report_reports_path
     end
   end

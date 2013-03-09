@@ -45,6 +45,7 @@ Merp::Application.routes.draw do
     get "rn_part_summary_report"
 
     get "pdf_sales_tax_exemption_report"
+    get "pdf_purchase_by_creditor_report"
     get "pdf_product_report"
     get "pdf_inventory_report"
     get "pdf_pr_report"
@@ -55,7 +56,8 @@ Merp::Application.routes.draw do
     get "excel_inventory_report"
     get "excel_pr_report"
     get "excel_po_report"
-    get "excel_sale_tax_exemption_report"
+    get "excel_receive_note_report"
+    get "excel_sales_tax_exemption_report"
     
     end 
     member do

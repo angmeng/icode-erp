@@ -1,11 +1,11 @@
 <h2>Purchase Order Report</h1>
 
 <div>
-  <% if @po_detail_report.present? %>
-  <% @po_detail_report.each do |p | %>
+  <% if @excel_po_report.present? %>
+  <% @excel_po_report.each do |p | %>
   <fieldset>
      
-      <div style="float:left">
+      <!-- <div style="float:left">
         <h4>Vendor : <u><%= p.trade_company.name %></u></h4>
       </div>
     
@@ -14,16 +14,19 @@
       </div>
       <div style="float:right;">
         Request By. : <%= p.request_by.name rescue '-' %>
-      </div>
+      </div> -->
       
     
 
-  	<table class="table table-striped" border="1">
+  	<table id="jgrid" class="zebraLight normal_table_black">
   		<thead>
   			<tr>
   				<th>PO No.</th>
+          <th>Vendor</th>
   				<th>Order date</th>
   				<th>Currency</th>
+          <th>Purchase By.</th>
+          <th>Request By.</th>
   				<th>Term</th>
   				<th>Transport</th>
   				
@@ -32,11 +35,14 @@
       
   	<tbody>
   		<tr>
-  			<td><%= p.po_no rescue'-' %></td>
-  			<td><%= p.po_date rescue '-' %></td>
-  			<td><%= p.currency.name rescue '-' %></td>
-  			<td><%= p.trade_term.name rescue '-' %></td>
-  			<td><%= p.transport.name rescue '-' %></td>
+  			<td align="center"><%= p.po_no rescue'-' %></td>
+        <td align="center"><%= p.trade_company.name rescue'-' %></td>
+  			<td align="center"><%= p.po_date rescue '-' %></td>
+  			<td align="center"><%= p.currency.name rescue '-' %></td>
+        <td align="center"><%= User.find_by_id(purchase_by).name rescue '-' %></td>
+        <td align="center"><%= User.find_by_id(request_by).name rescue '-' %></td>
+  			<td align="center"><%= p.trade_term.name rescue '-' %></td>
+  			<td align="center"><%= p.transport.name rescue '-' %></td>
   			
   		</tr>
   	</tbody>
@@ -48,3 +54,58 @@
    <% end %>
     <% end %>
 </div>
+
+<style>
+
+  table{
+    width:100%;
+  }
+  
+  body {
+    width:100%;
+    background-color: white;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+         
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+
+        }
+    thead td {
+        border-style: none none solid none;
+        border-width: thick;
+        border-color: red;
+        margin: 4pt;
+        border-bottom: 5pt short(4pt) solid red
+    }
+
+</style>

@@ -5,9 +5,9 @@
 	 
 	<fieldset>
 		<!-- <table style="border:1 cellpadding:3 cellspacing:1 width:100%; "> -->
-		<table class="black-line-table">
+		<table id="jgrid" class="black-line-table">
 			<thead>
-				<tr>
+				<tr class="header_line">
 					<th>No.</th>
 					<th>Product ID</th>
 	        <th>Description</th>
@@ -25,13 +25,13 @@
 
 			<tbody>
 			<tr>
-				<td><%= index + 1 %></td>
-				<td><%= render '/product_categories/join_product_category' , :pc => pri  rescue'-' %></td>
-        <td><%= pri.product.desc rescue '-' %></td>
-				<td><%= pri.stock_in rescue '-'%></td>
-				<td><%= pri.stock_out rescue '-'%></td>
-        <td><%= pri.amount rescue '-' %></td>
-				<td><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
+				<td align="center"><%= index + 1 %></td>
+				<td align="center"><%= render '/product_categories/join_product_category' , :pc => pri  rescue'-' %></td>
+        <td align="center"><%= pri.product.desc rescue '-' %></td>
+				<td align="center"><%= pri.stock_in rescue '-'%></td>
+				<td align="center"><%= pri.stock_out rescue '-'%></td>
+        <td align="center"><%= pri.amount rescue '-' %></td>
+				<td align="center"><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
 				<!--td><%#= pri.inventory_issue.in_out rescue '-' %></td-->
 				<%#= iproduct(pri.amount) rescue '-'%>
 			</tr>
@@ -53,6 +53,7 @@
   
   body {
     background-color: #fff;
+    
     color: #333;
     font-family: "Courier New", Courier, monospace;
     font-size: 11px;
@@ -86,5 +87,14 @@
           border-style: solid;
           border-color: black;
           background-color: transparent; }
+
+  tbody tr {
+    border-top: 3pt solid white
+  }
+  thead td {
+      /* Introduce a `short' style */
+      border-bottom: 5pt short(4pt) solid red
+  }
+
   
 </style>
