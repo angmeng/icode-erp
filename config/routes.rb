@@ -33,7 +33,7 @@ Merp::Application.routes.draw do
     #get "po_detail_report"
     #get "fg_transaction_cw"
     get "sales_tax_exemption_report"
-    #get "sales_cj5_summary_co"
+    get "sales_cj5_summary_co_report"
     get "product_report"
     get "company_report"
     get "purchase_by_creditor_report"
@@ -49,7 +49,9 @@ Merp::Application.routes.draw do
     get "pdf_pr_report"
     get "pdf_po_report"
     get "pdf_receive_note_report"
+    get "pdf_sales_cj5_summary_co_report"
 
+    get "excel_sales_cj5_summary_co_report"
     get "excel_product_report"
     get "excel_inventory_report"
     get "excel_pr_report"

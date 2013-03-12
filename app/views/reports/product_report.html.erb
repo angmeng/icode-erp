@@ -74,7 +74,7 @@
 	</fieldset>
 </div>
 	<div class="icon_tag" style="float:left">
-		<span><%#= submit_tag "Excel Report" , :class=>"k-button"  %><%= not_link_excel %><%#= submit_tag "Excel", :target => "_blank" ,  %>
+		<span><%= submit_tag "Excel Report" , :class=>"k-button"  %><%#= not_link_excel %><%#= submit_tag "Excel", :target => "_blank" ,  %>
 			<%#= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
 
 	</div>
