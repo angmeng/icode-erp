@@ -1,13 +1,13 @@
 <table id="jgrid" class="zebraLight">
-  
+
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>Name</th>
       <th>Job Title</th>
       <th>Department</th>
-      <th>Level Two</th>
-      <th>Level Three</th>
+      <th width="100">Level Two</th>
+      <th width="100">Level Three</th>
     </tr>
   </thead>
 
@@ -15,7 +15,7 @@
     <% list_users.each do |user| %>
       <% lv2 = User.find_by_id(user.level_two) %>
       <% lv3 = User.find_by_id(user.level_three) %>
-    
+
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= user.id %>">
         <td></td>
         <td align="center"><%= user.name rescue '-' %></td>

@@ -1,25 +1,13 @@
-<h1>Listing product_comboboxes</h1>
+<div class="title_head">
+  <strong style="color: white;">LISTING PRODUCTS</strong>
+  <%= search_button %>
+</div>
+<div class="search_engine"><%= render "search_combobox" %></div>
 
-<table>
-  <tr>
-    <th>Product</th>
-    <th>Product code</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @product_comboboxes.each do |product_combobox| %>
-  <tr>
-    <td><%= product_combobox.product_id %></td>
-    <td><%= product_combobox.product_code %></td>
-    <td><%= link_to 'Show', product_combobox %></td>
-    <td><%= link_to 'Edit', edit_product_combobox_path(product_combobox) %></td>
-    <td><%= link_to 'Destroy', product_combobox, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if @product_comboboxes.present? %>
+  <%= render "listing_comboboxes", :combobox => @product_comboboxes %>
+<% else %>
+  <div class="content">Not Record Found</div>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Product combobox', new_product_combobox_path %>
+<%= render "action_combobox" %>

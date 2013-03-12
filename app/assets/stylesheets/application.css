@@ -31,12 +31,12 @@ body {
 /* It is use for addClass in the javascript */
 .page_wrapper {
     /* Ignore the height to 100%, bcos jquery will help us to calculate.. */
-    background-color: #fff;
-    color: #000;
-    font-family: Tahoma, arial, helvetica, sans-serif;
-    font-size: 12px;
+/*    background-color: #fff;*/
+/*    color: #000;*/
+/*    font-family: Tahoma, arial, helvetica, sans-serif;*/
+/*    font-size: 12px;*/
     overflow: auto;
-/*    border: 1px solid red;*/
+/*    border: 1px solid grey;*/
 }
 
 /*#container, #popup_container {
@@ -52,14 +52,16 @@ body {
 
 
 
-#popup_content {
+/*#popup_content {
     height: 500px;
     border: 1px solid black;
-}
+}*/
 
 p, div { margin: 0; }
 
-hr { border: 1px solid black; }
+hr { margin-top: 5px; margin-bottom: 5px; }
+/*    border: 1px solid black; */
+    
 
 p, ol, ul, td {
     font-family: Tahoma, arial, helvetica, sans-serif;
@@ -72,7 +74,7 @@ pre {
 
 a         { color: #000; }
 a:visited { color: #666; }
-a:hover   { color: #fff; background-color:#000; }
+a:hover   { color: #fff; background-color: orange; }
 
 p#notice {
     background-color: green;
@@ -301,18 +303,7 @@ table.normal_table_white td {
 
 #inline { display:none; }
 
-.search_link {
-    float: right;
-/*    border-radius: 5px;   IE 9*/
-/*    -moz-border-radius: 5px;   Safari*/
-/*    -webkit-border-radius: 5px;   Chrome 9*/
-    background-color: gainsboro;
-    color: brown;
-    padding: 0px 5px 0px 5px;
-/*    font-size: 12px;*/
-    text-decoration: none;
-    font-weight: bold;
-}
+
 
 #run_size, #generate { 
     border-radius: 5px;  /* IE 9*/
@@ -369,9 +360,23 @@ table.normal_table_white td {
 #get_size       { display:none; float: right; background-color: orange; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding-left:5px; padding-right: 5px; cursor: pointer; }
 .padding_10     { padding: 10px; }
 .check_highlight{ width: 25px; }
+.remove_underline { text-decoration: none; }
+
 
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
 .search_engine  { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 100%; z-index: 50;}
+.search_link {
+    float: right;
+    background-color: gainsboro;
+    color: brown;
+    padding: 0px 5px 0px 5px;
+    text-decoration: none;
+    font-weight: bold;
+/*    border-radius: 5px;   IE 9*/
+/*    -moz-border-radius: 5px;   Safari*/
+/*    -webkit-border-radius: 5px;   Chrome 9*/
+/*    font-size: 12px;*/
+}
 
 #fix_height { overflow:auto; height:650px; }
 
@@ -456,17 +461,18 @@ table.normal_table_white td {
     height: 340px;
     width: 99.90%;}
 
-#user_strip {
+/*#user_strip {*/
 /*    width: 100%;*/
-    height: 550px;
-    border: 1px solid black;
-}
+/*    height: 550px;*/
+/*    border: 1px solid black;*/
+/*}*/
 
-.user_management {
+/*.user_management {*/
 /*    overflow-y: hidden;*/
 /*    overflow-x: scroll;*/
-    width: 100%;
-    height: 500px; }
+/*    width: 100%;*/
+/*    height: 500px; */
+/*}*/
 
 .user_management_show {
     overflow: auto;
@@ -496,10 +502,9 @@ tr.selected_row td{ background: gold; }
 }
 
 /* Product Layout */
-#horizontal { height: 500px; margin: 0 auto; }
-.product_button{ padding: 5px; }
-.product_container { margin: 5px; height: 450px; overflow: auto; }
-#right-pane { background-color: gainsboro; }
+.product_button     { padding: 5px; }
+.product_container  { margin: 5px; height: 450px; overflow: auto; }
+#right-pane         { background-color: gainsboro; }
 
 
 fieldset { border: 1px solid green; padding: 5px; }
@@ -530,4 +535,9 @@ legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color:
 
 #sheetbox_height { border: 1px solid black; }
 
+.content, .popup_content { padding: 0px 5px; border: 1px solid grey; }
+
+#treeview .k-state-selected { background: white; }
+#treeview .k-in             { border: 1px solid white; padding: 1px; }
+/*line-height: 16px;*/
 

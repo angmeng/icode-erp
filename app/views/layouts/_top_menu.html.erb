@@ -541,6 +541,13 @@
         <li>
           Product ID
           <ul>
+              <%# if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION) %>
+                <li><%= link_to "Listing Product ID", product_comboboxes_path %></li>
+              <%# else %>
+                <!--li class="text_gray">Listing Products</li-->
+              <%# end %>
+            
+            
               <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION) %>
                 <li><%= link_to "Non Operation", non_operation_products_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>

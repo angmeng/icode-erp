@@ -74,17 +74,25 @@
     <%= not_link_document_edit %>
   <% end %>
 
+  <% if data.product.present? %>
+    <% if data.active_common == false %>
+      <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_COMMON) %>
+        <%= link_common(common_product_category_path(data)) %>
+      <% else %>
+        <%= not_link_common %>
+      <% end %>
+    <% else %>
+      <%= not_link_common %>
+    <% end %>
+  <% else %>
+    <%= not_link_common %>
+  <% end %>
+
   <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV) %>
     <%= link_kiv(product_category_path(data)) %>
   <% else %>
     <%= not_link_kiv %>
   <% end %>
-
-  <%# if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE) %>
-    <%#= link_delete(delete_data_product_category_path(data)) %>
-  <%# else %>
-    <%#= not_link_delete %>
-  <%# end %>
 
   <% unless data.children.present? %>
     <% if data.icon == ProductCategory::ICON_FOLDER %>
@@ -93,6 +101,8 @@
       <% else %>
         <%= not_link_delete %>
       <% end %>
+    <%# elsif data.icon == ProductCategory::ICON_FILE %>
+      <%#= link_delete(delete_data_product_category_path(data)) %>
     <% else %>
       <%= not_link_delete %>
     <% end %>

@@ -12,8 +12,8 @@
   <%= javascript_include_tag "application" %>
   <%= yield :head %>
   <%= csrf_meta_tags %>
-  <%= yield(:jquery_script) %>  <!-- Javascript -->
-  <%#= yield(:css_style) %>      <!-- CSS -->
+  <!-- Javascript --><%= yield(:jquery_script) %>  
+  <!-- CSS --><%= yield(:css_style) %>      
 </head>
 
 <body>

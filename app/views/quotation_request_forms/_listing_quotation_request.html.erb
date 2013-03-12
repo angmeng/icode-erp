@@ -1,8 +1,10 @@
-<% if action_name == "pending_quotation" or action_name == "feedback" %>
-  <table id="grid_h400" class="white-line-table zebraLight">
-<% else %>
-  <table id="grid_h445" class="white-line-table zebraLight">
-<% end %>
+<%# if action_name == "pending_quotation" or action_name == "feedback" %>
+  <%#*<table id="grid_h400" class="white-line-table zebraLight">%>
+<%# else %>
+  <%#*<table id="grid_h445" class="white-line-table zebraLight">%>
+<%# end %>
+
+<table id="jgrid" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>

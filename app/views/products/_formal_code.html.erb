@@ -1,57 +1,23 @@
-<div id="popup_container">
-  <div class="title_head">
-    <strong style="color:white;">
-      <% if action_name == "non_operation" %>
-        NON OPERATION
-      <% elsif action_name == "operation" %>
-        OPERATION
-      <% elsif action_name == "finish_good" %>  
-        FINISH GOODS
-      <% else %>
-        -
-      <% end %>
-    </strong>
-    <%#= search_button %>
-  </div>
-  <div><%#= render "search_purchase_requisition" %></div>
-
-  <div id="horizontal">
-    <div id="left-pane">
-      <%= render "/products/category", :categories => @categories %>
-    </div>
-    <div id="right-pane">
-      <div id="product_ajax"></div>
-    </div>
-  </div>
-  
-  <div class="left_icon_tag">
-    <% if action_name == "non_operation" %>
-      <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP) %>
-        <%= link_to "Create Group", parent_product_categories_path(:category_type => ProductCategory::NON_OPERATION), :class => "iframe_800x450  k-button opac-icon", "data-fancybox-type" => "iframe" %>
-      <% else %>
-        <%= not_link_parent_folder %>
-      <% end %>
-    <% elsif action_name == "operation" %>
-      <% if roles.include?(InventoryManagementSystem::PRODUCT_OPERATION_GROUP) %>
-        <%= link_to "Create Group", parent_product_categories_path(:category_type => ProductCategory::OPERATION), :class => "iframe_800x450  k-button opac-icon", "data-fancybox-type" => "iframe" %>
-      <% else %>
-        <%= not_link_parent_folder %>
-      <% end %>
-    <% elsif action_name == "finish_good" %>
-      <% if roles.include?(InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP) %>
-        <%= link_to "Create Group", parent_product_categories_path(:category_type => ProductCategory::FINISH_GOOD), :class => "iframe_800x450  k-button opac-icon", "data-fancybox-type" => "iframe" %>
-      <% else %>
-        <%= not_link_parent_folder %>
-      <% end %>
+<div class="title_head">
+  <strong style="color:white;">
+    <% if action_name     == "non_operation" %>
+      NON OPERATION
+    <% elsif action_name  == "operation" %>
+      OPERATION
+    <% elsif action_name  == "finish_good" %>  
+      FINISH GOODS
     <% else %>
       -
     <% end %>
-  </div>
-
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+  </strong>
 </div>
+
+<div id="horizontal">
+  <div id="left-pane"><%= render "/products/category", :categories => @categories %></div>
+  <div id="right-pane"><div id="product_ajax"></div></div>
+</div>
+  
+<%= render "action_product" %>
             
 <% content_for :jquery_script do %>
   <script>
@@ -63,17 +29,19 @@
                   { collapsible: true, size: "220px" }
               ]
           });
-          
-          
+                    
           $('a').click(function (event){ 
               var div_class = $(this).parent('div').attr('class');
               
+              $('a').each(function(){ $(this).css({ "color": "black", "font-weight": "normal" }); });
+              $(this).css({ "color": "blue", "font-weight": "bold" });
+              
               if (div_class != 'left_icon_tag'){
                   event.preventDefault(); 
+                  
                   $.ajax({
                     url: $(this).attr('href'),
                     success: function(data) {
-                      $(this).css("color", "blue").css("font-weight", "bold");
                       $("#product_ajax").html(data);
                     }
                   })
@@ -83,3 +51,4 @@
       });
   </script>
 <% end %>
+  

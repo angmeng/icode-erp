@@ -1,28 +1,24 @@
-<div id="popup_container">
-  <div class="title_head">
-    <strong style="color:white;">
-      <% if action_name     == "kiv_non_operation" %>
-        NON OPERATION - KIV
-      <% elsif action_name  == "kiv_operation" %>
-        OPERATION - KIV
-      <% elsif action_name  == "kiv_finish_good" %>  
-        FINISH GOODS - KIV
-      <% else %>
-        -
-      <% end %>
-    </strong>
-    <%#= search_button %>
-  </div>
-  <div><%#= render "search_purchase_requisition" %></div>
+<div class="title_head">
+  <strong style="color:white;">
+    <% if action_name     == "kiv_non_operation" %>
+      NON OPERATION - KIV
+    <% elsif action_name  == "kiv_operation" %>
+      OPERATION - KIV
+    <% elsif action_name  == "kiv_finish_good" %>  
+      FINISH GOODS - KIV
+    <% else %>
+      -
+    <% end %>
+  </strong>
+</div>
 
-  <div id="horizontal">
-    <div id="left-pane"><%= render "/products/category_kiv", :categories => @categories %></div>
-    <div id="right-pane"><div id="product_ajax"></div></div>
-  </div>
+<div id="horizontal">
+  <div id="left-pane"><%= render "/products/category_kiv", :categories => @categories %></div>
+  <div id="right-pane"><div id="product_ajax"></div></div>
+</div>
 
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+<div class="icon_tag">
+  <%= link_close_button %>
 </div>
             
 <% content_for :jquery_script do %>

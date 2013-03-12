@@ -350,6 +350,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_NON_OPERATION_DELETE                       = 259
   PRODUCT_NON_OPERATION_KIV                          = 216
   PRODUCT_NON_OPERATION_RECOVER                      = 217
+  PRODUCT_NON_OPERATION_COMMON                       = 268
   
   PRODUCT_OPERATION_GROUP                            = 142
   PRODUCT_OPERATION_GROUP_EDIT                       = 143 #add
@@ -360,6 +361,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_OPERATION_DELETE                           = 260
   PRODUCT_OPERATION_KIV                              = 219
   PRODUCT_OPERATION_RECOVER                          = 220
+  PRODUCT_OPERATION_COMMON                           = 269
   
   PRODUCT_FINISH_GOOD_GROUP                          = 147
   PRODUCT_FINISH_GOOD_GROUP_EDIT                     = 148 #add
@@ -370,6 +372,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_DELETE                         = 261
   PRODUCT_FINISH_GOOD_KIV                            = 222
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
+  PRODUCT_FINISH_GOOD_COMMON                         = 270
   
   PRICE_CONTROL_MENU                                 = 258
   
@@ -397,6 +400,6 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   
   
-  #start at 268
+  #start at 271
   #kai kean use 300-400
 end

@@ -1,8 +1,10 @@
 class ProductComboboxesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /product_comboboxes
   # GET /product_comboboxes.json
   def index
-    @product_comboboxes = ProductCombobox.all
+    @search             = ProductCombobox.search(params[:search])
+    @product_comboboxes = @search.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -17,47 +17,60 @@
 
 $(document).ready(function () {
     
-    // Here must be bottom script.. Dont do it at top script
-    var window_height       = $(window).height();     //same with $("#page_height").height();
-    var main_header         = $("#main_header").height();
-    var main_footer         = $("#footer").height();
-    var menu                = $("#menu").height();
-    var container           = window_height - main_header - main_footer - menu - 25;
-    
-    $("#wrapper").css({ 'height': container }).addClass("page_wrapper"); 
-    
-    var ctn_width           = $("#container").width() - 20;
-    var title_height        = $(".title_head").height();
-    var button_height       = $(".icon_tag").height();
-    var table_height        = container - title_height - button_height - 10;
-    
-//    alert(button_height);
-    
+    var window_height           = $(window).height();     //same with $("#page_height").height();
+    var header_height           = $("#main_header").height();
+    var footer_height           = $("#footer").height();
+    var menu_height             = $("#menu").height();
+    var ctn_width               = $("#container").width() - 20;
+    var title_height            = $(".title_head").height();
+    var button_height           = $(".icon_tag").height();
+    var wrapper_height          = window_height - header_height - footer_height - menu_height - 25;
+    var content_height          = wrapper_height - title_height - button_height - 12;
+
+    // It is for normal page
+    $("#wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
+
+    // Normal Table
     $("#jgrid").chromatable({
-//        width:  ctn_width,
-//        height: ctn_height,
         width:  ctn_width,
-        height: table_height,
+        height: content_height,
         scrolling: "yes"
     });
+
+    // Normal Content
+    $(".content").css({ 'height': content_height }).addClass("page_wrapper");
+
+
+
+
     
+    var popup_content_height    = window_height - title_height - button_height - 12;
+    var popup_tab_height        = popup_content_height - 50;
+    // It is for popup product page
+    $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });
+    
+    // We setting the time out because IE9 really damn high time speed, so we delay time to 0.1s
+    setTimeout(function(){
+            var window_height           = $(window).height();     //same with $("#page_height").height();
+            var title_height            = $(".title_head").height();
+            var button_height           = $(".icon_tag").height();
+
+            // Here is popup module
+            var popup_content_height    = window_height - title_height - button_height - 12;
+            var popup_tab_height        = popup_content_height - 50;
+
+            // It is for popup normal page
+            $(".popup_content").css({ 'height': popup_content_height }).addClass("page_wrapper"); 
+
+            // Popup Tabbing Table -- IMS
+            $("#ims_purchase, #ims_product").chromatable({
+                width:  ctn_width,
+                height: popup_tab_height,
+                scrolling: "yes"
+            });
+    }, 100);
     
 
-//    var ctn_height      = $("#container").height();
-//    var popup_height    = $(window).height();
-//    var footer_height   = $("#footer").height();
-//    var icon_height     = $(".icon_tag").height();
-//    var ctn_height      = ctn_height - footer_height - icon_height - 10;
-//    var sheetbox        = popup_height - icon_height - 40;
-//    
-//    $("#jgrid").chromatable({
-//        width:  ctn_width,
-//        height: ctn_height,
-//        scrolling: "yes"
-//    });	
-//    
-//    $("#auto_height").height(ctn_height);
-//    $("#sheetbox_height").height(sheetbox);
 });
 
 

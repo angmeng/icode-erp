@@ -1,24 +1,21 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">EDITING GROUP</strong></div>
+<div class="title_head"><strong style="color:white;">EDITING GROUP</strong></div>
 
-  <%#= form_tag edit_group_product_category_path, :method => :put, :remote => true do %>
-  <%= form_tag edit_group_product_category_path, :method => :put do %>
-    <div class="fix_800x450">
-      <table>
-        <tr>
-          <td><b>Code</b></td>
-          <td><%= text_field_tag :code, @edit_group.code, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
-        </tr>
-        <tr>
-          <td><b>Description</b></td>
-          <td><%= text_field_tag :desc, @edit_group.desc, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,40]'" %></td>
-        </tr>
-      </table>
-    </div>
+<%= form_tag edit_group_product_category_path, :method => :put do %>
+  <div class="popup_content">
+    <table>
+      <tr>
+        <td><b>Code</b></td>
+        <td><%= text_field_tag :code, @edit_group.code, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
+      </tr>
+      <tr>
+        <td><b>Description</b></td>
+        <td><%= text_field_tag :desc, @edit_group.desc, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,40]'" %></td>
+      </tr>
+    </table>
+  </div>
 
-    <div class="icon_tag">
-      <%= link_save_button %>
-      <%= link_close_button %>
-    </div>
-  <% end %>
-</div>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>
