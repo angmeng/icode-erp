@@ -19,7 +19,7 @@ gem 'json'
 
 group :development do
   gem "better_errors"
-  gem "binding_of_caller", "~> 0.6.8"
+#  gem "binding_of_caller", "~> 0.6.8"
 end
 
 gem 'jquery-rails'
@@ -43,7 +43,7 @@ gem "omniauth"
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'rabl'
-gem 'will_paginate', '~> 3.0'
+gem "will_paginate", "~> 3.0.4"
 gem "pdfkit"
 gem "squeel"
 gem "meta_search"
@@ -52,6 +52,6 @@ gem 'turbolinks'
 gem 'mime-types'
 gem 'rails3-jquery-autocomplete' 
 
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
 
 

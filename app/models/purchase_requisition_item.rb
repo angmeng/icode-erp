@@ -74,6 +74,10 @@ class PurchaseRequisitionItem < ActiveRecord::Base
     skip_to_purchase_order == TRUE
   end
   
+  def urgent?
+    urgent == TRUE
+  end
+  
 #  def self.completed_update(app_three)
 #    all_pending = app_three.purchase_requisition_items.where(:status => PurchaseRequisitionItem::IN_PROCESSING)
 #    if all_pending.present?

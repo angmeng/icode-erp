@@ -4,7 +4,7 @@ class PriceControl < ActiveRecord::Base
   
   attr_accessible :currency_id, :pp_date, :pp_no, :reference, :status, :trade_company_id, :user_id
   
-  validates :currency_id, :pp_no, :reference, :trade_company_id, :user_id, :presence => true
+  validates :currency_id, :pp_no, :trade_company_id, :user_id, :presence => true
   validates :pp_date, :presence => true
   
   has_many :price_control_items, :dependent => :destroy
@@ -19,9 +19,19 @@ class PriceControl < ActiveRecord::Base
   
   default_scope order("pp_no DESC")
   
+  self.per_page = 50
+  
   scope :db_active, where(:status => PriceControl::ACTIVE)
   scope :db_kiv, where(:status => PriceControl::KEEP_IN_VIEW)
   scope :db_close, where(:status => PriceControl::CLOSE)
+  
+  def self.search_price_control(search)
+    search.where(:status => PriceControl::ACTIVE)
+  end
+  
+  def self.search_price_control_kiv(search)
+    search.where(:status => PriceControl::KEEP_IN_VIEW)
+  end
   
   # PS: price_control_items used for histories
   def self.running_price_control_items(data, price_control)
@@ -39,7 +49,7 @@ class PriceControl < ActiveRecord::Base
   end
   
   def self.generating_product_customer(price_control)
-    company_id = price_control.trade_company_id
+    company_id = price_control.trade_company_id  # must be customer ID
     
     price_control.price_control_items.each do |price_control_item| 
       product_id = price_control_item.product_id

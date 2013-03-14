@@ -1,19 +1,21 @@
 <% if pr.present? %>
-  <table id="grid_h295" class="white-line-table zebraLight">
+  <!--table id="grid_h295" class="white-line-table zebraLight"-->
+  <table id="jgrid_new_pr" class="zebraLight">
     <thead>
       <tr class="header_line">
         <th class="check_highlight"></th>
-        <th class="std_no">No.</th>
-        <th class="std_item_status">Item Status</th>
-        <th class="std_pid">Product ID</th>
-        <th class="std_company">Supplier Name</th>
-        <th class="std_desc">Description (in Detail)</th>
-        <th class="std_eta">ETA</th>
-        <th class="std_qty">Qty</th>
-        <th class="std_um">U/M</th>
-        <th class="std_up">Unit Price</th>
-        <th class="std_total">Total</th>
-        <th class="std_remark">Remark</th>
+        <th>No.</th>
+        <th>Item Status</th>
+        <th>Urgent</th>
+        <th>Product ID</th>
+        <th>Vendor Name</th>
+        <th>Description (in Detail)</th>
+        <th>ETA</th>
+        <th>Qty</th>
+        <th>U/M</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+        <th>Remark</th>
       </tr>
     </thead>
 
@@ -28,21 +30,28 @@
           <% end %>
         <% end %>
       
-        <% if p.urgent == TRUE %>
-          <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-          <% else %>
-            <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-          <% end %>
-        <% else %>
+        <%# if p.urgent == TRUE %>
+          <%# if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+            <!--tr class="<%#= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%#= p.id %>"-->
+          <%# else %>
+            <!--tr class="<%#= cycle("odd_line", "even_line") %> red_urgent" controllerName="purchase_requisition_items" rowsId="<%#= p.id %>"-->
+          <%# end %>
+        <%# else %>
           <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-        <% end %>
+        <%# end %>
             <td></td>
             <td align="center"><%= index + 1 %></td>
             <td align="center"><%= purchase_requisition_item_status(p) %></td>
             <td align="center">
+              <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                NO
+              <% else %>
+                <%= p.urgent? ? "YES" : "NO" %>
+              <% end %>
+            </td>
+            <td align="center">
               <% if p.product_id? %>
-                <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
                   <%= render '/product_categories/join_product_category', :pc => p %>
                 <% end %>
               <% end %>
@@ -60,7 +69,7 @@
                 <% end %>
               <% end %>
             </td>
-            <td><%= simple_format(p.description) %></td>
+            <td><%= p.description %></td>
             <td align="center">
               <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
                 <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
@@ -95,27 +104,14 @@
     </tbody>
   </table>
 
-  <div align="right" style="margin-right: 10%;"><b>Sub-Total: </b><%= two_precision(@arr.sum) %></div>
+  <div style="float: right;"><b>Sub-Total: </b><%= two_precision(@arr.sum) %></div>
 
 <% end %>
 
-<%# unless action_name == "kiv" %>
-  <%#*<table width="100%">%>
-    <%#*<tfoot>%>
-      <%#*<tr class="footer_line">%>
-          <%#*<th class="std_no"></th>%>
-          <%#*<th class="std_item_status"></th>%>
-          <%#*<th class="std_pid"></th>%>
-          <%#*<th class="std_company"></th>%>
-          <%#*<th class="std_desc"></th>%>
-          <%#*<th class="std_eta"></th>%>
-          <%#*<th class="std_qty"></th>%>
-          <%#*<th class="std_um"></th>%>
-          <%#*<th class="std_up">Sub-Total</th>%>
-          <!--th class="std_total" align="right"><%#= two_precision(arr.sum) %></th-->
-          <%#*<th class="std_remark"></th>%>
-          <%#*<th width="17"></th>%>
-      <%#*</tr>%>
-    <%#*</tfoot>%>
-  <%#*</table>%>
-<%# end %>
+<div class="pr_check_and_submit">
+  <% if action_name == "edit" %>
+    <%= render "signature_flow_with_button" %>   
+  <% else %>
+    <%= render "signature_flow_without_button" %>   
+  <% end %>
+</div>

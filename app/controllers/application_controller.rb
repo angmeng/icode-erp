@@ -24,8 +24,13 @@ class ApplicationController < ActionController::Base
 #  current_member
 #
 #  member_session
-
   
+  helper_method :version
+  helper_method :company
+  helper_method :user_is_admin?
+  helper_method :director_data
+  helper_method :users
+  helper_method :departments
   helper_method :payment_type
   helper_method :trade_term
   helper_method :type_of_sale
@@ -51,38 +56,31 @@ class ApplicationController < ActionController::Base
   helper_method :perihal_barang_both
   
   
-  
-  helper_method :version
   def version
-    "Version 0.2.6"
+    "Version 0.2.7"
   end
   
-  helper_method :company
+  
   def company
     @company ||= CompanyProfile.first
   end
   
-#  helper_method :user_is_director?
-#  def user_is_director?
-#    current_user.level == User::LEVEL_FIVE
-#  end
   
-  helper_method :user_is_admin?
   def user_is_admin?
     current_user.admin == true
   end
   
-  helper_method :director_data
+  
   def director_data
     @director_data ||= User.find_by_admin(true)
   end
   
-  helper_method :users
+  
   def users
     @users ||= User.users_active
   end
   
-  helper_method :departments
+  
   def departments
     @departments ||= Department.departments_active
   end
@@ -130,6 +128,7 @@ class ApplicationController < ActionController::Base
   #vendor only, including in Purchase Order
   def trade_company_vendor 
     @trade_company_vendor ||= TradeCompany.ordered_with_vendor_name
+#    @trade_company_vendor ||= TradeCompany.vendor_with_code_and_selection_name
   end
   
   def trade_company_vendor_with_code        #only vendor comboboxes

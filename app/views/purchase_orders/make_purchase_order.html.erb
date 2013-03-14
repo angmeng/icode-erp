@@ -1,15 +1,12 @@
-<div id="popup_container">
+
   <%= render "linking" %> 
 
   <div class="title_head"><strong style="color:white;">PO ENTRY</strong></div>
 
-  <div class="fix_h450">
     <% if @pr_items.present? %>
       <%= render "/purchase_orders/existing_approved_from_purchase_requisition_items", :pending => @pr_items %>
     <% else %>
-      No Record Found.
+      <div class="linking_content">No Record Found</div>
     <% end %>
-  </div>
 
   <%= render "action_purchase_order_make_po" %>
-</div>

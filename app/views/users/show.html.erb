@@ -1,14 +1,14 @@
 <div class="title_head"><strong style="color:white;">SHOW USER</strong></div>
 
-<div class="popup_content">
-  <div id="user_strip">
-    <ul>
-        <li class="k-state-active">User Account</li>
-        <li>Inventory Management System</li>
-        <li>Inventory Management System II- Product</li>
-    </ul>
+<div id="user_strip">
+  <ul>
+      <li class="k-state-active">User Account</li>
+      <li>Inventory Management System</li>
+      <li>Inventory Management System II- Product</li>
+  </ul>
 
-    <div>
+  <div>
+    <div id="name_entry">
       <table>
         <tr>
           <td width="150"><b>Name</b></td>
@@ -54,11 +54,11 @@
         <% end %>
       </table>
     </div>
-
-    <div><%= render "management_checkbox" %></div>
-    <div><%= render "management_product" %></div>
-
   </div>
+
+  <div><%= render "management_checkbox" %></div>
+  <div><%= render "management_product" %></div>
+
 </div>
 
 <div class="icon_tag">

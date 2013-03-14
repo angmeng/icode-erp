@@ -1,5 +1,5 @@
-<div id="popup_container">
-  <%= render "linking" %>
+
+  <%#= render "linking" %>
   
   <div class="title_head">
     <strong style="color:white;">NEW RECEIVE NOTE</strong>
@@ -11,7 +11,7 @@
     <% if @po_no.present? %>
       <%= render 'form', :f => f %>
     <% else %>
-      No Record Found.
+      <div class="popup_content">Not Record Found</div>
     <% end %>
 
     <div class="icon_tag">
@@ -20,7 +20,6 @@
       <% else %>
         <%= not_link_save %>
       <% end %>
-      <%= link_home_button  %>
+      <%= link_close_button  %>
     </div>
   <% end %>
-</div>

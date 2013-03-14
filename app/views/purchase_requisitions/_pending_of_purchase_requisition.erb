@@ -1,26 +1,27 @@
 <% if pending.present? %>
-  <table id="grid_h295" class="zebraLight">
+  <table id="jgrid_new_pr" class="zebraLight">
       <thead>
         <tr class="header_line">
           <th class="check_highlight"></th>
-          <th class="std_no">No.</th>
-          <th class="std_check" title="Check & Submit">C & S</th>
-          <th class="std_item_status">Item Status</th>
-          <th class="std_pid">Product ID</th>
-          <th class="std_company">Vendor Name</th>
-          <th class="std_desc">Description(in Detail)</th>
-          <th class="std_eta">ETA</th>
-          <th class="std_qty">QTY</th>
-          <th class="std_um">U/M</th>
-          <th class="std_up">Unit Price</th>
-          <th class="std_total">Total</th>
-          <th class="std_remark">Remark</th>
+          <th>No.</th>
+          <th width="50" title="Check & Submit">C & S</th>
+          <th>Status</th>
+          <th>Urgent</th>
+          <th>Product ID</th>
+          <th>Vendor Name</th>
+          <th>Description(in Detail)</th>
+          <th>ETA</th>
+          <th>QTY</th>
+          <th>U/M</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+          <th>Remark</th>
         </tr>
       </thead>
 
       <tbody>
 
-        <% @arr = [] %>
+        <%# @arr = [] %>
         
         <% pending.each_with_index do |p, index| %>
         
@@ -30,23 +31,30 @@
             <% end %>
           <% end %>
         
-          <% if p.urgent == TRUE %>
-            <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-            <% else %>
-              <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-            <% end %>
-          <% else %>
+          <%# if p.urgent == TRUE %>
+            <%# if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+              <!--tr class="<%#= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%#= p.id %>"-->
+            <%# else %>
+              <!--tr class="<%#= cycle("odd_line", "even_line") %> red_urgent" controllerName="purchase_requisition_items" rowsId="<%#= p.id %>"-->
+            <%# end %>
+          <%# else %>
             <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-          <% end %>
+          <%# end %>
               <td></td>
               <td align="center"><%= index + 1 %></td>
               <td align="center"><%= check_box_tag "select_items[]", p.id %></td>
               <td align="center"><%= purchase_requisition_item_status(p) %></td>
+              <td align="center">
+                <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                  NO
+                <% else %>
+                  <%= p.urgent? ? "YES" : "NO" %>
+                <% end %>
+              </td>
               <td align="center">            
                 <% if p.product_id? %>
                   <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-                    <%= render "/product_categories/join_product_category", :pc => p %>
+                    <%= p.product.product_combobox.product_code rescue '-' %>
                   <% end %>
                 <% end %>
               </td>
@@ -63,7 +71,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td><%= simple_format(p.description) %></td>
+              <td><%= p.description %></td>
               <td align="center">
                 <% if p.eta < Date.today %>
                   <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
@@ -79,7 +87,7 @@
                 <% if source.present? %>
                   <td align="right"><%= four_precision(source.unit_price) %></td>
                   <td align="right"><%= iproduct(p.quantity, source.unit_price) %></td>
-                  <% @arr << p.quantity * source.unit_price %>
+                  <%# @arr << p.quantity * source.unit_price %>
                 <% end %>
               <% end %>
                         
@@ -95,25 +103,3 @@
       </tbody>
   </table>
 <% end %>
-
-<%#*</div>%>
-
-<!--table class="white-line-table">
-    <tfoot>
-      <tr class="footer_line">
-          <th class="std_no"></th>
-          <th class="std_check"></th>
-          <th class="std_item_status"></th>
-          <th class="std_pid"></th>
-          <th class="std_company"></th>
-          <th class="std_desc"></th>
-          <th class="std_eta"></th>
-          <th class="std_qty"></th>
-          <th class="std_um"></th>
-          <th class="std_up">Sub-Total</th>
-          <th class="std_total" align="right"><%#= two_precision(@arr.sum) %></th>
-          <th class="std_remark"></th>
-          <th width="17"></th>
-      </tr>
-    </tfoot>
-</table-->

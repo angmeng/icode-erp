@@ -2,7 +2,7 @@ class ReceiveNotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :implement_product_id
   before_filter :inventory_management_system, :except => [:show]
-#  layout "sheetbox"
+  layout "sheetbox", :only => [:new, :edit]
 
   def index
     @search = ReceiveNote.search(params[:search])

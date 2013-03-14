@@ -1,7 +1,6 @@
 <div id="linking">
   <table>
       <tr>
-
         <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
           <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
             <td><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "k-button" %></td>
@@ -25,7 +24,6 @@
             <td>PR Transactions & Histories</td>
           <% end %>
         <% end %>
-
       </tr>
   </table>
 </div>

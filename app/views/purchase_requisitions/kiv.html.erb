@@ -1,13 +1,13 @@
-<div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">LISTING PURCHASE REQUISITIONS - KIV</strong></div>
-
-  <div class="fix_1600x900_h450">
-    <% if @purchase_requisitions.present? %>
-      <%= render "/purchase_requisitions/summary_from_purchase_requisition", :summary => @purchase_requisitions %>
-    <% else %>
-      Not Record Found.
-    <% end %>
-  </div>
-
-  <%= render "action_purchase_requisition_kiv" %> 
+<div class="title_head">
+  <strong style="color:white;">LISTING PURCHASE REQUISITIONS - KIV</strong>
+  <%= search_button %>
 </div>
+<div><%= render "search_purchase_requisition_kiv" %></div>
+
+<% if @purchase_requisitions.present? %>
+  <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
+
+<%= render "action_purchase_requisition_kiv" %>

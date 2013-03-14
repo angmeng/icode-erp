@@ -1,58 +1,74 @@
 <%= form_for(@price_control) do |f| %>
-  <div class="fix_h450">
-    <table>
-      <tr>
-        <% if action_name == "edit" %>
-          <td width="150"><b>P/P No#</b></td>
-          <td><%= @price_control.pp_no rescue '-' %></td>
-        <% else %>
-          <td width="150"><b>Current P/P No.</b></td>
-          <td><%= company.sn_product_price_no + 1 %></td>
-        <% end %>
-
-        <td width="50"></td>
-
-        <td><b>P/P Date *</b></td>
-
-        <td>
-          <% if action_name == "edit" %>
-            <%= f.text_field :pp_date , :value => @price_control.pp_date.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Select P/P Date"  %>
+  <div id="valid_price_control">
+    <div class="popup_content">
+      <table>
+        <tr>
+          <% if  @price_control.pp_no.present? %>
+            <td width="150"><b>P/P No # </b></td>
+            <td><%= @price_control.pp_no rescue '-' %></td>
           <% else %>
-            <%= f.text_field :pp_date , :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" ,  "required validationMessage" => "Please Select P/P Date"  %>
+            <td width="150"><b>Current P/P No.</b></td>
+            <td>
+              <%= company.sn_product_price_no + 1 %>
+              <%= f.hidden_field :pp_no, :value => company.sn_product_price_no + 1 %>
+            </td>
           <% end %>
-        </td>
-      </tr>
 
-      <tr>
-        <td><b>Trade Company *</b></td>
-        <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true , "required validationMessage" => "Please Select trade company"}, { :class => "kendo_combobox_multiple price_control_trade_company_id", :style => "width: 400px;" }  %></td>
-        <%#*:id => "kendo_combobox",%> 
-      </tr>
+          <td width="50"></td>
 
-      <tr>
-        <td><b>Reference *</b></td>
-        <td><%= f.text_field :reference, :class => "k-textbox", "required validationMessage" => "Please Enter Reference" %></td>
-      </tr>
+          <td><b>P/P Date *</b></td>
+          <td>
+            <% if @price_control.pp_date.present? %>
+              <%= f.text_field :pp_date , :value => @price_control.pp_date.strftime("%d-%m-%Y"), :class => "mkendo_date" ,  "required validationMessage" => "Please Select P/P Date" %>
+            <% else %>
+              <%= f.text_field :pp_date , :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date" ,  "required validationMessage" => "Please Select P/P Date" %>
+            <% end %>
+            <span class="k-invalid-msg" data-for="price_control[pp_date]"></span>
+          </td>
+        </tr>
 
-      <tr>
-        <td><b>Currency *</b></td>
-        <td><%= f.select :currency_id, options_from_collection_for_select(currency, :id, :name, @price_control.currency_id), { :include_blank => true }, { :style => "width: 100px;"}%></td>
-        <td></td>
-        <td><b>Updated By</b></td>
-        <td>
-          <%= current_user.name %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-        </td>
-      </tr>
-    </table>
+        <tr>
+          <td><b>Trade Company *</b></td>
+          <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true } , { :class => "mkendo_combobox price_control_trade_company_id", "required validationMessage" => "Please Select Trade Company", :style => "width: 400px;" }  %></td>
+          <td></td>
+          <td><b>Reference</b></td>
+          <td><%= f.text_field :reference, :class => "k-textbox" %></td>
+        </tr>
+
+        <tr>
+          <td><b>Currency *</b></td>
+          <td>
+            <%= f.select :currency_id, options_from_collection_for_select(currency, :id, :name, @price_control.currency_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" }%>
+            <span class="k-invalid-msg" data-for="price_control[currency_id]"></span>
+          </td>
+          <td></td>
+          <td><b>Updated By</b></td>
+          <td>
+            <%= current_user.name %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+          </td>
+        </tr>
+      </table>
     
-    <hr/>
+      <hr/>
     
-    <%# if  %>
-    <%= render "new_price_control_items", :price_control => @price_control %>
-    
+      <%= render "new_price_control_items", :price_control => @price_control %>
+    </div>
   </div>
 
   <%= render 'action_price_control_new' %>
+<% end %>
 
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var validator = $("#valid_price_control").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
 <% end %>

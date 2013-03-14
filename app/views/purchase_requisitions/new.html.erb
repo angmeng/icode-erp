@@ -1,44 +1,46 @@
 <%= render "linking" %>
-
-<div id="container">
   
-  <div class="title_head"><strong style="color:white;">NEW PURCHASE REQUISITION APPLICATION</strong></div>
+<div class="title_head"><strong style="color:white;">NEW PURCHASE REQUISITION APPLICATION</strong></div>
 
-  <div class="fix_h450">
-    <table width="100%" class="header_content">
-      <tr>
-        <td><h3>Pending PR Items</h3></td>
-        <td align="right">
-          <table>
-            <tr>
-              <td><b>Current PR No. : </b></td>
-              <td align="right"><%= company.sn_purchase_req_no + 1 %></td>
-            </tr>
-            <tr>
-              <td><b>PR Date : </b></td>
-              <td><%= Date.today.strftime("%d-%m-%Y") %></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+<table width="100%" class="header_content">
+  <tr>
+    <td><h3>Pending PR Items</h3></td>
+    <td align="right">
+      <table>
+        <tr>
+          <td><b>Current PR No. : </b></td>
+          <td align="right"><%= company.sn_purchase_req_no + 1 %></td>
+        </tr>
+        <tr>
+          <td><b>PR Date : </b></td>
+          <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
 
-    <% if @pending.present? %>
-      <%= render 'form' %>
-    <% end %>
-
-    <div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:400px;height:250px;'>
-      <div align="center">
-        <h3>New Item Request?</h3>
-        <br/>
-        <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
-        <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
-      </div>
-    </div>
-  </div>
-
-  <%= render "action_purchase_requisition_new" %>
+<div class="pr_content">
+  <% if @pending.present? %>
+    <%= render 'form' %>
+  <% else %>
+    <div style="padding: 0 5px;">No Record Found</div>
+  <% end %>
 </div>
+
+<div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:400px;height:250px;'>
+  <div align="center">
+    <h3>New Item Request?</h3>
+    <br/>
+    <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
+    <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
+  </div>
+</div>
+
+<%= render "action_purchase_requisition_new" %>
+
+<%= render "js_purchase_requisition" %>
+
 
 
 

@@ -1,85 +1,88 @@
 $(document).ready(function() {
 
+
       
     $('#checkall:checkbox').change(function () {
         if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
         else $('input:checkbox').removeAttr('checked');
     });
 
-    
-    $("#grid_userTable_h490").chromatable({
-        width: "1200px",
-        height: "490px",
-        scrolling: "yes"
-    });
 
-    $("#grid_h295").chromatable({
-        width: "1340px",
-        height: "295px",
-        scrolling: "yes"
-    });	
+    $("#menu").kendoMenu({ openOnClick: true });
+
+//    $("#grid_userTable_h490").chromatable({
+//        width: "1200px",
+//        height: "490px",
+//        scrolling: "yes"
+//    });
+//
+//    $("#grid_h295").chromatable({
+//        width: "1340px",
+//        height: "295px",
+//        scrolling: "yes"
+//    });	
+//    
+//    $("#delivery_order_h200").chromatable({
+//        width: "2000px",
+//        height: "200px",
+//        scrolling: "yes"
+//    });	
+//    
+//    $("#grid_h320").chromatable({
+//        width: "1340px",
+//        height: "320px",
+//        scrolling: "yes"
+//    });	
+//    
+//    $("#grid_h370").chromatable({
+//        width: "1340px",
+//        height: "370px",
+//        scrolling: "yes"
+//    });	
+//    
+//    $("#grid_h390").chromatable({
+//        width: "1340px",
+//        height: "390px",
+//        scrolling: "yes"
+//    });	
     
-    $("#delivery_order_h200").chromatable({
-        width: "2000px",
-        height: "200px",
-        scrolling: "yes"
-    });	
+//    $("#grid_h445").chromatable({
+////        width: "auto",  // It is working fine!!
+//        width: "1400px",
+//        height: "445px",
+//        scrolling: "yes"
+//    });	
     
-    $("#grid_h320").chromatable({
-        width: "1340px",
-        height: "320px",
-        scrolling: "yes"
-    });	
+//    $("#grid_h490").chromatable({
+//        width: "1410px",
+//        height: "490px",
+//        scrolling: "yes"
+//    });	
     
-    $("#grid_h370").chromatable({
-        width: "1340px",
-        height: "370px",
-        scrolling: "yes"
-    });	
+//    $("#grid_h495").chromatable({
+//        width: "1330px",
+//        height: "495px",
+//        scrolling: "yes"
+//    });
     
-    $("#grid_h390").chromatable({
-        width: "1340px",
-        height: "390px",
-        scrolling: "yes"
-    });	
+//    $("#grid_h400").chromatable({
+//        width: "1400px",
+//        height: "400px",
+//        scrolling: "yes"
+//    });
     
-    $("#grid_h445").chromatable({
-//        width: "auto",  // It is working fine!!
-        width: "1400px",
-        height: "445px",
-        scrolling: "yes"
-    });	
-    
-    $("#grid_h490").chromatable({
-        width: "1410px",
-        height: "490px",
-        scrolling: "yes"
-    });	
-    
-    $("#grid_h495").chromatable({
-        width: "1330px",
-        height: "495px",
-        scrolling: "yes"
-    });
-    
-    $("#grid_h400").chromatable({
-        width: "1400px",
-        height: "400px",
-        scrolling: "yes"
-    });
-    
-    $("#grid_h430").chromatable({
-        width: "1330px",
-        height: "430px",
-        scrolling: "yes"
-    });
+//    $("#grid_h430").chromatable({
+//        width: "1330px",
+//        height: "430px",
+//        scrolling: "yes"
+//    });
         
-
-    $("#autowidth_h400").chromatable({
-        width: "1510px",
-        height: "400px",
-        scrolling: "yes"
-    });
+//
+//    $("#autowidth_h400").chromatable({
+//        width: "1510px",
+//        height: "400px",
+//        scrolling: "yes"
+//    });
     
 //    $('input[class^="company_sales_"]').numberbox({min:0,  max: 999999});
 //    $('input[class^="two_digit_"]').numberbox({min:0,  max: 99});
@@ -110,15 +113,15 @@ $(document).ready(function() {
 //        }
 //    }); 
 
-    $("#menu").kendoMenu({ openOnClick: true });
-    $("#treeview").kendoTreeView();
+    
+    
     $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
     $("#panelbar").kendoPanelBar({expandMode: "single"});
     $("#sales_order_trade_company_id").width(400);
     $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
     
     $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
-    $('input[class^="kendo_date_multiple"]').kendoDatePicker({ format: "dd-MM-yyyy" });
+//    $('input[class^="kendo_date_multiple"]').kendoDatePicker({ format: "dd-MM-yyyy" });
     $('input[class^="mkendo_date"]').kendoDatePicker({ format: "dd-MM-yyyy" });
     $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({ format: "dd-MM-yyyy" }); 
     $("#kendo_combobox, #kendo_combobox_two, .mkendo_combobox").kendoComboBox({filter: "contains"});
@@ -191,6 +194,7 @@ $(document).ready(function() {
     });
     
     $(".iframe_800x600").fancybox({
+            padding     : 5,
             maxWidth	: 800,
             maxHeight	: 600,
             fitToView	: false,
@@ -232,6 +236,7 @@ $(document).ready(function() {
     });
     
     $(".show_without_refresh_page_800x450").fancybox({
+            padding     : 5,
             maxWidth	: 800,
             maxHeight	: 450,
             fitToView	: false,
@@ -244,6 +249,7 @@ $(document).ready(function() {
     });
     
     $(".show_without_refresh_page_800x600").fancybox({
+            padding     : 5,
             maxWidth	: 800,
             maxHeight	: 600,
             fitToView	: false,
@@ -256,6 +262,7 @@ $(document).ready(function() {
     });
     
     $(".show_without_refresh_page_1024x800").fancybox({
+            padding     : 5,
             maxWidth	: 1024,
             maxHeight	: 800,
             fitToView	: false,
@@ -388,7 +395,7 @@ $(document).ready(function() {
             var link_show      = "/" + controller_Name + "/" + row_id;
             var link_edit      = "/" + controller_Name + "/" + row_id + "/edit";
             var link_kiv       = "/" + controller_Name + "/" + row_id;
-            var link_moving_kiv = "/" + controller_Name + "/" + row_id + "/moving_kiv";            
+//            var link_moving_kiv = "/" + controller_Name + "/" + row_id + "/moving_kiv";            
             var link_printable = "/" + controller_Name + "/" + row_id + '.pdf';
             var link_printable_qr = "/" + controller_Name + "/" + row_id + '/printable.pdf';
             var link_printable_cs = "/" + controller_Name + "/" + row_id + '/printable.pdf';
@@ -414,7 +421,7 @@ $(document).ready(function() {
             html_show = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_show  + "><b>Show</b></a>"
             html_edit = "<a class='k-button " + edit_class + "' data-fancybox-type='iframe' href=" + link_edit + "><b>Edit</b></a>"
             html_kiv = "<a rel='nofollow' class='k-button' data-method='delete' data-confirm='Are you sure move to KIV?' href=" + link_kiv + "><b>Drop to KIV</b></a>"
-            html_moving_kiv = "<a data-confirm='Are you sure move to KIV?' class='k-button' href=" + link_moving_kiv + "><b>Drop to KIV</b></a>"
+//            html_moving_kiv = "<a data-confirm='Are you sure move to KIV?' class='k-button' href=" + link_moving_kiv + "><b>Drop to KIV</b></a>"
             html_pdf = "<a target='_blank' class='k-button' href=" + link_printable + "><b>Printer</b></a>"
             html_pdf_qr = "<a target='_blank' class='k-button' href=" + link_printable_qr + "><b>Printer</b></a>"
             html_pdf_cs = "<a target='_blank' class='k-button' href=" + link_printable_cs + "><b>Printer</b></a>"
@@ -439,7 +446,7 @@ $(document).ready(function() {
             $("#on_show").html(html_show);
             $("#on_edit").html(html_edit);
             $("#on_kiv").html(html_kiv);
-            $("#on_move_kiv").html(html_moving_kiv);
+//            $("#on_move_kiv").html(html_moving_kiv);
             $("#on_printable").html(html_pdf);
             $("#on_printable_qr").html(html_pdf_qr);
             $("#on_printable_cs").html(html_pdf_cs);
@@ -1433,15 +1440,11 @@ $(document).ready(function() {
         // prevent button redirecting to new page
         return false;
     });
-    
-    
-    
-    
+   
 });  
 
-
-
 $(function() {
+        
         $('input, textarea').placeholder();
     
 	$("#menu a").each(function() {
@@ -2106,6 +2109,7 @@ function datarow_id_and_name(tr){
 }
 
 function addTableRow_for_price_control(table){
+    
     var $tr = $(table).find("tbody tr:last").clone(false);
     
     datarow_id_and_name($tr);
@@ -2129,6 +2133,10 @@ function addTableRow_for_price_control(table){
     });
     
     $(table).find("tbody tr:last").after($tr);
+    
+    $('select[class^="mkendo_combobox"]').kendoComboBox({filter: "contains"});
+    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
+    $('input[class^="mkendo_date"]').kendoDatePicker({ format: "dd-MM-yyyy" });
 };
 
 function addTableRow_for_sales_order(table)

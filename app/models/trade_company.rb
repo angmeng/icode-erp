@@ -166,6 +166,12 @@ class TradeCompany < ActiveRecord::Base
     return mix
   end
   
+  def self.vendor_with_code_and_selection_name
+    combobox = self.ordered_with_vendor_name
+    mix = combobox.collect { |pcombo| ["[#{pcombo.code}] #{pcombo.name}", pcombo.name] }
+    return mix
+  end
+  
   def self.customer_with_code
     combobox = self.ordered_with_customer_name
     mix = combobox.collect { |pcombo| ["[#{pcombo.code}] #{pcombo.name}", pcombo.id] }

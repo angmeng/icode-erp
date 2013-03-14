@@ -692,6 +692,11 @@ module ApplicationHelper
   def search_button
     link_to 'Search', "#", :class => "search_link"
   end
+  
+  def search_button_with_f(f)
+    f.submit 'Search', :class => "k-button", :style => "float: right;"
+  end
+  
     
   def popup_product_id(product)
     link_to(product_path(product.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do

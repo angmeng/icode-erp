@@ -1,7 +1,8 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="jgrid_linking" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
+      <th>Urgent</th>
       <th>PR No.</th>
       <th>Product ID</th>
       <th>Proposed Vendor</th>
@@ -23,16 +24,23 @@
           <% end %>
         <% end %>
 
-        <% if proposed.urgent == TRUE %>
-          <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-          <% else %>
-            <tr class="<%= cycle("odd_line", "even_line") %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-          <% end %>
-        <% else %>
+        <%# if proposed.urgent == TRUE %>
+          <%# if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+            <!--tr class="<%#= cycle("odd_line", "even_line") %>" controllerName="<%#= controller_name %>" rowsId="<%#= proposed.id %>"-->
+          <%# else %>
+            <!--tr class="<%#= cycle("odd_line", "even_line") %> red_urgent" controllerName="<%#= controller_name %>" rowsId="<%#= proposed.id %>"-->
+          <%# end %>
+        <%# else %>
           <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-        <% end %>
+        <%# end %>
           <td></td>
+                        <td align="center">
+              <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                NO
+              <% else %>
+                <%= proposed.urgent? ? "YES" : "NO" %>
+              <% end %>
+            </td>
           <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
           <!--td align="center"><%#= render "/product_categories/join_product_category", :pc => proposed %></td>
           <td><%#= @sources.company_name if @sources.present? %></td-->

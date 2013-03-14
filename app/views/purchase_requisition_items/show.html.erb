@@ -1,134 +1,132 @@
-<div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">SHOW PURCHASE REQUISITION ITEM DETAIL</strong></div>
+<div class="title_head"><strong style="color:white;">SHOW PURCHASE REQUISITION ITEM DETAIL</strong></div>
 
-  <div class="fix_800x450">
-    <% if @purchase_requisition_item.urgent == TRUE %>
-      <div style="float:right"><%= image_tag("urgent_time.png", :alt => "Urgent", :title => "Urgent", :class => 'cube35' ) %></div>  
-    <% end %>
+<div class="popup_content">
+  <% if @purchase_requisition_item.urgent == TRUE %>
+    <div style="float:right"><%= image_tag("urgent_time.png", :alt => "Urgent", :title => "Urgent", :class => 'cube35' ) %></div>  
+  <% end %>
 
-    <% if @purchase_requisition_item.maintenance == FALSE %>
+  <% if @purchase_requisition_item.maintenance == FALSE %>
 
-        <table>
-          <% if @purchase_requisition_item.product_id.present? %>
-            <tr>
-              <td><b>Product ID</b></td>
-              <td><%= render "/product_categories/join_product_category", :pc => @purchase_requisition_item %></td>
-            </tr>
-          <% end %>
-
-          <% if @select_vendor.present? %>
-            <tr>
-              <td><b>Vendor Name</b></td>
-              <td><%= @select_vendor.company_name rescue '-' %></td>
-            </tr> 
-          <% end %>
-
-          <tr width="170">
-            <td style="vertical-align: top;"><b>Description</b></td>
-            <td><%= raw(@purchase_requisition_item.description.gsub(/\n/, '<br/>')) %></td>
-          </tr>
-
+      <table>
+        <% if @purchase_requisition_item.product_id.present? %>
           <tr>
-            <td><b>Quantity</b></td>
-            <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+            <td><b>Product ID</b></td>
+            <td><%= @purchase_requisition_item.product.product_combobox.product_code rescue '-' %></td>
           </tr>
+        <% end %>
 
+        <% if @select_vendor.present? %>
           <tr>
-            <td>
-              <% if @purchase_requisition_item.product_id.present? %>
-                <b>Unit Price</b>
-              <% else %>
-                <b>Estimated Price</b>
-              <% end %>
-            </td>
-            <td><%= four_precision(@select_vendor.unit_price) %></td>
-          </tr>
+            <td><b>Vendor Name</b></td>
+            <td><%= @select_vendor.company_name rescue '-' %></td>
+          </tr> 
+        <% end %>
 
-          <tr>
-            <td width="200">
-              <% if @purchase_requisition_item.product_id.present? %>
-                <b>Total Price</b>
-              <% else %>
-                <b>Estimated Total Price</b>
-              <% end %>
-            </td>
-            <td><%= iproduct(@purchase_requisition_item.quantity, @select_vendor.unit_price) %></td>
-          </tr>
+        <tr width="170">
+          <td style="vertical-align: top;"><b>Description</b></td>
+          <td><%= raw(@purchase_requisition_item.description.gsub(/\n/, '<br/>')) %></td>
+        </tr>
 
-          <tr>
-            <td><b>ETA</b></td>
-            <td>
-              <% if @purchase_requisition_item.eta < Date.today %>
-                <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
-                <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
-              <% end %>
-            </td>
-          </tr>
+        <tr>
+          <td><b>Quantity</b></td>
+          <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+        </tr>
 
-          <tr>
-            <td><b>Remark</b></td>
-            <td>
-              <% unless @purchase_requisition_item.remark.blank? %>
-                <%= @purchase_requisition_item.remark rescue '-' %>
-              <% else %>
-                -
-              <% end %>
-            </td>
-          </tr>
-          
-          <tr>
-            <td><b>Regular Vendor</b></td>
-            <td><%= @purchase_requisition_item.is_skip_to_po? ? "YES" : "NO" %></td>
-          </tr>
+        <tr>
+          <td>
+            <% if @purchase_requisition_item.product_id.present? %>
+              <b>Unit Price</b>
+            <% else %>
+              <b>Estimated Price</b>
+            <% end %>
+          </td>
+          <td><%= four_precision(@select_vendor.unit_price) %></td>
+        </tr>
 
-        </table>
+        <tr>
+          <td width="200">
+            <% if @purchase_requisition_item.product_id.present? %>
+              <b>Total Price</b>
+            <% else %>
+              <b>Estimated Total Price</b>
+            <% end %>
+          </td>
+          <td><%= iproduct(@purchase_requisition_item.quantity, @select_vendor.unit_price) %></td>
+        </tr>
 
-    <% else %>
+        <tr>
+          <td><b>ETA</b></td>
+          <td>
+            <% if @purchase_requisition_item.eta < Date.today %>
+              <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+            <% else %>
+              <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
+            <% end %>
+          </td>
+        </tr>
 
-        <table> 
-          <tr>
-            <td width="200"><b>Description</b></td>
-            <td><%= raw(@purchase_requisition_item.description.gsub(/\n/, '<br/>')) %></td>
-          </tr>
-          
-          <tr>
-            <td><b>Quantity</b></td>
-            <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>  
-          </tr>
-          
-          <tr>
-            <td><b>ETA</b></td>
-            <td>
-              <% if @purchase_requisition_item.eta < Date.today %>
-                <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
-                <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
-              <% end %>
-            </td>
-          </tr>
-          
-          <tr>
-            <td><b>Remark</b></td>
-            <td>
-              <% unless @purchase_requisition_item.remark.blank? %>
-                <%= @purchase_requisition_item.remark rescue '-' %>
-              <% else %>
-                -
-              <% end %>
-            </td>
-          </tr>
-          
-          <tr>
-            <td><b>Regular Vendor</b></td>
-            <td><%= @purchase_requisition_item.is_skip_to_po? ? "YES" : "NO" %></td>
-          </tr>
-        </table>
+        <tr>
+          <td><b>Remark</b></td>
+          <td>
+            <% unless @purchase_requisition_item.remark.blank? %>
+              <%= @purchase_requisition_item.remark rescue '-' %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+        </tr>
 
-    <% end %>
-  </div>
+        <tr>
+          <td><b>Regular Vendor</b></td>
+          <td><%= @purchase_requisition_item.is_skip_to_po? ? "YES" : "NO" %></td>
+        </tr>
 
-  <div class="icon_tag">
-    <%= link_close_button  %>
-  </div>
+      </table>
+
+  <% else %>
+
+      <table> 
+        <tr>
+          <td width="200"><b>Description</b></td>
+          <td><%= raw(@purchase_requisition_item.description.gsub(/\n/, '<br/>')) %></td>
+        </tr>
+
+        <tr>
+          <td><b>Quantity</b></td>
+          <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>  
+        </tr>
+
+        <tr>
+          <td><b>ETA</b></td>
+          <td>
+            <% if @purchase_requisition_item.eta < Date.today %>
+              <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+            <% else %>
+              <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Remark</b></td>
+          <td>
+            <% unless @purchase_requisition_item.remark.blank? %>
+              <%= @purchase_requisition_item.remark rescue '-' %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Regular Vendor</b></td>
+          <td><%= @purchase_requisition_item.is_skip_to_po? ? "YES" : "NO" %></td>
+        </tr>
+      </table>
+
+  <% end %>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button  %>
 </div>

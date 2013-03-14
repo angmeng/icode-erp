@@ -18,7 +18,7 @@
           <td>
             <b>C/N Date</b>&nbsp;
             <% if @credit_note.credit_note_date.present? %>
-              <%= f.text_field :credit_note_date, :value => @credit_note.credit_note_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
+              <%= f.text_field :credit_note_date, :value => @credit_note.credit_note_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Credit Note Date" %>
             <% else %>
               <%= f.text_field :credit_note_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Credit Note Date" %>
             <% end %>

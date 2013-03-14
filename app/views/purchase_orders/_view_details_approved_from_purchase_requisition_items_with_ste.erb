@@ -1,7 +1,7 @@
 <% if action_name == "printable" %>
   <table id="grid_h390" class="black-line-table" width="100%">
 <% else %>
-  <table id="grid_h390" class="white-line-table" width="100%">
+  <table id="jgrid">
 <% end %>
     
     <thead>
@@ -74,7 +74,7 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= simple_format(k.description) %></td>
+          <td><%= k.description %></td>
           <td align="center">
             <% if k.status == PurchaseRequisitionItem::RECEIVED_FULL %>
               <%= k.eta.strftime("%d-%m-%Y") rescue '-' %>

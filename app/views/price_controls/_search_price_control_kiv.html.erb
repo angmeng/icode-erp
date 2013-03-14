@@ -1,0 +1,6 @@
+<div class="search_engine">
+  <%= form_for @search, :url => kiv_price_controls_path do |f| %>
+    <%= render "search_engine_form", :f => f %>
+    <%= search_button_with_f(f) %>
+  <% end %>
+</div>

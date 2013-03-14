@@ -60,6 +60,8 @@ class PurchaseRequisition < ActiveRecord::Base
   
   default_scope order("pr_no DESC")
   
+  self.per_page = 50
+  
   def self.search_purchase_requisitions(search)
     search.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
   end
@@ -114,7 +116,7 @@ class PurchaseRequisition < ActiveRecord::Base
   
   def self.uniq_status
     array = []
-    pr = PurchaseRequisition.select('DISTINCT status');
+    pr = PurchaseRequisition.select('DISTINCT status')
     if pr.present?
       pr.each do |prs|
         if prs.status == PurchaseRequisition::LEVEL_ONE
@@ -129,8 +131,10 @@ class PurchaseRequisition < ActiveRecord::Base
           array << ["PO Issued", prs.status]
         elsif prs.status == PurchaseRequisition::SUBMIT_PO
           array << ["Pending PO", prs.status]
+        elsif prs.status == PurchaseRequisition::COMPLETED
+          array << ["Completed", prs.status]
         else
-#          array << ["KIV", prs.status]
+          array << ["KIV", prs.status]
         end
       end
     end

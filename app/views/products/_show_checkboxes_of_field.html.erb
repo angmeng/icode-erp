@@ -4,8 +4,8 @@
         <td width="250" style="vertical-align: top;">
           <%= check_box_tag "prod_field[]", ProductField::DESCRIPTION, field_id.include?(ProductField::DESCRIPTION), :disabled => true %> DESCRIPTION<br/>
           <%= check_box_tag "prod_field[]", ProductField::GSM, field_id.include?(ProductField::GSM), :disabled => true %> GSM<br/>
-          <%= check_box_tag "prod_field[]", ProductField::WIDTH, field_id.include?(ProductField::WIDTH), :disabled => true %> WIDTH<br/>
           <%= check_box_tag "prod_field[]", ProductField::LENGTH, field_id.include?(ProductField::LENGTH), :disabled => true %> LENGTH<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WIDTH, field_id.include?(ProductField::WIDTH), :disabled => true %> WIDTH<br/>
           <%= check_box_tag "prod_field[]", ProductField::HEIGHT, field_id.include?(ProductField::HEIGHT), :disabled => true %> HEIGHT<br/>
           <%= check_box_tag "prod_field[]", ProductField::TICKNESS, field_id.include?(ProductField::TICKNESS), :disabled => true %> TICKNESS<br/>
           <%= check_box_tag "prod_field[]", ProductField::UNIT_MEASURE, field_id.include?(ProductField::UNIT_MEASURE), :disabled => true %> UNIT MEASURE<br/>

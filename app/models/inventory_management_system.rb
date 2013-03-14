@@ -374,6 +374,8 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
   PRODUCT_FINISH_GOOD_COMMON                         = 270
   
+  
+ ########## Price Control ########## 
   PRICE_CONTROL_MENU                                 = 258
   
   PRICE_CONTROL_NEW                                  = 251
@@ -382,7 +384,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   PRICE_CONTROL_LISTING                              = 254
   PRICE_CONTROL_SHOW                                 = 247
-  PRICE_CONTROL_EDIT                                 = 248
+#  PRICE_CONTROL_EDIT                                 = 248
   PRICE_CONTROL_DROP_KIV                             = 249
   PRICE_CONTROL_PRINTABLE                            = 250
   

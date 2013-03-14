@@ -1,28 +1,28 @@
 <div class="icon_tag">
   
-  <% if roles.include?(InventoryManagementSystem::PR_DETAILS_SHOW) %>
-    <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
-  <% else %>
-    <span class="word_opac"><%= not_link_show %></span>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::PR_DETAILS_SHOW) %>
+    <!--span id="on_show" showClass="show_without_refresh_page_800x450"><%#= not_link_show %></span-->
+  <%# else %>
+    <!--span class="word_opac"><%#= not_link_show %></span-->
+  <%# end %>
 
   <%# if roles.include?(InventoryManagementSystem::PR_DETAILS_EDIT) and @purchase_requisition.user.id == current_user.id %>
     <!--span id="on_edit" editClass="iframe_800x600"><%#= not_link_edit %></span-->
   <%# else %>
-    <span class="word_opac"><%= not_link_edit %></span>
+    <!--span class="word_opac"><%#= not_link_edit %></span-->
   <%# end %>
 
   <%# if roles.include?(InventoryManagementSystem::PR_DETAILS_KIV) %>
      <!--span id="on_kiv"><%#= not_link_kiv %></span-->
   <%# else %>
-    <span class="word_opac"><%= not_link_kiv %></span>
+    <!--span class="word_opac"><%#= not_link_kiv %></span-->
   <%# end %>
 
-  <% if roles.include?(InventoryManagementSystem::PR_DETAILS_PRINTABLE) %>
-    <span id="on_printable"><%= not_link_printable %></span>
-  <% else %>
-    <span class="word_opac"><%= not_link_printable %></span>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::PR_DETAILS_PRINTABLE) %>
+    <!--span id="on_printable"><%#= not_link_printable %></span-->
+  <%# else %>
+    <!--span class="word_opac"><%#= not_link_printable %></span-->
+  <%# end %>
   
   <%= link_close_button %>
   
