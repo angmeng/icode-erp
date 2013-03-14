@@ -7,8 +7,7 @@
   
   <table id="jgrid" class="zebraLight normal_table_black">
       <thead>
-      <tr>
-                          
+      <tr>              
         <th>No.</th>
         <th>Product ID</th>
        <!--td>Product Name</td-->
@@ -19,18 +18,19 @@
         <th>Unit Measurement</th>
       </tr>
     </thead>  
-
-    <% @excel_product_report.each_with_index do |pro , index| %>
       <tbody>
+        
+    <% @excel_product_report.each_with_index do |pro , index| %>
+
         <tr>
-          <td><%= index + 1 %></td>
-              <td><%= pro.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
+          <td align="center"><%= index + 1 %></td>
+          <td align="center"><%= pro.product_code rescue '-' %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
                       <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
-          <td><%= pro.product.desc rescue '-'%></td>
-          <td><%= pro.product.part_no rescue '-'%></td>
-          <td><%= pro.product.selling_price rescue '-'%></td>
-          <td><%= pro.product.current_stock rescue '-'%></td>
-          <td><%= pro.product.unit_measurement.code rescue '-'%></td>
+          <td align="center"><%= pro.product.desc rescue '-'%></td>
+          <td align="center"><%= pro.product.part_no rescue '-'%></td>
+          <td align="center"><%= pro.product.selling_price rescue '-'%></td>
+          <td align="center"><%= pro.product.current_stock rescue '-'%></td>
+          <td align="center"><%= pro.product.unit_measurement.code rescue '-'%></td>
         </tr>
         <% end %>
       </tbody>

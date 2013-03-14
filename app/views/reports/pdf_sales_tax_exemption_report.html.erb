@@ -1,10 +1,8 @@
+<div id="container">
 <h2><u>Sales Tax Exemption Report</u></h2>
 
 
-<div>
-
-
-		<% if @detail_sales_tax_exemption_report.present? %>
+	<% if @detail_sales_tax_exemption_report.present? %>
 	<table id="jgrid" class="black-line-table">
 		<thead>
 			<tr class="header_line">
@@ -30,19 +28,12 @@
 			</tr>
 			
 		<% end %>
-		
-
-		
 		</tbody>
 
 		<% else %>
 			no report found
 		<% end %>
 	</table>
-
-
-	
-  	
 
 </div>
 

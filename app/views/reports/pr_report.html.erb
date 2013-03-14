@@ -43,10 +43,8 @@
       </tr>
     </thead>
 
-    
-
-    <% @show_pr_report.each_with_index do |pri , index| %>
         <tbody>
+          <% @show_pr_report.each_with_index do |pri , index| %>
           <tr class="<%= cycle("odd_line", "even_line") %>">
             
             <td align="center"><%= check_box_tag "pr_ids[]" , pri.id %></td>
@@ -56,12 +54,13 @@
             <td align="center"><%= pri.requested_by_date.strftime("%d-%m-%Y") rescue'-' %></td>
             <td align="center"><%= pri.remark rescue '-'%></td>
           </tr>
+           <% end %>
         </tbody>
 
       
         
 
-         <% end %>
+        
     </table>
   
 </div>

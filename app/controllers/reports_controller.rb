@@ -144,7 +144,7 @@ def pdf_product_report
   #render :text => params[:pri_ids]
   if params[:commit] == "PDF Report"
     if params[:pro_ids].present?
-      @product_detail_report = ProductCombobox.find(params[:pro_ids])
+      @detail_product_report = ProductCombobox.find(params[:pro_ids])
       html = render_to_string(:layout => false , :action => "pdf_product_report.html.erb")
         @kit = PDFKit.new(html)
         send_data(@kit.to_pdf ,:filename => "pdf_product_report.pdf" ,
@@ -154,7 +154,7 @@ def pdf_product_report
       #manage_categories(params[:category_id])
     elsif params[:commit] == "Show"
       if params[:pro_ids].present?
-        @product_detail_report = ProductCombobox.find(params[:pro_ids])
+        @detail_product_report = ProductCombobox.find(params[:pro_ids])
         respond_to do |format|
           format.html
         end
@@ -264,9 +264,9 @@ end
 
 
 def pdf_receive_note_report
-  if params[:commit] == "PDF report"
+  if params[:commit] == "PDF Report"
     if params[:rn_ids].present?
-      @detail_receive_note_report = ReceiveNote.find(params[:rn_ids])
+      @detail_receive_note_report = ReceiveNoteItem.find(params[:rn_ids])
       html = render_to_string(:layout => false , :action => "pdf_receive_note_report.html.erb")
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf ,:filename => "pdf_receive_note_report.pdf",
@@ -275,7 +275,7 @@ def pdf_receive_note_report
         end
     elsif params[:commit] == "Show"
       if params[:rn_ids].present?
-        @detail_receive_note_report = ReceiveNote.find(params[:rn_ids])
+        @detail_receive_note_report = ReceiveNoteItem.find(params[:rn_ids])
         respond_to do |format|
           format.html
       end
@@ -365,9 +365,9 @@ end
     #@take_ids = @show_sale_tax_exemption_report.map(&:id)
   end
 
-  def sales_cj5_summary_co
-    @sales_cj5_summary_co = SalesTaxExemption.search(params[:search])
-    @sales_cj5_summary_co_report = @sales_cj5_summary_co.all
+  def sales_cj5_summary_co_report
+    @sales_cj5_summary_co = SalesTaxExemptionBarang.search(params[:search])
+    @show_sales_cj5_summary_co_report = @sales_cj5_summary_co.all
   end
 
   def price_report

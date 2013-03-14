@@ -2,7 +2,7 @@
 <h1>Product ID Report</h1>
 
 
-	 <% if @product_detail_report.present? %>
+	 <% if @detail_product_report.present? %>
 	
 	
 
@@ -21,9 +21,10 @@
 			</tr>
 		</thead>	
 
-	<% @product_detail_report.each_with_index do |pri , index| %>
+	
 	<tbody>
-	<tr>
+	<% @detail_product_report.each_with_index do |pri , index| %>
+  <tr>
 		<td><%= index + 1 %></td>
     <td align="center"><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
                 <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
@@ -33,14 +34,15 @@
 		<td align="center"><%= pri.product.current_stock rescue '-'%></td>
 		<td align="center"><%= pri.product.unit_measurement.code rescue '-'%></td>
 	</tr>
+  <% end %>
 	</tbody>
-	<% end %>
+	
 	 
 	</table>
 
 	<% else %>
 	<h1>no record found</h1>
-		<% end %>
+	<% end %>
 		
 
 </div>

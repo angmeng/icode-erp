@@ -12,20 +12,35 @@
 				<th>Part No.</th>
 			</tr>
 		</head>
+
+			<%# po_no.each do |po| %>
+      		<%# f po.present? %>
+		 		<%# po.purchase_requisition_items.each do |item| %>
+				<%# @poil = PurchaseOrderItemLine.find_by_purchase_requisition_item_id(item.id) %>
+					<%# if item.present? %>
+					<%# @rni = ReceiveNoteItem.find_by_purchase_order_item_line_id_and_receive_note_id(@poil.purchase_requisition_item_id, @poil.receive_note_id) %>	
+
 		<%# arr = [] %>
 		</tbody>
-		
+			
+
 		<tr>
-			<% @detail_receive_note_report.each_with_index do |pri , index| %>
+			<% @detail_receive_note_report.each_with_index do |rni , index| %>
 
 			<td align="center"><%= index + 1 %></td>
-			<td align="center"><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %> / <%= purchse_order_item_line_purchase_requisition_item_product.desc rescue '-' %></td>
+			<td align="center"><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %> / 
+			<%= rni.purchase_order_item_line.purchase_requisition_item.product.desc rescue'-' %>
+
+				<%#= PurchaseOrderItemLine.purchase_requisition_item_product.desc rescue '-' %></td>
 			<%# d.received_note_items.each do |pri| %>
-			<td align="center"><%= pri.received_qty rescue '-'%></td>
-			<%# end %>
-			<td align="center"><%= pri.purchase_order_item_line_purcahse_order.po_no rescue '-' %></td>
-			<td align="center"><%= pri.purchase_order_item_line_purcahse_order.part_no rescue '-' %></td>
+				
+                         
+			<td align="center"><%= rni.received_qty rescue '-'%></td>
+
+			<td align="center"><%= rni.purchase_order_item_line.purcahse_order.po_no rescue '-' %></td>
+			<td align="center"><%= rni.purchase_order_item_line.purchase_requisition_item.product.part_no rescue '-' %></td>
 		</tr>
+				
 		<% end %>
 		</tbody>
 		</table>

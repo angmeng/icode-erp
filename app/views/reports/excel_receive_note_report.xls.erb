@@ -25,8 +25,8 @@
       <%# d.received_note_items.each do |pri| %>
       <td align="center"><%= pri.received_qty rescue '-'%></td>
       <%# end %>
-      <td align="center"><%= pri.purchase_order_item_line_purcahse_order.po_no rescue '-' %></td>
-      <td align="center"><%= pri.purchase_order_item_line_purcahse_order.part_no rescue '-' %></td>
+      <td align="center"><%= pri.purchase_order_item_line.purcahse_order.po_no rescue '-' %></td>
+      <td align="center"><%= pri.purchase_order_item_line.purchase_requisition_item.part_no rescue '-' %></td>
 
 			</tr>
 			

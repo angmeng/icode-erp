@@ -1,0 +1,73 @@
+<div id="popup_container">
+<div class="title_head"><strong style="color:white;">sales cj5 summary co</strong></div>
+
+<div>
+
+	<%= form_for @sales_cj5_summary_co , :url => sales_cj5_summary_co_report_reports_path do |f| %>
+	<table>
+		<tr>
+			<td>Trade Company<td>
+			<td><%#=f.text_field :sales_tax_exemption_trade_company_contains, :size => 12 %></td>
+			<td>List form</td>
+			<td><%#= f.text_field :list_form_gte, :size => 9 %> To 
+				<%#= f.text_field :list_form_lte, :size => 9 %>
+			</td>
+		</tr>
+
+	</table>
+	<% end %>
+</div>
+<hr />
+<input type="checkbox" name="all" id="checkall" />Check All
+	<div class="fix_1600x900_h450">
+		<%= form_tag pdf_sales_cj5_summary_co_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+		<table id="grid_h495">
+			<thead>
+			<tr class="header_line">
+				<th></th>
+				<th>Tarikh</th>
+				<th>Inbosis</th>
+				<th>perihal barang</th>
+				<th>KuantitHarga/Unit</th>
+				<th>Amaunt (RM)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @show_sales_cj5_summary_co_report.each do |p| %>
+			<tr>
+				<td align="center"><%= check_box_tag "po_ids[]" , p.id %></td>
+				<td align="center"><%#= p.sales_tax_exemption %></td>
+				<td align="center"><%#= p. %></td>
+				<td align="center"><%= p.perihal_barang %></td>
+				<td align="center"><%#= p. %></td>
+				<td align="center"><%#= p. %></td>
+				<td align="center"><%#= p. %></td>
+			</tr>
+			<% end %>
+		</tbody>
+		</table>
+		<% end %>
+	</div>
+
+
+
+
+</div>
+
+	<div class="icon_tag" style="float:left">
+		<span><%= not_link_excel %><%#= link_to "Excel", excel_product_report_reports_path( :sales_ids => @take_ids,:format=>"xls") 	, :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
+	</div>
+
+	<div class="icon_tag" style="float:right;">
+
+			<span><%= not_link_show %></span>
+
+			<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+
+			<span><%= not_link_recover %></span>
+
+		   <span><%= not_link_printable %><%#= link_to "PDF report" , pdf_sale_tax_exemption_report_reports_path(:sales_ids => @take_ids, :format => "pdf" ), :method => "get", :class=>"k-button", :target=>"_blank" %></span>
+
+		   <%= link_close_button %>
+	</div>
+
