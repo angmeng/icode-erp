@@ -27,21 +27,22 @@
 				<th></th>
 				<th>Tarikh</th>
 				<th>Inbosis</th>
-				<th>perihal barang</th>
-				<th>KuantitHarga/Unit</th>
+				<th>Perihal Barang</th>
+				<th>Kuantiti</th> 
+				<th>Harga/Unit</th>
 				<th>Amaunt (RM)</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @show_sales_cj5_summary_co_report.each do |p| %>
-			<tr>
+			<tr class="<%= cycle("odd_line", "even_line") %>">
 				<td align="center"><%= check_box_tag "po_ids[]" , p.id %></td>
 				<td align="center"><%#= p.sales_tax_exemption %></td>
 				<td align="center"><%#= p. %></td>
 				<td align="center"><%= p.perihal_barang %></td>
 				<td align="center"><%#= p. %></td>
 				<td align="center"><%#= p. %></td>
-				<td align="center"><%#= p. %></td>
+				<td align="center"><%#= p. %></td>				
 			</tr>
 			<% end %>
 		</tbody>

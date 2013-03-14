@@ -273,6 +273,14 @@
           </ul>
         </li>
       <% end %>
+
+      <li style="width:150px;">
+          Sales Order Report
+          <ul>
+            <li><%= link_to "Sales Oder Summary Report", sales_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Customer P/O Report", so_customer_po_detail_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+          </ul>
+        </li>
     </ul>
   </li>
 

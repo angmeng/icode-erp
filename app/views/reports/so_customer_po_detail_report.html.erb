@@ -1,0 +1,74 @@
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">Customer P/O Detail</strong></div>
+  
+    <%= form_for @so_customer_po_detail_report, :url => so_customer_po_detail_report_reports_path  do |f| %>
+      <table>
+        <tr>
+          <td>Trade Company :</td>
+          <td><%= f.text_field :sales_order_trade_company_code_contains, :size => 9 %></tD>
+          <td>Customer P/O #:</td>
+          <td><%= f.text_field :sales_order_purchase_order_no_contains, :size => 9 %></td>
+        </tr>
+        <tr>
+        <td><%= f.submit "Search" %></td>
+         </tr>
+      </table>
+    <% end %>
+  
+  <hr />
+    <input type="checkbox" name="all" id="checkall" />Check All
+
+    	<div class="fix_1600x900_h450">
+        	<%= form_tag pdf_so_customer_po_detail_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+        	<table  id="grid_h495" >
+            <thead>
+        		<tr class="header_line">
+              <th></th>
+              <th>SO #</th>
+              <th>No.</th>
+              <th>Part /Prod ID</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Order</th>
+              <th>Out sid</th>
+              <th>Status</th>
+        			
+        		</tr>
+          </thead>
+        </body>
+        		<tr class="<%= cycle("odd_line", "even_line") %>">
+        			<% @show_so_customer_po_detail_report.each_with_index do |so , index| %>
+              <td align="center"><%= check_box_tag "so_ids[]" , so.id %></td>
+              <td align="center"><%= so.sales_order.sales_order_no rescue'-' %></td>
+              <td align="center"><%= index + 1 %></td>
+              <td align="center"><%= render '/product_categories/join_product_category' , :pc => so %></td>
+              <td align="center"><%= so.description rescue'-' %></td>
+              <td align="center"><%= so.sales_order.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+              <td align="center"><%#=  %></td>
+              <td align="center"><%#=  %></td>  
+              <td align="center"><%= so.status rescue'-' %></td>    			
+        		</tr>
+        		<% end %>
+          </tbody>
+    	</table>
+  	 </div>
+
+  
+</div>
+
+  <div class="icon_tag" style="float:left">
+      <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+  </div>
+
+  <div class="icon_tag" style="float:right;">
+
+      <span><%= submit_tag "Show" , :class => "k-button" %></span>
+      <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+      <span><%= not_link_recover %></span>
+      <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <% end %>
+        <%#= link_to "PDF report" , pdf_po_report_reports_path(:po_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %>
+
+      <%= link_close_button %>
+  </div>
+

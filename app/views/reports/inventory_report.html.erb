@@ -50,7 +50,7 @@
           
                       <tr class="<%= cycle("odd_line", "even_line") %>">
                        
-                        <td align="center"><%= check_box_tag "inventory_ids[]" , pri.id %></td>
+                        <td align="center"><%= check_box_tag "in_ids[]" , pri.id %></td>
                         <td align="center"><%= index + 1 %></td>
                         <td align="center"><%= render '/product_categories/join_product_category' , :pc => pri %></td>
                         <td align="center"><%= pri.product.desc rescue '-' %></td>
@@ -88,7 +88,7 @@
           <%#*</fieldset>%>
 
     <div class="icon_tag" style="float:left">
-      <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
     </div>
 
     <div class="icon_tag" style="float:right;">

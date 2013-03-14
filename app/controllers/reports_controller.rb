@@ -2,10 +2,40 @@ class ReportsController < ApplicationController
   before_filter :authenticate_user!
   layout "sheetbox"
 
+  def excel_so_customer_po_detail_report
+    if params[:so_ids].present?
+      #render :text => params[:search]
+      @excel_so_customer_po_detail_report = SalesOrderItem.find(params[:so_ids])
+      respond_to do |format|
+        format.html
+        format.csv {render text: @excel_so_customer_po_detail_report.to_csv}
+        format.xls
+      end
+      else
+        redirect_to so_customer_po_detail_report_reports_path
+      end          
+  end
+
+
+
+
+  def excel_sales_order_summary_report
+    if params[:sos_ids].present?
+      @excel_sales_order_summary_report = SalesOrderItem.find(params[:sos_ids])
+      respond_to do |format|
+        format.html
+        format.csv {render text: @excel_sales_order_summary_report.to_csv}
+        format.xls
+      end
+    else
+      redirect_to sales_order_summary_report_reports_path
+    end
+  end
+
   def excel_product_report
     #if params[:commit] == "Excel"
     if params[:pro_ids].present?
-      @excel_product_report = ProductCombobox.find(params[:search])
+      @excel_product_report = ProductCombobox.find(params[:pro_ids])
       respond_to do |format|
         format.html
         format.csv { render text: @excel_product_report.to_csv}
@@ -17,13 +47,13 @@ class ReportsController < ApplicationController
   end
 
   def excel_inventory_report
-    if params[:inventory_ids].present?
-      @excel_inventory_report = InventoryHistory.find(params[:search])
-      respond_to do |format|
-        format.html
-        format.csv{ render text: @excel_inventory_report.to_csv }
-        format.xls
-    end
+    if params[:in_ids].present?
+      @excel_inventory_report = InventoryHistory.find(params[:in_ids])
+      #respond_to do |format|
+        #format.html
+        #format.csv{ render text: @excel_inventory_report.to_csv }
+        #format.xls
+    #end
   else
     redirect_to inventory_report_reports_path
   end
@@ -31,7 +61,7 @@ end
 
 def excel_pr_report # link from pdf_pr_report
   if params[:pr_ids].present?
-    @excel_pr_report = PurchaseRequisition.search(params[:search])
+    @excel_pr_report = PurchaseRequisition.find(params[:pr_ids])
     respond_to do |format|
       format.html
       format.csv{ render text: @excel_pr_report.to_csv }
@@ -44,7 +74,7 @@ end
 
 def excel_po_report
   if params[:po_ids].present?
-    @excel_po_report = PurchaseOrder.search(params[:search])
+    @excel_po_report = PurchaseOrder.find(params[:po_ids])
     respond_to do |format|
       format.html
       format.csv {render text: @excel_po_report.to_csv }
@@ -57,7 +87,7 @@ end
 
 def excel_sales_tax_exemption_report
   if params[:ste_ids].present?
-    @excel_sales_tax_exemption_report = SalesTaxExemption.search(params[:search])
+    @excel_sales_tax_exemption_report = SalesTaxExemption.find(params[:ste_ids])
     respond_to do |format|
       format.html
       format.csv {render text: @excel_sales_tax_exemption_report.to_csv }
@@ -70,7 +100,7 @@ end
 
 def excel_receive_note_report
   if params[:rn_ids].present?
-    @excel_receive_note_report = ReceiveNote.search(params[:search])
+    @excel_receive_note_report = ReceiveNote.find(params[:rn_ids])
     respond_to do |format|
       format.html
       format.csv {render text: @excel_receive_note_report.to_csv }
@@ -81,7 +111,6 @@ def excel_receive_note_report
   end
 end
 
-   
 def pdf_pr_report
 #render :text => params[:pr_ids].to_json
   if params[:commit] == "PDF Report"
@@ -170,25 +199,25 @@ end
 
 def pdf_inventory_report 
     if params[:commit] == "PDF Report"
-      if params[:inventory_ids].present?
-        @detail_inventory_report = InventoryHistory.find(params[:inventory_ids])
+      if params[:in_ids].present?
+        @detail_inventory_report = InventoryHistory.find(params[:in_ids])
         html = render_to_string(:layout => false , :action => "pdf_inventory_report.html.erb")
         @kit = PDFKit.new(html)
         send_data(@kit.to_pdf , :filename => "pdf_inventory_report.pdf" ,
                                 :type => 'application/pdf', 
                                 :disposition => "attachement")
       end
-    elsif params[:commit] = "Show"
-      if params[:inventory_ids].present?
-        @detail_inventory_report = InventoryHistory.find(params[:inventory_ids])
+    elsif params[:commit] == "Show"
+      if params[:in_ids].present?
+        @detail_inventory_report = InventoryHistory.find(params[:in_ids])
         respond_to do |format|
           format.html
         end
       end
     elsif params[:commit] == "Excel Report"
-      if params[:inventory_ids].present?
-        redirect_to excel_inventory_report_reports_path(:inventory_ids => params[:inventory_ids] , :format => "xls")
-    end
+      if params[:in_ids].present?
+        redirect_to excel_inventory_report_reports_path(:in_ids => params[:in_ids] , :format => "xls")
+      end
     else
       redirect_to inventory_report_reports_path      
     end
@@ -289,30 +318,82 @@ def pdf_receive_note_report
     end
 end 
 
-  def pdf_purchase_by_creditor_report
-    if params[:purchase_ids].present?
-      @detail_purchase_by_creditor_report = PurchaseRequisitionItem.find(params[:search])
-      repond_to do |format|
-        format.html
-        format.json {render json: @detail_purchase_by_creditor_report }
-        format.pdf {
-        @kit = PDFKit.new(html)
-        send_data(@kit.to_pdf ,:filename => "pdf_purchase_by_creditor_report.pdf" ,
-                              :type => 'application/pdf' , 
-                              :disposition => "attachement" )
-        }
+  def pdf_sales_order_summary_report
+    if params[:commit] == "PDF Report"
+      if params[:sos_ids].present?
+        @detail_sales_order_summary_report = SalesOrderItem.find(params[:sos_ids])
+        html = render_to_string(:layout => false , :action => "pdf_sales_order_summary_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf ,:filename => "pdf_sales_order_summary_report.pdf",
+                                :type => 'application/pdf' , 
+                                :disposition => "attachement")
+        end
+      elsif params[:commit] == "Show"
+        if params[:sos_ids].present?
+          @detail_sales_order_summary_report =  SalesOrderItem.find(params[:sos_ids])
+          respond_to do |format|
+            format.html
+        end
       end
     elsif params[:commit] == "Excel Report"
-      if params[:purchase_ids].present?
-      redirect_to excel_purchase_by_creditor_report_reports_path(:purchase_ids => params[:purchase_ids] , :format => "xls")
-    end
-    else 
-      redirect_to purchase_by_creditor_report_reports_path
-    end
+      if params[:sos_ids].present?
+        redirect_to excel_sales_order_summary_report_reports_path(:sos_ids => params[:sos_ids] , :format => "xls")
+      end
+    else
+      redirect_to sales_order_summary_report_reports_path
+      end      
   end
 
+  def pdf_so_customer_po_detail_report
+    if params[:commit] == "PDF Report"
+      if params[:so_ids].present?
+        @detail_so_customer_po_detail_report = SalesOrderItem.find(params[:so_ids])
+        html = render_to_string(:layout => false , :action => "pdf_so_customer_po_detail_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf ,:filename => "pdf_so_customer_po_detail_report.pdf",
+                                :type => 'application/pdf' , 
+                                :disposition => "attachement")
+        end
+      elsif params[:commit] == "Show"
+        if params[:so_ids].present?
+          @detail_so_customer_po_detail_report =  SalesOrderItem.find(params[:so_ids])
+          respond_to do |format|
+            format.html
+        end
+      end
+    elsif params[:commit] == "Excel Report"
+      if params[:so_ids].present?
+        redirect_to excel_so_customer_po_detail_report_reports_path(:so_ids => params[:so_ids] , :format => "xls")
+      end
+    else
+      redirect_to so_customer_po_detail_report_reports_path
+      end  
+  end
+
+  # def pdf_purchase_by_creditor_report
+  #   if params[:purchase_ids].present?
+  #     @detail_purchase_by_creditor_report = PurchaseRequisitionItem.find(params[:search])
+  #     repond_to do |format|
+  #       format.html
+  #       format.json {render json: @detail_purchase_by_creditor_report }
+  #       format.pdf {
+  #       @kit = PDFKit.new(html)
+  #       send_data(@kit.to_pdf ,:filename => "pdf_purchase_by_creditor_report.pdf" ,
+  #                             :type => 'application/pdf' , 
+  #                             :disposition => "attachement" )
+  #       }
+  #     end
+  #   elsif params[:commit] == "Excel Report"
+  #     if params[:purchase_ids].present?
+  #     redirect_to excel_purchase_by_creditor_report_reports_path(:purchase_ids => params[:purchase_ids] , :format => "xls")
+  #   end
+  #   else 
+  #     redirect_to purchase_by_creditor_report_reports_path
+  #   end
+  # end
+
   def purchase_by_creditor_report
-    @purchase_by_creditor = PurchaseRequisitionItem.find(params[:search])
+    @purchase_by_creditor = PurchaseRequisitionItem.search(params[:search])
     @show_purchase_by_creditor = @purchase_by_creditor.all
     
   end 
@@ -381,8 +462,23 @@ end
     @show_inventory_report = @inventory_report.all
     #@take_ids = @show_inventory_report.map(&:id)
   end
+
+  def delivery_order
+    @delivery_order_report = DeliveryOrderItem.search(params[:search])
+    @show_delivery_order_report = @delivery_order_report.all
+  end
+
+  def sales_order_summary_report
+    @sales_order_summary_report = SalesOrderItem.search(params[:search])
+    @show_sales_order_summary_report = @sales_order_summary_report.all
+  end
+
+  def so_customer_po_detail_report
+    @so_customer_po_detail_report = SalesOrderItem.search(params[:search])
+    @show_so_customer_po_detail_report = @so_customer_po_detail_report.all
+  end
  
-end
+end   
 
 #private
   
@@ -392,31 +488,3 @@ end
  #   @field_id = ProductCategory.all_field_id(@listing_categories) if @listing_categories.present?
  #   @show_product = @listing_categories.product if @listing_categories.present?
  # end
-
-
-
-
- #def pr_pdf_report
-    #if params[:p_ids].present?
-   # @pr_pdf_report = PurchaseRequisition.find(params[:p_ids]) #for show out one id by one id
-
-
-    #  respond_to do |format|
-    #  format.html
-    #  format.pdf do
-    #    pdf = Prawn::Document.new
-    #    pdf.text "test"
-    #    send_data pdf.render, :filename => 'pr_pdf_report.pdf', 
-     #                         :type => 'application/pdf' , 
-     #                         :disposition => 'inline'
-     # end
-    #end
-    #else
-  #end
-
-  #def download_pdf
-  #  html = render_to_string(:action => '../pdf/my_template', :layout => false)
-  #  pdf = PDFKit.new(html)
-  #  send_data(pdf.to_pdf)
-  #end
-

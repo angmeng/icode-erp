@@ -30,13 +30,9 @@
 			<td align="center"><%= index + 1 %></td>
 			<td align="center"><%= render '/product_categories/join_product_category' , :pc => pri rescue'-' %> / 
 			<%= rni.purchase_order_item_line.purchase_requisition_item.product.desc rescue'-' %>
-
 				<%#= PurchaseOrderItemLine.purchase_requisition_item_product.desc rescue '-' %></td>
 			<%# d.received_note_items.each do |pri| %>
-				
-                         
 			<td align="center"><%= rni.received_qty rescue '-'%></td>
-
 			<td align="center"><%= rni.purchase_order_item_line.purcahse_order.po_no rescue '-' %></td>
 			<td align="center"><%= rni.purchase_order_item_line.purchase_requisition_item.product.part_no rescue '-' %></td>
 		</tr>

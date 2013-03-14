@@ -1,0 +1,88 @@
+<div id="container">
+<h2><u>Sales Order Customer P/O Detail Report</u></h2>
+
+
+	<% if @detail_so_customer_po_detail_report.present? %>
+	<table id="jgrid" class="black-line-table">
+		<thead>
+			<tr class="header_line">
+				<th>No.</th>
+				<th>SO #</th>
+        <th>Part /Prod ID</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Order</th>
+        <th>Out sid</th>
+        <th>Status</th>
+			</tr>
+		</thead>
+
+		<tbody>
+		<% @detail_so_customer_po_detail_report.each_with_index do |so , index| %>
+			<tr>
+				<td align="center"><%= index + 1 %></td>
+				<td align="center"><%= so.sales_order.sales_order_no rescue'-' %></td>
+        <td align="center"><%= render '/product_categories/join_product_category' , :pc => so %></td>
+        <td align="center"><%= so.description rescue'-' %></td>
+        <td align="center"><%= so.sales_order.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td align="center"><%#=  %></td>
+        <td align="center"><%#=  %></td>  
+        <td align="center"><%= so.status rescue'-' %></td>      
+			</tr>
+			
+		<% end %>
+		</tbody>
+
+		<% else %>
+			no report found
+		<% end %>
+	</table>
+
+</div>
+
+
+<style>
+table{
+    width:100%;
+  }
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+   tbody tr {
+    border-top: 3pt solid white;
+ }
+  
+</style>

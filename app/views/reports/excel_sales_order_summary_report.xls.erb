@@ -1,0 +1,79 @@
+<div id="container">
+<h2><u>Sales Order Report</u></h2>
+	<% if @excel_sales_order_summary_report.present? %>
+		
+		<table id="grid_h495" class="zebraLight normal_table_black" >
+      		<tr class="header_line">
+            
+      			<th>SO / PO</th>
+      			<th>Product ID / Part #</th>
+      			<th>Description</th>
+      			<th>Order Qty</th>
+      			<th>U/P</th>
+      			<th>ETA</th>
+      			<th>Q/S Qty</th>
+      		</tr>
+      		<tr>
+      			<% @excel_sales_order_summary_report.each do |sos| %>
+            	
+      			<td align="center"><%= sos.sales_order.sales_order_no rescue'-' %></td>
+      			<td align="center"><%= render '/product_categories/join_product_category' , :pc => sos %></td>
+      			<td align="center"><%= sos.description rescue '-'%></td>
+      			<td align="center"><%= sos.quantity rescue'-' %></td>
+      			<td align="center"><%= sos.unit_price rescue'-' %></td>
+      			<td align="center"><%= sos.eta rescue'-' %></td>
+      			<td align="center"><%= sos.complete_qty rescue'-' %></td>
+      		</tr>
+      		<% end %>	
+		
+		<% else %>
+		No Report Found
+	<% end %>
+	
+</div>
+
+
+<style>
+
+table {
+	width: 100%;
+}
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+ 
+  
+</style>

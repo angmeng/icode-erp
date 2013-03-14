@@ -15,6 +15,9 @@
 //= require_tree .
 //= require turbolinks
 
+//= require jquery-ui
+//= require autocomplete-rails
+
 $(document).ready(function () {
     
     var window_height           = $(window).height();     //same with $("#page_height").height();
