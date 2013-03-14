@@ -1,17 +1,7 @@
-<div class="icon_tag">
-  
-  <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_SHOW) %>
-    <span id="on_show_kiv" showClass="show_without_refresh_page_1600x900"><%= not_link_binary %></span>
-  <%# else %>
-   <!--span class="word_opac"> <%#= not_link_binary %></span-->
-  <%# end %>
-    
-  <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_SHOW) %>
-    <span id="on_recover"><%= not_link_recover %></span>
-  <%# else %>
-    <!--span class="word_opac"><%#= not_link_show %></span-->
-  <%# end %>
-   
-  <%= link_home_button %>
+<div class="center_icon_tag"><%= will_paginate @users %></div>
 
+<div class="icon_tag">
+  <span id="on_show_kiv" showClass="show_without_refresh_page_1600x900"><%= not_link_binary %></span>
+  <span id="on_recover"><%= not_link_recover %></span>
+  <%= link_home_button %>
 </div>

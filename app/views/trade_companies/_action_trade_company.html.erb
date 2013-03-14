@@ -1,3 +1,25 @@
+<div class="left_icon_tag">
+  
+  <% if action_name == "index" %>
+  
+    <% if roles.include?(InventoryManagementSystem::VENDOR_NEW_ADD) %>
+      <%= link_to 'New Supplier', new_trade_company_path(:option => TradeCompany::SUPPLIER), :class => "iframe_1024x800 k-button", "data-fancybox-type" => "iframe" %>
+    <% else %>
+      <span class="k-button">New Supplier</span>
+    <% end %>
+      
+  <% elsif action_name == "customer" %> 
+      
+    <% if roles.include?(InventoryManagementSystem::CUSTOMER_NEW_ADD) %>
+      <%= link_to 'New Customer', new_trade_company_path(:option => TradeCompany::CUSTOMER), :class => "iframe_1024x800 k-button", "data-fancybox-type" => "iframe" %>
+    <% else %>
+      <span class="k-button">New Customer</span>
+    <% end %>
+      
+  <% end %>
+      
+</div>
+
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::VENDOR_SHOW) %>
@@ -24,6 +46,6 @@
     <span class="word_opac"><%= not_link_printable %></span>
   <% end %>
    
-  <%= link_close_button %>
+  <%= link_home_button %>
 
 </div>

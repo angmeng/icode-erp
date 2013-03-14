@@ -1,15 +1,13 @@
-<div id="popup_container">
+
   <%= render "linking" %> 
 
   <div class="title_head"><strong style="color:white;">VENDOR REGISTRATION</strong></div>
 
-  <div class="fix_h450">
-    <% if @vendor.present? %>
-      <%= render "/purchase_orders/vendor", :pending => @vendor %>
-    <% else %>
-      No Record Found.
-    <% end %>
-  </div>
+  <% if @vendor.present? %>
+    <%= render "/purchase_orders/vendor", :pending => @vendor %>
+  <% else %>
+    <div class="linking_content">No Record Found</div>
+  <% end %>
+
 
   <%= render "action_purchase_order_vendor_reg" %>
-</div>

@@ -1,3 +1,13 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
+    <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
+        <span><%= link_to "New RNs", new_receive_note_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></span>
+    <% else %>
+        <span class = "k-button" style = "color: grey; background-color: white; cursor: default;">New RNs</span>
+    <% end %>
+  <%# end %>
+</div>
+
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW) %>

@@ -21,7 +21,8 @@ html { height: 100%; overflow-y:hidden; }
 body {
     height: 100%;
     color: #000; /* background-color: green; */
-    font-family: Tahoma, arial, helvetica, sans-serif;
+/*    font-family: Tahoma, arial, helvetica, sans-serif;*/
+    font-family: 'Open Sans', Arial, sans-serif;
     font-size: 12px;
     line-height: 18px; 
 }
@@ -29,15 +30,7 @@ body {
 #page_height { height: 100%; }
 
 /* It is use for addClass in the javascript */
-.page_wrapper {
-    /* Ignore the height to 100%, bcos jquery will help us to calculate.. */
-/*    background-color: #fff;*/
-/*    color: #000;*/
-/*    font-family: Tahoma, arial, helvetica, sans-serif;*/
-/*    font-size: 12px;*/
-    overflow: auto;
-/*    border: 1px solid grey;*/
-}
+.page_wrapper { overflow: auto; }
 
 /*#container, #popup_container {
     background-color: #fff;
@@ -51,12 +44,6 @@ body {
 }*/
 
 
-
-/*#popup_content {
-    height: 500px;
-    border: 1px solid black;
-}*/
-
 p, div { margin: 0; }
 
 hr { margin-top: 5px; margin-bottom: 5px; }
@@ -64,7 +51,8 @@ hr { margin-top: 5px; margin-bottom: 5px; }
     
 
 p, ol, ul, td {
-    font-family: Tahoma, arial, helvetica, sans-serif;
+/*    font-family: Tahoma, arial, helvetica, sans-serif;*/
+    font-family: 'Open Sans', Arial, sans-serif;
     font-size: 12px; }
 
 pre {
@@ -125,7 +113,7 @@ p#alert {
 
 /*=================================== MENU TOOL =====================================*/
 #main_header { 
-    padding: 5px; font-weight: bold; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 15px; color:blue;
+    padding: 5px; font-weight: bold; /*font-family: Tahoma, arial, helvetica, sans-serif;*/ font-family: 'Open Sans', Arial, sans-serif; font-size: 15px; color:blue;
     background-color: #A6DEFF;
     /* For WebKit (Safari, Chrome, etc) */
     background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
@@ -137,10 +125,10 @@ p#alert {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#288CC8, endColorstr=#288CC8)" no-repeat;
 }
 
-#footer {
+#main_footer {
    position: fixed; left:0px; bottom:0px; 
    width:100%; 
-   padding: 5px; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
+   padding: 5px; /*font-family: Tahoma, arial, helvetica, sans-serif;*/ font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; color:blue;
    background-color: #A6DEFF;
    background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
    background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
@@ -243,7 +231,7 @@ table.normal_table_white {
 	border-width: 1px;
 	border-spacing: 0px;
 	border-style: none;
-	border-color: black;
+	border-color: white;
 	border-collapse: collapse;
 	background-color: transparent; }
 
@@ -251,7 +239,7 @@ table.normal_table_white th {
 	border-width: 1px;
 	padding: 1px;
 	border-style: solid;
-	border-color: black;
+	border-color: white;
 	background-color: transparent;
 	-moz-border-radius: 0px 0px 0px 0px; }
         
@@ -259,27 +247,10 @@ table.normal_table_white td {
 	border-width: 1px;
         padding: 1px;
 	border-style: solid;
-	border-color: black;
+	border-color: white;
 	background-color: transparent;
 	-moz-border-radius: 0px 0px 0px 0px; }
 /*=================================== BLACK TABLE (END) =====================================*/
-
-/*=================================== STANDARD TABLE WIDTH =====================================*/
-.std_no             { width: 30px; }
-.std_check          { width: 40px; }
-.std_item_status    { width: 90px; }
-.std_po_item_status { width: 100px; }
-.std_pid            { width: 150px; }
-.std_company        { width: 200px; }
-.std_desc           { width: 200px; }
-.std_eta            { width: 80px; }
-.std_qty            { width: 50px; }
-.std_um             { width: 30px; }
-.std_up             { width: 100px; }
-.std_total          { width: 100px; }
-.std_remark         { width: 100px; }
-.std_pr_no          { width: 50px; }
-/*=================================== STANDARD TABLE WIDTH (END) =====================================*/
 
 #treeview .k-sprite     { background-image: url("/assets/coloricons-sprite.png") }
 #treeview .rootfolder   { background-image: url("/assets/treeview_folder.gif") }
@@ -335,36 +306,36 @@ table.normal_table_white td {
     
 
 
-.font_bold      { font-weight: bold; }
-.header_content { background-color: #FE9B00; }
-.header_title   { background-color: orange; }
-.header_line    { background-color: lightsteelblue; }
-.odd_line       { background-color: wheat; }
-.even_line      { background-color: #e0f8f8; }
-.footer_line    { background-color: lightgrey; text-align: right; padding-right: 100px; }
-.green_line     { background-color: #00ff33; }
-.yellow_line    { background-color: yellow; }
-.red_alert      { color: red; font-weight: bold; /*background-color: red; color: white; font-weight: bold;*/ }
-.red_urgent     { border: 3px solid red; }
-.red_text       { color: red; font-weight: bold; }
-.text_gray      { color: lightgray; }
-/*.highlight      { background: bisque; color: blue;}*/
-.cube10         { width: 10px; height: 10px; border:none; }
-.cube35         { width: 35px; height: 35px; border:none; }
-.cube40         { width: 40px; height: 40px; border:none; }
-.cube50         { width: 50px; height: 50px; border:none; }
-.icon_tag       { float:right; padding: 5px; }
-.left_icon_tag  { float:left; padding: 5px; }
-.underline      { border-bottom: 1px solid black; }
-.direct_report  { display: none; }
-#get_size       { display:none; float: right; background-color: orange; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding-left:5px; padding-right: 5px; cursor: pointer; }
-.padding_10     { padding: 10px; }
-.check_highlight{ width: 25px; }
-.remove_underline { text-decoration: none; }
+.font_bold          { font-weight: bold; }
+.header_content     { background-color: #FE9B00; }
+.header_title       { background-color: orange; }
+.header_line        { background-color: lightsteelblue; }
+.odd_line           { background-color: wheat; }
+.even_line          { background-color: #e0f8f8; }
+/*.footer_line        { background-color: lightgrey; text-align: right; padding-right: 100px; }*/
+.green_line         { background-color: #00ff33; }
+.yellow_line        { background-color: yellow; }
+.red_alert          { color: red; font-weight: bold; /*background-color: red; color: white; font-weight: bold;*/ }
+.red_urgent         { border: 3px solid red; }
+.red_text           { color: red; font-weight: bold; }
+.text_gray          { color: lightgray; }
+/*.cube10             { width: 10px; height: 10px; border:none; }*/
+.cube35             { width: 35px; height: 35px; border:none; }
+/*.cube40             { width: 40px; height: 40px; border:none; }*/
+/*.cube50             { width: 50px; height: 50px; border:none; }*/
+.left_icon_tag      { float:left; padding: 5px; }
+.center_icon_tag    { position: absolute; left: 50%; margin-left: -100px; padding: 5px; }
+.icon_tag           { float:right; padding: 5px; }
+.underline          { border-bottom: 1px solid black; }
+.direct_report      { display: none; }
+#get_size           { display:none; float: right; background-color: orange; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding-left:5px; padding-right: 5px; cursor: pointer; }
+.padding_10         { padding: 10px; }
+.check_highlight    { width: 25px; }
+.remove_underline   { text-decoration: none; }
 
 
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
-.search_engine  { display:none; background-color: gainsboro; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 10px; position: absolute; float: left; width: 100%; z-index: 50;}
+.search_engine  { display:none; background-color: gainsboro; padding: 10px; position: absolute; right: 0px; z-index: 50;}
 .search_link {
     float: right;
     background-color: gainsboro;
@@ -535,9 +506,64 @@ legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color:
 
 #sheetbox_height { border: 1px solid black; }
 
-.content, .popup_content { padding: 0px 5px; border: 1px solid grey; }
+.content, .popup_content, .pr_content, .linking_content, .popup_form_table { padding: 0px 5px; border: 1px solid grey; }
 
 #treeview .k-state-selected { background: white; }
 #treeview .k-in             { border: 1px solid white; padding: 1px; }
-/*line-height: 16px;*/
 
+/* Pagination Style (START) */
+
+.digg_pagination {
+  background: white;
+  cursor: default;
+  /* self-clearing method: */ }
+  .digg_pagination a, .digg_pagination span, .digg_pagination em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .digg_pagination .disabled {
+    color: #999999;
+    border: 1px solid #dddddd; }
+  .digg_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1; }
+  .digg_pagination a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #000033;
+      border-color: #000033; }
+  .digg_pagination .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center; }
+    .digg_pagination .page_info b {
+      color: #000033;
+      background: #6aa6ed;
+      padding: 0.1em 0.25em; }
+  .digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .digg_pagination {
+    height: 1%; }
+  *:first-child + html .digg_pagination {
+    overflow: hidden; }
+
+/* Pagination Style (END) */
+
+/* Table Layout for each column name */
+.t_product      { text-align: left; }
+.t_description  { text-align: left; }
+.t_unit_price   { text-align: right; }
+.t_date         { text-align: center; }

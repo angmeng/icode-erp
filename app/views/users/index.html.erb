@@ -5,7 +5,7 @@
 <div class="search_engine"><%= render "search_user" %></div>
 
 <% if @users.present? %>
-  <%= render "listing_users", :list_users => @users %>
+  <div class='container'><%= render "listing_users", :list_users => @users %></div>
 <% else %>
   <div class="content">Not Record Found</div>
 <% end %>

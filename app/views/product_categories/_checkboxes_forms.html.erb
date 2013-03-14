@@ -7,8 +7,8 @@
         <td style="vertical-align: top;">
           <%= check_box_tag "prod_field[]", ProductField::DESCRIPTION, @edit_field_id.include?(ProductField::DESCRIPTION) %> DESCRIPTION<br/>
           <%= check_box_tag "prod_field[]", ProductField::GSM, @edit_field_id.include?(ProductField::GSM) %> GSM<br/>
-          <%= check_box_tag "prod_field[]", ProductField::WIDTH, @edit_field_id.include?(ProductField::WIDTH) %> WIDTH<br/>
           <%= check_box_tag "prod_field[]", ProductField::LENGTH, @edit_field_id.include?(ProductField::LENGTH) %> LENGTH<br/>
+          <%= check_box_tag "prod_field[]", ProductField::WIDTH, @edit_field_id.include?(ProductField::WIDTH) %> WIDTH<br/>
           <%= check_box_tag "prod_field[]", ProductField::HEIGHT, @edit_field_id.include?(ProductField::HEIGHT) %> HEIGHT<br/>
           <%= check_box_tag "prod_field[]", ProductField::TICKNESS, @edit_field_id.include?(ProductField::TICKNESS) %> TICKNESS<br/>
           <%= check_box_tag "prod_field[]", ProductField::UNIT_MEASURE, @edit_field_id.include?(ProductField::UNIT_MEASURE) %> UNIT MEASURE<br/>
@@ -79,8 +79,8 @@
       <td style="vertical-align: top;">
         <%= check_box_tag "prod_field[]", ProductField::DESCRIPTION, true %> DESCRIPTION<br/>
         <%= check_box_tag "prod_field[]", ProductField::GSM %> GSM<br/>
-        <%= check_box_tag "prod_field[]", ProductField::WIDTH %> WIDTH<br/>
         <%= check_box_tag "prod_field[]", ProductField::LENGTH %> LENGTH<br/>
+        <%= check_box_tag "prod_field[]", ProductField::WIDTH %> WIDTH<br/>
         <%= check_box_tag "prod_field[]", ProductField::HEIGHT %> HEIGHT<br/>
         <%= check_box_tag "prod_field[]", ProductField::TICKNESS %> TICKNESS<br/>
         <%= check_box_tag "prod_field[]", ProductField::UNIT_MEASURE, true %> UNIT MEASURE<br/>

@@ -31,20 +31,6 @@
       </tr>
     <% end %>
 
-    <% if @field_id.include?(ProductField::WIDTH) %>
-      <tr>
-        <td><b>Width</b></td>
-        <td>
-          <% if product_id.width.present? %>
-            <%= two_precision(product_id.width) rescue '-' %>
-            <%= product_id.width_um rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
     <% if @field_id.include?(ProductField::LENGTH) %>
       <tr>
         <td><b>Length</b></td>
@@ -52,6 +38,20 @@
           <% if product_id.length.present? %>
             <%= two_precision(product_id.length) rescue '-' %>
             <%= product_id.length_um rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::WIDTH) %>
+      <tr>
+        <td><b>Width</b></td>
+        <td>
+          <% if product_id.width.present? %>
+            <%= two_precision(product_id.width) rescue '-' %>
+            <%= product_id.width_um rescue '-' %>
           <% else %>
             -
           <% end %>

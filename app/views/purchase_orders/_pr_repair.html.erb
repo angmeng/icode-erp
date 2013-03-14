@@ -1,8 +1,9 @@
 <% if maintenance.present? %>
-  <table id="grid_h445" class="white-line-table zebraLight">
+  <table id="jgrid_linking" class="zebraLight">
     <thead>
       <tr class="header_line">
         <th class="check_highlight"></th>
+        <th>Urgent</th>
         <th>PR No.</th>
         <th>Proposed Vendor</th>
         <th>Description</th>
@@ -24,16 +25,23 @@
             <% end %>
           <% end %>
 
-          <% if item.urgent == TRUE %>
-            <% if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
-            <% else %>
-              <tr class="<%= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
-            <% end %>
-          <% else %>
+          <%# if item.urgent == TRUE %>
+            <%# if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+              <!--tr class="<%#= cycle("odd_line", "even_line") %>" controllerName="<%#= controller_name %>" rowsId="<%#= item.id %>"-->
+            <%# else %>
+              <!--tr class="<%#= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%#= controller_name %>" rowsId="<%#= item.id %>"-->
+            <%# end %>
+          <%# else %>
             <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
-          <% end %>
-              <td></td>
+          <%# end %>
+              <td></td>            
+              <td align="center">
+              <% if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                NO
+              <% else %>
+                <%= item.urgent? ? "YES" : "NO" %>
+              <% end %>
+            </td>
             <td align="center"><%= item.purchase_requisition.pr_no rescue '-' %></td>
 
             <td>

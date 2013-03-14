@@ -1,19 +1,19 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="jgrid_linking" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
-        <th class="std_no">No.</th>
-        <th class="std_po_item_status">Item Status</th>
-        <th class="std_pr_no">PR No.#</th>
-        <th class="std_pid">Product ID</th>
-        <th class="std_company">Vendor</th>
-        <th class="std_desc">Description (in Detail)</th>
-        <th class="std_eta">ETA</th>
-        <th class="std_qty">Qty</th>
-        <th class="std_um">U/M</th>
-        <th class="std_up">Unit Price</th>
-        <th class="std_total">Total</th>
-        <th class="std_remark">Remark</th>
+        <th>No.</th>
+        <th>Item Status</th>
+        <th width="60">PR No.#</th>
+        <th>Product ID</th>
+        <th>Vendor</th>
+        <th>Description (in Detail)</th>
+        <th>ETA</th>
+        <th>Qty</th>
+        <th>U/M</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+        <th>Remark</th>
     </tr>
   </thead>
 
@@ -73,7 +73,7 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= simple_format(p.description) %></td>
+          <td><%= p.description %></td>
           <td align="center">
             <% if p.eta < Date.today %>
               <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>

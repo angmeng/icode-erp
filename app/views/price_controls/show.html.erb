@@ -1,46 +1,42 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">SHOW DETAILS OF PRODUCT PRICE CONTROL</strong></div>
+<div class="title_head"><strong style="color:white;">SHOW PRODUCT PRICE CONTROL DETAIL</strong></div>
 
-  <div class="fix_h450">
-    <table>
-      <tr>
-        <td width="150"><b>P/P No#</b></td>
-        <td><%= @price_control.pp_no rescue '-' %></td>
-        <td width="50"></td>
-        <td><b>P/P Date</b></td>
-        <td><%= @price_control.pp_date.strftime("%d-%m-%Y") rescue '-' %></td>
-      </tr>
+<div class="table_details">
+  <table>
+    <tr>
+      <td><b>P/P No#</b></td>
+      <td><%= @price_control.pp_no rescue '-' %></td>
+      <td width="50"></td>
+      <td><b>P/P Date</b></td>
+      <td><%= @price_control.pp_date.strftime("%d-%m-%Y") rescue '-' %></td>
+    </tr>
 
-      <tr>
-        <td><b>Trade Company</b></td>
-        <td>[<%= @price_control.trade_company.code rescue '-' %>] <%= @price_control.trade_company.name rescue '-' %></td>
-      </tr>
+    <tr>
+      <td><b>Trade Company</b></td>
+      <td>[<%= @price_control.trade_company.code rescue '-' %>] <%= @price_control.trade_company.name rescue '-' %></td>
+      <td></td>
+      <td><b>Reference</b></td>
+      <td><%= @price_control.reference.present? ? "#{@price_control.reference}" : '-' %></td>
+    </tr>
 
-      <tr>
-        <td><b>Reference</b></td>
-        <td><%= @price_control.reference rescue '-' %></td>
-      </tr>
-
-      <tr>
-        <td><b>Currency</b></td>
-        <td><%= @price_control.currency.name rescue '-' %></td>
-        <td></td>
-        <td><b>Updated By</b></td>
-        <td><%= @price_control.user.name rescue '-' %></td>
-      </tr>
-    </table>
-
-    <hr/>
-
-    <% if @price_control.price_control_items.present? %>
-      <%= render "/price_control_items/listing_product_control_items", :pri => @price_control.price_control_items %>
-    <% else %>
-      No Record Found.
-    <% end %>
-  </div>
-
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+    <tr>
+      <td><b>Currency</b></td>
+      <td><%= @price_control.currency.name rescue '-' %></td>
+      <td></td>
+      <td><b>Updated By</b></td>
+      <td><%= @price_control.user.name rescue '-' %></td>
+    </tr>
+  </table>
 </div>
+
+<hr/>
+
+<% if @price_control.price_control_items.present? %>
+  <%= render "/price_control_items/listing_product_control_items", :p_control => @price_control.price_control_items %>
+<% else %>
+  <div class="popup_form_table">Not Record Found</div>
+<% end %>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div> 
 

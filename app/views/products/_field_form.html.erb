@@ -69,6 +69,18 @@
       <td><span class="k-invalid-msg" data-for="product[gsm]"></span></td>
     </tr>
   <% end %>
+    
+  <% if fielding.include?(ProductField::LENGTH) %>
+    <tr>
+      <td><b>Length</b></td>
+      <td colspan="3">
+        <%= f.text_field :length, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Length" %>
+        <span class="k-invalid-msg" data-for="product[length]"></span>
+        <%= f.select :length_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Length" } %>
+        <span class="k-invalid-msg" data-for="product[length_um]"></span>
+      </td>
+    </tr>
+  <% end %>
 
   <% if fielding.include?(ProductField::WIDTH) %>
     <tr>
@@ -78,18 +90,6 @@
         <span class="k-invalid-msg" data-for="product[width]"></span>
         <%= f.select :width_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Width" } %>
         <span class="k-invalid-msg" data-for="product[width_um]"></span>
-      </td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::LENGTH) %>
-    <tr>
-      <td><b>Length</b></td>
-      <td colspan="3">
-        <%= f.text_field :length, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Length" %>
-        <span class="k-invalid-msg" data-for="product[length]"></span>
-        <%= f.select :length_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Length" } %>
-        <span class="k-invalid-msg" data-for="product[length_um]"></span>
       </td>
     </tr>
   <% end %>

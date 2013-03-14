@@ -1,0 +1,38 @@
+<table>
+  <tr>
+    <td><b>PP No # </b></td>
+    <td><%= f.text_field :pp_no_equals, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>PP Date</b></td>
+    <td>
+      <% if @search.pp_date_gte.present? %>
+        <%= f.text_field :pp_date_gte, :value => @search.pp_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :pp_date_gte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+       - 
+      <% if @search.pp_date_lte.present? %>
+        <%= f.text_field :pp_date_lte, :value => @search.pp_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :pp_date_lte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Trade Company</b></td>
+    <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_both_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %></td>
+  </tr>
+  <tr>
+    <td><b>Reference</b></td>
+    <td><%= f.text_field :reference_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>Currency</b></td>
+    <td><%= f.select :currency_id_equals, options_from_collection_for_select(currency, :id, :name), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+  </tr>
+  <tr>
+    <td><b>Updated By</b></td>
+    <td><%= f.select :user_id_equals, options_from_collection_for_select(users, :id, :name), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+  </tr>
+</table>

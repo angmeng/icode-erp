@@ -5,12 +5,20 @@ class UsersController < ApplicationController
   
   def index
     @search = User.search(params[:search])
-    @users  = User.search_users(@search)  
+    @users  = User.search_users(@search).paginate(:page => params[:page])
+#    respond_to do |format|
+#      format.html
+#      format.json { render json: @users }
+#    end
   end
   
   def kiv
     @search = User.search(params[:search])
-    @users  = User.search_users_kiv(@search)
+    @users  = User.search_users_kiv(@search).paginate(:page => params[:page])
+#    respond_to do |format|
+#      format.html
+#      format.json { render json: @users }
+#    end
   end
 
   def show
@@ -30,30 +38,6 @@ class UsersController < ApplicationController
     redirect_to kiv_users_url, :notice => "The user has recovered from KIV."
   end
 
-  def profile
-    @user = User.find(params[:id])
-  end
-  
-  def update_profile
-    @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to profile_user_path(@user), :notice => "Update profile successfully"
-    else
-      render :action => "profile"
-    end
-  end
-  
-  def backup
-    BackupUtility.process
-    redirect_to root_url, :notice => "Backup Completed"
-  end
-  
-  def authorize
-    unless current_user.level == User::LEVEL_FIVE
-      render :text => "You are not authorize this zone!!"
-    end
-  end
-  
   def new_user_entry
     # create method will go to generator_user
   end
@@ -97,6 +81,24 @@ class UsersController < ApplicationController
     end
   end
   
+#  def profile
+#    @user = User.find(params[:id])
+#  end
+#  
+#  def update_profile
+#    @user = User.find(params[:id])
+#    if @user.update_attributes(params[:user])
+#      redirect_to profile_user_path(@user), :notice => "Update profile successfully"
+#    else
+#      render :action => "profile"
+#    end
+#  end
+  
+#  def backup
+#    BackupUtility.process
+#    redirect_to root_url, :notice => "Backup Completed"
+#  end
+  
 #  def lookup_level
 #    if params[:lvl].present?
 #      @user = User.where("status = ? and level = ?", User::ACTIVE, params[:lvl])
@@ -110,6 +112,12 @@ class UsersController < ApplicationController
 #    User.clearing
 #    redirect_to root_url, :notice => "Clear completed..."
 #  end
+
+  def authorize
+    unless current_user.level == User::LEVEL_FIVE
+      render :text => "You are not authorize this zone!!"
+    end
+  end
   
   private
   

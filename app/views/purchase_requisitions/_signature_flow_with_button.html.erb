@@ -1,0 +1,192 @@
+<table>
+  <tr>
+
+    <td width="300" style="vertical-align: top;">
+      <b>REQUESTER (DEPT. HEAD)</b>
+      <table>
+        <tr>
+          <td style="vertical-align: top;">
+            <table>
+              <tr>
+                <td><b>Name</b></td>
+                <td><%= @user.name %></td>
+              </tr>
+              <tr>
+                <td><b>Date</b></td>
+                <td><%= @purchase_requisition.requested_by_date.strftime("%d-%m-%Y") %></td>
+              </tr>
+
+              <% if @purchase_requisition.requested_by.to_i == current_user.id %>
+                <% if @purchase_requisition.tasks == current_user.id %>
+                  <tr>
+                    <td><b>Approved?</b></td>
+                    <td><%= link_to "YES", yes_approval_requester_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+
+              <% if @purchase_requisition.remark.present? %>
+                <tr>
+                  <td><b>Remark</b></td>
+                  <td style="color:white; background: red;"><%= @purchase_requisition.remark %></td>
+                </tr>
+              <% end %>
+            </table>
+          </td>
+
+        </tr>
+      </table>
+    </td>
+
+    <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+
+    <% if @logic.include?(2) %>
+      <td width="300" style="vertical-align: top;">
+          <b>APPROVAL(1)</b>
+          <% if @purchase_requisition.approved_by_level_two.present? %>
+              <table>
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%= @app_lvl2.name %></td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td><%= @purchase_requisition.approved_by_level_two_date.strftime("%d-%m-%Y") %></td>
+                </tr>
+              </table>
+          <% else %>
+              <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_TWO %>
+                  <% if @purchase_requisition.tasks == current_user.id %>
+                    <table>
+                      <tr>
+                        <td><b>Name</b></td>
+                        <td><%= current_user.name  %></td>
+                      </tr>
+                      <tr>
+                        <td><b>Date</b></td>
+                        <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+                      </tr>
+                      <tr>
+                        <td><b>Approved?</b></td>
+                        <td>
+                          <%= link_to "YES", yes_approval_one_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                          <%= link_to "NO", "#", :class => "pr_remark_one_link k-button" %>
+                        </td>
+                      </tr>
+                    </table>
+                  <% else %>
+                    <%= render "level_two_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "both" %>
+                  <% end %>
+              <% else %>
+                <%= render "level_two_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "name" %>
+              <% end %>
+          <% end %>
+      </td>
+      <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+    <% end %>
+
+    <!--------------------- Approval(OM) --------------------->
+    <% if @logic.include?(3) %>
+      <td width="300" style="vertical-align: top;">
+          <b>APPROVAL(OM)</b>
+          <% if @purchase_requisition.approved_by_level_three.present? %>
+              <table>
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%= @app_lvl3.name %></td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td><%= @purchase_requisition.approved_by_level_three_date.strftime("%d-%m-%Y") %></td>
+                </tr>
+              </table>
+          <% else %>
+              <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_THREE %>
+                  <% if @purchase_requisition.tasks == current_user.id %>
+                      <table>
+                        <tr>
+                          <td><b>Name</b></td>
+                          <td><%= current_user.name %></td>
+                        </tr>
+                        <tr>
+                          <td><b>Date</b></td>
+                          <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+                        </tr>
+                        <tr>
+                            <td><b>Approved?</b></td>
+                            <td>
+                              <%= link_to "YES", yes_approval_om_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                              <%= link_to "NO", "#", :class => "pr_remark_om_link k-button" %>
+                            </td>
+                        </tr>
+                      </table>
+                  <% else %>
+                      <%= render "level_three_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "both" %>
+                  <% end %>
+              <% else %>
+                <%= render "level_three_name_and_pending", :purchase_requisition => @purchase_requisition, :pick => "name" %>
+              <% end %>
+          <% end %>
+      </td>
+
+      <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+    <% end %>
+
+    <!--------------------- Approval(3) --------------------->
+    <%# if @logic.include?(5) %>
+      <td width="300" style="vertical-align: top;">
+          <b>APPROVAL(3)</b>
+          <% if @purchase_requisition.approved_by_level_five.present? %>
+              <table>
+                <tr>
+                  <td><b>Name</b></td>
+                  <td><%= @app_lvl4.name %></td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td><%= @purchase_requisition.approved_by_level_five_date.strftime("%d-%m-%Y") %></td>
+                </tr>
+              </table>
+          <% else %>
+              <% unless @purchase_requisition.status == PurchaseRequisition::LEVEL_ONE %>
+                <% if user_is_admin? %>
+                  <table>
+                    <tr>
+                      <td><b>Name</b></td>
+                      <td><%= current_user.name %></td>
+                    </tr>
+                    <tr>
+                      <td><b>Date</b></td>
+                      <td><%= Date.today.strftime("%d-%m-%Y") %></td>
+                    </tr>
+                    <tr>
+                      <td><b>Approved?</b></td>
+                      <td>
+                        <%= link_to "YES", yes_approval_three_purchase_requisition_path(@purchase_requisition), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                        <%= link_to "NO", "#", :class => "pr_remark_three_link k-button" %>
+                      </td>
+                    </tr>
+                  </table>
+                <% else %>
+                  <%= render "level_five_name_and_pending", :pick => "both" %>  
+                <% end %>
+              <% else %>
+                <%= render "level_five_name_and_pending", :pick => "name" %>
+              <% end %>
+          <% end %>
+      </td>
+    <%# end %>
+
+    <% if @purchase_requisition.status == PurchaseRequisition::SUBMIT_PO %>
+      <% unless @user.level == User::LEVEL_FIVE %>
+        <td width="60"><%= image_tag "arrow-right.png", :class => "cube35" %></td>
+      <% end %>
+    <% end %>
+
+   <!--------------------- Completed --------------------->
+    <% if @purchase_requisition.status == PurchaseRequisition::SUBMIT_PO or @purchase_requisition.status == PurchaseRequisition::SUBMIT_RN %>
+      <td width="300"><%=  image_tag("complete-Icon.png", :alt => "completed", :size => "50x50") %></td>
+    <% end %>
+
+  </tr>
+</table> 

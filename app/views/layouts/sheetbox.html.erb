@@ -17,7 +17,6 @@
 </head>
 
 <body>
-  <div id="page_height">
     <% flash.each do |key, msg| %>
       <%= content_tag :p, :id => key do %>
         <%= msg %><span><%= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span>
@@ -25,6 +24,5 @@
     <% end %>
 
     <%= yield %>
-  </div>
 </body>
 </html>

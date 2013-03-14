@@ -1,15 +1,12 @@
-<div id="popup_container">
-  <%= render "linking" %>
 
-  <div class="title_head"><strong style="color:white;">APPROVED FROM PR</strong></div> 
+<%= render "linking" %>
 
-  <div class="fix_h450">
-    <% if @approved_pr.present? %>
-      <%= render "details_from_pri", :pr => @approved_pr %>
-    <% else %>
-      No Record Found.
-    <% end %>
-  </div>
+<div class="title_head"><strong style="color:white;">APPROVED FROM PR</strong></div> 
 
-  <%= render "action_purchase_order_approved_pr" %>
-</div>
+<% if @approved_pr.present? %>
+  <%= render "details_from_pri", :pr => @approved_pr %>
+<% else %>
+  <div class="linking_content">No Record Found</div>
+<% end %>
+
+<%= render "action_purchase_order_approved_pr" %>

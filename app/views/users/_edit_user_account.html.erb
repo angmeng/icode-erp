@@ -1,47 +1,52 @@
-<table>
-    <tr>
-      <td width="100"><b>Name *</b></td>
-      <td><%= text_field_tag :new_name, @user.name %></td>
-    </tr>
-    <tr>
-      <td><b>Job Title *</b></td>
-      <td><%= text_field_tag :job_title, @user.job_title %></td>
-    </tr>
-    <tr>
-      <td><b>Department *</b></td>
-      <td><%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', @user.department_id.to_i), { :include_blank => true } %></td>
-    </tr>
-    <tr>
-      <td><b>Password *</b></td>
-      <td><%= password_field_tag :password, params[:password] %></td>
-    </tr>
-    <tr>
-      <td colspan="2"><i style="color:red;">*Blank password field if don't change password.</i></td>
-    </tr>
-    
-    <% unless @user.admin == current_user.admin %>
+<div id="name_entry">
+  <table>
       <tr>
-        <td valign="top"><b>Report Flow</b></td>
+        <td width="100"><b>Name *</b></td>
+        <td><%= text_field_tag :new_name, @user.name, :class => "k-textbox", "required validationMessage" => "Please Enter Name" %></td>
+      </tr>
+      <tr>
+        <td><b>Job Title *</b></td>
+        <td><%= text_field_tag :job_title, @user.job_title, :class => "k-textbox", "required validationMessage" => "Please Enter Job Title" %></td>
+      </tr>
+      <tr>
+        <td><b>Department *</b></td>
         <td>
-          <table class="white-line-table">
-            <thead>
-              <tr style="background-color: gainsboro;">
-                <th width="100">Level 1</th>
-                <th width="100">Level 2</th>
-                <th width="100">Level 3</th>
-                <th width="100">Level 5</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td align="center"><span id="insert_name"><%= @user.name rescue '(name)' %></span></td>
-                <td><%= select_tag :lvl_two,   options_from_collection_for_select(users, 'id', 'name', @user.level_two.to_i), { :include_blank => true } %></td>
-                <td><%= select_tag :lvl_three, options_from_collection_for_select(users, 'id', 'name', @user.level_three.to_i), { :include_blank => true } %></td>
-                <td align="center"><%= current_user.name %></td>
-              </tr>
-            </tbody>
-          </table>
+          <%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', @user.department_id.to_i), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Department" %>
+          <span class="k-invalid-msg" data-for="department_id"></span>
         </td>
       </tr>
-    <% end %>
-</table>
+      <tr>
+        <td><b>Password *</b></td>
+        <td><%= password_field_tag :password, params[:password], :class => "k-textbox" %></td>
+      </tr>
+      <tr>
+        <td colspan="2"><i style="color:red;">*Blank password field if don't change password.</i></td>
+      </tr>
+
+      <% unless @user.admin == current_user.admin %>
+        <tr>
+          <td valign="top"><b>Report Flow</b></td>
+          <td>
+            <table class="normal_table_white">
+              <thead>
+                <tr style="background-color: gainsboro;">
+                  <th width="100">Level 1</th>
+                  <th width="100">Level 2</th>
+                  <th width="100">Level 3</th>
+                  <th width="100">Level 5</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td align="center"><span id="insert_name"><%= @user.name rescue '(name)' %></span></td>
+                  <td><%= select_tag :lvl_two,   options_from_collection_for_select(users, 'id', 'name', @user.level_two.to_i), :include_blank => true, :class => "mkendo_combobox" %></td>
+                  <td><%= select_tag :lvl_three, options_from_collection_for_select(users, 'id', 'name', @user.level_three.to_i), :include_blank => true, :class => "mkendo_combobox" %></td>
+                  <td align="center"><%= current_user.name %></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      <% end %>
+  </table>
+</div>

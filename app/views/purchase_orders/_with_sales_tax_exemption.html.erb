@@ -1,7 +1,10 @@
 <%= form_for(@purchase_order) do |f| %>
   
-  <%= render "form", :f => f  %>
-  <div class="fix_1600x900_h400"><%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %></div>
+  <div class="po_form"><%= render "form", :f => f  %></div>
+
+  <%#*<div class="fix_1600x900_h400">%>
+    <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
+  <%#*</div>%>
   
   <div class="icon_tag">
     <% unless action_name == "edit" %>
@@ -22,5 +25,6 @@
   </div>
 <% end %>
 
+<%= render "js_purchase_order" %>
 
 

@@ -295,7 +295,7 @@
     <tr>
       <td width="60" align="center">
         <% if roles.include?(InventoryManagementSystem::PR_MENU) or roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) or roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
-          <%= link_to image_tag("purchase.png", :alt => "Purchase", :title => "Purchase", :class => "cube35"), '#', :id => "show_purchase"  %>
+          <%= link_to image_tag("purchase.png", :alt => "Purchase", :title => "Purchase", :class => "cube35"), '#', :id => "show_purchase" %>
         <% else %>
           <%= image_tag("purchase.png", :alt => "Purchase", :title => "Purchase", :class => "opac_icon")  %>
         <% end %>
@@ -315,11 +315,13 @@
 </div>
 
 <% if user_is_admin? %>
+  
   <div class="padding_10">
     <div><b>ACCESS MANAGEMENT (LEVEL 5)</b></div>
-    <div style="width:60px;">
-      <%= link_to image_tag("user_icon.png", :alt => "All Users", :title => "All Users", :class => "cube40"), users_path %><br/>
-      Listing Users
+    <div style="width:60px;" align="center">
+      <%= link_to image_tag("user_icon.png", :alt => "All Users", :title => "All Users", :class => "cube35"), users_path %><br/>
+      Users
     </div>
   </div>
+
 <% end %>

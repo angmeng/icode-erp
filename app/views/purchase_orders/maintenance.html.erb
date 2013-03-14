@@ -1,15 +1,15 @@
-<div id="popup_container">
+
   <%= render "linking" %>
 
   <div class="title_head"><strong style="color:white;">PR-REPAIR</strong></div>
 
-  <div class="fix_h450">
-    <% if @maintenance.present? %>
+
+    <%# if @maintenance.present? %>
+  <% if false %>
       <%= render "pr_repair", :maintenance => @maintenance %>
     <% else %>
-      No Record Found.
+      <div class="linking_content">No Record Found</div>
     <% end %>
-  </div>
+
 
   <%= render "action_purchase_order_repair" %>
-</div>

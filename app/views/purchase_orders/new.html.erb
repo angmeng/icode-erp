@@ -1,4 +1,4 @@
-<div id="popup_container">
+
   <div class="title_head"><strong style="color:white;">CREATE NEW PURCHASE ORDER NO.</strong></div>
   
   <% if @vendor_id.sales_tax_exemption.present? %>
@@ -6,4 +6,3 @@
   <% else %>
     <%= render "/purchase_orders/without_sales_tax_exemption" %>
   <% end %>
-</div>

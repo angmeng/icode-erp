@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <td><b>Name</b></td>
+    <td><%= f.text_field :name_contains %></td>
+  </tr>
+  <tr>
+    <td><b>Job Title</b></td>
+    <td><%= f.text_field :job_title_contains %></td>
+  </tr>
+  <tr>
+    <td><b>Department</b></td>
+    <td><%= f.select :department_id_equals, options_from_collection_for_select(departments, :id, :name, params[:department_id_equals].to_s), :include_blank => true %></td>
+  </tr>
+</table>

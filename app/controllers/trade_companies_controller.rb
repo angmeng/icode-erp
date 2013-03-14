@@ -1,7 +1,7 @@
 class TradeCompaniesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox"
+  layout "sheetbox", :only => [:show, :new, :edit]
   
   def index
     @search = TradeCompany.search(params[:search])

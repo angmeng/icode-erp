@@ -1,54 +1,46 @@
-<table>
-  <tr>
-    <td width="100"><b>Name *</b></td>
-    <td>
-      <%= text_field_tag :new_name, params[:new_name] %>
-      <%#= text_field_tag :new_name, params[:new_name], :validType => "maxLength[50]", :class => "easyui-validatebox" %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Job Title *</b></td>
-    <td>
-      <%= text_field_tag :job_title, params[:job_title] %>
-      <%#= text_field_tag :job_title, params[:job_title], :validType => "maxLength[50]", :class => "easyui-validatebox" %>
-    </td>
-  </tr>
-  <tr>
-    <td><b>Department *</b></td>
-    <td><%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', params[:department_id].to_i), { :include_blank => true } %></td>
-  </tr>
-  <!--tr>
-    <td><b>Level</b></td>
-    <td><%#= select_tag :level, options_for_select([["LEVEL 1", User::LEVEL_ONE ], ["LEVEL 2", User::LEVEL_TWO], ["LEVEL 3", User::LEVEL_THREE]], params[:level].to_i), :include_blank => true, :onchange => " dropdown_report_to(this)" %></td>
-  </tr-->
-  <tr>
-    <td><b>Password *</b></td>
-    <td>
-      <%= password_field_tag :password, params[:password] %>
-      <%#= password_field_tag :password, params[:password], :size => 30, :validType => "maxLength[40]", :class => "easyui-validatebox" %>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top"><b>Report Flow</b></td>
-    <td>
-      <table class="white-line-table">
-        <thead>
-          <tr style="background-color: gainsboro;">
-            <th width="100">Level 1</th>
-            <th width="100">Level 2</th>
-            <th width="100">Level 3</th>
-            <th width="100">Level 5</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td align="center"><span id="insert_name">(Name)</span></td>
-            <td><%= select_tag :lvl_two,   options_from_collection_for_select(users, 'id', 'name', params[:lvl_two].to_i), { :include_blank => true } %></td>
-            <td><%= select_tag :lvl_three, options_from_collection_for_select(users, 'id', 'name', params[:lvl_three].to_i), { :include_blank => true } %></td>
-            <td align="center"><%= current_user.name %></td>
-          </tr>
-        </tbody>
-      </table>
-    </td>
-  </tr>
-</table>
+<div id="name_entry">
+  <table>
+    <tr>
+      <td width="100"><b>Name *</b></td>
+      <td><%= text_field_tag :new_name, params[:new_name], :class => "k-textbox", "required validationMessage" => "Please Enter Name" %></td>
+    </tr>
+    <tr>
+      <td><b>Job Title *</b></td>
+      <td><%= text_field_tag :job_title, params[:job_title], :class => "k-textbox", "required validationMessage" => "Please Enter Job Title" %></td>
+    </tr>
+    <tr>
+      <td><b>Department *</b></td>
+      <td>
+        <%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', params[:department_id].to_i), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Department" %>
+        <span class="k-invalid-msg" data-for="department_id"></span>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Password *</b></td>
+      <td><%= password_field_tag :password, params[:password], :class => "k-textbox", "required validationMessage" => "Please Enter Password" %></td>
+    </tr>
+    <tr>
+      <td valign="top"><b>Report Flow</b></td>
+      <td>
+        <table class="normal_table_white">
+          <thead>
+            <tr style="background-color: gainsboro;">
+              <th width="100">Level 1</th>
+              <th width="100">Level 2</th>
+              <th width="100">Level 3</th>
+              <th width="100">Level 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="center"><span id="insert_name">(Name)</span></td>
+              <td><%= select_tag :lvl_two,   options_from_collection_for_select(users, 'id', 'name', params[:lvl_two].to_i), :include_blank => true, :class => "mkendo_combobox" %></td>
+              <td><%= select_tag :lvl_three, options_from_collection_for_select(users, 'id', 'name', params[:lvl_three].to_i), :include_blank => true, :class => "mkendo_combobox" %></td>
+              <td align="center"><%= current_user.name %></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>

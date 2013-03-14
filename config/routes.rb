@@ -104,7 +104,7 @@ Merp::Application.routes.draw do
       get "kiv"
     end
     member do
-      get "moving_kiv"
+#      get "moving_kiv"
       put "recover"
     end
   end
@@ -414,8 +414,8 @@ Merp::Application.routes.draw do
   
   resources :users do
     member do
-      get "profile"
-      post "update_profile"
+#      get "profile"
+#      post "update_profile"
       put "recover"
     end
     collection do

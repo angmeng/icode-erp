@@ -17,60 +17,88 @@
 
 $(document).ready(function () {
     
-    var window_height           = $(window).height();     //same with $("#page_height").height();
-    var header_height           = $("#main_header").height();
-    var footer_height           = $("#footer").height();
+    var window_height           = $(window).height();
+    var mainHeader_height       = $("#main_header").height();
+    var mainFooter_height       = $("#main_footer").height();
     var menu_height             = $("#menu").height();
-    var ctn_width               = $("#container").width() - 20;
+    var linking_height          = $("#linking").height();
     var title_height            = $(".title_head").height();
     var button_height           = $(".icon_tag").height();
-    var wrapper_height          = window_height - header_height - footer_height - menu_height - 25;
+    
+    var ctn_width               = $(".title_head").width() - 10; // It is for table width
+//    var ctn_width               = - 20; // It is for table width
+    
+    // Wrapper is calculate the height only available when without popup
+    var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
     var content_height          = wrapper_height - title_height - button_height - 12;
+    var linking_content_height  = wrapper_height - linking_height - title_height - button_height - 13;
 
-    // It is for normal page
-    $("#wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
-
-    // Normal Table
+    // It is for normal page for without popup
+    $("#main_wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
+    
+    // It is for .content
+    $(".content").css({ 'height': content_height }).addClass("page_wrapper");
+    
+    // It is for .content with linking
+    $(".linking_content").css({ 'height': linking_content_height }).addClass("page_wrapper");
+    
+    // Normal Table for main screen, no linking
     $("#jgrid").chromatable({
         width:  ctn_width,
         height: content_height,
         scrolling: "yes"
     });
-
-    // Normal Content
-    $(".content").css({ 'height': content_height }).addClass("page_wrapper");
-
-
-
-
     
+    // Normal Table with linking
+    $("#jgrid_linking").chromatable({
+        width:  ctn_width,
+        height: linking_content_height,
+        scrolling: "yes"
+    });
+    
+    // Here is Product Popup Module
     var popup_content_height    = window_height - title_height - button_height - 12;
     var popup_tab_height        = popup_content_height - 50;
-    // It is for popup product page
-    $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });
     
+    $("#treeview").kendoTreeView().height(popup_content_height);  
+    $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
+    
+    // When it is popup...
     // We setting the time out because IE9 really damn high time speed, so we delay time to 0.1s
     setTimeout(function(){
-            var window_height           = $(window).height();     //same with $("#page_height").height();
+            var window_height           = $(window).height();
+            var ctn_width               = $(".title_head").width() - 10;
             var title_height            = $(".title_head").height();
             var button_height           = $(".icon_tag").height();
-
-            // Here is popup module
+            var table_detail_height     = $(".table_details").height();
             var popup_content_height    = window_height - title_height - button_height - 12;
             var popup_tab_height        = popup_content_height - 50;
-
+            var popup_form_table_height = popup_content_height - table_detail_height - 15;
+            
             // It is for popup normal page
             $(".popup_content").css({ 'height': popup_content_height }).addClass("page_wrapper"); 
-
+            $(".popup_form_table").css({ 'height': popup_form_table_height }).addClass("page_wrapper"); 
+            
+            // IMS - User Account
+            $("#name_entry").height(popup_tab_height).addClass("page_wrapper");
+            
             // Popup Tabbing Table -- IMS
             $("#ims_purchase, #ims_product").chromatable({
-                width:  ctn_width,
+                width:  "-20",
                 height: popup_tab_height,
                 scrolling: "yes"
             });
+            
+            // Popup Tabbing Table -- IMS
+            $(".jgrid_popup").chromatable({
+                width:  ctn_width,
+                height: popup_form_table_height,
+                scrolling: "yes"
+            });
+            
     }, 100);
     
-
+    
 });
 
 

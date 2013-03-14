@@ -5,9 +5,9 @@
 <div class="search_engine"><%= render "search_user_kiv" %></div>
 
 <% if @users.present? %>
-  <%= render "listing_users", :list_users => @users %>
+  <div class='container'><%= render "listing_users", :list_users => @users %></div>
 <% else %>
-  <div id="content" style="padding: 0px 5px; border: 1px solid grey;">Not Record Found</div>
+  <div class="content">Not Record Found</div>
 <% end %>
 
 <%= render "action_user_kiv" %>

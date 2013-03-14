@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <td><b>PR No # </b></td>
+    <td><%= f.text_field :pr_no_equals, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>Status</b></td>
+    <td><%= f.select :status_contains, options_for_select(@pr_status, params[:status_contains].to_s), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+  </tr>
+  <tr>
+    <td><b>Requestor</b></td>
+    <td><%= f.select :requested_by_equals, options_for_select(@pr_requestor, params[:requested_by_equals].to_s), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+  </tr>
+  <tr>
+    <td><b>Department</b></td>
+    <td><%= f.select :requested_by_contains, options_for_select(@pr_department, params[:requested_by_contains].to_s), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+  </tr>
+</table>

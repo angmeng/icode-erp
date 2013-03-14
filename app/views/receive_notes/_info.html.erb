@@ -1,4 +1,4 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="jgrid_linking" class="white-line-table zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -20,22 +20,26 @@
         <% unless po.purchase_order_item_lines.map(&:checked).include?(FALSE) %>
 
                 <% if po.purchase_requisition_items.present? %>
-                  <tr class="header_title" style="height:30px;">
-                    <td></td>
-                    <td style="font-size: 20px; font-weight: bold; color: blue;" align="center">
-                      <%= link_to(purchase_order_path(po.id), { :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"}) do %>
-                        <%= po.po_no rescue '-' %>
-                      <% end %>
-                    </td>
-                    <td colspan="10"></td>
-                  </tr>
+    
+                  <% po.purchase_requisition_items.each_with_index do |item, index| %>
+                    <tr  class="<%= cycle("odd_line", "even_line") %>">
+                      <td></td>
+                    
+                    <% if index == 0 %>
+                      
+                      <td style="font-size: 20px; font-weight: bold; color: blue;" align="center" rowspan="<%= po.purchase_requisition_items.count %>">
+                        <%= link_to(purchase_order_path(po.id), { :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"}) do %>
+                          <%= po.po_no rescue '-' %>
+                        <% end %>
+                      </td>
+                                      
+                    <% end %>
 
-                  <% po.purchase_requisition_items.each do |item| %>
+                  
                     <% @poil = PurchaseOrderItemLine.find_by_purchase_requisition_item_id(item.id) %>
                     <% if item.present? %>
-                      <tr class="<%= cycle("odd_line", "even_line") %>">
-                        <td></td>
-                        <td></td>
+                      <%#*<tr >%>
+                        <%#*<td></td>%>
                         <td align="center">
                           <% if item.product.present? %>
                             <%= popup_product_id(item.product) %>
@@ -63,7 +67,8 @@
                             <%# end %>
                           <%# end %>
                         </td-->
-                      </tr>
+                      <%#*</tr>%>
+                        </tr>
                     <% end %>
                   <% end %>
 

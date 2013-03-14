@@ -6,14 +6,10 @@
 </div>
 <div><%= render "search_purchase_requisition" %></div>
 
-<div id="container">
+<% if @purchase_requisitions.present? %>
+  <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
+<% else %>
+  <div class="linking_content">Not Record Found</div>
+<% end %>
 
-    <% if @purchase_requisitions.present? %>
-      <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
-    <% else %>
-      Not Record Found.
-    <% end %>
-
-    <%= render "action_purchase_requisition" %>  
-      
-</div>
+<%= render "action_purchase_requisition" %>  

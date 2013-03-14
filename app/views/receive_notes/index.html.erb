@@ -1,16 +1,18 @@
-<div id="popup_container">
+
   <%= render "linking" %>
   
-  <div class="title_head"><strong style="color:white;">TRANSACTIONS & HISTORIES FOR RECEIVE NOTES</strong></div> 
+  <div class="title_head">
+    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR RECEIVE NOTES</strong>
+    <%= search_button %>
+  </div> 
   <div><%= render "search_engine_receive_notes" %></div>
 
-  <div class="fix_1600x900_h450">
+
     <% if @receive_notes.present? %>
       <%= render "/receive_notes/success_rn" %>
     <% else %>
-      No Record Found.
+      <div class="linking_content">Not Record Found</div>
     <% end %>
-  </div>
+
 
   <%= render "action_receive_note" %>
-</div>

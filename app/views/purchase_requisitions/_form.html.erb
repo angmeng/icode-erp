@@ -2,45 +2,48 @@
 
     <%= render "/purchase_requisitions/pending_of_purchase_requisition", :pending => @pending %>
 
-    <table width="100%">
-      <tr>
-        <td style="vertical-align: top;" width="80%">
-          <table>
-            <tr>
-              <td><b>Requested By</b></td>
-              <td>
-                <% if action_name == "edit" %>
-                  <%= @purchase_requisition.requested_by.name rescue '-' %>
-                <% else %>
-                  <%= current_user.name %>
-                  <%= f.hidden_field :requested_by, :value => current_user.id %>
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td><b>Date</b></td>
-              <td>
-                <% if action_name == "edit" %>
-                  <%= @purchase_requisition.requested_by_date.strftime("%d-%m-%Y") rescue '-' %>
-                <% else %>
-                  <%= Date.today.strftime("%d-%m-%Y") %>
-                  <%= f.hidden_field :requested_by_date, :value => Date.today %>
-                <% end %>
-              </td>
-            </tr>
-          </table>
-        </td>
-        
-        <td width="20%" align="center"><b>Sub-Total: </b><%= two_precision(@arr.sum) %></td>
-      </tr>
-    </table>
+    <div class="pr_check_and_submit">
+        <table width="100%">
+          <tr>
+            <td style="vertical-align: top;">
+               <%#*width="80%"%>
+              <table>
+                <tr>
+                  <td><b>Requested By</b></td>
+                  <td>
+                    <% if action_name == "edit" %>
+                      <%= @purchase_requisition.requested_by.name rescue '-' %>
+                    <% else %>
+                      <%= current_user.name %>
+                      <%= f.hidden_field :requested_by, :value => current_user.id %>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Date</b></td>
+                  <td>
+                    <% if action_name == "edit" %>
+                      <%= @purchase_requisition.requested_by_date.strftime("%d-%m-%Y") rescue '-' %>
+                    <% else %>
+                      <%= Date.today.strftime("%d-%m-%Y") %>
+                      <%= f.hidden_field :requested_by_date, :value => Date.today %>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </td>
 
-    <% if action_name == "edit" %>
-      <%= f.submit "Edit" %>
-    <% else %>
-      <% if @pending.present? %>
-        <%= f.submit "Submit", :confirm => "Are you sure?" %>
-      <% end %>
-    <% end %>
+            <!--td width="20%" align="center"><b>Sub-Total: </b><%#= two_precision(@arr.sum) %></td-->
+          </tr>
+        </table>
+
+        <% if action_name == "edit" %>
+          <%= f.submit "Edit", :class => "k-button" %>
+        <% else %>
+          <% if @pending.present? %>
+            <%= f.submit "Submit", :confirm => "Are you sure?", :class => "k-button" %>
+          <% end %>
+        <% end %>
+    </div>
 
 <% end %>

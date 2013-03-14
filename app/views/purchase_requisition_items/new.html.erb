@@ -1,9 +1,23 @@
-<div id="popup_container">
-  <div style="background-color:blue"><strong style="color:white;">NEW PURCHASE REQUISITION ITEMS</strong></div>
+<div class="title_head"><strong style="color:white;">NEW PURCHASE REQUISITION ITEMS</strong></div>
 
+<div id="valid_purchase_requisition">
   <% if @new_product == PurchaseRequisition::YES %>
     <%= render "new_product" %>
   <% else %>
     <%= render "exist_product" %>
   <% end %>
 </div>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var validator = $("#valid_purchase_requisition").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
+<% end %>

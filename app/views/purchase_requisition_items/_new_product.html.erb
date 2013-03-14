@@ -1,122 +1,110 @@
 <!-- New Product ID --> 
 <%= form_for(@purchase_requisition_item) do |f| %>
+  
+    <%= f.hidden_field :user_id, :value => current_user.id %>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-
-  <div class="fix_800x600">
-    <table>
-      <tr>
-        <td style="vertical-align: top;">
-          <table>
-            <% unless action_name == "edit" %>
-              <tr>
-                <td width="165"><b>Maintenance</b></td>
-                <td><%= f.check_box "maintenance", :id => "maintenance" %></td>
-              </tr>
-            <% end %>
-
-            <% unless @purchase_requisition_item.maintenance == TRUE %>
-              <tr class="new_product_cp">
-                <td width="165" ><b>Vendor Name</b></td>
-                <td>
-                  <% if action_name == "edit" %>
-                    <%= text_field_tag :company_name, @purchase_requisition_item.temporary_sources.first.company_name, :style => "width:400px;", :id => "autoComplete_suppliers" %>
-                  <% else %>
-                    <%= text_field_tag :company_name, params[:company_name], :style => "width:400px;", :id => "autoComplete_suppliers" %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-
-            <tr>
-              <td style="vertical-align: top;"><b>Description *</b></td>
-              <td><%= f.text_area :description, :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,255]'", :rows => 4 %></td>
-            </tr>
-
-            <tr id="new_product_qty">
-              <td><b>Quantity </b></td>
-              <td colspan="3">
-                <%= f.text_field :quantity, :size => 10, :class => "five_digit_" %>
-                <b>U/M: *</b> <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code'  , @purchase_requisition_item.unit_measurement_id.to_i), { :include_blank => true }, { :id => "kendo_combobox" } %>
-              </td>
-            </tr>
-
-            <% unless @purchase_requisition_item.maintenance == TRUE %>
-              <tr class="new_product_up">
-                <td><b>Estimated Price</b></td>
-                <td>
-                  <% if action_name == "edit" %>
-                    <%= text_field_tag :estimated_price, @purchase_requisition_item.temporary_sources.first.unit_price, :size => 10 %>
-                  <% else %>
-                    <%= text_field_tag :estimated_price, params[:estimated_price], :size => 10 %>
-                  <% end %>
-                </td>
-              </tr>
-
-              <tr class="new_product_etp">
-                <td><b>Estimated Amount</b></td>
-                <td id="estimated_total_price" align="left" width="20%">
-                  <% if action_name == "edit" %>
-                    <%= iproduct(@purchase_requisition_item.quantity, @purchase_requisition_item.temporary_sources.first.unit_price) %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-
-            <tr>
-              <td><b>ETA *</b></td>
-              <td>
-                <% if @purchase_requisition_item.eta.present? %>
-                  <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA" %>
-                <% else %>
-                  <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date", "required validationMessage" => "Please Enter ETA" %>
-                <% end %>
-              </td>
-            </tr>
-
-            <tr>
-              <td><b>Remark</b></td>
-              <td><%= f.text_area :remark, :rows => 2 %></td>
-            </tr>
-
-            <tr>
-              <% if action_name == "edit" %>
-                <!--td><b><%#= f.label :status %></b></td-->
-                <!--td>
-                  <%# if @purchase_requisition_item.status == PurchaseRequisitionItem::PENDING %>
-                    PENDING
-                  <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::IN_PROCESSING %>
-                    IN PROGRESS
-                  <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::REJECT %>
-                    REJECT
-                  <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::APPROVED %>
-                    PENDING PO
-                  <%# else %>
-                    <%#= @purchase_requisition_item.status rescue ' ' %>
-                  <%# end %>
-                </td-->
-              <% else %>
-                <td><%= f.hidden_field :status, :value => PurchaseRequisitionItem::PENDING %></td>
+    <div class="popup_content">
+      <table>
+        <tr>
+          <td style="vertical-align: top;">
+            <table>
+              <% unless action_name == "edit" %>
+                <tr>
+                  <td width="165"><b>Maintenance</b></td>
+                  <td><%= f.check_box "maintenance", :id => "maintenance" %></td>
+                </tr>
               <% end %>
-            </tr>
 
-            <tr>
-              <td><b>Urgent</b></td>
-              <td><%= f.check_box :urgent %></td>
-            </tr>
-            
-            <tr>
-              <td><b>Regular Vendor</b></td>
-              <td><%= f.check_box "skip_to_purchase_order" %></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </div>
+              <% unless @purchase_requisition_item.maintenance == TRUE %>
+                <tr class="new_product_cp">
+                  <td width="165" ><b>Vendor Name</b></td>
+                  <td>
+                    <% if action_name == "edit" %>
+                      <%= text_field_tag :company_name, @purchase_requisition_item.temporary_sources.first.company_name, :style => "width:400px;", :id => "autoComplete_suppliers" %>
+                    <% else %>
+                      <%= text_field_tag :company_name, params[:company_name], :style => "width:400px;", :id => "autoComplete_suppliers" %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
 
-  <div class="icon_tag">
-    <%= link_save_button %>
-    <%= link_close_button %>
-  </div>
+              <tr>
+                <td style="vertical-align: top;"><b>Description *</b></td>
+                <td><%= f.text_area :description, :rows => 4, "required validationMessage" => "Please Enter Description" %></td>
+              </tr>
+
+              <tr id="new_product_qty">
+                <td><b>Quantity *</b></td>
+                <td colspan="3">
+                  <%= f.text_field :quantity, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Quantity" %>
+                  <span class="k-invalid-msg" data-for="purchase_requisition_item[quantity]"></span>
+                  <b>U/M: *</b> <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code'  , @purchase_requisition_item.unit_measurement_id.to_i), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter U/M" } %>
+                </td>
+              </tr>
+
+              <% unless @purchase_requisition_item.maintenance == TRUE %>
+                <tr class="new_product_up">
+                  <td><b>Estimated Price</b></td>
+                  <td>
+                    <% if action_name == "edit" %>
+                      <%= text_field_tag :estimated_price, @purchase_requisition_item.temporary_sources.first.unit_price, :class => "kendo_precision_4" %>
+                    <% else %>
+                      <%= text_field_tag :estimated_price, params[:estimated_price], :class => "kendo_precision_4" %>
+                    <% end %>
+                  </td>
+                </tr>
+
+                <tr class="new_product_etp">
+                  <td><b>Estimated Amount</b></td>
+                  <td id="estimated_total_price" align="left" width="20%">
+                    <% if action_name == "edit" %>
+                      <%= iproduct(@purchase_requisition_item.quantity, @purchase_requisition_item.temporary_sources.first.unit_price) %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+
+              <tr>
+                <td><b>ETA *</b></td>
+                <td>
+                  <% if @purchase_requisition_item.eta.present? %>
+                    <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :class => "mkendo_date" , "required validationMessage" => "Please Enter ETA" %>
+                  <% else %>
+                    <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA" %>
+                  <% end %>
+                  <span class="k-invalid-msg" data-for="purchase_requisition_item[eta]"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td valign="top"><b>Remark</b></td>
+                <td><%= f.text_area :remark, :rows => 2 %></td>
+              </tr>
+
+              <tr>
+                <% unless action_name == "edit" %>
+                  <td><%= f.hidden_field :status, :value => PurchaseRequisitionItem::PENDING %></td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td><b>Urgent</b></td>
+                <td><%= f.check_box :urgent %></td>
+              </tr>
+
+              <tr>
+                <td><b>Regular Vendor</b></td>
+                <td><%= f.check_box "skip_to_purchase_order" %></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="icon_tag">
+      <%= link_save_button %>
+      <%= link_close_button %>
+    </div>
+
 <% end %>

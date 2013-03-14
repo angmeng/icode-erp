@@ -1,15 +1,14 @@
-<div id ="popup_container">
+
   <%= render "linking" %> 
 
   <div class="title_head"><strong style="color:white;">VENDOR SELECTION</strong></div>
 
-  <div class="fix_h450">
+
     <% if @pending_vendor.present? %>
       <%= render "/purchase_orders/pending_approval", :pending => @pending_vendor %>
     <% else %>
-      No Record Found.
+      <div class="linking_content">No Record Found</div>
     <% end %>
-  </div>
+
 
   <%= render "action_purchase_order_pending_app" %>
-</div>

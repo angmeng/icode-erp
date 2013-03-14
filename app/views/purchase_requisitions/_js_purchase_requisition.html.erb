@@ -1,0 +1,34 @@
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {    
+        var window_height           = $(window).height();
+        var mainHeader_height       = $("#main_header").height();
+        var mainFooter_height       = $("#main_footer").height();
+        var menu_height             = $("#menu").height();
+        var linking_height          = $("#linking").height();
+        var title_height            = $(".title_head").height();
+        var button_height           = $(".icon_tag").height();
+        var ctn_width               = $(".title_head").width() - 20;
+        
+        var header_content_height   = $(".header_content").height();
+        var pr_new_c_n_s_height     = $(".pr_check_and_submit").height();
+        
+        var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
+        if (linking_height > 0) {
+          var pr_new_height           = wrapper_height - linking_height - header_content_height - title_height - button_height - 12;
+        } else {
+          var pr_new_height           = wrapper_height - header_content_height - title_height - button_height - 12;
+        }
+        var pr_new_signature_height = pr_new_height - pr_new_c_n_s_height - 5;
+        
+        $(".pr_content").css({ 'height': pr_new_height }).addClass("page_wrapper"); 
+        
+        // Normal Table for purchase_requisition_new
+        $("#jgrid_new_pr").chromatable({
+            width:  ctn_width,
+            height: pr_new_signature_height,
+            scrolling: "yes"
+        });
+    });
+  </script>
+<% end %>

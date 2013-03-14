@@ -10,14 +10,13 @@ class PurchaseRequisitionsController < ApplicationController
     else
       @purchase_requisitions = @purchase_requisitions.find_all_by_requested_by(current_user.id)
     end
-    @pr_status      = PurchaseRequisition.uniq_status
-    @pr_requestor   = PurchaseRequisition.uniq_requestor
-    @pr_department  = PurchaseRequisition.uniq_department
+    loading
   end
   
   def kiv
     @search = PurchaseRequisition.search(params[:search])
     @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions_kiv(@search)
+    loading
   end
   
   def show
@@ -42,8 +41,9 @@ class PurchaseRequisitionsController < ApplicationController
       PurchaseRequisitionManagement.run_update(current_user, @purchase_requisition, params[:select_items])
       redirect_to new_purchase_requisition_path, notice: "PR No.#{@purchase_requisition.pr_no} has #{@purchase_requisition.purchase_requisition_items.size} items was created."
     else
-      msg << @purchase_requisition.errors.full_messages.join(", ")
-      flash[:alert] = msg
+      msg = [] unless msg.present?
+      msg << @purchase_requisition.errors.full_messages
+      flash[:alert] = msg.join(", ")
       error_callback
     end
   end
@@ -97,6 +97,7 @@ class PurchaseRequisitionsController < ApplicationController
     else
       @user_report = current_user.prs.where("status != ?", PurchaseRequisition::KEEP_IN_VIEW)
     end
+    @user_report = @user_report.paginate(:page => params[:page])
   end
   
   def yes_approval_requester
@@ -256,5 +257,11 @@ class PurchaseRequisitionsController < ApplicationController
     @purchase_requisition = PurchaseRequisition.find(id)
     @user = User.find(@purchase_requisition.requested_by)
     @logic = PurchaseRequisition.logic(@user)
+  end
+  
+  def loading
+    @pr_status      = PurchaseRequisition.uniq_status
+    @pr_requestor   = PurchaseRequisition.uniq_requestor
+    @pr_department  = PurchaseRequisition.uniq_department
   end
 end

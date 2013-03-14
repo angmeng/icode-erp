@@ -1,0 +1,19 @@
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {    
+        var window_height           = $(window).height();
+        var title_height            = $(".title_head").height();
+        var button_height           = $(".icon_tag").height();
+        var form_height             = $(".po_form").height();
+        var ctn_width               = $(".title_head").width() - 15;
+        var po_height           = window_height - form_height - title_height - button_height - 12;
+        
+        // Normal Table for purchase_requisition_new
+        $("#jgrid").chromatable({
+            width:  ctn_width,
+            height: po_height,
+            scrolling: "yes"
+        });
+    });
+  </script>
+<% end %>

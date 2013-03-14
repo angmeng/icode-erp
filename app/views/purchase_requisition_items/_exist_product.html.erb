@@ -9,20 +9,22 @@
     <% end %>
   <% end %>
 
-  <div class="fix_800x600">
+  <div class="popup_content">
     <table width="100%">
       <tr>
-        <td width="150"><b>Product ID</b></td>
-        <td><%= f.select :product_id, options_for_select(product_non_operation_n_operation_with_pr_combobox, @purchase_requisition_item.product_id), { :include_blank => true }, { :id => "kendo_combobox", :onchange => "put_product_description(this)", :style => "width: 400px;" } %></td>
+        <td width="150"><b>Product ID *</b></td>
+        <td><%= f.select :product_id, options_for_select(product_non_operation_n_operation_with_pr_combobox, @purchase_requisition_item.product_id), { :include_blank => true }, { :class => "mkendo_combobox", :onchange => "put_product_description(this)", :style => "width: 600px;", "required validationMessage" => "Please Enter Product ID" } %></td>
       </tr>
 
       <tr>
-        <td><b>Vendor Name</b></td>
+        <td><b>Vendor Company *</b></td>
         <td>
           <% if source.present? %>
-            <%= select_tag "company_name", options_for_select(trade_company_vendor_with_code, source.company_name), :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)" %>
+            <%#= select_tag "company_name", options_for_select(trade_company_vendor_with_code, source.company_name), :class => "mkendo_combobox", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
+            <%= select_tag "company_name", options_for_select(trade_company_vendor, source.company_name), :class => "mkendo_combobox", :include_blank => true, :style => "width:600px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
           <% else %>
-            <%= select_tag "company_name", options_for_select(trade_company_vendor_with_code),                      :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)" %>
+            <%#= select_tag "company_name", options_for_select(trade_company_vendor_with_code),                      :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
+            <%= select_tag "company_name", options_for_select(trade_company_vendor),                      :class => "mkendo_combobox", :include_blank => true, :style => "width:600px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
           <% end %>
         </td>
       </tr>
@@ -43,7 +45,9 @@
       <tr>
         <td><b>Quantity *</b></td>
         <td>
-          <%= f.text_field :quantity, :size => 10, :required => "true" %>
+          <%#= f.text_field :quantity, :size => 10, :required => "true" %>
+          <%= f.text_field :quantity, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Quantity" %>
+          <span class="k-invalid-msg" data-for="purchase_requisition_item[quantity]"></span>
           <b>U/M:</b>
           <% if @purchase_requisition_item.product_id.present? %>
             <span id="data_um"><%= @purchase_requisition_item.unit_measurement.code rescue '-' %></span>
@@ -54,13 +58,14 @@
       </tr>
 
       <tr>
-        <td><b>Unit Price</b></td>
+        <td><b>Unit Price *</b></td>
         <td>
           <% if source.present? %>
-            <%= text_field_tag :estimated_price, source.unit_price, :size => 10 %>
+            <%= text_field_tag :estimated_price, source.unit_price, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Unit Price" %>
           <% else %>
-            <%= text_field_tag :estimated_price, params[:estimated_price], :size => 10 %>
+            <%= text_field_tag :estimated_price, params[:estimated_price], :class => "kendo_precision_4", "required validationMessage" => "Please Enter Unit Price" %>
           <% end %>
+          <span class="k-invalid-msg" data-for="estimated_price"></span>
         </td>
       </tr>
 
@@ -81,6 +86,7 @@
           <% else %>
             <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA" %>
           <% end %>
+          <span class="k-invalid-msg" data-for="purchase_requisition_item[eta]"></span>
         </td>
       </tr>
 
@@ -90,22 +96,7 @@
       </tr>
             
       <tr>
-        <% if action_name == "edit" %>
-          <!--td><b><%#= f.label :status %></b></td-->
-          <!--td>
-            <%# if @purchase_requisition_item.status == PurchaseRequisitionItem::PENDING %>
-              PENDING
-            <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::IN_PROCESSING %>
-              IN PROGRESS
-            <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::REJECT %>
-              REJECT
-            <%# elsif @purchase_requisition_item.status == PurchaseRequisitionItem::APPROVED %>
-              PENDING PO
-            <%# else %>
-              <%#= @purchase_requisition_item.status rescue ' ' %>
-            <%# end %>
-          </td-->
-        <% else %>
+        <% unless action_name == "edit" %>
           <td><%= f.hidden_field :status, :value => PurchaseRequisitionItem::PENDING %></td>
         <% end %>
       </tr>
