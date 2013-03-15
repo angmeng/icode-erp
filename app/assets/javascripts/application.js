@@ -12,11 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
 //= require_tree .
 //= require turbolinks
 
 //= require jquery-ui
 //= require autocomplete-rails
+//= require dataTables/jquery.dataTables
+
+
 
 $(document).ready(function () {
     
@@ -66,6 +70,18 @@ $(document).ready(function () {
     $("#treeview").kendoTreeView().height(popup_content_height);  
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
     
+
+
+  $('#products').dataTable()
+  // {
+//     sPaginationType: "full_numbers"
+//     bJQueryUI: true,
+//     bProcessing: true,
+//     bServerSide: true
+//     sAjaxSource: $('#products').data('source')
+// });
+         
+
     // When it is popup...
     // We setting the time out because IE9 really damn high time speed, so we delay time to 0.1s
     setTimeout(function(){
