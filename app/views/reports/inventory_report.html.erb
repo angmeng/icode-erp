@@ -28,21 +28,20 @@
           <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
-                  <table id="grid_h445">
-                          <thead>
-                          <tr class="header_line">
-                            
-                            <th></th>
-                            <th>No.</th>
-                            <th>Product ID</th>
-                            <th>Description</th>
-                            <th>Stock In</th>
-                            <th>Stock Out</th>
-                            <th>Remaining</th>
-                            <th>Transaction</th>
-                            <%#*<th>Quantity</th>%>
-                          </tr>
-                  </thead>
+                  <table id="products" class="display">
+                    <thead>
+                      <tr class="header_line">
+                        <th></th>
+                        <th>No.</th>
+                        <th>Product ID</th>
+                        <th>Description</th>
+                        <th>Stock In</th>
+                        <th>Stock Out</th>
+                        <th>Remaining</th>
+                        <th>Transaction</th>
+                        <%#*<th>Quantity</th>%>
+                      </tr>
+                    </thead>
                 <tbody>
                   <% arr = [] %>
 

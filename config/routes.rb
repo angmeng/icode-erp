@@ -58,7 +58,6 @@ Merp::Application.routes.draw do
     get "pdf_receive_note_report"
     get "pdf_sales_cj5_summary_co_report"
     get "pdf_so_customer_po_detail_report"
-    get "pdf_so_customer_po_detail_report"
 
     get "excel_sales_cj5_summary_co_report"
     get "excel_product_report"

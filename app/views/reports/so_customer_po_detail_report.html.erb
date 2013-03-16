@@ -35,7 +35,7 @@
         			
         		</tr>
           </thead>
-        </body>
+        <tbody>
         		<tr class="<%= cycle("odd_line", "even_line") %>">
         			<% @show_so_customer_po_detail_report.each_with_index do |so , index| %>
               <td align="center"><%= check_box_tag "so_ids[]" , so.id %></td>
@@ -57,7 +57,7 @@
 </div>
 
   <div class="icon_tag" style="float:left">
-      <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
   </div>
 
   <div class="icon_tag" style="float:right;">

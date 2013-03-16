@@ -49,11 +49,11 @@ class ReportsController < ApplicationController
   def excel_inventory_report
     if params[:in_ids].present?
       @excel_inventory_report = InventoryHistory.find(params[:in_ids])
-      #respond_to do |format|
-        #format.html
-        #format.csv{ render text: @excel_inventory_report.to_csv }
-        #format.xls
-    #end
+      respond_to do |format|
+        format.html
+        format.csv{ render text: @excel_inventory_report.to_csv }
+        format.xls
+    end
   else
     redirect_to inventory_report_reports_path
   end

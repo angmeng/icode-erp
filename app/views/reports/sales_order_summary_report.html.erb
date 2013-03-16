@@ -1,6 +1,6 @@
 <div id="popup_container">
   <div class="title_head"><strong style="color:white;">Sales Order Summary Report</strong></div>
-<div>
+
   <%= form_for @sales_order_summary_report, :url => sales_order_summary_report_reports_path  do |f| %>
     <table>
       <tr>
@@ -22,12 +22,14 @@
        </tr>
     </table>
   <% end %>
-</div>
+
 <hr />
   <input type="checkbox" name="all" id="checkall" />Check All
-  	<div class="fix_1600x900_h450">
+
+      <div class="fix_1600x900_h450">
       	<%= form_tag pdf_sales_order_summary_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-      	<table  id="grid_h495" >
+      	<table id="grid_h495" >
+          <thead>
       		<tr class="header_line">
             <th></th>
       			<th>SO / PO</th>
@@ -38,6 +40,8 @@
       			<th>ETA</th>
       			<th>Q/S Qty</th>
       		</tr>
+        </thead>
+        <tbody>
       		<tr class="<%= cycle("odd_line", "even_line") %>">
       			<% @show_sales_order_summary_report.each do |so| %>
             <td align="center"><%= check_box_tag "sos_ids[]" , so.id %></td>
@@ -49,7 +53,8 @@
       			<td align="center"><%= so.eta rescue'-' %></td>
       			<td align="center"><%= so.complete_qty rescue'-' %></td>
       		</tr>
-      		<% end %>
+          </tbody>
+          <% end %>
   	</table>
 	</div>
 
