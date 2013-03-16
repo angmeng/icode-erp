@@ -1,13 +1,13 @@
 <%= render "linking" %>
 
 <div class="title_head">
-  <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE REQUISITIONS</strong>
+  <strong style="color:white;">PURCHASE REQUISITIONS DATA</strong>
   <%= search_button %>
 </div>
 <div><%= render "search_purchase_requisition" %></div>
 
 <% if @purchase_requisitions.present? %>
-  <%= render "summary_from_purchase_requisition", :summary => @purchase_requisitions %>
+  <%= render "listing_purchase_requisitions", :listing => @purchase_requisitions %>
 <% else %>
   <div class="linking_content">Not Record Found</div>
 <% end %>

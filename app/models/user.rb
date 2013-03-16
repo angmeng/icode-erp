@@ -53,16 +53,16 @@ class User < ActiveRecord::Base
     self.job_title.upcase!
   end
 
-  def is_admin?
-    admin == true
-  end
-  
   def has_level_two?
     level_two.present?
   end
   
   def has_level_three?
     level_three.present?
+  end
+  
+  def is_admin?  #level 5
+    admin == true
   end
   
 #  def self.clearing

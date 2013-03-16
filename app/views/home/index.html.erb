@@ -1,14 +1,15 @@
-<div style="height: 320px;">
+<div style="height: 400px; background-color: gainsboro;">
   <div id="main_pr">  
     <table>
       <tr>
         <th class="block_box" width="150">PURCHASE REQUISITION</th>
-
+        
         <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
-          <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
-            <td width="150"><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "k-button" %></td>
+        
+          <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
+            <td width="150"><%= link_to "Purchase Requisitions Data", purchase_requisitions_path, :class => "k-button"%></td>
           <% else %>
-            <td width="150">New & Pending PRs</td>
+            <td width="150">Purchase Requisitions Data</td>
           <% end %>
 
           <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
@@ -19,15 +20,7 @@
             <td width="150">Approve / Reject PRs Tasks</td>
           <% end %>
 
-          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-
-          <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
-            <td width="150"><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "k-button"%></td>
-          <% else %>
-            <td width="150">PR Transactions & Histories</td>
-          <% end %>
         <% end %>
-
       </tr>
 
       <tr>
@@ -215,20 +208,19 @@
             <td>Product ID Registration</td>
           <% end %>
 
-          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-
-          <%# if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
-            <td><%= link_to "Product Price Control", new_price_control_path,  :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
-          <%# else %>
-            <%#*<td>Product ID Registration</td>%>
-          <%# end %>
-
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>            
+            
+          <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %>
+            <td><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
+          <% else %>
+            <td class="disabled_button">New Product Price Control</td>
+          <% end %>
 
         <% end %>
       </tr>
 
       <tr>
-        <th><%= image_tag "arrow-bottom.png", :width => "30px"  %></th>
+        <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
       </tr>
 
       <tr>

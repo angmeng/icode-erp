@@ -10,6 +10,9 @@ class PurchaseRequisitionManagement
     elsif user.has_level_three?
       @purchase_requisition.status  = PurchaseRequisition::LEVEL_THREE
       @purchase_requisition.tasks   = user.level_three
+    elsif user.is_admin?
+      @purchase_requisition.status  = PurchaseRequisition::SUBMIT_PO
+      @purchase_requisition.tasks   = 0
     else
       @purchase_requisition.status  = PurchaseRequisition::LEVEL_FIVE
       @purchase_requisition.tasks   = boss.id

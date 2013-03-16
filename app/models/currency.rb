@@ -14,12 +14,10 @@ class Currency < ActiveRecord::Base
   
   ACTIVE = "ACTIVE"
   KEEP_IN_VIEW = "KIV"
+    
+  default_scope order("name")
   
-  default_scope :order => "name"
-  
-  def self.ordered
-    where(:status => Currency::ACTIVE)
-  end
+  scope :db_active, where(:status => Currency::ACTIVE)
   
   def self.ordered_name(search)
     search.where(:status => Currency::ACTIVE)

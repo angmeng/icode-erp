@@ -50,7 +50,7 @@ gem "meta_search"
 gem "paperclip"
 gem 'turbolinks'
 gem 'mime-types'
-gem 'rails3-jquery-autocomplete' 
+#gem 'rails3-jquery-autocomplete' 
 
 #gem 'wkhtmltopdf-binary'
 

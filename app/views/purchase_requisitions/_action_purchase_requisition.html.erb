@@ -1,3 +1,15 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
+    <span><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %></span>
+  <% else %>
+    <span class="disabled_button">New & Pending PRs</span>
+  <% end %>
+</div>
+
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%= will_paginate @purchase_requisitions, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION_SHOW) %>

@@ -1,21 +1,20 @@
 class PurchaseRequisitionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
+  layout "sheetbox", :only => [:new, :create, :edit, :update, :show]
 
   def index
     @search = PurchaseRequisition.search(params[:search])
     @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions(@search)
-    if user_is_admin?
-      @purchase_requisitions = @purchase_requisitions.all
-    else
-      @purchase_requisitions = @purchase_requisitions.find_all_by_requested_by(current_user.id)
-    end
+    @purchase_requisitions.find_all_by_department_id(current_user.department_id) unless user_is_admin?
+    @purchase_requisitions = @purchase_requisitions.paginate(:page => params[:page])
     loading
   end
   
   def kiv
     @search = PurchaseRequisition.search(params[:search])
     @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions_kiv(@search)
+    @purchase_requisitions = @purchase_requisitions.paginate(:page => params[:page])
     loading
   end
   
@@ -30,21 +29,21 @@ class PurchaseRequisitionsController < ApplicationController
   end
 
   def create
-    # Validate should checking whether select items and eta date are valid?
     @purchase_requisition = PurchaseRequisition.new(params[:purchase_requisition])
     pr_value = company.sn_purchase_req_no.to_i + 1
-    @manage, msg = PurchaseRequisition.managing_validate(current_user, params[:select_items])
+    @manage, msg = PurchaseRequisition.managing_validate(current_user, params[:select_items])   # Validate should checking whether select items and ETA date are valid?
     PurchaseRequisitionManagement.arrange(current_user, @purchase_requisition, pr_value, director_data) if @manage.present?
 
     if @manage.present? && @purchase_requisition.save
-      company.update_attributes(:sn_purchase_req_no => pr_value)
+      company.update_attributes!(:sn_purchase_req_no => pr_value)
       PurchaseRequisitionManagement.run_update(current_user, @purchase_requisition, params[:select_items])
-      redirect_to new_purchase_requisition_path, notice: "PR No.#{@purchase_requisition.pr_no} has #{@purchase_requisition.purchase_requisition_items.size} items was created."
+      redirect_to new_purchase_requisition_path, notice: "PR No # #{@purchase_requisition.pr_no} has #{@purchase_requisition.purchase_requisition_items.size} items was created."
     else
       msg = [] unless msg.present?
-      msg << @purchase_requisition.errors.full_messages
+      msg << @purchase_requisition.errors.full_messages if @purchase_requisition.errors.present?
       flash[:alert] = msg.join(", ")
-      error_callback
+      new
+      render action: "new"
     end
   end
   
@@ -54,7 +53,6 @@ class PurchaseRequisitionsController < ApplicationController
     @app_lvl2 = User.find(@purchase_requisition.approved_by_level_two)    if @purchase_requisition.approved_by_level_two.present?
     @app_lvl3 = User.find(@purchase_requisition.approved_by_level_three)  if @purchase_requisition.approved_by_level_three.present?
     @app_lvl4 = User.find(@purchase_requisition.approved_by_level_five)   if @purchase_requisition.approved_by_level_five.present?
-    render :layout => "sheetbox"
   end
 
   def update
@@ -74,21 +72,13 @@ class PurchaseRequisitionsController < ApplicationController
   def destroy
     @purchase_requisition = PurchaseRequisition.find(params[:id])
     @purchase_requisition.update_attributes(:status => PurchaseRequisition::KEEP_IN_VIEW, :recover_status => @purchase_requisition.status)
-
-    respond_to do |format|
-      format.html { redirect_to purchase_requisitions_path, :notice => "The PR has dropped to KIV." }
-      format.json { head :no_content }
-    end
+    redirect_to purchase_requisitions_path, :notice => "PR No # #{@purchase_requisition.pr_no} has dropped to KIV."
   end
   
   def recover
     @purchase_requisition = PurchaseRequisition.find(params[:id])
     @purchase_requisition.update_attributes(:status => @purchase_requisition.recover_status, :recover_status => "")
-#
-    respond_to do |format|
-      format.html { redirect_to kiv_purchase_requisitions_path, :notice => "The PR has recovered from KIV." }
-      format.json { head :no_content }
-    end
+    redirect_to kiv_purchase_requisitions_path, :notice => "PR No # #{@purchase_requisition.pr_no} has recovered from KIV."
   end
   
   def signature_report
@@ -240,11 +230,6 @@ class PurchaseRequisitionsController < ApplicationController
   
   private 
   
-  def error_callback
-    @pending = current_user.purchase_requisition_items.where("status = ?", PurchaseRequisitionItem::PENDING)
-    render action: "new"
-  end
-  
   def inventory_management_system
     role(PurchaseRequisition::ROLE)
   end
@@ -255,13 +240,13 @@ class PurchaseRequisitionsController < ApplicationController
   
   def loading_logic(id)
     @purchase_requisition = PurchaseRequisition.find(id)
-    @user = User.find(@purchase_requisition.requested_by)
-    @logic = PurchaseRequisition.logic(@user)
+    @user                 = User.find(@purchase_requisition.requested_by)
+    @logic                = PurchaseRequisition.logic(@user)
   end
   
   def loading
     @pr_status      = PurchaseRequisition.uniq_status
     @pr_requestor   = PurchaseRequisition.uniq_requestor
-    @pr_department  = PurchaseRequisition.uniq_department
+#    @pr_department  = PurchaseRequisition.uniq_department
   end
 end

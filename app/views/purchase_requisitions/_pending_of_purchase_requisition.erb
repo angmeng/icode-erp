@@ -13,15 +13,13 @@
           <th>ETA</th>
           <th>QTY</th>
           <th>U/M</th>
-          <th>Unit Price</th>
+          <th width="60">U/P</th>
           <th>Total</th>
           <th>Remark</th>
         </tr>
       </thead>
 
       <tbody>
-
-        <%# @arr = [] %>
         
         <% pending.each_with_index do |p, index| %>
         
@@ -31,72 +29,63 @@
             <% end %>
           <% end %>
         
-          <%# if p.urgent == TRUE %>
-            <%# if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <!--tr class="<%#= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%#= p.id %>"-->
-            <%# else %>
-              <!--tr class="<%#= cycle("odd_line", "even_line") %> red_urgent" controllerName="purchase_requisition_items" rowsId="<%#= p.id %>"-->
-            <%# end %>
-          <%# else %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
-          <%# end %>
-              <td></td>
-              <td align="center"><%= index + 1 %></td>
-              <td align="center"><%= check_box_tag "select_items[]", p.id %></td>
-              <td align="center"><%= purchase_requisition_item_status(p) %></td>
-              <td align="center">
-                <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-                  NO
-                <% else %>
-                  <%= p.urgent? ? "YES" : "NO" %>
-                <% end %>
-              </td>
-              <td align="center">            
-                <% if p.product_id? %>
-                  <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-                    <%= p.product.product_combobox.product_code rescue '-' %>
-                  <% end %>
-                <% end %>
-              </td>
-              <td>
-                <% unless p.maintenance == TRUE %>
-                  <% if source.present? %>
-                    <% if company = TradeCompany.find_by_name(source.company_name) %>
-                      <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
-                        <%= source.company_name rescue '-' %>
-                      <% end %>
-                    <% else %>
-                      <span class="red_alert"><%= source.company_name rescue '-' %></span>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </td>
-              <td><%= p.description %></td>
-              <td align="center">
-                <% if p.eta < Date.today %>
-                  <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-                <% else %>
-                  <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
-                <% end %>
-              </td>
-              <td align="center"><%= p.quantity %></td>
-              <td align="center"><%= p.unit_measurement.code rescue '-' %></td>
-              <% if p.maintenance == TRUE %>
-                <td></td><td></td>
+          <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= p.id %>">
+            <td></td>
+            <td align="center"><%= index + 1 %></td>
+            <td align="center"><%= check_box_tag "select_items[]", p.id %></td>
+            <td align="center"><%= purchase_requisition_item_status(p) %></td>
+            <td align="center">
+              <% if p.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                NO
               <% else %>
+                <%= p.urgent? ? "YES" : "NO" %>
+              <% end %>
+            </td>
+            <td align="center">            
+              <% if p.product_id? %>
+                <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                  <%= p.product.product_combobox.product_code rescue '-' %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% unless p.maintenance == TRUE %>
                 <% if source.present? %>
-                  <td align="right"><%= four_precision(source.unit_price) %></td>
-                  <td align="right"><%= iproduct(p.quantity, source.unit_price) %></td>
-                  <%# @arr << p.quantity * source.unit_price %>
+                  <% if company = TradeCompany.find_by_name(source.company_name) %>
+                    <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                      <%= source.company_name rescue '-' %>
+                    <% end %>
+                  <% else %>
+                    <span class="red_alert"><%= source.company_name rescue '-' %></span>
+                  <% end %>
                 <% end %>
               <% end %>
-                        
-              <% if p.remark.present? %>
-                <td><%= p.remark rescue '-' %></td>
+            </td>
+            <td><%= p.description %></td>
+            <td align="center">
+              <% if p.eta < Date.today %>
+                <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
               <% else %>
-                <td align="center">-</td>
+                <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
               <% end %>
-            </tr>
+            </td>
+            <td align="center"><%= p.quantity %></td>
+            <td align="center"><%= p.unit_measurement.code rescue '-' %></td>
+            <% if p.maintenance == TRUE %>
+              <td></td><td></td>
+            <% else %>
+              <% if source.present? %>
+                <td align="right"><%= four_precision(source.unit_price) %></td>
+                <td align="right"><%= iproduct(p.quantity, source.unit_price) %></td>
+              <% end %>
+            <% end %>
+
+            <% if p.remark.present? %>
+              <td><%= p.remark rescue '-' %></td>
+            <% else %>
+              <td align="center">-</td>
+            <% end %>
+          </tr>
 
         <% end %>
             

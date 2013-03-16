@@ -20,11 +20,9 @@
         <td><b>Vendor Company *</b></td>
         <td>
           <% if source.present? %>
-            <%#= select_tag "company_name", options_for_select(trade_company_vendor_with_code, source.company_name), :class => "mkendo_combobox", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
-            <%= select_tag "company_name", options_for_select(trade_company_vendor, source.company_name), :class => "mkendo_combobox", :include_blank => true, :style => "width:600px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
+            <%= select_tag "company_name", options_for_select(trade_company_vendor_with_selection_name, source.company_name), :class => "mkendo_combobox", :include_blank => true, :style => "width:600px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
           <% else %>
-            <%#= select_tag "company_name", options_for_select(trade_company_vendor_with_code),                      :id => "kendo_combobox_two", :include_blank => true, :style => "width:400px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
-            <%= select_tag "company_name", options_for_select(trade_company_vendor),                      :class => "mkendo_combobox", :include_blank => true, :style => "width:600px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
+            <%= select_tag "company_name", options_for_select(trade_company_vendor_with_selection_name),                      :class => "mkendo_combobox", :include_blank => true, :style => "width:600px;", :onchange => "getCombo_pr_company(this)", "required validationMessage" => "Please Enter Vendor Company" %>
           <% end %>
         </td>
       </tr>

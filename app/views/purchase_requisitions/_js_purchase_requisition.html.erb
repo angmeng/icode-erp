@@ -1,24 +1,26 @@
 <% content_for :jquery_script do %>
   <script>
-    $(document).ready(function() {    
+    $(document).ready(function() {  
+      
+        <%#*var message_box = $("#new_item_request"), undo = $("#undo");%>
+
+        <%#*undo.bind("click", function() { message_box.data("kendoWindow").open().center(); });%>
+
+        <%#*if (!message_box.data("kendoWindow")) {%>
+            <%#*message_box.kendoWindow({ width: "300px", height: "150px", actions: ["Close"], title: "REQUEST" });%>
+        <%#*}%>
+        
+        <%#*$('#on_button_one, #on_button_two').click(function() { message_box.data("kendoWindow").close(); });%>
+          
+          
+                    
         var window_height           = $(window).height();
-        var mainHeader_height       = $("#main_header").height();
-        var mainFooter_height       = $("#main_footer").height();
-        var menu_height             = $("#menu").height();
-        var linking_height          = $("#linking").height();
         var title_height            = $(".title_head").height();
         var button_height           = $(".icon_tag").height();
-        var ctn_width               = $(".title_head").width() - 20;
-        
+        var ctn_width               = $(".title_head").width() - 20;        
         var header_content_height   = $(".header_content").height();
         var pr_new_c_n_s_height     = $(".pr_check_and_submit").height();
-        
-        var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
-        if (linking_height > 0) {
-          var pr_new_height           = wrapper_height - linking_height - header_content_height - title_height - button_height - 12;
-        } else {
-          var pr_new_height           = wrapper_height - header_content_height - title_height - button_height - 12;
-        }
+        var pr_new_height           = window_height - title_height - header_content_height - button_height - 12;
         var pr_new_signature_height = pr_new_height - pr_new_c_n_s_height - 5;
         
         $(".pr_content").css({ 'height': pr_new_height }).addClass("page_wrapper"); 

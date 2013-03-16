@@ -1,29 +1,44 @@
 <div id="linking">
-  <table>
+  <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
+    <table>
       <tr>
-        <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
-          <% if roles.include?(InventoryManagementSystem::PR_NEW) %>
-            <td><%= link_to "New & Pending PRs", new_purchase_requisition_path, :class => "k-button" %></td>
-          <% else %>
-            <td>New & Pending PRs</td>
-          <% end %>
+        <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
+          <td><%= link_to "Purchase Requisitions Data", purchase_requisitions_path, :class => "k-button"%></td>
+        <% else %>
+          <td class="disabled_button">Purchase Requisitions Data</td>
+        <% end %>
 
-          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+        <td><%= image_tag "arrow-right.png", :width => "30px", :height => "30px" %></td>
 
-          <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
-            <td><%= link_to "Approve / Reject PRs Tasks", signature_report_purchase_requisitions_path, :class => "k-button" %></td>
-          <% else %>
-            <td>Approve / Reject PRs Tasks</td>
-          <% end %>
-
-          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-
-          <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
-            <td><%= link_to "PR Transactions & Histories", purchase_requisitions_path, :class => "k-button"%></td>
-          <% else %>
-            <td>PR Transactions & Histories</td>
-          <% end %>
+        <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
+          <td><%= link_to "Approve / Reject PRs Tasks", signature_report_purchase_requisitions_path, :class => "k-button" %></td>
+        <% else %>
+          <td class="disabled_button">Approve / Reject PRs Tasks</td>
         <% end %>
       </tr>
-  </table>
+    </table>
+  <% end %>
+  
 </div>
+
+<% if action_name == "index" %>
+  <span id="department_location"><b>DEPARTMENT:</b> <%= @purchase_requisitions.first.user.department.name rescue '-' %></span>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var mainHeader_height   = $("#main_header").height();
+        var menu_height         = $("#menu").height();
+        var total_height        = mainHeader_height + menu_height + 30;
+        
+        $("#department_location").css({ 
+          'position': 'absolute',
+          'right': '5px',
+          'top': total_height
+        }); 
+
+    });
+  </script>
+<% end %>

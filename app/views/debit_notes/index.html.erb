@@ -4,17 +4,14 @@
 </div>
 <div><%= render "search_debit_note" %></div>
 
-<div id="container">
 
   <% if @debit_notes.present? %>
     <%= render "listing_debit_notes", :debit_notes => @debit_notes %>
   <% else %>
-    <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
+    <div class="content">Not Record Found</div>
   <% end %>
 
   <%= render "action_debit_note" %>  
-      
-</div>
 
 
 

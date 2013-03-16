@@ -1,0 +1,31 @@
+<h1>Listing statement_of_accounts</h1>
+
+<table>
+  <tr>
+    <th>Trade company</th>
+    <th>Transaction date</th>
+    <th>Transaction type</th>
+    <th>Debit note</th>
+    <th>Credit note</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @statement_of_accounts.each do |statement_of_account| %>
+  <tr>
+    <td><%= statement_of_account.trade_company_id %></td>
+    <td><%= statement_of_account.transaction_date %></td>
+    <td><%= statement_of_account.transaction_type %></td>
+    <td><%= statement_of_account.debit_note_id %></td>
+    <td><%= statement_of_account.credit_note_id %></td>
+    <td><%= link_to 'Show', statement_of_account %></td>
+    <td><%= link_to 'Edit', edit_statement_of_account_path(statement_of_account) %></td>
+    <td><%= link_to 'Destroy', statement_of_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Statement of account', new_statement_of_account_path %>

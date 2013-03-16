@@ -137,8 +137,8 @@ p#alert {
 }
 
 /*#main_menu  { width: auto; }*/
-#main_pr    { height: 300px; padding: 10px; /* background-color: #DCF0F7; */ background-color: gainsboro; }
-#main_qr    { height: 300px; padding: 10px; /* background-color: #C5EFFD; */ background-color: gainsboro; display: none; }
+#main_pr    { height: 300px; padding: 10px; /* background-color: #DCF0F7; */  }
+#main_qr    { height: 300px; padding: 10px; /* background-color: #C5EFFD; */  display: none; }
 /*#menu h2    { font-size: 13px; text-transform: uppercase; padding: 5px 10px; }*/
 #menu a:hover { background-color: gold; }
 /*=================================== MENU TOOL (END) =====================================*/
@@ -332,6 +332,8 @@ table.normal_table_white td {
 .padding_10         { padding: 10px; }
 .check_highlight    { width: 25px; }
 .remove_underline   { text-decoration: none; }
+.disabled_button    { padding: 5px; color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: center; }
+.disabled_menu      { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: left; }
 
 
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
@@ -455,7 +457,7 @@ table.normal_table_white td {
     width: 100%;
     height: 550px; }
 
-.block_box { border: 1px solid black; padding: 5px; }
+.block_box { border: 1px solid black; padding: 5px; background-color: #9aafe5; }
 
 tr.over td{ background: gold; }
 tr.selected_row td{ background: gold; }
@@ -567,3 +569,5 @@ legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color:
 .t_description  { text-align: left; }
 .t_unit_price   { text-align: right; }
 .t_date         { text-align: center; }
+
+

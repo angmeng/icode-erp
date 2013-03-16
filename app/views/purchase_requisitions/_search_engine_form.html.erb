@@ -11,8 +11,4 @@
     <td><b>Requestor</b></td>
     <td><%= f.select :requested_by_equals, options_for_select(@pr_requestor, params[:requested_by_equals].to_s), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
   </tr>
-  <tr>
-    <td><b>Department</b></td>
-    <td><%= f.select :requested_by_contains, options_for_select(@pr_department, params[:requested_by_contains].to_s), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
-  </tr>
 </table>

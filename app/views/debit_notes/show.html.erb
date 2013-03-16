@@ -1,11 +1,11 @@
-<div id="popup_container">
+
   <div class="title_head"><strong style="color:white;">SHOW DEBIT NOTE DETAIL</strong></div>
-  <div class="fix_800x450">
+  <div class="popup_content">
     <table>
       <tr>
         <td><b>D/N No #</b></td>
         <td><%= @debit_note.debit_note_no rescue '-' %></td>
-        <td>
+        <td align="right">
           <b>D/N Date</b>
           <%= @debit_note.debit_note_date.strftime("%d-%m-%Y") rescue '-' %>
         </td>
@@ -34,4 +34,3 @@
   <div class="icon_tag">
     <%= link_close_button %>
   </div>
-</div>

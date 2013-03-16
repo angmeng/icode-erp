@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Trade company:</b>
+  <%= @statement_of_account.trade_company_id %>
+</p>
+
+<p>
+  <b>Transaction date:</b>
+  <%= @statement_of_account.transaction_date %>
+</p>
+
+<p>
+  <b>Transaction type:</b>
+  <%= @statement_of_account.transaction_type %>
+</p>
+
+<p>
+  <b>Debit note:</b>
+  <%= @statement_of_account.debit_note_id %>
+</p>
+
+<p>
+  <b>Credit note:</b>
+  <%= @statement_of_account.credit_note_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_statement_of_account_path(@statement_of_account) %> |
+<%= link_to 'Back', statement_of_accounts_path %>
