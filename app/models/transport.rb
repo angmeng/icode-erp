@@ -11,16 +11,16 @@ class Transport < ActiveRecord::Base
   
   validates :name, :uniqueness => true
   
-  def self.ordered
-    order("name").where(:status => Transport::ACTIVE)
-  end
+  default_scope order("name")
+  
+  scope :db_active, where(:status => Transport::ACTIVE)
   
   def self.ordered_name(search)
-    search.order("name").where(:status => TradeTerm::ACTIVE)
+    search.where(:status => TradeTerm::ACTIVE)
   end
   
   def self.ordered_name_kiv(search)
-    search.order("name").where(:status => TradeTerm::KEEP_IN_VIEW)
+    search.where(:status => TradeTerm::KEEP_IN_VIEW)
   end
   
   def uppercase_text

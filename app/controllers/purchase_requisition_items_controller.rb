@@ -1,6 +1,6 @@
 class PurchaseRequisitionItemsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox", :only => [:new, :edit, :show]
+  layout "sheetbox", :only => [:new, :create, :edit, :update, :show]
 
   def index
     @search = PurchaseRequisitionItem.search(params[:search])
@@ -21,16 +21,13 @@ class PurchaseRequisitionItemsController < ApplicationController
   def new
     @purchase_requisition_item = PurchaseRequisitionItem.new
     @new_product = params[:new_product].to_i
-    render :layout => "sheetbox"
   end
 
   def create
     @purchase_requisition_item = PurchaseRequisitionItem.new(params[:purchase_requisition_item])
     @eta, msg = PurchaseRequisitionItem.present_date(@purchase_requisition_item.eta)
-    if @eta.present?
-      unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
-        PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price])
-      end
+    if @eta.present?      
+      PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price]) unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
       if @purchase_requisition_item.save
         redirect_to @purchase_requisition_item, notice: 'Purchase Requisition Item was successfully created.'
       else
@@ -110,14 +107,20 @@ class PurchaseRequisitionItemsController < ApplicationController
     end
   end
   
-  def error_functions
-    unless @purchase_requisition_item.product_id.present?
-      @new_product = PurchaseRequisition::YES
-    end
-    render action: "new"
-  end
-  
   def kiv
     @purchase_requisition_items = PurchaseRequisitionItem.where(:status => PurchaseRequisitionItem::KEEP_IN_VIEW)
+  end
+  
+  def product_vendor_unit_price_in_pr
+    tc = TradeCompany.find_by_name(params[:vendor_id])
+    product_vendor = ProductVendor.find_by_product_id_and_trade_company_id(params[:product_id], tc.id)
+    render json: product_vendor
+  end
+  
+  private
+  
+  def error_functions
+    @new_product = PurchaseRequisition::YES unless @purchase_requisition_item.product_id.present?
+    render action: "new"
   end
 end

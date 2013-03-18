@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307134328) do
+ActiveRecord::Schema.define(:version => 20130315193850) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -686,6 +686,7 @@ ActiveRecord::Schema.define(:version => 20130307134328) do
     t.integer  "tasks"
     t.string   "status"
     t.string   "recover_status"
+    t.integer  "department_id"
   end
 
   create_table "quotation_request_forms", :force => true do |t|
@@ -1041,6 +1042,20 @@ ActiveRecord::Schema.define(:version => 20130307134328) do
     t.datetime "updated_at",                :null => false
     t.string   "source_path"
   end
+
+  create_table "statement_of_accounts", :force => true do |t|
+    t.integer  "trade_company_id"
+    t.date     "transaction_date"
+    t.string   "transaction_type"
+    t.integer  "debit_note_id"
+    t.integer  "credit_note_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "statement_of_accounts", ["credit_note_id"], :name => "index_statement_of_accounts_on_credit_note_id"
+  add_index "statement_of_accounts", ["debit_note_id"], :name => "index_statement_of_accounts_on_debit_note_id"
+  add_index "statement_of_accounts", ["trade_company_id"], :name => "index_statement_of_accounts_on_trade_company_id"
 
   create_table "stock_outs", :force => true do |t|
     t.string   "transfer_note_no"

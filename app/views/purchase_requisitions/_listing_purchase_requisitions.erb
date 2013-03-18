@@ -1,0 +1,60 @@
+<% if listing.present? %>
+  <table id="jgrid_linking" class="zebraLight">
+    <thead>
+      <tr class="header_line">
+        <th class="check_highlight"></th>
+        <% if action_name == "signature_report" %>
+          <th>Tasks</th>
+        <% end %>
+        <th>PR No #</th>
+        <th>Status</th>
+        <th>Requestor</th>
+        <th>Items</th>
+        <th>Requested Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% listing.each do |pr| %>
+        <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= pr.id %>">
+          <td></td>
+          <% if action_name == "signature_report" %>
+            <% if pr.remark.blank? %>
+              <td align="center">Approve</td>
+            <% else %>
+              <td align="center">Reject</td>
+            <% end %>
+          <% end %>
+          <td align="center"><%= pr.pr_no %></td>
+          <td align="center">
+            <% if pr.status == PurchaseRequisition::LEVEL_ONE %>
+              Level 1
+            <% elsif pr.status == PurchaseRequisition::LEVEL_TWO %>
+              Level 2
+            <% elsif pr.status == PurchaseRequisition::LEVEL_THREE %>
+              Level 3
+            <% elsif pr.status == PurchaseRequisition::LEVEL_FIVE %>
+              Level 5
+            <% elsif pr.status == PurchaseRequisition::SUBMIT_PO %>
+              Pending PO
+            <% elsif pr.status == PurchaseRequisition::SUBMIT_RN %>
+              PO Issued
+            <% elsif pr.status == PurchaseRequisition::COMPLETED %>
+              Completed
+            <% elsif pr.status == PurchaseRequisition::KEEP_IN_VIEW %>
+              Keep In View
+            <% else %>
+              -
+            <% end %>
+          </td>
+          <td align="center"><%= pr.user.name rescue '-' %></td>
+          <td align="center"><%= pr.purchase_requisition_items.count rescue '-' %></td>
+          <td class="t_date"><%= pr.requested_by_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+<% end %>
+

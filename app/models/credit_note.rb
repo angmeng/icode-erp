@@ -6,6 +6,8 @@ class CreditNote < ActiveRecord::Base
   
   validates :credit_note_no, :amount, :credit_note_date, :credit_type, :updated_by, :trade_company_id, :currency_id, :presence => true
   
+  has_one :statement_of_account
+  
   belongs_to :trade_company
   belongs_to :currency
   
@@ -24,9 +26,10 @@ class CreditNote < ActiveRecord::Base
   end
   
   def update_credit_thing(company)
-    company.total_amount      += self.amount
     company.sn_credit_note_no  = self.credit_note_no
     company.save!
+    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.credit_note_date, :transaction_type => "CN", :credit_note_id => self.id, :debit_note_id => 0)
+    @soa.save!
   end
   
   def uppercase_text

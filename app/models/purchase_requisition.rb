@@ -1,6 +1,6 @@
 class PurchaseRequisition < ActiveRecord::Base
   
-  attr_accessible :pr_no,  :requested_by, :requested_by_date, :approved_by_level_two, :approved_by_level_two_date, :approved_by_level_three, :approved_by_level_three_date, :approved_by_level_five, :approved_by_level_five_date, :remark, :tasks, :status, :recover_status
+  attr_accessible :pr_no,  :requested_by, :requested_by_date, :approved_by_level_two, :approved_by_level_two_date, :approved_by_level_three, :approved_by_level_three_date, :approved_by_level_five, :approved_by_level_five_date, :remark, :tasks, :status, :recover_status, :department_id
 
   belongs_to :product
   belongs_to :trade_company
@@ -153,17 +153,17 @@ class PurchaseRequisition < ActiveRecord::Base
     return array
   end
   
-  def self.uniq_department
-    department = []
-    pr = PurchaseRequisition.select('DISTINCT requested_by');
-    if pr.present?
-      pr.each do |prn|
-        user = User.find(prn.requested_by)
-        department << [user.department.name, prn.requested_by]
-      end
-    end
-    return department
-  end
+#  def self.uniq_department
+#    department = []
+#    pr = PurchaseRequisition.select('DISTINCT requested_by');
+#    if pr.present?
+#      pr.each do |prn|
+#        user = User.find(prn.requested_by)
+#        department << [user.department.name, prn.requested_by]
+#      end
+#    end
+#    return department
+#  end
   
   def self.logic(user)
     array_logic = []
@@ -188,18 +188,19 @@ class PurchaseRequisition < ActiveRecord::Base
   end
   
   def self.managing_validate(user, select_items)
+    msg = []
     if select_items.present?
       user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
       if user_pending.present?
         user_pending.each do |p|
           if p.eta < Date.today
-            return false, "ETA Should Have Future Date."
+            return false, msg << "ETA Should Have Future Date."
             break
           end
         end
       end
     else
-      return false, "Please Select Items From Checkboxes."
+      return false,  msg << "Please Select Items From Checkboxes."
     end
   end
   
@@ -248,6 +249,14 @@ class PurchaseRequisition < ActiveRecord::Base
     end
     
     return ret
+  end
+  
+  def self.overwrite_department_id
+    @pr = PurchaseRequisition.all
+    @pr.each do |pr|
+      user = User.find_by_id(pr.requested_by)
+      pr.update_attributes!(:department_id => user.department_id)
+    end
   end
 
 end

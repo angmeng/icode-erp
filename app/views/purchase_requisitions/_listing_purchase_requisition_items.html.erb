@@ -1,0 +1,104 @@
+<% if action_name == "kiv" %>
+  <table id="jgrid" class="zebraLight">
+<% else %>
+  <table id="jgrid_new_pr" class="zebraLight">
+<% end %>
+
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>No.</th>
+      <th>Item Status</th>
+      <th>Urgent</th>
+      <th>Product ID</th>
+      <th>Vendor Name</th>
+      <th>Description (in Detail)</th>
+      <th>ETA</th>
+      <th>Qty</th>
+      <th>U/M</th>
+      <th>Unit Price</th>
+      <th>Total</th>
+      <th>Remark</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @arr = [] %>
+
+    <% listing_pri.each_with_index do |pri, index| %>
+
+      <% if pri.temporary_sources.present? %> 
+        <% if pri.temporary_sources.find_by_select_vendor(TRUE).present? %>
+          <% source = pri.temporary_sources.find_by_select_vendor(TRUE) %>
+        <% end %>
+      <% end %>
+
+      <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="purchase_requisition_items" rowsId="<%= pri.id %>">
+        <td></td>
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= purchase_requisition_item_status(pri) %></td>
+        <td align="center">
+          <% if pri.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+            NO
+          <% else %>
+            <% if pri.urgent? %>
+              <span class="red_alert">YES</span>
+            <% else %>
+              NO
+            <% end %>
+          <% end %>
+        </td>
+        <td align="center">
+          <% if pri.product_id? %>
+            <%= link_to(product_path(pri.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+              <%= render '/product_categories/join_product_category', :pc => p %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% unless pri.maintenance == TRUE %>
+            <% if source.present? %>
+              <% if company = TradeCompany.find_by_name(source.company_name) %>
+                <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                  <%= source.company_name rescue '-' %>
+                <% end %>
+              <% else %>
+                <span class="red_alert"><%= source.company_name rescue '-' %></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= pri.description %></td>
+        <td align="center">
+          <% if pri.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+            <%= pri.eta.strftime("%d-%m-%Y") rescue '-' %>
+          <% else %>
+            <% if pri.eta < Date.today %>
+              <span class="red_alert"><%= pri.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+            <% else %>
+              <%= pri.eta.strftime("%d-%m-%Y") rescue '-' %>
+            <% end %>
+          <% end %>
+        </td>
+        <td align="center"><%= pri.quantity rescue '-' %></td>
+        <td align="center"><%= pri.unit_measurement.code rescue '-' %></td>
+
+        <% if pri.maintenance == TRUE %>
+          <td></td><td></td>
+        <% else %>
+          <% if source.present? %>
+            <td align="right"><%= four_precision(source.unit_price) %></td>
+            <td align="right"><%= iproduct(pri.quantity, source.unit_price) %></td>
+            <% @arr << pri.quantity * source.unit_price %>
+          <% end %>
+        <% end %>
+
+        <% if pri.remark.present? %>
+          <td><%= pri.remark rescue '-' %></td>
+        <% else %>
+          <td align="center">-</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

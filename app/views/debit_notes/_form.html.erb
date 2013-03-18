@@ -1,6 +1,6 @@
 <%= form_for(@debit_note) do |f| %>
   <div id="valid_debit_note">
-    <div class="fix_800x450">
+    <div class="popup_content">
       <table>
         <tr>
           <% if @debit_note.debit_note_no.present? %>
@@ -14,7 +14,7 @@
             </td>
           <% end %>
 
-          <td>
+          <td align="right">
             <b>D/N Date</b>&nbsp;
             <% if @debit_note.debit_note_date.present? %>
               <%= f.text_field :debit_note_date, :value => @debit_note.debit_note_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
@@ -26,7 +26,7 @@
         
         <tr>
           <td><b>Trade Company</b></td>
-          <td>
+          <td colspan="3">
             <% if @debit_note.trade_company_id.present? %>
               <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code, @debit_note.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
             <% else %>

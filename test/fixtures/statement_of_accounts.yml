@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trade_company_id: 1
+  transaction_date: 2013-03-16
+  transaction_type: MyString
+  debit_note_id: 1
+  credit_note_id: 1
+
+two:
+  trade_company_id: 1
+  transaction_date: 2013-03-16
+  transaction_type: MyString
+  debit_note_id: 1
+  credit_note_id: 1

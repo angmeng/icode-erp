@@ -95,7 +95,7 @@
                 </tr>
               </table>
           <% else %>
-            <% unless @purchase_requisition.status == PurchaseRequisition::LEVEL_ONE %>
+            <% if @purchase_requisition.status == PurchaseRequisition::LEVEL_ONE %>
               <%= render "level_five_name_and_pending", :pick => "both" %>
             <% else %>
               <%= render "level_five_name_and_pending", :pick => "name" %>

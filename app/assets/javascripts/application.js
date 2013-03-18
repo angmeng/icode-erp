@@ -19,8 +19,6 @@
 //= require jquery-ui
 
 
-
-
 $(document).ready(function () {
     
     var window_height           = $(window).height();
@@ -32,7 +30,6 @@ $(document).ready(function () {
     var button_height           = $(".icon_tag").height();
     
     var ctn_width               = $(".title_head").width() - 10; // It is for table width
-//    var ctn_width               = - 20; // It is for table width
     
     // Wrapper is calculate the height only available when without popup
     var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height - 25;

@@ -1,14 +1,11 @@
 $(document).ready(function() {
-
-
+    
+    $("#menu").kendoMenu({ openOnClick: true });
       
     $('#checkall:checkbox').change(function () {
         if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
         else $('input:checkbox').removeAttr('checked');
     });
-
-
-    $("#menu").kendoMenu({ openOnClick: true });
 
 //    $("#grid_userTable_h490").chromatable({
 //        width: "1200px",
@@ -1449,7 +1446,7 @@ $(function() {
     
 	$("#menu a").each(function() {
                 if (this.href == window.location) {
-                        $(this).css("color", "red").css("font-weight", "bold");
+                        $(this).css("color", "brown").css("font-weight", "bold");
                         $(this).parent('li').parent('ul').parent('li').addClass('highlight');
 		};
 	});
@@ -1527,12 +1524,24 @@ function getCombo_tradecompany_code(sel) {
 }
 
 function getCombo_pr_company(sel) {
-//    var title       = parseFloat(sel.options[sel.selectedIndex].title);
-//    var qty         = $("#purchase_requisition_item_quantity").val();
-//    var total_price = parseInt(qty) * parseFloat(title);
-//    $("#data_up").(title.toFixed(4));
-//    $("#select_unit_price").val(title.toFixed(4));
-//    $("#data_total_price").html(total_price.toFixed(4));
+    var sel_product = $("#purchase_requisition_item_product_id").val();
+    var sel_vendor  = sel.value;
+    
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: '/purchase_requisition_items/product_vendor_unit_price_in_pr',
+        data: { product_id: sel_product, vendor_id: sel_vendor },
+        success: function(response){                    
+            if (response){
+                var price = parseFloat(response.unit_price);
+                $("#estimated_price").val(price.toFixed(4));
+            } else {
+                alert("Could not found the unit price.");
+            }
+         }
+    });
+    
 }
 
 function place_customer_id_to_trade_company_id(sel){

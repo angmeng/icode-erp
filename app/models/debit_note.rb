@@ -6,6 +6,8 @@ class DebitNote < ActiveRecord::Base
   
   validates :currency_id, :debit_note_date, :debit_note_no, :debit_type, :trade_company_id, :updated_by, :amount, :presence => true
   
+  has_one :statement_of_account
+  
   belongs_to :trade_company
   belongs_to :currency
   
@@ -24,9 +26,10 @@ class DebitNote < ActiveRecord::Base
   end
   
   def update_debit_thing(company)
-    company.total_amount     -= self.amount
     company.sn_debit_note_no  = self.debit_note_no
     company.save!
+    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.debit_note_date, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => self.id)
+    @soa.save!
   end
   
   def uppercase_text

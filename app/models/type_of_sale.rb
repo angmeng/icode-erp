@@ -7,7 +7,9 @@ class TypeOfSale < ActiveRecord::Base
   
   validates :name, :uniqueness => true
   
-  def self.ordered
-    order("name").all
-  end
+  default_scope order("name")
+  
+#  def self.ordered
+#    all
+#  end
 end

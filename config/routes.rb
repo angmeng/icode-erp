@@ -1,5 +1,7 @@
 Merp::Application.routes.draw do
 
+  resources :statement_of_accounts
+
   get "documentation/product_rule"
 
   resources :payment_receiveds do
@@ -253,11 +255,14 @@ Merp::Application.routes.draw do
   resources :payment_types
 
   resources :purchase_requisition_items do 
+    collection do
+      get "product_vendor_unit_price_in_pr"
+      get "kiv"
+    end
     member do
       put "remove_pr"
       put "recover"
     end
-    get "kiv", :on => :collection
   end
 
   resources :product_vendors

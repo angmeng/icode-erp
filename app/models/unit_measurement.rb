@@ -26,7 +26,7 @@ class UnitMeasurement < ActiveRecord::Base
   
   default_scope order("code")
   
-  scope :ordering_code, where(:status => UnitMeasurement::ACTIVE)
+  scope :db_active, where(:status => UnitMeasurement::ACTIVE)
 
   def self.ordered_code(search)
     search.where(:status => UnitMeasurement::ACTIVE)

@@ -37,12 +37,17 @@ class ApplicationController < ActionController::Base
   helper_method :unit_measurement
   helper_method :currency
   helper_method :transport
+  
   helper_method :trade_company_both
   helper_method :trade_company_both_with_code
+  
   helper_method :trade_company_vendor
   helper_method :trade_company_vendor_with_code
+  helper_method :trade_company_vendor_with_selection_name
+  
   helper_method :trade_company_customer
   helper_method :trade_company_customer_with_code
+  
   helper_method :product_non_operation_n_operation_with_combobox
   helper_method :product_non_operation_n_operation_with_pr_combobox
   helper_method :product_finish_goods_with_combobox
@@ -54,43 +59,29 @@ class ApplicationController < ActionController::Base
   helper_method :roles
   helper_method :material
   helper_method :perihal_barang_both
-  
-  
+    
   def version
     "Version 0.2.7"
   end
-  
-  
+    
   def company
     @company ||= CompanyProfile.first
   end
-  
-  
+    
   def user_is_admin?
     current_user.admin == true
   end
-  
-  
+    
   def director_data
     @director_data ||= User.find_by_admin(true)
   end
-  
-  
+    
   def users
     @users ||= User.users_active
   end
-  
-  
+    
   def departments
     @departments ||= Department.departments_active
-  end
-  
-  
-  
-  
-  
-  def perihal_barang_both
-    @perihal_barang_both ||= SalesTaxExemptionBarang.where(:valid_condition => TRUE)
   end
   
   def payment_type
@@ -98,24 +89,38 @@ class ApplicationController < ActionController::Base
   end
   
   def trade_term
-    @trade_term ||= TradeTerm.ordered
+    @trade_term ||= TradeTerm.db_active
   end
   
   def type_of_sale
-    @type_of_sale ||= TypeOfSale.ordered
+    @type_of_sale ||= TypeOfSale.all
   end
   
   def unit_measurement
-    @unit_measurement ||=  UnitMeasurement.ordering_code
+    @unit_measurement ||=  UnitMeasurement.db_active
   end
-
+  
   def currency
-    @currency ||= Currency.ordered
+    @currency ||= Currency.db_active
   end
   
   def transport
     @transport ||= Transport.ordered
   end
+  
+
+  
+
+    def perihal_barang_both
+    @perihal_barang_both ||= SalesTaxExemptionBarang.where(:valid_condition => TRUE)
+  end
+
+  
+
+
+
+  
+
   
   def trade_company_both
     @trade_company_both ||= TradeCompany.ordered_with_both
@@ -128,11 +133,14 @@ class ApplicationController < ActionController::Base
   #vendor only, including in Purchase Order
   def trade_company_vendor 
     @trade_company_vendor ||= TradeCompany.ordered_with_vendor_name
-#    @trade_company_vendor ||= TradeCompany.vendor_with_code_and_selection_name
   end
   
   def trade_company_vendor_with_code        #only vendor comboboxes
     @trade_company_vendor_with_code ||= TradeCompany.vendor_with_code
+  end
+  
+  def trade_company_vendor_with_selection_name
+    @trade_company_vendor ||= TradeCompany.vendor_with_code_and_selection_name
   end
   
   def trade_company_customer
