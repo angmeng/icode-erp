@@ -15,7 +15,7 @@ group :assets do
 #  gem 'sass-rails',   '~> 3.2.3'
 #  gem 'coffee-rails', '~> 3.2.1'
 #  gem 'uglifier', '>= 1.0.3'
-	gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+	gem 'jquery-datatables-rails'
 	gem 'jquery-ui-rails'
 end
 
@@ -45,14 +45,15 @@ gem "omniauth"
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'rabl'
-gem "will_paginate", "~> 3.0.4"
+gem "will_paginate"
+# , "~> 3.0.4"
 gem "pdfkit"
 gem "squeel"
 gem "meta_search"
 gem "paperclip"
 gem 'turbolinks'
 gem 'mime-types'
-gem 'rails3-jquery-autocomplete' 
+#gem 'rails3-jquery-autocomplete' 
 
 #gem 'wkhtmltopdf-binary'
 

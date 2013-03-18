@@ -17,8 +17,7 @@
 //= require turbolinks
 
 //= require jquery-ui
-//= require autocomplete-rails
-//= require dataTables/jquery.dataTables
+
 
 
 
@@ -74,13 +73,12 @@ $(document).ready(function () {
 
   $('#products').dataTable()
   // {
-//     sPaginationType: "full_numbers"
-//     bJQueryUI: true,
-//     bProcessing: true,
-//     bServerSide: true
-//     sAjaxSource: $('#products').data('source')
-// });
-         
+  //       sPaginationType: "full_numbers",
+  //       bJQueryUI: true,
+  //       bProcessing: true,
+  //       bServerSide: true,
+  //       //sAjaxSource: $('#products').data('source')
+  //    });
 
     // When it is popup...
     // We setting the time out because IE9 really damn high time speed, so we delay time to 0.1s
