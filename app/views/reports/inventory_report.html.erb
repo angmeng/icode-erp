@@ -2,7 +2,7 @@
   <div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
  
-          <table>
+          <!-- <table>
             <%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
             <tr>
                     <td>Product ID :
@@ -21,14 +21,14 @@
           </table>
 
   <hr />
-
+ -->
 <input type="checkbox" name="all" id="checkall" />Check All
 
   <div class="fix_1600x900_h450">
           <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
-                  <table id="products" class="display">
+          <table id="products" class="display" data-source="<%= inventory_report_reports_path(format: "json") %> ">
                     <thead>
                       <tr class="header_line">
                         <th></th>
@@ -51,7 +51,7 @@
                        
                         <td align="center"><%= check_box_tag "in_ids[]" , pri.id %></td>
                         <td align="center"><%= index + 1 %></td>
-                        <td align="center"><%= render '/product_categories/join_product_category' , :pc => pri %></td>
+                        <td align="center"><%= render '/product_categories/join_product_category'  , :pc => pri %></td>
                         <td align="center"><%= pri.product.desc rescue '-' %></td>
                         <td align="center"><%= pri.stock_in rescue '-'%></td>
                         <td align="center"><%= pri.stock_out rescue '-'%></td>

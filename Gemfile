@@ -55,6 +55,6 @@ gem 'turbolinks'
 gem 'mime-types'
 #gem 'rails3-jquery-autocomplete' 
 
-#gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary'
 
 

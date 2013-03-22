@@ -363,6 +363,9 @@ table.normal_table_white td {
 #fix_height { overflow:auto; height:650px; }
 
 /* new_form */
+
+.fix_h
+
 .fix_1600x900_h450, .fix_h450 {
     border: 1px solid black;
     height: 450px;
