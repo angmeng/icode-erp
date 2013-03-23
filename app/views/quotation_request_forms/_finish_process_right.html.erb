@@ -11,28 +11,28 @@
     <% if @field_sets.include?(QuotationRequestForm::WINDOW_FIELDSET) %>
       <table>
         <tr>
-          <td width="150"><b>Window Patching</b></td>
+          <td width="120"><b>Window Patching</b></td>
           <td>
-            <%= f.radio_button("window_patching", false) %>NO
-            <%= f.radio_button("window_patching", true) %>YES
+            <%= f.radio_button("window_patching", false) %> NO
+            <%= f.radio_button("window_patching", true) %> YES
           </td>
         </tr>
 
         <tr>
-          <td valign="top"><b>Type of W. Patching</b></td>
+          <td style="vertical-align: top;"><b>Type of W. Patching</b></td>
           <td>
             <% if @quotation_request_form.window_patching == FALSE %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM, :disabled => true) %><%= QuotationRequestForm::OPP_FILM %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM, :disabled => true) %><%= QuotationRequestForm::PLAIN_FILM %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET, :disabled => true) %><%= QuotationRequestForm::PLASTIC_SHEET %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT, :disabled => true) %><%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :disabled => true, :size => 20 %><br/>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching", :size => 20, :disabled => true %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM, :disabled => true) %> <%= QuotationRequestForm::OPP_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM, :disabled => true) %> <%= QuotationRequestForm::PLAIN_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET, :disabled => true) %> <%= QuotationRequestForm::PLASTIC_SHEET %><br/>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT, :disabled => true) %> <%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :class => "k-textbox", :disabled => true %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS, :disabled => true) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching", :class => "k-textbox", :disabled => true %>
             <% else %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM) %><%= QuotationRequestForm::OPP_FILM %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM) %><%= QuotationRequestForm::PLAIN_FILM %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET) %><%= QuotationRequestForm::PLASTIC_SHEET %>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT) %><%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :size => 20 %><br/>
-              <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching", :size => 20 %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OPP_FILM) %> <%= QuotationRequestForm::OPP_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLAIN_FILM) %> <%= QuotationRequestForm::PLAIN_FILM %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PLASTIC_SHEET) %> <%= QuotationRequestForm::PLASTIC_SHEET %><br/>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::PRE_PRINT) %> <%= QuotationRequestForm::PRE_PRINT %> <%= f.text_field :pre_print_textbox, :class => "k-textbox" %>
+              <%= f.radio_button("window_patching_type", QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_patching_type_other", :id => "other_window_patching", :class => "k-textbox" %>
             <% end %>
           </td>
         </tr>
@@ -41,11 +41,11 @@
           <td><b>Size</b></td>
           <td>
             <% if @quotation_request_form.window_patching == FALSE %>
-              (W)<%= f.text_field :window_width, :size => 5, :disabled => true %> 
-              (L)<%= f.text_field :window_length, :size => 5, :disabled => true %>
+              (W) <%= f.text_field :window_width, :disabled => true, :class => "kendo_precision_2", :style => "width:80px;" %> 
+              (L) <%= f.text_field :window_length, :disabled => true, :class => "kendo_precision_2", :style => "width:80px;" %>
             <% else %>
-              (W)<%= f.text_field :window_width, :size => 5 %> 
-              (L)<%= f.text_field :window_length, :size => 5 %>
+              (W) <%= f.text_field :window_width, :class => "kendo_precision_2", :style => "width:80px;" %> 
+              (L) <%= f.text_field :window_length, :class => "kendo_precision_2", :style => "width:80px;" %>
             <% end %>
           </td>
         </tr>
@@ -54,9 +54,9 @@
           <td><b>Usage</b></td>
           <td>
             <% if @quotation_request_form.window_patching == FALSE %>
-              <%= f.text_field :window_usage, :size => 3,:disabled => true %> PCS
+              <%= f.text_field :window_usage, :disabled => true, :class => "kendo_precision_2", :style => "width:80px;" %> PCS
             <% else %>
-              <%= f.text_field :window_usage, :size => 3 %> PCS
+              <%= f.text_field :window_usage, :class => "kendo_precision_2", :style => "width:80px;" %> PCS
             <% end %>
           </td>
         </tr>
@@ -66,62 +66,6 @@
     <% end %>
   <% else %>
     <%= render "disabled_window", :f => f %>
-  <% end %>
-  
-  <% content_for :jquery_script do %>
-    <script>
-      $(document).ready(function() { 
-        // Window Patching
-        $("#quotation_request_form_window_patching_false").click(function() { 
-            $("#quotation_request_form_window_patching_type_opp_film").attr("checked", false).attr("disabled", true);
-            $("#quotation_request_form_window_patching_type_plain_film").attr("checked", false).attr("disabled", true);
-            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("checked", false).attr("disabled", true);
-            $("#quotation_request_form_window_patching_type_pre_print").attr("checked", false).attr("disabled", true);
-            $("#quotation_request_form_pre_print_textbox").val('').attr("disabled", true);
-            $("#quotation_request_form_window_patching_type_others").attr("checked", false).attr("disabled", true);
-            $("#other_window_patching").val('').attr("disabled", true);        
-            $("#quotation_request_form_window_width").val('').attr("disabled", true);
-            $("#quotation_request_form_window_length").val('').attr("disabled", true);
-            $("#quotation_request_form_window_usage").val('').attr("disabled", true);
-        });
-
-        $("#quotation_request_form_window_patching_true").click(function() { 
-            $("#quotation_request_form_window_patching_type_opp_film").attr("disabled", false);
-            $("#quotation_request_form_window_patching_type_plain_film").attr("disabled", false);
-            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("disabled", false);
-            $("#quotation_request_form_window_patching_type_pre_print").attr("disabled", false);
-            $("#quotation_request_form_pre_print_textbox").val('').attr("disabled", false);
-            $("#quotation_request_form_window_patching_type_others").attr("disabled", false);
-            $("#other_window_patching").attr("disabled", false); 
-            $("#quotation_request_form_window_width").attr("disabled", false);
-            $("#quotation_request_form_window_length").attr("disabled", false);
-            $("#quotation_request_form_window_usage").attr("disabled", false);
-        });
-
-        $("#other_window_patching").click(function() { 
-            $("#quotation_request_form_window_patching_type_opp_film").attr("checked", false);
-            $("#quotation_request_form_window_patching_type_plain_film").attr("checked", false);
-            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("checked", false);
-            $("#quotation_request_form_window_patching_type_pre_print").attr("checked", false);
-            $("#quotation_request_form_pre_print_textbox").val(''); 
-            $("#quotation_request_form_window_patching_type_others").attr("checked", true);
-        });
-
-        $("#quotation_request_form_pre_print_textbox").click(function() { 
-            $("#quotation_request_form_window_patching_type_opp_film").attr("checked", false);
-            $("#quotation_request_form_window_patching_type_plain_film").attr("checked", false);
-            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("checked", false);
-            $("#quotation_request_form_window_patching_type_pre_print").attr("checked", true);
-            $("#quotation_request_form_window_patching_type_others").attr("checked", false);
-            $("#other_window_patching").val(''); 
-        });
-
-        $("#quotation_request_form_window_patching_type_opp_film, #quotation_request_form_window_patching_type_plain_film, #quotation_request_form_window_patching_type_pre_print, #quotation_request_form_window_patching_type_plastic_sheet, #quotation_request_form_window_patching_type_others").click(function() { 
-            $("#quotation_request_form_pre_print_textbox").val('');
-            $("#other_window_patching").val('');
-        });
-      });
-    </script>
   <% end %>
 </fieldset>
 
@@ -138,37 +82,37 @@
     <% if @field_sets.include?(QuotationRequestForm::GLUEING_FIELDSET) %>
       <table>
         <tr>
-          <td width="150"><b>Type of Glueing</b>T</td>
+          <td width="120"><b>Type of Glueing</b></td>
           <td>
             <% if @quotation_request_form.selection_glueings.present? %>
-                <%= check_box_tag "glueing[]", QuotationRequestForm::PRE_FOLD, @glueing_types.include?(QuotationRequestForm::PRE_FOLD) %><%= QuotationRequestForm::PRE_FOLD %>
-                <%= check_box_tag "glueing[]", "1 SIDE", @glueing_types.include?("1 SIDE") %>1 SIDE
-                <%= check_box_tag "glueing[]", "2 SIDE", @glueing_types.include?("2 SIDE") %>2 SIDE
-                <%= check_box_tag "glueing[]", "4P", @glueing_types.include?("4P") %>4P
-                <%= check_box_tag "glueing[]", "6P", @glueing_types.include?("6P") %>6P
-                <%= check_box_tag "glueing[]", "LB", @glueing_types.include?("LB") %><span title="Lock Bottom">LB</span><br/>
+                <%= check_box_tag "glueing[]", QuotationRequestForm::PRE_FOLD, @glueing_types.include?(QuotationRequestForm::PRE_FOLD) %> <%= QuotationRequestForm::PRE_FOLD %>
+                <%= check_box_tag "glueing[]", "1 SIDE", @glueing_types.include?("1 SIDE") %> 1 SIDE
+                <%= check_box_tag "glueing[]", "2 SIDE", @glueing_types.include?("2 SIDE") %> 2 SIDE
+                <%= check_box_tag "glueing[]", "4P", @glueing_types.include?("4P") %> 4P
+                <%= check_box_tag "glueing[]", "6P", @glueing_types.include?("6P") %> 6P
+                <%= check_box_tag "glueing[]", "LB", @glueing_types.include?("LB") %> <span title="Lock Bottom">LB</span>
                 <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS, @glueing_types.include?(QuotationRequestForm::OTHERS) %> 
                 <%= QuotationRequestForm::OTHERS %>: 
                 <% if @glueing_types.include?(QuotationRequestForm::OTHERS) %>
-                  <%= text_field_tag "glueing_text", @quotation_request_form.selection_glueings.find_by_glueing(QuotationRequestForm::OTHERS).glueing_other, :size => 20 %>
+                  <%= text_field_tag "glueing_text", @quotation_request_form.selection_glueings.find_by_glueing(QuotationRequestForm::OTHERS).glueing_other, :class => "k-textbox", :style => "width:120px;" %>
                 <% else %>
-                  <%= text_field_tag "glueing_text", params[:glueing_text], :size => 20 %>
+                  <%= text_field_tag "glueing_text", params[:glueing_text], :class => "k-textbox", :style => "width:120px;" %>
                 <% end %>
             <% else %>
                 <%= check_box_tag "glueing[]", QuotationRequestForm::PRE_FOLD %><%= QuotationRequestForm::PRE_FOLD %> 
-                <%= check_box_tag "glueing[]", "1 SIDE" %>1 SIDE
-                <%= check_box_tag "glueing[]", "2 SIDE" %>2 SIDE
-                <%= check_box_tag "glueing[]", "4P" %>4P
-                <%= check_box_tag "glueing[]", "6P" %>6P
-                <%= check_box_tag "glueing[]", "LB" %><span title="Lock Bottom">LB</span><br/>
-                <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag "glueing_text", params[:glueing_text], :size => 20 %>
+                <%= check_box_tag "glueing[]", "1 SIDE" %> 1 SIDE
+                <%= check_box_tag "glueing[]", "2 SIDE" %> 2 SIDE
+                <%= check_box_tag "glueing[]", "4P" %> 4P
+                <%= check_box_tag "glueing[]", "6P" %> 6P
+                <%= check_box_tag "glueing[]", "LB" %> <span title="Lock Bottom">LB</span>
+                <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag "glueing_text", params[:glueing_text], :class => "k-textbox", :style => "width:120px;" %>
             <% end %>
           </td>
         </tr>
 
         <tr>
           <td><b>Glueing Material</b></td>
-          <td><%= f.text_field :glueing_material %></td>
+          <td><%= f.text_field :glueing_material, :class => "k-textbox" %></td>
           <td></td>
         </tr>
       </table>
@@ -194,19 +138,19 @@
     <% if @field_sets.include?(QuotationRequestForm::PACKING_FIELDSET) %>
       <table>
         <tr>
-          <td width="150"><b>Type of Packing</b></td>
+          <td width="120"><b>Type of Packing</b></td>
           <td>
-            <%= f.radio_button "packing_type", QuotationRequestForm::BULK %><%= QuotationRequestForm::BULK %>
-            <%= f.radio_button "packing_type", QuotationRequestForm::PACKET %><%= QuotationRequestForm::PACKET %>
-            <%= f.radio_button "packing_type", QuotationRequestForm::CARTON %><%= QuotationRequestForm::CARTON %>
-            <%= f.radio_button "packing_type", QuotationRequestForm::BIN %><%= QuotationRequestForm::BIN %>
-            <%= f.radio_button "packing_type", QuotationRequestForm::OTHERS %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :packing_type_other, :size => 20 %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::BULK %> <%= QuotationRequestForm::BULK %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::PACKET %> <%= QuotationRequestForm::PACKET %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::CARTON %> <%= QuotationRequestForm::CARTON %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::BIN %> <%= QuotationRequestForm::BIN %>
+            <%= f.radio_button "packing_type", QuotationRequestForm::OTHERS %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :packing_type_other, :class => "k-textbox" %>
           </td>
         </tr>
 
         <tr>
           <td><b>Packed Qty</b></td>
-          <td><%= f.text_field :packed_quantity, :size => 5 %> PCS</td>
+          <td><%= f.text_field :packed_quantity, :class => "kendo_precision_0", :style => "width:80px;" %> PCS</td>
         </tr>
       </table>
     <% else %>
@@ -214,24 +158,6 @@
     <% end %>
   <% else %>
     <%= render "disabled_packing", :f => f %>
-  <% end %>
-  
-    <% content_for :jquery_script do %>
-    <script>
-      $(document).ready(function(){ 
-        
-        // Packing
-        $("#quotation_request_form_packing_type_other").click(function() { 
-            $("#quotation_request_form_packing_type_bulk").attr("checked", false);
-            $("#quotation_request_form_packing_type_packet").attr("checked", false);
-            $("#quotation_request_form_packing_type_carton").attr("checked", false);
-            $("#quotation_request_form_packing_type_bin").attr("checked", false);
-            $("#quotation_request_form_packing_type_others").attr("checked", true);
-        });
-        $("#quotation_request_form_packing_type_bulk, #quotation_request_form_packing_type_packet, #quotation_request_form_packing_type_carton, #quotation_request_form_packing_type_bin").click(function() { $("#quotation_request_form_packing_type_other").val(''); }); 
-        
-      });
-    </script>
   <% end %>
   
 </fieldset>

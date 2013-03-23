@@ -1,13 +1,11 @@
+<%= render "linking" %> 
 
-  <%= render "linking" %> 
+<div class="title_head"><strong style="color:white;">VENDOR REGISTRATION</strong></div>
 
-  <div class="title_head"><strong style="color:white;">VENDOR REGISTRATION</strong></div>
+<% if @vendor.present? %>
+  <div class="table_color"><%= render "/purchase_orders/vendor", :pending => @vendor %></div>
+<% else %>
+  <div class="linking_content">No Record Found</div>
+<% end %>
 
-  <% if @vendor.present? %>
-    <%= render "/purchase_orders/vendor", :pending => @vendor %>
-  <% else %>
-    <div class="linking_content">No Record Found</div>
-  <% end %>
-
-
-  <%= render "action_purchase_order_vendor_reg" %>
+<%= render "action_purchase_order_vendor_reg" %>

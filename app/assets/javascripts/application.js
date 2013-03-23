@@ -15,9 +15,7 @@
 //= require dataTables/jquery.dataTables
 //= require_tree .
 //= require turbolinks
-
 //= require jquery-ui
-//= require autocomplete-rails
 
 $(document).ready(function () {
     
@@ -63,42 +61,44 @@ $(document).ready(function () {
     var popup_content_height    = window_height - title_height - button_height - 12;
     var popup_tab_height        = popup_content_height - 50;
     
-    $("#treeview").kendoTreeView().height(popup_content_height);  
+//    $("#treeview").kendoTreeView().height(popup_content_height);  
+    $("#treeview").kendoTreeView();
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
     
-
-
-  $('#products').dataTable()
-  // {
-//     sPaginationType: "full_numbers"
-//     bJQueryUI: true,
-//     bProcessing: true,
-//     bServerSide: true
-//     sAjaxSource: $('#products').data('source')
-// });
+    
+    $('#jdataTable').dataTable({
+         "sPaginationType": "full_numbers",
+//         "bJQueryUI": true,
+//         "bProcessing": true,
+//         "bServerSide": true,
+         "sScrollY": popup_content_height
+    });
          
 
     // When it is popup...
     // We setting the time out because IE9 really damn high time speed, so we delay time to 0.1s
     setTimeout(function(){
-            var window_height           = $(window).height();
-            var ctn_width               = $(".title_head").width() - 10;
-            var title_height            = $(".title_head").height();
-            var button_height           = $(".icon_tag").height();
-            var table_detail_height     = $(".table_details").height();
-            var popup_content_height    = window_height - title_height - button_height - 12;
-            var popup_tab_height        = popup_content_height - 50;
-            var popup_form_table_height = popup_content_height - table_detail_height - 15;
-            
+            var window_height                   = $(window).height();
+            var ctn_width                       = $(".title_head").width() - 10;
+            var title_height                    = $(".title_head").height();
+            var button_height                   = $(".icon_tag").height();
+            var table_detail_height             = $(".table_details").height();
+            var qr_signature_height             = $(".qr_signature").height();
+            var popup_content_height            = window_height - title_height - button_height - 12;
+            var popup_tab_height                = popup_content_height - 50;
+            var popup_form_table_height         = popup_content_height - table_detail_height - 15;
+            var popup_tab_height_and_signature  = popup_content_height - qr_signature_height - 60;
+
             // It is for popup normal page
             $(".popup_content").css({ 'height': popup_content_height }).addClass("page_wrapper"); 
             $(".popup_form_table").css({ 'height': popup_form_table_height }).addClass("page_wrapper"); 
             
             // IMS - User Account
             $("#name_entry").height(popup_tab_height).addClass("page_wrapper");
+            $(".quotation").height(popup_tab_height_and_signature).addClass("page_wrapper");
             
             // Popup Tabbing Table -- IMS
-            $("#ims_purchase, #ims_product").chromatable({
+            $("#ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_report, #ims_account").chromatable({
                 width:  "-20",
                 height: popup_tab_height,
                 scrolling: "yes"
@@ -112,6 +112,8 @@ $(document).ready(function () {
             });
             
     }, 100);
+    
+
     
     
 });

@@ -74,30 +74,30 @@ class TradeCompany < ActiveRecord::Base
   SUPPLIER = "SUPPLIER"
   CUSTOMER = "CUSTOMER"
   
-  ROLE = [
-    InventoryManagementSystem::TRADE_COMPANY_MENU,
-    InventoryManagementSystem::VENDOR_NEW,
-    InventoryManagementSystem::VENDOR_LISTING,
-    InventoryManagementSystem::VENDOR_KIV,
-    InventoryManagementSystem::VENDOR_NEW_ADD,
-    InventoryManagementSystem::VENDOR_SHOW,
-    InventoryManagementSystem::VENDOR_EDIT,
-    InventoryManagementSystem::VENDOR_ACTION_KIV,
-    InventoryManagementSystem::VENDOR_PRINTABLE,
-    InventoryManagementSystem::VENDOR_KIV_SHOW,
-    InventoryManagementSystem::VENDOR_KIV_RECOVER,
-    
-    InventoryManagementSystem::CUSTOMER_NEW,
-    InventoryManagementSystem::CUSTOMER_LISTING,
-    InventoryManagementSystem::CUSTOMER_KIV,
-    InventoryManagementSystem::CUSTOMER_NEW_ADD,
-    InventoryManagementSystem::CUSTOMER_SHOW,
-    InventoryManagementSystem::CUSTOMER_EDIT,
-    InventoryManagementSystem::CUSTOMER_ACTION_KIV,
-    InventoryManagementSystem::CUSTOMER_PRINTABLE,
-    InventoryManagementSystem::CUSTOMER_KIV_SHOW,
-    InventoryManagementSystem::CUSTOMER_KIV_RECOVER
-  ]
+#  ROLE = [
+#    InventoryManagementSystem::TRADE_COMPANY_MENU,
+#    InventoryManagementSystem::VENDOR_NEW,
+#    InventoryManagementSystem::VENDOR_LISTING,
+#    InventoryManagementSystem::VENDOR_KIV,
+#    InventoryManagementSystem::VENDOR_NEW_ADD,
+#    InventoryManagementSystem::VENDOR_SHOW,
+#    InventoryManagementSystem::VENDOR_EDIT,
+#    InventoryManagementSystem::VENDOR_ACTION_KIV,
+#    InventoryManagementSystem::VENDOR_PRINTABLE,
+#    InventoryManagementSystem::VENDOR_KIV_SHOW,
+#    InventoryManagementSystem::VENDOR_KIV_RECOVER,
+#    
+#    InventoryManagementSystem::CUSTOMER_NEW,
+#    InventoryManagementSystem::CUSTOMER_LISTING,
+#    InventoryManagementSystem::CUSTOMER_KIV,
+#    InventoryManagementSystem::CUSTOMER_NEW_ADD,
+#    InventoryManagementSystem::CUSTOMER_SHOW,
+#    InventoryManagementSystem::CUSTOMER_EDIT,
+#    InventoryManagementSystem::CUSTOMER_ACTION_KIV,
+#    InventoryManagementSystem::CUSTOMER_PRINTABLE,
+#    InventoryManagementSystem::CUSTOMER_KIV_SHOW,
+#    InventoryManagementSystem::CUSTOMER_KIV_RECOVER
+#  ]
   
   def self.get_all_companies(this)
     product_array = []

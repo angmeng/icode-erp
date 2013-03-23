@@ -4,21 +4,10 @@
 </div>
 <div><%= render "search_customer" %></div>
 
-<div id="container">
-    
-  <% if @trade_companies.present? %>
-    <%= render "listing_trade_company", :trade_company => @trade_companies %>
-  <% else %>
-    <div class="content" style="padding: 5px;">Not Record Found</div>
-  <% end %>
+<% if @trade_companies.present? %>
+  <div class="table_color"><%= render "listing_trade_company", :trade_company => @trade_companies %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
 
-  <%= render "action_trade_company" %>
-      
-</div>
-
-  
-                                                         
-
-
-
-
+<%= render "action_trade_company_customer" %>

@@ -45,7 +45,7 @@
 
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_MENU) %>
         <li style="width:150px;">
-          Purchase Order
+          Purchase Orders
           <ul>
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
               <li><%= link_to "PO Transactions & Histories", purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
@@ -94,8 +94,6 @@
             <% else %>
               <li class="text_gray">Listing Purchase Orders - KIV</li>
             <% end %>
-
-
           </ul>
         </li>
       <% end %>
@@ -110,13 +108,13 @@
               <li class="text_gray">RN Transactions & Histories</li>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
+            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
               <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %>
                 <li><%= link_to "Received Notes Completed", info_receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
                 <li class="text_gray">Received Notes Completed</li>
               <% end %>
-            <% end %>
+            <%# end %>
 
             <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
               <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
@@ -277,6 +275,72 @@
     </ul>
   </li>
 
+  
+
+  <li>
+    Inventory
+    <ul>
+
+      <% if roles.include?(InventoryManagementSystem::INVENTORY_MENU) %>
+        <li style="width:150px;">
+          Inventory
+          <ul>
+            <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
+              <li><%= link_to "Transactions & Histories For Inventory", inventory_histories_path %></li>
+            <% else %>
+              <li class="text_gray">Transactions & Histories For Inventory</li>
+            <% end %>
+
+            <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+              <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                <li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+              <% else %>
+                <li class="text_gray">New Inventory</li>
+              <% end %>
+            <% end %>
+
+            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                <li><%= link_to "Listing Transfer Notes", stock_outs_path %></li>
+              <%# else %>
+                <!-- <li class="text_gray">Stock Out</li> -->
+              <%# end %>
+            <%# end %>
+
+
+
+            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                <li><%= link_to "New Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+              <%# else %>
+                <!--li class="text_gray">Transfer Note</li-->
+              <%# end %>
+            <%# end %>
+
+
+
+            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
+              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
+                <%#*<li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
+          <%#*</li>%>
+              <%# else %>
+                <%#*<li class="text_gray">New Inventory</li>%>
+              <%# end %>
+            <%# end %>
+          </ul>
+        </li>
+      <% end %>
+
+      <li style="width:150px;">
+          Inventory Report
+          <ul>
+             <li><%= link_to "Inventory", inventory_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+          </ul>
+        </li>
+
+    </ul>
+  </li>
+  
   <li>
     Custom
     <ul>
@@ -411,70 +475,6 @@
   </li>
 
   <li>
-    Inventory Flow
-    <ul>
-
-      <% if roles.include?(InventoryManagementSystem::INVENTORY_MENU) %>
-        <li style="width:150px;">
-          Inventory
-          <ul>
-            <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
-              <li><%= link_to "Transactions & Histories For Inventory", inventory_histories_path %></li>
-            <% else %>
-              <li class="text_gray">Transactions & Histories For Inventory</li>
-            <% end %>
-
-            <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
-              <% else %>
-                <li class="text_gray">New Inventory</li>
-              <% end %>
-            <% end %>
-
-            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <li><%= link_to "Listing Transfer Notes", stock_outs_path %></li>
-              <%# else %>
-                <!-- <li class="text_gray">Stock Out</li> -->
-              <%# end %>
-            <%# end %>
-
-
-
-            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <li><%= link_to "New Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
-              <%# else %>
-                <!--li class="text_gray">Transfer Note</li-->
-              <%# end %>
-            <%# end %>
-
-
-
-            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <%#*<li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
-          <%#*</li>%>
-              <%# else %>
-                <%#*<li class="text_gray">New Inventory</li>%>
-              <%# end %>
-            <%# end %>
-          </ul>
-        </li>
-      <% end %>
-
-      <li style="width:150px;">
-          Inventory Report
-          <ul>
-             <li><%= link_to "Inventory", inventory_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-          </ul>
-        </li>
-
-    </ul>
-  </li>
-
-  <li>
     Housekeeping
     <ul>
       <% if roles.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU) %>
@@ -501,40 +501,26 @@
           <ul>
             <% if roles.include?(InventoryManagementSystem::VENDOR_LISTING) %>
               <li><%= link_to "Suppliers", trade_companies_path %></li>
-              <%#*, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"%>
             <% else %>
               <li class="text_gray">Suppliers</li>
             <% end %>
 
-            <%# if roles.include?(InventoryManagementSystem::VENDOR_NEW_ADD) %>
-              <!--li><%#= link_to 'New Supplier', new_trade_company_path(:option => TradeCompany::SUPPLIER), :class => "show_without_refresh_page_1024x800", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <!--li class="text_gray">New Supplier</li-->
-            <%# end %>
-
             <% if roles.include?(InventoryManagementSystem::VENDOR_KIV) %>
-              <li><%= link_to 'KIV Suppliers', kiv_vendors_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to 'Suppliers - KIV', kiv_vendors_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-              <li class="text_gray">KIV Suppliers</li>
+              <li class="text_gray">Suppliers - KIV</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::CUSTOMER_LISTING) %>
               <li><%= link_to "Customers", customer_trade_companies_path %></li>
-              <%#*, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"%>
             <% else %>
               <li class="text_gray">Customers</li>
             <% end %>
 
-            <%# if roles.include?(InventoryManagementSystem::CUSTOMER_NEW_ADD) %>
-              <!--li><%#= link_to 'New Customer', new_trade_company_path(:option => TradeCompany::CUSTOMER), :class => "show_without_refresh_page_1024x800", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <!--li class="text_gray">New Customer</li-->
-            <%# end %>
-
             <% if roles.include?(InventoryManagementSystem::CUSTOMER_KIV) %>
-              <li><%= link_to 'KIV Customers', kiv_customers_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to 'Customers - KIV', kiv_customers_trade_companies_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-              <li class="text_gray">KIV Customers</li>
+              <li class="text_gray">Customers - KIV</li>
             <% end %>
           </ul>
         </li>

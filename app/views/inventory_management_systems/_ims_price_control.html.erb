@@ -3,112 +3,69 @@
     <% if action_name == "show" %>
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_MENU, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_MENU), :disabled => true %> Price Control</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_NEW, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_NEW), :disabled => true %> New Price Control</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_ADD, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_ADD), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SAVE, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_SAVE), :disabled => true %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Product Price Controls Data</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_ADD) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
+          <td align="center"></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_DROP_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_LISTING, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING), :disabled => true %> Listing Price Controls</td>
-          <td></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SHOW, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_EDIT, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_DROP_KIV, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_DROP_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_PRINTABLE), :disabled => true %></td>
-          <% 6.times do |td| %><td></td><% end %>
-        </tr>
-
-         <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV), :disabled => true %> Listing Price Control - KIV</td>
-          <td></td>
-          <td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_RECOVER, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_RECOVER), :disabled => true %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
-        
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Product Price Controls Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
+        </tr>        
         
     <% else %>
         
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_MENU, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_MENU) %> Price Control</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_NEW, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %> New Price Control</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_ADD, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_ADD) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SAVE, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_SAVE) %></td>
-          <% 10.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Product Price Controls Data</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_ADD) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
+          <td align="center"></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_DROP_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_LISTING, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Listing Price Controls</td>
-          <td></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SHOW, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_EDIT, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_DROP_KIV, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_DROP_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
-          <% 6.times do |td| %><td></td><% end %>
-        </tr>
-
-         <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Listing Price Control - KIV</td>
-          <td></td>
-          <td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_RECOVER, checkboxes.include?(InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
-          <% 4.times do |td| %><td></td><% end %>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Product Price Controls Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
         </tr>
         
     <% end %>
 
   <% else %>
   
-         <tr>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_MENU %> Price Control</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_NEW %> New Price Control</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_ADD %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SAVE %></td>
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_LISTING %> Listing Price Controls</td>
-          <td></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_EDIT %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_DROP_KIV %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_PRINTABLE %></td>
-          <% 6.times do |td| %><td></td><% end %>
-        </tr>
+     <tr>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
+      <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Product Price Controls Data</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_ADD) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
+      <td align="center"></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_DROP_KIV) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
+      <% 2.times do |td| %><td></td><% end %>
+    </tr>
 
-         <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV %> Listing Price Control - KIV</td>
-          <td></td>
-          <td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PRICE_CONTROL_RECOVER %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
+    <tr>
+      <% 2.times do |td| %><td></td><% end %>
+      <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Product Price Controls Data - KIV</td>
+      <% 5.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
+    </tr>  
       
   <% end %>
 <%#*</table>%>

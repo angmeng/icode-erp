@@ -1,10 +1,9 @@
-
 <%= render "linking" %>
 
 <div class="title_head"><strong style="color:white;">APPROVED FROM PR</strong></div> 
 
 <% if @approved_pr.present? %>
-  <%= render "details_from_pri", :pr => @approved_pr %>
+  <div class="table_color"><%= render "details_from_pri", :pr => @approved_pr %></div>
 <% else %>
   <div class="linking_content">No Record Found</div>
 <% end %>

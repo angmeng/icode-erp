@@ -7,13 +7,12 @@
       <%= check_box_tag "glueing[]", "4P", false, :disabled => true %> 4P
       <%= check_box_tag "glueing[]", "6P", false, :disabled => true %> 6P
       <%= check_box_tag "glueing[]", "LB", false, :disabled => true %> <span title="Lock Bottom">LB</span>
-      <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS, false, :disabled => true %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag "glueing_text", params[:glueing_text], :size => 20, :disabled => true %>
+      <%= check_box_tag "glueing[]", QuotationRequestForm::OTHERS, false, :disabled => true, :class => "glueing_checkbox" %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag "glueing_text", params[:glueing_text], :class => "k-textbox", :disabled => true %>
     </td>
   </tr>
 
   <tr>
     <td><b>Glueing Material</b></td>
-    <td><%= f.text_field :glueing_material, :disabled => true %></td>
-    <td></td>
+    <td><%= f.text_field :glueing_material, :class => "k-textbox", :disabled => true %></td>
   </tr>
 </table>

@@ -5,45 +5,45 @@
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_MENU, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU), :disabled => true %> COMPANY PROFILE</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_VIEW, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_VIEW), :disabled => true %> Company Profile View</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_SHOW, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_SHOW), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_EDIT, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_EDIT), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_KIV, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_KIV), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_MENU) %> Company Profile</td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_VIEW) %> Company Profile View</td>
+        <td></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
       </tr>
   
     <% else %>
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_MENU, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU) %> COMPANY PROFILE</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_VIEW, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_VIEW) %> Company Profile View</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_SHOW, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_EDIT, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_KIV, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_MENU) %> Company Profile</td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_VIEW) %> Company Profile View</td>
+        <td></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
       </tr>
       
     <% end %>
 
   <% else %>
     
-    <tr>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_MENU %> COMPANY PROFILE</td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_VIEW %> Company Profile View</td>
-      <td></td><td><%#= "save" %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_EDIT %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_KIV %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE %></td>
-      <% 6.times do |td| %><td></td><% end %>
-    </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_MENU) %> Company Profile</td>
+        <td><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_VIEW) %> Company Profile View</td>
+        <td></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
 
   <% end %>
 <%#*</table>%>

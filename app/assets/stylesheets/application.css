@@ -14,8 +14,6 @@
  *= require jquery.ui.theme
  *= require dataTables/src/demo_table_jui
  *= require_tree . 
-
-
 */
 
 
@@ -23,15 +21,13 @@
 
 * { margin: 0; padding: 0; }
 
-table { width: 100%; }
-
 html { height: 100%; overflow-y:hidden; }
 
 body {
+    background-color: gainsboro;
     height: 100%;
     color: #000; /* background-color: green; */
-/*    font-family: Tahoma, arial, helvetica, sans-serif;*/
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: Tahoma, arial, helvetica, sans-serif;
     font-size: 12px;
     line-height: 18px; 
 }
@@ -41,18 +37,6 @@ body {
 /* It is use for addClass in the javascript */
 .page_wrapper { overflow: auto; }
 
-/*#container, #popup_container {
-    background-color: #fff;
-    color: #000;
-    font-family: Tahoma, arial, helvetica, sans-serif;
-    font-size: 12px;
-    min-height: 80%;
-    height: 100%;
-    height: auto !important;
-    margin: auto;
-}*/
-
-
 p, div { margin: 0; }
 
 hr { margin-top: 5px; margin-bottom: 5px; }
@@ -60,8 +44,7 @@ hr { margin-top: 5px; margin-bottom: 5px; }
     
 
 p, ol, ul, td {
-/*    font-family: Tahoma, arial, helvetica, sans-serif;*/
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: Tahoma, arial, helvetica, sans-serif;
     font-size: 12px; }
 
 pre {
@@ -122,7 +105,7 @@ p#alert {
 
 /*=================================== MENU TOOL =====================================*/
 #main_header { 
-    padding: 5px; font-weight: bold; /*font-family: Tahoma, arial, helvetica, sans-serif;*/ font-family: 'Open Sans', Arial, sans-serif; font-size: 15px; color:blue;
+    padding: 5px; font-weight: bold; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 15px; color:blue;
     background-color: #A6DEFF;
     /* For WebKit (Safari, Chrome, etc) */
     background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
@@ -137,7 +120,7 @@ p#alert {
 #main_footer {
    position: fixed; left:0px; bottom:0px; 
    width:100%; 
-   padding: 5px; /*font-family: Tahoma, arial, helvetica, sans-serif;*/ font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; color:blue;
+   padding: 5px; font-family: Tahoma, arial, helvetica, sans-serif; font-size: 12px; color:blue;
    background-color: #A6DEFF;
    background: #A6DEFF -webkit-gradient(linear, left top, left bottom, from(#288CC8), to(#A6DEFF)) no-repeat;
    background: #A6DEFF -moz-linear-gradient(top, #288CC8, #A6DEFF) no-repeat;
@@ -153,7 +136,8 @@ p#alert {
 /*=================================== MENU TOOL (END) =====================================*/
 
 /* Table Layout Design */
-table th, table td { padding: 0 5px 0 5px; }
+table th, table td { padding: 0 5px 0 5px; vertical-align: middle; }
+ 
 
 /*=================================== WHITE TABLE - 100% width =====================================*/
 table.white-line-table {
@@ -261,13 +245,16 @@ table.normal_table_white td {
 	-moz-border-radius: 0px 0px 0px 0px; }
 /*=================================== BLACK TABLE (END) =====================================*/
 
-#treeview .k-sprite     { background-image: url("/assets/coloricons-sprite.png") }
-#treeview .rootfolder   { background-image: url("/assets/treeview_folder.gif") }
-#treeview .folder       { background-image: url("/assets/treeview_folder_open.gif") }
-#treeview .file         { background-image: url("/assets/treeview_file.gif") }
-#treeview .remove_file  { background-image: url("/assets/remove_file.png") }
-#treeview .kiv_file     { background-image: url("/assets/remove_file.png") }
-#treeview .kiv_folder   { background-image: url("/assets/remove_folder.png") }
+#treeview .k-sprite         { background-image: url("/assets/coloricons-sprite.png") }
+#treeview .rootfolder       { background-image: url("/assets/treeview_folder.gif") }
+#treeview .folder           { background-image: url("/assets/treeview_folder_open.gif") }
+#treeview .file             { background-image: url("/assets/treeview_file.gif") }
+#treeview .remove_file      { background-image: url("/assets/remove_file.png") }
+#treeview .kiv_file         { background-image: url("/assets/remove_file.png") }
+#treeview .kiv_folder       { background-image: url("/assets/remove_folder.png") }
+#treeview .k-state-selected { background: white; }
+#treeview .k-in             { border: 1px solid white; padding: 1px; }
+#treeview                   { overflow-y:hidden; }
 
 .approval_remark{ background-color:red; color:white; padding:5px; width: 450px; }
 
@@ -341,15 +328,17 @@ table.normal_table_white td {
 .padding_10         { padding: 10px; }
 .check_highlight    { width: 25px; }
 .remove_underline   { text-decoration: none; }
-.disabled_button    { padding: 5px; color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: center; }
+.table_background   { background-color: white; }
+
+.disabled_button    { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: center; padding: 5px; }
+#disabled_on_left   { color: grey; background-color: white; cursor: default; }
 .disabled_menu      { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: left; }
 
-
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }
-.search_engine  { display:none; background-color: gainsboro; padding: 10px; position: absolute; right: 0px; z-index: 50;}
+.search_engine  { display:none; background-color: #9c9; padding: 10px; position: absolute; right: 0px; z-index: 50;}
 .search_link {
     float: right;
-    background-color: gainsboro;
+    background-color: #9c9;
     color: brown;
     padding: 0px 5px 0px 5px;
     text-decoration: none;
@@ -490,7 +479,7 @@ tr.selected_row td{ background: gold; }
 
 
 fieldset { border: 1px solid green; padding: 5px; }
-legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color: green; font-weight: bold;  }
+legend   { padding: 5px; border:1px solid green; color: green; font-weight: bold;  }
 
 /* Quotation Tabbing */
 .tabbing_h400 { overflow: auto; }
@@ -517,10 +506,10 @@ legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color:
 
 #sheetbox_height { border: 1px solid black; }
 
-.content, .popup_content, .pr_content, .linking_content, .popup_form_table { padding: 0px 5px; border: 1px solid grey; }
+.content, .popup_content, .pr_content, .linking_content, .popup_form_table { padding: 0px 5px; border: 1px solid grey; background-color: white; }
+.qr_content { border: 1px solid grey; background-color: white; }
 
-#treeview .k-state-selected { background: white; }
-#treeview .k-in             { border: 1px solid white; padding: 1px; }
+
 
 /* Pagination Style (START) */
 

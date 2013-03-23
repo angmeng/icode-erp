@@ -1,20 +1,18 @@
-<div id="container">
-  <div class="title_head"><strong style="color:white;">NEW QUOTATION REQUISITION APPLICATION</strong></div>
+<%= render "linking" %>
 
-  <table width="100%" class="header_content">
-    <tr><td><h3>Pending QR Items</h3></td></tr>
-  </table>
-
-  <div class="fix_h450">
+<div class="title_head"><strong style="color:white;">NEW QUOTATION REQUISITION APPLICATION</strong></div>
+  
+<div class="qr_content">
+  <% if @quotation_request_forms.present? %>
     <%= form_tag update_checkboxes_quotation_request_forms_path do %>
-      <% if @quotation_request_forms.present? %>
-          <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
-          <div style="padding: 5px;"><%= submit_tag "Submit", :confirm => "Are you sure to submit?" %></div>
-      <% else %>
-        Not Record Found 
-      <% end %>
+        <%= render "pending_qr_list", :quotations => @quotation_request_forms %>
+        <div style="padding: 5px;" id="qr_submit"><%= submit_tag "Submit", :confirm => "Are you sure to submit?", :class => "k-button" %></div>
     <% end %>
-  </div>
-
-  <%= render "action_quotation_new_pending" %>
+  <% else %>
+    <div style="padding: 0 5px;">No Record Found</div>
+  <% end %>
 </div>
+
+<%= render "action_quotation_new_pending" %>
+  
+<%= render "js_adjustment_height" %>

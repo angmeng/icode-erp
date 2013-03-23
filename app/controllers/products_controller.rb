@@ -93,7 +93,7 @@ class ProductsController < ApplicationController
     @product          = Product.new
     @manage_product   = ProductManagement.manage(params[:add_category_id]) if params[:add_category_id].present?
     manage_categories(params[:refer_category_id])
-    session[:refer_category_id] = params[:refer_category_id]
+#    session[:refer_category_id] = params[:refer_category_id]
   end
   
   def create
@@ -104,7 +104,11 @@ class ProductsController < ApplicationController
       ProductManagement.add_product_vendor(@product, session[:po_up], session[:po_vendor_id]) if session[:po_up].present? and session[:po_vendor_id].present?
       # business transaction (end)
       clearing_function
-      redirect_to @product, notice: "Product ID##{@product.product_combobox.product_code} was successfully created."
+      if params[:save_and_new]
+        redirect_to new_product_path(:add_category_id => params[:add_category_id], :category_type => params[:category_type], :refer_category_id => params[:refer_category_id]), notice: "Product ID # #{@product.product_combobox.product_code} was successfully created."
+      else
+        redirect_to @product, notice: "Product ID # #{@product.product_combobox.product_code} was successfully created."
+      end
     rescue ActiveRecord::StatementInvalid
       new
       flash[:alert] = "Sorry. The process has failed. Please try again. Thanks."
@@ -218,12 +222,12 @@ class ProductsController < ApplicationController
   end
   
   def clearing_function
-    session[:pri_id]       = nil #ok
-    session[:po_desc]      = nil #ok
-    session[:po_um_id]     = nil #ok
-    session[:po_up]        = nil #ok
-    session[:po_vendor_id] = nil #ok
-    session[:qr_id]        = nil
-    session[:refer_category_id] = nil
+    session[:pri_id]            = nil #ok
+    session[:po_desc]           = nil #ok
+    session[:po_um_id]          = nil #ok
+    session[:po_up]             = nil #ok
+    session[:po_vendor_id]      = nil #ok
+    session[:qr_id]             = nil
+#    session[:refer_category_id] = nil
   end
 end

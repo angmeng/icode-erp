@@ -1,0 +1,46 @@
+<div id="name_entry">
+  <table>
+    <tr>
+      <td width="150"><b>Name</b></td>
+      <td><%= @user.name rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Job Title</b></td>
+      <td><%= @user.job_title rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Department</b></td>
+      <td><%= @user.department.try(:name) rescue '-' %></td>
+    </tr>
+
+    <% unless @user.admin == current_user.admin %>
+      <tr>
+        <td valign="top"><b>Report Flow</b></td>
+        <td>
+
+            <table>
+              <thead>
+                <tr style="background-color: gainsboro;">
+                  <th width="100">Level 1</th>
+                  <th width="100">Level 2</th>
+                  <th width="100">Level 3</th>
+                  <th width="100">Level 5</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% lv2 = User.find_by_id(@user.level_two) %>
+                <% lv3 = User.find_by_id(@user.level_three) %>
+                <tr class="odd_line">
+                  <td align="center"><%= @user.name rescue '-' %></td>
+                  <td align="center"><%= lv2.name rescue '-' %></td>
+                  <td align="center"><%= lv3.name rescue '-' %></td>
+                  <td align="center"><%= director_data.name rescue '-' %></td>
+                </tr>
+              </tbody>
+            </table>
+
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

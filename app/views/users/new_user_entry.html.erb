@@ -1,16 +1,29 @@
 <div class="title_head"><strong style="color:white;">NEW USER</strong></div>
 
-<%= form_tag generator_user_users_path do  %>
+<%= form_tag generator_user_users_path do %>
   <div id="valid_user_form">
     <div id="user_strip">
       <ul>
         <li class="k-state-active">User Account</li>
-        <li>Inventory Management System</li>
-        <li>Inventory Management System II - Product</li>
+        <li>IMS - Purchase Flow</li>
+        <li>IMS - Sales Flow</li>
+        <li>IMS - Inventory</li>
+        <li>IMS - Custom</li>
+        <li>IMS - Housekeeping</li>
+        <li>IMS - Housekeeping - Product</li>
+        <li>IMS - Report</li>
+        <li>IMS - Account</li>
       </ul>
-      <div><%= render "user_account" %></div>
-      <div><%= render "management_checkbox" %></div>
+      <div><%= render "new_user_account" %></div>
+      <div><%= render "management_purchase_flow" %></div>
+      <div><%= render "management_sale_flow" %></div>
+      <div><%= render "management_inventory" %></div>
+      <div><%= render "management_custom" %></div>
+      <div><%= render "management_housekeeping" %></div>
       <div><%= render "management_product" %></div>
+      <div><%= render "management_report" %></div>
+      <div><%= render "management_account" %></div>
+      <span style="position: absolute; padding: 5px;">*IMS = Inventory Management System</span>
     </div>
   </div>
   <div class="icon_tag">

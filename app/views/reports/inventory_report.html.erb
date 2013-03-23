@@ -1,36 +1,14 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
+<div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
- 
-          <table>
-            <%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
-            <tr>
-                    <td>Product ID :
-                    <%= f.text_field :product_code_contains , :size => 9 %></td>
-                    <td>Description : 
-                    <%= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
-                    <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
-                    <td>Transaction
-                      <%= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
+<!--<input type="checkbox" name="all" id="checkall" />Check All-->
 
-            </tr>
-            <tr>
-                    <td><%= submit_tag "Search" %></td>
-            </tr>
-            <% end %>
-          </table>
-
-  <hr />
-
-<input type="checkbox" name="all" id="checkall" />Check All
-
-  <div class="fix_1600x900_h450">
+  <div class="popup_content">
           <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
-                  <table id="products" class="display">
+                  <table id="jdataTable">
                     <thead>
-                      <tr class="header_line">
+                      <tr>
                         <th></th>
                         <th>No.</th>
                         <th>Product ID</th>
@@ -47,7 +25,7 @@
 
                   <% @show_inventory_report.each_with_index do |pri , index| %>
           
-                      <tr class="<%= cycle("odd_line", "even_line") %>">
+                      <tr>
                        
                         <td align="center"><%= check_box_tag "in_ids[]" , pri.id %></td>
                         <td align="center"><%= index + 1 %></td>
@@ -82,8 +60,6 @@
               <%#*</div>%>
           <%#*</table>%>
     </div>
-
-</div>
           <%#*</fieldset>%>
 
     <div class="icon_tag" style="float:left">
@@ -103,4 +79,8 @@
 
       <%= link_close_button %>
     </div>
+
+
+
+
 

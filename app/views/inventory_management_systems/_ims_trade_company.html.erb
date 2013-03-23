@@ -5,202 +5,126 @@
 
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_MENU, checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_MENU), :disabled => true %> Trade Company</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_NEW, checkboxes.include?(InventoryManagementSystem::VENDOR_NEW), :disabled => true %> Vendor New</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_NEW_ADD, checkboxes.include?(InventoryManagementSystem::VENDOR_NEW_ADD), :disabled => true %></td>
-        <td><%#= "save" %></td>
-        <% 10.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRADE_COMPANY_MENU) %> Trade Company</td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_LISTING) %> Suppliers</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_NEW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_KIV) %> Vendors - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_KIV_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_LISTING) %> Customers</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_NEW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_LISTING, checkboxes.include?(InventoryManagementSystem::VENDOR_LISTING), :disabled => true %> Listing Vendor</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_SHOW, checkboxes.include?(InventoryManagementSystem::VENDOR_SHOW), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_EDIT, checkboxes.include?(InventoryManagementSystem::VENDOR_EDIT), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_ACTION_KIV, checkboxes.include?(InventoryManagementSystem::VENDOR_ACTION_KIV), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_PRINTABLE, checkboxes.include?(InventoryManagementSystem::VENDOR_PRINTABLE), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV , checkboxes.include?(InventoryManagementSystem::VENDOR_KIV ), :disabled => true %> Vendor KIV</td>
-        <td></td><td><%#= "save" %></td>
-        <% 4.times do |td| %><td></td><% end %>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV_SHOW , checkboxes.include?(InventoryManagementSystem::VENDOR_KIV_SHOW ), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::VENDOR_KIV_RECOVER), :disabled => true %></td>
-        <% 4.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_NEW, checkboxes.include?(InventoryManagementSystem::CUSTOMER_NEW), :disabled => true %>Customer New</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_NEW_ADD, checkboxes.include?(InventoryManagementSystem::CUSTOMER_NEW_ADD), :disabled => true %></td>
-        <td><%#= "save" %></td>
-        <% 10.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_LISTING, checkboxes.include?(InventoryManagementSystem::CUSTOMER_LISTING), :disabled => true %> Listing Customer</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOMER_SHOW), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_EDIT, checkboxes.include?(InventoryManagementSystem::CUSTOMER_EDIT), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_ACTION_KIV, checkboxes.include?(InventoryManagementSystem::CUSTOMER_ACTION_KIV), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_PRINTABLE, checkboxes.include?(InventoryManagementSystem::CUSTOMER_PRINTABLE), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV , checkboxes.include?(InventoryManagementSystem::CUSTOMER_KIV), :disabled => true %> Customer KIV</td>
-        <td></td><td><%#= "save" %></td>
-        <% 4.times do |td| %><td></td><% end %>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOMER_KIV_SHOW), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::CUSTOMER_KIV_RECOVER), :disabled => true %></td>
-        <% 4.times do |td| %><td></td><% end %>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_KIV) %> Customers - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
       </tr>
 
     <% else %>
 
-        <tr>
-          
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_MENU, checkboxes.include?(InventoryManagementSystem::TRADE_COMPANY_MENU) %> Trade Company</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_NEW, checkboxes.include?(InventoryManagementSystem::VENDOR_NEW) %> Vendor New</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_NEW_ADD, checkboxes.include?(InventoryManagementSystem::VENDOR_NEW_ADD) %></td>
-          <td><%#= "save" %></td>
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRADE_COMPANY_MENU) %> Trade Company</td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_LISTING) %> Suppliers</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_NEW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_KIV) %> Vendors - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_KIV_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_LISTING) %> Customers</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_NEW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
 
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_LISTING, checkboxes.include?(InventoryManagementSystem::VENDOR_LISTING) %> Listing Vendor</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_SHOW, checkboxes.include?(InventoryManagementSystem::VENDOR_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_EDIT, checkboxes.include?(InventoryManagementSystem::VENDOR_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_ACTION_KIV, checkboxes.include?(InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_PRINTABLE, checkboxes.include?(InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
-          <% 6.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_KIV) %> Customers - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
+      </tr>
 
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV , checkboxes.include?(InventoryManagementSystem::VENDOR_KIV ) %> Vendor KIV</td>
-          <td></td><td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV_SHOW , checkboxes.include?(InventoryManagementSystem::VENDOR_KIV_SHOW ) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_NEW, checkboxes.include?(InventoryManagementSystem::CUSTOMER_NEW) %>Customer New</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_NEW_ADD, checkboxes.include?(InventoryManagementSystem::CUSTOMER_NEW_ADD) %></td>
-          <td><%#= "save" %></td>
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_LISTING, checkboxes.include?(InventoryManagementSystem::CUSTOMER_LISTING) %> Listing Customer</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOMER_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_EDIT, checkboxes.include?(InventoryManagementSystem::CUSTOMER_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_ACTION_KIV, checkboxes.include?(InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_PRINTABLE, checkboxes.include?(InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
-          <% 6.times do |td| %><td></td><% end %>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV , checkboxes.include?(InventoryManagementSystem::CUSTOMER_KIV) %> Customer KIV</td>
-          <td></td><td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
-
-      <% end %>
+    <% end %>
     
   <% else %>
     
-    <tr>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::TRADE_COMPANY_MENU %> Trade Company</td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_NEW %> Vendor New</td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_NEW_ADD %></td>
-      <td><%#= "save" %></td>
-      <% 10.times do |td| %><td></td><% end %>
-    </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_new(InventoryManagementSystem::TRADE_COMPANY_MENU) %> Trade Company</td>
+        <td><%= ims_new(InventoryManagementSystem::VENDOR_LISTING) %> Suppliers</td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_NEW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_EDIT) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_new(InventoryManagementSystem::VENDOR_KIV) %> Vendors - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_KIV_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_new(InventoryManagementSystem::CUSTOMER_LISTING) %> Customers</td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_NEW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_EDIT) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_LISTING %> Listing Vendor</td>
-      <td></td><td><%#= "save" %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_EDIT %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_ACTION_KIV %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_PRINTABLE %></td>
-      <% 6.times do |td| %><td></td><% end %>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV %> Vendor KIV</td>
-      <td></td><td><%#= "save" %></td>
-      <% 4.times do |td| %><td></td><% end %>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::VENDOR_KIV_RECOVER %></td>
-      <% 4.times do |td| %><td></td><% end %>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_NEW %>Customer New</td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_NEW_ADD %></td>
-      <td><%#= "save" %></td>
-      <% 10.times do |td| %><td></td><% end %>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_LISTING %> Listing Customer</td>
-      <td></td><td><%#= "save" %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_EDIT %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_ACTION_KIV %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_PRINTABLE %></td>
-      <% 6.times do |td| %><td></td><% end %>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV %> Customer KIV</td>
-      <td></td><td><%#= "save" %></td>
-      <% 4.times do |td| %><td></td><% end %>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOMER_KIV_RECOVER %></td>
-      <% 4.times do |td| %><td></td><% end %>
-    </tr>
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_new(InventoryManagementSystem::CUSTOMER_KIV) %> Customers - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
+      </tr>
     
   <% end %>
 <%#*</table>%>

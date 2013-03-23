@@ -1,11 +1,12 @@
 <table>
   <tr>
-    <td width="120"><b>Paper Quality *</b></td>
-    <td><%= f.text_field :material_gramme, :class => "kendo_precision_0" , "required validationMessage" => "Please Enter Paper Quality", :style => "width: 80px;" %> GSM</td>
+    <td width="105"><b>Paper Quality *</b></td>
+    <td><%= f.text_field :material_gramme, :class => "kendo_precision_0" , "required validationMessage" => "Please Enter Paper Quality", :style => "width: 80px;" %> GSM<span class="k-invalid-msg" data-for="quotation_request_form[material_gramme]"></span></td>
+    
     <% if unit_measurement.find_by_code('GSM').present? %>
-      <%= f.hidden_field :unit_measurement_id, :value => unit_measurement.find_by_code('GSM').id, :size => 3 %>
+      <%= f.hidden_field :unit_measurement_id, :value => unit_measurement.find_by_code('GSM').id %>
     <% else %>
-      <%= f.hidden_field :unit_measurement_id, :value => 40, :size => 3 %>
+      <%= f.hidden_field :unit_measurement_id, :value => 40 %>
     <% end %>
   </tr>
 
@@ -15,19 +16,20 @@
   </tr>
 
   <tr>
-    <td><b>Remark</b></td>
-    <td colspan="3"><%= f.text_area :material_remark, :rows => '3', :cols => '40' %></td>
+    <td style="vertical-align: top;"><b>Remark</b></td>
+    <td><%= f.text_area :material_remark, :rows => '3', :cols => '40' %></td>
   </tr>
 
   <tr>
     <td><b>Paper Size, inch *</b></td>
     <td>
       (W)<%= f.text_field :paper_width, :class => "kendo_precision_2", "required validationMessage" => "Please Enter Paper Size of Width", :style => "width: 80px;" %>
+      <span class="k-invalid-msg" data-for="quotation_request_form[paper_width]"></span>
       (L)<%= f.text_field :paper_length, :class => "kendo_precision_2", "required validationMessage" => "Please Enter Paper Size of Length", :style => "width: 80px;" %>  
-    </td>
-    <td><b>Ratio *</b></td>
-    <td>
-      <%= f.text_field :ratio, :style => "width: 60px;", :class => "kendo_precision_0", "required validationMessage" => "Please Enter Ratio", :style => "width: 80px;" %>
+      <span class="k-invalid-msg" data-for="quotation_request_form[paper_length]"></span>
+      <b>Ratio *</b>
+      <%= f.text_field :ratio, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Ratio", :style => "width: 80px;" %>
+      <span class="k-invalid-msg" data-for="quotation_request_form[ratio]"></span>
       <span id="run_size">RUN</span>
     </td>
   </tr>

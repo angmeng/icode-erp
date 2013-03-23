@@ -1,336 +1,328 @@
-<div id="valid_company">
   <%= form_for @trade_company do |f| %>
+    <div id="valid_company">
+      <div class="popup_content">
+        <div id="company_strip">
+          <ul>
+            <li class="k-state-active">Company Details</li>
+            <li>Payment Details</li>
+            <li>Other Details</li>
+          </ul>
 
-    <div class="popup_content">
-      <div id="company_strip">
-        <ul>
-          <li class="k-state-active">Company Details</li>
-          <li>Payment Details</li>
-          <li>Other Details</li>
-        </ul>
+          <div>
+            <table>
+              <tr>
+                <td width="150"><b>Company Code *</b></td>     
+                <td>
+                  <% if action_name == "edit" %>
+                    [<%= @trade_company.code rescue '-' %>]
+                  <% else %>
+                    <%= f.text_field :code, :class => "k-textbox", "required validationMessage" => "Please Enter Code No", :placeholder => "Code No" %>
+                  <% end %>
 
-        <div>
-          <table>
-            <tr>
-              <td width="150"><b>Company Code *</b></td>     
-              <td>
-                <% if action_name == "edit" %>
-                  [<%= @trade_company.code rescue '-' %>]
-                <% else %>
-                  <%= f.text_field :code, :class => "k-textbox", "required validationMessage" => "Please Enter Company Code", :placeholder => "Code" %>
-                <% end %>
-
-                <% if @vendor.present? %>
-                  <!-- When apply the Purchase Requisition, the selection of supplier company will be displaying here.. -->
-                  <%= @vendor %><%= f.hidden_field :name, :value => @vendor %>
-                <% else %>
-                  <% if session[:option] == TradeCompany::CUSTOMER %>
-                    <!-- When apply the Quotation Requisition, the selection of customer company will be displaying here..  -->
-                    <% if @customer_company.present? %>
-                      <span style="color:red; font-weight: bold;"><%= @customer_company.customer_name rescue '-' %></span>
-                      <%= f.hidden_field :name, :value => @customer_company.customer_name %>
-                      <%= hidden_field_tag :customer_update_qr, @customer_company.customer_name %>
+                  <% if @vendor.present? %>
+                    <!-- When apply the Purchase Requisition, the selection of supplier company will be displaying here.. -->
+                    <%= @vendor %><%= f.hidden_field :name, :value => @vendor %>
+                  <% else %>
+                    <% if session[:option] == TradeCompany::CUSTOMER %>
+                      <!-- When apply the Quotation Requisition, the selection of customer company will be displaying here..  -->
+                      <% if @customer_company.present? %>
+                        <span class="red_alert"><%= @customer_company.customer_name %></span>
+                        <%= f.hidden_field :name, :value => @customer_company.customer_name, :class => "k-textbox" %>
+                        <%= hidden_field_tag :customer_update_qr, @customer_company.customer_name %>
+                      <% else %>
+                        <%= f.text_field :name, :class => "k-textbox", "required validationMessage" => "Please Enter Company Name", :placeholder => "Company Name", :style => "width: 400px;" %>
+                      <% end %>
                     <% else %>
-                      <%= f.text_field :name, :size => 40, :class => "k-textbox", "required validationMessage" => "Please Enter Name", :placeholder => "Company Name" %>
+                      <%= f.text_field :name, :class => "k-textbox", "required validationMessage" => "Please Enter Company Name", :placeholder => "Company Name", :style => "width: 400px;" %>
                     <% end %>
-                  <% else %>
-                    <%= f.text_field :name, :size => 40, :class => "k-textbox", "required validationMessage" => "Please Enter Name", :placeholder => "Company Name" %>
                   <% end %>
-                <% end %>
 
-                <% unless action_name == "edit" %>
-                  <% if session[:option] == TradeCompany::CUSTOMER %>
-                    <%= f.hidden_field "user_type", :value => TradeCompany::CUSTOMER %>
-                  <% else %>
-                    <%= f.hidden_field "user_type", :value => TradeCompany::SUPPLIER %>
+                  <% unless action_name == "edit" %>
+                    <% if session[:option] == TradeCompany::CUSTOMER %>
+                      <%= f.hidden_field "user_type", :value => TradeCompany::CUSTOMER %>
+                    <% else %>
+                      <%= f.hidden_field "user_type", :value => TradeCompany::SUPPLIER %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </td>
-            </tr>
-
-            <% if session[:option] == TradeCompany::CUSTOMER %>
-              <tr>
-                <td style="vertical-align: top;"><b>Bill To *</b></td>
-                <td><%= f.text_area :address_1, :validType => "maxLength[255]", :class => "easyui-validatebox", :size => "40x3", :placeholder => "Bill To Address", "required validationMessage" => "Please Enter Name"  %></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <%= f.text_field :postcode_one, :size => 8, :placeholder => "Postcode" %>
-                  <%= f.text_field :city_one, :size => 20, :placeholder => "City" %>
-                  <%= f.text_field :state_one, :size => 20, :placeholder => "State" %>
-                  <%= f.text_field :country_one, :size => 20, :placeholder => "Country" %>
                 </td>
               </tr>
+
+              <% if session[:option] == TradeCompany::CUSTOMER %>
+              
+                <tr>
+                  <td style="vertical-align: top;"><b>Bill To *</b></td>
+                  <td><%= f.text_area :address_1, :size => "50x3", :placeholder => "Bill To Address", "required validationMessage" => "Please Enter Bill To Address" %></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <%= f.text_field :postcode_one, :placeholder => "Postcode", :class => "k-textbox" %>
+                    <%= f.text_field :city_one, :placeholder => "City", :class => "k-textbox" %>
+                    <%= f.text_field :state_one, :placeholder => "State", :class => "k-textbox" %>
+                    <%= f.text_field :country_one, :placeholder => "Country", :class => "k-textbox" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><b>Ship To *</b></td>
+                  <td><%= f.text_area :address_2, :size => "50x3", :placeholder => "Ship To Adress", "required validationMessage" => "Please Enter Ship To Address" %></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <%= f.text_field :postcode_two, :placeholder => "Postcode", :class => "k-textbox" %>
+                    <%= f.text_field :city_two, :placeholder => "City", :class => "k-textbox" %>
+                    <%= f.text_field :state_two, :placeholder => "State", :class => "k-textbox" %>
+                    <%= f.text_field :country_two, :placeholder => "Country", :class => "k-textbox" %>
+                  </td>
+                </tr>
+                
+              <% else %>
+                
+                <tr>
+                  <td valign="top"><b>Vendor Address *</b></td>
+                  <td><%= f.text_area :address_1, :size => "50x3", :placeholder => "Vendor Address", "required validationMessage" => "Please Enter Vendor Address" %></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <%= f.text_field :postcode_one, :placeholder => "Postcode", :class => "k-textbox" %>
+                    <%= f.text_field :city_one, :placeholder => "City", :class => "k-textbox" %>
+                    <%= f.text_field :state_one, :placeholder => "State", :class => "k-textbox" %>
+                    <%= f.text_field :country_one, :placeholder => "Country", :class => "k-textbox" %>
+                  </td>
+                </tr>
+                
+              <% end %>
+
               <tr>
-                <td style="vertical-align: top;"><b>Ship To *</b></td>
-                <td><%= f.text_area :address_2, :validType => "maxLength[255]", :class => "easyui-validatebox", :size => "40x3", :placeholder => "Ship To Adress", "required validationMessage" => "Please Enter Ship To Address" %></td>
+                <td><b>Email</b></td>
+                <td><%= f.text_field :email, :class => "k-textbox" %></td>
               </tr>
+
               <tr>
-                <td></td>
+                <td><b>Phone/Mobile No. *</b></td>
                 <td>
-                  <%= f.text_field :postcode_two, :size => 8, :placeholder => "Postcode" %>
-                  <%= f.text_field :city_two, :size => 20, :placeholder => "City" %>
-                  <%= f.text_field :state_two, :size => 20, :placeholder => "State" %>
-                  <%= f.text_field :country_two, :size => 20, :placeholder => "Country" %>
-                </td>
+                  <%= f.text_field :tel_area_code_one, :class => "k-textbox", "required validationMessage" => "Please Enter Area Code", :style => "width: 40px;" %>-<%= f.text_field :tel_no_1, :class => "k-textbox", "required validationMessage" => "Please Enter Phone Number" %>&nbsp;/&nbsp;
+                  <%= f.text_field :tel_area_code_two, :class => "k-textbox", :style => "width: 40px;" %>-<%= f.text_field :tel_no_2, :class => "k-textbox" %></td>
               </tr>
-            <% else %>
+
               <tr>
-                <td valign="top"><b>Vendor Address *</b></td>
-                <td><%= f.text_area :address_1, :size => "50x3", :placeholder => "Vendor Address", "required validationMessage" => "Maximum is 255 characters." %></td>
+                <td><b><%= f.label :fax_no %><b></td>
+                <td><%= f.text_field :fax_area_code, :class => "k-textbox", :style => "width: 40px;" %>-<%= f.text_field :fax_no, :class => "k-textbox" %></td>
               </tr>
+
               <tr>
-                <td></td>
+                <td><b>Website</b></td>
+                <td><%= f.text_field :website, :class => "k-textbox" %></td>
+              </tr>
+
+              <tr>
+                <td><b>Company Reg No.</b></td>
+                <td><%= f.text_field :company_reg_no, :class => "k-textbox" %></td>
+              </tr>
+
+              <% if session[:option] == TradeCompany::SUPPLIER %>
+                <tr>
+                  <td><b>Supplier Performance Monitoring Record</b></td>
+                  <td><%= f.check_box :performance_monitoring %></td>
+                </tr>
+              <% end %>
+
+              <tr>
+                <td><b>Attn *</b></td>
+                <td><%= f.text_field :contact_person, :class => "k-textbox", "required validationMessage" => "Please Enter Attn" %></td>
+              </tr>
+
+              <tr>
+                <td style="vertical-align: top;"><b>Listing Contact</b></td>
                 <td>
-                  <%= f.text_field :postcode_one, :size => 8, :placeholder => "Postcode" %>
-                  <%= f.text_field :city_one, :size => 20, :placeholder => "City" %>
-                  <%= f.text_field :state_one, :size => 20, :placeholder => "State" %>
-                  <%= f.text_field :country_one, :size => 20, :placeholder => "Country" %>
-                </td>
-              </tr>
-            <% end %>
+                  <table class="target_table">
+                    <thead>
+                      <tr style="background-color: gainsboro;">
+                        <th>Department *</th>
+                        <th>Name *</th>
+                        <th>Email</th>
+                        <th>Phone No. *</th>
+                        <th>Mobile No.</th>
+                        <th><%= link_to "Add", "#", :id => "add_bottom_row", :class => "k-button" %></th>
+                      </tr>
+                    </thead>
 
-            <tr>
-              <td><b>Email</b></td>
-              <td><%= f.text_field :email %></td>
-            </tr>
+                    <tbody>
+                      <% if @trade_company.contacts.present? %>
 
-            <tr>
-              <td><b>Phone/Mobile No. *</b></td>
-              <td>
-                <%= f.text_field :tel_area_code_one, :class => "k-textbox", "required validationMessage" => "Please Enter Area Code", :style => "width: 40px;" %>-<%= f.text_field :tel_no_1, :class => "k-textbox", "required validationMessage" => "Please Enter Phone Number" %>&nbsp;/&nbsp;
-                <%= f.text_field :tel_area_code_two, :size => 1 %>-<%= f.text_field :tel_no_2, :size => 8 %></td>
-            </tr>
+                        <% @trade_company.contacts.each_with_index do |ct, index| %>                      
+                          <tr>
+                            <td><%= text_field_tag "datarow[#{index}][contact_department]", ct.department, :class => "k-textbox" %></td>
+                            <td><%= text_field_tag "datarow[#{index}][contact_name]", ct.name, :class => "k-textbox" %></td>
+                            <td><%= text_field_tag "datarow[#{index}][contact_email]", ct.email, :class => "k-textbox" %></td>
+                            <td><%= text_field_tag "datarow[#{index}][contact_phone_area_code]", ct.phone_area_code, :class => "k-textbox", :style => "width: 40px;" %>-<%= text_field_tag "datarow[#{index}][contact_phone_no]", ct.phone_no, :class => "k-textbox" %></td>
+                            <td><%= text_field_tag "datarow[#{index}][contact_mobile_area_code]", ct.mobile_area_code, :class => "k-textbox", :style => "width: 40px;" %>-<%= text_field_tag "datarow[#{index}][contact_mobile_no]", ct.mobile_no, :class => "k-textbox" %></td>
+                            <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
+                          </tr>
+                        <% end %>
 
-            <tr>
-              <td><b><%= f.label :fax_no %><b></td>
-              <td><%= f.text_field :fax_area_code, :size => 1 %>-<%= f.text_field :fax_no, :size => 8 %></td>
-            </tr>
+                      <% else %>
 
-            <tr>
-              <td><b>Website</b></td>
-              <td><%= f.text_field :website %></td>
-            </tr>
-
-            <tr>
-              <td><b><%= f.label :company_reg_no %></b></td>
-              <td><%= f.text_field :company_reg_no %></td>
-            </tr>
-
-            <% if session[:option] == TradeCompany::SUPPLIER %>
-              <tr>
-                <td><b>Supplier Performance Monitoring Record</b></td>
-                <td><%= f.check_box :performance_monitoring %></td>
-              </tr>
-            <% end %>
-
-            <tr>
-              <td><b>Attn *</b></td>
-              <td><%= f.text_field :contact_person, :class => "k-textbox", "required validationMessage" => "Please Enter Attn."%></td>
-            </tr>
-
-            <tr>
-              <td style="vertical-align: top;"><b>Listing Contact</b></td>
-              <td>
-                <table class="target_table">
-                  <thead>
-                    <tr style="background-color: gainsboro;">
-                      <th>Department *</th>
-                      <th>Name *</th>
-                      <th>Email</th>
-                      <th>Phone No. *</th>
-                      <th>Mobile No.</th>
-                      <th><%= link_to "Add", "#", :id => "add_bottom_row", :class => "k-button" %></th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <% if @trade_company.contacts.present? %>
-
-                      <% @trade_company.contacts.each_with_index do |ct, index| %>                      
                         <tr>
-                          <td><%= text_field_tag "datarow[#{index}][contact_department]", ct.department, :size => 15 %></td>
-                          <td><%= text_field_tag "datarow[#{index}][contact_name]", ct.name, :size => 15 %></td>
-                          <td><%= text_field_tag "datarow[#{index}][contact_email]", ct.email, :size => 15 %></td>
-                          <td><%= text_field_tag "datarow[#{index}][contact_phone_area_code]", ct.phone_area_code, :size => 1 %>-<%= text_field_tag "datarow[#{index}][contact_phone_no]", ct.phone_no, :size => 8 %></td>
-                          <td><%= text_field_tag "datarow[#{index}][contact_mobile_area_code]", ct.mobile_area_code, :size => 1 %>-<%= text_field_tag "datarow[#{index}][contact_mobile_no]", ct.mobile_no, :size => 8 %></td>
+                          <td><%= text_field_tag "datarow[0][contact_department]", '', :class => "k-textbox" %></td>
+                          <td><%= text_field_tag "datarow[0][contact_name]", '', :class => "k-textbox" %></td>
+                          <td><%= text_field_tag "datarow[0][contact_email]", '', :class => "k-textbox" %></td>
+                          <td><%= text_field_tag "datarow[0][contact_phone_area_code]", '', :class => "k-textbox", :style => "width: 40px;" %>-<%= text_field_tag "datarow[0][contact_phone_no]", '', :class => "k-textbox" %></td>
+                          <td><%= text_field_tag "datarow[0][contact_mobile_area_code]", '', :class => "k-textbox", :style => "width: 40px;" %>-<%= text_field_tag "datarow[0][contact_mobile_no]", '', :class => "k-textbox" %></td>
                           <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
                         </tr>
+
                       <% end %>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
 
-                    <% else %>
+              <tr>
+                <td><b><%= f.label :status %></b></td>
+                <td>
+                  <% if @trade_company.status == TradeCompany::ACTIVE %>
+                    <%= f.radio_button :status, TradeCompany::ACTIVE, :checked => true %> Active
+                    <%= f.radio_button :status, TradeCompany::INACTIVE %> Inactive
+                    <%= f.radio_button :status, TradeCompany::KIV %> KIV
+                  <% elsif @trade_company.status == TradeCompany::INACTIVE %>
+                    <%= f.radio_button :status, TradeCompany::ACTIVE %> Active
+                    <%= f.radio_button :status, TradeCompany::INACTIVE, :checked => true %> Inactive
+                    <%= f.radio_button :status, TradeCompany::KIV %> KIV
+                  <% else %>
+                    <%= f.radio_button :status, TradeCompany::ACTIVE %> Active
+                    <%= f.radio_button :status, TradeCompany::INACTIVE %> Inactive
+                    <%= f.radio_button :status, TradeCompany::KIV, :checked => true %> KIV
+                  <% end %>
+                </td>
+              </tr>
+              <!--tr>
+                <td><b>Farm Out Material</b></td>
+                <td></td>
+                <td><%#= f.check_box :subcon %></td>
+              </tr-->
+            </table>
+          </div>
 
-                      <tr>
-                        <td><%= text_field_tag "datarow[0][contact_department]", '', :size => 15 %></td>
-                        <td><%= text_field_tag "datarow[0][contact_name]", '', :size => 15 %></td>
-                        <td><%= text_field_tag "datarow[0][contact_email]", '', :size => 15 %></td>
-                        <td><%= text_field_tag "datarow[0][contact_phone_area_code]", '', :size => 1 %>-<%= text_field_tag "datarow[0][contact_phone_no]", '', :size => 8 %></td>
-                        <td><%= text_field_tag "datarow[0][contact_mobile_area_code]", '', :size => 1 %>-<%= text_field_tag "datarow[0][contact_mobile_no]", '', :size => 8 %></td>
-                        <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
-                      </tr>
+          <div>
+            <table>
+              <tr>
+                <td><b>Payment Type</b></td>
+                <td><%= f.select :payment_type_id, options_from_collection_for_select(payment_type, 'id', 'name', (@trade_company.payment_type_id)), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :opening_ac_date, "Opening A/C Date" %></b></td>
+                <td>
+                  <% if @trade_company.opening_ac_date.present? %>
+                    <%= f.text_field :opening_ac_date, :value => @trade_company.opening_ac_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+                  <% else %>
+                    <%= f.text_field :opening_ac_date, :id => "kendo_date" %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :opening_ac_amount, "Opening A/C Amount" %></b></td>
+                <td><%= f.text_field :opening_ac_amount, :class => "kendo_precision_4" %></td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :limit_amount, "Limit" %></b></td>
+                <td><%= f.text_field :limit_amount, :class => "kendo_precision_4"  %></td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :banking_name, "Banking Name" %></b></td>
+                <td><%= f.text_field :banking_name, :class => "k-textbox" %></td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :banking_account, "Banking Account" %></b></td>
+                <td><%= f.text_field :banking_account, :class => "k-textbox" %></td>
+              </tr>
+            </table>
+          </div>
 
-                    <% end %>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr>
-              <td><b><%= f.label :status %></b></td>
-              <td>
-                <% if @trade_company.status == TradeCompany::ACTIVE %>
-                  <%= f.radio_button :status, TradeCompany::ACTIVE, :checked => true %> Active
-                  <%= f.radio_button :status, TradeCompany::INACTIVE %> Inactive
-                  <%= f.radio_button :status, TradeCompany::KIV %> KIV
-                <% elsif @trade_company.status == TradeCompany::INACTIVE %>
-                  <%= f.radio_button :status, TradeCompany::ACTIVE %> Active
-                  <%= f.radio_button :status, TradeCompany::INACTIVE, :checked => true %> Inactive
-                  <%= f.radio_button :status, TradeCompany::KIV %> KIV
-                <% else %>
-                  <%= f.radio_button :status, TradeCompany::ACTIVE %> Active
-                  <%= f.radio_button :status, TradeCompany::INACTIVE %> Inactive
-                  <%= f.radio_button :status, TradeCompany::KIV, :checked => true %> KIV
-                <% end %>
-              </td>
-            </tr>
-            <!--tr>
-              <td><b>Farm Out Material</b></td>
-              <td></td>
-              <td><%#= f.check_box :subcon %></td>
-            </tr-->
-          </table>
-        </div>
-
-        <div>
-          <table>
-            <tr>
-              <td><b><%= f.label :payment_type_id, "Payment Type" %></b></td>
-              <td><%= f.select :payment_type_id, options_from_collection_for_select(payment_type, 'id', 'name', (@trade_company.payment_type_id)), { :include_blank => true } %></td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :opening_ac_date, "Opening A/C Date" %></b></td>
-              <td>
-                <% if @trade_company.opening_ac_date.present? %>
-                  <%= f.text_field :opening_ac_date, :value => @trade_company.opening_ac_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
-                <% else %>
-                  <%= f.text_field :opening_ac_date, :id => "kendo_date" %>
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :opening_ac_amount, "Opening A/C Amount" %></b></td>
-              <td><%= f.text_field :opening_ac_amount, :class => "two_zero_1", :style => "text-align:right;", :size => 10 %></td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :limit_amount, "Limit" %></b></td>
-              <td><%= f.text_field :limit_amount, :class => "two_zero_2", :style => "text-align:right;", :size => 10 %></td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :banking_name, "Banking Name" %></b></td>
-              <td><%= f.text_field :banking_name %></td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :banking_account, "Banking Account" %></b></td>
-              <td><%= f.text_field :banking_account %></td>
-            </tr>
-          </table>
-        </div>
-
-        <div>
-          <table>
-            <tr>
-              <td><b><%= f.label :type_of_sale_id, "Type of Sales" %></b></td>
-              <td></td>
-              <td><%= f.select 'type_of_sale_id', options_from_collection_for_select(type_of_sale, 'id', 'name', @trade_company.type_of_sale_id), {:include_blank => true} %></td>
-            </tr>
-            <tr>
-              <td><b>Sales Tax Licence No.</b></td>
-              <td></td>
-              <td><%= f.text_field 'sales_tax_licence_no' %></td>
-            </tr>
-            <tr>
-              <td><b>Sales Tax Exemption No.</b></td>
-              <td></td>
-              <td>
-                  <% if action_name == 'edit' %>
-                    <% if @trade_company.sales_tax_exemption.present? %>
-                      [<%= @trade_company.sales_tax_exemption.running_no rescue '-' %>] 
-                      <%= @trade_company.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
+          <div>
+            <table>
+              <tr>
+                <td><b><%= f.label :type_of_sale_id, "Type of Sales" %></b></td>
+                <td></td>
+                <td><%= f.select 'type_of_sale_id', options_from_collection_for_select(type_of_sale, 'id', 'name', @trade_company.type_of_sale_id), { :include_blank => true}, { :class => "mkendo_combobox", :style => "width: 300px;" } %></td>
+              </tr>
+              <tr>
+                <td><b>Sales Tax Licence No.</b></td>
+                <td></td>
+                <td><%= f.text_field 'sales_tax_licence_no', :class => "k-textbox" %></td>
+              </tr>
+              <tr>
+                <td><b>Sales Tax Exemption No.</b></td>
+                <td></td>
+                <td>
+                    <% if action_name == 'edit' %>
+                      <% if @trade_company.sales_tax_exemption.present? %>
+                        [<%= @trade_company.sales_tax_exemption.running_no rescue '-' %>] 
+                        <%= @trade_company.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
+                      <% else %>
+                        <i style="color:red;">
+                          After register new company, please go to Custom -> New Sales Tax Exemption No. for register.
+                        </i>
+                      <% end %>
                     <% else %>
                       <i style="color:red;">
                         After register new company, please go to Custom -> New Sales Tax Exemption No. for register.
                       </i>
                     <% end %>
-                  <% else %>
-                    <i style="color:red;">
-                      After register new company, please go to Custom -> New Sales Tax Exemption No. for register.
-                    </i>
-                  <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td><b>Warehouse Licence No.</b></td>
-              <td></td>
-              <td><%= f.text_field 'warehouse_licence_no' %></td>
-            </tr>
-            <tr>
-              <td><b>MFG Warehouse Licence No.</b></td>
-              <td></td>
-              <td><%= f.text_field 'mfg_warehouse_licence_no' %></td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :sales_rep, "Sales Rep." %></b></td>
-              <td></td>
-              <td><%= f.text_field :sales_rep %></td>
-            </tr>
-            <tr>
-              <td><b><%= f.label :customer_approval, "Customer Approval #" %></b></td>
-              <td></td>
-              <td><%= f.number_field :customer_approval, :style => "text-align:right;" %></td>
-            </tr>
+                </td>
+              </tr>
+              <tr>
+                <td><b>Warehouse Licence No.</b></td>
+                <td></td>
+                <td><%= f.text_field 'warehouse_licence_no', :class => "k-textbox" %></td>
+              </tr>
+              <tr>
+                <td><b>MFG Warehouse Licence No.</b></td>
+                <td></td>
+                <td><%= f.text_field 'mfg_warehouse_licence_no', :class => "k-textbox" %></td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :sales_rep, "Sales Rep." %></b></td>
+                <td></td>
+                <td><%= f.text_field :sales_rep, :class => "k-textbox" %></td>
+              </tr>
+              <tr>
+                <td><b><%= f.label :customer_approval, "Customer Approval #" %></b></td>
+                <td></td>
+                <td><%= f.text_field :customer_approval, :class => "kendo_precision_0" %></td>
+              </tr>
 
-            <tr>
-              <td><b><%= f.label :trade_term_id, "Trade Term" %></b></td>
-              <td></td>
-              <td><%= f.select 'trade_term_id', options_from_collection_for_select(trade_term, 'id', 'name', (@trade_company.trade_term_id)), { :include_blank => true } %></td>
-            </tr>
+              <tr>
+                <td><b><%= f.label :trade_term_id, "Trade Term" %></b></td>
+                <td></td>
+                <td><%= f.select 'trade_term_id', options_from_collection_for_select(trade_term, 'id', 'name', (@trade_company.trade_term_id)), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+              </tr>
 
-            <tr>
-              <td><b>Certification</b></td>
-              <td></td>
-              <td><%= f.text_field :certification %></td>
-            </tr>
-          </table>
+              <tr>
+                <td><b>Certification</b></td>
+                <td></td>
+                <td><%= f.text_field :certification, :class => "k-textbox", :style => "width: 300px;" %></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="icon_tag">
-      <%= link_fsave_button(f) %>
-      <%= link_close_button %>
-    </div>
+    <%= render "action_vendor_new" %>
 
   <% end %>
-</div>
+
             
 <% content_for :jquery_script do %>
   <script>
     $(document).ready(function() {
-        <%#*$("#trade_company_postcode_one, #trade_company_tel_area_code_one, #trade_company_tel_no_1, #trade_company_tel_area_code_two, #trade_company_tel_no_2, #trade_company_fax_area_code, #trade_company_fax_no").kendoNumericTextBox();%>
-        <%#*$("$('[id$='_contact_phone_area_code']')").kendoNumericTextBox();%>
-        <%#*$("$('[id$='_contact_phone_no']')").kendoNumericTextBox();%>
-        <%#*$("$('[id$='_contact_mobile_area_code']')").kendoNumericTextBox();%>
-        <%#*$("$('[id$='_contact_phone_area_code']')").kendoNumericTextBox();%>
-        
-
         var validator = $("#valid_company").kendoValidator().data("kendoValidator");
 
-        $("button").click(function() {
-            if (validator.validate()) {
-            } else {
-              alert("Invalid Data Form...");
-            }
+        $("#left_save_button, #save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
         });
     });
   </script>

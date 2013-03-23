@@ -1,12 +1,12 @@
 <div class="icon_tag">
   
-  <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY_APPLY) %>
+  <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY) %>
     <span id="on_add_product_id" applyClass="iframe_1600x900">
       <span class="k-button" style="color: grey; background-color: white;">Apply the Product ID Registration</span>
     </span>
-  <%# else %>
-    <%#= not_link_apply %>
-  <%# end %>
+  <% else %>
+    <span>Apply the Product ID Registration</span>
+  <% end %>
     
   <span><%= not_link_submit_to %></span>
   

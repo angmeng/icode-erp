@@ -5,7 +5,7 @@
 <div><%= render "search_price_control" %></div>
 
 <% if @price_controls.present? %>
-  <%= render "listing_price_controls", :listing => @price_controls %>
+  <div class="table_background"><%= render "listing_price_controls", :listing => @price_controls %></div>
 <% else %>
   <div class="linking_content">Not Record Found</div>
 <% end %>

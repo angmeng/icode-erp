@@ -2,17 +2,17 @@
   <tr>
     <td width="150"><b>Type of Stamping</b></td>
     <td>
-      <%= check_box_tag("stamping[]", QuotationRequestForm::GOLD, false, :disabled => true) %><%= QuotationRequestForm::GOLD %>
-      <%= check_box_tag("stamping[]", QuotationRequestForm::SILVER, false, :disabled => true) %><%= QuotationRequestForm::SILVER %>
-      <%= check_box_tag("stamping[]", QuotationRequestForm::OTHERS, false, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :stamping_other, params[:stamping_other], :disabled => true %>
+      <%= check_box_tag("stamping[]", QuotationRequestForm::GOLD, false, :disabled => true) %> <%= QuotationRequestForm::GOLD %>
+      <%= check_box_tag("stamping[]", QuotationRequestForm::SILVER, false, :disabled => true) %> <%= QuotationRequestForm::SILVER %>
+      <%= check_box_tag("stamping[]", QuotationRequestForm::OTHERS, false, :disabled => true, :class => "stamping_checkbox") %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :stamping_other, params[:stamping_other], :disabled => true, :class => "k-textbox" %>
     </td>
   </tr>
   <tr>
     <td><b>No of Location Per Box</b></td>
-    <td><%= f.text_field :stamping_per_box, :size => 3, :class => "two_digit_", :onblur => "generate_stamping_box(this)", :disabled => true %></td>
+    <td><%= f.text_field :stamping_per_box, :onblur => "generate_stamping_box(this)", :disabled => true, :class => "kendo_precision_0", :style => 'width: 80px;' %></td>
   </tr>
   <tr>
-    <td valign="top"><b>Stamping Size</b></td>
+    <td style="vertical-align: top;"><b>Stamping Size</b></td>
     <td id="generate_stamping_size"></td>
   </tr>
 </table>

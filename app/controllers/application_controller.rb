@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   helper_method :perihal_barang_both
     
   def version
-    "Version 0.2.7"
+    "Version 0.2.8"
   end
     
   def company
@@ -105,13 +105,13 @@ class ApplicationController < ActionController::Base
   end
   
   def transport
-    @transport ||= Transport.ordered
+    @transport ||= Transport.all
   end
   
 
   
 
-    def perihal_barang_both
+  def perihal_barang_both
     @perihal_barang_both ||= SalesTaxExemptionBarang.where(:valid_condition => TRUE)
   end
 

@@ -11,7 +11,7 @@
     <tr>
       <td><b>Department *</b></td>
       <td>
-        <%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', params[:department_id].to_i), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Department" %>
+        <%= select_tag :department_id, options_from_collection_for_select(departments, 'id', 'name', params[:department_id].to_i), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Department", :style => "width:200px;" %>
         <span class="k-invalid-msg" data-for="department_id"></span>
       </td>
     </tr>

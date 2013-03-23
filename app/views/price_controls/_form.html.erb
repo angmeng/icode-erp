@@ -29,7 +29,11 @@
 
         <tr>
           <td><b>Trade Company *</b></td>
-          <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true } , { :class => "mkendo_combobox price_control_trade_company_id", "required validationMessage" => "Please Select Trade Company", :style => "width: 400px;" }  %></td>
+          <% if @product.present? %>
+            <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true } , { :class => "mkendo_combobox price_control_trade_company_id", "required validationMessage" => "Please Select Trade Company", :style => "width: 400px;", :onchange => "price_control_data_when_company(this)" }  %></td>
+          <% else %>
+            <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @price_control.trade_company_id), { :include_blank => true } , { :class => "mkendo_combobox price_control_trade_company_id", "required validationMessage" => "Please Select Trade Company", :style => "width: 400px;" }  %></td>
+          <% end %>
           <td></td>
           <td><b>Reference</b></td>
           <td><%= f.text_field :reference, :class => "k-textbox" %></td>

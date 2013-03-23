@@ -17,7 +17,7 @@ class ProductCategory < ActiveRecord::Base
 # Dont use :code as presence is true, bcos Product Category will update after make new Product ID.
 # Dont use :code, :desc as uniqueness...
   validates :desc, :parent_id, :category_type, :icon, :presence => true
-  validates :desc, :length => { :in => 2..40 }
+  validates :desc, :length => { :in => 2..255 }
   
   ACTIVE = 'Active'
   KEEP_IN_VIEW = 'KIV'

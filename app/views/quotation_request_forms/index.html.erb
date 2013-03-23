@@ -1,13 +1,15 @@
+<%= render "linking" %>
+
 <div class="title_head">
   <strong style="color:white;">TRANSACTIONS & HISTORIES FOR QUOTATION REQUISITIONS</strong>
   <%= search_button %>
 </div>
 <div><%= render "search_quotation_request" %></div>
 
-  <% if @quotation_request_forms.present? %>
-    <%= render "listing_quotation_request", :quotations => @quotation_request_forms %>
-  <% else %>
-    <div class="content">Not Record Found</div>
-  <% end %>
+<% if @quotation_request_forms.present? %>
+  <div class="table_background"><%= render "listing_quotation_request", :quotations => @quotation_request_forms %></div>
+<% else %>
+  <div class="linking_content">Not Record Found</div>
+<% end %>
 
 <%= render "action_quotation_transaction" %>

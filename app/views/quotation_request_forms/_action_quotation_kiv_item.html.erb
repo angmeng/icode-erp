@@ -3,13 +3,13 @@
   <% if roles.include?(InventoryManagementSystem::QR_KIV_SHOW) %>
     <span id="on_show_kiv" showClass="show_without_refresh_page_1600x900"><%= not_link_binary %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_binary %></span>
+    <span><%= not_link_binary %></span>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::QR_KIV_RECOVER) %>
     <span id="on_recover"><%= not_link_recover %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_recover %></span>
+    <span><%= not_link_recover %></span>
   <% end %>
    
   <%= link_home_button %>

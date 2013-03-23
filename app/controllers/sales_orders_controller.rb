@@ -67,7 +67,7 @@ class SalesOrdersController < ApplicationController
   end
   
   def customer_registration
-    @quotation_request_forms = QuotationRequestForm.customer_confirmed.group_by(&:customer_name)
+    @quotation_request_forms = QuotationRequestForm.customer_confirmed.select { |attr_b| attr_b['trade_company_id'].blank? }
   end
   
   def product_registration

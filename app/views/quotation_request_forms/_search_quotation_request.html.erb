@@ -1,13 +1,5 @@
 <div class="search_engine">
   <%= form_for @search do |f| %>
-    <table>
-      <tr>
-        <td><%= f.label :customer_name_contains, "Customer Name" %></td>
-        <td><%= f.text_field :customer_name_contains %></td>
-      </tr>
-      <tr>
-        <td colspan="10" align="right"><%= f.submit 'Search' %></td>
-      </tr>
-    </table>
+    <%= render "search_engine_form", :f => f %>
   <% end %>
 </div>

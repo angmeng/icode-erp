@@ -1,19 +1,19 @@
 <table>
   <tr>
     <td width="120"><b>No of Color</b></td>
-    <td><%= f.text_field :color_no, :size => 3, :onblur => "dropdown_colorcode(this)", :disabled => true %></td>
+    <td><%= f.text_field :color_no, :onblur => "dropdown_colorcode(this)", :class => "kendo_precision_0", :style => "width: 80px;", :disabled => true %></td>
   </tr>
 
   <tr>
     <td><b>Type of Color</b></td>
     <td>
-      <%= f.radio_button("color_type", QuotationRequestForm::PROCESS, :disabled => true) %><%= QuotationRequestForm::PROCESS %>
-      <%= f.radio_button("color_type", QuotationRequestForm::PANTONE, :disabled => true) %><%= QuotationRequestForm::PANTONE %>
+      <%= f.radio_button("color_type", QuotationRequestForm::PROCESS, :disabled => true) %> <%= QuotationRequestForm::PROCESS %>
+      <%= f.radio_button("color_type", QuotationRequestForm::PANTONE, :disabled => true) %> <%= QuotationRequestForm::PANTONE %>
     </td>
   </tr>
 
   <tr>
-    <td><b>Color Name</b></td>
+    <td style="vertical-align: top;"><b>Color Name</b></td>
     <td>
       <span id="color_name">
         <% if @quotation_request_form.colors.present? %>
@@ -26,7 +26,7 @@
   </tr>
 
   <tr>
-    <td><b>Color Code</b></td>
+    <td style="vertical-align: top;"><b>Color Code</b></td>
     <td>
       <span id="color_code">
         <% if @quotation_request_form.colors.present? %>
@@ -42,20 +42,20 @@
     <td><b>Pre-Print</b></td>
     <td>
       <% if @quotation_request_form.pre_print_types.present? %>
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::LOT, @pre_print_types.include?(QuotationRequestForm::LOT) %>LOT #
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::MFG, @pre_print_types.include?(QuotationRequestForm::MFG) %><%= QuotationRequestForm::MFG %>
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::BARCODE, @pre_print_types.include?(QuotationRequestForm::BARCODE) %><%= QuotationRequestForm::BARCODE %>
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::LOT, @pre_print_types.include?(QuotationRequestForm::LOT) %> LOT #
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::MFG, @pre_print_types.include?(QuotationRequestForm::MFG) %> <%= QuotationRequestForm::MFG %>
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::BARCODE, @pre_print_types.include?(QuotationRequestForm::BARCODE) %> <%= QuotationRequestForm::BARCODE %>
         <% pp = @quotation_request_form.pre_print_types.find_by_pre_print(QuotationRequestForm::OTHERS) %>
         <% if pp.present? %>
-          <%= check_box_tag "pre_print_type[]", QuotationRequestForm::OTHERS, @pre_print_types.include?(QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :pre_print_type_other, pp.other, :size => 20 %>
+          <%= check_box_tag "pre_print_type[]", QuotationRequestForm::OTHERS, @pre_print_types.include?(QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :pre_print_type_other, pp.other, :class => "k-textbox" %>
         <% else %>
-          <%= check_box_tag "pre_print_type[]", QuotationRequestForm::OTHERS, @pre_print_types.include?(QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :pre_print_type_other, params[:pre_print_type_other], :size => 20 %>
+          <%= check_box_tag "pre_print_type[]", QuotationRequestForm::OTHERS, @pre_print_types.include?(QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :pre_print_type_other, params[:pre_print_type_other], :class => "k-textbox" %>
         <% end %>
       <% else %>
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::LOT, false, :disabled => true %>LOT #
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::MFG, false, :disabled => true %><%= QuotationRequestForm::MFG %>
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::BARCODE, false, :disabled => true %><%= QuotationRequestForm::BARCODE %>
-        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::OTHERS, false, :disabled => true %><%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :pre_print_type_other, params[:pre_print_type_other], :size => 20, :disabled => true %>
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::LOT, false, :disabled => true %> LOT #
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::MFG, false, :disabled => true %> <%= QuotationRequestForm::MFG %>
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::BARCODE, false, :disabled => true %> <%= QuotationRequestForm::BARCODE %>
+        <%= check_box_tag "pre_print_type[]", QuotationRequestForm::OTHERS, false, :disabled => true, :class => "pre_print_checkbox" %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :pre_print_type_other, params[:pre_print_type_other], :size => 20, :class => "k-textbox", :disabled => true %>
       <% end %>
     </td>
   </tr>
@@ -63,19 +63,19 @@
   <tr>
     <td><b>Barcode</b></td>
     <td>
-      <%= f.radio_button "barcode", QuotationRequestForm::EAN13, :disabled => true %><%= QuotationRequestForm::EAN13 %>
-      <%= f.radio_button "barcode", QuotationRequestForm::UPCA, :disabled => true %><%= QuotationRequestForm::UPCA %>
-      <%= f.radio_button "barcode", QuotationRequestForm::CODE128, :disabled => true %><%= QuotationRequestForm::CODE128 %>
-      <%= f.radio_button "barcode", QuotationRequestForm::CODE39, :disabled => true %><%= QuotationRequestForm::CODE39 %>
-      <%= f.radio_button "barcode", QuotationRequestForm::OTHERS, :disabled => true %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "barcode_other", :id => "other_barcode", :size => 20, :disabled => true %>
+      <%= f.radio_button "barcode", QuotationRequestForm::EAN13, :disabled => true %> <%= QuotationRequestForm::EAN13 %>
+      <%= f.radio_button "barcode", QuotationRequestForm::UPCA, :disabled => true %> <%= QuotationRequestForm::UPCA %>
+      <%= f.radio_button "barcode", QuotationRequestForm::CODE128, :disabled => true %> <%= QuotationRequestForm::CODE128 %>
+      <%= f.radio_button "barcode", QuotationRequestForm::CODE39, :disabled => true %> <%= QuotationRequestForm::CODE39 %>
+      <%= f.radio_button "barcode", QuotationRequestForm::OTHERS, :disabled => true %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field "barcode_other", :id => "other_barcode", :class => "k-textbox", :disabled => true %>
     </td>
   </tr>
 
   <tr>
     <td><b>If shortage</b></td>
     <td>
-      <%= f.radio_button "shortage", QuotationRequestForm::STAMPING, :disabled => true %><%= QuotationRequestForm::STAMPING %>
-      <%= f.radio_button "shortage", QuotationRequestForm::INJETPRINT, :disabled => true %><%= QuotationRequestForm::INJETPRINT %>
+      <%= f.radio_button "shortage", QuotationRequestForm::STAMPING, :disabled => true %> <%= QuotationRequestForm::STAMPING %>
+      <%= f.radio_button "shortage", QuotationRequestForm::INJETPRINT, :disabled => true %> <%= QuotationRequestForm::INJETPRINT %>
     </td>
   </tr>
 </table>

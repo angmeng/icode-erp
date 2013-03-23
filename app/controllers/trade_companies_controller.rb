@@ -1,7 +1,7 @@
 class TradeCompaniesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:show, :new, :edit]
+#  before_filter :inventory_management_system, :except => [:show]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   
   def index
     @search = TradeCompany.search(params[:search])
@@ -33,31 +33,35 @@ class TradeCompaniesController < ApplicationController
   end
 
   def new
-    @trade_company = TradeCompany.new  
+    @trade_company = TradeCompany.new
     if params[:temp_source_id].present?
       @vendor = TemporarySource.find_by_id(params[:temp_source_id]).company_name  #Vendor
       session[:option] = TradeCompany::SUPPLIER
     end
     session[:option] = params[:option] if params[:option].present?
-    @customer_company = QuotationRequestForm.find_by_id(params[:qr_id]) if params[:option] == TradeCompany::CUSTOMER and params[:qr_id].present?
+    if params[:option] == TradeCompany::CUSTOMER and params[:qr_id].present?
+      session[:qr_id] = params[:qr_id]
+      @customer_company = QuotationRequestForm.find_by_id(session[:qr_id]) 
+    end
   end
 
   def create
     @trade_company = TradeCompany.new(params[:trade_company])
     @trade_company.adding_contact(params[:datarow])
-    
-    respond_to do |format|
-      if @trade_company.save
-        QuotationRequestForm.update_for_qr(params[:customer_update_qr], @trade_company) if params[:customer_update_qr].present?
-        session[:option] = nil
-        format.html { redirect_to @trade_company, notice: 'Trade company was successfully created.' }
-        format.js   { render :js => "window.location.pathname='#{trade_company_path(@trade_company)}'" } 
+    if @trade_company.save
+      QuotationRequisitionManagement.update_for_qr(params[:customer_update_qr], @trade_company) if params[:customer_update_qr].present? #update if qr.trade_company_id is blank..
+      session[:option] = nil
+      if params[:save_and_new_customer]
+        redirect_to new_trade_company_path(:option => TradeCompany::CUSTOMER), notice: "Company Code # #{@trade_company.code} was successfully created."
+      elsif params[:save_and_new_supplier]
+        redirect_to new_trade_company_path(:option => TradeCompany::SUPPLIER), notice: "Company Code # #{@trade_company.code} was successfully created."
       else
-        format.html { 
-          flash[:alert] = @trade_company.errors.full_messages.join(", ")
-          render action: 'new' }
-        format.js   { render :js => "alert('#{@trade_company.errors.full_messages.join(", ")}');" }
+        redirect_to @trade_company, notice: 'Trade company was successfully created.'
       end
+    else
+      @customer_company = QuotationRequestForm.find_by_id(session[:qr_id]) if session[:qr_id].present?
+      flash[:alert] = @trade_company.errors.full_messages.join(", ")
+      render action: 'new'
     end
   end
 
@@ -158,7 +162,7 @@ class TradeCompaniesController < ApplicationController
   end
   
   private
-  def inventory_management_system
-    role(TradeCompany::ROLE)
-  end
+#  def inventory_management_system
+#    role(TradeCompany::ROLE)
+#  end
 end

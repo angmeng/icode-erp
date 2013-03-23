@@ -14,11 +14,11 @@
         <td width="150"><b>Lamination</b></td>
         <td>
           <% if @quotation_request_form.lamination == QuotationRequestForm::FULL %>
-            <%= f.radio_button("lamination", QuotationRequestForm::SPOT) %><%= QuotationRequestForm::SPOT %> <%= f.text_field :lamination_remark, :disabled => true %>
-            <%= f.radio_button("lamination", QuotationRequestForm::FULL) %><%= QuotationRequestForm::FULL %>
+            <%= f.radio_button("lamination", QuotationRequestForm::SPOT) %> <%= QuotationRequestForm::SPOT %> <%= f.text_field :lamination_remark, :disabled => true, :class => "k-textbox" %>
+            <%= f.radio_button("lamination", QuotationRequestForm::FULL) %> <%= QuotationRequestForm::FULL %>
           <% else %>
-            <%= f.radio_button("lamination", QuotationRequestForm::SPOT) %><%= QuotationRequestForm::SPOT %> <%= f.text_field :lamination_remark %>
-            <%= f.radio_button("lamination", QuotationRequestForm::FULL) %><%= QuotationRequestForm::FULL %>
+            <%= f.radio_button("lamination", QuotationRequestForm::SPOT) %> <%= QuotationRequestForm::SPOT %> <%= f.text_field :lamination_remark, :class => "k-textbox" %>
+            <%= f.radio_button("lamination", QuotationRequestForm::FULL) %> <%= QuotationRequestForm::FULL %>
           <% end %>
         </td>
       </tr>
@@ -26,9 +26,9 @@
       <tr>
         <td><b>Type of Lamination</b></td>
         <td>
-          <%= f.radio_button("lamination_type", QuotationRequestForm::GLOSS) %><%= QuotationRequestForm::GLOSS %>
-          <%= f.radio_button("lamination_type", QuotationRequestForm::MATT) %><%= QuotationRequestForm::MATT %>
-          <%= f.radio_button("lamination_type", QuotationRequestForm::FLUTE) %><%= QuotationRequestForm::FLUTE %>: <%= f.text_field :lamination_type_joints, :size => 3 %> joints
+          <%= f.radio_button("lamination_type", QuotationRequestForm::GLOSS) %> <%= QuotationRequestForm::GLOSS %>
+          <%= f.radio_button("lamination_type", QuotationRequestForm::MATT) %> <%= QuotationRequestForm::MATT %>
+          <%= f.radio_button("lamination_type", QuotationRequestForm::FLUTE) %> <%= QuotationRequestForm::FLUTE %>: <%= f.text_field :lamination_type_joints, :class => "kendo_precision_2", :style => "width:80px;" %> joints
         </td>
       </tr>
 
@@ -36,19 +36,19 @@
         <tr>
           <td><b>Type of Flute</b></td>
           <td>
-            <%= f.radio_button("flute_type", QuotationRequestForm::B_FLUTE, :disabled => true) %><%= QuotationRequestForm::B_FLUTE %>
-            <%= f.radio_button("flute_type", QuotationRequestForm::E_FLUTE, :disabled => true) %><%= QuotationRequestForm::E_FLUTE %>
-            <%= f.radio_button("flute_type", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_type_other, :disabled => true %>
+            <%= f.radio_button("flute_type", QuotationRequestForm::B_FLUTE, :disabled => true) %> <%= QuotationRequestForm::B_FLUTE %>
+            <%= f.radio_button("flute_type", QuotationRequestForm::E_FLUTE, :disabled => true) %> <%= QuotationRequestForm::E_FLUTE %>
+            <%= f.radio_button("flute_type", QuotationRequestForm::OTHERS, :disabled => true) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_type_other, :disabled => true, :class => "k-textbox" %>
           </td>
         </tr>
 
         <tr>
           <td><b>Material of Flute</b></td>
           <td>
-            <%= f.radio_button("flute_material", "26/26", :disabled => true) %>26/26
-            <%= f.radio_button("flute_material", "26/33", :disabled => true) %>26/33
-            <%= f.radio_button("flute_material", "33/33", :disabled => true) %>33/33
-            <%= f.radio_button("flute_material", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_material_other, :disabled => true %>
+            <%= f.radio_button("flute_material", "26/26", :disabled => true) %> 26/26
+            <%= f.radio_button("flute_material", "26/33", :disabled => true) %> 26/33
+            <%= f.radio_button("flute_material", "33/33", :disabled => true) %> 33/33
+            <%= f.radio_button("flute_material", QuotationRequestForm::OTHERS, :disabled => true) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_material_other, :disabled => true, :class => "k-textbox" %>
           </td>
         </tr>
 
@@ -58,31 +58,27 @@
             <% if @quotation_request_form.lamination_type_joints == 0 %>
             
             <% else %>
-              <%= text_field_tag "generate_flute_width[1][val]", {}, :disabled => true %>
-              <%= text_field_tag "generate_flute_length[2][val]", {}, :disabled => true %>
+              <%= text_field_tag "generate_flute_width[1][val]", {}, :disabled => true, :class => "kendo_precision_2" %>
+              <%= text_field_tag "generate_flute_length[2][val]", {}, :disabled => true, :class => "kendo_precision_2" %>
             <% end %>
           </td>
-          <!--td>
-            (W)<%#= f.text_field :flute_width, :size => 5, :class => "two_zero_", :disabled => true %>
-            (L)<%#= f.text_field :flute_length, :size => 5, :class => "two_zero_", :disabled => true %>
-          </td-->
         </tr>
       <% else %>
         <tr>
           <td><b>Type of Flute</b></td>
           <td>
-            <%= f.radio_button("flute_type", QuotationRequestForm::B_FLUTE) %><%= QuotationRequestForm::B_FLUTE %>
-            <%= f.radio_button("flute_type", QuotationRequestForm::E_FLUTE) %><%= QuotationRequestForm::E_FLUTE %>
-            <%= f.radio_button("flute_type", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_type_other %>
+            <%= f.radio_button("flute_type", QuotationRequestForm::B_FLUTE) %> <%= QuotationRequestForm::B_FLUTE %>
+            <%= f.radio_button("flute_type", QuotationRequestForm::E_FLUTE) %> <%= QuotationRequestForm::E_FLUTE %>
+            <%= f.radio_button("flute_type", QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_type_other, :class => "k-textbox" %>
           </td>
         </tr>
         <tr>
           <td><b>Material of Flute</b></td>
           <td>
-            <%= f.radio_button("flute_material", "26/26") %>26/26
-            <%= f.radio_button("flute_material", "26/33") %>26/33
-            <%= f.radio_button("flute_material", "33/33") %>33/33
-            <%= f.radio_button("flute_material", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_material_other %>
+            <%= f.radio_button("flute_material", "26/26") %> 26/26
+            <%= f.radio_button("flute_material", "26/33") %> 26/33
+            <%= f.radio_button("flute_material", "33/33") %> 33/33
+            <%= f.radio_button("flute_material", QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_material_other, :class => "k-textbox" %>
           </td>
         </tr>
         <tr>
@@ -91,16 +87,16 @@
             <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
               <% if @quotation_request_form.selection_flute_sizes.present? %>
                 <% @quotation_request_form.selection_flute_sizes.each do |sfs| %>
-                  (W)<%= text_field_tag "generate_flute_width[#{sfs.id}][val]", sfs.flute_width, :size => 5 %>
-                  (L)<%= text_field_tag "generate_flute_length[#{sfs.id}][val]", sfs.flute_length, :size => 5 %><br/>
+                  (W) <%= text_field_tag "generate_flute_width[#{sfs.id}][val]", sfs.flute_width, :class => "kendo_precision_2", :style => "width:80px;" %>
+                  (L) <%= text_field_tag "generate_flute_length[#{sfs.id}][val]", sfs.flute_length, :class => "kendo_precision_2", :style => "width:80px;" %><br/>
                 <% end %>
               <% else %>
-                (W)<%= text_field_tag "generate_flute_width[1][val]", '', :size => 5 %>
-                (L)<%= text_field_tag "generate_flute_length[1][val]", '', :size => 5 %>
+                (W) <%= text_field_tag "generate_flute_width[1][val]", '', :size => 5 %>
+                (L) <%= text_field_tag "generate_flute_length[1][val]", '', :size => 5 %>
               <% end %>
             <% else %>
-                (W)<%= text_field_tag "generate_flute_width[1][val]", '', :disabled => true, :size => 5 %>
-                (L)<%= text_field_tag "generate_flute_length[1][val]", '', :disabled => true, :size => 5 %>
+                (W) <%= text_field_tag "generate_flute_width[1][val]", '', :disabled => true, :size => 5 %>
+                (L) <%= text_field_tag "generate_flute_length[1][val]", '', :disabled => true, :size => 5 %>
             <% end %>
           </td>
         </tr>
@@ -111,67 +107,6 @@
     <% end %>
   <% else %>
     <%= render "disabled_lamination", :f => f %>
-  <% end %>
-  
-  <% content_for :jquery_script do %>
-    <script>
-      $(document).ready(function() {
-        
-        // Lamination
-        $("#quotation_request_form_lamination_full").click(function() { $("#quotation_request_form_lamination_remark").val('').attr("disabled", true); });
-        $("#quotation_request_form_lamination_spot").click(function() { $("#quotation_request_form_lamination_remark").val('').attr("disabled", false); });
-        $("#quotation_request_form_lamination_remark").click(function() { $("#quotation_request_form_lamination_spot").attr("checked", true); });
-        
-        $("#quotation_request_form_lamination_type_joints").click(function() { 
-            $("#quotation_request_form_lamination_type_flute").attr("checked", true); 
-            loading_flute(); 
-        });    
-        $("#quotation_request_form_lamination_type_flute").click(function(){ loading_flute(); });
-        $("#quotation_request_form_lamination_type_opp_gloss, #quotation_request_form_lamination_type_opp_matt").click(function() { 
-            disabled_flute(); 
-            $("#quotation_request_form_lamination_type_joints").val('0'); 
-        }); 
-        $("#quotation_request_form_lamination_type_joints").blur(function() { 
-            var joint_no = $(this).val();
-            if (joint_no <= 2){
-
-                if (joint_no != ''){
-                    $("#generate_flute_size").empty();
-                    $("#mould_no, #window_no").empty();
-                    for(var i = 0; i <= joint_no; i++) {
-                        $("#generate_flute_size").append('(W)<input id="generate_flute_width_" size="5" type="text" name="generate_flute_width[' + i + '][val]">');
-                        $("#generate_flute_size").append('(L)<input id="generate_flute_length_" size="5" type="text" name="generate_flute_length[' + i + '][val]"><br/');
-                        $("#mould_no").append('<input class="mould_no_" size="10" type="text" name="mould_no[' + i + '][val]" disabled="disabled">');
-                        $("#window_no").append('<input class="window_no_" size="10" type="text" name="window_no[' + i + '][val]" disabled="disabled">');
-                    }
-                } else {
-                        $("#quotation_request_form_lamination_type_joints").val('0');
-                        $("#generate_flute_size").append('(W)<input id="generate_flute_width_" size="5" type="text" name="generate_flute_width[1][val]">');
-                        $("#generate_flute_size").append('(L)<input id="generate_flute_length_" size="5" type="text" name="generate_flute_length[1][val]">');
-                        $("#mould_no").append('<input class="mould_no_" size="10" type="text" name="mould_no[1][val]" disabled="disabled">');
-                        $("#window_no").append('<input class="window_no_" size="10" type="text" name="window_no[1][val]" disabled="disabled">');
-                }
-
-            } else {
-                alert("Flute Joint should less than or equal to 2.");
-            }
-        });
-        $("#quotation_request_form_flute_type_b-flute, #quotation_request_form_flute_type_e-flute").click(function(){ $("#quotation_request_form_flute_type_other").val(''); });
-        $("#quotation_request_form_flute_type_other").click(function(){
-            $("#quotation_request_form_flute_type_others").attr("checked", true);
-            $("#quotation_request_form_flute_type_b-flute").attr("checked", false);
-            $("#quotation_request_form_flute_type_e-flute").attr("checked", false);
-        });
-        $("#quotation_request_form_flute_material_2626, #quotation_request_form_flute_material_2633, #quotation_request_form_flute_material_3333").click(function(){ $("#quotation_request_form_flute_material_other").val(''); });
-        $("#quotation_request_form_flute_material_other").click(function(){
-            $("#quotation_request_form_flute_material_2626").attr("checked", false);
-            $("#quotation_request_form_flute_material_2633").attr("checked", false);
-            $("#quotation_request_form_flute_material_3333").attr("checked", false);
-            $("#quotation_request_form_flute_material_others").attr("checked", true);
-        });
-        
-      });
-    </script>
   <% end %>
   
 </fieldset>
@@ -192,33 +127,33 @@
           <td width="150"><b>Type of Stamping</b></td>
           <td>
             <% if @quotation_request_form.selection_stampings.present? %>
-              <%= check_box_tag("stamping[]", QuotationRequestForm::GOLD, @stampings.include?(QuotationRequestForm::GOLD)) %><%= QuotationRequestForm::GOLD %>
-              <%= check_box_tag("stamping[]", QuotationRequestForm::SILVER, @stampings.include?(QuotationRequestForm::SILVER)) %><%= QuotationRequestForm::SILVER %>
-              <%= check_box_tag("stamping[]", QuotationRequestForm::OTHERS, @stampings.include?(QuotationRequestForm::OTHERS)) %><%= QuotationRequestForm::OTHERS %>: 
+              <%= check_box_tag("stamping[]", QuotationRequestForm::GOLD, @stampings.include?(QuotationRequestForm::GOLD)) %> <%= QuotationRequestForm::GOLD %>
+              <%= check_box_tag("stamping[]", QuotationRequestForm::SILVER, @stampings.include?(QuotationRequestForm::SILVER)) %> <%= QuotationRequestForm::SILVER %>
+              <%= check_box_tag("stamping[]", QuotationRequestForm::OTHERS, @stampings.include?(QuotationRequestForm::OTHERS), :class => "stamping_checkbox") %> <%= QuotationRequestForm::OTHERS %>: 
               <% other = @quotation_request_form.selection_stampings.find_by_stamping_type(QuotationRequestForm::OTHERS) %>
               <% if other.present? %>
-                <%= text_field_tag :stamping_other, other.stamping_other %>
+                <%= text_field_tag :stamping_other, other.stamping_other, :class => "k-textbox" %>
               <% else %>
-                <%= text_field_tag :stamping_other, params[:stamping_other] %>
+                <%= text_field_tag :stamping_other, params[:stamping_other], :class => "k-textbox" %>
               <% end %>
             <% else %>
-              <%= check_box_tag("stamping[]", QuotationRequestForm::GOLD) %><%= QuotationRequestForm::GOLD %>
-              <%= check_box_tag("stamping[]", QuotationRequestForm::SILVER) %><%= QuotationRequestForm::SILVER %>
-              <%= check_box_tag("stamping[]", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :stamping_other, params[:stamping_other] %>
+              <%= check_box_tag("stamping[]", QuotationRequestForm::GOLD) %> <%= QuotationRequestForm::GOLD %>
+              <%= check_box_tag("stamping[]", QuotationRequestForm::SILVER) %> <%= QuotationRequestForm::SILVER %>
+              <%= check_box_tag("stamping[]", QuotationRequestForm::OTHERS, :class => "stamping_checkbox") %> <%= QuotationRequestForm::OTHERS %>: <%= text_field_tag :stamping_other, params[:stamping_other] %>
             <% end %>
           </td>
         </tr>
         <tr>
           <td><b>No of Location Per Box</b></td>
-          <td><%= f.text_field :stamping_per_box, :size => 3, :class => "two_digit_", :onblur => "generate_stamping_box(this)" %></td>
+          <td><%= f.text_field :stamping_per_box, :onblur => "generate_stamping_box(this)", :class => "kendo_precision_0", :style => "width:80px;" %></td>
         </tr>
         <tr>
           <td valign="top"><b>Stamping Size</b></td>
           <td id="generate_stamping_size">
             <% if @quotation_request_form.selection_stamping_sizes.present? %>
               <% @quotation_request_form.selection_stamping_sizes.each do |sss| %>
-                (W)<%= text_field_tag "stamping_width[#{sss.id}][val]", sss.stamping_width, :size => 5 %>
-                (L)<%= text_field_tag "stamping_length[#{sss.id}][val]", sss.stamping_length, :size => 5 %><br/>
+                (W) <%= text_field_tag "stamping_width[#{sss.id}][val]", sss.stamping_width, :class => "kendo_precision_2", :style => "width:80px;" %>
+                (L) <%= text_field_tag "stamping_length[#{sss.id}][val]", sss.stamping_length, :class => "kendo_precision_2", :style => "width:80px;" %><br/>
               <% end %>
             <% end %>
           </td>
@@ -248,13 +183,13 @@
           <td width="150"><b>Die Cut</b></td>
           <td>
             <% if @quotation_request_form.selection_die_cuts.present? %>
-              <%= check_box_tag "die_cut[]", QuotationRequestForm::BOX_OUTLINE, @die_cut.include?(QuotationRequestForm::BOX_OUTLINE) %><%= QuotationRequestForm::BOX_OUTLINE %>
-              <%= check_box_tag "die_cut[]", QuotationRequestForm::TRIMING, @die_cut.include?(QuotationRequestForm::TRIMING) %><%= QuotationRequestForm::TRIMING %>
-              <%= check_box_tag "die_cut[]", QuotationRequestForm::WINDOW, @die_cut.include?(QuotationRequestForm::WINDOW) %><%= QuotationRequestForm::WINDOW %>
+              <%= check_box_tag "die_cut[]", QuotationRequestForm::BOX_OUTLINE, @die_cut.include?(QuotationRequestForm::BOX_OUTLINE) %> <%= QuotationRequestForm::BOX_OUTLINE %>
+              <%= check_box_tag "die_cut[]", QuotationRequestForm::TRIMING, @die_cut.include?(QuotationRequestForm::TRIMING) %> <%= QuotationRequestForm::TRIMING %>
+              <%= check_box_tag "die_cut[]", QuotationRequestForm::WINDOW, @die_cut.include?(QuotationRequestForm::WINDOW) %> <%= QuotationRequestForm::WINDOW %>
             <% else %>
-              <%= check_box_tag "die_cut[]", QuotationRequestForm::BOX_OUTLINE %><%= QuotationRequestForm::BOX_OUTLINE %>
-              <%= check_box_tag "die_cut[]", QuotationRequestForm::TRIMING %><%= QuotationRequestForm::TRIMING %>
-              <%= check_box_tag "die_cut[]", QuotationRequestForm::WINDOW %><%= QuotationRequestForm::WINDOW %>
+              <%= check_box_tag "die_cut[]", QuotationRequestForm::BOX_OUTLINE %> <%= QuotationRequestForm::BOX_OUTLINE %>
+              <%= check_box_tag "die_cut[]", QuotationRequestForm::TRIMING %> <%= QuotationRequestForm::TRIMING %>
+              <%= check_box_tag "die_cut[]", QuotationRequestForm::WINDOW %> <%= QuotationRequestForm::WINDOW %>
             <% end %>
           </td>
         </tr>
@@ -262,21 +197,21 @@
         <tr>
           <td><b>Type of Die Cut</b></td>
           <td>
-            <%= f.radio_button("die_cut_type", QuotationRequestForm::INTERLOCK) %><%= QuotationRequestForm::INTERLOCK %>
-            <%= f.radio_button("die_cut_type", QuotationRequestForm::FLAT) %><%= QuotationRequestForm::FLAT %>
-            <%= f.radio_button("die_cut_type", QuotationRequestForm::BUTTERFLY) %><%= QuotationRequestForm::BUTTERFLY %>
-            <%= f.radio_button("die_cut_type", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "die_cut_type_other",  :id => "other_die_cut", :size => 20 %>
+            <%= f.radio_button("die_cut_type", QuotationRequestForm::INTERLOCK) %> <%= QuotationRequestForm::INTERLOCK %>
+            <%= f.radio_button("die_cut_type", QuotationRequestForm::FLAT) %> <%= QuotationRequestForm::FLAT %>
+            <%= f.radio_button("die_cut_type", QuotationRequestForm::BUTTERFLY) %> <%= QuotationRequestForm::BUTTERFLY %>
+            <%= f.radio_button("die_cut_type", QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field "die_cut_type_other",  :id => "other_die_cut", :class => "k-textbox" %>
           </td>
         </tr>
 
         <tr>
           <td><b>Window Shape</b></td>
           <td>
-            <%= f.radio_button("window_shape", QuotationRequestForm::RECTANGLE) %><%= QuotationRequestForm::RECTANGLE %>
-            <%= f.radio_button("window_shape", QuotationRequestForm::KIDNEY) %><%= QuotationRequestForm::KIDNEY %>
-            <%= f.radio_button("window_shape", QuotationRequestForm::OVAL) %><%= QuotationRequestForm::OVAL %>
-            <%= f.radio_button("window_shape", QuotationRequestForm::TRIANGLE) %><%= QuotationRequestForm::TRIANGLE %>
-            <%= f.radio_button("window_shape", QuotationRequestForm::OTHERS) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_shape_other", :id => "window_shape_other", :size => 13 %>
+            <%= f.radio_button("window_shape", QuotationRequestForm::RECTANGLE) %> <%= QuotationRequestForm::RECTANGLE %>
+            <%= f.radio_button("window_shape", QuotationRequestForm::KIDNEY) %> <%= QuotationRequestForm::KIDNEY %>
+            <%= f.radio_button("window_shape", QuotationRequestForm::OVAL) %> <%= QuotationRequestForm::OVAL %>
+            <%= f.radio_button("window_shape", QuotationRequestForm::TRIANGLE) %> <%= QuotationRequestForm::TRIANGLE %>
+            <%= f.radio_button("window_shape", QuotationRequestForm::OTHERS) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field "window_shape_other", :id => "window_shape_other", :class => "k-textbox", :style => "width: 120px;" %>
           </td>
         </tr>
         
@@ -285,7 +220,7 @@
           <td id="mould_no">
             <% if @quotation_request_form.selection_die_cut_moulds.present? %>
               <% @quotation_request_form.selection_die_cut_moulds.each do |sdcm| %>
-                <%= text_field_tag "mould_no[#{sdcm.id}][val]", sdcm.mould_no, :size => 10 %>
+                <%= text_field_tag "mould_no[#{sdcm.id}][val]", sdcm.mould_no, :class => "k-textbox", :style => "width:80px;" %>
               <% end %>
             <% end %>
           </td>
@@ -296,7 +231,7 @@
           <td id="window_no">
             <% if @quotation_request_form.selection_die_cut_moulds.present? %>
               <% @quotation_request_form.selection_die_cut_moulds.each do |sdcm| %>
-                <%= text_field_tag "window_no[#{sdcm.id}][val]", sdcm.window_no, :size => 10 %>
+                <%= text_field_tag "window_no[#{sdcm.id}][val]", sdcm.window_no, :class => "k-textbox", :style => "width:80px;" %>
               <% end %>
             <% end %>
           </td>
@@ -310,34 +245,5 @@
   <% else %>
     <%= render "disabled_die_cut", :f => f  %>
   <% end %>
-  
-  <% content_for :jquery_script do %>
-    <script>
-      $(document).ready(function(){
-        // Die Cut
-        $("#other_die_cut").click(function() { 
-            $("#quotation_request_form_die_cut_type_interlock").attr("checked", false);
-            $("#quotation_request_form_die_cut_type_flat").attr("checked", false);
-            $("#quotation_request_form_die_cut_type_butterfly").attr("checked", false);
-            $("#quotation_request_form_die_cut_type_others").attr("checked", true);
-        });
-        $("#quotation_request_form_die_cut_type_interlock, #quotation_request_form_die_cut_type_flat, #quotation_request_form_die_cut_type_butterfly").click(function() { $("#other_die_cut").val(''); }); 
-        
-        // Window Shape
-        $("#window_shape_other").click(function() { 
-            $("#quotation_request_form_window_shape_rectangle").attr("checked", false);
-            $("#quotation_request_form_window_shape_kidney").attr("checked", false);
-            $("#quotation_request_form_window_shape_oval").attr("checked", false);
-            $("#quotation_request_form_window_shape_triangle").attr("checked", false);
-            $("#quotation_request_form_window_shape_others").attr("checked", true);
-        });
-
-        $("#quotation_request_form_window_shape_rectangle, #quotation_request_form_window_shape_kidney, #quotation_request_form_window_shape_oval, #quotation_request_form_window_shape_triangle").click(function() { 
-            $("#window_shape_other").val(''); 
-        });
-      });
-    </script>
-  <% end %>
-</fieldset>
 
 

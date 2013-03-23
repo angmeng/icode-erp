@@ -1,18 +1,10 @@
-<%# if action_name == "pending_quotation" or action_name == "feedback" %>
-  <%#*<table id="grid_h400" class="white-line-table zebraLight">%>
-<%# else %>
-  <%#*<table id="grid_h445" class="white-line-table zebraLight">%>
-<%# end %>
-
-<table id="jgrid" class="zebraLight">
+<table id="jgrid_linking" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
-      <% if action_name == "pending_quotation" %>
-        <th title="Check & Submit">C&S</th>
-      <% elsif action_name == "signature_quotation" %>
+      <% if action_name == "signature_quotation" %>
         <th>Task</th>
-      <% elsif action_name == "index" %>
+      <% elsif action_name == "index" or action_name == "kiv" %>
         <th>Sender Count</th>
         <th>Customer PO No#</th>
       <% elsif action_name == "feedback" %>
@@ -21,9 +13,9 @@
       <% end %>
       <th>QR No.</th>
       <th>Status</th>
-      <th>Customer company</th>
+      <th>Customer Company</th>
       <th>Description</th>
-      <th>QRF date</th>
+      <th>QRF Date</th>
       <th>Updated By</th>
     </tr>
   </thead>
@@ -32,11 +24,9 @@
     <% quotations.each do |quotation_request_form| %>
       <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= quotation_request_form.id %>">
         <td></td>
-        <% if action_name == "pending_quotation" %>
-          <td align="center"><%= check_box_tag "checkbox_quotation[]", quotation_request_form.id %></td>
-        <% elsif action_name == "signature_quotation" %>
+        <% if action_name == "signature_quotation" %>
           <td align="center"><%= quotation_request_form.qr_status rescue '-' %></td>
-        <% elsif action_name == "index" %>
+        <% elsif action_name == "index" or action_name == "kiv" %>
           <td align="center"><%= quotation_request_form.send_count rescue '0' %></td>
           <td align="center"><%= quotation_request_form.customer_po_no rescue '-' %></td>
         <% elsif action_name == "feedback" %>

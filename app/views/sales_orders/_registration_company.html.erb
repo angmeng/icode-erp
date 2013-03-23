@@ -1,4 +1,4 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="jgrid_linking" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -7,22 +7,13 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% num = 1 %>
-    
-    <% company.each do |k, v| %>
-    
-      <% if k.present? %>
-        <% if v.first.trade_company_id.blank? %>
-          <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="quotation_requisition_items" rowsId="<%= v.first.id %>">
-            <td></td>
-            <td align="center"><%= num %></td>
-            <td align="center"><%= k rescue '-' %></td>
-          </tr>
-        <% end %>
-      <% end %>
-          
-      <% num += 1 %>
+  <tbody>          
+    <% company.each_with_index do |k, index| %>
+      <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="quotation_requisition_items" rowsId="<%= k.id %>">
+        <td></td>
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= k.customer_name %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

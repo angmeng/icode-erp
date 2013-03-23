@@ -3,62 +3,26 @@
 <div id="user_strip">
   <ul>
       <li class="k-state-active">User Account</li>
-      <li>Inventory Management System</li>
-      <li>Inventory Management System II- Product</li>
+      <li>IMS - Purchase Flow</li>
+      <li>IMS - Sales Flow</li>
+      <li>IMS - Inventory</li>
+      <li>IMS - Custom</li>
+      <li>IMS - Housekeeping</li>
+      <li>IMS - Housekeeping - Product</li>
+      <li>IMS - Report</li>
+      <li>IMS - Account</li>
   </ul>
 
-  <div>
-    <div id="name_entry">
-      <table>
-        <tr>
-          <td width="150"><b>Name</b></td>
-          <td><%= @user.name rescue '-' %></td>
-        </tr>
-        <tr>
-          <td><b>Job Title</b></td>
-          <td><%= @user.job_title rescue '-' %></td>
-        </tr>
-        <tr>
-          <td><b>Department</b></td>
-          <td><%= @user.department.try(:name) rescue '-' %></td>
-        </tr>
-
-        <% unless @user.admin == current_user.admin %>
-          <tr>
-            <td valign="top"><b>Report Flow</b></td>
-            <td>
-
-                <table>
-                  <thead>
-                    <tr style="background-color: gainsboro;">
-                      <th width="100">Level 1</th>
-                      <th width="100">Level 2</th>
-                      <th width="100">Level 3</th>
-                      <th width="100">Level 5</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% lv2 = User.find_by_id(@user.level_two) %>
-                    <% lv3 = User.find_by_id(@user.level_three) %>
-                    <tr class="odd_line">
-                      <td align="center"><%= @user.name rescue '-' %></td>
-                      <td align="center"><%= lv2.name rescue '-' %></td>
-                      <td align="center"><%= lv3.name rescue '-' %></td>
-                      <td align="center"><%= director_data.name rescue '-' %></td>
-                    </tr>
-                  </tbody>
-                </table>
-
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
-
-  <div><%= render "management_checkbox" %></div>
+  <div><%= render "show_user_account" %></div>
+  <div><%= render "management_purchase_flow" %></div>
+  <div><%= render "management_sale_flow" %></div>
+  <div><%= render "management_inventory" %></div>
+  <div><%= render "management_custom" %></div>
+  <div><%= render "management_housekeeping" %></div>
   <div><%= render "management_product" %></div>
-
+  <div><%= render "management_report" %></div>
+  <div><%= render "management_account" %></div>
+  <span style="position: absolute; padding: 5px;">*IMS = Inventory Management System</span>
 </div>
 
 <div class="icon_tag">

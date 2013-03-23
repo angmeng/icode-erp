@@ -31,7 +31,7 @@
 <hr/>
 
 <% if @price_control.price_control_items.present? %>
-  <%= render "/price_control_items/listing_product_control_items", :p_control => @price_control.price_control_items %>
+  <div class="table_background"><%= render "/price_control_items/listing_product_control_items", :p_control => @price_control.price_control_items %></div>
 <% else %>
   <div class="popup_form_table">Not Record Found</div>
 <% end %>

@@ -1,0 +1,21 @@
+<div id="popup_container">
+  <div class="title_head">
+    <strong style="color:white;">TRANSACTION & HISTORIES FOR SALES ORDERS</strong>
+    <%= search_button %>
+  </div>
+
+  <div><%= render "search_sales_orders"  %></div>
+
+  <div class="fix_h450">
+    <% if @sales_orders.present? %>
+      <%= render "so_transaction", :so => @sales_orders %>
+    <% else %>
+      Not Record Found.
+    <% end %>
+  </div>
+
+  <%= render "action_so_transaction" %> 
+</div>
+
+
+

@@ -57,6 +57,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PURCHASE_ORDER_PROPOSED_VENDOR               = 22 #ok
   PURCHASE_ORDER_VENDOR_SELECTION              = 23 #ok
   PURCHASE_ORDER_VENDOR_REGISTRATION           = 24 #ok
+  PURCHASE_ORDER_PRODUCT_ID_REGISTRATION       = 271
   PURCHASE_ORDER_ENTRY                         = 25 #ok
   PURCHASE_ORDER_TRANSACTION                   = 26 #ok
   PURCHASE_ORDER_KIV_VIEW                      = 27
@@ -83,6 +84,8 @@ class InventoryManagementSystem < ActiveRecord::Base
   PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY     = 37 #ok
   #PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO = 38 
   PURCHASE_ORDER_VENDOR_REGISTRATION_KIV       = 39
+  
+  PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY = 272
   
   #po entry
   PURCHASE_ORDER_ENTRY_APPLY                   = 40 #ok
@@ -294,11 +297,13 @@ class InventoryManagementSystem < ActiveRecord::Base
 #  VENDOR_MENU                             = 95
 #  CUSTOMER_MENU                           = 96
   
-  VENDOR_NEW                              = 97
+  
   VENDOR_LISTING                          = 98
   VENDOR_KIV                              = 99
   
-  VENDOR_NEW_ADD                         = 100
+  VENDOR_NEW                              = 97
+  
+#  VENDOR_NEW_ADD                          = 100  # JC confirm this would be remove in the future.. (20/3/2013)
   
   VENDOR_SHOW                             = 101
   VENDOR_EDIT                             = 102
@@ -308,11 +313,13 @@ class InventoryManagementSystem < ActiveRecord::Base
   VENDOR_KIV_SHOW                         = 104
   VENDOR_KIV_RECOVER                      = 105
   
-  CUSTOMER_NEW                            = 106
+  
   CUSTOMER_LISTING                        = 107
   CUSTOMER_KIV                            = 108
   
-  CUSTOMER_NEW_ADD                        = 109
+  CUSTOMER_NEW                            = 106
+  
+#  CUSTOMER_NEW_ADD                        = 109  # JC confirm this would be remove in the future.. (20/3/2013)
   
   CUSTOMER_SHOW                           = 110
   CUSTOMER_EDIT                           = 111
@@ -402,6 +409,6 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   
   
-  #start at 271
+  #start at 273
   #kai kean use 300-400
 end

@@ -1,6 +1,7 @@
 <%= form_for(@product) do |f| %>
   <%= hidden_field_tag "add_category_id", params[:add_category_id] %>
   <%= hidden_field_tag "category_type",   params[:category_type] %>
+  <%= hidden_field_tag "refer_category_id", params[:refer_category_id] %>
 
   <div class="popup_content">
     <% if @field_id.present? %>
@@ -8,6 +9,10 @@
         <%= render "field_form", :f => f, :fielding => @field_id, :product => @product %>
       </div>
     <% end %>
+  </div>
+
+  <div class="left_icon_tag">
+    <%= submit_tag "Next New Product ID", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new" %>
   </div>
 
   <div class="icon_tag">
@@ -22,10 +27,11 @@
         
         var validator = $("#valid_product_field").kendoValidator().data("kendoValidator");
         
-        $("#save_button").click(function() {
+        $("#save_button, #left_save_button").click(function() {
             if (validator.validate()) {}
             else { alert("Invalid Data Form..."); return false; } 
         });
+          
     });
   </script>
 <% end %>

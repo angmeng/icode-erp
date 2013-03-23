@@ -1,0 +1,41 @@
+<table>
+  <tr>
+    <td><b>Customer PO No#</b></td>
+    <td><%= f.text_field :customer_po_no_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>QR No.</b></td>
+    <td><%= f.text_field :quotation_request_no_equals, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>Status</b></td>
+    <td><%= f.select :status_contains, options_for_select(QuotationRequestForm::OPTION_STATUS), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
+  </tr>
+  <tr>
+    <td><b>Customer Company</b></td>
+    <td><%= f.text_field :customer_name_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>Description</b></td>
+    <td><%= f.text_field :description_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>QRF Date</b></td>
+    <td>
+      <% if @search.qrf_date_gte.present? %>
+        <%= f.text_field :qrf_date_gte, :value => @search.qrf_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :qrf_date_gte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+       - 
+      <% if @search.qrf_date_lte.present? %>
+        <%= f.text_field :qrf_date_lte, :value => @search.qrf_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :qrf_date_lte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="10" align="right"><%= f.submit 'Search', :class => "k-button" %></td>
+  </tr>
+</table>

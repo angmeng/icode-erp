@@ -332,8 +332,6 @@ Merp::Application.routes.draw do
     end
   end
 
-  resources :product_prices
-
   resources :trade_terms do
     get "kiv", :on => :collection
     put "recover", :on => :member

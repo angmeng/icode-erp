@@ -1,12 +1,13 @@
 <style>
-  /*=================================== BLACK TABLE =====================================*/
   table.black-line-table {
           border-width: 1px;
           border-spacing: 0px;
           border-style: none;
           border-color: black;
           border-collapse: collapse;
-          background-color: transparent; }
+          background-color: transparent; 
+          font-family: Enigmatic, sans-serif;
+  }
 
   table.black-line-table th {
           border-width: 1px;
@@ -14,26 +15,27 @@
           border-style: solid;
           border-color: black;
           background-color: transparent;
-          -moz-border-radius: 0px 0px 0px 0px; }
+          -moz-border-radius: 0px 0px 0px 0px; 
+          font-family: Enigmatic, sans-serif;
+  }
 
   table.black-line-table td {
           border-width: 1px;
-          padding: 1px;
+          padding: 1px 5px;
           border-style: solid;
           border-color: black;
           background-color: transparent;
-          -moz-border-radius: 0px 0px 0px 0px; }
-  /*=================================== BLACK TABLE (END) =====================================*/
+          -moz-border-radius: 0px 0px 0px 0px; 
+          font-family: Enigmatic, sans-serif;
+  }
 
   #break_line {  page-break-before: always;  } 
-  
   fieldset { border: 1px solid green; padding: 5px; }
-  legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color: green; font-weight: bold;  }
-  
+  legend   { padding-left: 5px; padding-right: 5px; border:1px solid green; color: green; font-weight: bold; }
   div      { padding-bottom: 10px; }
 </style>
 
-<div style="background-color:blue; padding: 10px; margin-bottom: 10px;"><strong style="color:white;">QUOTATION REQUEST FORM</strong></div>
+<div style="background-color:blue; padding: 10px; margin-bottom: 10px;"><strong style="color:white;">QUOTATION REQUISITION FORM</strong></div>
 
 <div>
 
@@ -135,7 +137,7 @@
 
                 <% @quotation_request_form.custom_productions.each do |cp| %>
                   <tr>
-                    <td width="50"><%= cp.lot_size rescue '' %></td>
+                    <td width="50" align="center"><%= cp.lot_size rescue '' %></td>
                     <td width="200"><%= cp.part_no rescue '' %></td>
                     <td width="200"><%= cp.category_no rescue '' %></td>
                     <td width="300"><%= cp.stock_reference rescue '' %></td>
@@ -195,8 +197,8 @@
             <% @quotation_request_form.selection_printing_sizes.each do |sps| %>
 
               <tr>
-                <td width="100">(W)<%= two_precision(sps.width) rescue '0' %></td>
-                <td width="100">(L)<%= two_precision(sps.length) rescue '0' %></td>
+                <td width="100">(W) <%= two_precision(sps.width) rescue '0' %></td>
+                <td width="100">(L) <%= two_precision(sps.length) rescue '0' %></td>
                 <td align="right">UPS: </td>
                 <td><%= sps.ups rescue '0' %></td>
               </tr>
@@ -471,8 +473,8 @@
                           <% if @quotation_request_form.lamination_type == QuotationRequestForm::FLUTE %>
                             <% if @quotation_request_form.selection_flute_sizes.present? %>
                               <% @quotation_request_form.selection_flute_sizes.each do |sfs| %>
-                                (W)<%= two_precision(sfs.flute_width) %>
-                                (L)<%= two_precision(sfs.flute_length) %><br/>
+                                (W) <%= two_precision(sfs.flute_width) %>
+                                (L) <%= two_precision(sfs.flute_length) %><br/>
                               <% end %>
                             <% end %>
                           <% end %>
@@ -508,7 +510,7 @@
                     </tr-->
 
                     <tr>
-                      <td width="160"><b>Type of Stamping</b></td>
+                      <td width="200"><b>Type of Stamping</b></td>
                       <td>
                         <% if @stampings_join.present? %>
                           <% arr_stm = [] %>
@@ -541,8 +543,8 @@
                       <td>
                         <% if @quotation_request_form.selection_stamping_sizes.present? %>
                           <% @quotation_request_form.selection_stamping_sizes.each do |sss| %>
-                            (W)<%= two_precision(sss.stamping_width) rescue '-' %>
-                            (L)<%= two_precision(sss.stamping_length) rescue '-' %><br/>
+                            (W) <%= two_precision(sss.stamping_width) rescue '-' %>
+                            (L) <%= two_precision(sss.stamping_length) rescue '-' %><br/>
                           <% end %>
                         <% end %>
                       </td>
@@ -618,7 +620,7 @@
                   <legend>WINDOW PATCHING</legend>
                   <table>
                     <tr>
-                      <td width="160"><b>Window Patching</b></td>
+                      <td width="200"><b>Window Patching</b></td>
                       <td>
                         <% if @quotation_request_form.window_patching == TRUE %>
                           YES
@@ -646,8 +648,8 @@
                         <tr>
                           <td><b>Size</b></td>
                           <td>
-                            (W)<%= two_precision(@quotation_request_form.window_width) rescue '-' %> 
-                            (L)<%= two_precision(@quotation_request_form.window_length) rescue '-' %>
+                            (W) <%= two_precision(@quotation_request_form.window_width) rescue '-' %> 
+                            (L) <%= two_precision(@quotation_request_form.window_length) rescue '-' %>
                           </td>
                         </tr>
                       <% end %>
@@ -731,9 +733,7 @@
 
                     <tr>
                       <td><b>Packed Qty</b></td>
-                      <td>
-                        <%= @quotation_request_form.packed_quantity rescue '0' %>
-                      </td>
+                      <td><%= @quotation_request_form.packed_quantity rescue '0' %> PCS</td>
                     </tr>
                   </table>
                 </fieldset>
@@ -791,7 +791,7 @@
         <legend>COLLATING</legend>
         <table>
           <tr>
-            <td width="160"><b>Collating No of Design</b></td>
+            <td width="200"><b>Collating No of Design</b></td>
             <td><%= @quotation_request_form.collating_no rescue '-' %></td>
           </tr>
 

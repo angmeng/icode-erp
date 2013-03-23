@@ -13,6 +13,777 @@
             if (validator.validate()) {}
             else { alert("Invalid Data Form..."); return false; } 
         });
+        
+        
+    //================================= INVENTORY MANAGEMENT SYSTEM - CHECKBOXES =================================================
+        $('input:checkbox[name="inventory_management_system[]"]').click(function() {
+            var checkbox_value = $(this).attr("value");
+            var checked = $(this).is(':checked');
+            <%#*alert(checkbox_value);%>
+
+            switch (parseInt(checkbox_value)) {
+                case 2:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '6')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '7')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '8')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '9')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '6')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '7')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '8')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '9')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '10') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 131:
+                    if (checked == true){ 
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '132') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '133') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '132') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '133') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '134') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 3:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '11') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '13') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '11') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '13') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '14') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 4:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '15') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '15') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '16') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 5:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '17') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '17') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '18') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 20:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '129') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '129') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 21:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '28') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '29') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '28') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '29') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 22:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '31') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '32') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '31') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '32') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 23:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '34') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '34') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 24:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '37') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '37') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 25:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '40') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '40') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 26:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '43') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '45') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '43') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '44') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '45') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '46') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 27:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '47') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '47') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '48') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 50:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '262') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '262') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 51:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '55') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '57') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '55') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '56') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '57') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '58') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 52:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '130') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '130') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 63:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '67') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '69') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '67') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '68') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '69') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '70') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 65:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '75') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '75') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '76') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 225:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '228') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '229') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '230') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '228') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '229') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '230') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '231') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 227:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '237') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '237') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '238') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 78:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '81') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '81') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 79:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '82') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '82') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '83') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '85') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 89:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '90') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '90') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '91') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '92') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '93') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 97:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '100') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '100') {$(this).attr('checked', false);}
+                        });
+                    }
+                    break;
+
+                case 98:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '101') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '127') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '101') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '102') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '127') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '103') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 99:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '104') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '104') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '105') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 106:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '109') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '109') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 107:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '110') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '128') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '110') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '111') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '128') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '112') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 108:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '113') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '113') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '114') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 139:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '122') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '123') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '124') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '125') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '126') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '215') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '268') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '216') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '122') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '123') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '124') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '125') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '126') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '215') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '259') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '268') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 140:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '142') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '143') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '144') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '145') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '146') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '218') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '269') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '219') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '142') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '143') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '144') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '145') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '146') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '218') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '260') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '269') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 141:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '147') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '148') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '149') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '150') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '151') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '221') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '270') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '222') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '147') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '148') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '149') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '150') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '151') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '221') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '261') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '270') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 156:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '161') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '162') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '163') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '164') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '161') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '162') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '163') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '164') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 158:
+                    if (checked == true){
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '166') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '167') {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '198') {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '166') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '167') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '168') {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '198') {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 159:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '169')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '171')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '173')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '169')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '170')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '171')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '172')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '173')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 174:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '175')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '176')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '177')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '211')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '175')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '176')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '177')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '178')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '211')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 160:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '179')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '179')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '180')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 181:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '182')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '182')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 183:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '184')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '184')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 185:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '157')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '186')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '187')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '188')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '157')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '186')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '187')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '188')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '189')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 190:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '191')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '191')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '192')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 193:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '194')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '195')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '196')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '194')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '195')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '196')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '197')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 206:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '204')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '204')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '205')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 209:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '210')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '210')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 212:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '217')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '217')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 213:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '220')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '220')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 214:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if ($(this).attr("value") == '223')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if ($(this).attr("value") == '223')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 251:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '252')  {$(this).attr('checked', true);}
+                            else if      ($(this).attr("value") == '253')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '252')  {$(this).attr('checked', false);}
+                            else if      ($(this).attr("value") == '253')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 254:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '247')  {$(this).attr('checked', true);}
+                            else if      ($(this).attr("value") == '248')  {$(this).attr('checked', true);}
+                            else if      ($(this).attr("value") == '249')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '247')  {$(this).attr('checked', false);}
+                            else if      ($(this).attr("value") == '248')  {$(this).attr('checked', false);}
+                            else if      ($(this).attr("value") == '249')  {$(this).attr('checked', false);}
+                            else if      ($(this).attr("value") == '250')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                case 255:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '256')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '256')  {$(this).attr('checked', false);}
+                            else if      ($(this).attr("value") == '257')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+                    
+              case 271:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '272')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if           ($(this).attr("value") == '272')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                default:break;
+                  
+                  
+            }
+        });
+    //================================= INVENTORY MANAGEMENT SYSTEM - CHECKBOXES (END) ================================================
+        
     });
   </script>
 <% end %>

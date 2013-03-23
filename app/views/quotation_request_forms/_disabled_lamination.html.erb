@@ -2,48 +2,44 @@
   <tr>
     <td width="150"><b>Lamination</b></td>
     <td>
-      <%= f.radio_button("lamination", QuotationRequestForm::SPOT, :disabled => true) %><%= QuotationRequestForm::SPOT %> <%= f.text_field :lamination_remark, :disabled => true, :size => 20 %>
-      <%= f.radio_button("lamination", QuotationRequestForm::FULL, :disabled => true) %><%= QuotationRequestForm::FULL %>
+      <%= f.radio_button("lamination", QuotationRequestForm::SPOT, :disabled => true) %> <%= QuotationRequestForm::SPOT %> <%= f.text_field :lamination_remark, :disabled => true, :class => "k-textbox" %>
+      <%= f.radio_button("lamination", QuotationRequestForm::FULL, :disabled => true) %> <%= QuotationRequestForm::FULL %>
     </td>
   </tr>
 
   <tr>
     <td><b>Type of Lamination</b></td>
     <td>
-      <%= f.radio_button("lamination_type", QuotationRequestForm::GLOSS, :disabled => true) %><%= QuotationRequestForm::GLOSS %>
-      <%= f.radio_button("lamination_type", QuotationRequestForm::MATT, :disabled => true) %><%= QuotationRequestForm::MATT %>
-      <%= f.radio_button("lamination_type", QuotationRequestForm::FLUTE, :disabled => true) %><%= QuotationRequestForm::FLUTE %>: <%= f.text_field :lamination_type_joints, :size => 3, :disabled => true %> joints
+      <%= f.radio_button("lamination_type", QuotationRequestForm::GLOSS, :disabled => true) %> <%= QuotationRequestForm::GLOSS %>
+      <%= f.radio_button("lamination_type", QuotationRequestForm::MATT, :disabled => true) %> <%= QuotationRequestForm::MATT %>
+      <%= f.radio_button("lamination_type", QuotationRequestForm::FLUTE, :disabled => true) %> <%= QuotationRequestForm::FLUTE %>: <%= f.text_field :lamination_type_joints, :class => "kendo_precision_0", :disabled => true, :style => "width: 80px;" %> joints
     </td>
   </tr>
 
   <tr>
     <td><b>Type of Flute</b></td>
     <td>
-      <%= f.radio_button("flute_type", QuotationRequestForm::B_FLUTE, :disabled => true) %><%= QuotationRequestForm::B_FLUTE %>
-      <%= f.radio_button("flute_type", QuotationRequestForm::E_FLUTE, :disabled => true) %><%= QuotationRequestForm::E_FLUTE %>
-      <%= f.radio_button("flute_type", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_type_other, :disabled => true, :size => 20 %>
+      <%= f.radio_button("flute_type", QuotationRequestForm::B_FLUTE, :disabled => true) %> <%= QuotationRequestForm::B_FLUTE %>
+      <%= f.radio_button("flute_type", QuotationRequestForm::E_FLUTE, :disabled => true) %> <%= QuotationRequestForm::E_FLUTE %>
+      <%= f.radio_button("flute_type", QuotationRequestForm::OTHERS, :disabled => true) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_type_other, :disabled => true, :class => "k-textbox" %>
     </td>
   </tr>
 
   <tr>
     <td><b>Material of Flute</b></td>
     <td>
-      <%= f.radio_button("flute_material", "26/26", :disabled => true) %>26/26
-      <%= f.radio_button("flute_material", "26/33", :disabled => true) %>26/33
-      <%= f.radio_button("flute_material", "33/33", :disabled => true) %>33/33
-      <%= f.radio_button("flute_material", QuotationRequestForm::OTHERS, :disabled => true) %><%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_material_other, :disabled => true, :size => 20 %>
+      <%= f.radio_button("flute_material", "26/26", :disabled => true) %> 26/26
+      <%= f.radio_button("flute_material", "26/33", :disabled => true) %> 26/33
+      <%= f.radio_button("flute_material", "33/33", :disabled => true) %> 33/33
+      <%= f.radio_button("flute_material", QuotationRequestForm::OTHERS, :disabled => true) %> <%= QuotationRequestForm::OTHERS %>: <%= f.text_field :flute_material_other, :disabled => true, :class => "k-textbox" %>
     </td>
   </tr>
 
   <tr>
     <td valign="top"><b>Flute Size</b></td>
     <td id="generate_flute_size">
-      <% if @quotation_request_form.lamination_type_joints == 0 %>
-
-      <% else %>
-        (W)<%= text_field_tag "generate_flute_width[1][val]", '', :disabled => true, :size => 5 %>
-        (L)<%= text_field_tag "generate_flute_length[1][val]", '', :disabled => true, :size => 5 %>
-      <% end %>
+      (W) <%= text_field_tag "generate_flute_width[1][val]", '', :disabled => true, :style => "width: 80px;", :class => "kendo_precision_2" %>
+      (L) <%= text_field_tag "generate_flute_length[1][val]", '', :disabled => true, :style => "width: 80px;", :class => "kendo_precision_2" %>
     </td>
   </tr>
 

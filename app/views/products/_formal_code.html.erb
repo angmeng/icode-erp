@@ -22,11 +22,11 @@
 <% content_for :jquery_script do %>
   <script>
       $(document).ready(function() {
+          
           $("#horizontal").kendoSplitter({
               panes: [
-                  { collapsible: true, size: "500px" },
-                  { collapsible: false },
-                  { collapsible: true, size: "220px" }
+                  { collapsible: false, size: "40%" },
+                  { collapsible: false, size: "60%" }
               ]
           });
                     

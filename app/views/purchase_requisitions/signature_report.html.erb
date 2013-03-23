@@ -3,7 +3,7 @@
 <div class="title_head"><strong style="color:white;">APPROVE / REJECT PURCHASE REQUISITION TASKS</strong></div>
 
 <% if @user_report.present? %>
-  <%= render "listing_purchase_requisitions", :listing => @user_report %>
+  <div class="table_color"><%= render "listing_purchase_requisitions", :listing => @user_report %></div>
 <% else %>
   <div class="linking_content">No Record Found</div>
 <% end %>

@@ -18,11 +18,11 @@
 
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= user.id %>">
         <td></td>
-        <td align="center"><%= user.name rescue '-' %></td>
-        <td align="center"><%= user.job_title rescue '-' %></td>
-        <td align="center"><%= user.department.name rescue '-' %></td>
-        <td align="center"><%= lv2.name rescue '-' %></td>
-        <td align="center"><%= lv3.name rescue '-' %></td>
+        <td><%= user.name rescue '-' %></td>
+        <td><%= user.job_title rescue '-' %></td>
+        <td><%= user.department.name rescue '-' %></td>
+        <td><%= lv2.name rescue '-' %></td>
+        <td><%= lv3.name rescue '-' %></td>
       </tr>      
     <% end %>
   </tbody>

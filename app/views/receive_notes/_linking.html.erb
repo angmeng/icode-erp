@@ -2,13 +2,6 @@
   <table>
       <tr>
           <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> 
-            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
-              <td><%= link_to "New RNs", new_receive_note_path,:class => "k-button" %></td>
-            <% else %>
-              <td>New RNs</td>
-            <% end %>
-
-            <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
             <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
               <td><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "k-button" %></td>

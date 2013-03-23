@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315193850) do
+ActiveRecord::Schema.define(:version => 20130322160022) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -778,6 +778,7 @@ ActiveRecord::Schema.define(:version => 20130315193850) do
     t.integer  "confirmed_by"
     t.string   "customer_code"
     t.string   "customer_po_no"
+    t.string   "recover_status"
   end
 
   create_table "receipt_items", :force => true do |t|

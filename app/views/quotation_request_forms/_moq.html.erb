@@ -1,10 +1,10 @@
-<div class="tabbing_h400">
+<div class="quotation">
   <fieldset style="width: 700px;">
     <legend>
       <% if @field_sets.present? %>
-        <%= check_box_tag "field_set[]", QuotationRequestForm::MOQ_FIELDSET, @field_sets.include?(QuotationRequestForm::MOQ_FIELDSET) %>MINIMUN ORDER QUANTITY
+        <%= check_box_tag "field_set[]", QuotationRequestForm::MOQ_FIELDSET, @field_sets.include?(QuotationRequestForm::MOQ_FIELDSET) %> MINIMUN ORDER QUANTITY
       <% else %>
-        <%= check_box_tag "field_set[]", QuotationRequestForm::MOQ_FIELDSET %>MINIMUN ORDER QUANTITY
+        <%= check_box_tag "field_set[]", QuotationRequestForm::MOQ_FIELDSET %> MINIMUN ORDER QUANTITY
       <% end %>
     </legend>
 
@@ -13,7 +13,7 @@
         <table>
           <tr>
             <td width="100"><b>No of MOQ</b></td>
-            <td><%= f.text_field :no_of_moq, :size => 3, :onblur => "dropdown_moq(this)" %></td>
+            <td><%= f.text_field :no_of_moq, :onblur => "dropdown_moq(this)", :class => "kendo_precision_0", :style => "width:80px;" %></td>
           </tr>
 
           <tr>
@@ -22,7 +22,7 @@
               <span id="quantity_no">
                 <% if @quotation_request_form.material_of_quantities.present? %>
                   <% @quotation_request_form.material_of_quantities.each do |se| %>
-                    <%= text_field_tag "quantity[#{se.id}][qty]", se.quantity, :size => 8 %>
+                    <%= text_field_tag "quantity[#{se.id}][qty]", se.quantity, :class => "kendo_precision_0", :style => "width:80px;" %>
                   <% end %>
                 <% end %>
               </span>
@@ -35,7 +35,7 @@
               <span id="pricing">
                 <% if @quotation_request_form.material_of_quantities.present? %>
                   <% @quotation_request_form.material_of_quantities.each do |se| %>
-                    <%= text_field_tag "pricing[#{se.id}][price]", two_precision(se.unit_price), :size => 8 %>
+                    <%= text_field_tag "pricing[#{se.id}][price]", two_precision(se.unit_price), :class => "kendo_precision_4", :style => "width:80px;" %>
                   <% end %>
                 <% end %>
               </span>
@@ -43,7 +43,7 @@
           </tr>
 
           <tr>
-            <td><b>Remarks</b></td>
+            <td valign="top"><b>Remarks</b></td>
             <td><%= f.text_area :remarks, :rows => '3', :cols => '40' %></td>
           </tr>
         </table>

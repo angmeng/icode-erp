@@ -1,0 +1,35 @@
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+
+        var window_height           = $(window).height();
+        var mainHeader_height       = $("#main_header").height();
+        var mainFooter_height       = $("#main_footer").height();
+        var menu_height             = $("#menu").height();
+        var linking_height          = $("#linking").height();
+        var qr_submit_height        = $("#qr_submit").height();
+        var title_height            = $(".title_head").height();
+        var button_height           = $(".icon_tag").height();
+        var ctn_width               = $(".title_head").width() - 15; // It is for table width
+
+        // Wrapper is calculate the height only available when without popup
+        var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
+        var linking_content_height  = wrapper_height - linking_height - title_height - button_height - 13;
+        var qr_application_height   = linking_content_height - qr_submit_height - 15;
+
+        // It is for normal page for without popup
+        $("#main_wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
+
+        // It is for .content
+        $(".qr_content").css({ 'height': linking_content_height }).addClass("page_wrapper");
+
+        // Normal Table with linking
+        $("#jgrid_submit").chromatable({
+            width:  ctn_width,
+            height: qr_application_height,
+            scrolling: "yes"
+        });
+        
+    });
+  </script>
+<% end %>

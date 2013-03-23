@@ -10,30 +10,20 @@
   </thead>
 
   <tbody>
-    <% if price_control.price_control_items.present? %>
-
-      <%# price_control.price_control_items.each_with_index do |item, index| %>
-    
-        <!--tr class="<%#= cycle('odd_line', 'even_line') %>">     
-          
-          <td align="center" width="400"><%#= select_tag       "datarow[#{index}][product_id]", options_for_select(product_finish_goods_with_combobox, item.product_id), :include_blank => true, :id => "kendo_combobox", :style => "width: 400px;", :onchange => "product_data(this)" %></td>
-          <td align="center" width="150"></td>
-          <td align="center" width="150"></td>
-          <td align="center" width="150"><%#= text_field_tag   "datarow[#{index}][new_unit_price]", four_precision(item.new_unit_price), :id => "kendo_price" %></td>
-          <td align="center" width="150"><%#= text_field_tag   "datarow[#{index}][new_eff_date]", item.new_eff_date.strftime("%d-%m-%Y"), :id => "kendo_date"  %></td>   
-          
-        </tr-->
-    
-      <%# end %>
-
-    <% else %>
+    <% unless price_control.price_control_items.present? %>
       
       <tr class="<%= cycle('odd_line', 'even_line') %>">
-      
-        <td align="center" width="400">
-          <%= select_tag "datarow[0][product_id]", options_for_select(product_finish_goods_with_combobox), :include_blank => true, :style => "width: 400px;", :onchange => "price_control_data(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Product ID" %>
-          <span class="k-invalid-msg" data-for="datarow[0][product_id]"></span>
-        </td>
+        <% if @product.present? %>
+          <td align="center" width="400">
+            [<%= @product.product_combobox.product_code rescue '-' %>] <%= @product.desc rescue '-' %>
+            <%= hidden_field_tag "datarow[0][product_id]", @product.id %>
+          </td>
+        <% else %>
+          <td align="center" width="400">
+            <%= select_tag "datarow[0][product_id]", options_for_select(product_finish_goods_with_combobox), :include_blank => true, :style => "width: 400px;", :onchange => "price_control_data(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Product ID" %>
+            <span class="k-invalid-msg" data-for="datarow[0][product_id]"></span>
+          </td>
+        <% end %>
         
         <td align="center" width="150">
           <span id="old_up_0"></span>
@@ -51,7 +41,6 @@
           <%= text_field_tag   "datarow[0][new_eff_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Eff Date" %>
           <span class="k-invalid-msg" data-for="datarow[0][new_eff_date]"></span>
         </td>
-        
       </tr>
 
     <% end %>

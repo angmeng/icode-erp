@@ -3,14 +3,14 @@
     <% if action_name == "show" %>
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MENU, checkboxes.include?(InventoryManagementSystem::PR_MENU), :disabled => true %> PURCHASE REQUISITION</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW, checkboxes.include?(InventoryManagementSystem::PR_NEW), :disabled => true %> New & Pending PRs</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
+          <td></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW_PRINTABLE) %></td>
           <% 6.times do |td| %><td></td><% end %>
         </tr>
         
@@ -19,7 +19,7 @@
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE), :disabled => true %> PR Approval / Reject Tasks</td>
           <td></td>
-          <td><%#= "save" %></td>
+          <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_SHOW, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_EDIT, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_EDIT), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
@@ -81,14 +81,14 @@
         
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MENU, checkboxes.include?(InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION </td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW, checkboxes.include?(InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE) %></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
+          <td></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW_PRINTABLE) %></td>
           <% 6.times do |td| %><td></td><% end %>
         </tr>
         
@@ -161,14 +161,14 @@
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MENU %> PURCHASE REQUISITION</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW %> New & Pending PRs</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS %></td>
-        <td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE %></td>
+        <td><%= ims_new(InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION</td>
+        <td><%= ims_new(InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
+        <td></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::PR_NEW_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::PR_NEW_EDIT) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::PR_NEW_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::PR_NEW_PRINTABLE) %></td>
         <% 6.times do |td| %><td></td><% end %>
       </tr>
       

@@ -7,7 +7,7 @@
 <div><%= render "search_purchase_requisition" %></div>
 
 <% if @purchase_requisitions.present? %>
-  <%= render "listing_purchase_requisitions", :listing => @purchase_requisitions %>
+  <div class="table_color"><%= render "listing_purchase_requisitions", :listing => @purchase_requisitions %></div>
 <% else %>
   <div class="linking_content">Not Record Found</div>
 <% end %>

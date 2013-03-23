@@ -4,8 +4,13 @@ class QuotationRequestFormsController < ApplicationController
   
   def index
     @search = QuotationRequestForm.search(params[:search])
-    @quotation_request_forms = QuotationRequestForm.ordered_search_qrno(@search)
+    @quotation_request_forms = QuotationRequestForm.ordered_search_qr(@search)
     @quotation_request_forms = @quotation_request_forms.where(:user_id => current_user.id) unless user_is_admin?
+  end
+  
+  def kiv
+    @search = QuotationRequestForm.search(params[:search])
+    @quotation_request_forms = QuotationRequestForm.ordered_search_qr_kiv(@search)
   end
   
   def pending_quotation
@@ -49,12 +54,11 @@ class QuotationRequestFormsController < ApplicationController
   def create
     @quotation_request_form = QuotationRequestForm.new(params[:quotation_request_form])
     migrater
-    
     if @quotation_request_form.save
       company.update_attributes(:sn_quotation_request_no => @quotation_request_form.quotation_request_no)
-      QuotationRequestForm.process_material(@quotation_request_form, params[:option_size], params[:printing_length_a], params[:printing_length_b], params[:printing_width_a], params[:printing_width_b], params[:printing_no_of_ups_a], params[:printing_no_of_ups_b])
-      QuotationRequestForm.process_glueing(@quotation_request_form, params[:field_set], params[:varnish_type], params[:glueing], params[:die_cut], params[:sequent], params[:color_name], params[:color_code], params[:quantity], params[:pricing], params[:pre_print_type], params[:pre_print_type_other], params[:glueing_text], params[:stamping], params[:stamping_other], params[:lot_size], params[:part_no], params[:category_no], params[:stock_ref], params[:generate_flute_width], params[:generate_flute_length], params[:stamping_width], params[:stamping_length], params[:mould_no], params[:window_no])
-      redirect_to @quotation_request_form, notice: 'Quotation request form was successfully created.' 
+      QuotationRequisitionManagement.process_material(@quotation_request_form, params[:option_size], params[:printing_length_a], params[:printing_length_b], params[:printing_width_a], params[:printing_width_b], params[:printing_no_of_ups_a], params[:printing_no_of_ups_b])
+      QuotationRequisitionManagement.process_glueing(@quotation_request_form, params[:field_set], params[:varnish_type], params[:glueing], params[:die_cut], params[:sequent], params[:color_name], params[:color_code], params[:quantity], params[:pricing], params[:pre_print_type], params[:pre_print_type_other], params[:glueing_text], params[:stamping], params[:stamping_other], params[:lot_size], params[:part_no], params[:category_no], params[:stock_ref], params[:generate_flute_width], params[:generate_flute_length], params[:stamping_width], params[:stamping_length], params[:mould_no], params[:window_no])
+      redirect_to @quotation_request_form, notice: "QR No # #{@quotation_request_form.quotation_request_no} was successfully created."
     else
       flash[:alert] = @quotation_request_form.errors.full_messages.join(", ")
       render action: "new" 
@@ -63,7 +67,7 @@ class QuotationRequestFormsController < ApplicationController
   
   def update_checkboxes
     if params[:checkbox_quotation].present?
-      QuotationRequestForm.updating_pending_to_ip(params[:checkbox_quotation])
+      QuotationRequisitionManagement.updating_pending_to_ip(params[:checkbox_quotation])
       redirect_to pending_quotation_quotation_request_forms_path, :notice => "Submitting to Director Successfully."
     else
       flash[:alert] = "Please check boxes from your quotation request."
@@ -74,11 +78,10 @@ class QuotationRequestFormsController < ApplicationController
   def update
     @quotation_request_form = QuotationRequestForm.find(params[:id])
     migrater
-    
     if @quotation_request_form.update_attributes(params[:quotation_request_form])
-      mat, msg = QuotationRequestForm.process_material(@quotation_request_form, params[:option_size], params[:printing_length_a], params[:printing_length_b], params[:printing_width_a], params[:printing_width_b], params[:printing_no_of_ups_a], params[:printing_no_of_ups_b])
+      mat, msg = QuotationRequisitionManagement.process_material(@quotation_request_form, params[:option_size], params[:printing_length_a], params[:printing_length_b], params[:printing_width_a], params[:printing_width_b], params[:printing_no_of_ups_a], params[:printing_no_of_ups_b])
       if mat.present?
-        QuotationRequestForm.process_glueing(@quotation_request_form, params[:field_set], params[:varnish_type], params[:glueing], params[:die_cut], params[:sequent], params[:color_name], params[:color_code], params[:quantity], params[:pricing], params[:pre_print_type], params[:pre_print_type_other], params[:glueing_text], params[:stamping], params[:stamping_other], params[:lot_size], params[:part_no], params[:category_no], params[:stock_ref], params[:generate_flute_width], params[:generate_flute_length], params[:stamping_width], params[:stamping_length], params[:mould_no], params[:window_no])
+        QuotationRequisitionManagement.process_glueing(@quotation_request_form, params[:field_set], params[:varnish_type], params[:glueing], params[:die_cut], params[:sequent], params[:color_name], params[:color_code], params[:quantity], params[:pricing], params[:pre_print_type], params[:pre_print_type_other], params[:glueing_text], params[:stamping], params[:stamping_other], params[:lot_size], params[:part_no], params[:category_no], params[:stock_ref], params[:generate_flute_width], params[:generate_flute_length], params[:stamping_width], params[:stamping_length], params[:mould_no], params[:window_no])
         redirect_to @quotation_request_form, notice: 'Quotation request form was successfully updated.'
       else
         collect_all_process_types(@quotation_request_form)
@@ -91,16 +94,6 @@ class QuotationRequestFormsController < ApplicationController
       render action: "edit"
     end
   end
-
-  def destroy
-    @quotation_request_form = QuotationRequestForm.find(params[:id])
-    @quotation_request_form.update_attributes(:status => QuotationRequestForm::KEEP_IN_VIEW)
-    if action_name == "pending_quotation"
-      redirect_to pending_quotation_quotation_request_forms_url, :notice => "QR No ##{@quotation_request_form.quotation_request_no} has dropped to KIV successfully."
-    else
-      redirect_to quotation_request_forms_url, :notice => "QR No ##{@quotation_request_form.quotation_request_no} has dropped to KIV successfully."
-    end
-  end
   
   def no_button
     @quotation_request_form = QuotationRequestForm.find(params[:id])
@@ -108,31 +101,37 @@ class QuotationRequestFormsController < ApplicationController
     @quotation_request_form.qr_status = QuotationRequestForm::REJECTED
     @quotation_request_form.qr_task = @quotation_request_form.user_id
     @quotation_request_form.save!
-    redirect_to edit_quotation_request_form_path(@quotation_request_form), :notice => "QR no.#{@quotation_request_form.quotation_request_no} was sent back to Quoter."
+    redirect_to edit_quotation_request_form_path(@quotation_request_form), :notice => "QR No # #{@quotation_request_form.quotation_request_no} was sent back to Quoter."
   end
   
   def yes_button
-    user = User.find_by_level(User::LEVEL_FIVE)
+    user = director_data
     @quotation_request_form = QuotationRequestForm.find(params[:id])
-    @quotation_request_form.update_attributes(:status => QuotationRequestForm::APPROVED, :status_remark => nil, :qr_task => nil, :qr_status => nil, :director_approved => TRUE)
-    redirect_to edit_quotation_request_form_path(@quotation_request_form), :notice => "QR no.#{@quotation_request_form.quotation_request_no} was approved successfully."
+    @quotation_request_form.update_attributes!(:status => QuotationRequestForm::APPROVED, :status_remark => nil, :qr_task => nil, :qr_status => nil, :director_approved => TRUE)
+    redirect_to edit_quotation_request_form_path(@quotation_request_form), :notice => "QR No # #{@quotation_request_form.quotation_request_no} was approved successfully."
   end
   
   def quoter_press_yes
-    boss = User.find_by_level(User::LEVEL_FIVE)
+    boss = director_data
     @quotation_request_form = QuotationRequestForm.find(params[:id])
-    @quotation_request_form.update_attributes(:qr_status => QuotationRequestForm::APPROVING, :qr_task => boss.id, :status_remark => nil)
-    redirect_to edit_quotation_request_form_path(@quotation_request_form), :notice => "QR no.#{@quotation_request_form.quotation_request_no} submitting to Director."
+    @quotation_request_form.update_attributes!(:qr_status => QuotationRequestForm::APPROVING, :status_remark => nil, :qr_task => boss.id)
+    redirect_to edit_quotation_request_form_path(@quotation_request_form), :notice => "QR No # #{@quotation_request_form.quotation_request_no} submitting to Director."
   end
   
-  def kiv
-    @quotation_request_forms = QuotationRequestForm.ordered_qr_no_kiv
+  def destroy
+    @quotation_request_form = QuotationRequestForm.find(params[:id])
+    @quotation_request_form.update_attributes(:recover_status => @quotation_request_form.status, :status => QuotationRequestForm::KEEP_IN_VIEW)
+    if action_name == "pending_quotation"
+      redirect_to pending_quotation_quotation_request_forms_url, :notice => "QR No # #{@quotation_request_form.quotation_request_no} has dropped to KIV successfully."
+    else
+      redirect_to quotation_request_forms_url, :notice => "QR No # #{@quotation_request_form.quotation_request_no} has dropped to KIV successfully."
+    end
   end
   
   def recover
     @quotation_request_forms = QuotationRequestForm.find(params[:id])
-    @quotation_request_forms.update_attributes(:status => QuotationRequestForm::PENDING, :status_remark => nil, :qr_task => nil, :qr_status => nil, :director_approved => false)
-    redirect_to kiv_quotation_request_forms_path, :notice => "QR No #{@quotation_request_forms.quotation_request_no} has recovered from KIV." 
+    @quotation_request_forms.update_attributes!(:status => @quotation_request_forms.recover_status)
+    redirect_to kiv_quotation_request_forms_path, :notice => "QR No # #{@quotation_request_forms.quotation_request_no} has recovered from KIV." 
   end
   
   def printable
@@ -171,9 +170,9 @@ class QuotationRequestFormsController < ApplicationController
   def customer_confirm
     if params[:checkbox_quotation].present?
       if params[:confirmed_by].present? and params[:po_no].present?
-        @confirm, msg = QuotationRequestForm.updating_approved_to_confirmed(params[:checkbox_quotation], params[:confirmed_by], params[:po_no])
+        @confirm, msg = QuotationRequisitionManagement.updating_approved_to_confirmed(params[:checkbox_quotation], params[:confirmed_by], params[:po_no])
         if @confirm.present?
-          redirect_to feedback_quotation_request_forms_path, :notice => "Submitting to SALES ORDER status Successfully."
+          redirect_to feedback_quotation_request_forms_path, :notice => "Submitting to SALES ORDER Successfully."
         else
           flash[:alert] = msg
           redirect_to feedback_quotation_request_forms_path

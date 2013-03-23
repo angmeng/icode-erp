@@ -18,7 +18,7 @@ class PriceControlsController < ApplicationController
 
   def new
     @price_control = PriceControl.new
-#    @pri = current_user.price_control_items.db_active if current_user.price_control_items.db_active.present?
+    @product = Product.find(params[:product_id]) if params[:product_id].present?
   end
 
   def create

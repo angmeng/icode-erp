@@ -101,8 +101,6 @@
       <% else %>
         <%= not_link_delete %>
       <% end %>
-    <%# elsif data.icon == ProductCategory::ICON_FILE %>
-      <%#= link_delete(delete_data_product_category_path(data)) %>
     <% else %>
       <%= not_link_delete %>
     <% end %>
@@ -110,4 +108,14 @@
     <%= not_link_delete %>
   <% end %>
 
+<% end %>
+  
+<% if data.product.present? %>
+  <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %>
+    <%= link_to "New Product Price Control", new_price_control_path(:product_id => data.product.id), :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
+  <% else %>
+    <span class="k-button" style="color: grey; background-color: white; cursor: default;">New Product Price Control</span>
+  <% end %>
+<% else %>
+  <span class="k-button" style="color: grey; background-color: white; cursor: default;">New Product Price Control</span>
 <% end %>

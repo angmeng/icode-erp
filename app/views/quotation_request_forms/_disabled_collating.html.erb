@@ -2,15 +2,15 @@
   <tr>
     <td width="150"><b>No of Design</b></td>
     <td>    
-      <%= f.text_field :collating_no, :size => 3, :onblur => "dropdown_sequent(this)", :disabled => true %>
+      <%= f.text_field :collating_no, :style => "width: 80px;", :onblur => "dropdown_sequent(this)", :disabled => true, :class => "kendo_precision_0" %>
     </td>
   </tr>
 
   <tr>
     <td><b>Collect Sequence</b></td>
     <td>
-      <%= f.radio_button :collect_sequence, QuotationRequestForm::BIN, :disabled => true %><%= QuotationRequestForm::BIN %>
-      <%= f.radio_button :collect_sequence, QuotationRequestForm::CARTON, :disabled => true %><%= QuotationRequestForm::CARTON %>
+      <%= f.radio_button :collect_sequence, QuotationRequestForm::BIN, :disabled => true %> <%= QuotationRequestForm::BIN %>
+      <%= f.radio_button :collect_sequence, QuotationRequestForm::CARTON, :disabled => true %> <%= QuotationRequestForm::CARTON %>
     </td>
   </tr>
 

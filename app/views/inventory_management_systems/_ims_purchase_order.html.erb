@@ -58,6 +58,17 @@
         <tr>
           <td></td>
           <td></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION) %> Product ID Registration</td>
+          <td></td><td></td>
+          <% 6.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY) %></td>
+          <td align="center"></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_ENTRY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY), :disabled => true %> PO Entry</td>
           <td></td><td><%#= "save" %></td>
           <% 6.times do |td| %><td></td><% end %>
@@ -144,6 +155,17 @@
           <% 6.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION) %> Product ID Registration</td>
+          <td></td><td></td>
+          <% 6.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY) %></td>
+          <td align="center"></td>
           <% 2.times do |td| %><td></td><% end %>
         </tr>
 
@@ -238,6 +260,17 @@
       <% 6.times do |td| %><td></td><% end %>
       <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY %></td>
       <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_SUBMIT_TO %></td>
+      <% 2.times do |td| %><td></td><% end %>
+    </tr>
+    
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION) %> Product ID Registration</td>
+      <td></td><td></td>
+      <% 6.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY) %></td>
+      <td align="center"></td>
       <% 2.times do |td| %><td></td><% end %>
     </tr>
     

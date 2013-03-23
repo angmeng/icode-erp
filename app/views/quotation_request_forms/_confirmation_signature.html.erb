@@ -1,0 +1,42 @@
+<table>
+  <tr>
+    <td><b>Updated By</b></td>
+    <td width="150">
+      <% if @quotation_request_form.user_id.present? %>
+        <%= @quotation_request_form.user.name rescue '-' %>
+      <% else %>
+        <%= current_user.name %>
+      <% end %>
+    </td>
+    <td rowspan="2">
+      <% if @quotation_request_form.status_remark.present? %>
+        <span style="background:red; color:white; padding: 5px;">Status Remark: <%= @quotation_request_form.status_remark rescue '-' %></span><br/>
+        <% if @quotation_request_form.qr_status == QuotationRequestForm::REJECTED %>
+          <% if current_user.id == @quotation_request_form.qr_task %>
+            <b>Finished?</b>
+            <%= link_to "YES", quoter_press_yes_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Authorized By</b></td>
+    <td>
+      <% unless @quotation_request_form.director_approved == TRUE %>
+          <% if action_name == "edit" %>
+            <% if current_user.level == User::LEVEL_FIVE %>
+              <% if @quotation_request_form.qr_status == QuotationRequestForm::APPROVING %>
+                <b>Approve?</b>
+                <%= link_to "YES", yes_button_quotation_request_form_path(@quotation_request_form), :method => :put, :confirm => "Are you sure?", :class => "k-button" %>
+                <%= link_to "NO", '#', :class => "pop_remark k-button" %>
+              <% end %>
+            <% end %>
+          <% end %>
+      <% else %>
+        <%= User.find_by_level(User::LEVEL_FIVE).name rescue '-' %>
+      <% end %>
+    </td>
+  </tr>
+</table>

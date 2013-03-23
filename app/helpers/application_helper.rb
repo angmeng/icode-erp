@@ -655,7 +655,7 @@ module ApplicationHelper
   end
     
   def link_fsave_button(f)
-    f.submit "Save", :class => "k-button font_bold"
+    f.submit "Save", :class => "k-button font_bold", :id => "save_button"
   end
     
   def not_link_save
@@ -673,7 +673,7 @@ module ApplicationHelper
   end
     
   def link_mail_button
-    submit_tag "Send Mail", :class => "k-button font_bold"
+    submit_tag "Send Mail", :class => "k-button font_bold", :id => "send_button"
   end
     
     

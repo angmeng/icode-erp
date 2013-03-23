@@ -1,9 +1,11 @@
 <div class="left_icon_tag">
   <% unless action_name == "edit" %>
-    <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_ADD) %>
-      <%= link_to "Add Item", "#", :id => "add_bottom_row_for_price_control", :class => "k-button font_bold" %>
-    <% else %>
-      <span class="k-button" style = "color: grey; background-color: white; cursor: default;">Add Item</span>
+    <% unless @product.present? %>
+      <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_ADD) %>
+        <%= link_to "Add Item", "#", :id => "add_bottom_row_for_price_control", :class => "k-button font_bold" %>
+      <% else %>
+        <span class="k-button" style = "color: grey; background-color: white; cursor: default;">Add Item</span>
+      <% end %>
     <% end %>
   <% end %>
 </div>

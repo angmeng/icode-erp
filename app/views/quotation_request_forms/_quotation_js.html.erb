@@ -2,295 +2,585 @@
   <script>
     $(document).ready(function() {
       
+        //Pre-Print
+        $("#pre_print_type_other").click(function() { $(".pre_print_checkbox").attr("checked", true); });
+        $(".pre_print_checkbox").click(function() { $("#pre_print_type_other").val(''); });
+      
+        // Barcode
+        $("#other_barcode").click(function() { $("#quotation_request_form_barcode_others").attr("checked", true); });
+        $("#quotation_request_form_barcode_ean13, #quotation_request_form_barcode_upca, #quotation_request_form_barcode_code128, #quotation_request_form_barcode_code39, #quotation_request_form_barcode_other").click(function() { $("#other_barcode").val(''); });
+        
+        // Surface
+        $("#quotation_request_form_varnish_full").click(function() { $("#quotation_request_form_surface_remark").val(''); });
+        $("#quotation_request_form_varnish_spot").click(function() { $("#quotation_request_form_surface_remark").val(''); });
+        $("#quotation_request_form_surface_remark").click(function() { 
+          $("#quotation_request_form_varnish_full").attr("checked", false); 
+          $("#quotation_request_form_varnish_spot").attr("checked", true);
+        });
+      
+        // Lamination
+        $("#quotation_request_form_lamination_full").click(function() { $("#quotation_request_form_lamination_remark").val(''); });
+        $("#quotation_request_form_lamination_spot").click(function() { $("#quotation_request_form_lamination_remark").val('').attr("disabled", false); });
+        $("#quotation_request_form_lamination_remark").click(function() { $("#quotation_request_form_lamination_spot").attr("checked", true); });
+        
+        $("#quotation_request_form_lamination_type_flute").click(function(){ 
+          loading_flute(); 
+          $(".lamination_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" }); 
+        }); 
+        
+        $("#quotation_request_form_lamination_type_opp_gloss, #quotation_request_form_lamination_type_opp_matt").click(function() { 
+            disabled_flute(); 
+            var numerictextbox = $("#quotation_request_form_lamination_type_joints").data("kendoNumericTextBox");
+            numerictextbox.value('0');
+            $(".lamination_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" }); 
+        }); 
+        
+        $("#quotation_request_form_lamination_type_joints").blur(function() { 
+            var joint_no = $(this).val();
+            if (joint_no <= 2){
+              
+                loading_flute();
+                $("#quotation_request_form_lamination_type_flute").attr("checked", true); 
+
+                if (joint_no != ''){
+                    $("#generate_flute_size").empty();
+                    $("#mould_no, #window_no").empty();
+                    for(var i = 0; i <= joint_no; i++) {
+                        $("#generate_flute_size").append('(W)<input id="generate_flute_width_" style="width:80px;" class="lamination_precision_2" type="text" name="generate_flute_width[' + i + '][val]">');
+                        $("#generate_flute_size").append('(L)<input id="generate_flute_length_" style="width:80px;" class="lamination_precision_2" type="text" name="generate_flute_length[' + i + '][val]"><br/');
+                        $("#mould_no").append('<input class="mould_no_ k-textbox" type="text" name="mould_no[' + i + '][val]" disabled="disabled">');
+                        $("#window_no").append('<input class="window_no_ k-textbox" type="text" name="window_no[' + i + '][val]" disabled="disabled">');
+                    }
+                } else {
+                    var numerictextbox = $("#quotation_request_form_lamination_type_joints").data("kendoNumericTextBox");
+                    numerictextbox.value('0');
+                    $("#generate_flute_size").append('(W)<input id="generate_flute_width_" style="width:80px;" class="lamination_precision_2" type="text" name="generate_flute_width[1][val]">');
+                    $("#generate_flute_size").append('(L)<input id="generate_flute_length_" style="width:80px;" class="lamination_precision_2" type="text" name="generate_flute_length[1][val]">');
+                    $("#mould_no").append('<input class="mould_no_ k-textbox" type="text" name="mould_no[1][val]" disabled="disabled">');
+                    $("#window_no").append('<input class="window_no_ k-textbox" type="text" name="window_no[1][val]" disabled="disabled">');
+                }
+                
+                $(".lamination_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" }); 
+
+            } else {
+                alert("Flute Joint should less than or equal to 2.");
+            }
+        });
+        
+        $("#quotation_request_form_flute_type_b-flute, #quotation_request_form_flute_type_e-flute").click(function(){ $("#quotation_request_form_flute_type_other").val(''); });
+        $("#quotation_request_form_flute_type_other").click(function(){
+            $("#quotation_request_form_flute_type_others").attr("checked", true);
+            $("#quotation_request_form_flute_type_b-flute").attr("checked", false);
+            $("#quotation_request_form_flute_type_e-flute").attr("checked", false);
+        });
+        $("#quotation_request_form_flute_material_2626, #quotation_request_form_flute_material_2633, #quotation_request_form_flute_material_3333").click(function(){ $("#quotation_request_form_flute_material_other").val(''); });
+        $("#quotation_request_form_flute_material_other").click(function(){
+            $("#quotation_request_form_flute_material_2626").attr("checked", false);
+            $("#quotation_request_form_flute_material_2633").attr("checked", false);
+            $("#quotation_request_form_flute_material_3333").attr("checked", false);
+            $("#quotation_request_form_flute_material_others").attr("checked", true);
+        });
+      
+        // Stamping
+        $("#stamping_other").click(function() { $(".stamping_checkbox").attr("checked", true); });
+        $(".stamping_checkbox").click(function() { $("#stamping_other").val(''); });
+      
+        // Die Cut
+        $("#other_die_cut").click(function() { 
+            $("#quotation_request_form_die_cut_type_interlock").attr("checked", false);
+            $("#quotation_request_form_die_cut_type_flat").attr("checked", false);
+            $("#quotation_request_form_die_cut_type_butterfly").attr("checked", false);
+            $("#quotation_request_form_die_cut_type_others").attr("checked", true);
+        });
+        $("#quotation_request_form_die_cut_type_interlock, #quotation_request_form_die_cut_type_flat, #quotation_request_form_die_cut_type_butterfly").click(function() { $("#other_die_cut").val(''); }); 
+        
+        // Window Shape
+        $("#window_shape_other").click(function() { 
+            $("#quotation_request_form_window_shape_rectangle").attr("checked", false);
+            $("#quotation_request_form_window_shape_kidney").attr("checked", false);
+            $("#quotation_request_form_window_shape_oval").attr("checked", false);
+            $("#quotation_request_form_window_shape_triangle").attr("checked", false);
+            $("#quotation_request_form_window_shape_others").attr("checked", true);
+        });
+
+        $("#quotation_request_form_window_shape_rectangle, #quotation_request_form_window_shape_kidney, #quotation_request_form_window_shape_oval, #quotation_request_form_window_shape_triangle").click(function() { 
+            $("#window_shape_other").val(''); 
+        });
+        
+        // Window Patching
+        $("#quotation_request_form_window_patching_false").click(function() { 
+            var qr_width  = $("#quotation_request_form_window_width").data("kendoNumericTextBox");
+            var qr_length = $("#quotation_request_form_window_length").data("kendoNumericTextBox");
+            var qr_usage  = $("#quotation_request_form_window_usage").data("kendoNumericTextBox");
+            qr_width.enable(false); qr_length.enable(false); qr_usage.enable(false);
+            $("#quotation_request_form_window_patching_type_opp_film").attr("checked", false).attr("disabled", true);
+            $("#quotation_request_form_window_patching_type_plain_film").attr("checked", false).attr("disabled", true);
+            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("checked", false).attr("disabled", true);
+            $("#quotation_request_form_window_patching_type_pre_print").attr("checked", false).attr("disabled", true);
+            $("#quotation_request_form_pre_print_textbox").val('').attr("disabled", true);
+            $("#quotation_request_form_window_patching_type_others").attr("checked", false).attr("disabled", true);
+            $("#other_window_patching").val('').attr("disabled", true);
+        });
+
+        $("#quotation_request_form_window_patching_true").click(function() { 
+            var qr_width  = $("#quotation_request_form_window_width").data("kendoNumericTextBox");
+            var qr_length = $("#quotation_request_form_window_length").data("kendoNumericTextBox");
+            var qr_usage  = $("#quotation_request_form_window_usage").data("kendoNumericTextBox");
+            qr_width.enable(true); qr_length.enable(true); qr_usage.enable(true);
+            $("#quotation_request_form_window_patching_type_opp_film").attr("disabled", false);
+            $("#quotation_request_form_window_patching_type_plain_film").attr("disabled", false);
+            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("disabled", false);
+            $("#quotation_request_form_window_patching_type_pre_print").attr("disabled", false);
+            $("#quotation_request_form_pre_print_textbox").val('').attr("disabled", false);
+            $("#quotation_request_form_window_patching_type_others").attr("disabled", false);
+            $("#other_window_patching").attr("disabled", false);
+        });
+
+        $("#other_window_patching").click(function() { 
+            $("#quotation_request_form_window_patching_type_opp_film").attr("checked", false);
+            $("#quotation_request_form_window_patching_type_plain_film").attr("checked", false);
+            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("checked", false);
+            $("#quotation_request_form_window_patching_type_pre_print").attr("checked", false);
+            $("#quotation_request_form_pre_print_textbox").val(''); 
+            $("#quotation_request_form_window_patching_type_others").attr("checked", true);
+        });
+
+        $("#quotation_request_form_pre_print_textbox").click(function() { 
+            $("#quotation_request_form_window_patching_type_opp_film").attr("checked", false);
+            $("#quotation_request_form_window_patching_type_plain_film").attr("checked", false);
+            $("#quotation_request_form_window_patching_type_plastic_sheet").attr("checked", false);
+            $("#quotation_request_form_window_patching_type_pre_print").attr("checked", true);
+            $("#quotation_request_form_window_patching_type_others").attr("checked", false);
+            $("#other_window_patching").val(''); 
+        });
+
+        $("#quotation_request_form_window_patching_type_opp_film, #quotation_request_form_window_patching_type_plain_film, #quotation_request_form_window_patching_type_pre_print, #quotation_request_form_window_patching_type_plastic_sheet, #quotation_request_form_window_patching_type_others").click(function() { 
+            $("#quotation_request_form_pre_print_textbox").val('');
+            $("#other_window_patching").val('');
+        });
+        
+        // Glueing
+        $("#glueing_text").click(function() { $(".glueing_checkbox").attr("checked", true); });
+        $(".glueing_checkbox").click(function() { $("#glueing_text").val(''); });
+        
+        // Packing
+        $("#quotation_request_form_packing_type_other").click(function() { 
+            $("#quotation_request_form_packing_type_bulk").attr("checked", false);
+            $("#quotation_request_form_packing_type_packet").attr("checked", false);
+            $("#quotation_request_form_packing_type_carton").attr("checked", false);
+            $("#quotation_request_form_packing_type_bin").attr("checked", false);
+            $("#quotation_request_form_packing_type_others").attr("checked", true);
+        });
+        $("#quotation_request_form_packing_type_bulk, #quotation_request_form_packing_type_packet, #quotation_request_form_packing_type_carton, #quotation_request_form_packing_type_bin").click(function() { $("#quotation_request_form_packing_type_other").val(''); }); 
+        
         $('input:checkbox[name="field_set[]"]').click(function() {
             var checkbox_value = $(this).attr("value");
             var checked = $(this).is(':checked');
-    //        alert(checkbox_value);
+            <%#*alert(checkbox_value);%>
 
             switch(parseInt(checkbox_value)){
                 /* Color Fieldset */
                 case 1:
                     if (checked == true){
-                            $("#quotation_request_form_color_no").val('').attr('disabled', false);
-                            $('input[id^="quotation_request_form_color_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#color_name").empty();
-                            $("#color_code").empty();
-                            $('input[id^="pre_print_type_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', false);
-                            });
-                            $("#pre_print_type_other").val('').attr('disabled', false);
-                            $('input[id^="quotation_request_form_barcode_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', false);
-                            });
-                            $("#other_barcode").val('').attr("disabled", false);
-                            $('input[id^="quotation_request_form_shortage_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', false);
-                            });
+                        var numerictextbox = $("#quotation_request_form_color_no").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(true);
+                        numerictextbox.focus();
+                        $('input[id^="quotation_request_form_color_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#color_name").empty();
+                        $("#color_code").empty();
+                        $('input[id^="pre_print_type_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', false);
+                        });
+                        $("#pre_print_type_other").val('').attr('disabled', false);
+                        $('input[id^="quotation_request_form_barcode_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', false);
+                        });
+                        $("#other_barcode").val('').attr("disabled", false);
+                        $('input[id^="quotation_request_form_shortage_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', false);
+                        });
                     } else {
-                            $("#quotation_request_form_color_no").val('').attr('disabled', true);
-                            $('input[id^="quotation_request_form_color_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#color_name").empty();
-                            $("#color_code").empty();
-                            $('input[id^="pre_print_type_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', true);
-                            });
-                            $("#pre_print_type_other").val('').attr('disabled', true);
-                            $('input[id^="quotation_request_form_barcode_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', true);
-                            });
-                            $("#other_barcode").val('').attr("disabled", true);
-                            $('input[id^="quotation_request_form_shortage_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', true);
-                            });
+                        var numerictextbox = $("#quotation_request_form_color_no").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(false);
+                        $('input[id^="quotation_request_form_color_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#color_name").empty();
+                        $("#color_code").empty();
+                        $('input[id^="pre_print_type_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', true);
+                        });
+                        $("#pre_print_type_other").val('').attr('disabled', true);
+                        $('input[id^="quotation_request_form_barcode_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', true);
+                        });
+                        $("#other_barcode").val('').attr("disabled", true);
+                        $('input[id^="quotation_request_form_shortage_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', true);
+                        });
                     }
                     break;
 
                 /* Surface Fieldset */
                 case 2:
                     if (checked == true){
-                            $('input[id^="quotation_request_form_varnish_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $('input[id^="varnish_type_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', false);
-                            });
-                            $("#quotation_request_form_surface_remark").val('').attr("disabled", false);
+                        $('input[id^="quotation_request_form_varnish_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $('input[id^="varnish_type_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', false);
+                        });
+                        $("#quotation_request_form_surface_remark").val('').attr("disabled", false);
                     } else {
-                            $('input[id^="quotation_request_form_varnish_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $('input[id^="varnish_type_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', true);
-                            });
-                            $("#quotation_request_form_surface_remark").val('').attr("disabled", true);
+                        $('input[id^="quotation_request_form_varnish_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $('input[id^="varnish_type_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', true);
+                        });
+                        $("#quotation_request_form_surface_remark").val('').attr("disabled", true);
                     }
                     break;
 
                 /* Lamination Fieldset */
                 case 3:
                     if (checked == true){                        
-                            $('input[id^="quotation_request_form_lamination_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $('input[id^="quotation_request_form_lamination_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#quotation_request_form_lamination_type_joints").val('0').attr("disabled", false);
+                        var numerictextbox = $("#quotation_request_form_lamination_type_joints").data("kendoNumericTextBox");
+                        numerictextbox.value('0');
+                        numerictextbox.enable(true);
+                        $('input[id^="quotation_request_form_lamination_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $('input[id^="quotation_request_form_lamination_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
                     } else {
-                            $('input[id^="quotation_request_form_lamination_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $('input[id^="quotation_request_form_lamination_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#quotation_request_form_lamination_type_joints").val('0').attr("disabled", true);
-                            $('input[id^="quotation_request_form_flute_type_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', true);
-                            });
-                            $("#quotation_request_form_flute_type_other").val('').attr('disabled', true);
-                            $('input[id^="quotation_request_form_flute_material_"]').each(function(){
-                                $(this).attr('checked', false).attr('disabled', true);
-                            });
-                            $("#quotation_request_form_flute_material_other").val('').attr('disabled', true);
-                            $("#quotation_request_form_lamination_remark").val('').attr("disabled", true);
-                            $("#generate_flute_size").empty();
-                            $("#generate_flute_size").append('(W)<input id="generate_flute_width_" size="5" type="text" disabled="true" name="generate_flute_width[1][val]">');
-                            $("#generate_flute_size").append('(L)<input id="generate_flute_length_" size="5" type="text" disabled="true" name="generate_flute_length[1][val]">');
-                            $("#mould_no, #window_no").empty();
-                            $("#mould_no").append('<input class="mould_no_" size="10" type="text" name="mould_no[1][val]" disabled="disabled"/>');
-                            $("#window_no").append('<input class="window_no_" size="10" type="text" name="window_no[1][val]" disabled="disabled"/>');
+                        var numerictextbox = $("#quotation_request_form_lamination_type_joints").data("kendoNumericTextBox");
+                        numerictextbox.value('0');
+                        numerictextbox.enable(false);
+                        $('input[id^="quotation_request_form_lamination_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $('input[id^="quotation_request_form_lamination_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $('input[id^="quotation_request_form_flute_type_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', true);
+                        });
+                        $("#quotation_request_form_flute_type_other").val('').attr('disabled', true);
+                        $('input[id^="quotation_request_form_flute_material_"]').each(function(){
+                            $(this).attr('checked', false).attr('disabled', true);
+                        });
+                        $("#quotation_request_form_flute_material_other").val('').attr('disabled', true);
+                        $("#quotation_request_form_lamination_remark").val('').attr("disabled", true);
+                        $("#generate_flute_size").empty();
+                        $("#generate_flute_size").append('(W)<input id="generate_flute_width_" style="width:80px;" class="lamination_precision_2" type="text" disabled="true" name="generate_flute_width[1][val]">');
+                        $("#generate_flute_size").append('(L)<input id="generate_flute_length_" style="width:80px;" class="lamination_precision_2" type="text" disabled="true" name="generate_flute_length[1][val]">');
+                        $("#mould_no, #window_no").empty();
+                        $("#mould_no").append('<input class="mould_no_ k-textbox" type="text" name="mould_no[1][val]" disabled="disabled"/>');
+                        $("#window_no").append('<input class="window_no_ k-textbox" type="text" name="window_no[1][val]" disabled="disabled"/>');
+                        
+                        $(".lamination_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" }); 
                     }
                     break;
 
                 /* Stamping Fieldset */    
                 case 4:
                     if (checked == true){
-                             $('input[id^="stamping_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#stamping_other").val('').attr('disabled', false);
-                            $("#quotation_request_form_stamping_per_box").val('').attr('disabled', false);
-                            $("#quotation_request_form_stamping_width").val('').attr('disabled', false);
-                            $("#quotation_request_form_stamping_length").val('').attr('disabled', false);
+                        var numerictextbox = $("#quotation_request_form_stamping_per_box").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(true);
+                        $('input[id^="stamping_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#stamping_other").val('').attr('disabled', false);
+                        $("#quotation_request_form_stamping_width").val('').attr('disabled', false);
+                        $("#quotation_request_form_stamping_length").val('').attr('disabled', false);
                     } else {
-                            $('input[id^="stamping_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#stamping_other").val('').attr('disabled', true);
-                            $("#quotation_request_form_stamping_per_box").val('').attr('disabled', true);
-                            $("#quotation_request_form_stamping_width").val('').attr('disabled', true);
-                            $("#quotation_request_form_stamping_length").val('').attr('disabled', true);
+                        var numerictextbox = $("#quotation_request_form_stamping_per_box").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(false);
+                        $('input[id^="stamping_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#stamping_other").val('').attr('disabled', true);
+                        $("#generate_stamping_size").empty();
                     }
                     break;            
 
                 /* Die Cut Fieldset */   
                 case 5:
                     if (checked == true){
-    //                        var joint = $("quotation_request_form_lamination_type_joints").val();
-    //                        alert(joint);
+                        $('input[id^="die_cut_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $('input[id^="quotation_request_form_die_cut_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#other_die_cut").val('').attr('disabled', false);
+                        $('input[id^="quotation_request_form_window_shape_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#window_shape_other").val('').attr('disabled', false);
 
-                            $('input[id^="die_cut_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $('input[id^="quotation_request_form_die_cut_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#other_die_cut").val('').attr('disabled', false);
-                            $('input[id^="quotation_request_form_window_shape_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#window_shape_other").val('').attr('disabled', false);
-                            
-                            $('input[name^="mould_no"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $('input[name^="window_no"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
+                        $('input[name^="mould_no"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $('input[name^="window_no"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
                     } else {
-                            $('input[id^="die_cut_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $('input[id^="quotation_request_form_die_cut_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#other_die_cut").val('').attr('disabled', true);
-                            $('input[id^="quotation_request_form_window_shape_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#window_shape_other").val('').attr('disabled', true);
-                            
-                            $('input[name^="mould_no"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $('input[name^="window_no"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
+                        $('input[id^="die_cut_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $('input[id^="quotation_request_form_die_cut_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#other_die_cut").val('').attr('disabled', true);
+                        $('input[id^="quotation_request_form_window_shape_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#window_shape_other").val('').attr('disabled', true);
+                        $('input[name^="mould_no"]').each(function(){
+                            $(this).val('');
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $('input[name^="window_no"]').each(function(){
+                            $(this).val('');
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
                     }
                     break;
 
                 /* Window Fieldset */   
                 case 6:
                     if (checked == true){
-                            $('input[id^="quotation_request_form_window_patching_false"]').attr("checked", false).attr("disabled", false);
-                            $('input[id^="quotation_request_form_window_patching_true"]').attr("checked", false).attr("disabled", false);
+                        $('input[id^="quotation_request_form_window_patching_false"]').attr("checked", false).attr("disabled", false);
+                        $('input[id^="quotation_request_form_window_patching_true"]').attr("checked", false).attr("disabled", false);
                     } else {
-                            $('input[id^="quotation_request_form_window_patching_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $('input[id^="quotation_request_form_window_patching_type_plain_film"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#quotation_request_form_pre_print_textbox").val('').attr('disabled', true);
-                            $("#other_window_patching").val('').attr('disabled', true);
-                            $("#quotation_request_form_window_width").val('').attr('disabled', true);
-                            $("#quotation_request_form_window_length").val('').attr('disabled', true);
-                            $("#quotation_request_form_window_usage").val('').attr('disabled', true);
+                        $('input[id^="quotation_request_form_window_patching_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $('input[id^="quotation_request_form_window_patching_type_plain_film"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#quotation_request_form_pre_print_textbox").val('').attr('disabled', true);
+                        $("#other_window_patching").val('').attr('disabled', true);
+                        $("#quotation_request_form_window_width").val('').attr('disabled', true);
+                        $("#quotation_request_form_window_length").val('').attr('disabled', true);
+                        $("#quotation_request_form_window_usage").val('').attr('disabled', true);
                     }
                     break;
 
                 /* Glueing Fieldset */ 
                 case 7:
                     if (checked == true){
-                            $('input[id^="glueing_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#glueing_text").val('').attr('disabled', false);
-                            $("#quotation_request_form_glueing_material").val('').attr('disabled', false);
+                        $('input[id^="glueing_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#glueing_text").val('').attr('disabled', false);
+                        $("#quotation_request_form_glueing_material").val('').attr('disabled', false);
                     } else {
-                            $('input[id^="glueing_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#glueing_text").val('').attr('disabled', true);
-                            $("#quotation_request_form_glueing_material").val('').attr('disabled', true);
+                        $('input[id^="glueing_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#glueing_text").val('').attr('disabled', true);
+                        $("#quotation_request_form_glueing_material").val('').attr('disabled', true);
                     }
                     break;
 
                 /* Packing Fieldset */ 
                 case 8:
                     if (checked == true){
-                            $('input[id^="quotation_request_form_packing_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#quotation_request_form_packing_type_other").val('').attr('disabled', false);
-                            $("#quotation_request_form_packed_quantity").val('0').attr('disabled', false);
+                        var numerictextbox = $("#quotation_request_form_packed_quantity").data("kendoNumericTextBox");
+                        numerictextbox.value('0');
+                        numerictextbox.enable(true);
+                        $('input[id^="quotation_request_form_packing_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#quotation_request_form_packing_type_other").val('').attr('disabled', false);
                     } else {
-                            $('input[id^="quotation_request_form_packing_type_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#quotation_request_form_packing_type_other").val('').attr('disabled', true);
-                            $("#quotation_request_form_packed_quantity").val('0').attr('disabled', true);
+                        var numerictextbox = $("#quotation_request_form_packed_quantity").data("kendoNumericTextBox");
+                        numerictextbox.value('0');
+                        numerictextbox.enable(false);
+                        $('input[id^="quotation_request_form_packing_type_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#quotation_request_form_packing_type_other").val('').attr('disabled', true);
                     }
                     break;
 
                 /* Collating Fieldset */     
                 case 11:
                     if (checked == true){
-                            $('input[id^="quotation_request_form_collect_sequence_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", false);
-                            });
-                            $("#quotation_request_form_collating_no").val('0').attr('disabled', false);
-                            $("#sequent_no").empty();
+                        var numerictextbox = $("#quotation_request_form_collating_no").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(true);
+                        $('input[id^="quotation_request_form_collect_sequence_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", false);
+                        });
+                        $("#sequent_no").empty();
                     } else {
-                            $('input[id^="quotation_request_form_collect_sequence_"]').each(function(){
-                                $(this).attr("checked", false).attr("disabled", true);
-                            });
-                            $("#quotation_request_form_collating_no").val('0').attr('disabled', true);
-                            $("#sequent_no").empty();
+                        var numerictextbox = $("#quotation_request_form_collating_no").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(false);
+                        $('input[id^="quotation_request_form_collect_sequence_"]').each(function(){
+                            $(this).attr("checked", false).attr("disabled", true);
+                        });
+                        $("#sequent_no").empty();
                     }
                     break;
 
                 /* MOQ Fieldset */ 
                 case 12:
                     if (checked == true){
-                            $("#quotation_request_form_no_of_moq").val('').attr('disabled', false);
-                            $("#quantity_no").empty();
-                            $("#pricing").empty();
-                            $("#quotation_request_form_remarks").val('').attr('disabled', false);
+                        var numerictextbox = $("#quotation_request_form_no_of_moq").data("kendoNumericTextBox");
+                        numerictextbox.value('0');
+                        numerictextbox.enable(true);
+                        $("#quantity_no").empty();
+                        $("#pricing").empty();
+                        $("#quotation_request_form_remarks").val('').attr('disabled', false);
                     } else {
-                            $("#quotation_request_form_no_of_moq").val('').attr('disabled', true);
-                            $("#quantity_no").empty();
-                            $("#pricing").empty();
-                            $("#quotation_request_form_remarks").val('').attr('disabled', true);
+                        var numerictextbox = $("#quotation_request_form_no_of_moq").data("kendoNumericTextBox");
+                        numerictextbox.value('0');
+                        numerictextbox.enable(false);
+                        $("#quantity_no").empty();
+                        $("#pricing").empty();
+                        $("#quotation_request_form_remarks").val('').attr('disabled', true);
                     }
                     break;
 
                 /* Custom Fieldset */ 
                 case 13:
                     if (checked == true){
-                            $("#quotation_request_form_custom_stock_code").val('').attr('disabled', false);
-                            $("#quotation_request_form_box_part_no").val('').attr('disabled', false);
-                            $("#quotation_request_form_lot_size_no").val('').attr('disabled', false);
-                            $("#lot_size").empty();
+                        var numerictextbox = $("#quotation_request_form_lot_size_no").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(true);
+                        $("#quotation_request_form_custom_stock_code").val('').attr('disabled', false);
+                        $("#quotation_request_form_custom_stock_code").focus();
+                        $("#quotation_request_form_box_part_no").val('').attr('disabled', false);
+                        $("#lot_size").empty();
                     } else {
-                            $("#quotation_request_form_custom_stock_code").val('').attr('disabled', true);
-                            $("#quotation_request_form_box_part_no").val('').attr('disabled', true);
-                            $("#quotation_request_form_lot_size_no").val('').attr('disabled', true);
-                            $("#lot_size").empty();
+                        var numerictextbox = $("#quotation_request_form_lot_size_no").data("kendoNumericTextBox");
+                        numerictextbox.value('');
+                        numerictextbox.enable(false);
+                        $("#quotation_request_form_custom_stock_code").val('').attr('disabled', true);
+                        $("#quotation_request_form_box_part_no").val('').attr('disabled', true);
+                        $("#lot_size").empty();
                     }
                     break;
 
                 default:break;
             }
         });
+        
+        // QR - Function
+        $("#run_size").click(function() { 
+            var acc_a = acc_b = 0;
+            var paper_width_a  = paper_width_b = $("#quotation_request_form_paper_width").val();        
+            var paper_length_a = paper_length_b = $("#quotation_request_form_paper_length").val();
+            var ra             = $("#quotation_request_form_ratio").val();
+
+            if (paper_length_a != 0 && paper_width_a != 0){
+                $("#get_size").show();
+                $("#calculate_size").html('');
+
+                if (paper_width_a <= 200){
+                    $("#paper_size").css({'width': paper_length_a * 2}).css({'height': paper_width_a * 2});
+                } else if (paper_width_a > 200 && paper_width_a <= 400){
+                    $("#paper_size").css({'width': paper_length_a}).css({'height': paper_width_a});
+                } else if (paper_width_a > 400 && paper_width_a <= 800){
+                    $("#paper_size").css({'width': paper_length_a / 2}).css({'height': paper_width_a / 2});
+                } else if (paper_width_a > 800 && paper_width_a <= 1200){
+                    $("#paper_size").css({'width': paper_length_a / 3}).css({'height': paper_width_a / 3});
+                } else if (paper_width_a > 1200 && paper_width_a <= 1600){
+                    $("#paper_size").css({'width': paper_length_a / 4}).css({'height': paper_width_a / 4});
+                } else if (paper_width_a > 1600 && paper_width_a <= 2000){
+                    $("#paper_size").css({'width': paper_length_a / 5}).css({'height': paper_width_a / 5});
+                } else {
+                    $("#paper_size").css({'width': paper_length_a}).css({'height': paper_width_a});
+                }
+
+                //OPTION A
+                $("#calculate_size").append('<div><input id="option_size_option_b" type="radio" value="option_b" name="option_size" checked="checked"> OPTION A - (W / Ratio)</div>');
+
+                $("#calculate_size").append('<table>');
+
+                for(var i = ra; 0 < i; i--) {
+                    if (paper_width_b % i === 0){
+                        acc_b = (paper_width_b / i);
+                    } else {
+                        acc_b = parseInt(paper_width_b / i) + 1;
+                    }
+
+                    $("#calculate_size").append(
+                      '<tr>' +
+                      '<td>' + '(W)' + '</td><td>' + '<input id="printing_width_b_" class="printsize_precision_2" style="width:80px;" value="' + acc_b.toFixed(2) + '" type="text" name="printing_width_b[' + i + '][val]">' + '</td>' +
+                      '<td>' + '(L)' + '</td><td>' + '<input id="printing_length_b_" class="printsize_precision_2" style="width:80px;" value="' + paper_length_b + '" type="text" name="printing_length_b[' + i + '][val]">' + '</td>' +
+                      '<td align="right">' + 'UPS:' + '</td><td>' + '<input id="printing_no_of_ups_b_" class="printsize_precision_2" style="width:80px;" value="0" type="text" name="printing_no_of_ups_b[' + i + '][val]">' + '</td>' +
+                      '</tr>'
+                    );
+
+                    paper_width_b = paper_width_b - acc_b;
+                }
+
+                $("#calculate_size").append('<tr><td colspan="4"></td><td>' + 'Total UPS: ' + '</td><td id="auto_total_ups_b" align=center>0</td></tr>');
+                $("#calculate_size").append('</table>');
+
+
+                //OPTION B
+                $("#calculate_size").append('<div><input id="option_size_option_a" type="radio" value="option_a" name="option_size"> OPTION B - (L / Ratio) </div>');
+
+                $("#calculate_size").append('<table>');
+
+                for(var i = ra; 0 < i; i--) {
+                    if (paper_length_a % i === 0){
+                        acc_a = (paper_length_a / i);
+                    } else {
+                        acc_a = parseInt(paper_length_a / i) + 1;
+                    }
+
+                    $("#calculate_size").append(
+                      '<tr>' +
+                      '<td>' + '(W)' + '</td><td>' + '<input id="printing_width_a_" class="printsize_precision_2" style="width:80px;" value="' + paper_width_a + '" type="text" name="printing_width_a[' + i + '][val]">' + '</td>' +
+                      '<td>' + '(L)' + '</td><td>' + '<input id="printing_length_a_" class="printsize_precision_2" style="width:80px;" value="' + acc_a.toFixed(2) + '" type="text" name="printing_length_a[' + i + '][val]">' + '</td>' +
+                      '<td align="right">' + 'UPS:' + '</td><td>' + '<input id="printing_no_of_ups_a_" class="printsize_precision_2" style="width:80px;" value="0" type="text" name="printing_no_of_ups_a[' + i + '][val]">' + '</td>' + 
+                      '</tr>'
+                    );
+
+                    paper_length_a = paper_length_a - acc_a;
+                }
+
+                $("#calculate_size").append('<tr><td colspan="4"></td><td>' + 'Total UPS: ' + '</td><td id="auto_total_ups_a" align="center">0</td></tr>');
+                $("#calculate_size").append('</table>'); 
+            } else {
+                alert("Please enter the Paper Size.");
+            }
+            
+            $(".printsize_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" });
+        });
+
           
           
-          
-          
-          
-        var validator = $("#quotation_form").kendoValidator().data("kendoValidator")
+        var validator = $("#valid_quotation_requisition").kendoValidator().data("kendoValidator");
         status = $(".alert_msg");
 
         $("#save_button").click(function() {
             if (validator.validate()) {
-              
-            } else {
-              alert("Oop, there is invalid data in the form.");
-            }
+               $('*').css('cursor','progress');   
+               $.ajax({  
+                 type: "POST",
+                 url: "/quotation_request_forms",
+                 success: function(){  
+                   $('*').css('cursor','default');   
+                 }  
+               });
+            } 
+            else { alert("Oop, there is invalid data in the form."); }
         });
         
         
