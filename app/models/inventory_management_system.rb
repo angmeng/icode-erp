@@ -391,7 +391,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   PRICE_CONTROL_LISTING                              = 254
   PRICE_CONTROL_SHOW                                 = 247
-#  PRICE_CONTROL_EDIT                                 = 248
+  PRICE_CONTROL_EDIT                                 = 248
   PRICE_CONTROL_DROP_KIV                             = 249
   PRICE_CONTROL_PRINTABLE                            = 250
   
@@ -408,7 +408,30 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_RECEIPT_PRINTABLE                         = 267
   
   
+ 
+  #start at 271
+
+  #====== ====== report ===== =====
+  PURCHASE_REQUISITION_REPORT                       = 300
+
+  PURCHASE_ORDER_REPORT                             = 301
+
+  PRODUCT_REPORT                                    = 302
   
-  #start at 273
+  INVENTORY_REPORT                                  = 303
+
+  RECEIVE_NOTE_REPORT                               = 304
+
+  DELIVERY_ORDER_REPORT                             = 305
+
+  SALES_ORDER_REPORT                                = 306
+
+  ACCOUNT_REPORT                                    = 307
+
+  SALES_TAX_EXEMPTION_REPORT                        = 308
+
+  LISTING_REPORT                                    = 309
+
+
   #kai kean use 300-400
 end

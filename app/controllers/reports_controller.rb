@@ -392,13 +392,6 @@ end
                                 :type => 'application/pdf' ,
                                 :disposition => "attachement" )
       end
-     elsif params[:commit] == "Show"
-      if params[:doc_ids].present?
-        @detail_do_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
-        respond_to do |format|
-          format.html
-        end
-      end
     elsif params[:commit] == "Print Invoice Report"
       if params[:doc_ids].present?
        @detail_invoice_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
@@ -415,6 +408,10 @@ end
 
   def pdf_delivery_order_summary_report
     render :text => "ABC 123"
+  end
+
+  def pdf_sales_order_listing_report
+    render :text => "abc 123"
   end
 
   # ======================================= end of pdf ============================================
@@ -539,6 +536,11 @@ end
   def delivery_order_summary_report
     @delivery_order_summary_report = DeliveryOrderItem.search(params[:search])
     @show_delivery_order_summary_report = @delivery_order_summary_report.all
+  end
+
+  def sales_order_listing_report
+    @sales_order_listing_report = SalesOrderItem.search(params[:search])
+    @show_sales_order_listing_report = @sales_order_listing_report.all
   end
 
   

@@ -9,6 +9,13 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def self.testing
+  	html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+        @kit = PDFKit.new(html)
+        send_data(@kit.to_pdf,  :filename => "pdf_delivery_order_report.pdf",
+                                :type => 'application/pdf' ,
+                                :disposition => "attachement" )
+    end
 
   
 end
