@@ -110,6 +110,44 @@ def excel_receive_note_report
     redirect_to receive_note_report_reports_path
   end
 end
+     
+
+    # if params[:inventory_ids].present?
+    #    @detail_inventory_report = InventoryHistory.find(params[:inventory_ids])
+    #    respond_to do |format|
+    #    format.html
+    #    # format.json { render json: @detail_inventory_report}
+    #    format.pdf {
+    #      @kit = PDFKit.new(html)
+    #      # send_data(@kit.to_pdf ,:filename => "pdf_inventory_report.pdf" ,
+    #      #                       :type => 'application/pdf' , 
+    #      #                       :disposition => "attachement" )
+    #    }
+    #   end
+    #  else
+    #    #flash[:alert]="please check the checkbox"
+    #    redirect_to inventory_report_reports_path 
+    # end
+
+  # if params[:commit] == "Excel report"
+    
+    #    if params[:inventory_ids].present?
+        
+    #    @excel_inventory_report = InventoryHistory.find(params[:inventory_ids])
+    # render :text => @excel_inventory_report.to_
+    #   respond_to do |format|
+    #     format.html
+    #     format.csv { render text: @excel_product_report.to_csv}
+    #     format.xls 
+    #    end
+    #   end
+    #   else
+    #   flash[:alert]="please check the checkbox"
+    #    redirect_to inventory_report_reports_path
+#       end
+#      end
+# end
+
 
 def pdf_pr_report
 #render :text => params[:pr_ids].to_json
@@ -197,6 +235,8 @@ def pdf_product_report
   end
 end
 
+
+
 def pdf_inventory_report 
     if params[:commit] == "PDF Report"
       if params[:in_ids].present?
@@ -224,46 +264,6 @@ def pdf_inventory_report
 end
      
 
-    # if params[:inventory_ids].present?
-    #    @detail_inventory_report = InventoryHistory.find(params[:inventory_ids])
-    #    respond_to do |format|
-    #    format.html
-    #    # format.json { render json: @detail_inventory_report}
-    #    format.pdf {
-    #      @kit = PDFKit.new(html)
-    #      # send_data(@kit.to_pdf ,:filename => "pdf_inventory_report.pdf" ,
-    #      #                       :type => 'application/pdf' , 
-    #      #                       :disposition => "attachement" )
-    #    }
-    #   end
-    #  else
-    #    #flash[:alert]="please check the checkbox"
-    #    redirect_to inventory_report_reports_path 
-    # end
-
-  
-
-    # if params[:commit] == "Excel report"
-    
-    #    if params[:inventory_ids].present?
-        
-    #    @excel_inventory_report = InventoryHistory.find(params[:inventory_ids])
-    # render :text => @excel_inventory_report.to_
-    #   respond_to do |format|
-    #     format.html
-    #     format.csv { render text: @excel_product_report.to_csv}
-    #     format.xls 
-    #    end
-    #   end
-    #   else
-    #   flash[:alert]="please check the checkbox"
-    #    redirect_to inventory_report_reports_path
-#       end
-#      end
-# end
-
-
-
 def pdf_sales_tax_exemption_report
   if params[:commit] == "PDF Report"
     if params[:ste_ids].present?
@@ -275,6 +275,18 @@ def pdf_sales_tax_exemption_report
                               :disposition => "attachement" )
      
     end
+  # elsif params[:commit] == "Print Invoice"
+  #   if params[:ste_ids].present?
+  #     @detail_invoice_report = SalesTaxExemption.find(params[:ste_ids])
+  #     respond_to do |format|
+  #       format.html
+  #     # html = render_to_string(:layout => false , :action => "pdf_invoice_report.html.erb")
+  #     #   @kit = PDFKit.new(html)
+  #     #   send_data(@kit.to_pdf , :filename => "pdf_invoice_report.pdf" ,
+  #     #                           :type => 'application/pdf',
+  #     #                           :disposition => "attachement" )
+  #   end
+  # end
     elsif params[:commit] == "Show"
       if params[:ste_ids].present?
         @detail_sales_tax_exemption_report = SalesTaxExemption.find(params[:ste_ids])
@@ -370,6 +382,43 @@ end
       end  
   end
 
+  def pdf_do_so_documentation_report
+    if params[:commit] == "Print D/O Report"
+       if params[:doc_ids].present?
+       @detail_delivery_order_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
+       html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+        @kit = PDFKit.new(html)
+        send_data(@kit.to_pdf,  :filename => "pdf_delivery_order_report.pdf",
+                                :type => 'application/pdf' ,
+                                :disposition => "attachement" )
+      end
+     elsif params[:commit] == "Show"
+      if params[:doc_ids].present?
+        @detail_do_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
+        respond_to do |format|
+          format.html
+        end
+      end
+    elsif params[:commit] == "Print Invoice Report"
+      if params[:doc_ids].present?
+       @detail_invoice_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
+       html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+        @kit = PDFKit.new(html)
+        send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
+                                :type => 'application/pdf' ,
+                                :disposition => "attachement" )
+      end
+      else
+      redirect_to delivery_order_report_reports_path
+    end
+  end
+
+  def pdf_delivery_order_summary_report
+    render :text => "ABC 123"
+  end
+
+  # ======================================= end of pdf ============================================
+
   # def pdf_purchase_by_creditor_report
   #   if params[:purchase_ids].present?
   #     @detail_purchase_by_creditor_report = PurchaseRequisitionItem.find(params[:search])
@@ -460,13 +509,17 @@ end
   def inventory_report
     @inventory_report = InventoryHistory.search(params[:search])
     @show_inventory_report = @inventory_report.all
+    respond_to do |format|
+      format.html
+      format.json { render json: ProductsDatatable.new(view_context) }
+    end
     #@take_ids = @show_inventory_report.map(&:id)
   end
 
-  def delivery_order
-    @delivery_order_report = DeliveryOrderItem.search(params[:search])
-    @show_delivery_order_report = @delivery_order_report.all
-  end
+  # def delivery_order
+  #   @delivery_order_report = DeliveryOrderItem.search(params[:search])
+  #   @show_delivery_order_report = @delivery_order_report.all
+  # end
 
   def sales_order_summary_report
     @sales_order_summary_report = SalesOrderItem.search(params[:search])
@@ -477,6 +530,18 @@ end
     @so_customer_po_detail_report = SalesOrderItem.search(params[:search])
     @show_so_customer_po_detail_report = @so_customer_po_detail_report.all
   end
+
+  def do_so_documentation_report
+    @do_so_documentation_report = DeliveryOrderItem.search(params[:search])
+    @show_do_so_documentation_report = @do_so_documentation_report.all
+  end
+
+  def delivery_order_summary_report
+    @delivery_order_summary_report = DeliveryOrderItem.search(params[:search])
+    @show_delivery_order_summary_report = @delivery_order_summary_report.all
+  end
+
+  
  
 end   
 

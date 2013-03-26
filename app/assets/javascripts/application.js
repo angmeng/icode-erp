@@ -64,16 +64,25 @@ $(document).ready(function () {
 //    $("#treeview").kendoTreeView().height(popup_content_height);  
     $("#treeview").kendoTreeView();
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
-    
-    
-    $('#jdataTable').dataTable({
-         "sPaginationType": "full_numbers",
-//         "bJQueryUI": true,
-//         "bProcessing": true,
-//         "bServerSide": true,
-         "sScrollY": popup_content_height
-    });
-         
+
+
+  $('#products').dataTable({
+        "sPaginationType": "full_numbers",  // "bPaginate": false,
+        "bJQueryUI": true,
+        "bProcessing": true,
+        //"bServerSide": true,
+        //"sAjaxSource": $('#products').data('source'),
+        "oLanguage": {
+                "sZeroRecords":  "No ids found.",
+                "sSearch": "Search all columns:"
+            }
+        // "bLengthChange": false,
+        // "bFilter": true,
+        // "bSort": false,
+        // "bInfo": false,   //exp :showing 1 of 15 pages 
+        //"bAutoWidth": true
+        
+     });
 
     // When it is popup...
     // We setting the time out because IE9 really damn high time speed, so we delay time to 0.1s

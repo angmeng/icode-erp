@@ -6,6 +6,7 @@
       <th>Old Effective Date</th>
       <th>New Unit Price</th>
       <th>New Effective Date</th>
+      <th width="100">Action</th>
     </tr>
   </thead>
 
@@ -41,6 +42,7 @@
           <%= text_field_tag   "datarow[0][new_eff_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Eff Date" %>
           <span class="k-invalid-msg" data-for="datarow[0][new_eff_date]"></span>
         </td>
+        <td align="center"><%= remove_row_button  %></td>
       </tr>
 
     <% end %>

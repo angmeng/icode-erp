@@ -1,11 +1,20 @@
 $(document).ready(function() {
     
-    $("#menu").kendoMenu({ openOnClick: true });
+    $("#menu").kendoMenu({openOnClick: true});
       
     $('#checkall:checkbox').change(function () {
         if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
         else $('input:checkbox').removeAttr('checked');
-    });	 
+    });	
+    
+    $("table.target_table").on('click','.remove_datarow',function(event){
+        event.preventDefault();
+        if ($(this).parents('table').find('tr').length >  2) { 
+            $(this).closest('tr').remove();
+        }else{
+            alert ('Must have at least one row!')
+        }
+    });
     
     $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
     $("#panelbar").kendoPanelBar({expandMode: "single"});
@@ -13,16 +22,15 @@ $(document).ready(function() {
     $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
     
     $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
-//    $('input[class^="kendo_date_multiple"]').kendoDatePicker({ format: "dd-MM-yyyy" });
-    $('input[class^="mkendo_date"]').kendoDatePicker({ format: "dd-MM-yyyy" });
-    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({ format: "dd-MM-yyyy" }); 
-    $("#kendo_combobox, #kendo_combobox_two, .mkendo_combobox").kendoComboBox({filter: "contains"});
-    $("#kendo_price").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
+    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({format: "dd-MM-yyyy"}); 
+    $(".mkendo_combobox").kendoComboBox({filter: "contains"});
+    $("#kendo_price").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     
-    $(".kendo_precision_6").kendoNumericTextBox({ min: 0, decimals: 6, format: "n6" });
-    $(".kendo_precision_4").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
-    $(".kendo_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" });
-    $(".kendo_precision_0").kendoNumericTextBox({ min: 0, decimals: 0, format: "n0" });
+    $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
+    $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+    $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
+    $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
     
     // Just autocomplete all suppliers only
     $("#autoComplete_suppliers").kendoAutoComplete({    
@@ -466,6 +474,11 @@ $(document).ready(function() {
         }
     });
     
+    $("#add_row_button").click(function(){
+       addTableRow($("table.target_table"));
+       return false; 
+    });
+    
     $("#add_bottom_row_for_price_control").click(function(){
         // add new row to table using addTableRow function
         addTableRow_for_price_control($("table.target_table"));
@@ -545,24 +558,6 @@ function put_product_description(sel){
     });
 }
 
-//function change_description(sel){
-//    var product_desc = sel.value;
-//    $.ajax({
-//        dataType: "json",
-//        cache: false,
-//        url: '/products/look_product_desc?desc=' + product_desc,
-//        timeout: 2000,
-//        success: function(data){ 
-//            if (data){
-//                $("#data_um").html(data.um);
-//                $(".put_produtct_id").val(data.id.toString()).attr("selected", "selected");
-//            } else {
-//                alert("Description has unmatched..")
-//            }
-//        }
-//    });
-//}
-
 
 
 function getCombo_tradecompany_code(sel) {
@@ -590,7 +585,7 @@ function getCombo_pr_company(sel) {
         type: "GET",
         dataType: "json",
         url: '/purchase_requisition_items/product_vendor_unit_price_in_pr',
-        data: { product_id: sel_product, vendor_id: sel_vendor },
+        data: {product_id: sel_product, vendor_id: sel_vendor},
         success: function(response){                    
             if (response){
                 var price = parseFloat(response.unit_price);
@@ -845,7 +840,7 @@ function generate_stamping_box(sel) {
                 $("#generate_stamping_size").append('(W) <input id="stamping_width_" class="stamping_precision_2" style="width:80px;" type="text" name="stamping_width[' + i + '][val]">');
                 $("#generate_stamping_size").append('(L) <input id="stamping_length_" class="stamping_precision_2" style="width:80px;" type="text" name="stamping_length[' + i + '][val]"><br/>');
             }
-            $(".stamping_precision_2").kendoNumericTextBox({ min: 0, decimals: 2, format: "n2" }); 
+            $(".stamping_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"}); 
         } else {
             $("#generate_stamping_size").empty();
         }
@@ -879,8 +874,8 @@ function dropdown_moq(sel) {
         for(var i = 1; i <= seq; i++) {
             $("#pricing").append('<input id="pricing_" class="moq_precision_4" style="width: 80px;" type="text" name="pricing[' + i + '][price]">');
         }
-        $(".moq_precision_0").kendoNumericTextBox({ min: 0, decimals: 0, format: "n0" }); 
-        $(".moq_precision_4").kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
+        $(".moq_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"}); 
+        $(".moq_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     } else {
         alert("No of MOQ should be less than or equal to 10.");
     }
@@ -952,7 +947,7 @@ function compare_printing_width_n_length(os){
             var origin = parseFloat($("#quotation_request_form_paper_width").val());
             var sum_width_b = 0;
             $('input[id^="printing_width_b_"]').each(function() {
-                if(!isNaN(this.value) && this.value.length!=0) { sum_width_b += parseInt(this.value); }                    
+                if(!isNaN(this.value) && this.value.length!=0) {sum_width_b += parseInt(this.value);}                    
             })
             
             if (origin.toFixed(2) >= sum_width_b.toFixed(2) ){
@@ -964,7 +959,7 @@ function compare_printing_width_n_length(os){
             var origin = parseFloat($("#quotation_request_form_paper_length").val());
             var sum_length_a = 0;
             $('input[id^="printing_length_a_"]').each(function() {
-                if(!isNaN(this.value) && this.value.length!=0) { sum_length_a += parseInt(this.value); }                    
+                if(!isNaN(this.value) && this.value.length!=0) {sum_length_a += parseInt(this.value);}                    
             })
 
             if ( origin.toFixed(2) >= sum_length_a.toFixed(2) ){
@@ -1073,25 +1068,26 @@ function price_control_add(id){
 function price_control_data(sel) {
     var number = sel.name.match(/\[(\d+)\]/);
     var number = parseInt(number[1], 10);
-    var product_id = sel.options[sel.selectedIndex].value; ;
+    var product_id = sel.options[sel.selectedIndex].value;
     var company_id = $("select.price_control_trade_company_id option:selected").val();
     
     if (company_id){
         $.ajax({
             type: "GET",
             dataType: "json",
-            cache: false,
             url: '/price_controls/take_old_unit_price_and_eff_date',
-            data: { 'company_id' : company_id, 'product_id' : product_id },
+            data: {'company_id' : company_id, 'product_id' : product_id},
             success: function(data){ 
                 
                 var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
                 var sellPrice = data.selling_price;
+                var value_date = '#datarow_' + number + '_old_eff_date';
+                var html_date  = '#old_date_' + number;
+                var value_sellPrice = '#datarow_' + number + '_old_unit_price';
+                var html_sellPrice  = '#old_up_' + number;
                 
                 if (myDate){
                     var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
-                    value_date = '#datarow_' + number + '_old_eff_date';
-                    html_date  = '#old_date_' + number;
                     $(value_date).val(k_date);
                     $(html_date).html(k_date);
                 } else {
@@ -1101,8 +1097,6 @@ function price_control_data(sel) {
                 
                 if (sellPrice){
                     var f_num = parseFloat(sellPrice).toFixed(4);  
-                    value_sellPrice = '#datarow_' + number + '_old_unit_price';
-                    html_sellPrice  = '#old_up_' + number;
                     $(value_sellPrice).val(f_num);
                     $(html_sellPrice).html(f_num);
                 } else {
@@ -1128,7 +1122,7 @@ function price_control_data_when_company(sel) {
             dataType: "json",
             cache: false,
             url: '/price_controls/take_old_unit_price_and_eff_date',
-            data: { 'company_id' : company_id, 'product_id' : product_id },
+            data: {'company_id' : company_id, 'product_id' : product_id},
             success: function(data){ 
                 
                 var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
@@ -1163,11 +1157,10 @@ function price_control_data_when_company(sel) {
     }
 }
 
-
 function product_customer_data(sel){
     var number = sel.name.match(/\[(\d+)\]/);
     var number = parseInt(number[1], 10);
-    var product_id = sel.options[sel.selectedIndex].value; ;
+    var product_id = sel.options[sel.selectedIndex].value;;
     var company_id = $("select.sales_order_trade_company_id option:selected").val();
     
     if (company_id.length > 0){
@@ -1176,7 +1169,7 @@ function product_customer_data(sel){
             dataType: "json",
             cache: false,
             url: '/product_customers/take_data',
-            data: { 'company_id' : company_id, 'product_id' : product_id },
+            data: {'company_id' : company_id, 'product_id' : product_id},
             success: function(data){ 
                 
                 var sellPrice = data.selling_price;
@@ -1203,13 +1196,59 @@ function product_customer_data(sel){
 function addTableRow(table)
 {
     var $tr = $(table).find("tbody tr:last").clone(false);
-    
-    datarow_id_and_name($tr);
-    
+    datarow_all_attributes($tr);
     $(table).find("tbody tr:last").after($tr);
-    
-    
+    running_kendoui();
 };
+
+function datarow_all_attributes(tr){
+    
+    tr.find('[name^=datarow]').attr('name', function() {
+        var index = this.name.match(/\[(\d+)\]/);
+        if (index != null && index.length > 1) {
+            var newIndex = parseInt(index[1], 10) + 1;
+            return this.name.replace(/\[(\d+)\]/, '[' + newIndex + ']');
+        }
+        return this.name;
+    });
+    
+    tr.find('[name^=datarow]').attr('id', function() {
+        var index_two = this.id.match(/\_(\d+)\_/);
+        if (index_two != null && index_two.length > 1) {
+            var newIndex = parseInt(index_two[1], 10) + 1;
+            return this.id.replace(/\_(\d+)\_/, '_' + newIndex + '_');
+        }
+        return this.id;  
+    });
+    
+    tr.find('[id^=old_date]').attr('id', function() {
+        var index_three = this.id.match(/\_(\d+)/);
+        if (index_three != null && index_three.length > 1) {
+            var newIndex = parseInt(index_three[1], 10) + 1;
+            return this.id.replace(/\_(\d+)/, '_' + newIndex);
+        }
+        return this.id;
+    });
+    
+    tr.find('[id^=old_date]').html('');
+    
+    tr.find('[id^=old_up]').attr('id', function() {
+        var index_four = this.id.match(/\_(\d+)/);
+        if (index_four != null && index_four.length > 1) {
+            var newIndex = parseInt(index_four[1], 10) + 1;
+            return this.id.replace(/\_(\d+)/, '_' + newIndex);
+        }
+        return this.id;   
+    });
+    
+    tr.find('[id^=old_up]').html('');
+}
+
+function running_kendoui(){
+    $('select[class^="mkendo_combobox"]').kendoComboBox({filter: "contains"});
+    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+}
 
 function datarow_id_and_name(tr){
     tr.find('[name^=datarow]').attr('name', function() {
@@ -1258,8 +1297,8 @@ function addTableRow_for_price_control(table){
     $(table).find("tbody tr:last").after($tr);
     
     $('select[class^="mkendo_combobox"]').kendoComboBox({filter: "contains"});
-    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({ min: 0, decimals: 4, format: "n4" });
-    $('input[class^="mkendo_date"]').kendoDatePicker({ format: "dd-MM-yyyy" });
+    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
 };
 
 function addTableRow_for_sales_order(table)

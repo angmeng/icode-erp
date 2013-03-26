@@ -1,4 +1,4 @@
-<table id="grid_h295" class="white-line-table target_table">
+<table class="white-line-table target_table">
   <thead>
     <tr style="background-color: gainsboro;">
       <th>Product ID</th>
@@ -12,20 +12,7 @@
 
   <tbody>
     <% if sales_order.sales_order_items.present? %>
-
-      <%# price_control.price_control_items.each_with_index do |item, index| %>
     
-        <!--tr class="<%#= cycle('odd_line', 'even_line') %>">     
-          
-          <td align="center" width="400"><%#= select_tag       "datarow[#{index}][product_id]", options_for_select(product_finish_goods_with_combobox, item.product_id), :include_blank => true, :id => "kendo_combobox", :style => "width: 400px;", :onchange => "product_data(this)" %></td>
-          <td align="center" width="150"></td>
-          <td align="center" width="150"></td>
-          <td align="center" width="150"><%#= text_field_tag   "datarow[#{index}][new_unit_price]", four_precision(item.new_unit_price), :id => "kendo_price" %></td>
-          <td align="center" width="150"><%#= text_field_tag   "datarow[#{index}][new_eff_date]", item.new_eff_date.strftime("%d-%m-%Y"), :id => "kendo_date"  %></td>   
-          
-        </tr-->
-    
-      <%# end %>
 
     <% else %>
       

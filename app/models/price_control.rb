@@ -38,13 +38,12 @@ class PriceControl < ActiveRecord::Base
     if data.present?
       data.each do |key, content|
         p_control = price_control.price_control_items.build(:product_id => content[:product_id], :old_unit_price => content[:old_unit_price], :old_eff_date => content[:old_eff_date], :new_unit_price => content[:new_unit_price], :new_eff_date => content[:new_eff_date])
-        if p_control.valid? 
-          return true
-        else
+        unless p_control.valid?
           return false, msg = p_control.errors.full_messages
           break;
         end
       end  
+      return price_control
     end
   end
   

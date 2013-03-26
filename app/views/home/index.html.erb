@@ -224,11 +224,11 @@
 
         <!--td rowspan="2"><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
 
-        <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
-          <td><%= link_to "Sales Order Entry", new_sales_order_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
-        <% else %>
-          <td class="disabled_button">Sales Order Entry</td>
-        <% end %>
+        <%# if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
+          <!--td><%#= link_to "Sales Order Entry", new_sales_order_path, :class => "show_without_refresh_page_1600x900 k-button", "data-fancybox-type" => "iframe" %></td-->
+        <%# else %>
+          <!--td class="disabled_button">Sales Order Entry</td-->
+        <%# end %>
 
         <!--td><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
 
@@ -238,12 +238,12 @@
           <%#*<td>Production</td>%>
         <%# end %>
 
-        <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+        <!--td><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
 
         <% if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
-          <td><%= link_to "SO transactions & Histories", sales_orders_path,:class => "k-button" %></td>
+          <td><%= link_to "Sales Orders Data", sales_orders_path,:class => "k-button" %></td>
         <% else %>
-          <td class="disabled_button">SO transactions & Histories</td>
+          <td class="disabled_button">Sales Orders Data</td>
         <% end %>
       </tr>
 

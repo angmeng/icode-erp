@@ -1,3 +1,15 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
+    <td><%= link_to "New Sales Order", new_sales_order_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %></td>
+  <% else %>
+    <td class="disabled_button">New Sales Order</td>
+  <% end %>
+</div>
+
+<!--div class="center_icon_tag">
+  <div class="digg_pagination"><%#= will_paginate @users, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div-->
+
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::SO_TRANSACTION_SHOW) %>

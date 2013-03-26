@@ -1,0 +1,267 @@
+<div class="invoice_layout">
+
+<% if @detail_invoice_documentation_report.present? %>
+<% @detail_invoice_documentation_report.each_with_index do |p , index| %>
+	<div>
+	<table style="width:100%">
+		<tr>
+			<td style="width:11cm;">
+					<div class="part1" style="margin-left:70px;"><%= p.delivery_order.trade_company.name %> /
+						<%= p.delivery_order.trade_company.address_1 %>
+					</div>
+				
+				
+			</td>
+			<td style="width:1cm;"></td>
+			<td style="width:8cm;">
+				<div>
+					<div style="margin-left:4.5cm;margin-bottom:1cm;">
+					<div><%= p.delivery_order.do_no rescue'-' %></div>
+					<div><%= p.delivery_order.do_date rescue'-' %></div>
+					<div><%= p.delivery_order.trade_term.name rescue'-' %></div>
+					<div><%= p.delivery_order.currency.name rescue'-' %></div>
+					<div><%= p.delivery_order.sales_rep rescue'-' %></div>
+					<div><%= p.delivery_order.transport.name rescue'-' %></div>
+				</div>
+				</div>
+				
+			</td>
+		</tr>
+	</table>
+	</div>
+	<br />
+	<div style="margin-left:5cm;">
+		<div>
+			<% if p.delivery_order.present? %>
+				<% if p.delivery_order.trade_company.present? %>
+					<% if p.delivery_order.trade_company.sales_tax_licence_no.present? %>
+						<%= p.delivery_order.trade_company.sales_tax_licence_no rescue'-'%>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div>
+			<% if p.delivery_order.present? %>
+				<% if p.delivery_order.sales_tax_exemption.present? %>
+					<%= p.delivery_order.sales_tax_exemption rescue'-' %>
+				<%else%>
+						&nbsp;
+				<%end%>
+			<%end%>
+		</div>
+		<div>
+			<% if p.delivery_order.present? %>
+				<% if p.delivery_order.trade_company.present? %>
+					<% if p.delivery_order.trade_company.warehouse_licence_no.present? %>
+						<%= p.delivery_order.trade_company.warehouse_licence_no rescue'-' %>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div>
+			<% if p.delivery_order.present? %>
+				<% if p.delivery_order.trade_company.present? %>
+					<% if p.delivery_order.trade_company.mfg_warehouse_licence_no.present? %>
+						<%= p.delivery_order.trade_company.mfg_warehouse_licence_no rescue'-' %>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	
+
+	<table class="fix_h350_w100_bottom">	
+		<tr>
+			<th style="width:1%;"></th>
+			<th style="width:20%;"></th>
+			<th style="width:30%;"></th>
+			<th style="width:10%;"></th>
+			<th style="width:15%;"></th>
+			<th style="width:15%;"></th>
+			<th style="width:15%;"></th>
+		</tr>
+	    <tr>
+	      <td align="center"><%= index + 1 %></td>
+	      <td align="left"><%= p.client_lot rescue'-' %> / <%= p.client_po %></td>
+	      <td align="center"><%= p.part_no rescue'-' %></td>
+	      <td align="left"><%= p.no_of_carton rescue'-' %></td>
+	      <td align="center"><%= p.delivery_qty rescue'-' %></td>
+	      <td align="right"><%= p.unit_price rescue'-' %></td>
+	      <td align="right"><%= iproduct(p.delivery_qty, p.unit_price) %></td>
+	    </tr>
+	
+	</table>
+
+
+
+	<% end %>
+
+	<% elsif @detail_delivery_order_documentation_report.present? %>
+	<% @detail_delivery_order_documentation_report.each_with_index do |d , index| %>
+	<div>
+	<table style="width:100%">
+		<tr>
+			<td style="width:11cm;">
+					<div class="part1" style="margin-left:70px;"><%= d.delivery_order.trade_company.name %> /
+						<%= d.delivery_order.trade_company.address_1 %>
+					</div>
+				
+				
+			</td>
+			<td style="width:1cm;"></td>
+			<td style="width:8cm;">
+				<div>
+					<div style="margin-left:4.5cm;margin-bottom:1cm;">
+					<div><%= d.delivery_order.do_no rescue'-' %></div>
+					<div><%= d.delivery_order.do_date rescue'-' %></div>
+					<div><%= d.delivery_order.trade_term.name rescue'-' %></div>
+					<div><%= d.delivery_order.currency.name rescue'-' %></div>
+					<div><%= d.delivery_order.sales_rep rescue'-' %></div>
+					<div><%= d.delivery_order.transport.name rescue'-' %></div>
+				</div>
+				</div>
+				
+			</td>
+		</tr>
+	</table>
+	</div>
+	<br />
+	<div style="margin-left:5cm;">
+		<div>
+			<% if d.delivery_order.present? %>
+				<% if d.delivery_order.trade_company.present? %>
+					<% if d.delivery_order.trade_company.sales_tax_licence_no.present? %>
+						<%= d.delivery_order.trade_company.sales_tax_licence_no rescue'-'%>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div>
+			<% if d.delivery_order.present? %>
+				<% if d.delivery_order.sales_tax_exemption.present? %>
+					<%= d.delivery_order.sales_tax_exemption rescue'-' %>
+				<%else%>
+						&nbsp;
+				<%end%>
+			<%end%>
+		</div>
+		<div>
+			<% if d.delivery_order.present? %>
+				<% if d.delivery_order.trade_company.present? %>
+					<% if d.delivery_order.trade_company.warehouse_licence_no.present? %>
+						<%= d.delivery_order.trade_company.warehouse_licence_no rescue'-' %>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div>
+			<% if d.delivery_order.present? %>
+				<% if d.delivery_order.trade_company.present? %>
+					<% if d.delivery_order.trade_company.mfg_warehouse_licence_no.present? %>
+						<%= d.delivery_order.trade_company.mfg_warehouse_licence_no rescue'-' %>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<table class="fix_h350_w100_bottom">	
+		<tr>
+			<th style="width:1%;"></th>
+			<th style="width:20%;"></th>
+			<th style="width:30%;"></th>
+			<th style="width:10%;"></th>
+			<th style="width:15%;"></th>
+			<th style="width:15%;"></th>
+			<th style="width:15%;"></th>
+		</tr>
+	    <tr>
+	      <td align="center"><%= index + 1 %></td>
+	      <td align="left"><%= d.client_lot rescue'-' %> / <%= d.client_po %></td>
+	      <td align="center"><%= d.part_no rescue'-' %></td>
+	      <td align="left"><%= d.no_of_carton rescue'-' %></td>
+	      <td align="center"><%= d.delivery_qty rescue'-' %></td>
+	      <td align="right"><%#= d.unit_price rescue'-' %></td>
+	      <td align="right"><%#= iproduct(d.delivery_qty, d.unit_price) %></td>
+	    </tr>
+	
+	</table>
+
+
+
+		<% end %>
+	<% else %>
+		
+	<div>No Record Found</div>
+
+<% end %>
+
+
+</div>
+
+
+<style>
+
+table
+{
+width:100%;
+font-family:"Times New Roman";
+}
+th
+{
+height:20px;
+}
+
+.invoice_layout {
+  margin-top: 1.5cm;
+  margin-right: 10px;   
+  margin-bottom: 10px; 
+  margin-left: 10px;
+}
+
+.center_margin_rigth{
+	margin-right: 15cm;
+
+}
+
+/*table.center_margin_rigth td{
+	margin-left: 70px;
+}*/
+
+.part2 {
+  /*border-bottom: 4px;*/
+  /*border-style: solid;*/
+  height: 120px;
+  width: 100%;
+}
+
+.part1 {
+  height: 150px;
+  /*border-style: solid;*/
+  width: 100%;
+}
+
+.fix_h350_w100_bottom {
+    width:100%;
+    border-width: 350px;
+    
+    margin-top: 0cm;
+}
+
+.fix_h350_w100_bottom th{
+	height:50px;
+	
+}
+
+</style>

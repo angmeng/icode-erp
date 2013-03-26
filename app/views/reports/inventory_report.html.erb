@@ -1,12 +1,36 @@
-<div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
-<!--<input type="checkbox" name="all" id="checkall" />Check All-->
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
-  <div class="popup_content">
+ 
+          <!-- <table>
+            <%#= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
+            <tr>
+                    <td>Product ID :
+                    <%#= f.text_field :product_code_contains , :size => 9 %></td>
+                    <td>Description : 
+                    <%#= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
+                    <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
+                    <td>Transaction
+                      <%#= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
+
+            </tr>
+            <tr>
+                    <td><%#= submit_tag "Search" %></td>
+            </tr>
+            <%# end %>
+          </table>
+
+  <hr />
+ -->
+<input type="checkbox" name="all" id="checkall" />Check All
+
+  <div class="fix_1600x900_h450">
           <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
-                  <table id="jdataTable">
+          <table id="products" class="display" data-source="<%= inventory_report_reports_path(format: "json") %> ">
+
                     <thead>
                       <tr>
                         <th></th>
@@ -29,7 +53,7 @@
                        
                         <td align="center"><%= check_box_tag "in_ids[]" , pri.id %></td>
                         <td align="center"><%= index + 1 %></td>
-                        <td align="center"><%= render '/product_categories/join_product_category' , :pc => pri %></td>
+                        <td align="center"><%= render '/product_categories/join_product_category'  , :pc => pri %></td>
                         <td align="center"><%= pri.product.desc rescue '-' %></td>
                         <td align="center"><%= pri.stock_in rescue '-'%></td>
                         <td align="center"><%= pri.stock_out rescue '-'%></td>

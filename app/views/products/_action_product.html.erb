@@ -17,6 +17,11 @@
     <% else %>
       <%= not_link_parent_folder %>
     <% end %>
+    <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %>
+      <%= link_to "New Product Price Control", new_price_control_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %>
+    <% else %>
+      <span class="k-button">New Product Price Control</span>
+    <% end %>
   <% else %>
     -
   <% end %>

@@ -6,7 +6,6 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_MENU, checkboxes.include?(InventoryManagementSystem::SO_MENU), :disabled => true %> SALES ORDER</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY, checkboxes.include?(InventoryManagementSystem::SO_ENTRY), :disabled => true %>SO Entry</td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_ADD, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_ADD), :disabled => true %></td>
-          <td><%#= "save" %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_SHOW, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_EDIT, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_EDIT), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_KIV, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_KIV), :disabled => true %></td>
@@ -18,7 +17,7 @@
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM), :disabled => true %>SO KIV Items</td>
-          <td></td><td><%#= "save" %></td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_RECOVER), :disabled => true %></td>
@@ -29,7 +28,7 @@
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION), :disabled => true %>SO Transactions & Histories</td>
-          <td></td><td><%#= "save" %></td>
+          <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_SHOW), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_EDIT), :disabled => true %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_KIV), :disabled => true %></td>
@@ -43,7 +42,6 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_MENU, checkboxes.include?(InventoryManagementSystem::SO_MENU) %> SALES ORDER</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY, checkboxes.include?(InventoryManagementSystem::SO_ENTRY) %>SO Entry</td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_ADD, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_ADD) %></td>
-          <td><%#= "save" %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_SHOW, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_EDIT, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_EDIT) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_KIV, checkboxes.include?(InventoryManagementSystem::SO_ENTRY_KIV) %></td>
@@ -55,7 +53,7 @@
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM) %>SO KIV Items</td>
-          <td></td><td><%#= "save" %></td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_RECOVER) %></td>
@@ -66,7 +64,7 @@
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION) %>SO Transactions & Histories</td>
-          <td></td><td><%#= "save" %></td>
+          <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_EDIT) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::SO_TRANSACTION_KIV) %></td>
@@ -82,7 +80,6 @@
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_MENU %> SALES ORDER</td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY %>SO Entry</td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_ADD %></td>
-          <td><%#= "save" %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_SHOW %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_EDIT %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_ENTRY_KIV %></td>
@@ -94,7 +91,7 @@
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM %>SO KIV Items</td>
-          <td></td><td><%#= "save" %></td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER %></td>
@@ -105,7 +102,7 @@
           <td></td>
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION %>SO Transactions & Histories</td>
-          <td></td><td><%#= "save" %></td>
+          <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_SHOW %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_EDIT %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_TRANSACTION_KIV %></td>

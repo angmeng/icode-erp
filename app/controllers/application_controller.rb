@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   helper_method :perihal_barang_both
     
   def version
-    "Version 0.2.8"
+    "Version 0.2.9"
   end
     
   def company

@@ -564,14 +564,44 @@ module ApplicationHelper
       "Remove"
     end
   end
+  
+  def remove_row_button
+#    link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();", :class => "k-button"
+    link_to "Remove", "#", :class => "remove_datarow k-button"
+  end
+  
+  def add_row_button(name)
+    link_to "#{name}", "#", :id => "add_row_button", :class => "k-button font_bold"
+  end
 
   def not_link_excel
     content_tag :span, :class => "k-button", :style => "color:grey ; background-color: white;" do 
       "Excel"
     end 
   end
-    
-    
+  
+  def nothing_link(name)
+    content_tag :span, :class => "k-button", :style => "color:grey ; background-color: white; cursor: default;" do 
+      "#{name}"
+    end
+  end
+  
+  def title_head(name)
+    content_tag :div, :class => "title_head" do
+      content_tag :strong, :style => "color:white;" do
+        "#{name}"
+      end
+    end
+  end
+  
+  def title_head_with_search_engine(name)
+    content_tag :div, :class => "title_head" do
+      content_tag :strong, :style => "color:white;" do
+        "#{name}"
+      end
+      search_button
+    end
+  end
     
     
   def link_delete(linked)

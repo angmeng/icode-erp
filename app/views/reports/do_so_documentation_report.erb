@@ -1,0 +1,69 @@
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">D/O Invoice REPORT</strong></div>
+
+<input type="checkbox" name="all" id="checkall" />Check All
+
+  <div class="fix_1600x900_h450">
+    <%= form_tag pdf_do_so_documentation_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+    <table id="products" class="display">
+      <%#*data-source="<%= pdf_do_so_documentation_report_reports_path(format: "json") %> 
+              <thead>
+                <tr class="header_line">
+                  <th></th>
+                  <th>Date</th>
+                  <th>Trade Company</th>
+                  <th>Currency</th>
+                  <th>Term</th>
+                  <th>Sales Tax</th>
+                  <th>Sales Tax No.</th>
+                  <th>Sales Rep.</th>
+                  <!-- <th>Term</th>
+                  <th>Carton</th> -->
+                  <%#*<th>Quantity</th>%>
+                </tr>
+              </thead>
+          <tbody>
+
+            <% @show_do_so_documentation_report.each_with_index do |doc , index| %>
+    
+              <tr class="<%= cycle("odd_line", "even_line") %>">
+               
+                <td align="center"><%= check_box_tag "doc_ids[]" , doc.id %></td>
+                <td align="center"><%= index + 1 %></td>
+                <td align="center"><%= doc.delivery_order.do_date rescue '-' %></td>
+                <td align="center"><%= doc.delivery_order.trade_company.name rescue '-' %> / 
+                  <%= doc.delivery_order.trade_company.address_1 rescue'-' %></td>
+                <td align="center"><%= doc.delivery_order.trade_company.trade_term.name rescue'-' %></td>
+                <td align="center"><%= doc.delivery_order.sales_tax_exemption_no rescue'-' %></td>
+                <td align="center"><%= doc.delivery_order.trade_company.sales_tax_no rescue'-'%></td>
+                <td align="center"><%= doc.delivery_order.sales_rep rescue'-'%></td>
+                
+                <!-- <td align="center"><%= doc.delivery_order.trade_term.name rescue'-' %></td>
+                <td align="center"><%= doc.no_of_carton rescue '-' %></td> -->
+                      
+              </tr>
+                  <% end %>
+              </tbody>
+            </table>
+    </div>
+
+</div>
+          
+
+    <div class="icon_tag" style="float:left">
+      <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
+      <span><%= submit_tag "Print Invoice Report" , :class =>"k-button" %></span>
+    </div>
+
+    <div class="icon_tag" style="float:right;">
+
+      <span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
+      <span><%= not_link_edit %></span>
+      <span><%= not_link_recover %></span>
+      <span><%= submit_tag "Print D/O Report" , :class => "k-button" %></span>
+      <% end %>
+
+      <%= link_close_button %>
+    </div>
+
+

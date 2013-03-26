@@ -45,7 +45,7 @@ gem "omniauth"
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'rabl'
-gem "will_paginate", "~> 3.0.4"
+gem "will_paginate"
 gem "pdfkit"
 gem "squeel"
 gem "meta_search"

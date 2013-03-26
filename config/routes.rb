@@ -29,13 +29,13 @@ Merp::Application.routes.draw do
   resources :product_running_numbers
   resources :stock_outs
 
+
   resources :reports do
     collection do
+    get "delivery_order_summary_report"
     get "pr_report"
     get "price_report"
     get "po_report"
-    #get "po_detail_report"
-    #get "fg_transaction_cw"
     get "sales_tax_exemption_report"
     get "sales_order_summary_report"
     get "sales_cj5_summary_co_report"
@@ -47,6 +47,7 @@ Merp::Application.routes.draw do
     get "customer_report"
     get "receive_note_report"
     get "rn_part_summary_report"
+    get "do_so_documentation_report"
 
     get "pdf_sales_tax_exemption_report"
     get "pdf_sales_order_summary_report"
@@ -58,6 +59,7 @@ Merp::Application.routes.draw do
     get "pdf_receive_note_report"
     get "pdf_sales_cj5_summary_co_report"
     get "pdf_so_customer_po_detail_report"
+    get "pdf_do_so_documentation_report"
 
     get "excel_sales_cj5_summary_co_report"
     get "excel_product_report"

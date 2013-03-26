@@ -2,7 +2,6 @@
   <strong style="color:white;">PRODUCT PRICE CONTROLS DATA</strong>
   <%= search_button %>
 </div>
-<div><%= render "search_price_control" %></div>
 
 <% if @price_controls.present? %>
   <div class="table_background"><%= render "listing_price_controls", :listing => @price_controls %></div>
