@@ -20,20 +20,29 @@ class ProductsDatatable
 	  @total_objects = DeliveryOrderItem.count :include => [:user], :conditions => conditions
 	end
 
+
 	def datatable_columns(column_id)
-	  case column_id.to_i
-	  when 1
-	    return "objects.description"
-	  when 2
-	    return "objects.created_at"
-	  else
-	    return "users.name"
-	  end
+	  
+case column_id.to_i
+    when 2
+      return "objects.do_date"
+    when 3
+      return "objects.delivery_order.do_date"
+    when 4
+      return "objects.delivery_order.trade_company.name"
+    when 5
+      return "objects.delivery_order.trade_company.trade_term.name"
+    when 6
+      return "objects.delivery_order.sales_tax_exemption_no"
+    when 7
+      return "objects.delivery_order.trade_company.sales_tax_no"     
+    else
+      return "objects.delivery_order.sales_rep"
 	end
 
 	def conditions
 	  conditions = []
-	  conditions << "(objects.description ILIKE '%#{params[:sSearch]}%' OR users.name ILIKE '%#{params[:sSearch]}%')" if(params[:sSearch])
+	  conditions << "(objects.do_date ILIKE '%#{params[:sSearch]}%' OR users.name ILIKE '%#{params[:sSearch]}%')" if(params[:sSearch])
 	  return conditions.join(" AND ")
 	end
 end
