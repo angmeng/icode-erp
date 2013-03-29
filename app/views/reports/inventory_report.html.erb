@@ -87,6 +87,7 @@
           <%#*</fieldset>%>
 
     <div class="icon_tag" style="float:left">
+      <%# if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_EXCEL) %>
       <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
     </div>
 

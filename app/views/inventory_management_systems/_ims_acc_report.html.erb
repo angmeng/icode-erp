@@ -1,0 +1,157 @@
+<% if checkboxes.present? %>
+
+    <% if action_name == "show" %>
+    <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::ACCOUNT_REPORT_MENU), :disabled => true %> Account Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT), :disabled => true %> AC Receivable Sales Journal</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_EXCEL), :disabled => true %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT), :disabled => true %>Debtor Sales Journal</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_EXCEL), :disabled => true %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT), :disabled => true %>Invoice Summary</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_EXCEL), :disabled => true %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT), :disabled => true %>CN/DN/OR Period</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_EXCEL), :disabled => true %></td>
+	</tr>
+
+	<% else %>  <!-- edit part -->
+
+	<tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::ACCOUNT_REPORT_MENU) %> Account Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT) %> AC Receivable Sales Journal</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_EXCEL) %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT) %>Debtor Sales Journal</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_EXCEL) %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT) %>Invoice Summary</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_EXCEL) %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT) %>CN/DN/OR Period</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_EXCEL) %></td>
+	</tr>
+
+	<% end %>
+
+	<% else %>  <!-- new part -->
+
+	<tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_REPORT_MENU %> Account Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT %> AC Receivable Sales Journal</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_EXCEL %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT %>Debtor Sales Journal</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_EXCEL %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT %>Invoice Summary</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_INVOICE_SUMMARY_REPORT_EXCEL %></td>
+	</tr>
+
+	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT %>CN/DN/OR Period</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_EXCEL %></td>
+	</tr>
+
+	<% end %>

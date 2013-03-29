@@ -1,0 +1,373 @@
+ <% if checkboxes.present? %>
+
+    <% if action_name == "show" %>
+    <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU), :disabled => true %> Purchase Order Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT), :disabled => true %> Purchase Order Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT), :disabled => true %> PO Purchase Received Parts </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT), :disabled => true %> Purchase Part ETA Inquire</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT), :disabled => true %> PO Vendor</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT), :disabled => true %> PO Department </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT), :disabled => true %> PO Outstanding Vendor </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT), :disabled => true %> PO Outstanding Overall </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT), :disabled => true %> PO Price History </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT), :disabled => true %> PO Product Information </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT), :disabled => true %> PO Daily Iquire</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+
+  	<% else %>   <!-- edit part  -->
+
+  	<tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU) %> Purchase Order Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT) %> Purchase Order Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_PRINT)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT) %> PO Purchase Received Parts </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT) %> Purchase Part ETA Inquire</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT) %> PO Vendor</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_VENDOR_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT) %> PO Department </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_DEPARTMENT_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT) %> PO Outstanding Vendor </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT) %> PO Outstanding Overall </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT)%> PO Price History </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_PRINT)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_EXCEL)%></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT) %> PO Product Information </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_EXCEL) %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT) %> PO Daily Iquire</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_EXCEL) %></td>
+  	</tr>
+  <% end %>
+
+  <% else %>		<!-- new part  -->
+
+  <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU %> Purchase Order Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT %> Purchase Order Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_PRINT%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT %> PO Purchase Received Parts </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_SHOW%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_PRINT%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_RECEIVED_PARTS_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT %> Purchase Part ETA Inquire</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT, checkboxes %> PO Vendor</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_VENDOR_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT%> PO Department </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DEPARTMENT_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT %> PO Outstanding Vendor </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_SHOW%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_VENDOR_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT %> PO Outstanding Overall </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_OUTSTANDING_OVERALL_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT %> PO Price History </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRICE_HISTORY_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT %> PO Product Information </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_PRODUCT_INFORMATION_REPORT_EXCEL %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT %> PO Daily Iquire</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PO_DAILY_ETA_INQUIRE_REPORT_EXCEL %></td>
+  	</tr>
+
+<% end %>

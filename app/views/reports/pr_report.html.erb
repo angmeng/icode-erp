@@ -75,9 +75,13 @@
       <span><%= submit_tag "Show" , :class => "k-button" %></span>
       <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
       <span><%= not_link_recover %></span>
-      <span><%#= not_link_printable %><%#= link_to "PDF Report" , pdf_pr_report_reports_path(:pr_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %>
-      <%= submit_tag "PDF Report",:class => "k-button" %></span>
+      <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT) %>
+        <span><%= submit_tag "PDF Report",:class => "k-button" %></span>
+      <% else %>
+      <%= not_link_printable %>
+      
       <% end %>
+    <% end %>
     
 
 
