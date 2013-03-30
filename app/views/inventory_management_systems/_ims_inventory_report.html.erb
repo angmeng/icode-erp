@@ -1,0 +1,50 @@
+<% if checkboxes.present? %>
+
+    <% if action_name == "show" %>
+    <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_MENU), :disabled => true %> Inventory Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT), :disabled => true %> Inventory Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_EXCEL), :disabled => true %></td>
+	</tr>
+
+	<% else %>
+
+	<tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_MENU) %> Inventory Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT) %> Inventory Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_PRINT) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::INVENTORY_REPORT_EXCEL) %></td>
+	</tr>
+
+	<% end %>
+
+	<% else %>
+	<tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_MENU%> Inventory Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT %> Inventory Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_PRINT %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_REPORT_EXCEL %></td>
+	</tr>
+
+
+	<% end %>
+

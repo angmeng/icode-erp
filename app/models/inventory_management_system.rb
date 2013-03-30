@@ -414,27 +414,262 @@ class InventoryManagementSystem < ActiveRecord::Base
  
   #start at 279
 
-  #====== ====== report ===== =====
-  PURCHASE_REQUISITION_REPORT                       = 300
 
-  PURCHASE_ORDER_REPORT                             = 301
+  #====== ====== report ======= =======
+  PURCHASE_REQUISITION_REPORT_MENU                  = 300
 
-  PRODUCT_REPORT                                    = 302
+  #====== SUB MODULE REPORT ===== ======
+  PURCHASE_REQUISITION_REPORT                       = 301
+  PR_PURCHASE_BY_CREDITORS_REPORT                   = 302
+  PR_MONTHLY_PURCHASE_ANALYSIS                      = 303
+  PR_PURCHASE_PART_TRANSACTION                      = 304
+  PR_PROD_TYPE_PURC_BY_VENDOR                       = 305
+
+
+  #==== ACTION ======
+  PURCHASE_REQUISITION_REPORT_SHOW                  = 306
+  PURCHASE_REQUISITION_REPORT_PRINT                 = 307
+  PURCHASE_REQUISITION_REPORT_EXCEL                 = 308
+  PR_PURCHASE_BY_CREDITORS_REPORT_SHOW              = 309
+  PR_PURCHASE_BY_CREDITORS_REPORT_PRINT             = 310
+  PR_PURCHASE_BY_CREDITORS_REPORT_EXCEL             = 311
+  PR_MONTHLY_PURCHASE_ANALYSIS_SHOW                 = 312
+  PR_MONTHLY_PURCHASE_ANALYSIS_PRINT                = 313
+  PR_MONTHLY_PURCHASE_ANALYSIS_EXCEL                = 314
+  PR_PURCHASE_PART_TRANSACTION_SHOW                 = 315
+  PR_PURCHASE_PART_TRANSACTION_PRINT                = 316
+  PR_PURCHASE_PART_TRANSACTION_EXCEL                = 317
+  PR_PROD_TYPE_PURC_BY_VENDOR_SHOW                  = 318
+  PR_PROD_TYPE_PURC_BY_VENDOR_PRINT                 = 319
+  PR_PROD_TYPE_PURC_BY_VENDOR_EXCEL                 = 320
+
+  #===== ====== PO REPORT ====== =======
+  PURCHASE_ORDER_REPORT_MENU                        = 321
+
+  #===== ====== SUB MODULE REPORT===== ======
+  PURCHASE_ORDER_REPORT                             = 322
+  PO_PURCHASE_RECEIVED_PARTS_REPORT                 = 323
+  PO_PURCHASE_PART_ETA_INQUIRE_REPORT               = 324
+  PO_VENDOR_REPORT                                  = 325
+  PO_DEPARTMENT_REPORT                              = 326
+  PO_OUTSTANDING_VENDOR_REPORT                      = 327
+  PO_OUTSTANDING_OVERALL_REPORT                     = 328
+  PO_PRICE_HISTORY_REPORT                           = 329
+  PO_PRODUCT_INFORMATION_REPORT                     = 330
+  PO_DAILY_ETA_INQUIRE_REPORT                       = 331
+
+  #==== ACTION ======                                         #=====IGNOE PO EXCEL
+  PURCHASE_ORDER_REPORT_SHOW                        = 332
+  PURCHASE_ORDER_REPORT_PRINT                       = 333
+  PURCHASE_ORDER_REPORT_EXCEL                       = 334
+
+  PO_PURCHASE_RECEIVED_PARTS_REPORT_SHOW            = 335
+  PO_PURCHASE_RECEIVED_PARTS_REPORT_PRINT           = 336
+  PO_PURCHASE_RECEIVED_PARTS_REPORT_EXCEL           = 337
+
+  PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW          = 338
+  PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT         = 339
+  PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL         = 340
+
+  PO_VENDOR_REPORT_SHOW                             = 341
+  PO_VENDOR_REPORT_PRINT                            = 342
+  PO_VENDOR_REPORT_EXCEL                            = 343
+
+  PO_DEPARTMENT_REPORT_SHOW                         = 344
+  PO_DEPARTMENT_REPORT_PRINT                        = 345
+  PO_DEPARTMENT_REPORT_EXCEL                        = 346
+
+  PO_OUTSTANDING_VENDOR_REPORT_SHOW                 = 347
+  PO_OUTSTANDING_VENDOR_REPORT_PRINT                = 348
+  PO_OUTSTANDING_VENDOR_REPORT_EXCEL                = 349
+
+  PO_OUTSTANDING_OVERALL_REPORT_SHOW                = 350
+  PO_OUTSTANDING_OVERALL_REPORT_PRINT               = 351
+  PO_OUTSTANDING_OVERALL_REPORT_EXCEL               = 352
+
+  PO_PRICE_HISTORY_REPORT_SHOW                      = 353
+  PO_PRICE_HISTORY_REPORT_PRINT                     = 354
+  PO_PRICE_HISTORY_REPORT_EXCEL                     = 355
+
+  PO_PRODUCT_INFORMATION_REPORT_SHOW                = 356
+  PO_PRODUCT_INFORMATION_REPORT_PRINT               = 357
+  PO_PRODUCT_INFORMATION_REPORT_EXCEL               = 358
+
+  PO_DAILY_ETA_INQUIRE_REPORT_SHOW                  = 359
+  PO_DAILY_ETA_INQUIRE_REPORT_PRINT                 = 360
+  PO_DAILY_ETA_INQUIRE_REPORT_EXCEL                 = 361
+
+
+# PRINT SHOW EXCEL DO UNTIL HERE 
+
+  #===== ====== CUSTOM REPORT ====== ======
+  CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU            = 362
+
+  #==== ====== SUB MODULE REPORT ====== ========
+  CUSTOM_EXEMPTION_SUMMARY_REPORT                   = 363
+  CUSTOM_LIST_SALES_TAX_EXEMPTION_REPORT            = 364
+  CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT                = 365
+  CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT            = 366
+  CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT               = 367
+  CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT              = 368
+  CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT             = 369
+  CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT                 = 370
+
+  #===== ACTION =============
+  CUSTOM_EXEMPTION_SUMMARY_REPORT_SHOW              = 371
+  CUSTOM_EXEMPTION_SUMMARY_REPORT_PRINT             = 372
+  CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL             = 373
+
+  CUSTOM_LIST_STE_REPORT_SHOW                       = 374
+  CUSTOM_LIST_STE_REPORT_PRINT                      = 375
   
-  INVENTORY_REPORT                                  = 303
+  CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_SHOW           = 376
+  CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_PRINT          = 377
+  
+  CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_SHOW       = 378
+  CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_PRINT      = 379
 
-  RECEIVE_NOTE_REPORT                               = 304
+  CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_SHOW          = 380
+  CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_PRINT         = 381
 
-  DELIVERY_ORDER_REPORT                             = 305
+  CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_SHOW         = 382
+  CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT        = 383
 
-  SALES_ORDER_REPORT                                = 306
+  CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_SHOW        = 384
+  CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_PRINT       = 385
 
-  ACCOUNT_REPORT                                    = 307
+  CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_SHOW            = 386
+  CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_PRINT           = 387
 
-  SALES_TAX_EXEMPTION_REPORT                        = 308
+  #==== ===== INVENTORY REPORT ===== ======
+  RECEIVE_NOTE_REPORT_MENU                          = 388
 
-  LISTING_REPORT                                    = 309
+  #==== ==== SUB MODULE REPORT ====== =====
+  RECEIVE_NOTE_REPORT                               = 389
+  RN_COMPANY_SUMMARY_REPORT_REPORT                  = 390
+  RN_PART_SUMMARY_REPORT                            = 391
 
+  #==== ==== ACTION ==== ====
+  RECEIVE_NOTE_REPORT_SHOW                          = 392
+  RECEIVE_NOTE_REPORT_PRINT                         = 393
+  RECEIVE_NOTE_REPORT_EXCEL                         = 394
 
+  RN_COMPANY_SUMMARY_REPORT_REPORT_SHOW             = 395
+  RN_COMPANY_SUMMARY_REPORT_REPORT_PRINT            = 396
+  RN_PART_SUMMARY_REPORT_SHOW                       = 397
+  RN_PART_SUMMARY_REPORT_PRINT                      = 398
+
+  
+    #==== ==== DELIVERY ORDER REPORT ==== ====
+  DELIVERY_ORDER_REPORT_MENU                        = 399
+
+  #==== ==== SUB MODULE REPORT ==== ====
+  DO_INVOICE_DOCUMENTATION_REPORT                   = 400
+  DO_SUMMARY_REPORT                                 = 401
+  DO_UNKNOW_REPORT                                  = 402  #============ UNKNOW NAME REPORT
+
+  #==== ==== ACTION ==== ====
+  DO_SUMMARY_REPORT_SHOW                            = 403
+  DO_SUMMARY_REPORT_PRINT                           = 404  
+  DO_SUMMARY_REPORT_EXCEL                           = 405
+
+  DO_UNKNOW_REPORT_SHOW                             = 406
+  DO_UNKNOW_REPORT_PRINT                            = 407
+
+  DO_INVOICE_DOCUMENTATION_REPORT_SHOW              = 408
+  DO_INVOICE_DOCUMENTATION_REPORT_PRINT             = 409
+  
+  INVOICE_DOCUMENTATION_REPORT_PRINT                = 410
+ 
+  #==== ==== SALES ORDER REPORT ======= ======
+  SALES_ORDER_REPORT_MENU                           = 411
+
+  #==== ==== SUB MODULE REPORT ==== ====
+  SALES_ORDER_REPORT                                = 453  
+  SO_LISTING_REPORT                                 = 412
+  SO_SALES_ANALYSIS_REPORT                          = 413
+  SO_CUS_SUMMARY_REPORT                             = 414
+  SO_CUSTOMER_PO_DETAIL_REPORT                      = 415
+  SO_SALES_REPLENISHMENT_REPORT                     = 416
+
+  #==== ==== ACTION ==== ====
+  SO_REPORT_SHOW                                    = 454
+  SO_REPORT_PRINT                                   = 455 # UNTIL THIS NUMBER ***************
+
+  SO_LISTING_REPORT_SHOW                            = 417
+  SO_LISTING_REPORT_PRINT                           = 418
+
+  SO_SALES_ANALYSIS_REPORT_SHOW                     = 419
+  SO_SALES_ANALYSIS_REPORT_PRINT                    = 420
+
+  SO_CUS_SUMMARY_REPORT_SHOW                        = 421
+  SO_CUS_SUMMARY_REPORT_PRINT                       = 422
+
+  SO_CUSTOMER_PO_DETAIL_REPORT_SHOW                 = 423
+  SO_CUSTOMER_PO_DETAIL_REPORT_PRINT                = 424
+
+  SO_SALES_REPLENISHMENT_REPORT_SHOW                = 425
+  SO_SALES_REPLENISHMENT_REPORT_PRINT               = 426
+
+  #==== ==== ACCOUNT REPORT MENU ==== ====
+  ACCOUNT_REPORT_MENU                               = 427
+
+  #==== ==== ACCOUNT REPORT ==== ====
+  
+  ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT         = 428
+  ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT                = 429
+  ACCOUNT_INVOICE_SUMMARY_REPORT                     = 430
+  ACCOUNT_CN_DN_OR_PERIOD_REPORT                     = 431
+
+  #==== ==== ACTION ==== ==== 
+  ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW    = 432
+  ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_PRINT   = 433
+
+  ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW           = 434
+  ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT          = 435
+
+  ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW                = 436
+  ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT               = 437
+
+  ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW                = 438
+  ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT               = 439
+  
+
+  #==== ==== LISTING REPORT ==== ====
+  LISTING_REPORT_MENU                               = 440
+
+  #==== ==== SUB MODULE REPORT ==== ====
+  LISTING_PRODUCT_ID_REPORT                         = 441
+  LISTING_COMPANY_REPORT                            = 442
+  LISTING_CATEGORY_SUB_CATEGORY_REPORT              = 443
+  LISTING_PRICE_REPORT                              = 456 
+  LISTING_PRODUCT_CUSTOMER_REPORT                   = 444
+
+  #==== ==== ACTION ==== ====
+  LISTING_PRODUCT_ID_REPORT_SHOW                    = 445
+  LISTING_PRODUCT_ID_REPORT_PRINT                   = 446
+
+  LISTING_COMPANY_REPORT_SHOW                       = 447
+  LISTING_COMPANY_REPORT_PRINT                      = 448
+
+  LISTING_CATEGORY_SUB_CATEGORY_REPORT_SHOW         = 449
+  LISTING_CATEGORY_SUB_CATEGORY_REPORT_PRINT        = 450
+
+  LISTING_PRICE_REPORT_SHOW                         = 457
+  LISTING_PRICE_REPORT_PRINT                        = 458 
+
+  LISTING_PRODUCT_CUSTOMER_REPORT_SHOW              = 451
+  LISTING_PRODUCT_CUSTOMER_REPORT_PRINT             = 452
+
+#===== INVENTORY REPORT ==== ====
+  INVENTORY_REPORT_MENU                             = 459
+
+#==== ==== SUB MODULE REPORT ==== ====
+  INVENTORY_REPORT                                  = 460
+
+#==== ==== ACTION ==== ====
+  INVENTORY_REPORT_SHOW                             = 461
+  INVENTORY_REPORT_PRINT                            = 462
+  INVENTORY_REPORT_EXCEL                            = 463  # UNTIL THIS NUMBER ***************
   #kai kean use 300-500
 end

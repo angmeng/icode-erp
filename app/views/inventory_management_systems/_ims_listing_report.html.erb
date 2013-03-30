@@ -1,0 +1,193 @@
+<% if checkboxes.present? %>
+
+    <% if action_name == "show" %>
+    <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::LISTING_REPORT_MENU), :disabled => true %> 	Listing Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT), :disabled => true %> Product ID Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	 <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_COMPANY_REPORT), :disabled => true %> Listing Company Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_COMPANY_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_COMPANY_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT), :disabled => true %> Listing Category/Sub Category</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT), :disabled => true %> Listing Price </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT), :disabled => true %> Listing Product Customer </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<% else %>  <!-- EDIT PART -->
+
+  	 <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::LISTING_REPORT_MENU) %>Listing Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT) %> Product ID Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	 <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_COMPANY_REPORT) %> Listing Company Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_COMPANY_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_COMPANY_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT) %> Listing Category/Sub Category</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT) %> Listing Price </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT) %> Listing Product Customer </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+	<% end %> 
+
+	<% else %>  <!-- new part  -->
+
+	 <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_REPORT_MENU %> Listing Report Menu</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT %> Product ID Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	 <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT %> Listing Company Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_COMPANY_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT %> Listing Category/Sub Category</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_CATEGORY_SUB_CATEGORY_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::SO_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT %> Listing Price </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+  	<tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT %> Listing Product Customer </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_SHOW %></td>
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRODUCT_CUSTOMER_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::LISTING_PRICE_REPORT_EXCEL), :disabled => true %></td>
+  	</tr>
+
+
+<% end %>

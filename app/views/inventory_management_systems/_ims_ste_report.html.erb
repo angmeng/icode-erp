@@ -1,0 +1,337 @@
+ <% if checkboxes.present? %>
+
+    <% if action_name == "show" %>
+    <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU), :disabled => true %> STE Menu Report</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT), :disabled => true %> Exemption Summary Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_SALES_TAX_EXEMPTION_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_SALES_TAX_EXEMPTION_REPORT), :disabled => true %> Listing STE Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT), :disabled => true %> Sales CJ5 Summary Co Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT), :disabled => true %> Sales CJ5 Summary Period Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT), :disabled => true %> Sales CJ5 Summary CJ5 Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT), :disabled => true %> Sales CJ5 Summary Item Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT), :disabled => true %>Pure Summary Period Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+     <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT), :disabled => true %>Pure Summary CJ5 Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_PRINT), :disabled => true %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_EXCEL), :disabled => true %> </td>
+
+    </tr>
+
+    <% else %>  <!-- edit part -->
+
+    <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU) %> STE Menu Report</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT) %> Exemption Summary Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_PRINT)%> </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL) %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_SALES_TAX_EXEMPTION_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_SALES_TAX_EXEMPTION_REPORT)%> Listing STE Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW)%> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_EXCEL) %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT)%> Sales CJ5 Summary Co Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_PRINT)%> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_EXCEL) %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT) %> Sales CJ5 Summary Period Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_PRINT) %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_EXCEL) %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT) %> Sales CJ5 Summary CJ5 Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_PRINT) %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_EXCEL) %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT) %> Sales CJ5 Summary Item Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT) %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_EXCEL)%> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT) %>Pure Summary Period Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_PRINT)%> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_EXCEL)%> </td>
+
+    </tr>
+
+     <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT) %>Pure Summary CJ5 Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_SHOW, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_PRINT, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_PRINT) %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_EXCEL, checkboxes.include?(InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_EXCEL) %> </td>
+
+    </tr>
+
+    <% end %>
+    <% else %>  <!-- new part --> 
+
+     <tr>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU %> STE Menu Report</td>
+
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT %> Exemption Summary Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_PRINT %> </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_SALES_TAX_EXEMPTION_REPORT %> Listing STE Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_LIST_STE_REPORT_EXCEL %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT %> Sales CJ5 Summary Co Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CO_REPORT_EXCEL %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT %> Sales CJ5 Summary Period Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_PERIOD_REPORT_EXCEL %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT %> Sales CJ5 Summary CJ5 Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_CJ5_REPORT_EXCEL %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT %> Sales CJ5 Summary Item Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_SALES_CJ5_SUMMARY_ITEM_REPORT_EXCEL %> </td>
+
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT %>Pure Summary Period Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_PERIOD_REPORT_EXCEL %> </td>
+
+    </tr>
+
+     <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT %>Pure Summary CJ5 Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_PRINT %> </td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::CUSTOM_PURE_CJ5_SUMMARY_CJ5_REPOT_EXCEL %> </td>
+
+    </tr>
+
+
+<% end %>
+        <%# 10.times do |td| %>
+  
+
+
+    <%# elsif action_name == "" %>
+    
+
+
+<!--   LISTING_COMPANY_REPORT                            
+  LISTING_PRICE_REPORT                            
+  LISTING_CATEGORY_REPORT                           
+  LISTING_CUSTOMER_REPORT                           -->

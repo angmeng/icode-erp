@@ -38,20 +38,31 @@
     </div>
 
 </div>
-          
+    
 
     <div class="icon_tag" style="float:left">
+       <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_EXCEL) %>
       <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
+      <% else %>
+      <%= not_link_excel %>
+      <% end %>
       <span><%#= submit_tag "Print Invoice Report" , :class =>"k-button" %></span>
     </div>
 
     <div class="icon_tag" style="float:right;">
 
+    <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_SHOW) %>
       <span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
+      <% else %>
+        <%= not_link_show %>
+      <% end %>
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
+    <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_PRINT) %>
       <span><%= not_link_printable %><%#= submit_tag "Print D/O Report" , :class => "k-button" %></span>
-      <%# end %>
+        <% else %>
+        <%= not_link_printable %>
+      <% end %>
 
       <%= link_close_button %>
     </div>

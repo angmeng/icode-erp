@@ -52,7 +52,12 @@
 
     <div class="icon_tag" style="float:left">
       <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
-      <span><%= submit_tag "Print Invoice Report" , :class =>"k-button" %></span>
+
+      <% if roles.include?(InventoryManagementSystem::INVOICE_DOCUMENTATION_REPORT_PRINT) %>
+        <span><%= submit_tag "Print Invoice Report" , :class =>"k-button" %></span>
+      <% else %>
+        <%= not_link_printable %>
+      <% end %>
     </div>
 
     <div class="icon_tag" style="float:right;">
@@ -60,7 +65,11 @@
       <span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
-      <span><%= submit_tag "Print D/O Report" , :class => "k-button" %></span>
+        <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT_PRINT) %>
+          <span><%= submit_tag "Print D/O Report" , :class => "k-button" %></span>
+        <% else %>
+          <%= not_link_printable %>
+        <% end %>
       <% end %>
 
       <%= link_close_button %>
