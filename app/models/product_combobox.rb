@@ -9,13 +9,15 @@ class ProductCombobox < ActiveRecord::Base
   
   validates :product_id, :product_code, :uniqueness => true
   
-  default_scope order("product_code")
-  
   scope :fg_active ,where(:category_type => ProductCategory::FINISH_GOOD, :status => ProductCombobox::ACTIVE)
   scope :category, where(:category_type => ProductCategory::FINISH_GOOD)
   scope :db_active, where(:status => ProductCombobox::ACTIVE)
-  scope :db_active_both_operation, where("status = ?", ProductCombobox::ACTIVE).where("category_type =? or category_type = ?", ProductCategory::NON_OPERATION, ProductCategory::OPERATION)
   scope :db_active_finish_goods,   where("status = ?", ProductCombobox::ACTIVE).where(:category_type => ProductCategory::FINISH_GOOD)
+  scope :db_active_both_operation, where("status = ?", ProductCombobox::ACTIVE).where("category_type =? or category_type = ?", ProductCategory::NON_OPERATION, ProductCategory::OPERATION)
+  
+  default_scope order("product_code")
+  
+  self.per_page = 50
   
   def self.finish_goods
     category.db_active
@@ -37,7 +39,7 @@ class ProductCombobox < ActiveRecord::Base
   
   def self.qr_comboboxes
     combobox = self.db_active_finish_goods
-    mix = combobox.collect { |pcombo| ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id] }
+    mix = combobox.collect { |pcombo| ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id] }  # e.g [A0001] APPLE (M) SDN BHD
     return mix
   end
 end

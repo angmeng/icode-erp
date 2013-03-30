@@ -18,6 +18,19 @@
       </tr>
     <% end %>
       
+    <% if @field_id.include?(ProductField::UNIT_MEASURE) %>
+      <tr>
+        <td><b>U/M</b></td>
+        <td>
+          <% if product_id.unit_measurement.present? %>
+            <%= product_id.unit_measurement.code rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
     <% if @field_id.include?(ProductField::GSM) %>
       <tr>
         <td><b>GSM</b></td>
@@ -86,58 +99,6 @@
         </td>
       </tr>
     <% end %>
-      
-    <% if @field_id.include?(ProductField::UNIT_MEASURE) %>
-      <tr>
-        <td><b>U/M</b></td>
-        <td>
-          <% if product_id.unit_measurement.present? %>
-            <%= product_id.unit_measurement.code rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::ORIGIN) %>
-      <tr>   
-        <td><b>Origin</b></td>
-        <td>
-          <% if product_id.origin.present? %>
-            <%= product_id.origin rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::BRAND) %>
-      <tr>   
-        <td><b>Brand</b></td>
-        <td>
-          <% if product_id.brand.present? %>
-            <%= product_id.brand rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::GRADE) %>
-      <tr>   
-        <td><b>Grade</b></td>
-        <td>
-          <% if product_id.grade.present? %>
-            <%= product_id.grade rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
 
     <% if @field_id.include?(ProductField::PACKING_METHOD) %>
       <tr>   
@@ -185,6 +146,84 @@
         </td>
       </tr>
     <% end %>
+      
+    <% if @field_id.include?(ProductField::PART_WEIGHT) %>
+      <tr>
+        <td><b>Part Weight/pc</b></td>
+        <td>
+          <% if product_id.part_weight.present? %>
+            <%= six_precision(product_id.part_weight) rescue '-' %> g
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::EXP_DATE) %>
+      <tr>
+        <td><b>EXP Date</b></td>
+        <td>
+          <% if product_id.exp_date.present? %>
+            <%= product_id.exp_date.strftime("%d-%m-%Y") rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::MFG_DATE) %>
+      <tr>
+        <td><b>MFG Date</b></td>
+        <td>
+          <% if product_id.mfg_date.present? %>
+            <%= product_id.mfg_date.strftime("%d-%m-%Y") rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::ART_NO) %>
+      <tr>
+        <td><b>Art No</b></td>
+        <td>
+          <% if product_id.art_no.present? %>
+            <%= product_id.art_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::BAR_CODE) %>
+      <tr>
+        <td><b>Bar Code</b></td>
+        <td>
+          <% if product_id.bar_code.present? %>
+            <%= product_id.bar_code rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::BRAND) %>
+      <tr>   
+        <td><b>Brand</b></td>
+        <td>
+          <% if product_id.brand.present? %>
+            <%= product_id.brand rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
 
     <% if @field_id.include?(ProductField::BUFFER_STOCK) %>
       <tr>
@@ -198,35 +237,59 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::TARIF_CODE) %>
+      
+    <% if @field_id.include?(ProductField::CAPACITY) %>
       <tr>
-        <td><b>Tarif Code</b></td>
+        <td><b>Capacity</b></td>
         <td>
-          <% if product_id.tarif_code.present? %>
-            <%= product_id.tarif_code rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-        <!--td><b>Perihal Barang</b></td>
-        <td><%#= product_id.sales_tax_exemption.perihal_barang rescue '-' %></td-->
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::PART_WEIGHT) %>
-      <tr>
-        <td><b>Part Weight/pc</b></td>
-        <td>
-          <% if product_id.part_weight.present? %>
-            <%= six_precision(product_id.part_weight) rescue '-' %> g
+          <% if product_id.capacity.present? %>
+            <%= product_id.capacity rescue '-' %>
           <% else %>
             -
           <% end %>
         </td>
       </tr>
     <% end %>
-
+      
+    <% if @field_id.include?(ProductField::CATEGORY) %>
+      <tr>
+        <td><b>Category</b></td>
+        <td>
+          <% if product_id.category.present? %>
+            <%= product_id.category rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::COLOUR) %>
+      <tr>
+        <td><b>Colour</b></td>
+        <td>
+          <% if product_id.color.present? %>
+            <%= product_id.color rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::CONSIGNEE) %>
+      <tr>
+        <td><b>Consignee</b></td>
+        <td>
+          <% if product_id.consignee.present? %>
+            <%= product_id.consignee rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
     <% if @field_id.include?(ProductField::CONTAINER_NO) %>
       <tr>
         <td><b>Container No</b></td>
@@ -239,20 +302,7 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::SEAL_NO) %>
-      <tr>
-        <td><b>Seal No</b></td>
-        <td>
-          <% if product_id.seal_no.present? %>
-            <%= product_id.seal_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
+      
     <% if @field_id.include?(ProductField::DESPATCH_ADVISE) %>
       <tr>
         <td><b>Despatch Advise</b></td>
@@ -265,65 +315,78 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::SIZE) %>
+      
+    <% if @field_id.include?(ProductField::DESTINATION) %>
       <tr>
-        <td><b>Size</b></td>
+        <td><b>Destination</b></td>
         <td>
-          <% if product_id.size.present? %>
-            <%= product_id.size rescue '-' %>
+          <% if product_id.destination.present? %>
+            <%= product_id.destination rescue '-' %>
           <% else %>
             -
           <% end %>
         </td>
       </tr>
     <% end %>
-
+      
+    <% if @field_id.include?(ProductField::FILM_NO) %>
+      <tr>
+        <td><b>Film No</b></td>
+        <td>
+          <% if product_id.film_no.present? %>
+            <%= product_id.film_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::GRADE) %>
+      <tr>   
+        <td><b>Grade</b></td>
+        <td>
+          <% if product_id.grade.present? %>
+            <%= product_id.grade rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::ITEM_CODE) %>
+      <tr>
+        <td><b>Item Code</b></td>
+        <td>
+          <% if product_id.item_code.present? %>
+            <%= product_id.item_code rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::LOT_NO) %>
+      <tr>
+        <td><b>LOT #</b></td>
+        <td>
+          <% if product_id.lot_no.present? %>
+            <%= product_id.lot_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
     <% if @field_id.include?(ProductField::MODEL_NO) %>
       <tr>
         <td><b>Model No</b></td>
         <td>
           <% if product_id.model_no.present? %>
             <%= product_id.model_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::REORDER_NO) %>
-      <tr>
-        <td><b>Reorder No</b></td>
-        <td>
-          <% if product_id.reorder_no.present? %>
-            <%= product_id.reorder_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::ART_NO) %>
-      <tr>
-        <td><b>Art No</b></td>
-        <td>
-          <% if product_id.art_no.present? %>
-            <%= product_id.art_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::REF_NO) %>
-      <tr>
-        <td><b>Ref No</b></td>
-        <td>
-          <% if product_id.ref_no.present? %>
-            <%= product_id.ref_no rescue '-' %>
           <% else %>
             -
           <% end %>
@@ -343,111 +406,20 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::WORK_ORDER_NO) %>
-      <tr>
-        <td><b>Work Order No</b></td>
+      
+    <% if @field_id.include?(ProductField::ORIGIN) %>
+      <tr>   
+        <td><b>Origin</b></td>
         <td>
-          <% if product_id.work_order_no.present? %>
-            <%= product_id.work_order_no rescue '-' %>
+          <% if product_id.origin.present? %>
+            <%= product_id.origin rescue '-' %>
           <% else %>
             -
           <% end %>
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::MFG_DATE) %>
-      <tr>
-        <td><b>MFG Date</b></td>
-        <td>
-          <% if product_id.mfg_date.present? %>
-            <%= product_id.mfg_date.strftime("%d-%m-%Y") rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::EXP_DATE) %>
-      <tr>
-        <td><b>EXP Date</b></td>
-        <td>
-          <% if product_id.exp_date.present? %>
-            <%= product_id.exp_date.strftime("%d-%m-%Y") rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::FILM_NO) %>
-      <tr>
-        <td><b>Film No</b></td>
-        <td>
-          <% if product_id.film_no.present? %>
-            <%= product_id.film_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::BAR_CODE) %>
-      <tr>
-        <td><b>Bar Code</b></td>
-        <td>
-          <% if product_id.bar_code.present? %>
-            <%= product_id.bar_code rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::LOT_NO) %>
-      <tr>
-        <td><b>LOT #</b></td>
-        <td>
-          <% if product_id.lot_no.present? %>
-            <%= product_id.lot_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::ITEM_CODE) %>
-      <tr>
-        <td><b>Item Code</b></td>
-        <td>
-          <% if product_id.item_code.present? %>
-            <%= product_id.item_code rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::PART_CODE) %>
-      <tr>
-        <td><b>Part Code</b></td>
-        <td>
-          <% if product_id.part_code.present? %>
-            <%= product_id.part_code rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
+      
     <% if @field_id.include?(ProductField::PANTONE_CODE) %>
       <tr>
         <td><b>Pantone Code</b></td>
@@ -460,13 +432,52 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::COLOUR) %>
+      
+    <% if @field_id.include?(ProductField::PART_CODE) %>
       <tr>
-        <td><b>Colour</b></td>
+        <td><b>Part Code</b></td>
         <td>
-          <% if product_id.color.present? %>
-            <%= product_id.color rescue '-' %>
+          <% if product_id.part_code.present? %>
+            <%= product_id.part_code rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::PROCESS) %>
+      <tr>
+        <td><b>Process</b></td>
+        <td>
+          <% if product_id.process.present? %>
+            <%= product_id.process rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::REF_NO) %>
+      <tr>
+        <td><b>Ref No</b></td>
+        <td>
+          <% if product_id.ref_no.present? %>
+            <%= product_id.ref_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::REORDER_NO) %>
+      <tr>
+        <td><b>Reorder No</b></td>
+        <td>
+          <% if product_id.reorder_no.present? %>
+            <%= product_id.reorder_no rescue '-' %>
           <% else %>
             -
           <% end %>
@@ -474,6 +485,32 @@
       </tr>
     <% end %>
 
+    <% if @field_id.include?(ProductField::REVISION) %>
+      <tr>
+        <td><b>Revision</b></td>
+        <td>
+          <% if product_id.revision.present? %>
+            <%= product_id.revision rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::SEAL_NO) %>
+      <tr>
+        <td><b>Seal No</b></td>
+        <td>
+          <% if product_id.seal_no.present? %>
+            <%= product_id.seal_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
     <% if @field_id.include?(ProductField::SERIAL_NO) %>
       <tr>
         <td><b>Serial No</b></td>
@@ -486,7 +523,35 @@
         </td>
       </tr>
     <% end %>
-
+      
+    <% if @field_id.include?(ProductField::SIZE) %>
+      <tr>
+        <td><b>Size</b></td>
+        <td>
+          <% if product_id.size.present? %>
+            <%= product_id.size rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::TARIF_CODE) %>
+      <tr>
+        <td><b>Tarif Code</b></td>
+        <td>
+          <% if product_id.tarif_code.present? %>
+            <%= product_id.tarif_code rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <!--td><b>Perihal Barang</b></td>
+        <td><%#= product_id.sales_tax_exemption.perihal_barang rescue '-' %></td-->
+      </tr>
+    <% end %>
+      
     <% if @field_id.include?(ProductField::WARRANTY) %>
       <tr>
         <td><b>Warranty</b></td>
@@ -499,13 +564,39 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::CAPACITY) %>
+      
+    <% if @field_id.include?(ProductField::WINDOW_CODE) %>
       <tr>
-        <td><b>Capacity</b></td>
+        <td><b>Window Code</b></td>
         <td>
-          <% if product_id.capacity.present? %>
-            <%= product_id.capacity rescue '-' %>
+          <% if product_id.window_code.present? %>
+            <%= product_id.window_code rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::WORK_ORDER_NO) %>
+      <tr>
+        <td><b>Work Order No</b></td>
+        <td>
+          <% if product_id.work_order_no.present? %>
+            <%= product_id.work_order_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::AMPERE) %>
+      <tr>
+        <td><b>Ampere</b></td>
+        <td>
+          <% if product_id.ampere.present? %>
+            <%= product_id.ampere rescue '-' %>
           <% else %>
             -
           <% end %>
@@ -519,6 +610,71 @@
         <td>
           <% if product_id.diameter.present? %>
             <%= two_precision(product_id.diameter) rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::HP) %>
+      <tr>
+        <td><b>HP</b></td>
+        <td>
+          <% if product_id.hp.present? %>
+            <%= two_precision(product_id.hp) rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if @field_id.include?(ProductField::HZ) %>
+      <tr>
+        <td><b>HZ</b></td>
+        <td>
+          <% if product_id.hz.present? %>
+            <%= two_precision(product_id.hz) rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if @field_id.include?(ProductField::PIN) %>
+      <tr>
+        <td><b>Pin</b></td>
+        <td>
+          <% if product_id.pin.present? %>
+            <%= product_id.pin rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      
+    <% if @field_id.include?(ProductField::PURENESS) %>
+      <tr>
+        <td><b>Pureness</b></td>
+        <td>
+          <% if product_id.pureness.present? %>
+            <%= two_precision(product_id.pureness) rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if @field_id.include?(ProductField::TON) %>
+      <tr>
+        <td><b>Ton</b></td>
+        <td>
+          <% if product_id.ton.present? %>
+            <%= four_precision(product_id.ton) rescue '-' %>
           <% else %>
             -
           <% end %>
@@ -551,122 +707,6 @@
         </td>
       </tr>
     <% end %>
-
-    <% if @field_id.include?(ProductField::PIN) %>
-      <tr>
-        <td><b>Pin</b></td>
-        <td>
-          <% if product_id.pin.present? %>
-            <%= product_id.pin rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::AMPERE) %>
-      <tr>
-        <td><b>Ampere</b></td>
-        <td>
-          <% if product_id.ampere.present? %>
-            <%= product_id.ampere rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::HP) %>
-      <tr>
-        <td><b>HP</b></td>
-        <td>
-          <% if product_id.hp.present? %>
-            <%= two_precision(product_id.hp) rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::HZ) %>
-      <tr>
-        <td><b>HZ</b></td>
-        <td>
-          <% if product_id.hz.present? %>
-            <%= two_precision(product_id.hz) rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::PURENESS) %>
-      <tr>
-        <td><b>Pureness</b></td>
-        <td>
-          <% if product_id.pureness.present? %>
-            <%= two_precision(product_id.pureness) rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::TON) %>
-      <tr>
-        <td><b>Ton</b></td>
-        <td>
-          <% if product_id.ton.present? %>
-            <%= four_precision(product_id.ton) rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::CONSIGNEE) %>
-      <tr>
-        <td><b>Consignee</b></td>
-        <td>
-          <% if product_id.consignee.present? %>
-            <%= product_id.consignee rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::DESTINATION) %>
-      <tr>
-        <td><b>Destination</b></td>
-        <td>
-          <% if product_id.destination.present? %>
-            <%= product_id.destination rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @field_id.include?(ProductField::PROCESS) %>
-      <tr>
-        <td><b>Process</b></td>
-        <td>
-          <% if product_id.process.present? %>
-            <%= product_id.process rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+      
   </table>
 <% end %>

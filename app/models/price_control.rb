@@ -50,7 +50,7 @@ class PriceControl < ActiveRecord::Base
   def self.generating_product_customer(price_control)
     company_id = price_control.trade_company_id  # must be customer ID
     
-    price_control.price_control_items.each do |price_control_item| 
+    price_control.price_control_items.each do |price_control_item|
       product_id = price_control_item.product_id
       prod_cus = ProductCustomer.find_by_product_id_and_trade_company_id(product_id, company_id)
       if prod_cus.present?

@@ -580,8 +580,14 @@ module ApplicationHelper
     end 
   end
   
-  def nothing_link(name)
-    content_tag :span, :class => "k-button", :style => "color:grey ; background-color: white; cursor: default;" do 
+#  def nothing_link(name)
+#    content_tag :span, :class => "k-button", :style => "color:grey ; background-color: white; cursor: default;" do 
+#      "#{name}"
+#    end
+#  end
+  
+  def disabled_style(name)
+    content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do
       "#{name}"
     end
   end
@@ -591,15 +597,6 @@ module ApplicationHelper
       content_tag :strong, :style => "color:white;" do
         "#{name}"
       end
-    end
-  end
-  
-  def title_head_with_search_engine(name)
-    content_tag :div, :class => "title_head" do
-      content_tag :strong, :style => "color:white;" do
-        "#{name}"
-      end
-      search_button
     end
   end
     
@@ -693,6 +690,8 @@ module ApplicationHelper
       "Save"
     end
   end
+  
+
     
   def link_close_button
     link_to 'Close' , "#" , :class=>"k-button font_bold", :onclick => "parent.$.fancybox.close();"

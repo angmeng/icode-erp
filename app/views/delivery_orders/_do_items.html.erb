@@ -1,0 +1,45 @@
+<table class="jgrid_popup zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th width="400">[SO No][Product ID][Description]</th>
+      <th width="150">SO Date</th>
+      <th width="150">Delivery Qty</th>
+      <th width="150">Order Qty</th>
+      <th width="150">Unit Price</th>
+      <th width="150">Balance Qty</th>
+      <th width="150">No. of Carton</th>
+      <th width="150">Gen Cur Stock</th>
+      <!--th width="150">D/O Status</th-->
+      <th width="150">Part No.</th>
+      <th width="150">Client's Lot#</th>
+      <th width="150">Client's P/O</th>
+      <th width="150">Dept Cur Stock</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if items.present? %>
+
+      <% items.each do |delivery| %>
+
+        <tr class="<%= cycle('odd_line', 'even_line') %>">
+
+          <td align="center"><%= delivery.sales_order_item_id %></td>
+          <td align="center"><%= delivery.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+          <td align="center"><%= delivery.delivery_qty %></td>
+          <td align="center"><%= delivery.order_qty %></td>
+          <td align="center"><%= delivery.unit_price %></td>
+          <td align="center"><%= delivery.balance_qty %></td>
+          <td align="center"><%= delivery.no_of_carton %></td>
+          <td align="center"><%= delivery.gen_current_stock %></td>
+          <td align="center"><%= delivery.part_no %></td> 
+          <td align="center"><%= delivery.client_lot %></td> 
+          <td align="center"><%= delivery.client_po %></td> 
+          <td align="center"><%= delivery.department %> <%= delivery.dept_current_stock %></td>
+        </tr>
+
+      <% end %>
+
+    <% end %>
+  </tbody>
+</table>

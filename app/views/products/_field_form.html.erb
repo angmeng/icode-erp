@@ -3,9 +3,9 @@
     <td width="170">
       <b>
         <% if action_name == "edit" %>
-          Product ID # *
+          Product ID #
         <% else %>
-          Current Product ID *
+          Current Product ID
         <% end %>
       </b>
     </td>
@@ -61,7 +61,22 @@
       <td style="vertical-align: top;" colspan="2"><span class="k-invalid-msg" data-for="product[desc]"></span></td>
     </tr>
   <% end %>
-
+    
+  <% if fielding.include?(ProductField::UNIT_MEASURE) %>
+    <tr>
+      <td><b>U/M</b></td>
+      <td>
+        <% if session[:po_um_id].present? %>
+          <%= UnitMeasurement.find(session[:po_um_id].to_i).code rescue '-'  %>
+          <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', session[:po_um_id].to_i), { :include_blank => true }, :style => "display:none;" %>
+        <% else %>
+          <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', @product.unit_measurement_id.to_i), { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter U/M" } %>
+        <% end %>
+      </td>
+      <td><span class="k-invalid-msg" data-for="product[unit_measurement_id]"></span></td>
+    </tr>
+  <% end %>
+    
   <% if fielding.include?(ProductField::GSM) %>
     <tr>
       <td width="110"><b>GSM</b></td>
@@ -118,45 +133,6 @@
     </tr>
   <% end %>
 
-  <% if fielding.include?(ProductField::UNIT_MEASURE) %>
-    <tr>
-      <td><b>U/M</b></td>
-      <td>
-        <% if session[:po_um_id].present? %>
-          <%= UnitMeasurement.find(session[:po_um_id].to_i).code rescue '-'  %>
-          <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', session[:po_um_id].to_i), { :include_blank => true }, :style => "display:none;" %>
-        <% else %>
-          <%= f.select :unit_measurement_id, options_from_collection_for_select(unit_measurement, 'id', 'code', @product.unit_measurement_id.to_i), { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter U/M" } %>
-        <% end %>
-      </td>
-      <td><span class="k-invalid-msg" data-for="product[unit_measurement_id]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::ORIGIN) %>
-    <tr>   
-      <td><b>Origin</b></td>
-      <td><%= f.text_field :origin, :class => "k-textbox", "required validationMessage" => "Please Enter Origin" %></td>
-      <td><span class="k-invalid-msg" data-for="product[origin]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::BRAND) %>
-    <tr>   
-      <td><b>Brand</b></td>
-      <td><%= f.text_field :brand, :class => "k-textbox", "required validationMessage" => "Please Enter Brand" %></td>
-      <td><span class="k-invalid-msg" data-for="product[brand]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::GRADE) %>
-    <tr>   
-      <td><b>Grade</b></td>
-      <td><%= f.text_field :grade, :class => "k-textbox", "required validationMessage" => "Please Enter Grade" %></td>
-      <td><span class="k-invalid-msg" data-for="product[grade]"></span></td>
-    </tr>
-  <% end %>
-
   <% if fielding.include?(ProductField::PACKING_METHOD) %>
     <tr>
       <td><b>Packing Method</b></td>
@@ -166,7 +142,6 @@
       </td>
       <td><span class="k-invalid-msg" data-for="product[packing_method]"></span></td>
     </tr>
-
     <tr>
       <td style="vertical-align: top;"><b>Packing Qty</b></td>
       <td>
@@ -175,11 +150,10 @@
             <% um = product.unit_measurement.code if product.unit_measurement.present?  %>
             <% product.packing_quantities.each do |pack| %>
               <tr>
-                <td><%= text_field_tag "packing_method_qty[#{pack.id}][val]", pack.quantity %></td>
+                <td><%= text_field_tag "packing_method_qty[#{pack.id}][val]", pack.quantity, :class => "k-textbox", :style => "width: 80px;" %></td>
                 <td>
                   <%= um %> per <%= pack.packing_type rescue '-' %>
                   <%= hidden_field_tag "packing_method_per[#{pack.id}][val]", pack.packing_type %>
-
                   <% um = pack.packing_type %>
                 </td>
               </tr>
@@ -197,23 +171,7 @@
       <td><span class="k-invalid-msg" data-for="product[packing_qty]"></span></td>
     </tr>
   <% end %>
-
-  <% if fielding.include?(ProductField::BUFFER_STOCK) %>
-    <tr>
-      <td><b>Buffer Stock</b></td>
-      <td><%= f.text_field :buffer_stock, :class => "k-textbox", "required validationMessage" => "Please Enter Buffer Stock" %></td>
-      <td><span class="k-invalid-msg" data-for="product[buffer_stock]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::TARIF_CODE) %>
-    <tr>
-      <td width="110"><b>Tarif Code</b></td>
-      <td><%= f.text_field :tarif_code, :class => "k-textbox", "required validationMessage" => "Please Enter Tarif Code" %></td>
-      <td><span class="k-invalid-msg" data-for="product[tarif_code]"></span></td>
-    </tr>
-  <% end %>
-
+    
   <% if fielding.include?(ProductField::PART_WEIGHT) %>
     <tr>
       <td><b>Part Weight/pc</b></td>
@@ -221,12 +179,212 @@
       <td><span class="k-invalid-msg" data-for="product[part_weight]"></span></td>
     </tr>
   <% end %>
+    
+  <% if fielding.include?(ProductField::EXP_DATE) %>
+    <tr>
+      <td><b>EXP Date</b></td>
+      <td><%= f.text_field :exp_date, :class => "mkendo_date", "required validationMessage" => "Please Enter EXP Date" %></td>
+      <td><span class="k-invalid-msg" data-for="product[exp_date]"></span></td>
+    </tr>
+  <% end %>
 
+  <% if fielding.include?(ProductField::MFG_DATE) %>
+    <tr>
+      <td><b>MFG Date</b></td>
+      <td><%= f.text_field :mfg_date, :class => "mkendo_date", "required validationMessage" => "Please Enter MFG Date" %></td>
+      <td><span class="k-invalid-msg" data-for="product[mfg_date]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::ART_NO) %>
+    <tr>
+      <td><b>Art No</b></td>
+      <td><%= f.text_field :art_no, :class => "k-textbox", "required validationMessage" => "Please Enter Art No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[art_no]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::BAR_CODE) %>
+    <tr>
+      <td><b>Bar Code</b></td>
+      <td><%= f.text_field :bar_code, :class => "k-textbox", "required validationMessage" => "Please Enter Bar Code" %></td>
+      <td><span class="k-invalid-msg" data-for="product[bar_code]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::BRAND) %>
+    <tr>   
+      <td><b>Brand</b></td>
+      <td><%= f.text_field :brand, :class => "k-textbox", "required validationMessage" => "Please Enter Brand" %></td>
+      <td><span class="k-invalid-msg" data-for="product[brand]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::BUFFER_STOCK) %>
+    <tr>
+      <td><b>Buffer Stock</b></td>
+      <td><%= f.text_field :buffer_stock, :class => "k-textbox", "required validationMessage" => "Please Enter Buffer Stock" %></td>
+      <td><span class="k-invalid-msg" data-for="product[buffer_stock]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::CAPACITY) %>
+    <tr>
+      <td><b>Capacity</b></td>
+      <td><%= f.text_field :capacity, :size => 8, :class => "k-textbox", "required validationMessage" => "Please Enter Capacity" %></td>
+      <td><span class="k-invalid-msg" data-for="product[capacity]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::CATEGORY) %>
+    <tr>
+      <td><b>Category</b></td>
+      <td><%= f.text_field :category, :class => "k-textbox", "required validationMessage" => "Please Enter Category" %></td>
+      <td><span class="k-invalid-msg" data-for="product[category]"></span></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::COLOUR) %>
+    <tr>
+      <td><b>Colour</b></td>
+      <td><%= f.text_field :color, :class => "k-textbox", "required validationMessage" => "Please Enter Colour" %></td>
+      <td><span class="k-invalid-msg" data-for="product[color]"></span></td>
+    </tr>
+  <% end %>
+      
+  <% if fielding.include?(ProductField::CONSIGNEE) %>
+    <tr>
+      <td><b>Consignee</b></td>
+      <td><%= f.text_field :consignee, :class => "k-textbox", "required validationMessage" => "Please Enter Consignee" %></td>
+      <td><span class="k-invalid-msg" data-for="product[consignee]"></span></td>
+    </tr>
+  <% end %>
+    
   <% if fielding.include?(ProductField::CONTAINER_NO) %>
     <tr>
       <td><b>Container No </b></td>
       <td><%= f.text_field :container_no, :class => "k-textbox", "required validationMessage" => "Please Enter Container No" %></td>
       <td><span class="k-invalid-msg" data-for="product[container_no]"></span></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::DESPATCH_ADVISE) %>
+    <tr>
+      <td><b>Despatch Advise </b></td>
+      <td><%= f.text_field :despatch_advise, :class => "k-textbox", "required validationMessage" => "Please Enter Despatch Advise" %></td>
+      <td><span class="k-invalid-msg" data-for="product[despatch_advise]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::DESTINATION) %>
+    <tr>
+      <td><b>Destination</b></td>
+      <td><%= f.text_field :destination, :class => "k-textbox", "required validationMessage" => "Please Enter Destination" %></td>
+      <td><span class="k-invalid-msg" data-for="product[destination]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::FILM_NO) %>
+    <tr>
+      <td><b>Film No</b></td>
+      <td><%= f.text_field :film_no, :class => "k-textbox", "required validationMessage" => "Please Enter Film No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[film_no]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::GRADE) %>
+    <tr>   
+      <td><b>Grade</b></td>
+      <td><%= f.text_field :grade, :class => "k-textbox", "required validationMessage" => "Please Enter Grade" %></td>
+      <td><span class="k-invalid-msg" data-for="product[grade]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::ITEM_CODE) %>
+    <tr>
+      <td><b>Item Code</b></td>
+      <td><%= f.text_field :item_code, :class => "k-textbox", "required validationMessage" => "Please Enter Item Code" %></td>
+      <td><span class="k-invalid-msg" data-for="product[item_code]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::LOT_NO) %>
+    <tr>
+      <td><b>LOT #</b></td>
+      <td><%= f.text_field :lot_no, :class => "k-textbox", "required validationMessage" => "Please Enter Lot No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[lot_no]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::MODEL_NO) %>
+    <tr>
+      <td><b>Model No</b></td>
+      <td><%= f.text_field :model_no, :class => "k-textbox", "required validationMessage" => "Please Enter Model No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[model_no]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::MOULD_NO) %>
+    <tr>
+      <td><b>Mould No</b></td>
+      <td><%= f.text_field :mould_no, :class => "k-textbox", "required validationMessage" => "Please Enter Mould No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[mould_no]"></span></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::ORIGIN) %>
+    <tr>   
+      <td><b>Origin</b></td>
+      <td><%= f.text_field :origin, :class => "k-textbox", "required validationMessage" => "Please Enter Origin" %></td>
+      <td><span class="k-invalid-msg" data-for="product[origin]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::PANTONE_CODE) %>
+    <tr>
+      <td><b>Pantone Code</b></td>
+      <td><%= f.text_field :pantone_code, :class => "k-textbox", "required validationMessage" => "Please Enter Pantone Code" %></td>
+      <td><span class="k-invalid-msg" data-for="product[pantone_code]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::PART_CODE) %>
+    <tr>
+      <td><b>Part Code</b></td>
+      <td><%= f.text_field :part_code, :class => "k-textbox", "required validationMessage" => "Please Enter Part Code" %></td>
+      <td><span class="k-invalid-msg" data-for="product[part_code]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::PROCESS) %>
+    <tr>
+      <td><b>Process</b></td>
+      <td><%= f.text_field :process, :class => "k-textbox", "required validationMessage" => "Please Enter Process" %></td>
+      <td><span class="k-invalid-msg" data-for="product[process]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::REF_NO) %>
+    <tr>
+      <td><b>Ref No</b></td>
+      <td><%= f.text_field :ref_no, :class => "k-textbox", "required validationMessage" => "Please Enter Ref No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[ref_no]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::REORDER_NO) %>
+    <tr>
+      <td><b>Reorder No</b></td>
+      <td><%= f.text_field :reorder_no, :class => "k-textbox", "required validationMessage" => "Please Enter Reorder No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[reorder_no]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::REVISION) %>
+    <tr>
+      <td><b>Revision</b></td>
+      <td><%= f.text_field :revision, :class => "k-textbox", "required validationMessage" => "Please Enter Revision" %></td>
+      <td><span class="k-invalid-msg" data-for="product[revision]"></span></td>
     </tr>
   <% end %>
 
@@ -238,11 +396,11 @@
     </tr>
   <% end %>
 
-  <% if fielding.include?(ProductField::DESPATCH_ADVISE) %>
+  <% if fielding.include?(ProductField::SERIAL_NO) %>
     <tr>
-      <td><b>Despatch Advise </b></td>
-      <td><%= f.text_field :despatch_advise, :class => "k-textbox", "required validationMessage" => "Please Enter Despatch Advise" %></td>
-      <td><span class="k-invalid-msg" data-for="product[despatch_advise]"></span></td>
+      <td><b>Serial No</b></td>
+      <td><%= f.text_field :serial_no, :class => "k-textbox", "required validationMessage" => "Please Enter Serial No" %></td>
+      <td><span class="k-invalid-msg" data-for="product[serial_no]"></span></td>
     </tr>
   <% end %>
 
@@ -254,59 +412,19 @@
     </tr>
   <% end %>
 
-  <% if fielding.include?(ProductField::MODEL_NO) %>
+  <% if fielding.include?(ProductField::TARIF_CODE) %>
     <tr>
-      <td><b>Model No</b></td>
-      <td><%= f.text_field :model_no, :class => "k-textbox", "required validationMessage" => "Please Enter Model No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[model_no]"></span></td>
+      <td width="110"><b>Tarif Code</b></td>
+      <td><%= f.text_field :tarif_code, :class => "k-textbox", "required validationMessage" => "Please Enter Tarif Code" %></td>
+      <td><span class="k-invalid-msg" data-for="product[tarif_code]"></span></td>
     </tr>
   <% end %>
-
-  <% if fielding.include?(ProductField::REORDER_NO) %>
+    
+  <% if fielding.include?(ProductField::WARRANTY) %>
     <tr>
-      <td><b>Reorder No</b></td>
-      <td><%= f.text_field :reorder_no, :class => "k-textbox", "required validationMessage" => "Please Enter Reorder No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[reorder_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::ART_NO) %>
-    <tr>
-      <td><b>Art No</b></td>
-      <td><%= f.text_field :art_no, :class => "k-textbox", "required validationMessage" => "Please Enter Art No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[art_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::REF_NO) %>
-    <tr>
-      <td><b>Ref No</b></td>
-      <td><%= f.text_field :ref_no, :class => "k-textbox", "required validationMessage" => "Please Enter Ref No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[ref_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::MOULD_NO) %>
-    <tr>
-      <td><b>Mould No</b></td>
-      <td><%= f.text_field :mould_no, :class => "k-textbox", "required validationMessage" => "Please Enter Mould No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[mould_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::CATEGORY) %>
-    <tr>
-      <td><b>Category</b></td>
-      <td><%= f.text_field :category, :class => "k-textbox", "required validationMessage" => "Please Enter Category" %></td>
-      <td><span class="k-invalid-msg" data-for="product[category]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::REVISION) %>
-    <tr>
-      <td><b>Revision</b></td>
-      <td><%= f.text_field :revision, :class => "k-textbox", "required validationMessage" => "Please Enter Revision" %></td>
-      <td><span class="k-invalid-msg" data-for="product[revision]"></span></td>
+      <td><b>Warranty</b></td>
+      <td><%= f.text_field :warranty, :size => 8, :class => "k-textbox", "required validationMessage" => "Please Enter Warranty" %></td>
+      <td><span class="k-invalid-msg" data-for="product[warranty]"></span></td>
     </tr>
   <% end %>
 
@@ -325,100 +443,12 @@
       <td><span class="k-invalid-msg" data-for="product[work_order_no]"></span></td>
     </tr>
   <% end %>
-
-  <% if fielding.include?(ProductField::MFG_DATE) %>
+    
+  <% if fielding.include?(ProductField::AMPERE) %>
     <tr>
-      <td><b>MFG Date</b></td>
-      <td><%= f.text_field :mfg_date, :class => "mkendo_date", "required validationMessage" => "Please Enter MFG Date" %></td>
-      <td><span class="k-invalid-msg" data-for="product[mfg_date]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::EXP_DATE) %>
-    <tr>
-      <td><b>EXP Date</b></td>
-      <td><%= f.text_field :exp_date, :class => "mkendo_date", "required validationMessage" => "Please Enter EXP Date" %></td>
-      <td><span class="k-invalid-msg" data-for="product[exp_date]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::FILM_NO) %>
-    <tr>
-      <td><b>Film No</b></td>
-      <td><%= f.text_field :film_no, :class => "k-textbox", "required validationMessage" => "Please Enter Film No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[film_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::BAR_CODE) %>
-    <tr>
-      <td><b>Bar Code</b></td>
-      <td><%= f.text_field :bar_code, :class => "k-textbox", "required validationMessage" => "Please Enter Bar Code" %></td>
-      <td><span class="k-invalid-msg" data-for="product[bar_code]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::LOT_NO) %>
-    <tr>
-      <td><b>LOT #</b></td>
-      <td><%= f.text_field :lot_no, :class => "k-textbox", "required validationMessage" => "Please Enter Lot No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[lot_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::ITEM_CODE) %>
-    <tr>
-      <td><b>Item Code</b></td>
-      <td><%= f.text_field :item_code, :class => "k-textbox", "required validationMessage" => "Please Enter Item Code" %></td>
-      <td><span class="k-invalid-msg" data-for="product[item_code]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::PART_CODE) %>
-    <tr>
-      <td><b>Part Code</b></td>
-      <td><%= f.text_field :part_code, :class => "k-textbox", "required validationMessage" => "Please Enter Part Code" %></td>
-      <td><span class="k-invalid-msg" data-for="product[part_code]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::PANTONE_CODE) %>
-    <tr>
-      <td><b>Pantone Code</b></td>
-      <td><%= f.text_field :pantone_code, :class => "k-textbox", "required validationMessage" => "Please Enter Pantone Code" %></td>
-      <td><span class="k-invalid-msg" data-for="product[pantone_code]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::COLOUR) %>
-    <tr>
-      <td><b>Colour</b></td>
-      <td><%= f.text_field :color, :class => "k-textbox", "required validationMessage" => "Please Enter Colour" %></td>
-      <td><span class="k-invalid-msg" data-for="product[color]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::SERIAL_NO) %>
-    <tr>
-      <td><b>Serial No</b></td>
-      <td><%= f.text_field :serial_no, :class => "k-textbox", "required validationMessage" => "Please Enter Serial No" %></td>
-      <td><span class="k-invalid-msg" data-for="product[serial_no]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::WARRANTY) %>
-    <tr>
-      <td><b>Warranty</b></td>
-      <td><%= f.text_field :warranty, :size => 8, :class => "k-textbox", "required validationMessage" => "Please Enter Warranty" %></td>
-      <td><span class="k-invalid-msg" data-for="product[warranty]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::CAPACITY) %>
-    <tr>
-      <td><b>Capacity</b></td>
-      <td><%= f.text_field :capacity, :size => 8, :class => "k-textbox", "required validationMessage" => "Please Enter Capacity" %></td>
-      <td><span class="k-invalid-msg" data-for="product[capacity]"></span></td>
+      <td><b>Ampere</b></td>
+      <td><%= f.text_field :ampere, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Ampere" %></td>
+      <td><span class="k-invalid-msg" data-for="product[ampere]"></span></td>
     </tr>
   <% end %>
 
@@ -427,6 +457,46 @@
       <td><b>Diameter</b></td>
       <td><%= f.text_field :diameter, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Diameter" %></td>
       <td><span class="k-invalid-msg" data-for="product[diameter]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::HP) %>
+    <tr>
+      <td><b>HP</b></td>
+      <td><%= f.text_field :hp, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter HP" %></td>
+      <td><span class="k-invalid-msg" data-for="product[hp]"></span></td>
+    </tr>
+  <% end %>
+
+  <% if fielding.include?(ProductField::HZ) %>
+    <tr>
+      <td><b>HZ</b></td>
+      <td><%= f.text_field :hz, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Hz" %></td>
+      <td><span class="k-invalid-msg" data-for="product[hz]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::PIN) %>
+    <tr>
+      <td><b>Pin</b></td>
+      <td><%= f.text_field :pin, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Pin" %></td>
+      <td><span class="k-invalid-msg" data-for="product[pin]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::PURENESS) %>
+    <tr>
+      <td><b>Pureness</b></td>
+      <td><%= f.text_field :pureness, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Pureness" %></td>
+      <td><span class="k-invalid-msg" data-for="product[pureness]"></span></td>
+    </tr>
+  <% end %>
+    
+  <% if fielding.include?(ProductField::TON) %>
+    <tr>
+      <td><b>Ton</b></td>
+      <td><%= f.text_field :ton, :class => "kendo_precision_4 width_100", "required validationMessage" => "Please Enter Ton" %></td>
+      <td><span class="k-invalid-msg" data-for="product[ton]"></span></td>
     </tr>
   <% end %>
 
@@ -445,79 +515,6 @@
       <td><span class="k-invalid-msg" data-for="product[watt]"></span></td>
     </tr>
   <% end %>
-
-  <% if fielding.include?(ProductField::PIN) %>
-    <tr>
-      <td><b>Pin</b></td>
-      <td><%= f.text_field :pin, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Pin" %></td>
-      <td><span class="k-invalid-msg" data-for="product[pin]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::AMPERE) %>
-    <tr>
-      <td><b>Ampere</b></td>
-      <td><%= f.text_field :ampere, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Ampere" %></td>
-      <td><span class="k-invalid-msg" data-for="product[ampere]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::HP) %>
-    <tr>
-      <td><b>HP</b></td>
-      <td><%= f.text_field :hp, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter HP" %></td>
-      <td><span class="k-invalid-msg" data-for="product[hp]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::HZ) %>
-    <tr>
-      <td><b>HZ</b></td>
-      <td><%= f.text_field :hz, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Hz" %></td>
-      <td><span class="k-invalid-msg" data-for="product[hz]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::PURENESS) %>
-    <tr>
-      <td><b>Pureness</b></td>
-      <td><%= f.text_field :pureness, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Pureness" %></td>
-      <td><span class="k-invalid-msg" data-for="product[pureness]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::TON) %>
-    <tr>
-      <td><b>Ton</b></td>
-      <td><%= f.text_field :ton, :class => "kendo_precision_4 width_100", "required validationMessage" => "Please Enter Ton" %></td>
-      <td><span class="k-invalid-msg" data-for="product[ton]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::CONSIGNEE) %>
-    <tr>
-      <td><b>Consignee</b></td>
-      <td><%= f.text_field :consignee, :class => "k-textbox", "required validationMessage" => "Please Enter Consignee" %></td>
-      <td><span class="k-invalid-msg" data-for="product[consignee]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::DESTINATION) %>
-    <tr>
-      <td><b>Destination</b></td>
-      <td><%= f.text_field :destination, :class => "k-textbox", "required validationMessage" => "Please Enter Destination" %></td>
-      <td><span class="k-invalid-msg" data-for="product[destination]"></span></td>
-    </tr>
-  <% end %>
-
-  <% if fielding.include?(ProductField::PROCESS) %>
-    <tr>
-      <td><b>Process</b></td>
-      <td><%= f.text_field :process, :class => "k-textbox", "required validationMessage" => "Please Enter Process" %></td>
-      <td><span class="k-invalid-msg" data-for="product[process]"></span></td>
-    </tr>
-  <% end %>
-
 </table>
 
 

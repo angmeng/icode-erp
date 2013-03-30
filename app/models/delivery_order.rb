@@ -9,6 +9,17 @@ class DeliveryOrder < ActiveRecord::Base
   belongs_to :trade_term
   belongs_to :transport
   
+  ACTIVE        = "Active"
+  KEEP_IN_VIEW  = "KIV"
+  
+  default_scope order("do_no DESC")
+  
+  self.per_page = 50
+  
+  def self.search_do(search)
+    search.where(:status => DeliveryOrder::ACTIVE)
+  end
+  
   def self.running_delivery_order_items(data, delivery_order)
     if data.present?
       data.each do |key, content|
@@ -27,13 +38,12 @@ class DeliveryOrder < ActiveRecord::Base
           :department => content[:department],
           :dept_current_stock => content[:dept_cur_stock]
         )
-        if d_order.valid? 
-          return true
-        else
+        unless d_order.valid?
           return false, msg = d_order.errors.full_messages
           break;
         end
-      end  
+      end
+      return delivery_order
     end
   end
   

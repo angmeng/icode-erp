@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :code, :color_grade, :opening_stock, :current_stock, :cutoff_date, :desc, :model,  :part_no, :part_weight, :selling_price, :tarif_code, :unit_measurement_id, :version, :product_category_id, :product_vendors_attributes, :product_name, :unit_price, :sales_tax_exemption_id, :quotation_request_form_id, :effective_date,
+  attr_accessible :code, :color_grade, :opening_stock, :current_stock, :cutoff_date, :desc, :model, :part_no, :part_weight, :selling_price, :tarif_code, :unit_measurement_id, :version, :product_category_id, :product_vendors_attributes, :product_name, :unit_price, :sales_tax_exemption_id, :quotation_request_form_id, :effective_date,
                   :product_type, :gsm, :width, :width_um, :length, :length_um, :height, :height_um, :tickness, :tickness_um, :origin, :brand, :grade,
                   :packing_method, :packing_qty, :container_no, :seal_no, :despatch_advise,
                   :size, :model_no, :reorder_no, :art_no, :ref_no, :work_order_no, :mfg_date, :exp_date, :film_no, :bar_code,

@@ -2,15 +2,15 @@
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
-      <th>Sales Order No</th>
+      <th>S/O No #</th>
       <th>Trade company</th>
-      <th>Purchase order no</th>
-      <th>Sales rep</th>
+      <th>Customer P/O No</th>
+      <th>Sales Rep</th>
       <th>Currency</th>
-      <th>Trade term</th>
+      <th>Trade Term</th>
       <th>Revision</th>
       <th>Purpose</th>
-      <th>Updated by</th>
+      <th>Updated By</th>
     </tr>
   </thead>
 
@@ -18,19 +18,19 @@
     <% so.each do |sales_order| %>
       <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= sales_order.id %>">
         <td></td>
-        <td align="center"><%= sales_order.sales_order_no %></td>
+        <td align="center"><%= sales_order.sales_order_no rescue '-' %></td>
         <td>
           [<%= sales_order.trade_company.code rescue '-' %>] 
           <%= sales_order.trade_company.name rescue '-' %>
         </td>
         <td><%= sales_order.purchase_order_no rescue '-' %></td>
-        <td><%= sales_order.sales_rep %></td>
+        <td><%= sales_order.sales_rep rescue '-' %></td>
         <td align="center"><%= sales_order.currency.name rescue '-' %></td>
         <td align="center"><%= sales_order.trade_term.name rescue '-' %></td>
         <td align="center"><%= sales_order.revision %></td>
-        <td align="center"><%= sales_order.purpose == SalesOrder::SALES ? SalesOrder::SALES : '-' %></td>
+        <td align="center"><%= sales_order.purpose == SalesOrder::SALES ? "SALES" : '-' %></td>
         <td align="center">
-          <% updater = User.find(sales_order.updated_by)  %>
+          <% updater = User.find(sales_order.updated_by) %>
           <%= updater.name rescue '-' %>
         </td>
       </tr>

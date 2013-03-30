@@ -3,21 +3,32 @@
     <div class="popup_content">
       <table>
         <tr>
-          <% if action_name == "edit" %>
-            <td width="150"><b>SO No # </b></td>
+          <% if @sales_order.sales_order_no.present? %>
+            <td width="150"><b>S/O No # </b></td>
             <td><%= @sales_order.sales_order_no rescue '-' %></td>
           <% else %>
-            <td width="150"><b>Current SO No.</b></td>
-            <td><%= company.sn_sales_order_no + 1 %></td>
+            <td width="150"><b>Current S/O No.</b></td>
+            <td>
+              <%= company.sn_sales_order_no + 1 %>
+              <%= f.hidden_field :sales_order_no, :value => company.sn_sales_order_no + 1 %>
+            </td>
           <% end %>
 
           <td width="50"></td>
 
           <td width="100"><b>SO Date *</b></td>
-          <td>
-            <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter SO Date" %>
-            <span class="k-invalid-msg" data-for="sales_order[so_date]"></span>
-          </td>
+          
+          <% if @sales_order.so_date.present? %>
+            <td>
+              <%= f.text_field :so_date, :value => @sales_order.so_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter SO Date" %>
+              <span class="k-invalid-msg" data-for="sales_order[so_date]"></span>
+            </td>
+          <% else %>
+            <td>
+              <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter SO Date" %>
+              <span class="k-invalid-msg" data-for="sales_order[so_date]"></span>
+            </td>
+          <% end %>
 
           <td width="50"></td>
 
@@ -27,19 +38,12 @@
 
         <tr>
           <td><b>Customer Company *</b></td>
-          <td>
-            <% if @temp_company.present? %>
-              <%= @temp_company.trade_company.name rescue'-'  %>
-              <%= f.hidden_field :trade_company_id, :value => @temp_company.trade_company_id  %>
-            <% else %>
-              <%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @sales_order.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox sales_order_trade_company_id", "required validationMessage" => "Please Enter Customer Company" , :style => "width: 400px;", :onchange => "sales_order_company_change(this)" } %>
-            <% end %>
-          </td>
+          <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @sales_order.trade_company_id), { :include_blank => true }, { :class => "sales_order_trade_company_id mkendo_combobox", "required validationMessage" => "Please Enter Customer Company" , :style => "width: 400px;", :onchange => "sales_order_company_change(this)" } %></td>
 
           <td></td>
 
-          <td><b>Revision</b></td>
-          <td><%= f.text_field :revision, :value => 0, :class => "k-textbox" %></td>
+          <td><b>Revision *</b></td>
+          <td><%= f.text_field :revision, :value => 0, :class => "k-textbox", "required validationMessage" => "Please Enter Revision"  %></td>
 
           <td></td>
 
@@ -48,7 +52,7 @@
         </tr>
 
         <tr>
-          <td><b>P/O#</b></td>
+          <td><b>Customer P/O #</b></td>
           <td><%= f.text_field :purchase_order_no, :class => "k-textbox" %></td>
 
           <td></td>
@@ -61,14 +65,13 @@
           <td><b>Exp Date</b></td>
           <td><%= f.text_field :exp_date, :class => "mkendo_date" %></td>
         </tr>
+        
         <tr>
           <td><b>Sales Rep.</b></td>
           <td><%= f.text_field :sales_rep, :class => "k-textbox" %></td>
           <td></td>
           <td><b>Currency *</b></td>
-          <td><%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id),{ :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %>
-
-           </td>
+          <td><%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id),{ :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %></td>
         </tr>
 
         <tr>
@@ -87,14 +90,9 @@
   
       <%= render "new_sales_order_items", :sales_order => @sales_order %>
     </div>
+    <%= render "action_sales_order_entry" %>
   </div>
-
-  
-
-  
 <% end %>
-    
-<%= render "action_so_entry" %>
   
 <% content_for :jquery_script do %>
   <script>

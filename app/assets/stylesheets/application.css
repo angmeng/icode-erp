@@ -136,8 +136,8 @@ p#alert {
 /*=================================== MENU TOOL (END) =====================================*/
 
 /* Table Layout Design */
-table th, table td { padding: 0 5px 0 5px; vertical-align: middle; }
- 
+table th, table td  { padding: 0 5px 0 5px; vertical-align: middle; }
+.pad_wall           { padding: 0 5px 0 5px; vertical-align: middle; }
 
 /*=================================== WHITE TABLE - 100% width =====================================*/
 table.white-line-table {
@@ -302,7 +302,7 @@ table.normal_table_white td {
     
 
 
-.font_bold          { font-weight: bold; }
+.font_bold          { font-weight: bold; color: #003F59; }
 .header_content     { background-color: #FE9B00; }
 .header_title       { background-color: orange; }
 .header_line        { background-color: lightsteelblue; }
@@ -330,8 +330,8 @@ table.normal_table_white td {
 .remove_underline   { text-decoration: none; }
 .table_background   { background-color: white; }
 
-.disabled_button    { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: center; padding: 5px; }
-#disabled_on_left   { color: grey; background-color: white; cursor: default; }
+/*.disabled_button    { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: center; padding: 5px; }*/
+/*#disabled_on_left   { color: grey; background-color: white; cursor: default; }*/
 .disabled_menu      { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: left; }
 
 .title_head     { background-color:blue; padding: 0px 5px 0px 5px; }

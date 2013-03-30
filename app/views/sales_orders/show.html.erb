@@ -1,9 +1,9 @@
-<div style="background-color:blue"><strong style="color:white;">SHOW DETAILS OF SALES ORDERS</strong></div>
+<%= title_head "SHOW SALE ORDER DETAIL" %>
 
-<% if @sales_order.present? %>
+<div class="table_details">
   <table>
     <tr>
-      <td width="150"><b>SO No#</b></td>
+      <td width="150"><b>SO No #</b></td>
       <td><%= @sales_order.sales_order_no rescue '-' %></td>
       <td width="50"></td>
       <td width="100"><b>SO Date</b></td>
@@ -18,10 +18,10 @@
         <% end %>
       </td>
     </tr>
-    
+
     <tr>
       <td><b>Customer Company</b></td>
-      <td><%= @sales_order.trade_company.name rescue '-' %></td>
+      <td>[<%= @sales_order.trade_company.code rescue '-' %>] <%= @sales_order.trade_company.name rescue '-' %></td>
       <td></td>
       <td><b>Revision</b></td>
       <td><%= @sales_order.revision rescue '-' %></td>
@@ -29,7 +29,7 @@
       <td><b>Mfg Date</b></td>
       <td><%= @sales_order.mfg_date.strftime("%d-%m-%Y") rescue '-' %></td>
     </tr>
-    
+
     <tr>
       <td><b>Customer P/O#</b></td>
       <td><%= @sales_order.purchase_order_no rescue '-' %></td>
@@ -46,7 +46,7 @@
       <td><b>Exp Date</b></td>
       <td><%= @sales_order.exp_date.strftime("%d-%m-%Y") rescue '-' %></td>
     </tr>
-    
+
     <tr>
       <td><b>Sales Rep.</b></td>
       <td><%=@sales_order.sales_rep rescue '-' %></td>
@@ -54,7 +54,7 @@
       <td><b>Currency</b></td>
       <td><%= @sales_order.currency.name rescue '-' %></td>
     </tr>
-    
+
     <tr>
       <td><b>Updated By</b></td>
       <td><%= User.find_by_id(@sales_order.updated_by).name rescue '-' %></td>
@@ -63,14 +63,16 @@
       <td><%= @sales_order.trade_term.name rescue '-' %></td>
     </tr>
   </table>
+</div>
 
-  <hr/>
-  
-  <div class="item_scroll">
-    <%= render "so_items", :items => @sales_order.sales_order_items %>
-  </div>
-  
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+<hr/>
+
+<% if @sales_order.sales_order_items.present? %>
+  <div class="table_background"><%= render "so_items", :items => @sales_order.sales_order_items %></div>
+<% else %>
+  <div class="popup_form_table">Not Record Found</div>
 <% end %>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

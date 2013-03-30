@@ -11,12 +11,19 @@ class SalesOrderItemsController < ApplicationController
     end
   end
 
+  # Don't delete def show, because it related to jquery, is function sales_order_item_data(sel)
   def show
     @sales_order_item = SalesOrderItem.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sales_order_item }
+      format.html
+      format.json { 
+          if @sales_order_item.present?
+            render json: @sales_order_item.attributes.merge({ "jstatus" => true, :so_date => @sales_order_item.sales_order.so_date, :client_lot => @sales_order_item.sales_order.lot_no }) 
+          else
+            render json: { :jstatus => false }
+          end
+        }
     end
   end
 

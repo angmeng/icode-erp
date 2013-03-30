@@ -1,4 +1,4 @@
-<table id="delivery_order_h200" class="white-line-table target_table">
+<table class="white-line-table target_table">
   <thead>
     <tr style="background-color: gainsboro;">
       <th width="400">[SO No][Product ID][Description]</th>
@@ -14,6 +14,7 @@
       <th width="150">Client's Lot#</th>
       <th width="150">Client's P/O</th>
       <th width="150">Dept Cur Stock</th>
+      <th>Action</th>
     </tr>
   </thead>
 
@@ -24,28 +25,41 @@
       
       <tr class="<%= cycle('odd_line', 'even_line') %>">
       
-        <td align="center"><%= select_tag "datarow[0][sales_order_item_id]", options_for_select(product_finish_goods_with_combobox), :include_blank => true, :style => "width: 400px;", :onchange => "sales_order_data(this)" %></td>
+        <td align="center"><%= select_tag "datarow[0][sales_order_item_id]", options_for_select(@sales_order), :include_blank => true, :style => "width: 400px;", :onchange => "sales_order_item_data(this)", :class => "mkendo_combobox" %></td>
         <td align="center">
           <span id="so_date_0"></span>
-          <%= text_field_tag "datarow[0][so_date]", '', :placeholder => "dd-mm-yyyy" %>
+          <%= hidden_field_tag "datarow[0][so_date]", '', :placeholder => "dd-mm-yyyy" %>
         </td>
-        <td align="center"><%= text_field_tag "datarow[0][delivery_qty]" %></td>
+        <td align="center"><%= text_field_tag "datarow[0][delivery_qty]", '', :class => "k-textbox", :style => "width:50px;" %></td>
         <td align="center">
           <span id="so_order_qty_0"></span>
           <%= hidden_field_tag "datarow[0][order_qty]", '' %>
         </td>
-        <td align="center"><%= text_field_tag "datarow[0][unit_price]", '' %></td>
+        <td align="right">
+          <span id="unit_price_0"></span>
+          <%= hidden_field_tag "datarow[0][unit_price]", '', :size => 6 %>
+        </td>
         <td align="center">
           <span id="so_balance_qty_0"></span>
           <%= hidden_field_tag "datarow[0][balance_qty]", '' %>
         </td>
-        <td align="center"><%= text_field_tag "datarow[0][no_of_carton]", '' %></td>
-        <td align="center"><%= text_field_tag "datarow[0][gen_cur_stock]", '' %></td>        
+        <td align="center"><%= text_field_tag "datarow[0][no_of_carton]", '', :class => "k-textbox", :style => "width:50px;"  %></td>
+        <td align="center"><%= text_field_tag "datarow[0][gen_cur_stock]", '', :class => "k-textbox", :style => "width:50px;"  %></td>        
         <td align="center"><span id="so_status_0"></span></td>
-        <td align="center"><%= text_field_tag "datarow[0][part_no]", '' %></td> 
-        <td align="center"><%= text_field_tag "datarow[0][client_lot]", '' %></td> 
-        <td align="center"><%= text_field_tag "datarow[0][client_po]", '' %></td> 
+        <td align="center">
+          <span id="partno_0"></span>
+          <%= hidden_field_tag "datarow[0][part_no]", '' %>
+        </td> 
+        <td align="center">
+          <span id="clientLotNo_0"></span>
+          <%= hidden_field_tag "datarow[0][client_lot]", '' %>
+        </td> 
+        <td align="center">
+          <span id="clientPoNo_0"></span>
+          <%= hidden_field_tag "datarow[0][client_po]", '' %>
+        </td> 
         <td align="center"><%= text_field_tag "datarow[0][department]", '', :size => 2 %> <%= text_field_tag "datarow[0][dept_cur_stock]", '', :size => 7 %></td>
+        <td align="center"><%= remove_row_button  %></td>
       </tr>
       
     <% end %>

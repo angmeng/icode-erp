@@ -1,5 +1,7 @@
 $(document).ready(function() {
     
+    $(".digg_pagination").append('<i style="color: red;">*pg</i>');
+    
     $("#menu").kendoMenu({openOnClick: true});
       
     $('#checkall:checkbox').change(function () {
@@ -9,7 +11,7 @@ $(document).ready(function() {
     
     $("table.target_table").on('click','.remove_datarow',function(event){
         event.preventDefault();
-        if ($(this).parents('table').find('tr').length >  2) { 
+        if ($(this).parents('table').find('tr').length > 2) { 
             $(this).closest('tr').remove();
         }else{
             alert ('Must have at least one row!')
@@ -18,12 +20,11 @@ $(document).ready(function() {
     
     $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
     $("#panelbar").kendoPanelBar({expandMode: "single"});
-    $("#sales_order_trade_company_id").width(400);
     $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
     
     $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
     $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
-    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({format: "dd-MM-yyyy"}); 
+//    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({format: "dd-MM-yyyy"}); 
     $(".mkendo_combobox").kendoComboBox({filter: "contains"});
     $("#kendo_price").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     
@@ -460,10 +461,9 @@ $(document).ready(function() {
             packing = '<table class="generate_packing_method">'
             $.each(string, function(k, v){
                 packing += "<tr><td>"
-                packing += '<input id="packing_method_qty_" name="packing_method_qty[' + k + '][val]" size="8" type="text" value="0" /> ' + um + ' per ' + v
-                packing += '<input id="packing_method_per_" name="packing_method_per[' + k + '][val]" size="8" type="hidden" value="' + v + '" />'
+                packing += '<input id="packing_method_qty_" name="packing_method_qty[' + k + '][val]" type="text" value="0" class="k-textbox" style="width:80px;" /> ' + um + ' per ' + v
+                packing += '<input id="packing_method_per_" name="packing_method_per[' + k + '][val]" type="hidden" value="' + v + '" />'
                 packing += "</td></tr>"
-                
                 um = v
             }); 
             packing += "</table>"
@@ -479,36 +479,35 @@ $(document).ready(function() {
        return false; 
     });
     
-    $("#add_bottom_row_for_price_control").click(function(){
-        // add new row to table using addTableRow function
-        addTableRow_for_price_control($("table.target_table"));
- 
-        // prevent button redirecting to new page
-        return false;
-    });
+//    $("#add_bottom_row").click(function(){
+//        addTableRow($("table.target_table"));
+//        return false;
+//    });
     
-    $("#add_bottom_row_for_sales_order").click(function(){
-        // add new row to table using addTableRow function
-        addTableRow_for_sales_order($("table.target_table"));
- 
-        // prevent button redirecting to new page
-        return false;
-    });
+//    $("#add_bottom_row_for_price_control").click(function(){
+//        // add new row to table using addTableRow function
+//        addTableRow_for_price_control($("table.target_table"));
+// 
+//        // prevent button redirecting to new page
+//        return false;
+//    });
     
-    $("#add_bottom_row_for_delivery_order").click(function(){
-        addTableRow_for_delivery_order($("table.target_table"));
-        return false;
-    });
+//    $("#add_bottom_row_for_sales_order").click(function(){
+//        // add new row to table using addTableRow function
+//        addTableRow_for_sales_order($("table.target_table"));
+// 
+//        // prevent button redirecting to new page
+//        return false;
+//    });
+    
+//    $("#add_bottom_row_for_delivery_order").click(function(){
+//        addTableRow_for_delivery_order($("table.target_table"));
+//        return false;
+//    });
 
 
 
-    $("#add_bottom_row").click(function(){
-        // add new row to table using addTableRow function
-        addTableRow($("table.target_table"));
- 
-        // prevent button redirecting to new page
-        return false;
-    });
+
    
 });  
 
@@ -1021,17 +1020,12 @@ function sales_order_company_change(sel){
         $.ajax({
             dataType: "json",
             cache: false,
-            url: '/trade_companies/' + company_id ,
+            url: '/trade_companies/' + company_id,
             timeout: 2000,
             success: function(data){
-                if (data.trade_term_id != null){
-                    var term = data.trade_term_id
-                    $("select#sales_order_trade_term_id option").each(function(){
-                        if($(this).val() == term){
-                            $(this).attr("selected","selected");
-                            return false;
-                        }
-                    });
+                if (data.trade_term_id != null){                            
+                    var combobox = $("#sales_order_trade_term_id").data("kendoComboBox");
+                    combobox.value(data.trade_term_id);
                 }
             }
         });
@@ -1079,28 +1073,36 @@ function price_control_data(sel) {
             data: {'company_id' : company_id, 'product_id' : product_id},
             success: function(data){ 
                 
-                var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
-                var sellPrice = data.selling_price;
                 var value_date = '#datarow_' + number + '_old_eff_date';
                 var html_date  = '#old_date_' + number;
                 var value_sellPrice = '#datarow_' + number + '_old_unit_price';
                 var html_sellPrice  = '#old_up_' + number;
                 
-                if (myDate){
-                    var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
-                    $(value_date).val(k_date);
-                    $(html_date).html(k_date);
-                } else {
-                    $(value_date).val(' ');
-                    $(html_date).html('-');
-                }
+                if (data.jstatus == true){
                 
-                if (sellPrice){
-                    var f_num = parseFloat(sellPrice).toFixed(4);  
-                    $(value_sellPrice).val(f_num);
-                    $(html_sellPrice).html(f_num);
+                    var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
+                    var sellPrice = data.selling_price;
+
+                    if (myDate){
+                        var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
+                        $(value_date).val(k_date);
+                        $(html_date).html(k_date); } 
+                    else {
+                        $(value_date).val(' ');
+                        $(html_date).html('-'); }
+
+                    if (sellPrice){
+                        var f_num = parseFloat(sellPrice).toFixed(4);  
+                        $(value_sellPrice).val(f_num);
+                        $(html_sellPrice).html(f_num); }
+                    else {
+                        $(value_sellPrice).val(' ');
+                        $(html_sellPrice).html('-'); }
+                        
                 } else {
-                    $(value_sellPrice).val(' ');
+                    $(value_date).val("");
+                    $(html_date).html('-');
+                    $(value_sellPrice).val("");
                     $(html_sellPrice).html('-');
                 }
                 
@@ -1160,10 +1162,10 @@ function price_control_data_when_company(sel) {
 function product_customer_data(sel){
     var number = sel.name.match(/\[(\d+)\]/);
     var number = parseInt(number[1], 10);
-    var product_id = sel.options[sel.selectedIndex].value;;
+    var product_id = sel.options[sel.selectedIndex].value;
     var company_id = $("select.sales_order_trade_company_id option:selected").val();
     
-    if (company_id.length > 0){
+    if (company_id){
         $.ajax({
             type: "GET",
             dataType: "json",
@@ -1172,18 +1174,22 @@ function product_customer_data(sel){
             data: {'company_id' : company_id, 'product_id' : product_id},
             success: function(data){ 
                 
-                var sellPrice = data.selling_price;
-                
-                if (sellPrice){
-                    var f_num = parseFloat(sellPrice).toFixed(4);
-                    value_sellPrice = '#datarow_' + number + '_unit_price';
-                    html_sellPrice  = '#unit_price_' + number;
-                    $(value_sellPrice).val(f_num);
-                    $(html_sellPrice).html(f_num);
+                if (data.jstatus == true) {
+                    var sellPrice = data.selling_price;
+                    var partNo = data.part_no;
+                    var html_partNo = '#datarow_' + number + '_part_no';
+                    
+                    if (sellPrice){
+                        var f_num = parseFloat(sellPrice).toFixed(4);
+                        value_sellPrice = '#datarow_' + number + '_unit_price';
+                        $(value_sellPrice).val(f_num);
+//                        $(value_sellPrice).kendoNumericTextBox({ value: f_num });
+                    }
+                    
+                    if (partNo != null) { $(html_partNo).val(partNo); }
+                    
                 } else {
-                    alert("Unit Price is not found.");
-                    $(value_sellPrice).val(' ');
-                    $(html_sellPrice).html('-');
+                    alert("Unit Price has not found. Please create new product price control.");
                 }
                 
             }
@@ -1193,131 +1199,262 @@ function product_customer_data(sel){
     }
 }
 
-function addTableRow(table)
-{
-    var $tr = $(table).find("tbody tr:last").clone(false);
+function sales_order_item_data(sel){
+    var number = sel.name.match(/\[(\d+)\]/);
+    var number = parseInt(number[1], 10);
+    var sale_order_item = sel.options[sel.selectedIndex].value;
+    
+    if (sale_order_item){
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            cache: false,
+            url: '/sales_order_items/' + sale_order_item,
+            success: function(data){ 
+                
+                var myDate      = Date.parse(data.so_date, "yyyy-MM-dd");
+                var order_qty   = data.quantity;
+                var up          = data.unit_price;
+                var partNo      = data.part_no;
+                var clientLot   = data.client_lot;                
+                var clientPo    = data.customer_po;  
+                
+                if (data.jstatus == true){
+                    if (myDate){
+                        var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
+                        value_date = '#datarow_' + number + '_so_date';
+                        html_date  = '#so_date_' + number;
+                        $(value_date).val(k_date);
+                        $(html_date).html(k_date);
+                    } else {
+                        $(value_date).val(' ');
+                        $(html_date).html('-');
+                    }
+                }
+                if (order_qty){
+                    value_order = '#datarow_' + number + '_order_qty'; 
+                    html_order  = '#so_order_qty_' + number;
+                    $(value_order).val(order_qty);
+                    $(html_order).html(order_qty);
+                }
+                if (up){
+                    value_order = '#datarow_' + number + '_unit_price'; 
+                    html_order  = '#unit_price_' + number;
+                    $(value_order).val(up);
+                    $(html_order).html(up);
+                }
+                if (partNo){
+                    value_order = '#datarow_' + number + '_part_no'; 
+                    html_order  = '#partno_' + number;
+                    $(value_order).val(partNo);
+                    $(html_order).html(partNo);
+                }
+                if (clientLot) {
+                    value_order = '#datarow_' + number + '_client_lot'; 
+                    html_order  = '#clientLotNo_' + number;
+                    $(value_order).val(clientLot);
+                    $(html_order).html(clientLot);
+                }
+                if (clientPo) {
+                    value_order = '#datarow_' + number + '_client_po'; 
+                    html_order  = '#clientPoNo_' + number;
+                    $(value_order).val(clientPo);
+                    $(html_order).html(clientPo);
+                }
+            }
+        });
+    } else {
+        alert("Please select SO No.");
+    }
+}
+
+function addTableRow(table){
+    var $tr = $(table).find("tbody tr:last").clone(true);
     datarow_all_attributes($tr);
     $(table).find("tbody tr:last").after($tr);
     running_kendoui();
-};
+}
 
 function datarow_all_attributes(tr){
-    
-    tr.find('[name^=datarow]').attr('name', function() {
-        var index = this.name.match(/\[(\d+)\]/);
-        if (index != null && index.length > 1) {
-            var newIndex = parseInt(index[1], 10) + 1;
-            return this.name.replace(/\[(\d+)\]/, '[' + newIndex + ']');
+
+    tr.find('[name^=datarow]').each(function(k, elem) {
+        var str_id = $(this).attr('id');
+        if (typeof str_id != 'undefined'){
+            var index_one = str_id.match(/\_(\d+)\_/);
+            if (index_one != null && index_one.length > 1) {
+                var new_index_one = parseInt(index_one[1], 10) + 1;
+                var raise = str_id.replace(/\_(\d+)\_/g, '_' + new_index_one + '_');
+                $(this).attr('id', raise);
+                $(this).val('');
+            }
         }
-        return this.name;
     });
     
-    tr.find('[name^=datarow]').attr('id', function() {
-        var index_two = this.id.match(/\_(\d+)\_/);
-        if (index_two != null && index_two.length > 1) {
-            var newIndex = parseInt(index_two[1], 10) + 1;
-            return this.id.replace(/\_(\d+)\_/, '_' + newIndex + '_');
+    tr.find('[name^=datarow]').each(function(k, elem) {
+        var str_name = $(this).attr('name');
+        if (typeof str_name != 'undefined'){
+            var index_two = str_name.match(/\[(\d+)\]/);
+            if (index_two != null && index_two.length > 1) {
+                var new_index_two = parseInt(index_two[1], 10) + 1;
+                var raise = str_name.replace(/\[(\d+)\]/g, '[' + new_index_two + ']');
+                $(this).attr('name', raise);
+            }
         }
-        return this.id;  
     });
     
-    tr.find('[id^=old_date]').attr('id', function() {
-        var index_three = this.id.match(/\_(\d+)/);
-        if (index_three != null && index_three.length > 1) {
-            var newIndex = parseInt(index_three[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
+    tr.find('[id^=old_up]').each(function(k, elem) {
+        var oldUp = $(this).attr('id');
+        if (typeof oldUp != 'undefined'){
+            var index_three = oldUp.match(/\_(\d+)/);
+            if (index_three != null && index_three.length > 1) {
+                var new_index_three = parseInt(index_three[1], 10) + 1;
+                var raise = oldUp.replace(/\_(\d+)/g, '_' + new_index_three);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
         }
-        return this.id;
     });
     
-    tr.find('[id^=old_date]').html('');
-    
-    tr.find('[id^=old_up]').attr('id', function() {
-        var index_four = this.id.match(/\_(\d+)/);
-        if (index_four != null && index_four.length > 1) {
-            var newIndex = parseInt(index_four[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
+    tr.find('[id^=old_date]').each(function(k, elem) {
+        var oldDate = $(this).attr('id');
+        if (typeof oldDate != 'undefined'){
+            var index_four = oldDate.match(/\_(\d+)/);
+            if (index_four != null && index_four.length > 1) {
+                var new_index_four = parseInt(index_four[1], 10) + 1;
+                var raise = oldDate.replace(/\_(\d+)/g, '_' + new_index_four);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
         }
-        return this.id;   
     });
     
-    tr.find('[id^=old_up]').html('');
+    tr.find('[class^=k-invalid-msg]').each(function(k, elem) {
+        var dataFor = $(this).attr('data-for');
+        if (typeof dataFor != 'undefined'){
+            var index_five = dataFor.match(/\[(\d+)\]/);
+            if (index_five != null && index_five.length > 1) {
+                var new_index_five = parseInt(index_five[1], 10) + 1;
+                var raise = dataFor.replace(/\[(\d+)\]/g, '[' + new_index_five + ']');
+                $(this).attr('data-for', raise);
+            }
+        }
+    });
+    
+    tr.find('[id^=so_date]').each(function(k, elem) {
+        var soDate = $(this).attr('id');
+        if (typeof soDate != 'undefined'){
+            var index_six = soDate.match(/\_(\d+)/);
+            if (index_six != null && index_six.length > 1) {
+                var new_index_six = parseInt(index_six[1], 10) + 1;
+                var raise = soDate.replace(/\_(\d+)/g, '_' + new_index_six);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    tr.find('[id^=so_order_qty]').each(function(k, elem) {
+        var orderQty = $(this).attr('id');
+        if (typeof orderQty != 'undefined'){
+            var index_seven = orderQty.match(/\_(\d+)/);
+            if (index_seven != null && index_seven.length > 1) {
+                var new_index_seven = parseInt(index_seven[1], 10) + 1;
+                var raise = orderQty.replace(/\_(\d+)/g, '_' + new_index_seven);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    tr.find('[id^=unit_price]').each(function(k, elem) {
+        var uprice = $(this).attr('id');
+        if (typeof uprice != 'undefined'){
+            var index_eight = uprice.match(/\_(\d+)/);
+            if (index_eight != null && index_eight.length > 1) {
+                var new_index_eight = parseInt(index_eight[1], 10) + 1;
+                var raise = uprice.replace(/\_(\d+)/g, '_' + new_index_eight);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    tr.find('[id^=partno]').each(function(k, elem) {
+        var uprice = $(this).attr('id');
+        if (typeof uprice != 'undefined'){
+            var index_eight = uprice.match(/\_(\d+)/);
+            if (index_eight != null && index_eight.length > 1) {
+                var new_index_eight = parseInt(index_eight[1], 10) + 1;
+                var raise = uprice.replace(/\_(\d+)/g, '_' + new_index_eight);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    tr.find('[id^=clientLotNo]').each(function(k, elem) {
+        var cl = $(this).attr('id');
+        if (typeof cl != 'undefined'){
+            var index_ten = cl.match(/\_(\d+)/);
+            if (index_ten != null && index_ten.length > 1) {
+                var new_index_ten = parseInt(index_ten[1], 10) + 1;
+                var raise = cl.replace(/\_(\d+)/g, '_' + new_index_ten);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    tr.find('[id^=clientPoNo]').each(function(k, elem) {
+        var cpo = $(this).attr('id');
+        if (typeof cpo != 'undefined'){
+            var index_elev = cpo.match(/\_(\d+)/);
+            if (index_elev != null && index_elev.length > 1) {
+                var new_index_elev = parseInt(index_elev[1], 10) + 1;
+                var raise = cpo.replace(/\_(\d+)/g, '_' + new_index_elev);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+        
+    tr.find('[id^=so_balance_qty]').each(function(k, elem) {
+        var cpo = $(this).attr('id');
+        if (typeof cpo != 'undefined'){
+            var index_elev = cpo.match(/\_(\d+)/);
+            if (index_elev != null && index_elev.length > 1) {
+                var new_index_elev = parseInt(index_elev[1], 10) + 1;
+                var raise = cpo.replace(/\_(\d+)/g, '_' + new_index_elev);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    tr.find('[id^=so_status]').each(function(k, elem) {
+        var cpo = $(this).attr('id');
+        if (typeof cpo != 'undefined'){
+            var index_elev = cpo.match(/\_(\d+)/);
+            if (index_elev != null && index_elev.length > 1) {
+                var new_index_elev = parseInt(index_elev[1], 10) + 1;
+                var raise = cpo.replace(/\_(\d+)/g, '_' + new_index_elev);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    
+    
 }
 
 function running_kendoui(){
     $('select[class^="mkendo_combobox"]').kendoComboBox({filter: "contains"});
-    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+    
+//    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({min: 0, format: "n4"});
+//    $('input[class^="kendo_precision_0"]').kendoNumericTextBox({min: 0, format: "n"});
 }
-
-function datarow_id_and_name(tr){
-    tr.find('[name^=datarow]').attr('name', function() {
-        var index = this.name.match(/\[(\d+)\]/);
-        if (index != null && index.length > 1) {
-            var newIndex = parseInt(index[1], 10) + 1;
-            return this.name.replace(/\[(\d+)\]/, '[' + newIndex + ']');
-        }
-        return this.name;    
-    });
-    
-    tr.find('[name^=datarow]').attr('id', function() {
-        var index_two = this.id.match(/\_(\d+)\_/);
-        if (index_two != null && index_two.length > 1) {
-            var newIndex = parseInt(index_two[1], 10) + 1;
-            return this.id.replace(/\_(\d+)\_/, '_' + newIndex + '_');
-        }
-        return this.id;    
-    });
-}
-
-function addTableRow_for_price_control(table){
-    
-    var $tr = $(table).find("tbody tr:last").clone(false);
-    
-    datarow_id_and_name($tr);
-    
-    $tr.find('[id^=old_date]').attr('id', function() {
-        var index_three = this.id.match(/\_(\d+)/);
-        if (index_three != null && index_three.length > 1) {
-            var newIndex = parseInt(index_three[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $tr.find('[id^=old_up]').attr('id', function() {
-        var index_four = this.id.match(/\_(\d+)/);
-        if (index_four != null && index_four.length > 1) {
-            var newIndex = parseInt(index_four[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $(table).find("tbody tr:last").after($tr);
-    
-    $('select[class^="mkendo_combobox"]').kendoComboBox({filter: "contains"});
-    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
-    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
-};
-
-function addTableRow_for_sales_order(table)
-{
-    var $tr = $(table).find("tbody tr:last").clone(false);
-    
-    datarow_id_and_name($tr);
-    
-    $tr.find('[id^=unit_price]').attr('id', function() {
-        var index_three = this.id.match(/\_(\d+)/);
-        if (index_three != null && index_three.length > 1) {
-            var newIndex = parseInt(index_three[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $(table).find("tbody tr:last").after($tr);
-};
 
 function addTableRow_for_delivery_order(table)
 {

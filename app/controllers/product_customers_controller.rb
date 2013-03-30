@@ -1,4 +1,5 @@
 class ProductCustomersController < ApplicationController
+  before_filter :authenticate_user!
   # GET /product_customers
   # GET /product_customers.json
   def index
@@ -82,11 +83,15 @@ class ProductCustomersController < ApplicationController
   end
   
   def take_data
-    @product_customer = ProductCustomer.take_unit_price(params[:product_id], params[:company_id])
-    if @product_customer.present?
-      render json: @product_customer
+    @pc = ProductCustomer.take_unit_price(params[:product_id], params[:company_id])
+    @product = Product.find(params[:product_id])
+    if @pc.present?
+      render json: @pc.attributes.merge({"jstatus" => true, :part_no => @product.part_code })
+    else
+      render json: { :jstatus => false }
     end
   end
+  
   
   def matching_product_customer
     ev = []

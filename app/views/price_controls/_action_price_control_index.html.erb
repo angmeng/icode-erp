@@ -1,8 +1,8 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_NEW) %>
-    <%= link_to "New Product Price Control", new_price_control_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %>
+    <%= link_to "Add - Product Price Control Entry", new_price_control_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <span class="k-button">New Product Price Control</span>
+    <%= disabled_style("Add - Product Price Control Entry") %>
   <% end %>
 </div>
 
@@ -20,7 +20,7 @@
     
   <span><%= not_link_edit %></span>
   
-  <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_DROP_KIV) %>
+  <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_KIV) %>
     <span id="on_kiv"><%= not_link_kiv %></span>
   <% else %>
     <span><%= not_link_kiv %></span>

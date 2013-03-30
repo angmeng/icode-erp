@@ -21,8 +21,16 @@
         <td></td>
         <td><%= pid.product_code rescue '-' %></td>
         <td><%= pid.product.desc rescue '-' %></td>
-        <td align="center"><%= pid.product.part_no rescue '-' %></td>
-        <td align="right"><%= pid.product.current_price rescue '-' %></td>
+        <td align="center"><%= pid.product.part_code rescue '-' %></td>
+        <td align="right">
+          <% if pid.category_type == ProductCategory::NON_OPERATION or pid.category_type == ProductCategory::OPERATION %>
+            <%= four_precision(pid.product.product_vendor.unit_price) rescue '-' %>
+          <% elsif pid.category_type == ProductCategory::FINISH_GOOD %>
+            <%= four_precision(pid.product.product_customer.selling_price) rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
         <td align="center"><%= pid.product.current_stock rescue '-' %></td>
         <td align="center"><%= pid.product.unit_measurement.code rescue '-' %></td>
         <td align="center">

@@ -22,6 +22,7 @@ class SalesOrderItem < ActiveRecord::Base
   scope :db_pending, where(:status => SalesOrderItem::PENDING)
   
   def uppercase_text
-    self.customer_po.upcase! if self.customer_po?
+    self.customer_po.upcase!
+    self.part_no.upcase!
   end
 end
