@@ -61,12 +61,11 @@ $(document).ready(function () {
     var popup_content_height    = window_height - title_height - button_height - 12;
     var popup_tab_height        = popup_content_height - 50;
     
-//    $("#treeview").kendoTreeView().height(popup_content_height);  
     $("#treeview").kendoTreeView();
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
 
 
-  $('#products').dataTable({
+    $('#products').dataTable({
         "sPaginationType": "full_numbers",  // "bPaginate": false,
         "bJQueryUI": true,
         "bProcessing": true,
@@ -121,10 +120,6 @@ $(document).ready(function () {
             });
             
     }, 100);
-    
-
-    
-    
 });
 
 

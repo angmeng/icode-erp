@@ -77,7 +77,9 @@ class PriceControlsController < ApplicationController
   def take_old_unit_price_and_eff_date
     @pci = PriceControl.take_old_up_n_eff_date(params[:company_id], params[:product_id])
     if @pci.present?
-      render json: @pci
+      render json: @pci.attributes.merge({ "jstatus" => true }) 
+    else
+      render json: { :jstatus => false }
     end
   end
 end

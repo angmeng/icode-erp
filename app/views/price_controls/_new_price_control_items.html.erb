@@ -35,7 +35,8 @@
           <%= hidden_field_tag "datarow[0][old_eff_date]", '' %>
         </td>
         <td align="center" width="150">
-          <%= text_field_tag   "datarow[0][new_unit_price]", 0.0000, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Unit Price" %>
+          <%= text_field_tag   "datarow[0][new_unit_price]", 0.0000, "required validationMessage" => "Please Enter Unit Price" %>
+           <%#*:class => "kendo_precision_4",%>
           <span class="k-invalid-msg" data-for="datarow[0][new_unit_price]"></span>
         </td>
         <td align="center" width="150">

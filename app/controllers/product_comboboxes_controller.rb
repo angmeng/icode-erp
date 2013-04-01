@@ -4,7 +4,7 @@ class ProductComboboxesController < ApplicationController
   # GET /product_comboboxes.json
   def index
     @search             = ProductCombobox.search(params[:search])
-    @product_comboboxes = @search.all
+    @product_comboboxes = @search.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

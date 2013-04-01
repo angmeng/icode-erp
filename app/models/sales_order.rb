@@ -14,7 +14,16 @@ class SalesOrder < ActiveRecord::Base
   
   ACTIVE = 'Active'
   IN_PROGRESS = 'IP'
+  KEEP_IN_VIEW = "KIV"
   SALES = 1
+  
+  default_scope order("sales_order_no DESC")
+  
+  self.per_page = 50
+  
+  def self.db_active(search)
+    search.where(:status => SalesOrder::ACTIVE)
+  end
   
   def running_update
     update_attributes(:status => SalesOrder::IN_PROGRESS)
@@ -25,23 +34,25 @@ class SalesOrder < ActiveRecord::Base
   end
   
   def uppercase_text
-    self.purchase_order_no.upcase! if self.purchase_order_no?
-    self.sales_rep.upcase! if self.sales_rep?
+    self.purchase_order_no.upcase!
+    self.sales_rep.upcase!
+    self.lot_no.upcase!
   end
   
-  def self.running_sales_order_items(datarow, sales_order)
-    if datarow.present?
-      datarow.each do |key, content|
-        s_order = sales_order.sales_order_items.build(:product_id => content[:product_id], :quantity => content[:quantity], :unit_price => content[:unit_price], :eta => content[:eta_date], :customer_po => content[:customer_po], :part_no => content[:part_no], :status => SalesOrderItem::PENDING)
-        if s_order.valid?
-          return true
-        else
-          return false, msg = s_order.errors.full_messages
-          break;
-        end
-      end
-    end
-  end
+#  def self.running_sales_order_items(datarow, sales_order)
+#    if datarow.present?
+#      sales_order.sales_order_items.delete_all if sales_order.sales_order_items.present?
+#      datarow.each do |key, content|
+#        s_order = sales_order.sales_order_items.build(:product_id => content[:product_id], :quantity => content[:quantity], :unit_measurement_id => content[:unit_measurement_id], :unit_price => content[:unit_price], :eta => content[:eta_date], :customer_po => content[:customer_po], :part_no => content[:part_no], :status => SalesOrderItem::PENDING)
+#        if s_order.valid?
+#          return true
+#        else
+#          return false, msg = s_order.errors.full_messages
+#          break;
+#        end
+#      end
+#    end
+#  end
   
   def self.running_price_control_items(data, price_control)
     if data.present?
@@ -55,5 +66,17 @@ class SalesOrder < ActiveRecord::Base
         end
       end  
     end
+  end
+  
+  def self.so_pid_desc
+    mix = []
+    sale_orders = SalesOrder.where(:status => SalesOrder::ACTIVE)
+    sale_orders.each do |so|
+      so_no = so.sales_order_no
+      so.sales_order_items.each do |soi|
+        mix << ["[#{so_no rescue '-'}][#{soi.product.product_combobox.product_code rescue '-'}] #{soi.product.desc rescue '-'}", soi.id]
+      end
+    end
+    return mix
   end
 end

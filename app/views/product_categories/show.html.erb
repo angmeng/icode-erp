@@ -1,4 +1,4 @@
-<div class="title_head"><strong style="color:white;">SHOW PRODUCT CATEGORY DETAIL</strong></div>
+<%= title_head "SHOW PRODUCT CATEGORY DETAIL" %>
 
 <div class="popup_content">
   <table>
@@ -24,6 +24,8 @@
       <td><%= @product_category.desc rescue '-' %></td>
     </tr>
   </table>
+  
+  <hr/>
   
   <%= render "/products/show_checkboxes_of_field", :field_id => @field_id %>
 </div>

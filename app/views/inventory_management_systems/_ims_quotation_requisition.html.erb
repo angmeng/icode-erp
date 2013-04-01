@@ -3,358 +3,315 @@
     <% if action_name == "show" %>
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_MENU, checkboxes.include?(InventoryManagementSystem::QR_MENU), :disabled => true %> QUOTATION REQUISITION</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_N_PENDING, checkboxes.include?(InventoryManagementSystem::QR_NEW_N_PENDING), :disabled => true %> New & Pending QRs</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_ADD, checkboxes.include?(InventoryManagementSystem::QR_NEW_ADD), :disabled => true %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::QR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::QR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::QR_NEW_KIV_ITEM), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_NEW_PRINTABLE), :disabled => true %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_MENU) %> QUOTATION REQUISITION</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_ADD) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
         
        <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_APPROVED_REJECT, checkboxes.include?(InventoryManagementSystem::QR_APPROVED_REJECT), :disabled => true %> QR Approval / Reject Tasks</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_SHOW, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_EDIT, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_EDIT), :disabled => true %></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
           <td></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_PRINTABLE), :disabled => true %></td>
-          <% 5.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING), :disabled => true %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
+          <td></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td>Costing Sheet</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD), :disabled => true %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE), :disabled => true %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td>Costing Sheet Entry</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
 
        <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION), :disabled => true %> QR Transaction & Histories</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_PRINTABLE), :disabled => true %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_MAIL, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_MAIL), :disabled => true %></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
+          <td></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
           <td></td>
         </tr>
 
        <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV, checkboxes.include?(InventoryManagementSystem::QR_KIV), :disabled => true %> QR KIV</td>
-          <td></td><td><%#= "save" %></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV) %> QR KIV</td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::QR_KIV_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::QR_KIV_RECOVER), :disabled => true %></td>
-          <% 4.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
         
        <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU), :disabled => true %> COSTING SHEETS - KIV</td>
-          <td></td><td><%#= "save" %></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER), :disabled => true %></td>
-          <% 4.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
         
        <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_CUSTOMER_FEEDBACK, checkboxes.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK), :disabled => true %> QR Customer Feedback</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_SHOW, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_EDIT, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_KIV, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_PRINTABLE), :disabled => true %></td>
-          <% 5.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_COSTING, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_COSTING), :disabled => true %></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
+          <td></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_CUSTOMER_REGISTRATION, checkboxes.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION), :disabled => true %>Customer Registration</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD, checkboxes.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD), :disabled => true %></td>
-          <td><%#= "save" %></td>
-          <!--td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 10.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
+          <% 8.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION, checkboxes.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION), :disabled => true %>Product ID Registration</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD, checkboxes.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD), :disabled => true %></td>
-          <td><%#= "save" %></td>
-          <!--td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 10.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
+          <% 8.times do |td| %><td></td><% end %>
         </tr> 
         
-    <% else %>
+    <% else %> 
         
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_MENU, checkboxes.include?(InventoryManagementSystem::QR_MENU) %> QUOTATION REQUISITION</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_N_PENDING, checkboxes.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_ADD, checkboxes.include?(InventoryManagementSystem::QR_NEW_ADD) %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::QR_NEW_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::QR_NEW_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_MENU) %> QUOTATION REQUISITION</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_ADD) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+       <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
+          <td></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
+          <td></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_APPROVED_REJECT, checkboxes.include?(InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_SHOW, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_EDIT, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
-          <td></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
-          <% 5.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td>Costing Sheet</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td>Costing Sheet Entry</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
 
-        <tr>
+       <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_MAIL, checkboxes.include?(InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
+          <td></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
           <td></td>
         </tr>
 
-        <tr>
+       <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV, checkboxes.include?(InventoryManagementSystem::QR_KIV) %> QR KIV</td>
-          <td></td><td><%#= "save" %></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV) %> QR KIV</td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::QR_KIV_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+       <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+       <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
+          <td></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
-          <td></td><td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
-          <% 4.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
+          <% 8.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_CUSTOMER_FEEDBACK, checkboxes.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_SHOW, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_EDIT, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_KIV, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_PRINTABLE, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
-          <% 5.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_COSTING, checkboxes.include?(InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_CUSTOMER_REGISTRATION, checkboxes.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %>Customer Registration</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD, checkboxes.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
-          <td><%#= "save" %></td>
-          <!--td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION, checkboxes.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>Product ID Registration</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD, checkboxes.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
-          <td><%#= "save" %></td>
-          <!--td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
+          <% 8.times do |td| %><td></td><% end %>
+        </tr> 
         
     <% end %>
 
   <% else %>
     
-        <tr>
+      <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_MENU %> QUOTATION REQUISITION</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_N_PENDING %> New & Pending QRs</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_ADD %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_EDIT %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_KIV_ITEM %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_NEW_PRINTABLE %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::QR_MENU) %> QUOTATION REQUISITION</td>
+          <td><%= ims_new(InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_ADD) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+       <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_new(InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
+          <td></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
+          <td></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_APPROVED_REJECT %> QR Approval / Reject Tasks</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_EDIT %></td>
-          <td></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_PRINTABLE %></td>
-          <% 5.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING %></td>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td>Costing Sheet</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD %></td>
-          <td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td>Costing Sheet Entry</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
 
-        <tr>
+       <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION %> QR Transaction & Histories</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_EDIT %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_KIV %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_PRINTABLE %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_TRANSACTION_MAIL %></td>
+          <td><%= ims_new(InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
+          <td></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
           <td></td>
         </tr>
 
-        <tr>
+       <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV %> QR KIV</td>
-          <td></td><td><%#= "save" %></td>
+          <td><%= ims_new(InventoryManagementSystem::QR_KIV) %> QR KIV</td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_KIV_RECOVER %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_KIV_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+       <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+       <tr>
+          <td></td>
+          <td></td>
+          <td><%= ims_new(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
+          <td></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU %> COSTING SHEETS - KIV</td>
-          <td></td><td><%#= "save" %></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER %></td>
-          <% 4.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
+          <% 8.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_CUSTOMER_FEEDBACK %> QR Customer Feedback</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_EDIT %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_KIV %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_PRINTABLE %></td>
-          <% 5.times do |td| %><td></td><% end %>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::QR_FEEDBACK_COSTING %></td>
-        </tr>
-        
-                
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_CUSTOMER_REGISTRATION %>Customer Registration</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD %></td>
-          <td><%#= "save" %></td>
-          <!--td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
-      
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION %>Product ID Registration</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD %></td>
-          <td><%#= "save" %></td>
-          <!--td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 10.times do |td| %><td></td><% end %>
-        </tr>
+          <td><%= ims_new(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
+          <% 8.times do |td| %><td></td><% end %>
+        </tr> 
       
   <% end %>
 <%#*</table>%>

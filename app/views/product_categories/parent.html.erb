@@ -1,22 +1,24 @@
-<div class="title_head"><strong style="color:white;">GROUP</strong></div>
+<%= title_head "GROUP" %>
 
 <%= form_tag add_group_product_categories_path, :method => :post do %>
-  <div class="popup_content">
-    <table>
-      <tr>
-        <td><b>Code</b></td>
-        <td><%= text_field_tag :code, "", :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,4]'" %></td>
-      </tr>
-      <tr>
-        <td><b>Description</b></td>
-        <td><%= text_field_tag :desc, "", :class => "easyui-validatebox", "data-options" => "required: true, validType: 'length[2,40]'" %></td>
-      </tr>
-      <tr>
-        <td><%= hidden_field_tag :parent_id, 0 %></td>
-        <td><%= hidden_field_tag :icon, @icon %></td>
-        <td><%= hidden_field_tag :category_type, @category_type %></td>
-      </tr>
-    </table>
+  <div id="valid_group">
+    <div class="popup_content">
+      <table>
+        <tr>
+          <td><b>Code</b></td>
+          <td><%= text_field_tag :code, "", :class => "k-textbox", "required validationMessage" => "Please Enter Code" %></td>
+        </tr>
+        <tr>
+          <td><b>Description</b></td>
+          <td><%= text_field_tag :desc, "", :class => "k-textbox", "required validationMessage" => "Please Enter Description" %></td>
+        </tr>
+        <tr>
+          <td><%= hidden_field_tag :parent_id, 0 %></td>
+          <td><%= hidden_field_tag :icon, @icon %></td>
+          <td><%= hidden_field_tag :category_type, @category_type %></td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div class="icon_tag">
@@ -24,3 +26,5 @@
     <%= link_close_button %>
   </div>
 <% end %>
+
+<%= render "js_group" %>

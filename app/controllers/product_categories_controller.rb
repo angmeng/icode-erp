@@ -83,7 +83,7 @@ class ProductCategoriesController < ApplicationController
     respond_to do |format|
       if @new_category.save
         ProductManagement.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
-        format.html { redirect_to @new_category, :notice => 'Sub Group/Product Type was successfully created.' } 
+        format.html { redirect_to @new_category, :notice => 'Sub Group / Product Type was successfully created.' } 
         format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
       else
         format.html { render action: 'new' }
@@ -107,7 +107,7 @@ class ProductCategoriesController < ApplicationController
       @new_category = ProductCategory.find(params[:id])
       ProductManagement.update_product_type(@new_category, params[:product_category], params[:active_pid])
       ProductManagement.checkbox_field_edit(@new_category, params[:prod_field]) if @new_category.level == 1
-      redirect_to @new_category, notice: 'Editing Sub Group/Product Type was successfully updated.'
+      redirect_to @new_category, notice: 'Editing Sub Group / Product Type was successfully updated.'
     rescue ActiveRecord::StatementInvalid
       flash[:alert] = "Sorry. Something wrong. Please try again. Thanks."
       render action: 'edit'

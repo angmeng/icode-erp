@@ -1,0 +1,13 @@
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {   
+        
+        var validator = $("#valid_group").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
+<% end %>

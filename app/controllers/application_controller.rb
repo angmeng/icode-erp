@@ -159,8 +159,8 @@ class ApplicationController < ActionController::Base
     @product_non_operation_n_operation_with_pr_combobox ||= ProductCombobox.pr_comboboxes
   end
 
+  # Value as product_id, Display as [A0001] APPLE (M) SDN BHD
   def product_finish_goods_with_combobox
-#    @product_finish_goods ||= ProductCombobox.finish_goods
     @product_finish_goods_with_combobox = ProductCombobox.qr_comboboxes
   end
   

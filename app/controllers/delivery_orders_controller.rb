@@ -1,19 +1,17 @@
 class DeliveryOrdersController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox", :only => [:new, :show, :edit]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   
   def index
     @search = DeliveryOrder.search(params[:search])
-    @delivery_orders = @search.all
+    @delivery_orders = DeliveryOrder.search_do(@search)
+    @delivery_orders = @delivery_orders.paginate(:page => params[:page])
   end
 
-  # GET /delivery_orders/1
-  # GET /delivery_orders/1.json
   def show
     @delivery_order = DeliveryOrder.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @delivery_order }
     end
   end
@@ -22,6 +20,7 @@ class DeliveryOrdersController < ApplicationController
   # GET /delivery_orders/new.json
   def new
     @delivery_order = DeliveryOrder.new
+    @sales_order = SalesOrder.so_pid_desc
   end
 
   # GET /delivery_orders/1/edit
@@ -33,12 +32,9 @@ class DeliveryOrdersController < ApplicationController
   # POST /delivery_orders.json
   def create
     @delivery_order = DeliveryOrder.new(params[:delivery_order])
-    do_running = company.sn_deliver_order_no + 1
-    @delivery_order.do_no = do_running
     check_delivery_order, msg = DeliveryOrder.running_delivery_order_items(params[:datarow], @delivery_order)
-
     if @delivery_order.save and check_delivery_order.present?
-      company.update_attributes(:sn_deliver_order_no => do_running)
+      company.update_attributes(:sn_deliver_order_no => @delivery_order.do_no)
       redirect_to @delivery_order, notice: 'Delivery Order was successfully created.'
     else
       msg << @delivery_order.errors.full_messages

@@ -3,33 +3,39 @@
     <% if action_name == "show" %>
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::DO_MENU, checkboxes.include?(InventoryManagementSystem::DO_MENU), :disabled => true %> DELIVERY ORDER</td>
-          <!--td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW, checkboxes.include?(InventoryManagementSystem::PR_NEW), :disabled => true %> New & Pending PRs</td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_ADD_ITEMS, checkboxes.include?(InventoryManagementSystem::PR_NEW_ADD_ITEMS), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_SHOW, checkboxes.include?(InventoryManagementSystem::PR_NEW_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_EDIT, checkboxes.include?(InventoryManagementSystem::PR_NEW_EDIT), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_KIV, checkboxes.include?(InventoryManagementSystem::PR_NEW_KIV), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_NEW_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_NEW_PRINTABLE), :disabled => true %></td-->
-          <% 13.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_MENU) %> DELIVERY ORDER</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION) %> Delivery Orders Data</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_ENTRY) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
-        
     <% else %>
-        
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::DO_MENU, checkboxes.include?(InventoryManagementSystem::DO_MENU) %> DELIVERY ORDER</td>
-          <% 13.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_MENU) %> DELIVERY ORDER</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_TRANSACTION) %> Delivery Orders Data</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_ENTRY) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_TRANSACTION_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
         </tr>
-        
     <% end %>
-
   <% else %>
-    
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::DO_MENU %> DELIVERY ORDER</td>
-          <% 13.times do |td| %><td></td><% end %>
-        </tr> 
-      
+          <td><%= ims_new(InventoryManagementSystem::DO_MENU) %> DELIVERY ORDER</td>
+          <td><%= ims_new(InventoryManagementSystem::DO_TRANSACTION) %> Delivery Orders Data</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_ENTRY) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
   <% end %>
 <%#*</table>%>

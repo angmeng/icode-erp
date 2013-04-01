@@ -174,12 +174,15 @@ class InventoryManagementSystem < ActiveRecord::Base
  
 #===================================== SALES ORDER (START) =====================================================
   SO_MENU                               = 154
+  
+  SO_TRANSACTION                        = 193
+  SO_TRANSACTION_SHOW                   = 194
+  SO_TRANSACTION_EDIT                   = 195
+  SO_TRANSACTION_KIV                    = 196
+  SO_TRANSACTION_PRINTABLE              = 197
+  
   SO_ENTRY                              = 185
-  SO_ENTRY_ADD                          = 157
-  SO_ENTRY_SHOW                         = 186
-  SO_ENTRY_EDIT                         = 187
-  SO_ENTRY_KIV                          = 188
-  SO_ENTRY_PRINTABLE                    = 189
+  
   SO_CUSTOMER_REGISTRATION              = 181
   SO_CUSTOMER_REGISTRATION_ADD          = 182
   SO_PRODUCT_ID_REGISTRATION            = 183
@@ -189,13 +192,13 @@ class InventoryManagementSystem < ActiveRecord::Base
   SO_KIV_ITEM_SHOW                      = 191
   SO_KIV_ITEM_RECOVER                   = 192
   
-  SO_TRANSACTION                        = 193
-  SO_TRANSACTION_SHOW                   = 194
-  SO_TRANSACTION_EDIT                   = 195
-  SO_TRANSACTION_KIV                    = 196
-  SO_TRANSACTION_PRINTABLE              = 197
-  
   DO_MENU                               = 155
+  DO_TRANSACTION                        = 273
+  DO_ENTRY                              = 274
+  DO_TRANSACTION_SHOW                   = 275
+  DO_TRANSACTION_EDIT                   = 276
+  DO_TRANSACTION_KIV                    = 277
+  DO_TRANSACTION_PRINTABLE              = 278
   
   
 #===================================== SALES ORDER (END) =====================================================
@@ -385,14 +388,14 @@ class InventoryManagementSystem < ActiveRecord::Base
  ########## Price Control ########## 
   PRICE_CONTROL_MENU                                 = 258
   
-  PRICE_CONTROL_NEW                                  = 251
-  PRICE_CONTROL_ADD                                  = 252
-  PRICE_CONTROL_SAVE                                 = 253
+#  PRICE_CONTROL_ADD                                  = 252
+#  PRICE_CONTROL_SAVE                                 = 253
   
   PRICE_CONTROL_LISTING                              = 254
+  PRICE_CONTROL_NEW                                  = 251
   PRICE_CONTROL_SHOW                                 = 247
   PRICE_CONTROL_EDIT                                 = 248
-  PRICE_CONTROL_DROP_KIV                             = 249
+  PRICE_CONTROL_KIV                                  = 249
   PRICE_CONTROL_PRINTABLE                            = 250
   
   PRICE_CONTROL_LISTING_KIV                          = 255
@@ -409,7 +412,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   
  
-  #start at 271
+  #start at 279
 
 
   #====== ====== report ======= =======

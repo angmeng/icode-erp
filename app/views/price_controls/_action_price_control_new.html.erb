@@ -1,25 +1,12 @@
 <div class="left_icon_tag">
   <% unless action_name == "edit" %>
     <% unless @product.present? %>
-  
-      <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_ADD) %>
         <%= add_row_button("Add Item") %>
-      <% else %>
-        <%= nothing_link("Add Item") %>
-      <% end %>
-        
     <% end %>
   <% end %>
 </div>
 
 <div class="icon_tag">
-  
-  <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_SAVE) %>
-    <%= link_save_button %>
-  <% else %>
-    <%= not_link_save %>
-  <% end %>
-    
+  <%= link_save_button %>
   <%= link_close_button %>
-  
 </div>

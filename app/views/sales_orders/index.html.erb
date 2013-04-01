@@ -5,7 +5,7 @@
 <div><%= render "search_sales_orders" %></div>
 
 <% if @sales_orders.present? %>
-  <div class="table_background"><%= render "so_transaction", :so => @sales_orders %></div>
+  <div class="table_background"><%= render "listing_sale_orders", :so => @sales_orders %></div>
 <% else %>
   <div class="content">Not Record Found</div>
 <% end %>

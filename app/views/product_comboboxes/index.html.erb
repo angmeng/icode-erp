@@ -1,11 +1,11 @@
 <div class="title_head">
-  <strong style="color: white;">LISTING PRODUCTS</strong>
+  <strong style="color: white;">LISTING PRODUCT ID</strong>
   <%= search_button %>
 </div>
 <div class="search_engine"><%= render "search_combobox" %></div>
 
 <% if @product_comboboxes.present? %>
-  <%= render "listing_comboboxes", :combobox => @product_comboboxes %>
+  <div class="table_background"><%= render "listing_comboboxes", :combobox => @product_comboboxes %></div>
 <% else %>
   <div class="content">Not Record Found</div>
 <% end %>

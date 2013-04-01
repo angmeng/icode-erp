@@ -247,14 +247,21 @@
         <li style="width:150px;">
           Sales Order
           <ul>
-            <li><%= link_to "SO Transactions & Histories", sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-
-            <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
-              <li><%= link_to 'SO Entry', new_sales_order_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <% if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
+              <li><%= link_to "Sales Orders Data", sales_orders_path,:class => "k-button" %></li>
             <% else %>
-              <li class="text_gray">SO Entry</li>
+              <li class="text_gray">Sales Orders Data</li>
             <% end %>
 
+            <%# if roles.include?(InventoryManagementSystem::SO_KIV_ITEM) %>
+              <!--li><%#= link_to "KIV - Sales Order Items", kiv_sales_order_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
+            <%# else %>
+              <!--li class="text_gray">KIV - Sales Order Items</li-->
+            <%# end %>
+          </ul>
+        </li>
+      <% end %>
+        
             <%# if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
               <!--li><%#= link_to "Product ID Registration", product_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
             <%# else %>
@@ -267,19 +274,16 @@
               <%#*<li class="text_gray">Customer Registration</li>%>
             <%# end %>
 
-            <% if roles.include?(InventoryManagementSystem::SO_KIV_ITEM) %>
-              <li><%= link_to "KIV - Sales Order Items", kiv_sales_order_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-            <% else %>
-              <li class="text_gray">KIV - Sales Order Items</li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-
       <% if roles.include?(InventoryManagementSystem::DO_MENU) %>
         <li style="width:150px;">
           Delivery Order
           <ul>
+            <% if roles.include?(InventoryManagementSystem::DO_TRANSACTION) %>
+              <li><%= link_to "Delivery Orders Data", delivery_orders_path %></li>
+            <% else %>
+              <li class="text_gray">Delivery Orders Data</li>
+            <% end %>
+            
             <li><%#= link_to "Transactions", delivery_orders_path %></li>
             <li><%#= link_to "New", new_delivery_order_path %></li>
           </ul>
