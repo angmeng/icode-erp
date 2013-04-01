@@ -1,10 +1,10 @@
 <div id="popup_container">
   <div class="title_head"><strong style="color:white;">D/O Invoice REPORT</strong></div>
 
-<input type="checkbox" name="all" id="checkall" />Check All
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
   <div class="fix_1600x900_h450">
-    <%= form_tag pdf_do_so_documentation_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+    <%= form_tag pdf_do_so_documentation_report_reports_path ,:name=>"form1",:target=>"_blank" ,:method =>"get" do %>
     <table id="products" class="display">
       <%#*data-source="<%= pdf_do_so_documentation_report_reports_path(format: "json") %> 
               <thead>
@@ -28,7 +28,7 @@
     
               <tr class="<%= cycle("odd_line", "even_line") %>">
                
-                <td align="center"><%= check_box_tag "doc_ids[]" , doc.id %></td>
+                <td align="center"><%= check_box_tag "doc_ids[]" , doc.id  %></td>
                 <td align="center"><%= index + 1 %></td>
                 <td align="center"><%= doc.delivery_order.do_date rescue '-' %></td>
                 <td align="center"><%= doc.delivery_order.trade_company.name rescue '-' %> / 
@@ -74,5 +74,48 @@
 
       <%= link_close_button %>
     </div>
+
+   
+
+  <script type="text/javascript">
+
+      // function chkcontrol(doc_ids) {
+      //   var total=0;
+      //     for(var i=0; i < document.form1.ckb.length; i++){
+      //       if(document.form1.ckb[i].checked){
+      //       total = total +1;}
+      //       if(total > 1){
+      //       alert("Please Select only One")
+      //       document.form1.ckb[doc_ids].checked = false ;
+      //     return false;
+      //     }
+      //   }
+      // } 
+
+
+    // when user updates a checkbox.
+    $("input:checkbox").change(function(){
+ 
+    // total allowed to be checked.
+    var max_allowed = 1;
+ 
+    // count how many checked.
+    var checked = $("input:checked").size();
+ 
+    // perform test.
+    if ( checked > max_allowed ) {
+ 
+        // is more than the max so uncheck.
+        $(this).attr("checked", false);
+ 
+        // display error message.
+        alert("Please select a maximum of " + max_allowed + " options.");
+ 
+    }
+ 
+  });
+  </script>
+
+  
 
 
