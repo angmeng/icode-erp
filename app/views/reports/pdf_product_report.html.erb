@@ -12,7 +12,7 @@
                           
 				<th>No.</th>
         <th>Product ID</th>
-                                <!--td>Product Name</td-->
+        <th>Product Name</th>
 				<th>Description</th>
 				<th>Part No.</th>
 				<th>U/P(RM)</th>
@@ -26,12 +26,14 @@
 	<% @detail_product_report.each_with_index do |pri , index| %>
   <tr>
 		<td><%= index + 1 %></td>
-    <td align="center"><%= pri.product_code %><%#= render '/product_categories/join_product_category' , :pc => pri.product_category %></td>
-                <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
+    <td align="center"><%= pri.product_code rescue'-' %></td>
+    <%#= render '/product_categories/join_product_category' , :pc => pri.product_category %>
+    <!--td><%#= pri.product.product_combobox.product_code rescue '-'%></td-->
+    <td align="center"><%= pri.product.product_name rescue'-' %></td>
 		<td align="center"><%= pri.product.desc rescue '-'%></td>
-		<td align="center"><%= pri.product.part_no rescue '-'%></td>
-		<td align="center"><%= pri.product.selling_price rescue '-'%></td>
-		<td align="center"><%= pri.product.current_stock rescue '-'%></td>
+		<td align="center"><%= pri.product.part_code rescue '-'%></td>
+		<td align="right"><%= pri.product.selling_price rescue '-'%></td>
+		<td align="right"><%= pri.product.current_stock rescue '-'%></td>
 		<td align="center"><%= pri.product.unit_measurement.code rescue '-'%></td>
 	</tr>
   <% end %>

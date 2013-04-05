@@ -61,13 +61,14 @@
                         <td align="center"><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
                               
                       </tr>
+                     
           
 
                           <% if pri.amount.present? %>
                             <% arr << pri.amount * pri.amount %>
                           <% end %>
-
-                        <% end %>
+                           <% end %>
+                      <% end %>
                     </tbody>
                   </table>
 
@@ -87,19 +88,27 @@
           <%#*</fieldset>%>
 
     <div class="icon_tag" style="float:left">
-      <%# if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_EXCEL) %>
-      <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <% if roles.include?(InventoryManagementSystem::INVENTORY_REPORT_EXCEL) %>
+        <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
+      <% else %>
+        <% not_link_excel %>
+      <% end %> 
     </div>
 
     <div class="icon_tag" style="float:right;">
-
-      <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
+        <% if roles.include?(InventoryManagementSystem::INVENTORY_REPORT_SHOW) %>
+      <span><%= submit_tag "Show" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_show %>
+      <% end %>
       
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
 
-      
-      <span><%= submit_tag "PDF Report" , :class => "k-button" %><%#= link_to "PDF Report" , pdf_inventory_report_reports_path(:inventory_ids => @take_ids), :target=>"_blank" , :method => "get" ,:class =>"k-button" %></span>
+      <% if roles.include?(InventoryManagementSystem::INVENTORY_REPORT_PRINT) %>
+        <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <% else %>
+        <% not_link_printable %>
       <% end %>
 
       <%= link_close_button %>

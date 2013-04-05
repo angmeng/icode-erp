@@ -73,7 +73,7 @@ class ProductsDatatable
 
 	def current_objects(params={})
 	  current_page = (params[:iDisplayStart].to_i/params[:iDisplayLength].to_i rescue 0)+1
-	  @current_objects = InventoryHistory.paginate :page => current_page, 
+	  @current_objects = ProductCombobox.paginate :page => current_page, 
 	                                     :include => [:user], 
 	                                     :order => "#{datatable_columns(params[:iSortCol_0])} #{params[:sSortDir_0] || "DESC"}", 
 	                                     :conditions => conditions,
@@ -81,17 +81,25 @@ class ProductsDatatable
 	end
 
 	def total_objects(params={})
-	  @total_objects = InventoryHistory.count :include => [:user], :conditions => conditions
+	  @total_objects = ProductCombobox.count :include => [:user], :conditions => conditions
 	end
 
 	def datatable_columns(column_id)
 	  case column_id.to_i
 	  when 1
-	    return "objects.description"
+	    return "objects.product_code"
 	  when 2
-	    return "objects.created_at"
+	    return "objects.product.desc"
+	  when 3
+	    return "objects.product.part_code"
+	  when 4
+	    return "objects.product.current_stock"
+	  when 5
+	    return "objects.product.product_vendor.unit_price"
+	  when 6
+	    return "objects.product.product_customer.selling_price"  
 	  else
-	    return "users.name"
+	    return "objects.product.unit_measurement.code"
 	  end
 	end
 

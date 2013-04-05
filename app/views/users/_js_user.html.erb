@@ -852,6 +852,40 @@
                     }
                     break;
                     
+// report start from here //
+
+                    case 301:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '306')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '307')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '308')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '306')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '307')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '308')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+
+                    case 302:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '309')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '310')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '311')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '309')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '310')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '311')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+                    
                     
                     
                     

@@ -27,7 +27,7 @@
                 <td align="center"><%= check_box_tag "doc_ids[]" , doc.id  %></td>
                 <td align="center"><%= doc.do_no rescue '-' %></td>
                 <td align="center"><%= doc.trade_company.name rescue '-' %> / 
-                  <%= doc.delivery_order.trade_company.address_1 rescue'-' %></td>
+                  <%= doc.trade_company.address_1 rescue'-' %></td>
                 
                 <!-- <td align="center"><%= doc.delivery_order.trade_term.name rescue'-' %></td>
                 <td align="center"><%= doc.no_of_carton rescue '-' %></td> -->

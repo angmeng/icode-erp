@@ -1,34 +1,36 @@
 <div id="popup_container">
-  <div class="title_head"><strong style="color:white;">Sales Order Summary Report</strong></div>
-
-  <%= form_for @sales_order_summary_report, :url => sales_order_summary_report_reports_path  do |f| %>
+<div class="title_head"><strong style="color:white;">Sales Order Summary Report</strong></div>
+  
+  <!-- <div>
+  <%#= form_for @sales_order_summary_report, :url => sales_order_summary_report_reports_path  do |f| %>
     <table>
       <tr>
         <td>Trade Company Code :</td>
-        <td><%= f.text_field :trade_company_code_contains, :size => 12 %>
+        <td><%#= f.text_field :trade_company_code_contains, :size => 12 %>
 
         <td>Trade Company Name :</td>
-      	<td><%= f.text_field :trade_company_name_contains , :size => 12 %></td>
+      	<td><%#= f.text_field :trade_company_name_contains , :size => 12 %></td>
       </tr>
 
       <tr>
       	
       	<td>Customer P/O :</td>
-        <td><%= f.text_field :customer_po_contains , :size => 10 %></td>
+        <td><%#= f.text_field :customer_po_contains , :size => 10 %></td>
       </tr>
 
       <tr>
-      <td><%= f.submit "Search" %></td>
+      <td><%#= f.submit "Search" %></td>
        </tr>
     </table>
-  <% end %>
+  <%# end %>
+</div> -->
 
-<hr />
+
   <input type="checkbox" name="all" id="checkall" />Check All
 
       <div class="fix_1600x900_h450">
       	<%= form_tag pdf_sales_order_summary_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-      	<table id="grid_h495" >
+      	<table id="products" class="display" >
           <thead>
       		<tr class="header_line">
             <th></th>
@@ -53,23 +55,39 @@
       			<td align="center"><%= so.eta rescue'-' %></td>
       			<td align="center"><%= so.complete_qty rescue'-' %></td>
       		</tr>
+            <% end %>
+          
           </tbody>
-          <% end %>
+          
   	</table>
 	</div>
 
 </div>
 
   <div class="icon_tag" style="float:left">
-      <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+    <%# if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT_EXCEL) %>
+      <span><%#= submit_tag "Excel Report" , :class => "k-button" %></span> 
+      <%# else %>
+      <%= not_link_excel %>
+      <%# end %>
     </div>
 
   <div class="icon_tag" style="float:right;">
+      <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT_SHOW) %>
+        <span><%= submit_tag "Show" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_show %>
+      <% end %>
 
-      <span><%= submit_tag "Show" , :class => "k-button" %></span>
       <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
       <span><%= not_link_recover %></span>
-      <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
+
+      <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT_PRINT) %>
+        <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_printable %>
+      <% end %>
+
       <% end %>
         <%#= link_to "PDF report" , pdf_po_report_reports_path(:po_ids => @take_ids, :format => "pdf" ), :target=>"_blank" , :method => "get" ,:class =>"k-button" %>
 

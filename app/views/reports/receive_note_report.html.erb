@@ -1,7 +1,7 @@
 <div id="popup_container">
 <div class="title_head"><strong style="color:white;">Receive Note Report</strong></div>
 
-		<div>
+		<!-- <div>
 			<table>
 				<%= form_for @receive_note_report, :url => receive_note_report_reports_path  do |f| %>
 				<tr>
@@ -19,13 +19,13 @@
 				<% end %>
 			</table>
 		</div>
-
+ -->
 		<input type="checkbox" name="all" id="checkall" />Check All
 
 		<div class="fix_1600x900_h450">
 			
 			<%= form_tag pdf_receive_note_report_reports_path , :method => "get" , :target => "_blank" do %>
-			<table id="grid_h495" >
+			<table id="products" class="display">
 				<thead>
 				<tr class="header_line">
 					

@@ -1,6 +1,6 @@
 <div id="popup_container"> 
   <div class="title_head"><strong style="color:white;">Purchase Order Report</strong></div>
-  <div>
+  <!-- <div>
     <%= form_for @po_report, :url => po_report_reports_path  do |f| %>
       <table>
         <tr>
@@ -23,14 +23,14 @@
          </tr>
       </table>
     <% end %>
-  </div>
+  </div> -->
 
 
 <input type="checkbox" name="all" id="checkall" />Check All
 
       <div class="fix_1600x900_h450">
         <%= form_tag pdf_po_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-        	<table id="grid_h495" >
+        	<table id="products" class="display">
         		<thead>
         			<tr class="header_line">
                 <th></th>

@@ -25,17 +25,7 @@ class ProductsDatatable
 	  
 case column_id.to_i
     when 2
-      return "objects.do_date"
-    when 3
-      return "objects.delivery_order.do_date"
-    when 4
-      return "objects.delivery_order.trade_company.name"
-    when 5
-      return "objects.delivery_order.trade_company.trade_term.name"
-    when 6
-      return "objects.delivery_order.sales_tax_exemption_no"
-    when 7
-      return "objects.delivery_order.trade_company.sales_tax_no"     
+      return "objects.do_date"     
     else
       return "objects.delivery_order.sales_rep"
 	end

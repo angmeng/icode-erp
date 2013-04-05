@@ -1,7 +1,7 @@
 <div id="popup_container">
 <div class="title_head"><strong style="color:white;">Product Report</strong></div>
 
-<div>
+<!-- <div>
 	<%= form_for @product_report, :url => product_report_reports_path  do |f| %>
 	<table>
 		<thead>
@@ -9,8 +9,8 @@
 			<td>Product ID :</td>
 			<td><%= f.text_field :product_code_contains, :size => 10 %></td>
 			<%#= f.text_field :product_category_code_contains ,:size => 12 %>
-			<!--td>Product Name :</td>
-			<td><%#= f.text_field :product_product_name_contains, :size => 10 %></td-->
+			<td>Product Name :</td>
+			<td><%#= f.text_field :product_product_name_contains, :size => 10 %></td>
 			<td>Part No. :</td>
 			<td><%= f.text_field :product_part_code_contains , :size => 10 %></td>
 		</tr>
@@ -29,16 +29,16 @@
 	</table>
 	<% end %>
 
-</div>
+</div> -->
 
 <input type="checkbox" name="all" id="checkall" />Check All
 
 <div class="fix_1600x900_h450">
-	<fieldset>
+	
 	<%= form_tag pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-	<table id="grid_h495">
+	<table id="products" class="display" data-source="<%= product_report_reports_path(format: "json") %> ">
 		<thead>
-			<tr class="header_line">
+			<tr>
                 <th></th>
 				<th>No.</th>
 				 <%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %>
@@ -55,7 +55,7 @@
 	
 		<tbody>
 		<% @show_product_report.each_with_index do |pro , index| %>
-			<tr class="<%= cycle("odd_line", "even_line") %>">
+			<tr>
 		       
 		        <td align="center"><%= check_box_tag "pro_ids[]", pro.id %></td>
 				<td align="center"><%= index + 1 %></td>
@@ -64,14 +64,23 @@
 				<td align="center"><%= pro.product.desc rescue '-'%></td>
 				<td align="center"><%= pro.product.part_code rescue '-'%></td>
 				<td align="center"><%= pro.product.part_weight rescue '-' %>
-				<td align="center"><%= pro.product.selling_price rescue '-'%></td>
+				<td align="right">
+				 <% if pro.category_type == ProductCategory::NON_OPERATION or pro.category_type == ProductCategory::OPERATION %>
+				    <b style="color:blue;"><%= four_precision(pro.product.product_vendor.unit_price) rescue '-' %></b>
+				 <% elsif pro.category_type == ProductCategory::FINISH_GOOD %>
+				    <b style="color:green;"><%= four_precision(pro.product.product_customer.selling_price) rescue '-' %></b>
+				 <% else %>
+				    -
+				 <% end %>
+				</td>
 				<td align="center"><%= pro.product.current_stock rescue '-'%></td>
 				<td align="center"><%= pro.product.unit_measurement.code rescue '-'%></td>
 			</tr>
+			<% end %>
 		</tbody>
-	<% end %>
+		
 	</table>
-	</fieldset>
+	
 </div>
 	<div class="icon_tag" style="float:left">
 		<span><%= submit_tag "Excel Report" , :class=>"k-button"  %><%#= not_link_excel %><%#= submit_tag "Excel", :target => "_blank" ,  %>
