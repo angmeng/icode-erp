@@ -1,11 +1,11 @@
 <%= render "/quotation_request_forms/linking" %>
 
-<div class="title_head"><strong style="color:white;">CUSTOMER REGISTRATION</strong></div>
+<%= title_head "CUSTOMER REGISTRATION" %>
 
-  <% if @quotation_request_forms.present? %>
-    <div class="table_background"><%= render "registration_company", :company => @quotation_request_forms %></div>
-  <% else %>
-    <div class="linking_content">Not Record Found</div>
-  <% end %>
+<% if @quotation_request_forms.present? %>
+  <div class="table_background"><%= render "registration_company", :company => @quotation_request_forms %></div>
+<% else %>
+  <div class="linking_content">Not Record Found</div>
+<% end %>
 
 <%= render "action_customer_registration" %>

@@ -1,9 +1,9 @@
 <%= render "linking" %> 
 
-<div class="title_head"><strong style="color:white;">VENDOR SELECTION</strong></div>
+<%= title_head "VENDOR SELECTION" %>
 
 <% if @pending_vendor.present? %>
-  <div class="table_color"><%= render "/purchase_orders/pending_approval", :pending => @pending_vendor %></div>
+  <div class="table_background"><%= render "/purchase_orders/pending_approval", :pending => @pending_vendor %></div>
 <% else %>
   <div class="linking_content">No Record Found</div>
 <% end %>

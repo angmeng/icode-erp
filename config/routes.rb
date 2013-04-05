@@ -203,18 +203,18 @@ Merp::Application.routes.draw do
     collection do
       get "kiv"
     end
-    member do
-      put "recover"
-    end
+    put "recover", :on => :member
   end
   
 
   resources :sales_orders do
     collection do
       get "customer_registration"
-      get "product_registration"
-      get "production"
+      get "kiv"
+#      get "product_registration"
+#      get "production"
     end
+    put "recover", :on => :member
   end
 
   resources :sales_tax_exemption_items

@@ -1,0 +1,17 @@
+<div id="searching">
+  <%= form_for @search do |f| %>
+    <table>
+      <tr>
+        <td><b>Trade Company</b></td>
+        <td>
+          <% if @search.trade_company_id_equals.present? %>
+            <%= f.select :trade_company_id_equals, options_for_select(trade_company_customer_with_code, @search.trade_company_id_equals), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %>
+          <% else %>
+            <%= f.select :trade_company_id_equals, options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %>
+          <% end %>
+        </td>
+        <td><%= submit_tag "Search", :class => "k-button" %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

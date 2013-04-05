@@ -1,0 +1,21 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_NEW) %>
+    <%= link_to "Add - New Product Price Control", new_price_control_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
+  <% else %>
+    <%= disabled_style("Add - New Product Price Control") %>
+  <% end %>
+</div>
+
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%= will_paginate @product_customers, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
+<div class="icon_tag">
+  <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_HISTORY) %>
+    <span id="on_history" showClass="show_without_refresh_page_1600x900"><%= disabled_style("History") %></span>
+  <% else %>
+    <%= disabled_style("History") %>
+  <% end %>
+  
+  <%= link_home_button %>
+</div>

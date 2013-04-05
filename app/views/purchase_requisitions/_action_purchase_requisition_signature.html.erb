@@ -7,13 +7,13 @@
   <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE_SHOW) %>
     <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_show %></span>
+    <%= not_link_show %>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE_EDIT) %>
     <span id="on_edit" editClass="iframe_1600x900"><%= not_link_edit %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_edit %></span>
+    <%= not_link_edit %>
   <% end %>
 
   <span><%= not_link_kiv %></span>
@@ -21,7 +21,7 @@
   <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE_PRINTABLE) %>
     <span id="on_printable"><%= not_link_printable %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_printable %></span>
+    <%= not_link_printable %>
   <% end %>
    
   <%= link_home_button %> 

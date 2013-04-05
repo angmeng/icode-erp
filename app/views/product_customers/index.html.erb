@@ -1,27 +1,10 @@
-<h1>Listing product_customers</h1>
+<%= title_head "PRODUCT PRICE CONTROLS DATA - CUSTOMERS" %>
+<%= render "search_price_control_customer" %>
 
-<table>
-  <tr>
-    <th>Product</th>
-    <th>Trade company</th>
-    <th>Selling price</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @product_customers.each do |product_customer| %>
-  <tr>
-    <td><%= product_customer.product_id %></td>
-    <td><%= product_customer.trade_company_id %></td>
-    <td><%= product_customer.selling_price %></td>
-    <td><%= link_to 'Show', product_customer %></td>
-    <td><%= link_to 'Edit', edit_product_customer_path(product_customer) %></td>
-    <td><%= link_to 'Destroy', product_customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if @product_customers.present? %>
+  <div class="table_background"><%= render "customer_price_listing", :lists => @product_customers %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Product customer', new_product_customer_path %>
+  
+<%= render "action_index" %>

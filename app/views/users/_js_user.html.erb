@@ -1,5 +1,20 @@
 <% content_for :jquery_script do %>
   <script>
+    function busyHours(){
+        <% if action_name == "new_user_entry" %>
+          var hyper = "/users/generator_user"
+        <% elsif action_name == "edit" %>
+          var hyper = window.location.pathname
+        <% end %>
+
+        $('*').css('cursor','progress');
+        $.ajax({
+            type: "POST",
+            url: hyper,
+            complete: function(){ $('*').css('cursor','auto'); }
+        });
+    }
+    
     $(document).ready(function() {
         var validator = $("#valid_user_form").kendoValidator().data("kendoValidator");
         
@@ -10,12 +25,12 @@
         });
         
         $("#save_button").click(function() {
-            if (validator.validate()) {}
-            else { alert("Invalid Data Form..."); return false; } 
+            if (validator.validate()) { busyHours(); } 
+            else { alert("Invalid Data Form..."); return false; }
         });
         
         
-    //================================= INVENTORY MANAGEMENT SYSTEM - CHECKBOXES =================================================
+        //===== ===== INVENTORY MANAGEMENT SYSTEM - CHECKBOXES ===== =====
         $('input:checkbox[name="inventory_management_system[]"]').click(function() {
             var checkbox_value = $(this).attr("value");
             var checked = $(this).is(':checked');
@@ -652,6 +667,9 @@
                             else if ($(this).attr("value") == '195')  {$(this).attr('checked', false);}
                             else if ($(this).attr("value") == '196')  {$(this).attr('checked', false);}
                             else if ($(this).attr("value") == '197')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '287')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '285')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '286')  {$(this).attr('checked', false);}
                         })
                     }
                     break;
@@ -661,6 +679,7 @@
                         $('input:checkbox[name="inventory_management_system[]"]').each( function() {
                             if      ($(this).attr("value") == '185')  {$(this).attr('checked', true);}
                             else if ($(this).attr("value") == '194')  {$(this).attr('checked', true);}
+                            else if ($(this).attr("value") == '195')  {$(this).attr('checked', true);}
                         })
                     } else {
                         $('input:checkbox[name="inventory_management_system[]"]').each( function() {
@@ -669,6 +688,19 @@
                             else if ($(this).attr("value") == '195')  {$(this).attr('checked', false);}
                             else if ($(this).attr("value") == '196')  {$(this).attr('checked', false);}
                             else if ($(this).attr("value") == '197')  {$(this).attr('checked', false);}
+                        })
+                    }
+                    break;
+                    
+                case 287:
+                    if (checked == true){  
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '285')  {$(this).attr('checked', true);}
+                        })
+                    } else {
+                        $('input:checkbox[name="inventory_management_system[]"]').each( function() {
+                            if      ($(this).attr("value") == '285')  {$(this).attr('checked', false);}
+                            else if ($(this).attr("value") == '286')  {$(this).attr('checked', false);}
                         })
                     }
                     break;

@@ -571,16 +571,15 @@
 
         $("#save_button").click(function() {
             if (validator.validate()) {
-               $('*').css('cursor','progress');   
+               $('*').css('cursor','wait');
                $.ajax({  
                  type: "POST",
                  url: "/quotation_request_forms",
-                 success: function(){  
-                   $('*').css('cursor','default');   
-                 }  
+                 success: function(){ $('*').css('cursor','auto'); },
+                 error:   function(){ $('*').css('cursor','auto'); }
                });
             } 
-            else { alert("Oop, there is invalid data in the form."); }
+            else { alert("Invalid Data Form..."); return false; }
         });
         
         

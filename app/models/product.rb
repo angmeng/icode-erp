@@ -20,6 +20,7 @@ class Product < ActiveRecord::Base
   has_one    :sales_order_item
   has_one    :product_combobox
   has_one    :product_customer
+  has_one    :product_vendor
   has_one    :stock_out
   
   has_many   :price_control_items, :dependent => :destroy
@@ -28,8 +29,8 @@ class Product < ActiveRecord::Base
   has_many   :sales_tax_exemption_items, :dependent => :destroy
   has_many   :packing_quantities, :dependent => :destroy
   
-  has_many :product_vendors, :dependent => :destroy
-  accepts_nested_attributes_for :product_vendors, :reject_if => lambda { |a| a[:trade_company_id].blank? }, :allow_destroy => true
+#  has_many :product_vendors, :dependent => :destroy
+#  accepts_nested_attributes_for :product_vendors, :reject_if => lambda { |a| a[:trade_company_id].blank? }, :allow_destroy => true
   
   validates :product_category_id, :presence => true
   validates :part_no, :tarif_code, :length => { :maximum => 40 }

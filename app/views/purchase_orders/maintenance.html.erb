@@ -1,9 +1,9 @@
 <%= render "linking" %>
 
-<div class="title_head"><strong style="color:white;">PR-REPAIR</strong></div>
+<%= title_head "PR-REPAIR" %>
 
 <% if @maintenance.present? %>
-  <div class="table_color"><%= render "pr_repair", :maintenance => @maintenance %></div>
+  <div class="table_background"><%= render "pr_repair", :maintenance => @maintenance %></div>
 <% else %>
   <div class="linking_content">No Record Found</div>
 <% end %>

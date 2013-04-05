@@ -34,16 +34,17 @@
           <span id="old_date_0"></span>
           <%= hidden_field_tag "datarow[0][old_eff_date]", '' %>
         </td>
+        
         <td align="center" width="150">
-          <%= text_field_tag   "datarow[0][new_unit_price]", 0.0000, "required validationMessage" => "Please Enter Unit Price" %>
-           <%#*:class => "kendo_precision_4",%>
+          <%= text_field_tag   "datarow[0][new_unit_price]", 0.0000, :class => "numberKey k-textbox", "required validationMessage" => "Please Enter Unit Price" %>
           <span class="k-invalid-msg" data-for="datarow[0][new_unit_price]"></span>
-        </td>
+        </td>        
+        
         <td align="center" width="150">
           <%= text_field_tag   "datarow[0][new_eff_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Eff Date" %>
           <span class="k-invalid-msg" data-for="datarow[0][new_eff_date]"></span>
         </td>
-        <td align="center"><%= remove_row_button  %></td>
+        <td align="center"><%= remove_row_button %></td>
       </tr>
 
     <% end %>

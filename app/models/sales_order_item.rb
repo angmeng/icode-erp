@@ -10,8 +10,7 @@ class SalesOrderItem < ActiveRecord::Base
   belongs_to :sales_order
   belongs_to :trade_company
   
-  validates :product_id, :quantity, :unit_price, :eta, :presence => true
-#  :unit_measurement_id, 
+  validates :product_id, :quantity, :unit_price, :eta, :unit_measurement_id, :presence => true
   
   PENDING  = "PD"
   PRODUCTION = 'PDT'
@@ -22,7 +21,7 @@ class SalesOrderItem < ActiveRecord::Base
   scope :db_pending, where(:status => SalesOrderItem::PENDING)
   
   def uppercase_text
-    self.customer_po.upcase!
-    self.part_no.upcase!
+    self.customer_po.upcase! if self.customer_po.present?
+    self.part_no.upcase!     if self.part_no.present?
   end
 end

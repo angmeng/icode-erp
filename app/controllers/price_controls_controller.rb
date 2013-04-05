@@ -22,11 +22,12 @@ class PriceControlsController < ApplicationController
   end
 
   def create
+    company_pp_no = company.sn_product_price_no + 1
     @price_control = PriceControl.new(params[:price_control])
     check_price_control, msg = PriceControl.running_price_control_items(params[:datarow], @price_control)
     
     if @price_control.save && check_price_control.present?
-      company.update_attributes(:sn_product_price_no => @price_control.pp_no)
+      company.update_attributes(:sn_product_price_no => company_pp_no)
       PriceControl.generating_product_customer(@price_control)
       redirect_to @price_control, notice: "PP No # #{@price_control.pp_no} was successfully created."
     else

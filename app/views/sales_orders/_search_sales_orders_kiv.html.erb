@@ -1,6 +1,5 @@
 <div class="search_engine">
-  <%= form_for @search do |f| %>
+  <%= form_for @search, :url => kiv_sales_orders_path do |f| %>
     <%= render "search_engine_form", :f => f %>
-    <%= search_button_with_f(f) %>
   <% end %>
 </div>

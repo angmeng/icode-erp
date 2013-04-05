@@ -17,7 +17,7 @@ class PriceControl < ActiveRecord::Base
   CLOSE = "Close"
   KEEP_IN_VIEW = "KIV"
   
-  default_scope order("pp_no DESC")
+  default_scope order("pp_date DESC")
   
   self.per_page = 50
   
@@ -49,14 +49,15 @@ class PriceControl < ActiveRecord::Base
   
   def self.generating_product_customer(price_control)
     company_id = price_control.trade_company_id  # must be customer ID
+    currencyId = price_control.currency_id
     
     price_control.price_control_items.each do |price_control_item|
       product_id = price_control_item.product_id
       prod_cus = ProductCustomer.find_by_product_id_and_trade_company_id(product_id, company_id)
       if prod_cus.present?
-        prod_cus.update_attributes!(:selling_price => price_control_item.new_unit_price, :eff_date => price_control_item.new_eff_date)
+        prod_cus.update_attributes!(:selling_price => price_control_item.new_unit_price, :eff_date => price_control_item.new_eff_date, :currency_id => currencyId.to_i)
       else
-        ProductCustomer.create!(:product_id => product_id, :trade_company_id => company_id, :selling_price => price_control_item.new_unit_price, :eff_date => price_control_item.new_eff_date)
+        ProductCustomer.create!(:product_id => product_id, :trade_company_id => company_id, :selling_price => price_control_item.new_unit_price, :eff_date => price_control_item.new_eff_date, :currency_id => currencyId.to_i)
       end
     end
   end

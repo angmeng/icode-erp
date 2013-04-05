@@ -12,7 +12,7 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
   
     <% else %>
@@ -26,7 +26,7 @@
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
     <% end %>
@@ -42,7 +42,7 @@
         <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
 
   <% end %>

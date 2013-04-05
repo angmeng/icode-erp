@@ -1,26 +1,25 @@
 <%= form_for @search do |f| %>
-<table>
-		<thead>
-		<tr>
-			<td>[Group]-[sub-group] :</td>
-			<td><%= f.text_field :product_code_contains, :size => 10 %></td>
-			<%#= f.text_field :product_category_code_contains ,:size => 12 %>
-			<td>Product Name :</td>
-			<td><%= f.text_field :product_product_name_contains, :size => 10 %></td>
-			<td>Part No. :</td>
-			<td><%= f.text_field :product_part_no_contains , :size => 10 %></td>
-		</tr>
-		<tr>
-			<td>Tarif Code :</td>
-			<td><%= f.text_field :product_tarif_code_contains, :size => 10 %></td>
-			<td>Description :</td>
-			<td><%= f.text_field :product_desc_contains, :size => 10 %></td>
-		</tr>
-		<tr>
-			<td><%= submit_tag "search" %></td>
-
-		</tr>
-		<thead>
-
-	</table>
+  <table>
+    <tr>
+      <td><b>Product ID</b></td>
+      <td><%= f.text_field :product_code_contains, :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b>Description</b></td>
+      <td><%= f.text_field :product_desc_contains, :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b>Part Code</b></td>
+      <td><%= f.text_field :product_part_code_contains , :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b>Tarif Code</b></td>
+      <td><%= f.text_field :product_tarif_code_contains, :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b>Old Product ID</b></td>
+      <td><%= f.text_field :old_product_code_contains, :class => "k-textbox" %></td>
+    </tr>
+  </table>
+  <%= search_button_with_f(f) %>
 <% end %>

@@ -14,4 +14,12 @@ class PriceControlItem < ActiveRecord::Base
   
   scope :db_active,    where(:status => PriceControlItem::ACTIVE)
 #  scope :db_confirmed, where(:status => PriceControlItem::CONFIRMED)
+
+  def price_control_trade_company_id
+    self.price_control.trade_company_id
+  end
+  
+  def self.ordering_price_control_item
+    joins([:price_control, :price_control => :trade_company]).order("code ASC, price_controls.pp_date DESC")
+  end
 end

@@ -25,6 +25,10 @@ class SalesOrder < ActiveRecord::Base
     search.where(:status => SalesOrder::ACTIVE)
   end
   
+  def self.db_kiv(search)
+    search.where(:status => SalesOrder::KEEP_IN_VIEW)
+  end
+  
   def running_update
     update_attributes(:status => SalesOrder::IN_PROGRESS)
   end
@@ -34,9 +38,9 @@ class SalesOrder < ActiveRecord::Base
   end
   
   def uppercase_text
-    self.purchase_order_no.upcase!
-    self.sales_rep.upcase!
-    self.lot_no.upcase!
+    self.purchase_order_no.upcase!  if self.purchase_order_no.present?
+    self.sales_rep.upcase!          if self.sales_rep.present?
+    self.lot_no.upcase!             if self.lot_no.present?
   end
   
 #  def self.running_sales_order_items(datarow, sales_order)

@@ -279,9 +279,9 @@ ActiveRecord::Schema.define(:version => 20130322160022) do
   create_table "delivery_orders", :force => true do |t|
     t.integer  "do_no"
     t.integer  "trade_company_id"
-    t.integer  "sales_tax",           :default => 0
+    t.integer  "sales_tax",                                          :default => 0
     t.integer  "type_of_sale_id"
-    t.float    "tport_c"
+    t.decimal  "tport_c",             :precision => 10, :scale => 2, :default => 0.0
     t.integer  "currency_id"
     t.integer  "bk_two"
     t.integer  "trade_term_id"
@@ -289,10 +289,10 @@ ActiveRecord::Schema.define(:version => 20130322160022) do
     t.integer  "transport_id"
     t.string   "sales_rep"
     t.string   "sales_tax_exemption"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
     t.date     "do_date"
-    t.string   "status",              :default => "Active"
+    t.string   "status",                                             :default => "Active"
   end
 
   add_index "delivery_orders", ["currency_id"], :name => "index_delivery_orders_on_currency_id"
@@ -438,7 +438,7 @@ ActiveRecord::Schema.define(:version => 20130322160022) do
   add_index "price_control_items", ["user_id"], :name => "index_price_control_items_on_user_id"
 
   create_table "price_controls", :force => true do |t|
-    t.integer  "pp_no"
+    t.string   "pp_no"
     t.date     "pp_date"
     t.integer  "trade_company_id"
     t.string   "reference"
@@ -488,6 +488,7 @@ ActiveRecord::Schema.define(:version => 20130322160022) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.date     "eff_date"
+    t.integer  "currency_id"
   end
 
   add_index "product_customers", ["product_id"], :name => "index_product_customers_on_product_id"
@@ -517,6 +518,7 @@ ActiveRecord::Schema.define(:version => 20130322160022) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "unit_price",       :default => 0.0
+    t.integer  "currency_id"
   end
 
   add_index "product_vendors", ["product_id"], :name => "index_product_vendors_on_product_id"
@@ -526,10 +528,6 @@ ActiveRecord::Schema.define(:version => 20130322160022) do
     t.string   "code"
     t.integer  "unit_measurement_id"
     t.string   "desc"
-    t.string   "color_grade"
-    t.string   "version"
-    t.string   "model"
-    t.string   "part_no"
     t.string   "tarif_code"
     t.decimal  "part_weight",                   :precision => 10, :scale => 6, :default => 0.0
     t.decimal  "selling_price",                 :precision => 10, :scale => 5, :default => 0.0

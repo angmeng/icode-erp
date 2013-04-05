@@ -1,0 +1,21 @@
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%= will_paginate @sales_orders, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::SO_KIV_SHOW) %>
+    <span id="on_show_kiv" showClass="show_without_refresh_page_1600x900"><%= not_link_binary %></span>
+  <% else %>
+    <%= not_link_binary %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::SO_KIV_RECOVER) %>
+    <span id="on_recover"><%= not_link_recover %></span>
+  <% else %>
+    <%= not_link_recover %>
+  <% end %>
+   
+  <%= link_home_button %>
+
+</div>

@@ -13,17 +13,15 @@
           <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_TRANSACTION_PRINTABLE) %></td>
           <% 4.times do |td| %><td></td><% end %>
         </tr>
-
-        <!--tr>
-          <td></td>
-          <td></td>
-          <td><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM), :disabled => true %>SO KIV Items</td>
-          <td></td>
-          <%# 4.times do |td| %><td></td><%# end %>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_SHOW, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_SHOW), :disabled => true %></td>
-          <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::SO_KIV_ITEM_RECOVER, checkboxes.include?(InventoryManagementSystem::SO_KIV_ITEM_RECOVER), :disabled => true %></td>
-          <%# 4.times do |td| %><td></td><%# end %>
-        </tr-->
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_KIV) %> Sales Order Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
         
     <% else %>
        
@@ -37,6 +35,15 @@
           <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_TRANSACTION_KIV) %></td>
           <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_TRANSACTION_PRINTABLE) %></td>
           <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_KIV) %> Sales Order Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
         
     <% end %>
@@ -53,6 +60,15 @@
         <td align="center"><%= ims_new(InventoryManagementSystem::SO_TRANSACTION_KIV) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::SO_TRANSACTION_PRINTABLE) %></td>
         <% 4.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_new(InventoryManagementSystem::SO_KIV) %> Sales Order Data - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_new(InventoryManagementSystem::SO_KIV_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::SO_KIV_RECOVER) %></td>
+        <% 2.times do |td| %><td></td><% end %>
       </tr>
       
   <% end %>
