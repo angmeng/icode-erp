@@ -39,6 +39,7 @@ class DeliveryOrdersController < ApplicationController
       flash[:alert] = msg.join(', ')
       render action: "new"
     end
+
   end
 
   def update

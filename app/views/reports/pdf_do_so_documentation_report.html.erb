@@ -1,21 +1,37 @@
 <div class="invoice_layout">
 
 <% if @detail_invoice_documentation_report.present? %>
+<% arr = [] %>
+<% array = [] %>
+<%# count = 0 %>
 <% @detail_invoice_documentation_report.each_with_index do |p , index| %>
+
+<!-- 	<%# if count % 6 == 0 %>  
+	<div style="page-break-before: always;">
+
+	 
+
+ -->
 	<div>
+	
 	<table style="width:100%">
 		<tr>
-			<td style="width:11cm;">
-					<div class="part1" style="margin-left:70px;"><%= p.delivery_order.trade_company.name %> /
+			<td style="width:10cm;">
+					<div class="part1"><%= p.delivery_order.trade_company.name %> /
 						<%= p.delivery_order.trade_company.address_1 %>
+						<%= p.delivery_order.trade_company.address_2 %>
+						<%= p.delivery_order.trade_company.address_3 %>
+						<%= p.delivery_order.trade_company.tel_no_1 %>
+						<%= p.delivery_order.trade_company.tel_no_2 %>
+						<%= p.delivery_order.trade_company.fax_no %>
 					</div>
 				
 				
 			</td>
-			<td style="width:1cm;"></td>
+			<td style="width:2cm;"></td>
 			<td style="width:8cm;">
 				<div>
-					<div style="margin-left:4.5cm;margin-bottom:1cm;">
+					<div class="part2" style="margin-left:4.5cm;">
 					<div><%= p.delivery_order.do_no rescue'-' %></div>
 					<div><%= p.delivery_order.do_date rescue'-' %></div>
 					<div><%= p.delivery_order.trade_term.name rescue'-' %></div>
@@ -28,7 +44,9 @@
 			</td>
 		</tr>
 	</table>
-	</div>
+</div>
+	
+
 	<br />
 	<div style="margin-left:5cm;">
 		<div>
@@ -75,33 +93,79 @@
 		</div>
 	</div>
 	
-
-	<table class="fix_h350_w100_bottom">	
-		<tr>
-			<th style="width:1%;"></th>
-			<th style="width:20%;"></th>
-			<th style="width:30%;"></th>
-			<th style="width:10%;"></th>
-			<th style="width:15%;"></th>
-			<th style="width:15%;"></th>
-			<th style="width:15%;"></th>
-		</tr>
-	    <tr>
-	      <td align="center"><%= index + 1 %></td>
-	      <td align="left"><%= p.client_lot rescue'-' %> / <%= p.client_po %></td>
-	      <td align="center"><%= p.part_no rescue'-' %></td>
-	      <td align="left"><%= p.no_of_carton rescue'-' %></td>
-	      <td align="center"><%= p.delivery_qty rescue'-' %></td>
-	      <td align="right"><%= p.unit_price rescue'-' %></td>
-	      <td align="right"><%= iproduct(p.delivery_qty, p.unit_price) %></td>
-	    </tr>
 	
+	
+	<table class="fix_h350_w100_bottom">	
+		<thead>
+		<tr>
+			<th width="10"></th>
+			<th width="50"></th>
+			<th width="80"></th>
+			<th width="20"></th>
+			<th width="50"></th>
+			<th width="30"></th>
+			<th width="30"></th>
+		</tr>
+	</thead>
+	<tbody>
+	    <tr> 
+	      <td align="center"><%= index + 1 %></td>
+	      <td align="center"><%= p.client_lot rescue'-' %> / <%= p.client_po %></td>
+	      <td align="center"><%= p.part_no rescue'-' %> <%= p.sales_order_item.product.desc rescue'-' %> </td>
+	      <td align="center"><%= p.no_of_carton rescue'-' %></td>
+	      <td align="center"><%= p.delivery_qty rescue'-' %> <%= p.sales_order_item_id.unit_measurement rescue'-' %></td>
+	      	<% array << p.no_of_carton %>
+	      <td align="right"><%= p.unit_price rescue'-' %></td>
+	      	
+	      <td align="right"><%= iproduct(p.delivery_qty, p.unit_price) %></td>
+	      	<% arr << p.delivery_qty * p.unit_price %>
+	    </tr>
+
+	
+      
+        <%# count += 1 %>
+        <% end %>
+        <tr>
+        	<td></td>
+        	<td></td>
+        	<td align="right">Total :</td>
+        	<td><%= two_precision(array.sum) %></td>
+        	<td></td>
+        	<td></td>
+        	<td align="right"><%= two_precision(arr.sum) %></td>
+        </tr>
+
+	   <tr>
+	   	   <% 5.times do |td| %><td></td><% end %>
+           <td align="center">+ S/Tax 0%:</td>
+          <% @detail_invoice_documentation_report.each do |e| %>
+           <td align="right"><%= e.delivery_order.sales_tax rescue'0.0' %></td>
+           
+        </tr>
+        <tr>
+        	<% 5.times do |td| %><td></td><% end %>
+           <td align="center">+ T/Charges:</td>
+           <td align="right">100<%#= e.delivery_order.tport_c rescue'0.0' %></td>
+           <% arr << e.delivery_order.sales_tax + 100 %>
+          <% end %>
+       </tr>
+       <tr>
+        	<% 6.times do |td| %><td></td><% end %>
+           <td align="right"><%= two_precision(arr.sum) %></td>
+       </tr>
+		</tbody>
 	</table>
 
 
 
-	<% end %>
+	
 
+
+
+
+
+	
+ 
 	<% elsif @detail_delivery_order_documentation_report.present? %>
 	<% @detail_delivery_order_documentation_report.each_with_index do |d , index| %>
 	<div>
@@ -110,6 +174,11 @@
 			<td style="width:11cm;">
 					<div class="part1" style="margin-left:70px;"><%= d.delivery_order.trade_company.name %> /
 						<%= d.delivery_order.trade_company.address_1 %>
+						<%= d.delivery_order.trade_company.address_2 %>
+						<%= d.delivery_order.trade_company.address_3 %>
+						<%= d.delivery_order.trade_company.tel_no_1 %>
+						<%= d.delivery_order.trade_company.tel_no_2 %>
+						<%= d.delivery_order.trade_company.fax_no %>
 					</div>
 				
 				
@@ -117,7 +186,7 @@
 			<td style="width:1cm;"></td>
 			<td style="width:8cm;">
 				<div>
-					<div style="margin-left:4.5cm;margin-bottom:1cm;">
+					<div style="margin-left:4.5cm;margin-bottom:3cm;">
 					<div><%= d.delivery_order.do_no rescue'-' %></div>
 					<div><%= d.delivery_order.do_date rescue'-' %></div>
 					<div><%= d.delivery_order.trade_term.name rescue'-' %></div>
@@ -178,13 +247,13 @@
 	</div>
 	<table class="fix_h350_w100_bottom">	
 		<tr>
-			<th style="width:1%;"></th>
-			<th style="width:20%;"></th>
-			<th style="width:30%;"></th>
-			<th style="width:10%;"></th>
-			<th style="width:15%;"></th>
-			<th style="width:15%;"></th>
-			<th style="width:15%;"></th>
+			<th width="10"></th>
+			<th width="50"></th>
+			<th width="80"></th>
+			<th width="20"></th>
+			<th width="50"></th>
+			<th width="30"></th>
+			<th width="30"></th>
 		</tr>
 	    <tr>
 	      <td align="center"><%= index + 1 %></td>
@@ -215,7 +284,6 @@
 
 table
 {
-width:100%;
 font-family:"Times New Roman";
 }
 th
@@ -239,29 +307,33 @@ height:20px;
 	margin-left: 70px;
 }*/
 
-.part2 {
-  /*border-bottom: 4px;*/
-  /*border-style: solid;*/
-  height: 120px;
-  width: 100%;
-}
-
 .part1 {
   height: 150px;
   /*border-style: solid;*/
   width: 100%;
+  margin-left: 2cm;
+  margin-top: 1cm;
 }
+
+.part2 {
+  /*border-bottom: 4px;*/
+  /*border-style: solid;*/
+  /*height: 120px;
+  width: 100%;*/
+  margin-bottom: 2cm;
+}
+
+
 
 .fix_h350_w100_bottom {
     width:100%;
     border-width: 350px;
     
-    margin-top: 0cm;
 }
 
 .fix_h350_w100_bottom th{
 	height:50px;
-	
+	border:1px solid black;
 }
 
 </style>

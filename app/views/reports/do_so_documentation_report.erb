@@ -1,5 +1,5 @@
 <div id="popup_container">
-  <div class="title_head"><strong style="color:white;">D/O Invoice REPORT</strong></div>
+  <div class="title_head"><strong style="color:white;">Print D/O Invoice </strong></div>
 
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
@@ -10,13 +10,9 @@
               <thead>
                 <tr class="header_line">
                   <th></th>
-                  <th>Date</th>
+                  <th>DO No.</th>
                   <th>Trade Company</th>
-                  <th>Currency</th>
-                  <th>Term</th>
-                  <th>Sales Tax</th>
-                  <th>Sales Tax No.</th>
-                  <th>Sales Rep.</th>
+                  
                   <!-- <th>Term</th>
                   <th>Carton</th> -->
                   <%#*<th>Quantity</th>%>
@@ -29,14 +25,9 @@
               <tr class="<%= cycle("odd_line", "even_line") %>">
                
                 <td align="center"><%= check_box_tag "doc_ids[]" , doc.id  %></td>
-                <td align="center"><%= index + 1 %></td>
-                <td align="center"><%= doc.delivery_order.do_date rescue '-' %></td>
-                <td align="center"><%= doc.delivery_order.trade_company.name rescue '-' %> / 
+                <td align="center"><%= doc.do_no rescue '-' %></td>
+                <td align="center"><%= doc.trade_company.name rescue '-' %> / 
                   <%= doc.delivery_order.trade_company.address_1 rescue'-' %></td>
-                <td align="center"><%= doc.delivery_order.trade_company.trade_term.name rescue'-' %></td>
-                <td align="center"><%= doc.delivery_order.sales_tax_exemption_no rescue'-' %></td>
-                <td align="center"><%= doc.delivery_order.trade_company.sales_tax_no rescue'-'%></td>
-                <td align="center"><%= doc.delivery_order.sales_rep rescue'-'%></td>
                 
                 <!-- <td align="center"><%= doc.delivery_order.trade_term.name rescue'-' %></td>
                 <td align="center"><%= doc.no_of_carton rescue '-' %></td> -->
@@ -54,7 +45,7 @@
       <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
 
       <% if roles.include?(InventoryManagementSystem::INVOICE_DOCUMENTATION_REPORT_PRINT) %>
-        <span><%= submit_tag "Print Invoice Report" , :class =>"k-button" %></span>
+        <span><%= submit_tag "Print Invoice" , :class =>"k-button" %></span>
       <% else %>
         <%= not_link_printable %>
       <% end %>
@@ -66,7 +57,7 @@
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
         <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT_PRINT) %>
-          <span><%= submit_tag "Print D/O Report" , :class => "k-button" %></span>
+          <span><%= submit_tag "Print D/O" , :class => "k-button" %></span>
         <% else %>
           <%= not_link_printable %>
         <% end %>
