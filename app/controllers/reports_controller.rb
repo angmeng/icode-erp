@@ -383,7 +383,7 @@ end
   end
 
   def pdf_do_so_documentation_report
-    if params[:commit] == "Print D/O Report"
+    if params[:commit] == "Print D/O"
        if params[:doc_ids].present?
        @detail_delivery_order_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
@@ -392,17 +392,17 @@ end
                                 :type => 'application/pdf' ,
                                 :disposition => "attachement" )
       end
-    elsif params[:commit] == "Print Invoice Report"
+    elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
        @detail_invoice_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
-       html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
-        @kit = PDFKit.new(html)
-        send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
-                                :type => 'application/pdf' ,
-                                :disposition => "attachement" )
-      end
+       # html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+       #  @kit = PDFKit.new(html)
+       #  send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
+       #                          :type => 'application/pdf' ,
+       #                          :disposition => "attachement" )
+      end 
       else
-      redirect_to delivery_order_report_reports_path
+      redirect_to do_so_documentation_report_reports_path
     end
   end
 
@@ -529,7 +529,7 @@ end
   end
 
   def do_so_documentation_report
-    @do_so_documentation_report = DeliveryOrderItem.search(params[:search])
+    @do_so_documentation_report = DeliveryOrder.search(params[:search])
     @show_do_so_documentation_report = @do_so_documentation_report.all
   end
 
@@ -555,3 +555,18 @@ end
  #   @field_id = ProductCategory.all_field_id(@listing_categories) if @listing_categories.present?
  #   @show_product = @listing_categories.product if @listing_categories.present?
  # end
+
+ # private
+
+ #  def acion_button(doc_ids)
+ #    @temporary_id = doc_ids
+ #    if @temporary_id == 
+ #      alert("abc")
+ #    else
+ #        scope :non_operation_kiv, where
+ #        ("category_type = ? and status = ?", 
+ #          ProductCategory::NON_OPERATION, ProductCategory::KEEP_IN_VIEW)
+
+ #    end 
+ #  end 
+

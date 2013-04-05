@@ -53,11 +53,15 @@
             <%= current_user.name %>
             <%= f.hidden_field :updated_by, :value => current_user.id %>
           </td>
+          
         </tr>
 
         <tr>
           <td><b>Transport *</b></td>
           <td><%= f.select :transport_id, options_from_collection_for_select(transport, :id, :name, @delivery_order.transport_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Transport" }   %></td>
+          <td></td>
+          <!-- <td><b>Authorize Print Invoice</b></td>
+          <td><%= f.check_box :authorize_print %></td> -->
         </tr>
 
         <tr>

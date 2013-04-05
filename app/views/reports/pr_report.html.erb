@@ -72,7 +72,11 @@
 
     <div class="icon_tag" style="float:right;">
 
+      <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT) %>
       <span><%= submit_tag "Show" , :class => "k-button" %></span>
+      <% else %>
+      <%= not_link_show %>
+      <% end %>
       <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
       <span><%= not_link_recover %></span>
       <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT) %>

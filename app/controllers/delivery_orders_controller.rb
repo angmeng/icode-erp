@@ -41,6 +41,7 @@ class DeliveryOrdersController < ApplicationController
       flash[:alert] = msg.join(', ')
       render action: "new"
     end
+
   end
 
   # PUT /delivery_orders/1
