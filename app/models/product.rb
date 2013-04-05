@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :code, :color_grade, :opening_stock, :current_stock, :cutoff_date, :desc, :model, :part_no, :part_weight, :selling_price, :tarif_code, :unit_measurement_id, :version, :product_category_id, :product_vendors_attributes, :product_name, :unit_price, :sales_tax_exemption_id, :quotation_request_form_id, :effective_date,
+  attr_accessible :code, :opening_stock, :current_stock, :cutoff_date, :desc, :part_weight, :selling_price, :tarif_code, :unit_measurement_id, :product_category_id, :product_vendors_attributes, :product_name, :unit_price, :sales_tax_exemption_id, :quotation_request_form_id, :effective_date,
                   :product_type, :gsm, :width, :width_um, :length, :length_um, :height, :height_um, :tickness, :tickness_um, :origin, :brand, :grade,
                   :packing_method, :packing_qty, :container_no, :seal_no, :despatch_advise,
                   :size, :model_no, :reorder_no, :art_no, :ref_no, :work_order_no, :mfg_date, :exp_date, :film_no, :bar_code,
@@ -33,7 +33,7 @@ class Product < ActiveRecord::Base
 #  accepts_nested_attributes_for :product_vendors, :reject_if => lambda { |a| a[:trade_company_id].blank? }, :allow_destroy => true
   
   validates :product_category_id, :presence => true
-  validates :part_no, :tarif_code, :length => { :maximum => 40 }
+  validates :part_code, :tarif_code, :length => { :maximum => 40 }
   validates :desc, :length => { :maximum => 255 }
   
   ACTIVE = "Active"
@@ -77,7 +77,7 @@ class Product < ActiveRecord::Base
       self.desc.upcase! 
       self.desc.strip!
     end
-    self.part_no.upcase! if self.part_no.present?
+    self.part_code.upcase! if self.part_code.present?
     self.tarif_code.upcase! if self.tarif_code.present?
     self.origin.upcase! if self.origin.present?
     self.brand.upcase! if self.brand.present?
@@ -96,7 +96,6 @@ class Product < ActiveRecord::Base
     self.bar_code.upcase! if self.bar_code.present?
     self.lot_no.upcase! if self.lot_no.present?
     self.item_code.upcase! if self.item_code.present?
-    self.part_code.upcase! if self.part_code.present?
     self.pantone_code.upcase! if self.pantone_code.present?
     self.color.upcase! if self.color.present?
     self.serial_no.upcase! if self.serial_no.present?

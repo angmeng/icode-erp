@@ -54,6 +54,6 @@ gem 'turbolinks'
 gem 'mime-types'
 
 
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
 
 

@@ -293,15 +293,15 @@ $(document).ready(function() {
         var row_id = $(this).attr("rowsId");
         
         if(row_id) {
-            var add_class = $("#on_add_customer, #on_add_product").attr("addClass");
-            var show_class = $("#on_show, #on_show_kiv, #on_history").attr("showClass");
-            var edit_class = $("#on_edit").attr("editClass");
-            var apply_class = $("#on_apply, #on_add_product_id").attr("applyClass");
-            var apply_vendor_select_class = $("#on_apply_vendor_select").attr("applyClass");
+            var add_class                   = $("#on_add_customer, #on_add_product").attr("addClass");
+            var show_class                  = $("#on_show, #on_show_kiv, #on_history").attr("showClass");
+            var edit_class                  = $("#on_edit").attr("editClass");
+            var apply_class                 = $("#on_apply, #on_add_product_id").attr("applyClass");
+            var apply_vendor_select_class   = $("#on_apply_vendor_select").attr("applyClass");
             var apply_proposed_vendor_class = $("#on_apply_proposed_vendor").attr("applyClass");
-            var apply_vendor_reg_class = $("#on_apply_vendor_reg").attr("applyClass");
-            var apply_make_po_class = $("#on_apply_make_po").attr("applyClass");
-            var cost_class = $("#on_cost").attr("costClass");
+            var apply_vendor_reg_class      = $("#on_apply_vendor_reg").attr("applyClass");
+            var apply_make_po_class         = $("#on_apply_make_po").attr("applyClass");
+            var cost_class                  = $("#on_cost").attr("costClass");
             
             var link_show      = "/" + controller_Name + "/" + row_id;
             var link_edit      = "/" + controller_Name + "/" + row_id + "/edit";
