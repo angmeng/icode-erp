@@ -60,8 +60,10 @@
           <td><b>Transport *</b></td>
           <td><%= f.select :transport_id, options_from_collection_for_select(transport, :id, :name, @delivery_order.transport_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Transport" }   %></td>
           <td></td>
+          <% if user_is_admin? %>
           <!-- <td><b>Authorize Print Invoice</b></td>
-          <td><%= f.check_box :authorize_print %></td> -->
+          <td><%#= f.check_box :authorize_print %></td> for give authorize to boss let staff print invoice again  --> 
+          <% end %>
         </tr>
 
         <tr>

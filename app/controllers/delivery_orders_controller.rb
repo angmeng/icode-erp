@@ -37,6 +37,7 @@ class DeliveryOrdersController < ApplicationController
       company.update_attributes(:sn_deliver_order_no => @delivery_order.do_no)
       redirect_to @delivery_order, notice: 'Delivery Order was successfully created.'
     else
+      msg.present? ? msg : msg = []
       msg << @delivery_order.errors.full_messages
       flash[:alert] = msg.join(', ')
       render action: "new"
