@@ -90,6 +90,18 @@
     
     <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MONTHLY_PURCHASE_ANALYSIS_EXCEL, checkboxes.include?(InventoryManagementSystem::PR_MONTHLY_PURCHASE_ANALYSIS_EXCEL) %></td>
   </tr>
+  
+   <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT, checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT)%> Purchase Requisition Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_SHOW)%></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT) %></td>
+    
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_EXCEL)%></td>
+  </tr>
 
   <tr>
     <td></td>
@@ -157,6 +169,18 @@
     <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MONTHLY_PURCHASE_ANALYSIS_PRINT %></td>
     
     <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_MONTHLY_PURCHASE_ANALYSIS_EXCEL %></td>
+  </tr>
+  
+   <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT%> Purchase Requisition Report </td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT %></td>
+    
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_EXCEL %></td>
   </tr>
 
   <tr>

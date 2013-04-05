@@ -7,7 +7,7 @@
       <th>Unit Price</th>
       <th>ETA Date</th>
       <th>Customer's P/O</th>
-      <th>Part No.</th>
+      <th>Part Code</th>
       <th width="100">Action</th>
     </tr>
   </thead>
@@ -15,31 +15,41 @@
   <tbody>
     <% if sales_order.sales_order_items.present? %>
     
-      <% sales_order.sales_order_items.each do |soi| %>
+      <% sales_order.sales_order_items.each_with_index do |soi, index| %>
     
         <tr class="<%= cycle('odd_line', 'even_line') %>">
 
           <td align="center" width="400">
-            <%= select_tag "datarow[0][product_id]", options_for_select(product_finish_goods_with_combobox, soi.product_id), :include_blank => true, :style => "width: 400px;", :onchange => "product_customer_data(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Product ID" %>
-            <span class="k-invalid-msg" data-for="datarow[0][product_id]"></span>
+            <%= select_tag "datarow[#{index}][product_id]", options_for_select(product_finish_goods_with_combobox, soi.product_id), :include_blank => true, :style => "width: 400px;", :onchange => "product_customer_data(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Product ID" %>
+            <span class="k-invalid-msg" data-for="datarow[<%= index %>][product_id]"></span>
           </td>
           <td align="center" width="150">
-            <%= text_field_tag "datarow[0][quantity]", soi.quantity, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Quantity" %>
-            <span class="k-invalid-msg" data-for="datarow[0][quantity]"></span>
+            <%= text_field_tag "datarow[#{index}][quantity]", soi.quantity, :class => "k-textbox numberKey", "required validationMessage" => "Please Enter Quantity" %>
+            <span class="k-invalid-msg" data-for="datarow[<%= index %>][quantity]"></span>
           </td>
           <td align="center" width="150">
-            <%= select_tag "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'  , soi.unit_measurement_id.to_i), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter U/M" %>
-            <span class="k-invalid-msg" data-for="datarow[0][unit_measurement_id]"></span>
+            <span id="um_code_<%= index %>"><%= soi.unit_measurement.code rescue '-' %></span>
+            <%= hidden_field_tag "datarow[#{index}][unit_measurement_id]", soi.unit_measurement_id.to_i %>
           </td>
           <td align="center" width="150">
-            <%= text_field_tag "datarow[0][unit_price]", soi.unit_price, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Unit Price"  %>
+            <span id="unit_price_<%= index %>"><%= four_precision(soi.unit_price) %></span>
+            <%= hidden_field_tag "datarow[#{index}][unit_price]", soi.unit_price, "required validationMessage" => "Please Enter Unit Price" %>
           </td>
           <td align="center" width="150">
-            <%= text_field_tag "datarow[0][eta_date]", soi.eta.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date" %>
-            <span class="k-invalid-msg" data-for="datarow[0][eta_date]"></span>
+            <%= text_field_tag "datarow[#{index}][eta_date]", soi.eta.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date" %>
+            <span class="k-invalid-msg" data-for="datarow[<%= index %>][eta_date]"></span>
           </td>
-          <td align="center" width="150"><%= text_field_tag "datarow[0][customer_po]", soi.customer_po, :class => "k-textbox" %></td>
-          <td align="center" width="150"><%= text_field_tag "datarow[0][part_no]", soi.part_no, :class => "k-textbox" %></td>   
+          <td align="center" width="150">
+            <% if sales_order.purchase_order_no.present? %>
+              <%= text_field_tag "datarow[#{index}][customer_po]", '', :class => "k-textbox", :disabled => "disabled" %>
+            <% else %>
+              <%= text_field_tag "datarow[#{index}][customer_po]", soi.customer_po, :class => "k-textbox" %>
+            <% end %>
+          </td>
+          <td align="center" width="150">
+            <span id="partCode_<%= index %>"><%= soi.part_no rescue '-' %></span>
+            <%= hidden_field_tag "datarow[#{index}][part_no]", soi.part_no %>
+          </td>   
           <td align="center"><%= remove_row_button  %></td>
 
         </tr>
@@ -55,25 +65,26 @@
           <span class="k-invalid-msg" data-for="datarow[0][product_id]"></span>
         </td>
         <td align="center" width="150">
-          <%= text_field_tag "datarow[0][quantity]", '', "required validationMessage" => "Please Enter Quantity" %>
-          <%#*:class => "kendo_precision_0",%>
+          <%= text_field_tag "datarow[0][quantity]", '', :class => "k-textbox numberKey", "required validationMessage" => "Please Enter Quantity" %>
           <span class="k-invalid-msg" data-for="datarow[0][quantity]"></span>
         </td>
-        <td align="center" width="150">          
-          <%= select_tag "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter U/M" %>
-          <span class="k-invalid-msg" data-for="datarow[0][unit_measurement_id]"></span>
+        <td align="center" width="150">
+          <span id="um_code_0"></span>
+          <%= hidden_field_tag "datarow[0][unit_measurement_id]" %>
         </td>
         <td align="center" width="150">
-          <!--span id="unit_price_0"></span-->
-          <%= text_field_tag "datarow[0][unit_price]", '', "required validationMessage" => "Please Enter Unit Price" %>
-          <%#*:class => "kendo_precision_4",%> 
+          <span id="unit_price_0"></span>
+          <%= hidden_field_tag "datarow[0][unit_price]", '', "required validationMessage" => "Please Enter Unit Price" %>
         </td>
         <td align="center" width="150">
           <%= text_field_tag "datarow[0][eta_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date" %>
           <span class="k-invalid-msg" data-for="datarow[0][eta_date]"></span>
         </td>
         <td align="center" width="150"><%= text_field_tag "datarow[0][customer_po]", '', :class => "k-textbox" %></td>
-        <td align="center" width="150"><%= text_field_tag "datarow[0][part_no]", '', :class => "k-textbox" %></td>   
+        <td align="center" width="150">
+          <span id="partCode_0"></span>
+          <%= hidden_field_tag "datarow[0][part_no]", '' %>
+        </td>   
         <td align="center"><%= remove_row_button  %></td>
         
       </tr>

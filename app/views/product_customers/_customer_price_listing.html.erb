@@ -1,0 +1,34 @@
+<table id="jgrid_searching" class="zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <% unless @search.trade_company_id_equals.present? %>
+        <th>Customer Company</th>
+      <% end %>
+      <th>Product ID</th>
+      <th>Description</th>
+      <th width="200">Current Selling Marketing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% lists.each do |product_customer| %>
+      <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="price_control_items" rowsId="<%= product_customer.product_id %>">
+        <td></td>
+        <% unless @search.trade_company_id_equals.present? %>
+          <td>
+            <%= link_to(trade_company_path(product_customer.trade_company_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+              [<%= product_customer.trade_company.code rescue '-' %>] <%= product_customer.trade_company.name rescue '-' %>
+            <% end %>
+          </td>
+        <% end %>
+        <td>
+          <%= link_to(product_path(product_customer.product_id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+            <%= product_customer.product.product_combobox.product_code rescue '-' %>
+          <% end %>
+        </td>
+        <td><%= product_customer.product.desc rescue '-' %></td>
+        <td align="right"><span style="float: left"><%= product_customer.currency.name rescue '-' %></span> <%= four_precision(product_customer.selling_price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

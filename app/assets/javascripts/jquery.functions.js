@@ -1,8 +1,8 @@
 $(document).ready(function() {
     
-    $(".digg_pagination").append('<i style="color: red;">*pg</i>');
+    $("#k_menu").kendoMenu({openOnClick: true});
     
-    $("#menu").kendoMenu({openOnClick: true});
+    $(".digg_pagination").append('<i style="color: red;">*pg</i>');
       
     $('#checkall:checkbox').change(function () {
         if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
@@ -20,18 +20,27 @@ $(document).ready(function() {
     
     $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
     $("#panelbar").kendoPanelBar({expandMode: "single"});
-    $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
     
-    $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
-    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+//    $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
+//    $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
 //    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({format: "dd-MM-yyyy"}); 
+
+    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
     $(".mkendo_combobox").kendoComboBox({filter: "contains"});
-    $("#kendo_price").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+//    $("#kendo_price").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     
     $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
     $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
     $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
+    
+//    $(".inputNum_integer").forceNumeric({fixDecimals: 0});
+//    $(".integer").numeric(false, function() { alert("Integers only"); this.value = ""; this.focus(); });
+
+//    $('input[class^="kendo_precision_4"]').each(function(k, v) {
+//        var string_id = $(this).attr('class');
+//        console.log($(this).kendoNumericTextBox({min: 0, format: "n4"}))
+//    });
     
     // Just autocomplete all suppliers only
     $("#autoComplete_suppliers").kendoAutoComplete({    
@@ -285,7 +294,7 @@ $(document).ready(function() {
         
         if(row_id) {
             var add_class = $("#on_add_customer, #on_add_product").attr("addClass");
-            var show_class = $("#on_show, #on_show_kiv").attr("showClass");
+            var show_class = $("#on_show, #on_show_kiv, #on_history").attr("showClass");
             var edit_class = $("#on_edit").attr("editClass");
             var apply_class = $("#on_apply, #on_add_product_id").attr("applyClass");
             var apply_vendor_select_class = $("#on_apply_vendor_select").attr("applyClass");
@@ -296,8 +305,7 @@ $(document).ready(function() {
             
             var link_show      = "/" + controller_Name + "/" + row_id;
             var link_edit      = "/" + controller_Name + "/" + row_id + "/edit";
-            var link_kiv       = "/" + controller_Name + "/" + row_id;
-//            var link_moving_kiv = "/" + controller_Name + "/" + row_id + "/moving_kiv";            
+            var link_kiv       = "/" + controller_Name + "/" + row_id;         
             var link_printable = "/" + controller_Name + "/" + row_id + '.pdf';
             var link_printable_qr = "/" + controller_Name + "/" + row_id + '/printable.pdf';
             var link_printable_cs = "/" + controller_Name + "/" + row_id + '/printable.pdf';
@@ -316,14 +324,13 @@ $(document).ready(function() {
             var link_mail = "/" + controller_Name + "/" + row_id + "/mailing";
             var link_add_customer = "/trade_companies/new?option=CUSTOMER" + "&qr_id=" + row_id;
             var link_add_product = "/products/finish_good?qr_id=" + row_id;
-//            var link_add_product = "/products/finish_good";
             var link_costing = "/costing_sheets?id=" + row_id;
             var link_add_product_id = "/products/message?pri_id=" + row_id;
+            var link_history    = "/price_control_items?id=" + row_id;
 
             html_show = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_show  + "><b>Show</b></a>"
             html_edit = "<a class='k-button " + edit_class + "' data-fancybox-type='iframe' href=" + link_edit + "><b>Edit</b></a>"
             html_kiv = "<a rel='nofollow' class='k-button' data-method='delete' data-confirm='Are you sure move to KIV?' href=" + link_kiv + "><b>Drop to KIV</b></a>"
-//            html_moving_kiv = "<a data-confirm='Are you sure move to KIV?' class='k-button' href=" + link_moving_kiv + "><b>Drop to KIV</b></a>"
             html_pdf = "<a target='_blank' class='k-button' href=" + link_printable + "><b>Printer</b></a>"
             html_pdf_qr = "<a target='_blank' class='k-button' href=" + link_printable_qr + "><b>Printer</b></a>"
             html_pdf_cs = "<a target='_blank' class='k-button' href=" + link_printable_cs + "><b>Printer</b></a>"
@@ -344,11 +351,11 @@ $(document).ready(function() {
             html_add_product = "<a class='k-button " + add_class + "' data-fancybox-type='iframe' href=" + link_add_product + "><b>Add New Product</b></a>"
             html_costing = "<a class='k-button " + cost_class + "' data-fancybox-type='iframe' href=" + link_costing + "><b>Costing Sheet</b></a>"
             html_add_product_id = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_add_product_id + "><b>Apply the Product ID Registration</b></a>"
+            html_history = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_history  + "><b>History</b></a>"
             
             $("#on_show").html(html_show);
             $("#on_edit").html(html_edit);
             $("#on_kiv").html(html_kiv);
-//            $("#on_move_kiv").html(html_moving_kiv);
             $("#on_printable").html(html_pdf);
             $("#on_printable_qr").html(html_pdf_qr);
             $("#on_printable_cs").html(html_pdf_cs);
@@ -369,6 +376,7 @@ $(document).ready(function() {
             $("#on_cost").html(html_costing);
             allow_mail(row_id, html_mail);
             $("#on_add_product_id").html(html_add_product_id);
+            $("#on_history").html(html_history);
         };
     });
 
@@ -478,41 +486,10 @@ $(document).ready(function() {
        addTableRow($("table.target_table"));
        return false; 
     });
-    
-//    $("#add_bottom_row").click(function(){
-//        addTableRow($("table.target_table"));
-//        return false;
-//    });
-    
-//    $("#add_bottom_row_for_price_control").click(function(){
-//        // add new row to table using addTableRow function
-//        addTableRow_for_price_control($("table.target_table"));
-// 
-//        // prevent button redirecting to new page
-//        return false;
-//    });
-    
-//    $("#add_bottom_row_for_sales_order").click(function(){
-//        // add new row to table using addTableRow function
-//        addTableRow_for_sales_order($("table.target_table"));
-// 
-//        // prevent button redirecting to new page
-//        return false;
-//    });
-    
-//    $("#add_bottom_row_for_delivery_order").click(function(){
-//        addTableRow_for_delivery_order($("table.target_table"));
-//        return false;
-//    });
-
-
-
-
    
 });  
 
 $(function() {
-        
         $('input, textarea').placeholder();
     
 	$("#menu a").each(function() {
@@ -556,8 +533,6 @@ function put_product_description(sel){
         }
     });
 }
-
-
 
 function getCombo_tradecompany_code(sel) {
     var value = sel.options[sel.selectedIndex].value;  
@@ -971,29 +946,29 @@ function compare_printing_width_n_length(os){
 
 
 
-function select_exists() {
-    $.ajax({
-        dataType: "json",
-        cache: false,
-        url: '/trade_companies/active_customer',
-        timeout: 2000,
-        error: function(XMLHttpRequest, errorTextStatus, error){
-            alert("Failed to submit : "+ errorTextStatus+" ;"+error);
-        },
-        success: function(data){
-            $("#select_customer").empty();
-            
-            $("#select_customer").append('<select id="sales_order_trade_company_id" name="sales_order[trade_company_id]">');
-            $("select#sales_order_trade_company_id").append('<option value=""></option>');
-            $.each(data, function(i, j){
-                row = "<option value=\"" + j.id + "\">" + j.name + "</option>"
-                $("select#sales_order_trade_company_id").append(row);
-            }); 
-            $("#select_customer").append('</select>');
-            $("#sales_order_trade_company_id").kendoComboBox({filter: "contains"});
-        }
-    });
-}
+//function select_exists() {
+//    $.ajax({
+//        dataType: "json",
+//        cache: false,
+//        url: '/trade_companies/active_customer',
+//        timeout: 2000,
+//        error: function(XMLHttpRequest, errorTextStatus, error){
+//            alert("Failed to submit : "+ errorTextStatus+" ;"+error);
+//        },
+//        success: function(data){
+//            $("#select_customer").empty();
+//            
+//            $("#select_customer").append('<select id="sales_order_trade_company_id" name="sales_order[trade_company_id]">');
+//            $("select#sales_order_trade_company_id").append('<option value=""></option>');
+//            $.each(data, function(i, j){
+//                row = "<option value=\"" + j.id + "\">" + j.name + "</option>"
+//                $("select#sales_order_trade_company_id").append(row);
+//            }); 
+//            $("#select_customer").append('</select>');
+//            $("#sales_order_trade_company_id").kendoComboBox({filter: "contains"});
+//        }
+//    });
+//}
 
 function select_qr(sel) {
     var qr = sel.value; 
@@ -1113,57 +1088,84 @@ function price_control_data(sel) {
     }
 }
 
-function price_control_data_when_company(sel) {
-    var number = 0;
+function access_pp_no(sel) {
+    $('*').css('cursor','progress');
     var company_id = sel.options[sel.selectedIndex].value;
-    var product_id = $("#datarow_0_product_id").val();
     
     if (company_id){
         $.ajax({
             type: "GET",
             dataType: "json",
             cache: false,
-            url: '/price_controls/take_old_unit_price_and_eff_date',
-            data: {'company_id' : company_id, 'product_id' : product_id},
-            success: function(data){ 
-                
-                var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
-                var sellPrice = data.selling_price;
-                
-                if (myDate){
-                    var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
-                    value_date = '#datarow_' + number + '_old_eff_date';
-                    html_date  = '#old_date_' + number;
-                    $(value_date).val(k_date);
-                    $(html_date).html(k_date);
-                } else {
-                    $(value_date).val(' ');
-                    $(html_date).html('-');
-                }
-                
-                if (sellPrice){
-                    var f_num = parseFloat(sellPrice).toFixed(4);  
-                    value_sellPrice = '#datarow_' + number + '_old_unit_price';
-                    html_sellPrice  = '#old_up_' + number;
-                    $(value_sellPrice).val(f_num);
-                    $(html_sellPrice).html(f_num);
-                } else {
-                    $(value_sellPrice).val(' ');
-                    $(html_sellPrice).html('-');
-                }
-                
+            url: '/trade_companies/' + company_id,
+            success: function(data){
+                var current = $("#current_pp_no").val();
+                var combine = data.code + '-' + current;
+                $("#generate_pp_no").html(combine);
+                $("#price_control_pp_no").val(combine);
+                $('*').css('cursor','auto');
+            },
+            error: function(){
+                $('*').css('cursor','auto');
             }
         });
-    } else {
-        alert("Trade Company can't blank.");
     }
 }
+
+//function price_control_data_when_company(sel) {
+//    var number = 0;
+//    var company_id = sel.options[sel.selectedIndex].value;
+//    var product_id = $("#datarow_0_product_id").val();
+//    
+//    if (company_id){
+//        $.ajax({
+//            type: "GET",
+//            dataType: "json",
+//            cache: false,
+//            url: '/price_controls/take_old_unit_price_and_eff_date',
+//            data: {'company_id' : company_id, 'product_id' : product_id},
+//            success: function(data){ 
+//                
+//                var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
+//                var sellPrice = data.selling_price;
+//                
+//                if (myDate){
+//                    var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
+//                    value_date = '#datarow_' + number + '_old_eff_date';
+//                    html_date  = '#old_date_' + number;
+//                    $(value_date).val(k_date);
+//                    $(html_date).html(k_date);
+//                } else {
+//                    $(value_date).val(' ');
+//                    $(html_date).html('-');
+//                }
+//                
+//                if (sellPrice){
+//                    var f_num = parseFloat(sellPrice).toFixed(4);  
+//                    value_sellPrice = '#datarow_' + number + '_old_unit_price';
+//                    html_sellPrice  = '#old_up_' + number;
+//                    $(value_sellPrice).val(f_num);
+//                    $(html_sellPrice).html(f_num);
+//                } else {
+//                    $(value_sellPrice).val(' ');
+//                    $(html_sellPrice).html('-');
+//                }
+//                
+//            }
+//        });
+//    } else {
+//        alert("Trade Company can't blank.");
+//    }
+//}
 
 function product_customer_data(sel){
     var number = sel.name.match(/\[(\d+)\]/);
     var number = parseInt(number[1], 10);
     var product_id = sel.options[sel.selectedIndex].value;
     var company_id = $("select.sales_order_trade_company_id option:selected").val();
+    
+    console.log(product_id);
+    console.log(company_id);
     
     if (company_id){
         $.ajax({
@@ -1175,18 +1177,41 @@ function product_customer_data(sel){
             success: function(data){ 
                 
                 if (data.jstatus == true) {
-                    var sellPrice = data.selling_price;
-                    var partNo = data.part_no;
-                    var html_partNo = '#datarow_' + number + '_part_no';
+                    var sellPrice   = data.selling_price;
+                    var um_id       = data.product.unit_measurement_id;
+                    var um_code     = data.um_code;
+                    var partCode      = data.product.part_code;
                     
-                    if (sellPrice){
-                        var f_num = parseFloat(sellPrice).toFixed(4);
-                        value_sellPrice = '#datarow_' + number + '_unit_price';
-                        $(value_sellPrice).val(f_num);
-//                        $(value_sellPrice).kendoNumericTextBox({ value: f_num });
+                    var code    = '#um_code_' + number;
+                    var um      = '#datarow_' + number + '_unit_measurement_id';
+                    if (um_id != null){
+                        $(code).html(um_code);
+                        $(um).val(um_id);
+                    } else {
+                        $(code).html('');
+                        $(um).val('');
                     }
                     
-                    if (partNo != null) { $(html_partNo).val(partNo); }
+                    var value_sellPrice = '#datarow_' + number + '_unit_price';
+                    var html_sellPrice  = '#unit_price_' + number;
+                    if (sellPrice != null){
+                        var f_num = parseFloat(sellPrice).toFixed(4);
+                        $(html_sellPrice).html(f_num);
+                        $(value_sellPrice).val(f_num);
+                    } else {
+                        $(html_sellPrice).html('');
+                        $(value_sellPrice).val('');
+                    }
+                    
+                    var value_partNo = '#datarow_' + number + '_part_no';
+                    var html_partNo  = '#partCode_' + number;
+                    if (partCode != null) { 
+                        $(html_partNo).html(partCode);
+                        $(value_partNo).val(partCode);
+                    } else {
+                        $(html_partNo).html('');
+                        $(value_partNo).val('');
+                    }
                     
                 } else {
                     alert("Unit Price has not found. Please create new product price control.");
@@ -1302,32 +1327,6 @@ function datarow_all_attributes(tr){
         }
     });
     
-    tr.find('[id^=old_up]').each(function(k, elem) {
-        var oldUp = $(this).attr('id');
-        if (typeof oldUp != 'undefined'){
-            var index_three = oldUp.match(/\_(\d+)/);
-            if (index_three != null && index_three.length > 1) {
-                var new_index_three = parseInt(index_three[1], 10) + 1;
-                var raise = oldUp.replace(/\_(\d+)/g, '_' + new_index_three);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=old_date]').each(function(k, elem) {
-        var oldDate = $(this).attr('id');
-        if (typeof oldDate != 'undefined'){
-            var index_four = oldDate.match(/\_(\d+)/);
-            if (index_four != null && index_four.length > 1) {
-                var new_index_four = parseInt(index_four[1], 10) + 1;
-                var raise = oldDate.replace(/\_(\d+)/g, '_' + new_index_four);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
     tr.find('[class^=k-invalid-msg]').each(function(k, elem) {
         var dataFor = $(this).attr('data-for');
         if (typeof dataFor != 'undefined'){
@@ -1340,164 +1339,52 @@ function datarow_all_attributes(tr){
         }
     });
     
-    tr.find('[id^=so_date]').each(function(k, elem) {
-        var soDate = $(this).attr('id');
-        if (typeof soDate != 'undefined'){
-            var index_six = soDate.match(/\_(\d+)/);
-            if (index_six != null && index_six.length > 1) {
-                var new_index_six = parseInt(index_six[1], 10) + 1;
-                var raise = soDate.replace(/\_(\d+)/g, '_' + new_index_six);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=so_order_qty]').each(function(k, elem) {
-        var orderQty = $(this).attr('id');
-        if (typeof orderQty != 'undefined'){
-            var index_seven = orderQty.match(/\_(\d+)/);
-            if (index_seven != null && index_seven.length > 1) {
-                var new_index_seven = parseInt(index_seven[1], 10) + 1;
-                var raise = orderQty.replace(/\_(\d+)/g, '_' + new_index_seven);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=unit_price]').each(function(k, elem) {
-        var uprice = $(this).attr('id');
-        if (typeof uprice != 'undefined'){
-            var index_eight = uprice.match(/\_(\d+)/);
-            if (index_eight != null && index_eight.length > 1) {
-                var new_index_eight = parseInt(index_eight[1], 10) + 1;
-                var raise = uprice.replace(/\_(\d+)/g, '_' + new_index_eight);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=partno]').each(function(k, elem) {
-        var uprice = $(this).attr('id');
-        if (typeof uprice != 'undefined'){
-            var index_eight = uprice.match(/\_(\d+)/);
-            if (index_eight != null && index_eight.length > 1) {
-                var new_index_eight = parseInt(index_eight[1], 10) + 1;
-                var raise = uprice.replace(/\_(\d+)/g, '_' + new_index_eight);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=clientLotNo]').each(function(k, elem) {
-        var cl = $(this).attr('id');
-        if (typeof cl != 'undefined'){
-            var index_ten = cl.match(/\_(\d+)/);
-            if (index_ten != null && index_ten.length > 1) {
-                var new_index_ten = parseInt(index_ten[1], 10) + 1;
-                var raise = cl.replace(/\_(\d+)/g, '_' + new_index_ten);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=clientPoNo]').each(function(k, elem) {
-        var cpo = $(this).attr('id');
-        if (typeof cpo != 'undefined'){
-            var index_elev = cpo.match(/\_(\d+)/);
-            if (index_elev != null && index_elev.length > 1) {
-                var new_index_elev = parseInt(index_elev[1], 10) + 1;
-                var raise = cpo.replace(/\_(\d+)/g, '_' + new_index_elev);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-        
-    tr.find('[id^=so_balance_qty]').each(function(k, elem) {
-        var cpo = $(this).attr('id');
-        if (typeof cpo != 'undefined'){
-            var index_elev = cpo.match(/\_(\d+)/);
-            if (index_elev != null && index_elev.length > 1) {
-                var new_index_elev = parseInt(index_elev[1], 10) + 1;
-                var raise = cpo.replace(/\_(\d+)/g, '_' + new_index_elev);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
-    tr.find('[id^=so_status]').each(function(k, elem) {
-        var cpo = $(this).attr('id');
-        if (typeof cpo != 'undefined'){
-            var index_elev = cpo.match(/\_(\d+)/);
-            if (index_elev != null && index_elev.length > 1) {
-                var new_index_elev = parseInt(index_elev[1], 10) + 1;
-                var raise = cpo.replace(/\_(\d+)/g, '_' + new_index_elev);
-                $(this).attr('id', raise);
-                $(this).html('');
-            }
-        }
-    });
-    
+    // Price Control
+    string_last_number(tr, '[id^=old_up]');
+    string_last_number(tr, '[id^=old_date]');
+
+    // Sales Order, Unit Price will join with Delivery Order
+    string_last_number(tr, '[id^=um_code]');
+    string_last_number(tr, '[id^=partCode]');
+
+    // Delivery Order
+    string_last_number(tr, '[id^=so_date]');
+    string_last_number(tr, '[id^=so_order_qty]');
+    string_last_number(tr, '[id^=unit_price]');
+    string_last_number(tr, '[id^=so_balance_qty]');
+    string_last_number(tr, '[id^=partno]');
+    string_last_number(tr, '[id^=clientLotNo]');
+    string_last_number(tr, '[id^=clientPoNo]');
+    string_last_number(tr, '[id^=do_status]');
     
 }
+
+function string_last_number(tr, last_number){
+    tr.find(last_number).each(function(k, v) {
+        var string_id = $(this).attr('id');
+        if (typeof string_id != 'undefined'){
+            var index_id = string_id.match(/\_(\d+)/);
+            if (index_id != null && index_id.length > 1) {
+                var new_index_id = parseInt(index_id[1], 10) + 1;
+                var raise = string_id.replace(/\_(\d+)/g, '_' + new_index_id);
+                $(this).attr('id', raise);
+                $(this).html('');
+            }
+        }
+    });
+    return tr;
+}
+
 
 function running_kendoui(){
     $('select[class^="mkendo_combobox"]').kendoComboBox({filter: "contains"});
     $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
     
+//    $('input[class^="kendo_precision"]').each(function(k, v) {
+//        $(this).kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+//    });
+    
 //    $('input[class^="kendo_precision_4"]').kendoNumericTextBox({min: 0, format: "n4"});
 //    $('input[class^="kendo_precision_0"]').kendoNumericTextBox({min: 0, format: "n"});
 }
-
-function addTableRow_for_delivery_order(table)
-{
-    var $tr = $(table).find("tbody tr:last").clone(false);
-    
-    datarow_id_and_name($tr);
-    
-    $tr.find('[id^=so_date]').attr('id', function() {
-        var index_three = this.id.match(/\_(\d+)/);
-        if (index_three != null && index_three.length > 1) {
-            var newIndex = parseInt(index_three[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $tr.find('[id^=so_order_qty]').attr('id', function() {
-        var index_four = this.id.match(/\_(\d+)/);
-        if (index_four != null && index_four.length > 1) {
-            var newIndex = parseInt(index_four[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $tr.find('[id^=so_balance_qty]').attr('id', function() {
-        var index_five = this.id.match(/\_(\d+)/);
-        if (index_five != null && index_five.length > 1) {
-            var newIndex = parseInt(index_five[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $tr.find('[id^=so_status]').attr('id', function() {
-        var index_six = this.id.match(/\_(\d+)/);
-        if (index_six != null && index_six.length > 1) {
-            var newIndex = parseInt(index_six[1], 10) + 1;
-            return this.id.replace(/\_(\d+)/, '_' + newIndex);
-        }
-        return this.id;    
-    });
-    
-    $(table).find("tbody tr:last").after($tr);
-};
 

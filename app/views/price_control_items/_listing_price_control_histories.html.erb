@@ -2,17 +2,37 @@
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
+      <th>P/P Date</th>
+      <th>P/P No#</th>
+      <th>Reference</th>
+      <th>Currency</th>
       <th>Old Unit Price</th>
       <th>Old Effective Date</th>
       <th>New Unit Price</th>
       <th>New Effective Date</th>
+      <th>Updated By</th>
     </tr>
   </thead>
 
   <tbody>
-    <% p_control.each do |prod_price| %>
+    <% p_control.each do |k, v| %>
+      <% company_id = TradeCompany.find(k) %>
+      <tr style="background-color: #663399; color: white; font-weight: bold;">
+        <td colspan="11">[<%= company_id.code rescue '-' %>] <%= company_id.name rescue '-' %></td>
+      </tr>
+      <% v.each do |prod_price| %>
         <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="price_control_items" rowsId="<%= prod_price.id %>">
           <td></td>
+          <td align="center"><%= prod_price.price_control.pp_date.strftime("%d-%m-%Y") rescue '-' %></td>
+          <td><%= prod_price.price_control.pp_no rescue '-' %></td>
+          <td>
+            <% if prod_price.price_control.present? %>
+              <%= prod_price.price_control.reference.present? ? "#{prod_price.price_control.reference}" : '-' %>
+            <% else %>
+              -
+            <% end %>
+          </td>
+          <td><%= prod_price.price_control.currency.name rescue '-' %></td>
           <% if prod_price.old_unit_price.present? %>
             <td class="t_unit_price"><%= four_precision(prod_price.old_unit_price) rescue '-' %></td>
           <% else %>
@@ -25,7 +45,9 @@
             <td align="center">-</td>
           <% end %>
           <td class="t_date"><%= prod_price.new_eff_date.strftime("%d-%m-%Y") rescue '-' %></td>
+          <td><%= prod_price.price_control.user.name rescue '-' %></td>
         </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

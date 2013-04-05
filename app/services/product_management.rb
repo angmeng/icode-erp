@@ -97,7 +97,8 @@ class ProductManagement
   end
   
   def self.add_product_vendor(product, po_up, po_vendor_id)
-    product.product_vendors.create!(:trade_company_id => po_vendor_id, :unit_price => po_up)
+#    product.product_vendors.create!(:trade_company_id => po_vendor_id, :unit_price => po_up)
+    ProductVendor.create!(:trade_company_id => po_vendor_id, :unit_price => po_up)
   end
   
 #  Group Start

@@ -1,0 +1,17 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %>
+    <span id="on_add_product" addClass="iframe_1600x900"><span class="k-button">Add New Product</span></span>
+  <% else %>
+    <%= disabled_style("Add New Product") %>
+  <% end %>
+</div>
+
+<div class="icon_tag">
+  
+    <%= not_link_show %>
+    <%= not_link_edit %>
+    <%= not_link_kiv %>
+    <%= not_link_printable %>
+    <%= link_close_button %>
+
+</div>

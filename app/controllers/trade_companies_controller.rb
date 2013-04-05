@@ -144,13 +144,13 @@ class TradeCompaniesController < ApplicationController
     end
   end
   
-  def active_customer
-    @customer = trade_company_customer
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @customer }
-    end
-  end
+#  def active_customer
+#    @customer = trade_company_customer
+#    respond_to do |format|
+#      format.html # index.html.erb
+#      format.json { render json: @customer }
+#    end
+#  end
   
   def customer_name_n_place_customer_id
     tc = TradeCompany.find_by_name(params[:customer_name])

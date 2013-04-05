@@ -1,9 +1,9 @@
 class ProductCustomersController < ApplicationController
   before_filter :authenticate_user!
-  # GET /product_customers
-  # GET /product_customers.json
+
   def index
-    @product_customers = ProductCustomer.all
+    @search            = ProductCustomer.search(params[:search])
+    @product_customers = ProductCustomer.ordering_attr(@search).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,8 +11,6 @@ class ProductCustomersController < ApplicationController
     end
   end
 
-  # GET /product_customers/1
-  # GET /product_customers/1.json
   def show
     @product_customer = ProductCustomer.find(params[:id])
 
@@ -22,8 +20,6 @@ class ProductCustomersController < ApplicationController
     end
   end
 
-  # GET /product_customers/new
-  # GET /product_customers/new.json
   def new
     @product_customer = ProductCustomer.new
 
@@ -32,14 +28,11 @@ class ProductCustomersController < ApplicationController
       format.json { render json: @product_customer }
     end
   end
-
-  # GET /product_customers/1/edit
+  
   def edit
     @product_customer = ProductCustomer.find(params[:id])
   end
 
-  # POST /product_customers
-  # POST /product_customers.json
   def create
     @product_customer = ProductCustomer.new(params[:product_customer])
 
@@ -54,8 +47,6 @@ class ProductCustomersController < ApplicationController
     end
   end
 
-  # PUT /product_customers/1
-  # PUT /product_customers/1.json
   def update
     @product_customer = ProductCustomer.find(params[:id])
 
@@ -70,8 +61,6 @@ class ProductCustomersController < ApplicationController
     end
   end
 
-  # DELETE /product_customers/1
-  # DELETE /product_customers/1.json
   def destroy
     @product_customer = ProductCustomer.find(params[:id])
     @product_customer.destroy
@@ -86,7 +75,7 @@ class ProductCustomersController < ApplicationController
     @pc = ProductCustomer.take_unit_price(params[:product_id], params[:company_id])
     @product = Product.find(params[:product_id])
     if @pc.present?
-      render json: @pc.attributes.merge({"jstatus" => true, :part_no => @product.part_code })
+      render json: @pc.attributes.merge({"jstatus" => true, :product => @product, :um_code => @product.unit_measurement.code })
     else
       render json: { :jstatus => false }
     end

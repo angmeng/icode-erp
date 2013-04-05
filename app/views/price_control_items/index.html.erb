@@ -1,35 +1,26 @@
-<h1>Listing price_control_items</h1>
+<%= title_head "SHOW PRODUCT PRICE CONTROL HISTORIES" %>
 
-<table>
-  <tr>
-    <th>Product</th>
-    <th>Old unit price</th>
-    <th>Old eff date</th>
-    <th>New unit price</th>
-    <th>New eff date</th>
-    <th>Part no</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="table_details">
+  <table>
+    <tr>
+      <td><b>Product ID</b></td>
+      <td><%= @product_detail.product.product_combobox.product_code rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Description</b></td>
+      <td><%= @product_detail.product.desc rescue '-' %></td>
+    </tr>
+  </table>
+</div>
 
-<% @price_control_items.each do |price_control_item| %>
-  <tr>
-    <td><%= price_control_item.product_id %></td>
-    <td><%= price_control_item.old_unit_price %></td>
-    <td><%= price_control_item.old_eff_date %></td>
-    <td><%= price_control_item.new_unit_price %></td>
-    <td><%= price_control_item.new_eff_date %></td>
-    <td><%= price_control_item.part_no %></td>
-    <td><%= price_control_item.status %></td>
-    <td><%= link_to 'Show', price_control_item %></td>
-    <td><%= link_to 'Edit', edit_price_control_item_path(price_control_item) %></td>
-    <td><%= link_to 'Destroy', price_control_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<hr/>
+
+<% if @price_control_items.present? %>
+  <div class="table_background"><%= render "listing_price_control_histories", :p_control => @price_control_items %></div>
+<% else %>
+  <div class="popup_form_table">Not Record Found</div>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Price control item', new_price_control_item_path %>
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

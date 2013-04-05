@@ -12,7 +12,7 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_EDIT) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -21,6 +21,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_KIV_SHOW) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
       
       <tr>
@@ -31,7 +32,7 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_EDIT) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
@@ -40,6 +41,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
 
     <% else %>
@@ -53,7 +55,7 @@
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_EDIT) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -62,6 +64,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_KIV_SHOW) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
       
       <tr>
@@ -72,7 +75,7 @@
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_EDIT) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
@@ -81,6 +84,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
 
     <% end %>
@@ -96,7 +100,7 @@
         <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_EDIT) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_ACTION_KIV) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -105,6 +109,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_KIV_SHOW) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::VENDOR_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
       
       <tr>
@@ -115,7 +120,7 @@
         <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_EDIT) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_ACTION_KIV) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
@@ -124,6 +129,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_KIV_SHOW) %></td>
         <td align="center"><%= ims_new(InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
     
   <% end %>

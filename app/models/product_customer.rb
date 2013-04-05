@@ -1,35 +1,17 @@
 class ProductCustomer < ActiveRecord::Base
-  attr_accessible :product_id, :trade_company_id, :selling_price, :eff_date
+  attr_accessible :product_id, :trade_company_id, :selling_price, :eff_date, :currency_id
   
   belongs_to :trade_company
   belongs_to :product
-  
-#  def self.ordered_with_customer_company
-#    arr_cc = []
-#    cc = select("trade_company_id").uniq
-#    if cc.present?
-#      cc.each do |c|
-#        code = c.trade_company.code 
-#        name = c.trade_company.name
-#        string = "#{code} - #{name}"
-#        arr_cc << [name, string]
-#      end
-#      return arr_cc
-#    end
-#  end
-  
-#  def self.selection_company
-#    arr_cc = []
-#    cc = select("trade_company_id").uniq
-#    if cc.present?
-#      cc.each do |c|
-#        id = c.trade_company.id 
-#        name = c.trade_company.name
-#        arr_cc << [name, id]
-#      end
-#      return arr_cc
-#    end
-#  end
+  belongs_to :currency
+
+  def self.ordering_attr(search)
+    if search.trade_company_id_equals.present?
+      search.joins(:product => :product_combobox).order('product_code')
+    else
+      search.joins([:trade_company, :product => :product_combobox]).order('trade_companies.name, product_code')
+    end
+  end
   
   def self.fg_combobox(company_id)
     arr_trade = []

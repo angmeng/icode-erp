@@ -76,179 +76,135 @@ module ApplicationHelper
     raw ret
   end
     
-  def treeview_with_parent_kiv(category, view, customize_mode = true, with_form = false)
-    view ? ret = view : ret = ""
-    downlines = category.children
-        
-    if category.status == ProductCategory::KEEP_IN_VIEW
-      if current_user.level == User::LEVEL_FIVE
-        ret << "<li data-expanded='true'>"
-      end
-    else
-      #          ret << "<li data-expanded='true'>"
-    end
-        
-    if with_form  #false
-      #          if category.icon == ProductCategory::ICON_FILE
-      #            ret << "<table><tr><td><span class='k-sprite file'></span></td>"
-      #          elsif category.icon == ProductCategory::ICON_FOLDER
-      #            ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
-      #          else
-      #            if category.status == ProductCategory::KEEP_IN_VIEW
-      #              if current_user.level == User::LEVEL_FIVE
-      #                ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-      #              end
-      #            else
-      #              ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-      #            end
-      #          end
-      #          
-      #          if category.status == ProductCategory::KEEP_IN_VIEW
-      #            if current_user.level == User::LEVEL_FIVE
-      #              ret << "<td><div>#{category.code}</div></td>"
-      #              ret << "<td>[" << generate_posting_form(category) << "]</td></tr></table>"
-      #            end
-      #          else
-      #            ret << "<td><div>#{category.code}</div></td>"
-      #            ret << "<td>[" << generate_posting_form(category) << "]</td></tr></table>"
-      #          end
-    else
-      if customize_mode #false
-        #            ret << "<div class='display-category' id='category-id-#{category.id}' data-url=''><a href='/product?category_id=#{category.id}'>#{category.code}</a></div>" 
-      else
-        if category.icon == ProductCategory::ICON_FILE
-          ret << "<table><tr><td><span class='k-sprite file'></span></td>"
-        elsif category.icon == ProductCategory::ICON_FOLDER
-          ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
-        else
-          if category.status == ProductCategory::KEEP_IN_VIEW
-            if current_user.level == User::LEVEL_FIVE
-              if category.icon == ProductCategory::ICON_REMOVE_FILE
-                ret << "<table><tr><td><span class='k-sprite kiv_file'></span></td>"
-              elsif category.icon == ProductCategory::ICON_REMOVE_FOLDER
-                ret << "<table><tr><td><span class='k-sprite kiv_folder'></span></td>"
-              end
-            end
-          else
-            ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-          end
-        end
-
-        if category.status == ProductCategory::KEEP_IN_VIEW
-          if current_user.level == User::LEVEL_FIVE
-            if category.category_type == ProductCategory::FINISH_GOOD
-              ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
-            elsif category.category_type == ProductCategory::NON_OPERATION
-              ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
-            elsif category.category_type == ProductCategory::OPERATION
-              ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
-              #                elsif category.category_type == ProductCategory::RAW_MATERIAL
-              #                  ret << "<td><div><a href='/products/raw_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-              #                elsif category.category_type == ProductCategory::SUB_MATERIAL
-              #                  ret << "<td><div><a href='/products/sub_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-              #                elsif category.category_type == ProductCategory::PACKAGING
-              #                  ret << "<td><div><a href='/products/packaging?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-              #                elsif category.category_type == ProductCategory::COMMERCIAL
-              #                  ret << "<td><div><a href='/products/commercial?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-            end
-          end
-        else
-          #              if category.category_type == ProductCategory::FINISH_GOOD
-          #                ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-          #              elsif category.category_type == ProductCategory::RAW_MATERIAL
-          #                ret << "<td><div><a href='/products/raw_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-          #              elsif category.category_type == ProductCategory::SUB_MATERIAL
-          #                ret << "<td><div><a href='/products/sub_material?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-          #              elsif category.category_type == ProductCategory::PACKAGING
-          #                ret << "<td><div><a href='/products/packaging?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-          #              elsif category.category_type == ProductCategory::COMMERCIAL
-          #                ret << "<td><div><a href='/products/commercial?category_id=#{category.id}'>#{category.code}</a></div></td></tr></table>"
-          #              end
-        end
-            
-      end        
-    end
-        
-    unless downlines.empty?
-      ret << "<ul>"
-      downlines.each do |d|
-        treeview_with_parent_kiv(d, ret, customize_mode, with_form)
-      end
-      ret << "</ul>"
-    end
-        
-    if category.status == ProductCategory::KEEP_IN_VIEW
-      if current_user.level == User::LEVEL_FIVE
-        ret << "</li>" 
-      end
-    else
-      #          ret << "</li>" 
-    end
-        
-    raw ret
-  end
+#  def treeview_with_parent_kiv(category, view, customize_mode = true, with_form = false)
+#    view ? ret = view : ret = ""
+#    downlines = category.children
+#        
+#    if category.status == ProductCategory::KEEP_IN_VIEW
+#      if current_user.level == User::LEVEL_FIVE
+#        ret << "<li data-expanded='true'>"
+#      end
+#    else
+#    end
+#        
+#    if with_form
+#      
+#    else
+#      if customize_mode
+#      else
+#        if category.icon == ProductCategory::ICON_FILE
+#          ret << "<table><tr><td><span class='k-sprite file'></span></td>"
+#        elsif category.icon == ProductCategory::ICON_FOLDER
+#          ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
+#        else
+#          if category.status == ProductCategory::KEEP_IN_VIEW
+#            if current_user.level == User::LEVEL_FIVE
+#              if category.icon == ProductCategory::ICON_REMOVE_FILE
+#                ret << "<table><tr><td><span class='k-sprite kiv_file'></span></td>"
+#              elsif category.icon == ProductCategory::ICON_REMOVE_FOLDER
+#                ret << "<table><tr><td><span class='k-sprite kiv_folder'></span></td>"
+#              end
+#            end
+#          else
+#            ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
+#          end
+#        end
+#
+#        if category.status == ProductCategory::KEEP_IN_VIEW
+#          if current_user.level == User::LEVEL_FIVE
+#            if category.category_type == ProductCategory::FINISH_GOOD
+#              ret << "<td><div><a href='/products/finish_good?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
+#            elsif category.category_type == ProductCategory::NON_OPERATION
+#              ret << "<td><div><a href='/products/non_operation?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
+#            elsif category.category_type == ProductCategory::OPERATION
+#              ret << "<td><div><a href='/products/operation?category_id=#{category.id}'>#{category.code}</a>#{category.desc}</div></td></tr></table>"
+#            end
+#          end
+#        else
+#        end
+#            
+#      end        
+#    end
+#        
+#    unless downlines.empty?
+#      ret << "<ul>"
+#      downlines.each do |d|
+#        treeview_with_parent_kiv(d, ret, customize_mode, with_form)
+#      end
+#      ret << "</ul>"
+#    end
+#        
+#    if category.status == ProductCategory::KEEP_IN_VIEW
+#      if current_user.level == User::LEVEL_FIVE
+#        ret << "</li>" 
+#      end
+#    else
+#    end
+#        
+#    raw ret
+#  end
     
-  def treeview_with_selection(category, view)
-    view ? ret = view : ret = ""
-    downlines = category.children
-    if category.status == ProductCategory::KEEP_IN_VIEW
-      if current_user.level == User::LEVEL_FIVE
-        ret << "<li data-expanded='true'>"
-      end
-    else
-      ret << "<li data-expanded='true'>"
-    end
-        
-    if category.icon == ProductCategory::ICON_FILE
-      ret << "<table><tr><td><span class='k-sprite file'></span></td>"
-    elsif category.icon == ProductCategory::ICON_FOLDER
-      ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
-    else
-      if category.status == ProductCategory::KEEP_IN_VIEW
-        if current_user.level == User::LEVEL_FIVE
-          ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-        end
-      else
-        ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
-      end
-    end
-
-    if category.icon == ProductCategory::ICON_FILE
-      if category.product
-        if category.category_type == ProductCategory::FINISH_GOOD
-          ret << "<td><div class='select_product_fg' product_id=#{category.product.id} um_code=#{category.product.unit_measurement.code} width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
-        else
-          price = four_precision(category.product.selling_price)
-          ret << "<td><div class='select_product' category_id=#{category.product.id} title='#{category.code}' desc='#{category.product.desc}' unitmeasurement='#{category.product.unit_measurement.code}' unitprice='#{price}' width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
-        end
-      else
-        ret << "<td><div class='select_product' category_id=#{category.product.id} title='#{category.code}' width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
-      end
-    elsif category.icon == ProductCategory::ICON_REMOVE
-      if current_user.level == User::LEVEL_FIVE
-        ret << "<td><div class='select_product' category_id=#{category.product.id} title='#{category.code}' width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
-      end
-    else
-      ret << "<td><div>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
-    end
-
-    unless downlines.empty?
-      ret << "<ul>"
-      downlines.each do |d|
-        treeview_with_selection(d, ret)
-      end
-      ret << "</ul>"
-    end
-        
-    if category.status == ProductCategory::KEEP_IN_VIEW
-      if current_user.level == User::LEVEL_FIVE
-        ret << "</li>"
-      end
-    else
-      ret << "</li>"
-    end
-    raw ret
-  end
+#  def treeview_with_selection(category, view)
+#    view ? ret = view : ret = ""
+#    downlines = category.children
+#    if category.status == ProductCategory::KEEP_IN_VIEW
+#      if current_user.level == User::LEVEL_FIVE
+#        ret << "<li data-expanded='true'>"
+#      end
+#    else
+#      ret << "<li data-expanded='true'>"
+#    end
+#        
+#    if category.icon == ProductCategory::ICON_FILE
+#      ret << "<table><tr><td><span class='k-sprite file'></span></td>"
+#    elsif category.icon == ProductCategory::ICON_FOLDER
+#      ret << "<table><tr><td><span class='k-sprite folder'></span></td>"
+#    else
+#      if category.status == ProductCategory::KEEP_IN_VIEW
+#        if current_user.level == User::LEVEL_FIVE
+#          ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
+#        end
+#      else
+#        ret << "<table><tr><td><span class='k-sprite remove_file'></span></td>"
+#      end
+#    end
+#
+#    if category.icon == ProductCategory::ICON_FILE
+#      if category.product
+#        if category.category_type == ProductCategory::FINISH_GOOD
+#          ret << "<td><div class='select_product_fg' product_id=#{category.product.id} um_code=#{category.product.unit_measurement.code} width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
+#        else
+#          price = four_precision(category.product.selling_price)
+#          ret << "<td><div class='select_product' category_id=#{category.product.id} title='#{category.code}' desc='#{category.product.desc}' unitmeasurement='#{category.product.unit_measurement.code}' unitprice='#{price}' width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
+#        end
+#      else
+#        ret << "<td><div class='select_product' category_id=#{category.product.id} title='#{category.code}' width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
+#      end
+#    elsif category.icon == ProductCategory::ICON_REMOVE
+#      if current_user.level == User::LEVEL_FIVE
+#        ret << "<td><div class='select_product' category_id=#{category.product.id} title='#{category.code}' width='300'>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
+#      end
+#    else
+#      ret << "<td><div>#{category.code}&nbsp;&nbsp;&nbsp;#{category.desc}</div></td></tr></table>"
+#    end
+#
+#    unless downlines.empty?
+#      ret << "<ul>"
+#      downlines.each do |d|
+#        treeview_with_selection(d, ret)
+#      end
+#      ret << "</ul>"
+#    end
+#        
+#    if category.status == ProductCategory::KEEP_IN_VIEW
+#      if current_user.level == User::LEVEL_FIVE
+#        ret << "</li>"
+#      end
+#    else
+#      ret << "</li>"
+#    end
+#    raw ret
+#  end
     
     
     
@@ -329,16 +285,6 @@ module ApplicationHelper
     sales_tax_exemption.find_by_trade_company_id_and_tarif_code(company_id, tarif_code).complete_qty rescue '-'
   end
     
-  #    def collection_supplier
-  #      array ||= []
-  #      Product.all.each do |c|
-  #        unless c.product_category.try(:category_type) == ProductCategory::FINISH_GOOD
-  #          array <<  [c.code, c.id]
-  #        end
-  #      end
-  #      return array
-  #    end
-    
   def purchase_requisition_item_status(pri)
     if pri.status == PurchaseRequisitionItem::PENDING
       "PENDING"
@@ -391,6 +337,7 @@ module ApplicationHelper
     end
   end
     
+  
   def link_add_1600x900(linked)
     link_to "Add", linked, :class => "iframe_1600x900  k-button", "data-fancybox-type" => "iframe"
   end
@@ -400,24 +347,23 @@ module ApplicationHelper
       "Add"
     end
   end
-    
-    
-  def link_addnew_800x450(linked)
-    link_to "Add New", linked, :class => "iframe_800x450 k-button opac-icon", "data-fancybox-type" => "iframe"
-  end
-    
+  
+  
   def link_addnew_1600x900(linked)
     link_to "Add New", linked, :class => "iframe_1600x900 k-button opac-icon", "data-fancybox-type" => "iframe"
   end
-    
+  
+  def link_addnew_800x450(linked)
+    link_to "Add New", linked, :class => "iframe_800x450 k-button opac-icon", "data-fancybox-type" => "iframe"
+  end
+        
   def not_link_addnew
     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
       "Add New"
     end
   end
     
-    
-    
+  
   def link_show_1600x900(linked)
     link_to "Show", linked, :class =>"show_without_refresh_page_1600x900 k-button opac-icon", "data-fancybox-type" => "iframe"
   end
@@ -436,6 +382,7 @@ module ApplicationHelper
     end
   end
     
+  
   def not_link_remove_row
     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
       "Remove Item"
@@ -555,18 +502,9 @@ module ApplicationHelper
     
     
     
-  def link_remove(linked)
-    link_to "Remove", linked, confirm: 'Are you sure to remove?', :method => :put ,:class => " k-button"
-  end
-    
-  def not_link_remove
-    content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
-      "Remove"
-    end
-  end
+
   
   def remove_row_button
-#    link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();", :class => "k-button"
     link_to "Remove", "#", :class => "remove_datarow k-button"
   end
   
@@ -580,14 +518,14 @@ module ApplicationHelper
     end 
   end
   
-#  def nothing_link(name)
-#    content_tag :span, :class => "k-button", :style => "color:grey ; background-color: white; cursor: default;" do 
-#      "#{name}"
-#    end
-#  end
-  
   def disabled_style(name)
     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do
+      "#{name}"
+    end
+  end
+  
+  def disabled_menu_style(name)
+    content_tag :span, :style => "color: gray; cursor: default;" do
       "#{name}"
     end
   end
@@ -620,8 +558,7 @@ module ApplicationHelper
       "Common"
     end
   end
-    
-    
+        
   def link_kiv(linked)
     link_to "Drop to KIV", linked, confirm: 'Are you sure move to KIV?', method: :delete ,:class => "k-button"
   end
@@ -631,9 +568,6 @@ module ApplicationHelper
       "Drop To KIV"
     end
   end
-    
-    
-    
 
   def link_recover(linked)
     link_to "Recover", linked, confirm: 'Are you sure to recover?', :method => :put ,:class => " k-button"
@@ -645,8 +579,6 @@ module ApplicationHelper
     end
   end
     
-    
-    
   def link_recycle(linked)
     link_to  "Delete", linked, confirm: 'Are you sure to delete?', method: :delete ,:class => " k-button"
   end
@@ -657,8 +589,6 @@ module ApplicationHelper
     end
   end
     
-    
-    
   def link_printable(linked, type = FALSE)
     link_to  'Printer', linked, :target => "_blank" ,:class => " k-button"
   end
@@ -668,8 +598,6 @@ module ApplicationHelper
       "Printer"
     end
   end
-    
-    
     
   def link_submit_button
     content_tag :span, :class => "k-button" do 
@@ -690,8 +618,6 @@ module ApplicationHelper
       "Save"
     end
   end
-  
-
     
   def link_close_button
     link_to 'Close' , "#" , :class=>"k-button font_bold", :onclick => "parent.$.fancybox.close();"
@@ -705,15 +631,24 @@ module ApplicationHelper
     submit_tag "Send Mail", :class => "k-button font_bold", :id => "send_button"
   end
     
-    
-    
   def not_link_cost
     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
       "Costing Sheet"
     end
   end
+   
+  def link_remove(linked)
+    link_to "Remove", linked, confirm: 'Are you sure to remove?', :method => :put ,:class => " k-button"
+  end
     
-    
+  def not_link_remove
+    content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
+      "Remove"
+    end
+  end
+  
+  
+  
   def um_code(unit_measurement_id)
     UnitMeasurement.find(unit_measurement_id).code rescue '-'
   end

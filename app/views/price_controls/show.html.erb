@@ -3,16 +3,16 @@
 <div class="table_details">
   <table>
     <tr>
-      <td><b>P/P No#</b></td>
-      <td><%= @price_control.pp_no rescue '-' %></td>
+      <td><b>Trade Company</b></td>
+      <td>[<%= @price_control.trade_company.code rescue '-' %>] <%= @price_control.trade_company.name rescue '-' %></td>
       <td width="50"></td>
       <td><b>P/P Date</b></td>
       <td><%= @price_control.pp_date.strftime("%d-%m-%Y") rescue '-' %></td>
     </tr>
-
+    
     <tr>
-      <td><b>Trade Company</b></td>
-      <td>[<%= @price_control.trade_company.code rescue '-' %>] <%= @price_control.trade_company.name rescue '-' %></td>
+      <td><b>P/P No#</b></td>
+      <td><%= @price_control.pp_no rescue '-' %></td>
       <td></td>
       <td><b>Reference</b></td>
       <td><%= @price_control.reference.present? ? "#{@price_control.reference}" : '-' %></td>

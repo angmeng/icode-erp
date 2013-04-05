@@ -1,5 +1,7 @@
 class CompanyProfilesController < ApplicationController
   before_filter :authenticate_user!
+  layout "sheetbox", :only => [:edit, :create, :update]
+  
   
   def index
     render :layout => "sheetbox" if params[:change_layout].present?

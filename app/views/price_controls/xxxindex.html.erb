@@ -1,8 +1,5 @@
-<div class="title_head">
-  <strong style="color:white;">PRODUCT PRICE CONTROLS DATA</strong>
-  <%= search_button %>
-</div>
-<div><%= render "search_price_control" %></div>
+<%= title_head "PRODUCT PRICE CONTROLS DATA" %>
+<%= render "search_price_control" %>
 
 <% if @price_controls.present? %>
   <div class="table_background"><%= render "listing_price_controls", :listing => @price_controls %></div>

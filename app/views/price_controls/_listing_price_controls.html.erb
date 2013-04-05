@@ -1,10 +1,10 @@
-<table id="jgrid" class="zebraLight">
+<table id="jgrid_searching" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
+      <th>Trade Company</th>
       <th>PP No</th>
       <th>PP date</th>
-      <th>Trade Company</th>
       <th>Reference</th>
       <th>Currency</th>
       <th>Updated By</th>
@@ -16,10 +16,16 @@
       <% listing.each do |price_control| %>
         <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= price_control.id %>">
           <td></td>
+          <td>[<%= price_control.trade_company.code rescue '-' %>] <%= price_control.trade_company.name rescue '-' %></td>
           <td align="center"><%= price_control.pp_no rescue '-' %></td>
           <td align="center"><%= price_control.pp_date.strftime("%d-%m-%Y") rescue '-' %></td>
-          <td>[<%= price_control.trade_company.code rescue '-' %>] <%= price_control.trade_company.name rescue '-' %></td>
-          <td align="center"><%= price_control.reference rescue '-' %></td>
+          <td align="center">
+            <% if price_control.reference.present? %>
+              <%= price_control.reference rescue '-' %>
+            <% else %>
+              -
+            <% end %>
+          </td>
           <td align="center"><%= price_control.currency.name rescue '-' %></td>
           <td align="center"><%= price_control.user.name rescue '-' %></td>
         </tr>

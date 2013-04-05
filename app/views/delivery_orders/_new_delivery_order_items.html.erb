@@ -2,18 +2,18 @@
   <thead>
     <tr style="background-color: gainsboro;">
       <th width="400">[SO No][Product ID][Description]</th>
-      <th width="150">SO Date</th>
-      <th width="150">Delivery Qty</th>
-      <th width="150">Order Qty</th>
-      <th width="150">Unit Price</th>
+      <th width="150">S/O Date</th>
+      <th width="150">S/O Qty</th>
+      <th width="150">U/P</th>
       <th width="150">Balance Qty</th>
-      <th width="150">No. of Carton</th>
-      <th width="150">Gen Cur Stock</th>
-      <th width="150">D/O Status</th>
       <th width="150">Part No.</th>
       <th width="150">Client's Lot#</th>
       <th width="150">Client's P/O</th>
-      <th width="150">Dept Cur Stock</th>
+      <th width="150">D/O Status</th>
+      <th width="150">Gen Cur Stock</th>
+      <th width="150">Delivery Qty</th>
+      <th width="150">No. of Carton</th>
+      <!--th width="150">Dept Cur Stock</th-->
       <th>Action</th>
     </tr>
   </thead>
@@ -30,7 +30,6 @@
           <span id="so_date_0"></span>
           <%= hidden_field_tag "datarow[0][so_date]", '', :placeholder => "dd-mm-yyyy" %>
         </td>
-        <td align="center"><%= text_field_tag "datarow[0][delivery_qty]", '', :class => "k-textbox", :style => "width:50px;" %></td>
         <td align="center">
           <span id="so_order_qty_0"></span>
           <%= hidden_field_tag "datarow[0][order_qty]", '' %>
@@ -43,9 +42,7 @@
           <span id="so_balance_qty_0"></span>
           <%= hidden_field_tag "datarow[0][balance_qty]", '' %>
         </td>
-        <td align="center"><%= text_field_tag "datarow[0][no_of_carton]", '', :class => "k-textbox", :style => "width:50px;"  %></td>
-        <td align="center"><%= text_field_tag "datarow[0][gen_cur_stock]", '', :class => "k-textbox", :style => "width:50px;"  %></td>        
-        <td align="center"><span id="so_status_0"></span></td>
+        
         <td align="center">
           <span id="partno_0"></span>
           <%= hidden_field_tag "datarow[0][part_no]", '' %>
@@ -58,7 +55,10 @@
           <span id="clientPoNo_0"></span>
           <%= hidden_field_tag "datarow[0][client_po]", '' %>
         </td> 
-        <td align="center"><%= text_field_tag "datarow[0][department]", '', :size => 2 %> <%= text_field_tag "datarow[0][dept_cur_stock]", '', :size => 7 %></td>
+        <td align="center"><span id="do_status_0"></span></td>
+        <td align="center"><%= text_field_tag "datarow[0][gen_cur_stock]", '', :class => "k-textbox", :style => "width:50px;"  %></td>        
+        <td align="center"><%= text_field_tag "datarow[0][delivery_qty]", '', :class => "k-textbox", :style => "width:50px;" %></td>
+        <td align="center"><%= text_field_tag "datarow[0][no_of_carton]", '', :class => "k-textbox", :style => "width:50px;"  %></td>
         <td align="center"><%= remove_row_button  %></td>
       </tr>
       

@@ -181,6 +181,10 @@ class InventoryManagementSystem < ActiveRecord::Base
   SO_TRANSACTION_KIV                    = 196
   SO_TRANSACTION_PRINTABLE              = 197
   
+  SO_KIV                                = 287
+  SO_KIV_SHOW                           = 285
+  SO_KIV_RECOVER                        = 286
+  
   SO_ENTRY                              = 185
   
   SO_CUSTOMER_REGISTRATION              = 181
@@ -188,9 +192,9 @@ class InventoryManagementSystem < ActiveRecord::Base
   SO_PRODUCT_ID_REGISTRATION            = 183
   SO_PRODUCT_ID_REGISTRATION_ADD        = 184
   
-  SO_KIV_ITEM                           = 190
-  SO_KIV_ITEM_SHOW                      = 191
-  SO_KIV_ITEM_RECOVER                   = 192
+#  SO_KIV_ITEM                           = 190
+#  SO_KIV_ITEM_SHOW                      = 191
+#  SO_KIV_ITEM_RECOVER                   = 192
   
   DO_MENU                               = 155
   DO_TRANSACTION                        = 273
@@ -391,12 +395,19 @@ class InventoryManagementSystem < ActiveRecord::Base
 #  PRICE_CONTROL_ADD                                  = 252
 #  PRICE_CONTROL_SAVE                                 = 253
   
-  PRICE_CONTROL_LISTING                              = 254
-  PRICE_CONTROL_NEW                                  = 251
-  PRICE_CONTROL_SHOW                                 = 247
-  PRICE_CONTROL_EDIT                                 = 248
-  PRICE_CONTROL_KIV                                  = 249
-  PRICE_CONTROL_PRINTABLE                            = 250
+  PRICE_CONTROL_CUSTOMER_LISTING                     = 254
+  PRICE_CONTROL_CUSTOMER_NEW                         = 251
+  PRICE_CONTROL_CUSTOMER_HISTORY                     = 247  # Change SHOW to HISTORY, 3/4/2013
+#  PRICE_CONTROL_CUSTOMER_EDIT                        = 248
+#  PRICE_CONTROL_CUSTOMER_KIV                         = 249
+#  PRICE_CONTROL_CUSTOMER_PRINTABLE                   = 250
+  
+  PRICE_CONTROL_VENDOR_LISTING                       = 279
+  PRICE_CONTROL_VENDOR_NEW                           = 280
+  PRICE_CONTROL_VENDOR_HISTORY                       = 281  # Change SHOW to HISTORY, 3/4/2013
+#  PRICE_CONTROL_VENDOR_EDIT                          = 282
+#  PRICE_CONTROL_VENDOR_KIV                           = 283
+#  PRICE_CONTROL_VENDOR_PRINTABLE                     = 284
   
   PRICE_CONTROL_LISTING_KIV                          = 255
   PRICE_CONTROL_SHOW_KIV                             = 256
@@ -412,7 +423,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   
  
-  #start at 279
+  #start at 288
 
 
   #====== ====== report ======= =======

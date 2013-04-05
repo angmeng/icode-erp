@@ -12,27 +12,28 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require dataTables/jquery.dataTables
-//= require_tree .
-//= require turbolinks
 //= require jquery-ui
+//= require_tree .
+//= require dataTables/jquery.dataTables
+//= require turbolinks
 
 $(document).ready(function () {
     
     var window_height           = $(window).height();
     var mainHeader_height       = $("#main_header").height();
     var mainFooter_height       = $("#main_footer").height();
-    var menu_height             = $("#menu").height();
+    var menu_height             = $("#k_menu").height();
     var linking_height          = $("#linking").height();
+    var searching_height        = $("#searching").height();
     var title_height            = $(".title_head").height();
     var button_height           = $(".icon_tag").height();
-    
     var ctn_width               = $(".title_head").width() - 10; // It is for table width
     
     // Wrapper is calculate the height only available when without popup
-    var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
-    var content_height          = wrapper_height - title_height - button_height - 12;
-    var linking_content_height  = wrapper_height - linking_height - title_height - button_height - 13;
+    var wrapper_height           = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
+    var content_height           = wrapper_height - title_height - button_height - 12;
+    var linking_content_height   = wrapper_height - linking_height - title_height - button_height - 13;
+    var searching_content_height = wrapper_height - searching_height - title_height - button_height - 13;
 
     // It is for normal page for without popup
     $("#main_wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
@@ -54,6 +55,13 @@ $(document).ready(function () {
     $("#jgrid_linking").chromatable({
         width:  ctn_width,
         height: linking_content_height,
+        scrolling: "yes"
+    });
+    
+    // Normal Table with search engine, reference for /price_controls
+    $("#jgrid_searching").chromatable({
+        width:  ctn_width,
+        height: searching_content_height,
         scrolling: "yes"
     });
     

@@ -3,58 +3,49 @@
       <tr>
         <td></td>
         <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
-        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Product Price Controls Data</td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_NEW) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
-        <td></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_KIV) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_LISTING) %> Product Price Controls Data - Customers</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_NEW) %></td>
+        <% 6.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_HISTORY) %></td>
       </tr>
       <tr>
         <% 2.times do |td| %><td></td><% end %>
-        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Product Price Controls Data - KIV</td>
-        <% 5.times do |td| %><td></td><% end %>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
-      </tr>        
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_VENDOR_LISTING) %> Product Price Controls Data - Suppliers</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_VENDOR_NEW) %></td>
+        <% 6.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRICE_CONTROL_VENDOR_HISTORY) %></td>
+      </tr>       
   <% else %>
       <tr>
         <td></td>
         <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
-        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Product Price Controls Data</td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_NEW) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
-        <td></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_KIV) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_LISTING) %> Product Price Controls Data - Customers</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_NEW) %></td>
+        <% 6.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_HISTORY) %></td>
       </tr>
       <tr>
         <% 2.times do |td| %><td></td><% end %>
-        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Product Price Controls Data - KIV</td>
-        <% 5.times do |td| %><td></td><% end %>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_VENDOR_LISTING) %> Product Price Controls Data - Suppliers</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_VENDOR_NEW) %></td>
+        <% 6.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRICE_CONTROL_VENDOR_HISTORY) %></td>
       </tr>
   <% end %>
 <% else %>
-  <tr>
-    <td></td>
-    <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
-    <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_LISTING) %> Product Price Controls Data</td>
-    <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_NEW) %></td>
-    <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_SHOW) %></td>
-    <td></td>
-    <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_KIV) %></td>
-    <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_PRINTABLE) %></td>
-    <% 2.times do |td| %><td></td><% end %>
-  </tr>
-  <tr>
-    <% 2.times do |td| %><td></td><% end %>
-    <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %> Product Price Controls Data - KIV</td>
-    <% 5.times do |td| %><td></td><% end %>
-    <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_SHOW_KIV) %></td>
-    <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_RECOVER) %></td>
-  </tr>
+    <tr>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_MENU) %> Product Price Controls</td>
+      <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_LISTING) %> Product Price Controls Data - Customers</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_NEW) %></td>
+      <% 6.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_HISTORY) %></td>
+    </tr>
+    <tr>
+      <% 2.times do |td| %><td></td><% end %>
+      <td><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_VENDOR_LISTING) %> Product Price Controls Data - Suppliers</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_VENDOR_NEW) %></td>
+      <% 6.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::PRICE_CONTROL_VENDOR_HISTORY) %></td>
+    </tr>
 <% end %>

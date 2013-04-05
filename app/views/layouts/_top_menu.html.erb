@@ -1,4 +1,4 @@
-<ul id="menu">
+<ul id="k_menu">
   <li>
     Home (<strong><%= current_user.name %></strong>)
     <ul>
@@ -248,9 +248,15 @@
           Sales Order
           <ul>
             <% if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
-              <li><%= link_to "Sales Orders Data", sales_orders_path,:class => "k-button" %></li>
+              <li><%= link_to "Sales Orders Data", sales_orders_path %></li>
             <% else %>
-              <li class="text_gray">Sales Orders Data</li>
+              <li><%= disabled_menu_style "Sales Orders Data" %></li>
+            <% end %>
+              
+            <% if roles.include?(InventoryManagementSystem::SO_KIV) %>
+              <li><%= link_to "Sales Orders Data - KIV", kiv_sales_orders_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Sales Orders Data - KIV" %></li>
             <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::SO_KIV_ITEM) %>
@@ -699,17 +705,17 @@
         <li>
           Product Price Controls
           <ul>
-            <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING) %>
-              <li><%= link_to "Product Price Controls Data", price_controls_path %></li>
+            <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_LISTING) %>
+              <li><%= link_to "Product Price Controls Data - Customers", product_customers_path %></li>
             <% else %>
-              <li class="disabled_menu">Product Price Controls Data</li>
+              <li><%= disabled_menu_style("Product Price Controls Data - Customers") %></li>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %>
-              <li><%= link_to "Product Price Controls Data - KIV", kiv_price_controls_path %></li>
-            <% else %>
-              <li class="disabled_menu">Product Price Controls Data - KIV</li>
-            <% end %>
+            <%# if roles.include?(InventoryManagementSystem::PRICE_CONTROL_LISTING_KIV) %>
+              <!--li><%#= link_to "Product Price Controls Data - KIV", kiv_price_controls_path %></li-->
+            <%# else %>
+              <!--li class="disabled_menu">Product Price Controls Data - KIV</li-->
+            <%# end %>
           </ul>
         </li>
       <% end %>

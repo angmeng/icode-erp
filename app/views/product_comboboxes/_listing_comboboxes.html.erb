@@ -5,10 +5,11 @@
       <th class="check_highlight"></th>
       <th>Product ID</th>
       <th>Description</th>
-      <th>Part No.</th>
+      <th width="70">Part Code</th>
       <th>U/P(RM)</th>
-      <th>Current Stock</th>
+      <th width="70">Current Stock</th>
       <th>U/M</th>
+      <th>Tarif Code</th>
       <th>Category Type</th>
       <th>Old Product ID</th>
       <th>Status</th>
@@ -24,15 +25,16 @@
         <td align="center"><%= pid.product.part_code rescue '-' %></td>
         <td align="right">
           <% if pid.category_type == ProductCategory::NON_OPERATION or pid.category_type == ProductCategory::OPERATION %>
-            <%= four_precision(pid.product.product_vendor.unit_price) rescue '-' %>
+            <b style="color:blue;"><%= four_precision(pid.product.product_vendor.unit_price) rescue '-' %></b>
           <% elsif pid.category_type == ProductCategory::FINISH_GOOD %>
-            <%= four_precision(pid.product.product_customer.selling_price) rescue '-' %>
+            <b style="color:green;"><%= four_precision(pid.product.product_customer.selling_price) rescue '-' %></b>
           <% else %>
             -
           <% end %>
         </td>
         <td align="center"><%= pid.product.current_stock rescue '-' %></td>
         <td align="center"><%= pid.product.unit_measurement.code rescue '-' %></td>
+        <td align="center"><%= pid.product.tarif_code rescue '-' %></td>
         <td align="center">
           <% if pid.category_type == ProductCategory::NON_OPERATION %>
             Non Operation

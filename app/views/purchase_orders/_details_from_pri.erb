@@ -5,8 +5,8 @@
         <th>No.</th>
         <th>Item Status</th>
         <th width="60">PR No.#</th>
-        <th>Product ID</th>
         <th>Vendor</th>
+        <th>Product ID</th>
         <th>Description (in Detail)</th>
         <th>ETA</th>
         <th>Qty</th>
@@ -53,13 +53,6 @@
             <% end %>
           </td>
           <td align="center"><%= p.purchase_requisition.pr_no rescue '-' %></td>
-          <td align="center">
-            <% if p.product_id? %>
-              <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-                <%= render '/product_categories/join_product_category', :pc => p %>
-              <% end %>
-            <% end %>
-          </td>
           <td>
             <% unless p.maintenance == TRUE %>
               <% if source.present? %>
@@ -70,6 +63,13 @@
                 <% else %>
                   <span class="red_alert"><%= source.company_name rescue '-' %></span>
                 <% end %>
+              <% end %>
+            <% end %>
+          </td>
+          <td align="center">
+            <% if p.product_id? %>
+              <%= link_to(product_path(p.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                <%= render '/product_categories/join_product_category', :pc => p %>
               <% end %>
             <% end %>
           </td>
