@@ -23,13 +23,10 @@ class DeliveryOrdersController < ApplicationController
     @sales_order = SalesOrder.so_pid_desc
   end
 
-  # GET /delivery_orders/1/edit
   def edit
     @delivery_order = DeliveryOrder.find(params[:id])
   end
 
-  # POST /delivery_orders
-  # POST /delivery_orders.json
   def create
     @delivery_order = DeliveryOrder.new(params[:delivery_order])
     check_delivery_order, msg = DeliveryOrder.running_delivery_order_items(params[:datarow], @delivery_order)
@@ -37,14 +34,13 @@ class DeliveryOrdersController < ApplicationController
       company.update_attributes(:sn_deliver_order_no => @delivery_order.do_no)
       redirect_to @delivery_order, notice: 'Delivery Order was successfully created.'
     else
+      msg.present? ? msg : msg = []
       msg << @delivery_order.errors.full_messages
       flash[:alert] = msg.join(', ')
       render action: "new"
     end
   end
 
-  # PUT /delivery_orders/1
-  # PUT /delivery_orders/1.json
   def update
     @delivery_order = DeliveryOrder.find(params[:id])
 

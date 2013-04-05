@@ -1,96 +1,95 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color: white;">PURCHASE ORDER # <%= @purchase_order.po_no %></strong></div>
-  
-  <table>
-      <tr>
-        <td width="100"><b>Vendor</b></td>
-        <td>[<%= @purchase_order.trade_company.code %>] <%= @purchase_order.trade_company.name rescue "-" %></td>
+<div class="title_head"><strong style="color: white;"></strong></div>
+<%= title_head "PURCHASE ORDER NO. [#{@purchase_order.po_no}]" %>
 
-        <td width="100"></td>
+<table>
+    <tr>
+      <td width="100"><b>Vendor</b></td>
+      <td>[<%= @purchase_order.trade_company.code %>] <%= @purchase_order.trade_company.name rescue "-" %></td>
 
-        <td width="100"><b>P/O Date</b></td>
-        <td><%= @purchase_order.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      <td width="100"></td>
 
-        <td width="100"></td>
+      <td width="100"><b>P/O Date</b></td>
+      <td><%= @purchase_order.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
 
-        <td width="100"><b>Remark</b></td>
-        <td><%= @purchase_order.remark rescue '-' %></td>
-      </tr>
+      <td width="100"></td>
 
-      <tr>
-        <td></td>
-        <td rowspan="3" style="display: block;">
-          <%= simple_format(@purchase_order.trade_company.address_1) rescue '-' %>
-          <% if @purchase_order.trade_company.postcode_one.present? %>
-            <%= @purchase_order.trade_company.postcode_one rescue '-' %>&nbsp;
-          <% end %>
-          <% if @purchase_order.trade_company.city_one.present? %>
-            <%= @purchase_order.trade_company.city_one rescue '-' %>,&nbsp;
-          <% end %>
-          <% if @purchase_order.trade_company.state_one.present? %>
-            <%= @purchase_order.trade_company.state_one rescue '-' %>,&nbsp;
-          <% end %>
-          <% if @purchase_order.trade_company.country_one.present? %>
-            <%= @purchase_order.trade_company.country_one rescue '-' %>.
-          <% end %>
-        </td>
+      <td width="100"><b>Remark</b></td>
+      <td><%= @purchase_order.remark rescue '-' %></td>
+    </tr>
 
-        <td></td>
+    <tr>
+      <td></td>
+      <td rowspan="3" style="display: block;">
+        <%= simple_format(@purchase_order.trade_company.address_1) rescue '-' %>
+        <% if @purchase_order.trade_company.postcode_one.present? %>
+          <%= @purchase_order.trade_company.postcode_one rescue '-' %>&nbsp;
+        <% end %>
+        <% if @purchase_order.trade_company.city_one.present? %>
+          <%= @purchase_order.trade_company.city_one rescue '-' %>,&nbsp;
+        <% end %>
+        <% if @purchase_order.trade_company.state_one.present? %>
+          <%= @purchase_order.trade_company.state_one rescue '-' %>,&nbsp;
+        <% end %>
+        <% if @purchase_order.trade_company.country_one.present? %>
+          <%= @purchase_order.trade_company.country_one rescue '-' %>.
+        <% end %>
+      </td>
 
-        <td><b>Trade Term</b></td>
-        <td><%= @purchase_order.trade_term.name rescue '-' %></td>
-      </tr> 
+      <td></td>
 
-      <tr>
-        <td></td>
-        <td></td>
-        <td><b>Currency</b></td>
-        <td><%= @purchase_order.currency.name rescue '-' %></td>
-      </tr>
+      <td><b>Trade Term</b></td>
+      <td><%= @purchase_order.trade_term.name rescue '-' %></td>
+    </tr> 
 
-      <tr>
-        <td></td>
-        <td></td>
-        <td><b>Revision</b></td>
-        <td><%= @purchase_order.revision rescue '-' %></td>
-      </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><b>Currency</b></td>
+      <td><%= @purchase_order.currency.name rescue '-' %></td>
+    </tr>
 
-      <tr>
-        <td><b>Fax #</b></td>
-        <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
-        <td></td>
-        <td><b>Transport</b></td>
-        <td><%= @purchase_order.transport.name rescue "-" %></td>
-      </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><b>Revision</b></td>
+      <td><%= @purchase_order.revision rescue '-' %></td>
+    </tr>
 
-      <tr>
-        <td><b>Attn.</b></td>
-        <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
-      </tr>
+    <tr>
+      <td><b>Fax #</b></td>
+      <td><%= @purchase_order.trade_company.fax_no rescue '-' %></td>
+      <td></td>
+      <td><b>Transport</b></td>
+      <td><%= @purchase_order.transport.name rescue "-" %></td>
+    </tr>
 
-      <tr>
-        <td><b>Purchased By</b></td>
-        <td>
-          <% pb = User.find(@purchase_order.purchase_by) %>
-          <%= pb.name %>
-        </td>
-        <td></td>
-        <td title="Sales Tax Exemption No."><b>STE No.</b></td>
-        <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
-      </tr>
-  </table>
+    <tr>
+      <td><b>Attn.</b></td>
+      <td><%= @purchase_order.trade_company.contact_person rescue "-" %></td>
+    </tr>
 
-  <hr/>
+    <tr>
+      <td><b>Purchased By</b></td>
+      <td>
+        <% pb = User.find(@purchase_order.purchase_by) %>
+        <%= pb.name %>
+      </td>
+      <td></td>
+      <td title="Sales Tax Exemption No."><b>STE No.</b></td>
+      <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
+    </tr>
+</table>
 
-  <div class="fix_1600x900_h400">
-    <% if @purchase_order.trade_company.sales_tax_exemption.present? %>
-      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @purchase_order.purchase_requisition_items %>
-    <% else %>
-      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @purchase_order.purchase_requisition_items %>
-    <% end %>
-  </div>
+<hr/>
 
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+<div class="fix_1600x900_h400">
+  <% if @purchase_order.trade_company.sales_tax_exemption.present? %>
+    <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @purchase_order.purchase_requisition_items %>
+  <% else %>
+    <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @purchase_order.purchase_requisition_items %>
+  <% end %>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
 </div>

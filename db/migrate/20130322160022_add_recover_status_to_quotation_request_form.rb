@@ -5,6 +5,7 @@ class AddRecoverStatusToQuotationRequestForm < ActiveRecord::Migration
     add_column    :quotation_request_forms, :recover_status, :string
     add_column    :product_customers, :currency_id, :integer
     add_column    :product_vendors, :currency_id, :integer
+    
     remove_column :products, :color_grade
     remove_column :products, :version
     remove_column :products, :model

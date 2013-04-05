@@ -1,9 +1,9 @@
 <%= render "linking" %> 
 
-<div class="title_head"><strong style="color:white;">PRODUCT ID REGISTRATION (NON OPERATION AND OPERATION)</strong></div>
+<%= title_head "PRODUCT ID REGISTRATION (NON OPERATION AND OPERATION)" %>
 
 <% if @no_product_id.present? %>
-  <div class="table_color"><%= render "/purchase_orders/read_no_product_id", :product_id => @no_product_id %></div>
+  <div class="table_background"><%= render "/purchase_orders/read_no_product_id", :product_id => @no_product_id %></div>
 <% else %>
   <div class="linking_content">No Record Found</div>
 <% end %>
