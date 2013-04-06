@@ -22,6 +22,11 @@ class DeliveryOrder < ActiveRecord::Base
   def self.search_do(search)
     search.where(:status => DeliveryOrder::ACTIVE)
   end
+
+  # def self.authorize_print
+  #   if authorize_print == true
+  #     authorize_print.update_attributes
+  # end
   
   def self.running_delivery_order_items(data, delivery_order)
     if data.present?

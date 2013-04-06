@@ -163,7 +163,7 @@ def pdf_pr_report
     end
     elsif params[:commit] == "Show"
       if params[:pr_ids].present?
-      @detail_pr_report = PurchaseRequisition.find(params[:pr_ids])
+      @detail_pr_report = PurchaseRequisitio.find(params[:pr_ids])
         respond_to do |format|
           format.html
         end
@@ -385,7 +385,7 @@ end
   def pdf_do_so_documentation_report
     if params[:commit] == "Print D/O"
        if params[:doc_ids].present?
-       @detail_delivery_order_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
+       @detail_delivery_order_documentation_report = DeliveryOrder.find(params[:doc_ids])
        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
         @kit = PDFKit.new(html)
         send_data(@kit.to_pdf,  :filename => "pdf_delivery_order_report.pdf",
@@ -394,7 +394,7 @@ end
       end
     elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
-       @detail_invoice_documentation_report = DeliveryOrderItem.find(params[:doc_ids])
+       @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
        # html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
        #  @kit = PDFKit.new(html)
        #  send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
@@ -458,7 +458,7 @@ end
   end
 
 
-  def pr_report 
+  def pr_report
     @pr_report = PurchaseRequisition.search(params[:search])
     @show_pr_report = @pr_report.all
     #@take_ids = @show_pr_report.map(&:id)

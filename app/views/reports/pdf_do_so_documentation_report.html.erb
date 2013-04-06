@@ -4,8 +4,8 @@
 <% arr = [] %>
 <% array = [] %>
 <%# count = 0 %>
-<% @detail_invoice_documentation_report.each_with_index do |p , index| %>
-
+<% @detail_invoice_documentation_report.each_with_index do |p| %>
+	<% p.delivery_order_items.each_with_index do |doi , index| %>
 <!-- 	<%# if count % 6 == 0 %>  
 	<div style="page-break-before: always;">
 
@@ -13,17 +13,20 @@
 
  -->
 	<div>
-	
+	<br />
+	<br />
+	<br />
+	<br />
 	<table style="width:100%">
 		<tr>
 			<td style="width:10cm;">
-					<div class="part1"><%= p.delivery_order.trade_company.name %> /
-						<%= p.delivery_order.trade_company.address_1 %>
-						<%= p.delivery_order.trade_company.address_2 %>
-						<%= p.delivery_order.trade_company.address_3 %>
-						<%= p.delivery_order.trade_company.tel_no_1 %>
-						<%= p.delivery_order.trade_company.tel_no_2 %>
-						<%= p.delivery_order.trade_company.fax_no %>
+					<div class="part1"><%= doi.delivery_order.trade_company.name %> /
+						<%= doi.delivery_order.trade_company.address_1 %>
+						<%= doi.delivery_order.trade_company.address_2 %>
+						<%= doi.delivery_order.trade_company.address_3 %>
+						<%= doi.delivery_order.trade_company.tel_no_1 %>
+						<%= doi.delivery_order.trade_company.tel_no_2 %>
+						<%= doi.delivery_order.trade_company.fax_no %>
 					</div>
 				
 				
@@ -32,12 +35,12 @@
 			<td style="width:8cm;">
 				<div>
 					<div class="part2" style="margin-left:4.5cm;">
-					<div><%= p.delivery_order.do_no rescue'-' %></div>
-					<div><%= p.delivery_order.do_date rescue'-' %></div>
-					<div><%= p.delivery_order.trade_term.name rescue'-' %></div>
-					<div><%= p.delivery_order.currency.name rescue'-' %></div>
-					<div><%= p.delivery_order.sales_rep rescue'-' %></div>
-					<div><%= p.delivery_order.transport.name rescue'-' %></div>
+					<div><%= doi.delivery_order.do_no rescue'-' %></div>
+					<div><%= doi.delivery_order.do_date rescue'-' %></div>
+					<div><%= doi.delivery_order.trade_term.name rescue'-' %></div>
+					<div><%= doi.delivery_order.currency.name rescue'-' %></div>
+					<div><%= doi.delivery_order.sales_rep rescue'-' %></div>
+					<div><%= doi.delivery_order.transport.name rescue'-' %></div>
 				</div>
 				</div>
 				
@@ -50,10 +53,10 @@
 	<br />
 	<div style="margin-left:5cm;">
 		<div>
-			<% if p.delivery_order.present? %>
-				<% if p.delivery_order.trade_company.present? %>
-					<% if p.delivery_order.trade_company.sales_tax_licence_no.present? %>
-						<%= p.delivery_order.trade_company.sales_tax_licence_no rescue'-'%>
+			<% if doi.delivery_order.present? %>
+				<% if doi.delivery_order.trade_company.present? %>
+					<% if doi.delivery_order.trade_company.sales_tax_licence_no.present? %>
+						<%= doi.delivery_order.trade_company.sales_tax_licence_no rescue'-'%>
 					<% else %>
 						&nbsp;
 					<% end %>
@@ -61,19 +64,19 @@
 			<% end %>
 		</div>
 		<div>
-			<% if p.delivery_order.present? %>
-				<% if p.delivery_order.sales_tax_exemption.present? %>
-					<%= p.delivery_order.sales_tax_exemption rescue'-' %>
+			<% if doi.delivery_order.present? %>
+				<% if doi.delivery_order.sales_tax_exemption.present? %>
+					<%= doi.delivery_order.sales_tax_exemption rescue'-' %>
 				<%else%>
 						&nbsp;
 				<%end%>
 			<%end%>
 		</div>
 		<div>
-			<% if p.delivery_order.present? %>
-				<% if p.delivery_order.trade_company.present? %>
-					<% if p.delivery_order.trade_company.warehouse_licence_no.present? %>
-						<%= p.delivery_order.trade_company.warehouse_licence_no rescue'-' %>
+			<% if doi.delivery_order.present? %>
+				<% if doi.delivery_order.trade_company.present? %>
+					<% if doi.delivery_order.trade_company.warehouse_licence_no.present? %>
+						<%= doi.delivery_order.trade_company.warehouse_licence_no rescue'-' %>
 					<% else %>
 						&nbsp;
 					<% end %>
@@ -81,10 +84,10 @@
 			<% end %>
 		</div>
 		<div>
-			<% if p.delivery_order.present? %>
-				<% if p.delivery_order.trade_company.present? %>
-					<% if p.delivery_order.trade_company.mfg_warehouse_licence_no.present? %>
-						<%= p.delivery_order.trade_company.mfg_warehouse_licence_no rescue'-' %>
+			<% if doi.delivery_order.present? %>
+				<% if doi.delivery_order.trade_company.present? %>
+					<% if doi.delivery_order.trade_company.mfg_warehouse_licence_no.present? %>
+						<%= doi.delivery_order.trade_company.mfg_warehouse_licence_no rescue'-' %>
 					<% else %>
 						&nbsp;
 					<% end %>
@@ -110,20 +113,21 @@
 	<tbody>
 	    <tr> 
 	      <td align="center"><%= index + 1 %></td>
-	      <td align="center"><%= p.client_lot rescue'-' %> / <%= p.client_po %></td>
-	      <td align="center"><%= p.part_no rescue'-' %> <%= p.sales_order_item.product.desc rescue'-' %> </td>
-	      <td align="center"><%= p.no_of_carton rescue'-' %></td>
-	      <td align="center"><%= p.delivery_qty rescue'-' %> <%= p.sales_order_item_id.unit_measurement rescue'-' %></td>
-	      	<% array << p.no_of_carton %>
-	      <td align="right"><%= p.unit_price rescue'-' %></td>
+	      <td align="center"><%= doi.client_lot rescue'-' %> / <%= doi.client_po %></td>
+	      <td align="center"><%= doi.part_no rescue'-' %> <%= doi.sales_order_item.product.desc rescue'-' %> </td>
+	      <td align="center"><%= doi.no_of_carton rescue'-' %></td>
+	      <td align="center"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item_id.unit_measurement rescue'-' %></td>
+	      	<% array << doi.no_of_carton %>
+	      <td align="right"><%= doi.unit_price rescue'-' %></td>
 	      	
-	      <td align="right"><%= iproduct(p.delivery_qty, p.unit_price) %></td>
-	      	<% arr << p.delivery_qty * p.unit_price %>
+	      <td align="right"><%= iproduct(doi.delivery_qty, doi.unit_price) %></td>
+	      	<% arr << doi.delivery_qty * doi.unit_price %>
 	    </tr>
 
 	
       
         <%# count += 1 %>
+        <% end %>
         <% end %>
         <tr>
         	<td></td>
@@ -139,14 +143,16 @@
 	   	   <% 5.times do |td| %><td></td><% end %>
            <td align="center">+ S/Tax 0%:</td>
           <% @detail_invoice_documentation_report.each do |e| %>
-           <td align="right"><%= e.delivery_order.sales_tax rescue'0.0' %></td>
+          <% e.delivery_order_items.each_with_index do |doi , index| %>
+           <td align="right"><%= doi.delivery_order.sales_tax rescue'0.0' %></td>
            
         </tr>
         <tr>
         	<% 5.times do |td| %><td></td><% end %>
            <td align="center">+ T/Charges:</td>
-           <td align="right">100<%#= e.delivery_order.tport_c rescue'0.0' %></td>
-           <% arr << e.delivery_order.sales_tax + 100 %>
+           <td align="right"><%= doi.delivery_order.tport_c rescue'0.0' %></td>
+           <% arr << doi.delivery_order.sales_tax + doi.delivery_order.tport_c %>
+           <% end %>
           <% end %>
        </tr>
        <tr>
@@ -312,7 +318,7 @@ height:20px;
   /*border-style: solid;*/
   width: 100%;
   margin-left: 2cm;
-  margin-top: 1cm;
+  margin-bottom: -2cm;
 }
 
 .part2 {
@@ -320,7 +326,7 @@ height:20px;
   /*border-style: solid;*/
   /*height: 120px;
   width: 100%;*/
-  margin-bottom: 2cm;
+  margin-bottom: 0cm;
 }
 
 
