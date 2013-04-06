@@ -623,7 +623,7 @@ class InventoryManagementSystem < ActiveRecord::Base
 
   #==== ==== ACTION ==== ====
   SO_REPORT_SHOW                                    = 454
-  SO_REPORT_PRINT                                   = 455 # UNTIL THIS NUMBER ***************
+  SO_REPORT_PRINT                                   = 455 
 
   SO_LISTING_REPORT_SHOW                            = 417
   SO_LISTING_REPORT_PRINT                           = 418

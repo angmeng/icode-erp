@@ -42,6 +42,7 @@ Merp::Application.routes.draw do
     get "sales_tax_exemption_report"
     get "sales_order_summary_report"
     get "sales_cj5_summary_co_report"
+    get "sales_order_listing_report"
     get "so_customer_po_detail_report"
     get "product_report"
     get "company_report"
@@ -54,6 +55,7 @@ Merp::Application.routes.draw do
 
     get "pdf_sales_tax_exemption_report"
     get "pdf_sales_order_summary_report"
+    get "pdf_sales_order_listing_report"
     get "pdf_purchase_by_creditor_report"
     get "pdf_product_report"
     get "pdf_inventory_report"

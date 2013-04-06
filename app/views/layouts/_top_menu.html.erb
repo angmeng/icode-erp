@@ -304,13 +304,19 @@
               <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT) %>
             <li><%= link_to "SO Cus Summary Report", sales_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-            <li class="text_gray">SO Cus Summary Report</li>
+              <li class="text_gray">SO Cus Summary Report</li>
             <% end %>
 
               <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
             <li><%= link_to "Customer P/O Report", so_customer_po_detail_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-            <li class="text_gray">Customer P/O Report</li>
+              <li class="text_gray">Customer P/O Report</li>
+            <% end %>
+
+            <% if roles.include?(InventoryManagementSystem::SO_LISTING_REPORT) %>
+            <li><%= link_to "Sales Order Listing Report", sales_order_listing_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <% else %>
+              <li class="text_gray">Sales Order Listing Report</li>
             <% end %>
           <% end %>
 
@@ -321,16 +327,17 @@
           Delivery Order Report
           <ul>
           <% if roles.include?(InventoryManagementSystem::DELIVERY_ORDER_REPORT_MENU) %>
-              <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
+              
+            <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
             <li><%= link_to "Print D/O,Invoice Report", do_so_documentation_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-              <% else %>
-            <li class="text_gray">Print D/O,Invoice Report</li>
-              <% end %>
-              <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
+            <% else %>
+             <li class="text_gray">Print D/O,Invoice Report</li>
+            <% end %>
+            <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
             <li><%= link_to "Delivery Order Summary Report", delivery_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
             <li class="text_gray">Delivery Order Summary Report</li>
-              <% end %>
+            <% end %>
           
             <% end %>
           </ul>

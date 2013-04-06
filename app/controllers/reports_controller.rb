@@ -163,7 +163,7 @@ def pdf_pr_report
     end
     elsif params[:commit] == "Show"
       if params[:pr_ids].present?
-      @detail_pr_report = PurchaseRequisitio.find(params[:pr_ids])
+      @detail_pr_report = PurchaseRequisition.find(params[:pr_ids])
         respond_to do |format|
           format.html
         end
@@ -395,11 +395,11 @@ end
     elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
-       # html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
-       #  @kit = PDFKit.new(html)
-       #  send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
-       #                          :type => 'application/pdf' ,
-       #                          :disposition => "attachement" )
+       html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+        @kit = PDFKit.new(html)
+        send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
+                                :type => 'application/pdf' ,
+                                :disposition => "attachement" )
       end 
       else
       redirect_to do_so_documentation_report_reports_path
@@ -407,11 +407,11 @@ end
   end
 
   def pdf_delivery_order_summary_report
-    render :text => "ABC 123"
+    render :text => "pdf DO order summary report"
   end
 
   def pdf_sales_order_listing_report
-    render :text => "abc 123"
+    render :text => "pdf sales order listing report"
   end
 
   # ======================================= end of pdf ============================================
@@ -447,6 +447,10 @@ end
   def product_report
     @product_report = ProductCombobox.search(params[:search])
     @show_product_report = @product_report.all
+     respond_to do |format|
+      format.html
+      format.json { render json: ProductsDatatable.new(view_context) }
+    end
     #@take_ids = @show_product_report.map(&:id) #for pdf 
   end
   #.where("parent_id = ? and icon = ?", 0, ProductCategory::ICON_FOLDER)

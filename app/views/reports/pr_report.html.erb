@@ -1,6 +1,6 @@
 <div id="popup_container">
   <div class="title_head"><strong style="color:white;">Purchase requsition Report</strong></div>
-<div>
+<!-- <div>
   <%= form_for @pr_report, :url => pr_report_reports_path  do |f| %>
     <table>
       <tr>
@@ -21,15 +21,14 @@
        </tr>
     </table>
   <% end %>
-</div>
-<hr />
+</div> -->
 
 <input type="checkbox" name="all" id="checkall" />Check All
 
 <div class="fix_1600x900_h450">
     <!-- <fieldset> -->
     <%= form_tag pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-      <table id="grid_h495">
+      <table id="products" class="display">
         <thead>
           <tr class="header_line">
             <th></th>
@@ -72,7 +71,7 @@
 
     <div class="icon_tag" style="float:right;">
 
-      <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT) %>
+      <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_SHOW) %>
       <span><%= submit_tag "Show" , :class => "k-button" %></span>
       <% else %>
       <%= not_link_show %>
