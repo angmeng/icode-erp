@@ -1,16 +1,14 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="jgrid_searching" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>Date</th>
 
-      <% if @search.present? %>
-        <% unless @search.product_code_equals.present? %>
-          <th>Product</th>
-        <% end %>
+      <% unless @search.product_id_equals.present? %>
+        <th>Product ID</th>
+        <th>Description</th>
       <% end %>
 
-      <th>Description</th>
       <th>Transaction</th>
       <th>Stock in</th>
       <th>Stock out</th>
@@ -21,24 +19,24 @@
   <tbody>
     <% inventory_histories.each do |inventory_history| %>
       
-        <%# unless inventory_history.product.product_category.try(:category_type) == ProductCategory::FINISH_GOOD %>
-          <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= inventory_history.id %>">
-            <td></td>
-            <td align="center"><%= inventory_history.created_at.strftime("%d-%m-%Y") rescue '-' %></td>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= inventory_history.id %>">
+        <td></td>
+        <td align="center"><%= inventory_history.created_at.strftime("%d-%m-%Y") rescue '-' %></td>
 
-            <% if @search.present? %>
-              <% unless @search.product_code_equals.present? %>
-                <td><%= render "/product_categories/join_product_category", :pc => inventory_history %></td>
-              <% end %>
-            <% end %>
-            <td><%= inventory_history.product.desc rescue '-' %></td>
-            <td align="center"><%= inventory_issue_description(inventory_history.inventory_issue_id) rescue '-' %></td>
-            <td align="center"><%= inventory_history.stock_in %></td>
-            <td align="center"><%= inventory_history.stock_out rescue '0' %></td>
-            <td align="center"><%= inventory_history.amount %></td>
-            <td align="center"><%= inventory_history.product.unit_measurement.code rescue '-' %></td>
-          </tr>
-        <%# end %>
+        <% unless @search.product_id_equals.present? %>
+          <td><%= render "/product_categories/join_product_category", :pc => inventory_history %></td>
+          <td><%= inventory_history.product.desc rescue '-' %></td>
+        <% end %>
+            
+        <td align="center">
+          <%#= inventory_issue_description(inventory_history.inventory_issue_id) rescue '-' %>
+          <%= inventory_history.inventory_issue.description rescue '-' %>
+        </td>
+        <td align="center"><%= inventory_history.stock_in rescue '0' %></td>
+        <td align="center"><%= inventory_history.stock_out rescue '0' %></td>
+        <td align="center"><%= inventory_history.amount rescue '0' %></td>
+        <td align="center"><%= inventory_history.product.unit_measurement.code rescue '-' %></td>
+      </tr>
 
     <% end %>
   </tbody>

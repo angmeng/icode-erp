@@ -1,8 +1,8 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="jgrid" class="zebraLight">
   <tr class="header_line">
     <th class="check_highlight"></th>
     <th>Transfer Note No</th>
-    <th>Product</th>
+    <th>Product ID</th>
     <th>Description</th>
     <th>Quantity</th>
     <th>Balance</th>
@@ -18,7 +18,7 @@
       <td></td>
       <td align="center"><%= stock_out.transfer_note_no rescue '-' %></td>
       <td align="center"><%= stock_out.product.product_combobox.product_code rescue '-' %></td>
-      <td><%= simple_format(stock_out.product.desc) rescue '-' %></td>
+      <td><%= stock_out.product.desc rescue '-' %></td>
       <td align="center"><%= two_precision(stock_out.quantity) rescue '-' %></td>
       <td align="center"><%= two_precision(stock_out.balance) rescue '-' %></td>
       <td align="center"><%= stock_out.collector_name rescue '-' %></td>

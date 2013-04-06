@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
   helper_method :trade_company_customer
   helper_method :trade_company_customer_with_code
   
+  helper_method :product_all_with_combobox
   helper_method :product_non_operation_n_operation_with_combobox
   helper_method :product_non_operation_n_operation_with_pr_combobox
   helper_method :product_finish_goods_with_combobox
@@ -149,6 +150,10 @@ class ApplicationController < ActionController::Base
   
   def trade_company_customer_with_code      #only customer comboboxes
     @trade_company_customer_with_code ||= TradeCompany.customer_with_code
+  end
+  
+  def product_all_with_combobox
+    @product_all_with_combobox ||= ProductCombobox.db_all
   end
   
   def product_non_operation_n_operation_with_combobox

@@ -8,7 +8,7 @@
   </li>
 
   <li>
-    Purchase Flow
+    Purchase Management
     <ul>
 
       <!-- Purchase Flow - Purchase Requisition -->
@@ -198,7 +198,7 @@
   </li>
 
   <li>
-    Sales Flow
+    Sale Management
     <ul>
       <% if roles.include?(InventoryManagementSystem::QR_MENU) %>
         <li style="width:150px;">
@@ -341,58 +341,31 @@
     </ul>
   </li>
 
-  
-
   <li>
-    Inventory
+    Stock Management
     <ul>
 
       <% if roles.include?(InventoryManagementSystem::INVENTORY_MENU) %>
         <li style="width:150px;">
-          Inventory
+          Inventories
           <ul>
             <% if roles.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %>
-              <li><%= link_to "Transactions & Histories For Inventory", inventory_histories_path %></li>
+              <li><%= link_to "Inventories Data", inventory_histories_path %></li>
             <% else %>
-              <li class="text_gray">Transactions & Histories For Inventory</li>
+              <li><%= disabled_menu_style "Inventories Data" %></li>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
-              <% else %>
-                <li class="text_gray">New Inventory</li>
-              <% end %>
+            <% if roles.include?(InventoryManagementSystem::TRANSFER_NOTES) %>  
+              <li><%= link_to "Transfer Notes Data", stock_outs_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Transfer Notes Data" %></li>
             <% end %>
-
-            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <li><%= link_to "Listing Transfer Notes", stock_outs_path %></li>
-              <%# else %>
-                <!-- <li class="text_gray">Stock Out</li> -->
-              <%# end %>
-            <%# end %>
-
-
-
-            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <li><%= link_to "New Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
-              <%# else %>
-                <!--li class="text_gray">Transfer Note</li-->
-              <%# end %>
-            <%# end %>
-
-
-
-            <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-              <%# if roles.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %>  
-                <%#*<li><%= link_to "New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %>
-          <%#*</li>%>
-              <%# else %>
-                <%#*<li class="text_gray">New Inventory</li>%>
-              <%# end %>
-            <%# end %>
+              
+            <% if roles.include?(InventoryManagementSystem::TRANSFER_NOTES_KIV_LISTING) %>  
+              <li><%= link_to "Transfer Notes Data - KIV", kiv_stock_outs_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Transfer Notes Data - KIV" %></li>
+            <% end %>
           </ul>
         </li>
       <% end %>

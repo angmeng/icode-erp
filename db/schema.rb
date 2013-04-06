@@ -531,7 +531,6 @@ ActiveRecord::Schema.define(:version => 20130404073530) do
     t.string   "desc"
     t.string   "tarif_code"
     t.decimal  "part_weight",                   :precision => 10, :scale => 6, :default => 0.0
-    t.decimal  "selling_price",                 :precision => 10, :scale => 5, :default => 0.0
     t.date     "cutoff_date"
     t.integer  "opening_stock",                                                :default => 0
     t.integer  "current_stock",                                                :default => 0
@@ -540,7 +539,6 @@ ActiveRecord::Schema.define(:version => 20130404073530) do
     t.integer  "product_category_id"
     t.string   "product_name"
     t.integer  "sales_tax_exemption_id"
-    t.float    "buying_price",                                                 :default => 0.0
     t.string   "status",                                                       :default => "Active"
     t.integer  "gsm",                                                          :default => 0
     t.float    "width",                                                        :default => 0.0
@@ -595,7 +593,6 @@ ActiveRecord::Schema.define(:version => 20130404073530) do
     t.string   "category"
     t.string   "window_code"
     t.string   "revision"
-    t.decimal  "current_price",                 :precision => 10, :scale => 2, :default => 0.0
   end
 
   add_index "products", ["sales_tax_exemption_id"], :name => "index_products_on_sales_tax_exemption_id"
@@ -1069,6 +1066,7 @@ ActiveRecord::Schema.define(:version => 20130404073530) do
     t.integer  "issued_by"
     t.string   "location"
     t.string   "reference_no"
+    t.integer  "status",                                             :default => 1
   end
 
   add_index "stock_outs", ["product_id"], :name => "index_stock_outs_on_product_id"

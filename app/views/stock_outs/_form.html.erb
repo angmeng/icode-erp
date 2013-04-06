@@ -1,55 +1,57 @@
 <%= form_for(@stock_out) do |f| %>
-  <div class="fix_800x450">
-    <table>
-      <tr>
-        <td width="130"><b>Transfer Note No</b></td>
-        <td><%= company.sn_transfer_slip_no + 1 %></td>
-      </tr>
-      <tr>
-        <td><b>Product ID *</b></td>
-        <td>
-          <%= f.select :product_id , options_for_select(product_non_operation_n_operation_with_pr_combobox, @stock_out.product_id), { :include_blank => true }, { :onchange => "getCombo_product(this)", :id => "kendo_combobox", :style => "width: 400px;" }  %>&nbsp;<span id="current_product_stock"></span>
-          <span id="stock_value" style="display: none;"></span>
-        </td>
-      </tr>
-      <tr>
-        <td><b>Description</b></td>
-        <td id="stock_out_description"></td>
-      </tr>
-      <tr>
-        <td><b>Quantity *</b></td>
-        <td>
-          <%= f.text_field :quantity, :size => 8 %>&nbsp;<b>U/M</b>&nbsp;<span id="stock_out_um"></span>
-          <%= f.hidden_field "unit_measurement_id" %>
-        </td>
-      </tr>
-      <tr>
-        <td><b>Balance</b></td>
-        <td>
-          <span id="stock_out_balance_span"></span>
-          <%= f.hidden_field :balance %>
-        </td>
-      </tr>
-      <tr>
-        <td><b>Collector Name *</b></td>
-        <td><%= f.text_field :collector_name %></td>
-      </tr>
-      <tr>
-        <td><b>Location *</b></td>
-        <td><%= f.text_field :location %></td>
-      </tr>
-      <tr>
-        <td><b>Reference No</b></td>
-        <td><%= f.text_field :reference_no %></td>
-      </tr>
-      <tr>
-        <td><b>Issued By</b></td>
-        <td>
-          <%= current_user.name %>
-          <%= f.hidden_field :issued_by, :value => current_user.id %>
-        </td>
-      </tr>
-    </table>
+  <div class="popup_content">
+    <div id="valid_transfer_note">
+      <table>
+        <tr>
+          <td width="130"><b>Transfer Note No</b></td>
+          <td>
+            <%= company.sn_transfer_slip_no + 1 %>
+            <%= f.hidden_field :transfer_note_no, :value => company.sn_transfer_slip_no + 1 %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Product ID *</b></td>
+          <td><%= f.select :product_id , options_for_select(product_non_operation_n_operation_with_pr_combobox, @stock_out.product_id), { :include_blank => true }, { :onchange => "getCombo_product(this)", :class => "mkendo_combobox", :style => "width: 600px;", "required validationMessage" => "Please Enter Product ID" } %></td>
+        </tr>
+        <tr>
+          <td><b>Current Stock</b></td>
+          <td><span id="current_product_stock"></span></td>
+        </tr>
+        <tr>
+          <td><b>Quantity *</b></td>
+          <td>
+            <%= f.text_field :quantity, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Quantity", :style => "width: 80px;" %><span class="k-invalid-msg" data-for="stock_out[quantity]"></span>&nbsp;<b>U/M</b>&nbsp;<span id="stock_out_um"></span>
+            <%= f.hidden_field "unit_measurement_id" %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Balance</b></td>
+          <td>
+            <span id="stock_out_balance_span"></span>
+            <%= f.hidden_field :balance %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Collector Name *</b></td>
+          <td><%= f.text_field :collector_name, :class => "k-textbox", "required validationMessage" => "Please Enter Collector Name" %></td>
+        </tr>
+        <tr>
+          <td><b>Location *</b></td>
+          <td><%= f.text_field :location, :class => "k-textbox", "required validationMessage" => "Please Enter Location" %></td>
+        </tr>
+        <tr>
+          <td><b>Reference No</b></td>
+          <td><%= f.text_field :reference_no, :class => "k-textbox" %></td>
+        </tr>
+        <tr>
+          <td><b>Issued By</b></td>
+          <td>
+            <%= current_user.name %>
+            <%= f.hidden_field :issued_by, :value => current_user.id %>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div class="icon_tag">
     <span id="stock_out_save_button"><%= link_save_button %></span>
@@ -77,6 +79,14 @@
             $("#stock_out_save_button").show();
           }
         });
+        
+        var validator = $("#valid_transfer_note").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) {}
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+        
     });
 
   </script>

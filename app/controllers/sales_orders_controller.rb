@@ -8,6 +8,11 @@ class SalesOrdersController < ApplicationController
     @sales_orders = @sales_orders.paginate(:page => params[:page])
   end
   
+  def dummy_so
+    @search = SalesOrder.search(params[:search])
+    @sales_orders = SalesOrder.db_active(@search)
+  end
+  
   def kiv
     @search = SalesOrder.search(params[:search])
     @sales_orders = SalesOrder.db_kiv(@search)

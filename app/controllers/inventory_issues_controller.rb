@@ -2,11 +2,8 @@ class InventoryIssuesController < ApplicationController
   before_filter :authenticate_user!
 #  before_filter :inventory_management_system, :except => [:show ]
   
-  # GET /inventory_issues
-  # GET /inventory_issues.json
   def index
-#    @inventory_issues = InventoryIssue.all
-    @inventory_issues = InventoryIssue.find_all_by_in_out(params[:type])
+    @inventory_issues = InventoryIssue.where(:in_out => params[:type_id])
 
     respond_to do |format|
       format.html # index.html.erb

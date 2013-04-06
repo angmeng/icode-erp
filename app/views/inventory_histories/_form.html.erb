@@ -1,61 +1,106 @@
 <%= form_for(@inventory_history) do |f| %>
-  <div class="fix_800x450">
-    <table>
-      <% unless action_name == "edit" %>
-        <tr>
-          <td>Type</td>
-          <td><%= select_tag "in_out", options_for_select([ "IN", "OUT" ], params[:in_out]), :include_blank => true , :onchange => "getCombo_in_out(this)" %></td>
-        </tr>
-      <% end %>
-        
-      <% unless action_name == "edit" %>
-        <tr>
-          <td>Product ID *</td>
-          <td>
-            <%= select_tag :product_id, options_from_collection_for_select(Product.all, 'id', 'code', @inventory_history.product_id.to_i), :include_blank => true, :onchange => "getCombo_product(this)", "required validationMessage" => "Please Enter an Product ID"  %>
-            <span id="current_product_stock"></span>
-          </td>
-        </tr>
-      <% end %>
-
-      <% unless action_name == "edit" %>
-        <% if params[:in_out] == "IN" or @inventory_history.stock_out == 0 %>
-          <tr class="show_in">
-            <td>Stock In</td>
-            <td><%= f.text_field :stock_in, :value => 0 %></td>
-          </tr>
-        <% else %>
-          <tr style="display:none;" class="show_in">
-            <td>Stock In</td>
-            <td><%= f.text_field :stock_in, :value => 0 %></td>
+  <div class="popup_content">
+    <div id="valid_inventory">
+      <table>
+        <% unless action_name == "edit" %>
+          <tr>
+            <td><b>Type *</b></td>
+            <td><%= select_tag "in_out", options_for_select([ "IN", "OUT" ], params[:in_out]), :include_blank => true , :onchange => "getCombo_in_out(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Type" %></td>
           </tr>
         <% end %>
-      <% end %>
 
-      <% unless action_name == "edit" %>
-        <% if params[:in_out] == "OUT" or @inventory_history.stock_in == 0 %>
-          <tr class="show_out">
-            <td>Stock Out</td>
-            <td><%= f.text_field :stock_out, :value => 0 %></td>
+        <% unless action_name == "edit" %>
+          <tr>
+            <td><b>Product ID *</b></td>
+            <td><%= select_tag :product_id, options_for_select(product_all_with_combobox, @inventory_history.product_id), :include_blank => true, :onchange => "getCombo_product(this)", :class => "mkendo_combobox", :style => "width: 600px;", "required validationMessage" => "Please Enter Product ID" %></td>
           </tr>
-        <% else %>
-          <tr style="display:none;" class="show_out">
-            <td>Stock Out</td>
-            <td><%= f.text_field :stock_out, :value => 0 %></td>
+          <tr>
+            <td><b>Current Stock</b></td>
+            <td><span id="current_product_stock"></span></td>
           </tr>
         <% end %>
-      <% end %>
 
-      <tr>
-        <td><%= f.label :inventory_issue_id, "Inventory Issue" %></td>
-        <td>
-          <%= f.select :inventory_issue_id, options_from_collection_for_select(InventoryIssue.all, 'id', 'description', @inventory_history.inventory_issue_id.to_i), :include_blank => true %>
-        </td>
-      </tr>
-    </table>
+        <% unless action_name == "edit" %>
+          <% if params[:in_out] == "IN" or @inventory_history.stock_out == 0 %>
+            <tr class="show_in">
+              <td><b>Stock In</b></td>
+              <td><%= f.text_field :stock_in, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock In" %></td>
+            </tr>
+          <% else %>
+            <tr style="display:none;" class="show_in">
+              <td><b>Stock In</b></td>
+              <td><%= f.text_field :stock_in, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock In" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+
+        <% unless action_name == "edit" %>
+          <% if params[:in_out] == "OUT" or @inventory_history.stock_in == 0 %>
+            <tr class="show_out">
+              <td><b>Stock Out</b></td>
+              <td><%= f.text_field :stock_out, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock Out" %></td>
+            </tr>
+          <% else %>
+            <tr style="display:none;" class="show_out">
+              <td><b>Stock Out</b></td>
+              <td><%= f.text_field :stock_out, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock Out" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+
+        <tr>
+          <td><b>Inventory Issue *</b></td>
+          <td><%= f.select :inventory_issue_id, options_from_collection_for_select(InventoryIssue.all, 'id', 'description', @inventory_history.inventory_issue_id.to_i), { :include_blank => true }, { "required validationMessage" => "Please Enter Inventory Issue", :style => "width :300px;" } %></td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div class="icon_tag">
     <%= link_save_button %>
     <%= link_close_button %>
   </div>
+<% end %>
+
+
+<% content_for :jquery_script do %>
+  <script>
+    
+    $(document).ready(function() {
+        
+        var validator = $("#valid_inventory").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+        
+    });
+    
+    function getCombo_in_out(sel) {
+        var combo = sel.options[sel.selectedIndex].value; 
+        if (combo == "IN"){
+            $('.show_in').show();
+            $('.show_out').hide();
+        } else {
+            $('.show_in').hide();
+            $('.show_out').show();
+        }
+
+        $.ajax({
+            dataType: "json",
+            url: '/inventory_issues?type_id=' + combo,
+            success: function(data){
+                $("select#inventory_history_inventory_issue_id").empty();
+                var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+                $(row).appendTo("select#inventory_history_inventory_issue_id");
+                $.each(data, function(i, j){
+                    row = "<option value=\"" + j.id + "\">" + j.description + "</option>";
+                    $(row).appendTo("select#inventory_history_inventory_issue_id"); 
+                });
+            }
+        });
+    }
+
+  </script>
+
 <% end %>

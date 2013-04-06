@@ -44,6 +44,9 @@ $(document).ready(function () {
     // It is for .content with linking
     $(".linking_content").css({ 'height': linking_content_height }).addClass("page_wrapper");
     
+    // It is for .content with searching
+    $(".searching_content").css({ 'height': searching_content_height }).addClass("page_wrapper");
+    
     // Normal Table for main screen, no linking
     $("#jgrid").chromatable({
         width:  ctn_width,

@@ -1,0 +1,9 @@
+<%= title_head "Dummy Sales Orders" %>
+
+<% if @sales_orders.present? %>
+  <div class="table_background"><%#= render "listing_sale_orders", :so => @sales_orders %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
+
+<%= render "action_dummy_so" %>

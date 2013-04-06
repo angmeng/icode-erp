@@ -4,72 +4,45 @@
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_MENU, checkboxes.include?(InventoryManagementSystem::INVENTORY_MENU), :disabled => true %> Inventory</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW, checkboxes.include?(InventoryManagementSystem::INVENTORY_NEW), :disabled => true %> Inventory New</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW_ADD, checkboxes.include?(InventoryManagementSystem::INVENTORY_NEW_ADD), :disabled => true %></td>
-        <td><%#= "save" %></td>
-        <% 10.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION), :disabled => true %> Inventory Transaciton</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT), :disabled => true %></td>
-        <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_KIV , checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_KIV ), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_MENU) %> Inventories</td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION) %> Inventories Data</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_NEW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
       </tr>
   
     <% else %>
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_MENU, checkboxes.include?(InventoryManagementSystem::INVENTORY_MENU) %> Inventory</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW, checkboxes.include?(InventoryManagementSystem::INVENTORY_NEW) %> Inventory New</td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW_ADD, checkboxes.include?(InventoryManagementSystem::INVENTORY_NEW_ADD) %></td>
-        <td><%#= "save" %></td>
-        <% 10.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION) %> Inventory Transaciton</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT) %></td>
-        <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_KIV , checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_KIV ) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE) %></td>
-        <% 6.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_MENU) %> Inventories</td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION) %> Inventories Data</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_NEW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
       </tr>
       
     <% end %>
 
   <% else %>
     
-    <tr>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_MENU %> Inventory</td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW %> Inventory New</td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_NEW_ADD %></td>
-      <td><%#= "save" %></td>
-      <% 10.times do |td| %><td></td><% end %>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION %> Inventory Transaciton</td>
-      <td></td><td><%#= "save" %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT %></td>
-      <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_KIV %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE %></td>
-      <% 6.times do |td| %><td></td><% end %>
-    </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_new(InventoryManagementSystem::INVENTORY_MENU) %> Inventories</td>
+        <td><%= ims_new(InventoryManagementSystem::INVENTORY_TRANSACTION) %> Inventories Data</td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::INVENTORY_NEW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::INVENTORY_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::INVENTORY_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::INVENTORY_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::INVENTORY_TRANSACTION_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
 
   <% end %>
 <%#*</table>%>

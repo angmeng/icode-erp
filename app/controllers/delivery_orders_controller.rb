@@ -15,9 +15,7 @@ class DeliveryOrdersController < ApplicationController
       format.json { render json: @delivery_order }
     end
   end
-
-  # GET /delivery_orders/new
-  # GET /delivery_orders/new.json
+  
   def new
     @delivery_order = DeliveryOrder.new
     @sales_order = SalesOrder.so_pid_desc
@@ -25,6 +23,7 @@ class DeliveryOrdersController < ApplicationController
 
   def edit
     @delivery_order = DeliveryOrder.find(params[:id])
+    @sales_order = SalesOrder.so_pid_desc
   end
 
   def create
@@ -32,6 +31,7 @@ class DeliveryOrdersController < ApplicationController
     check_delivery_order, msg = DeliveryOrder.running_delivery_order_items(params[:datarow], @delivery_order)
     if @delivery_order.save and check_delivery_order.present?
       company.update_attributes(:sn_deliver_order_no => @delivery_order.do_no)
+      # reduce Inventory and Product's current stock
       redirect_to @delivery_order, notice: 'Delivery Order was successfully created.'
     else
       msg.present? ? msg : msg = []
@@ -60,10 +60,10 @@ class DeliveryOrdersController < ApplicationController
   # DELETE /delivery_orders/1.json
   def destroy
     @delivery_order = DeliveryOrder.find(params[:id])
-    @delivery_order.destroy
+    @delivery_order.update_attributes(:status => DeliveryOrder::KEEP_IN_VIEW)
 
     respond_to do |format|
-      format.html { redirect_to delivery_orders_url }
+      format.html { redirect_to delivery_orders_url, :notice => "Delivery Order No # #{@delivery_order.do_no} has dropped to KIV." }
       format.json { head :no_content }
     end
   end

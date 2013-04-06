@@ -17,15 +17,15 @@
       <td><%= @delivery_order.trade_company.name rescue '-'%></td>
       <td></td>
       <td><b>Sales Tax</b></td>
-      <td><%= @delivery_order.sales_tax rescue '-' %></td>
+      <td><%= number_to_percentage(@delivery_order.sales_tax, :precision => 0) rescue '-' %></td>
     </tr>
 
     <tr>
       <td><b>Type of Sales</b></td>
       <td><%= @delivery_order.type_of_sale.name rescue'-' %></td>
       <td></td>
-      <td><b>T'port C.</b></td>
-      <td><%= @delivery_order.tport_c %></td>
+      <td><b>Transport Charge</b></td>
+      <td><%= two_precision(@delivery_order.tport_c) %></td>
     </tr>
 
     <tr>

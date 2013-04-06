@@ -27,7 +27,7 @@
           <% end %>
         </td>
         <td><%= product_customer.product.desc rescue '-' %></td>
-        <td align="right"><span style="float: left"><%= product_customer.currency.name rescue '-' %></span> <%= four_precision(product_customer.selling_price) %></td>
+        <td align="right"><!--span style="float: left"><%#= product_customer.currency.name rescue '-' %></span--><%= four_precision(product_customer.selling_price) %></td>
       </tr>
     <% end %>
   </tbody>

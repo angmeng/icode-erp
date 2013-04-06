@@ -1,0 +1,22 @@
+<div id="searching">
+  <% if @search.product_id_equals.present? %>
+    <div style="float: right; font-size:30px; color: purple; padding-top: 5px; padding-right: 10px;">
+      <b>Current Stock:</b> <%= inventory.product.current_stock rescue '-' %>
+    </div>
+  <% end %>
+  <%= form_for @search do |f| %>
+    <table>
+      <tr>
+        <td><b>Product ID</b></td>
+        <td>
+          <% if @search.product_id_equals.present? %>
+            <%= f.select :product_id_equals, options_for_select(product_all_with_combobox, @search.product_id_equals), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width: 600px;" } %>
+          <% else %>
+            <%= f.select :product_id_equals, options_for_select(product_all_with_combobox), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width: 600px;" } %>
+          <% end %>
+        </td>
+        <td><%= f.submit "Search", :class => "k-button" %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>
