@@ -22,18 +22,18 @@
 
         <tr>
           <td><b>Customer Company *</b></td>
-          <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @delivery_order.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Customer Company", :style => "width: 400px;" } %></td>
+          <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @delivery_order.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Customer Company", :style => "width: 400px;", :onchange => "delivery_order_company_change(this)" } %></td>
           <td></td>
           <td><b>Sales Tax</b></td>
-          <td><%= f.text_field :sales_tax, :class => "k-textbox" %></td>
+          <td><%= f.text_field :sales_tax, :class => "kendo_precision_2" %></td>
         </tr>
 
         <tr>
           <td><b>Type of Sales *</b></td>
           <td><%= f.select :type_of_sale_id, options_from_collection_for_select(type_of_sale, :id, :name, @delivery_order.type_of_sale_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Type of Sales", :style => "width: 250px;" } %></td>
           <td></td>
-          <td><b>T'port C.</b></td>
-          <td><%= f.text_field :tport_c, :class => "k-textbox" %></td>
+          <td><b>Transport Charges</b></td>
+          <td><%= f.text_field :tport_c, :class => "kendo_precision_2" %></td>
         </tr>
 
         <tr>
@@ -60,12 +60,9 @@
           <td><b>Transport *</b></td>
           <td><%= f.select :transport_id, options_from_collection_for_select(transport, :id, :name, @delivery_order.transport_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Transport" }   %></td>
           <td></td>
-          <% if user_is_admin? %>
-          <!-- <td><b>Authorize Print Invoice</b></td>
-
-          <td><%#= f.check_box :authorize_print %></td> for give authorize to boss let staff print invoice again  --> 
-          <% end %>
-
+          <%# if user_is_admin? %>
+          <!-- td><%#= f.check_box :authorize_print %></td --> <!--for give authorize to boss let staff print invoice again  --> 
+          <%# end %>
         </tr>
 
         <tr>
@@ -89,7 +86,8 @@
 
 <% content_for :jquery_script do %>
   <script>
-    $(document).ready(function() {   
+    $(document).ready(function() {  
+        $(".numberKey").forceNumeric();
         
         var validator = $("#valid_delivery_order").kendoValidator().data("kendoValidator");
         
@@ -98,6 +96,159 @@
             else { alert("Invalid Data Form..."); return false; } 
         });
     });
+    
+    function delivery_order_company_change(sel){
+        var company_id = sel.value;
+        if (company_id){
+            $.ajax({
+                dataType: "json",
+                url: '/trade_companies/' + company_id,
+                success: function(data){
+                    if (data.trade_term_id != null){ 
+                        var combobox = $("#delivery_order_trade_term_id").data("kendoComboBox");
+                        combobox.value(data.trade_term_id);
+                    }
+                    if (data.type_of_sale_id != null){ 
+                      <%#*%>
+                        var combobox2 = $("#delivery_order_type_of_sale_id").data("kendoComboBox");
+                        combobox2.value(data.type_of_sale_id);
+                    }
+                }
+            });
+        }
+    }
+  
+    function sales_order_item_data(sel){
+        var number = sel.name.match(/\[(\d+)\]/);
+        var number = parseInt(number[1], 10);
+        var sale_order_item = sel.options[sel.selectedIndex].value;
+
+        if (sale_order_item){
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                url: '/sales_order_items/' + sale_order_item,
+                success: function(data){ 
+
+                    var myDate      = Date.parse(data.so_date, "yyyy-MM-dd");
+                    var order_qty   = data.quantity;
+                    var um          = data.order_um;
+                    var up          = data.unit_price;
+                    var partNo      = data.part_no;
+                    var clientLot   = data.client_lot;                
+                    var clientPo    = data.customer_po;  
+                    var cur_stock   = data.current_stock;
+
+                    if (data.jstatus == true){
+                        if (myDate != null){
+                            var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
+                            var value_date = '#datarow_' + number + '_so_date';
+                            var html_date  = '#so_date_' + number;
+                            $(value_date).val(k_date);
+                            $(html_date).html(k_date);
+                        } else {
+                            $(value_date).val('');
+                            $(html_date).html('-');
+                        }
+
+                        if (order_qty != null){
+                            var value_order = '#datarow_' + number + '_order_qty'; 
+                            var html_order  = '#so_order_qty_' + number;
+                            $(value_order).val(order_qty);
+                            $(html_order).html(order_qty + ' ' + um);
+                        } else {
+                            $(value_order).val('');
+                            $(html_order).html('-');
+                        }
+
+                        if (up != null){
+                            var value_order = '#datarow_' + number + '_unit_price'; 
+                            var html_order  = '#unit_price_' + number;
+                            $(value_order).val(up.toFixed(4));
+                            $(html_order).html(up.toFixed(4));
+                        } else {
+                            $(value_order).val('');
+                            $(html_order).html('-');  
+                        }
+
+                        if (partNo != null){
+                            var value_order = '#datarow_' + number + '_part_no'; 
+                            var html_order  = '#partno_' + number;
+                            $(value_order).val(partNo);
+                            $(html_order).html(partNo);
+                        } else {
+                            $(value_order).val('');
+                            $(html_order).html('-');
+                        }
+
+                        if (clientLot != null) {
+                            var value_order = '#datarow_' + number + '_client_lot'; 
+                            var html_order  = '#clientLotNo_' + number;
+                            $(value_order).val(clientLot);
+                            $(html_order).html(clientLot);
+                        } else {
+                            $(value_order).val('');
+                            $(html_order).html('-');
+                        }
+
+                        if (clientPo != null) {
+                            var value_order = '#datarow_' + number + '_client_po'; 
+                            var html_order  = '#clientPoNo_' + number;
+                            $(value_order).val(clientPo);
+                            $(html_order).html(clientPo);
+                        } else {
+                            $(value_order).val('');
+                            $(html_order).html('-');
+                        }
+
+                        if (cur_stock != null) {
+                            var value_order = '#datarow_' + number + '_gen_cur_stock';
+                            var html_order  = '#cur_stock_' + number;
+                            $(value_order).val(cur_stock);
+                            $(html_order).html(cur_stock);
+                        } else {
+                            $(value_order).val('');
+                            $(html_order).html('-');
+                        }
+
+                    }
+
+                }
+            });
+        } else {
+            alert("Please select SO No.");
+        }
+    }
+
+    function calculate_balance(sel){
+        var number            = sel.name.match(/\[(\d+)\]/);
+        var number            = parseInt(number[1], 10);
+        var current_stock     = '#datarow_' + number + '_gen_cur_stock';
+        var order_qty         = '#datarow_' + number + '_order_qty';
+        
+        var delivery_qty      = parseInt(sel.value);
+        var val_current_stock = parseInt($(current_stock).val());
+        var val_order_qty     = parseInt($(order_qty).val());
+        var balance           = val_current_stock - val_order_qty - delivery_qty;
+        
+        if (val_order_qty >= delivery_qty){
+            $("#save_button").attr("disabled", false);
+            if (balance != null) {
+                var value_order = '#datarow_' + number + '_balance_qty';
+                var html_order  = '#so_balance_qty_' + number;
+                $(value_order).val(balance);
+                $(html_order).html(balance);
+            } else {
+                $(value_order).val('');
+                $(html_order).html('-');
+            }
+        } else { 
+            alert("Should not excess S/O Qty"); 
+            $("#save_button").attr("disabled", "disabled");
+        }
+    }
+
   </script>
 <% end %>
 

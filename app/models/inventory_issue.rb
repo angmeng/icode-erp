@@ -23,6 +23,7 @@ class InventoryIssue < ActiveRecord::Base
   EXPIRED_SCRAF_DAMAGED         = 8
   NEW_PRODUCT                   = 9
   TRANSFER_NOTE                 = 10
+  FINISH_GOODS                  = 11
   
 end
 

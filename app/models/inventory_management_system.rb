@@ -274,21 +274,37 @@ class InventoryManagementSystem < ActiveRecord::Base
   FORMULATION_FOR_COSTING_SHOW                = 210
 #===================================== COSTING SHEET (END) ===========================================  
   
+#===================================== INVENTORY (START) ===========================================  
   INVENTORY_MENU                          = 77
   
-  INVENTORY_NEW                           = 78
   INVENTORY_TRANSACTION                   = 79
-  INVENTORY_KIV_VIEW                      = 80
-  
-  INVENTORY_NEW_ADD                      = 81
-  
+  INVENTORY_NEW                           = 78
   INVENTORY_TRANSACTION_SHOW              = 82
   INVENTORY_TRANSACTION_EDIT              = 83
   INVENTORY_TRANSACTION_KIV               = 84
   INVENTORY_TRANSACTION_PRINTABLE         = 85  
   
+  INVENTORY_KIV_VIEW                      = 80
   INVENTORY_TRANSACTION_KIV_SHOW          = 86
   INVENTORY_TRANSACTION_KIV_RECOVER       = 87
+  
+#  INVENTORY_NEW_ADD                      = 81  // JC decide remove, 5/4/2013
+
+  TRANSFER_NOTES                          = 288
+  TRANSFER_NOTES_NEW                      = 289
+  TRANSFER_NOTES_SHOW                     = 290
+#  TRANSFER_NOTES_EDIT                     = 291 // JC said it is history, history can't edit anymore.
+  TRANSFER_NOTES_KIV                      = 292
+  TRANSFER_NOTES_PRINTABLE                = 293
+  
+  TRANSFER_NOTES_KIV_LISTING              = 294
+  TRANSFER_NOTES_KIV_SHOW                 = 295
+  TRANSFER_NOTES_KIV_RECOVER              = 296
+  
+  #===================================== INVENTORY (END) ===========================================  
+
+  
+
   
   COMPANY_PROFILE_MENU                    = 88
   
@@ -423,7 +439,9 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   
  
-  #start at 288
+  #start at 297
+  
+  
 
 
   #====== ====== report ======= =======

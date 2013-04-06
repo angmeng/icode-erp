@@ -2,30 +2,74 @@
   <thead>
     <tr style="background-color: gainsboro;">
       <th width="400">[SO No][Product ID][Description]</th>
+      <th width="150">Delivery Qty</th>
+      <th width="150">No. of Carton</th>
       <th width="150">S/O Date</th>
       <th width="150">S/O Qty</th>
       <th width="150">U/P</th>
-      <th width="150">Balance Qty</th>
+      <th width="150" title="Balance PO Qty">Bal PO Qty</th>
       <th width="150">Part No.</th>
       <th width="150">Client's Lot#</th>
       <th width="150">Client's P/O</th>
+      <th width="150">Current Stock</th>
       <th width="150">D/O Status</th>
-      <th width="150">Gen Cur Stock</th>
-      <th width="150">Delivery Qty</th>
-      <th width="150">No. of Carton</th>
-      <!--th width="150">Dept Cur Stock</th-->
       <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
     <% if delivery_order.delivery_order_items.present? %>
+    
+        <% delivery_order.delivery_order_items.each_with_index do |doi, index| %>
+            <tr class="<%= cycle('odd_line', 'even_line') %>">
+
+                <td align="center"><%= select_tag "datarow[#{index}][sales_order_item_id]", options_for_select(@sales_order, doi.sales_order_item_id), :include_blank => true, :style => "width: 400px;", :onchange => "sales_order_item_data(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Product ID" %></td>
+                <td align="center"><%= text_field_tag "datarow[#{index}][delivery_qty]", doi.delivery_qty, :class => "k-textbox numberKey", :style => "width:50px;", :onkeyup => "calculate_balance(this)", "required validationMessage" => "Please Enter Delivery Qty" %></td>
+                <td align="center"><%= text_field_tag "datarow[#{index}][no_of_carton]", doi.no_of_carton, :class => "k-textbox numberKey", :style => "width:50px;", "required validationMessage" => "Please Enter No. of Carton" %></td>
+                <td align="center">
+                  <span id="so_date_<%= index %>"><%= doi.so_date.strftime("%d-%m-%Y") rescue '-' %></span>
+                  <%= hidden_field_tag "datarow[#{index}][so_date]", doi.so_date.strftime("%d-%m-%Y") %>
+                </td>
+                <td align="center">
+                  <span id="so_order_qty_<%= index %>"><%= doi.order_qty %></span>
+                  <%= hidden_field_tag "datarow[#{index}][order_qty]", doi.order_qty %>
+                </td>
+                <td align="right">
+                  <span id="unit_price_<%= index %>"><%= four_precision(doi.unit_price) %></span>
+                  <%= hidden_field_tag "datarow[#{index}][unit_price]", doi.unit_price %>
+                </td>
+                <td align="center">
+                  <span id="so_balance_qty_<%= index %>"><%= doi.balance_qty %></span>
+                  <%= hidden_field_tag "datarow[#{index}][balance_qty]", doi.balance_qty %>
+                </td>
+                <td align="center">
+                  <span id="partno_<%= index %>"><%= doi.part_no %></span>
+                  <%= hidden_field_tag "datarow[#{index}][part_no]", doi.part_no %>
+                </td> 
+                <td align="center">
+                  <span id="clientLotNo_<%= index %>"><%= doi.client_lot %></span>
+                  <%= hidden_field_tag "datarow[#{index}][client_lot]", doi.client_lot %>
+                </td> 
+                <td align="center">
+                  <span id="clientPoNo_<%= index %>"><%= doi.client_po %></span>
+                  <%= hidden_field_tag "datarow[#{index}][client_po]", doi.client_po %>
+                </td> 
+                <td align="center">
+                  <span id="cur_stock_<%= index %>"><%= doi.gen_current_stock %></span>
+                  <%= hidden_field_tag "datarow[#{index}][gen_current_stock]", doi.gen_current_stock %>
+                </td>
+                <td align="center"><span id="do_status_<%= index %>"></span></td>
+                <td align="center"><%= remove_row_button  %></td>
+              </tr>
+        <% end %>
 
     <% else %>
       
       <tr class="<%= cycle('odd_line', 'even_line') %>">
       
-        <td align="center"><%= select_tag "datarow[0][sales_order_item_id]", options_for_select(@sales_order), :include_blank => true, :style => "width: 400px;", :onchange => "sales_order_item_data(this)", :class => "mkendo_combobox" %></td>
+        <td align="center"><%= select_tag "datarow[0][sales_order_item_id]", options_for_select(@sales_order), :include_blank => true, :style => "width: 400px;", :onchange => "sales_order_item_data(this)", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Product ID" %></td>
+        <td align="center"><%= text_field_tag "datarow[0][delivery_qty]", '', :class => "k-textbox numberKey", :style => "width:50px;", :onkeyup => "calculate_balance(this)", "required validationMessage" => "Please Enter Delivery Qty" %></td>
+        <td align="center"><%= text_field_tag "datarow[0][no_of_carton]", '', :class => "k-textbox numberKey", :style => "width:50px;", "required validationMessage" => "Please Enter No. of Carton" %></td>
         <td align="center">
           <span id="so_date_0"></span>
           <%= hidden_field_tag "datarow[0][so_date]", '', :placeholder => "dd-mm-yyyy" %>
@@ -42,7 +86,6 @@
           <span id="so_balance_qty_0"></span>
           <%= hidden_field_tag "datarow[0][balance_qty]", '' %>
         </td>
-        
         <td align="center">
           <span id="partno_0"></span>
           <%= hidden_field_tag "datarow[0][part_no]", '' %>
@@ -55,10 +98,11 @@
           <span id="clientPoNo_0"></span>
           <%= hidden_field_tag "datarow[0][client_po]", '' %>
         </td> 
+        <td align="center">
+          <span id="cur_stock_0"></span>
+          <%= hidden_field_tag "datarow[0][gen_cur_stock]", '' %>
+        </td>
         <td align="center"><span id="do_status_0"></span></td>
-        <td align="center"><%= text_field_tag "datarow[0][gen_cur_stock]", '', :class => "k-textbox", :style => "width:50px;"  %></td>        
-        <td align="center"><%= text_field_tag "datarow[0][delivery_qty]", '', :class => "k-textbox", :style => "width:50px;" %></td>
-        <td align="center"><%= text_field_tag "datarow[0][no_of_carton]", '', :class => "k-textbox", :style => "width:50px;"  %></td>
         <td align="center"><%= remove_row_button  %></td>
       </tr>
       

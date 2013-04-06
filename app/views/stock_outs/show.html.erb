@@ -1,52 +1,51 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">SHOW TRANSFER NOTE DETAILS</strong></div>
-  <div class="fix_800x450">
-    <table>
-      <tr>
-        <td width="130"><b>Transfer Note No#</b></td>
-        <td><%= @stock_out.transfer_note_no rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Product ID</b></td>
-        <td><%= @stock_out.product.product_combobox.product_code rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Description</b></td>
-        <td><%= @stock_out.product.desc  rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Quantity</b></td>
-        <td><%= @stock_out.quantity rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Balance</b></td>
-        <td><%= @stock_out.balance rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Collector Name</b></td>
-        <td><%= @stock_out.collector_name rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Location</b></td>
-        <td><%= @stock_out.location rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Reference No.</b></td>
-        <td><%= @stock_out.reference_no rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Issued By</b></td>
-        <td><%= User.find(@stock_out.issued_by).name rescue '-' %></td>
-      </tr>
-      <tr>
-        <td><b>Unit Measurement</b></td>
-        <td><%= @stock_out.unit_measurement.code rescue'-' %></td>
-      </tr>
-    </table>
-  </div>
+<%= title_head "SHOW TRANSFER NOTE DETAIL" %>
 
-  <div class="icon_tag">
-    <%= link_close_button %>
-  </div>
+<div class="popup_content">
+  <table>
+    <tr>
+      <td width="130"><b>Transfer Note No #</b></td>
+      <td><%= @stock_out.transfer_note_no rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Product ID</b></td>
+      <td><%= @stock_out.product.product_combobox.product_code rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Description</b></td>
+      <td><%= @stock_out.product.desc  rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Quantity</b></td>
+      <td><%= @stock_out.quantity rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Balance</b></td>
+      <td><%= @stock_out.balance rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Collector Name</b></td>
+      <td><%= @stock_out.collector_name rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Location</b></td>
+      <td><%= @stock_out.location rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Reference No.</b></td>
+      <td><%= @stock_out.reference_no rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Issued By</b></td>
+      <td><%= User.find(@stock_out.issued_by).name rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Unit Measurement</b></td>
+      <td><%= @stock_out.unit_measurement.code rescue'-' %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="icon_tag">
+  <%= link_close_button %>
 </div>
 

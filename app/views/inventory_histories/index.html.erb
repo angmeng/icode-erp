@@ -1,22 +1,10 @@
-<div id="popup_container">
+<%= title_head "INVENTORIES DATA" %>
+<div><%= render "search_inventory_product_id", :inventory => @inventories.first %></div>
 
-  <div class="title_head">
-    <strong style="color:white;">TRANSACTIONS & HISTORIES FOR INVENTORY</strong>
-    <%= search_button %>
-  </div>
-  <div><%= render "search_inventory" %></div>
+<% if @inventories.present? %>
+  <div class="table_background"><%= render "select_inventory", :inventory_histories => @inventories %></div>
+<% else %>
+  <div class="searching_content">Not Record Found</div>
+<% end %>
 
-  <div class="fix_1600x900_h450">
-    <% if @inventories.present? %>
-      <% if @search.product_code_equals.present? %>
-        <%= render "product_details", :inventory_histories => @search %>
-      <% else %>
-        <%= render "select_inventory", :inventory_histories => @inventories %>
-      <% end %>
-    <% else %>
-      Not Record Found.
-    <% end %>
-  </div>
-
-  <%= render "action_inventory" %> 
-</div>
+<%= render "action_inventory" %>

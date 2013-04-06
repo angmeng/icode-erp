@@ -1,0 +1,69 @@
+<%#*<table>%>
+  <% if checkboxes.present? %>
+    <% if action_name == "show" %>
+  
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES) %> Transfer Notes Data</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_NEW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_SHOW) %></td>
+        <td></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV_LISTING) %> Transfer Notes Data - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV_RECOVER) %></td>
+      </tr>
+  
+    <% else %>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES) %> Transfer Notes Data</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_NEW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_SHOW) %></td>
+        <td></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV_LISTING) %> Transfer Notes Data - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::TRANSFER_NOTES_KIV_RECOVER) %></td>
+      </tr>
+      
+    <% end %>
+
+  <% else %>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES) %> Transfer Notes Data</td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_NEW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_SHOW) %></td>
+        <td></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_KIV_LISTING) %> Transfer Notes Data - KIV</td>
+        <% 5.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_KIV_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::TRANSFER_NOTES_KIV_RECOVER) %></td>
+      </tr>
+
+  <% end %>
+<%#*</table>%>

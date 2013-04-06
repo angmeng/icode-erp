@@ -20,6 +20,8 @@ module InventoryIssuesHelper
       "Return Stock Form"
     elsif issue_id == InventoryIssue::TRANSFER_NOTE
       "Transfer Note"
+    elsif issue_id == InventoryIssue::FINISH_GOODS
+      "Finish Goods"
     end
   end
 end

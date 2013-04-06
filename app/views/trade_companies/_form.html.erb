@@ -215,9 +215,9 @@
                 <td><b><%= f.label :opening_ac_date, "Opening A/C Date" %></b></td>
                 <td>
                   <% if @trade_company.opening_ac_date.present? %>
-                    <%= f.text_field :opening_ac_date, :value => @trade_company.opening_ac_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+                    <%= f.text_field :opening_ac_date, :value => @trade_company.opening_ac_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
                   <% else %>
-                    <%= f.text_field :opening_ac_date, :id => "kendo_date" %>
+                    <%= f.text_field :opening_ac_date, :class => "mkendo_date" %>
                   <% end %>
                 </td>
               </tr>

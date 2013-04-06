@@ -1,0 +1,13 @@
+<div class="title_head">
+  <strong style="color:white;">DELIVERY ORDERS DATA - KIV</strong>
+  <%= search_button %>
+</div>
+<div><%= render "search_delivery_order_kiv" %></div>
+
+<% if @delivery_orders.present? %>
+  <div class="table_background"><%= render "listing_delivery_order", :listing_delivery_no => @delivery_orders %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
+  
+<%= render "action_delivery_order_kiv" %>

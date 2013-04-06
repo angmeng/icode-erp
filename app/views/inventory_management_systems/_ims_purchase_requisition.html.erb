@@ -3,7 +3,7 @@
     <% if action_name == "show" %>
         <tr>
           <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_MENU) %> Purchase Requisitions</td>
           <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
           <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
           <td></td>
@@ -81,7 +81,7 @@
         
         <tr>
           <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_MENU) %> Purchase Requisitions</td>
           <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
           <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
           <td></td>
@@ -136,7 +136,7 @@
           <td></td>
           <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_VIEW, checkboxes.include?(InventoryManagementSystem::PR_KIV_VIEW) %> PR KIV</td>
           <td></td>
-          <td><%#= "save" %></td>
+          <td></td>
           <% 4.times do |td| %><td></td><% end %>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_SHOW, checkboxes.include?(InventoryManagementSystem::PR_KIV_SHOW) %></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_KIV_RECOVER, checkboxes.include?(InventoryManagementSystem::PR_KIV_RECOVER) %></td>
@@ -161,7 +161,7 @@
   
       <tr>
         <td></td>
-        <td><%= ims_new(InventoryManagementSystem::PR_MENU) %> PURCHASE REQUISITION</td>
+        <td><%= ims_new(InventoryManagementSystem::PR_MENU) %> Purchase Requisitions</td>
         <td><%= ims_new(InventoryManagementSystem::PR_NEW) %> New & Pending PRs</td>
         <td align="center"><%= ims_new(InventoryManagementSystem::PR_NEW_ADD_ITEMS) %></td>
         <td></td>

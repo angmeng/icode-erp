@@ -27,7 +27,10 @@ Merp::Application.routes.draw do
   end
 
   resources :product_running_numbers
-  resources :stock_outs
+  resources :stock_outs do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
 
 
   resources :reports do
@@ -168,7 +171,7 @@ Merp::Application.routes.draw do
 
   resources :selection_glueings
 
-  resources :delivery_orders
+
 
   resources :quotation_request_forms do
     collection do
@@ -199,12 +202,13 @@ Merp::Application.routes.draw do
 
   resources :inventory_management_systems
 
-  resources :delivery_orders
+  resources :delivery_orders do
+    get "kiv", :on => :collection
+    put "recover", :on => :member
+  end
 
   resources :sales_order_items do
-    collection do
-      get "kiv"
-    end
+    get "kiv", :on => :collection
     put "recover", :on => :member
   end
   
@@ -213,6 +217,7 @@ Merp::Application.routes.draw do
     collection do
       get "customer_registration"
       get "kiv"
+      get "dummy_so"
 #      get "product_registration"
 #      get "production"
     end

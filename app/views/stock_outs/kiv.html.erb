@@ -4,7 +4,7 @@
 </div-->
 <!--div><%#= render "" %></div-->
 
-<%= title_head "TRANSFER NOTES DATA" %>
+<%= title_head "TRANSFER NOTES DATA - KIV" %>
 
 <% if @stock_outs.present? %>
   <div class="table_background"><%= render "listing_transfer_notes", :lists => @stock_outs %></div>
@@ -12,4 +12,4 @@
   <div class="content">Not Record Found</div>
 <% end %>
 
-<%= render "action_stock_outs" %>
+<%= render "action_stock_outs_kiv" %>

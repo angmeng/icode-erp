@@ -42,4 +42,10 @@ class ProductCombobox < ActiveRecord::Base
     mix = combobox.collect { |pcombo| ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id] }  # e.g [A0001] APPLE (M) SDN BHD
     return mix
   end
+  
+  def self.db_all
+    combobox = self.all
+    mix = combobox.collect { |pcombo| ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id] }  # e.g [A0001] APPLE (M) SDN BHD
+    return mix
+  end
 end

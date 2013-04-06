@@ -1,30 +1,28 @@
-<div style="background-color:blue"><strong style="color:white;">SHOW DETAILS</strong></div>
+<%= title_head "SHOW INVENTORY DETAIL" %>
 
-<div class="fix_800x450">
-  <p>
-    <b>Product:</b>
-    <%= render "/product_categories/join_product_category", :pc => @inventory_history %>
-  </p>
-
-  <p>
-    <b>Stock in:</b>
-    <%= @inventory_history.stock_in %>
-  </p>
-
-  <p>
-    <b>Stock out:</b>
-    <%= @inventory_history.stock_out %>
-  </p>
-
-  <p>
-    <b>Inventory Issue:</b>
-    <%= @inventory_history.inventory_issue.description rescue '-' %>
-  </p>
-
-  <p>
-    <b>Total:</b>
-    <%= @inventory_history.amount rescue '-' %>
-  </p>
+<div class="popup_content">
+  <table>
+    <tr>
+      <td><b>Product ID</b></td>
+      <td><%= render "/product_categories/join_product_category", :pc => @inventory_history %></td>
+    </tr>
+    <tr>
+      <td><b>Stock In</b></td>
+      <td><%= @inventory_history.stock_in rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Stock Out</b></td>
+      <td><%= @inventory_history.stock_out rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Inventory Issue</b></td>
+      <td><%= @inventory_history.inventory_issue.description rescue '-' %></td>
+    </tr>
+    <tr>
+      <td><b>Total</b></td>
+      <td><%= @inventory_history.amount rescue '-' %></td>
+    </tr>
+  </table>
 </div>
 
 <div class="icon_tag">
