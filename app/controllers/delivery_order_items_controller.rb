@@ -57,7 +57,7 @@ class DeliveryOrderItemsController < ApplicationController
   # PUT /delivery_order_items/1.json
   def update
     @delivery_order_item = DeliveryOrderItem.find(params[:id])
-
+    
     respond_to do |format|
       if @delivery_order_item.update_attributes(params[:delivery_order_item])
         format.html { redirect_to @delivery_order_item, notice: 'Delivery order item was successfully updated.' }

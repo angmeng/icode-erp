@@ -5,16 +5,15 @@
 
   <div class="fix_1600x900_h450">
     <%= form_tag pdf_do_so_documentation_report_reports_path ,:name=>"form1",:target=>"_blank" ,:method =>"get" do %>
-    <table id="products" class="display">
+    <table id="jdatatable" class="display">
       <%#*data-source="<%= pdf_do_so_documentation_report_reports_path(format: "json") %> 
               <thead>
                 <tr class="header_line">
                   <th></th>
                   <th>DO No.</th>
                   <th>Trade Company</th>
-                  
-                  <!-- <th>Term</th>
-                  <th>Carton</th> -->
+                  <th>Term</th>
+                  <th>Carton</th>
                   <%#*<th>Quantity</th>%>
                 </tr>
               </thead>
@@ -29,8 +28,8 @@
                 <td align="center"><%= doc.trade_company.name rescue '-' %> / 
                   <%= doc.trade_company.address_1 rescue'-' %></td>
                 
-                <!-- <td align="center"><%= doc.delivery_order.trade_term.name rescue'-' %></td>
-                <td align="center"><%= doc.no_of_carton rescue '-' %></td> -->
+                <td align="center"><%= doc.delivery_order.trade_term.name rescue'-' %></td>
+                <td align="center"><%= doc.no_of_carton rescue '-' %></td>
                       
               </tr>
                   <% end %>
@@ -84,28 +83,28 @@
       // } 
 
 
-    // when user updates a checkbox.
-    $("input:checkbox").change(function(){
+  //   // when user updates a checkbox.
+  //   $("input:checkbox").change(function(){
  
-    // total allowed to be checked.
-    var max_allowed = 1;
+  //   // total allowed to be checked.
+  //   var max_allowed = 1;
  
-    // count how many checked.
-    var checked = $("input:checked").size();
+  //   // count how many checked.
+  //   var checked = $("input:checked").size();
  
-    // perform test.
-    if ( checked > max_allowed ) {
+  //   // perform test.
+  //   if ( checked > max_allowed ) {
  
-        // is more than the max so uncheck.
-        $(this).attr("checked", false);
+  //       // is more than the max so uncheck.
+  //       $(this).attr("checked", false);
  
-        // display error message.
-        alert("Please select a maximum of " + max_allowed + " options.");
+  //       // display error message.
+  //       alert("Please select a maximum of " + max_allowed + " options.");
  
-    }
+  //   }
  
-  });
-  </script>
+  // });
+  // </script>
 
   
 

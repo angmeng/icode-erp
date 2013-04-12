@@ -333,11 +333,18 @@
             <% else %>
              <li class="text_gray">Print D/O,Invoice Report</li>
             <% end %>
+
             <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
             <li><%= link_to "Delivery Order Summary Report", delivery_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
             <li class="text_gray">Delivery Order Summary Report</li>
             <% end %>
+
+            <%# if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
+            <li><%= link_to "Invoice Print History", history_invoices_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <%# else %>
+             <!-- <li class="text_gray">Print D/O,Invoice Report</li> -->
+            <%# end %>
           
             <% end %>
           </ul>
@@ -1012,6 +1019,29 @@
               <!--li><%#= link_to "Creditors / Debtors" %></li-->
             <%# else %>
               <li class="text_gray">Creditors / Debtors</li>
+            <%# end %>
+          </ul>
+        </li>
+
+         <li style="width:150px;">
+          Account Report
+          <ul>
+            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+              <li><%= link_to "Debit Note Report" , debit_note_report_reports_path ,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"%></li>
+            <%# else %>
+              <!-- <li class="text_gray">Debit Note Report</li> -->
+            <%# end %>
+
+            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+             <li><%= link_to "Credit Note Report" , credit_note_report_reports_path ,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"%></li>
+            <%# else %>
+              <!-- <li class="text_gray">Debit Note Report</li> -->
+            <%# end %>
+
+            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+              <!--li><%#= link_to "Creditors / Debtors" %></li-->
+            <%# else %>
+              <li class="text_gray">Journel Report</li>
             <%# end %>
           </ul>
         </li>

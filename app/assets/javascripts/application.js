@@ -76,7 +76,7 @@ $(document).ready(function () {
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
 
 
-    $('#products').dataTable({
+    $('#jdatatable').dataTable({
         "sPaginationType": "full_numbers",  // "bPaginate": false,
         "bJQueryUI": true,
         "bProcessing": true,

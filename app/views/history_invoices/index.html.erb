@@ -1,0 +1,41 @@
+<div id="popup_container">
+<div class="title_head"><strong style="color:white;">INVOICE PRINT HISTORY</strong></div>
+
+
+  <div class="fix_1600x900_h450">
+    <%#= form_tag history_invoices_path ,:name=>"form1",:target=>"_blank" ,:method =>"get" do %>
+  <table id="jdatatable" class="display">
+    <thead class="header_line">
+    <tr>
+      <th></th>
+      <th>No.</th>
+      <th>Invoice ID</th>
+      <th>Date / Time</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @history_invoices.each_with_index do |hi , index| %>
+    <tr class="<%= cycle("odd_line", "even_line") %>">
+      <td align="center"><%#= check_box_tag "hi_ids[]" , hi.id  %></td>
+      <td align="center"><%= index + 1 %></td>
+      <td align="center"><%= hi.delivery_order_id %></td>
+      <td><%#= hi. %><%#= link_to 'Show', history_invoice %></td>
+      <td><%#= link_to 'Edit', edit_history_invoice_path(history_invoice) %></td>
+      <td><%= link_to 'Destroy', hi, method: :delete, data: { confirm: 'Are you sure?' } , :class => "k-button" %></td>
+    </tr>
+  </tbody>
+  <% end %>
+  </table>
+  </div>
+</div>
+
+  <!-- <div class="icon_tag" style="float:left">
+    <span><%#= link_to 'Destroy', method: :delete, data: { confirm: 'Are you sure?' } , :class => "k-button" %></span>
+  </div>
+  <%# end %> --> <%# end > form tag %>
+
+
+<%#= link_to 'New History invoice', new_history_invoice_path %>
