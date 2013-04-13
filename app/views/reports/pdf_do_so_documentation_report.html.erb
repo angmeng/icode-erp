@@ -11,7 +11,7 @@
 
 	 
  -->
- <div class="line_items">
+ 
 	<div>
 	
 	<br />
@@ -113,7 +113,7 @@
 	      <td align="center"><%= index + 1 %></td>
 	      <td align="center"> 
 	      	<%#= render '/product_categories/join_product_category'  , :pc => doi %>
-	      	<p><%= doi.client_po rescue'-' %></p>
+	      	<p><%= doi.sale_order_item.customer_po rescue'-' %></p>
 	      	<p><%= doi.client_lot rescue'-' %></p>
 	      </td>
 	      <td align="center">
@@ -125,7 +125,7 @@
 	      	<p><%= doi.sales_order_item.product.desc rescue'-' %> </p>
 	      </td>
 	      <td align="center"><%= doi.no_of_carton rescue'-' %></td>
-	      <td align="center"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item_id.unit_measurement rescue'-' %></td>
+	      <td align="center"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
 	      	<% array << doi.no_of_carton %>
 	      <td align="right"><%= doi.unit_price rescue'-' %></td>
 	      	
@@ -171,7 +171,7 @@
        </tr>
 		</tbody>
 	</table>
-</div>
+
 
  
 	<% elsif @detail_delivery_order_documentation_report.present? %>

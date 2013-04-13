@@ -129,45 +129,7 @@ class Product < ActiveRecord::Base
   def self.json_um(product)
     a = { :id => product.id, :desc => product.desc, :um =>  self.unit_measurement_code(product) }
     return a
-  end
-  
-  
-  
-#  def self.run_updating(comp, jump, product)
-#    a = comp.sn_product_id_no
-#
-#    if jump == "yes"
-#      b = a + 2
-#      string = "%05d" % (b)
-#    else
-#      b = a + 1
-#      string = "%05d" % (b)
-#    end
-#    
-#    if comp.update_attributes(:sn_product_id_no => b)
-#      if product.update_attributes(:code => string)
-#        if product.product_category.update_attributes(:code => string)
-#          @combo = ProductCombobox.new(:product_code => self.category(product), :product_id => product.id, :category_type => product.product_category.category_type)
-#          if @combo.save
-#            return true
-#          else
-#            comp.update_attributes(:sn_product_id_no => a)
-#            return false, @combo.errors.full_messages.join(", ")
-#          end
-#        else
-#          comp.update_attributes(:sn_product_id_no => a)
-#          return false, product.errors.full_messages.join(", ")
-#        end
-#      else
-#        comp.update_attributes(:sn_product_id_no => a)
-#        return false, product.errors.full_messages.join(", ")
-#      end
-#    else
-#      return false, comp.errors.full_messages.join(", ")
-#    end
-#
-#  end
-  
+  end 
   
   
   def self.running_option(product_value, company_name)
