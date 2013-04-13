@@ -112,8 +112,8 @@
 	    <tr> 
 	      <td align="center"><%= index + 1 %></td>
 	      <td align="center"> 
-	      	<%#= render '/product_categories/join_product_category'  , :pc => doi %>
-	      	<p><%= doi.sale_order_item.customer_po rescue'-' %></p>
+	      	<p><%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %></p>
+	      	<p><%= doi.client_po rescue'-' %></p>
 	      	<p><%= doi.client_lot rescue'-' %></p>
 	      </td>
 	      <td align="center">
@@ -151,18 +151,14 @@
        <% @detail_invoice_documentation_report.each do |s|%>
 	   <tr>
 	   	   <% 5.times do |td| %><td></td><% end %>
-           <td align="center">+ S/Tax 0%:</td>
-     
-      
-           <td align="right"><%= s.sales_tax rescue'-' %></td>
-           
+           <td align="center">+ S/Tax 0%:</td>      
+           <td align="right"><%= s.sales_tax rescue'-' %></td> 
         </tr>
         <tr>
-        	<% 5.times do |td| %><td></td><% end %>
+           <% 5.times do |td| %><td></td><% end %>
            <td align="center">+ T/Charges:</td>
            <td align="right"><%= s.tport_c rescue'-' %></td>
            <% arr << s.sales_tax + s.tport_c %>
-	      
        </tr>
        <% end %>
        <tr>
