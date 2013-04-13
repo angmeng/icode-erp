@@ -1,8 +1,12 @@
 Merp::Application.routes.draw do
 
+
   resources :journal_voucher_items
 
   resources :journal_vouchers
+
+  resources :history_invoices
+
 
   resources :statement_of_accounts
 
@@ -62,6 +66,8 @@ Merp::Application.routes.draw do
     get "receive_note_report"
     get "rn_part_summary_report"
     get "do_so_documentation_report"
+    get "debit_note_report"
+    get "credit_note_report"
 
     get "pdf_sales_tax_exemption_report"
     get "pdf_sales_order_summary_report"

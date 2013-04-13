@@ -1,0 +1,111 @@
+
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">DEBIT NOTE REPROT</strong></div>
+
+ 
+          <!-- <table>
+            <%#= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
+            <tr>
+                    <td>Product ID :
+                    <%#= f.text_field :product_code_contains , :size => 9 %></td>
+                    <td>Description : 
+                    <%#= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
+                    <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
+                    <td>Transaction
+                      <%#= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
+
+            </tr>
+            <tr>
+                    <td><%#= submit_tag "Search" %></td>
+            </tr>
+            <%# end %>
+          </table>
+
+  <hr />
+ -->
+<input type="checkbox" name="all" id="checkall" />Check All
+
+  <div class="fix_1600x900_h450">
+          <%#= form_tag pdf_debit_note_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+          
+          <table id="jdatatable" class="display" data-source="<%= inventory_report_reports_path(format: "json") %> ">
+
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>No.</th>
+                        <th>Debit Note Date</th>
+                        <th>Debit Note No.</th>
+                        <th>Amount</th>
+                        
+                        <th>Trade Company Name</th>
+                        <th>Debit Type</th>
+                        
+                        
+                        <%#*<th>Quantity</th>%>
+                      </tr>
+                    </thead>
+                <tbody>
+                 
+                  <% @show_debit_note_report.each_with_index do |dn , index| %>
+          
+                      <tr class="<%= cycle("odd_line", "even_line") %>">
+                        <td align="center"><%= check_box_tag "dn_ids[]" , dn.id %></td>
+                        <td align="center"><%= index + 1 %></td>
+                        <td align="center"><%= dn.debit_note_date.strftime("%d-%m-%Y") rescue'-' %></td>
+                        <td align="center"><%= dn.debit_note_no rescue'-' %></td>
+                        <td align="center"><%= dn.amount rescue'-' %></td>
+                        
+                        <td align="center"><%= dn.trade_company.name rescue'-' %></td>
+                        <td align="center"><%= dn.debit_type rescue'-' %></td>
+                        
+                             
+                              
+                      </tr>
+                     
+          
+
+                          <%# if pri.amount.present? %>
+                            <%# arr << pri.amount * pri.amount %>
+                          <%# end %>
+                        <% end %>
+                      <%# end %>
+                    </tbody>
+                  </table>
+
+         
+    </div>
+          
+
+    <div class="icon_tag" style="float:left">
+      <%# if roles.include?(InventoryManagementSystem::_REPORT_EXCEL) %>
+        <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
+      <%# else %>
+      <%# end %> 
+    </div>
+
+    <div class="icon_tag" style="float:right;">
+        <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW) %>
+      <span><%= not_link_show %><%#= submit_tag "Show" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_show %>
+      <% end %>
+      
+      <span><%= not_link_edit %></span>
+      <span><%= not_link_recover %></span>
+
+      <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT) %>
+        <span><%#= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <% else %>
+        <% not_link_printable %>
+      <% end %>
+
+      <%= link_close_button %>
+    </div>
+
+   
+
+
+
+
+

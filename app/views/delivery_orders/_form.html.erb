@@ -67,9 +67,17 @@
           <td><b>Sales Tax Exempt. No.</b></td>
           <td><%= f.text_field :sales_tax_exemption, :class => "k-textbox" %></td>
           <td></td>
-          <%# if user_is_admin? %>
-            <!-- td><%#= f.check_box :authorize_print %></td --> <!--for give authorize to boss let staff print invoice again  --> 
-          <%# end %>
+
+
+        <tr>
+          <td><b>Sales Rep.</b></td>
+          <td><%= f.text_field :sales_rep, :class => "k-textbox" %></td>
+        </tr>
+
+        <tr>
+          <td><b>Sales Tax Exemption</b></td>
+          <td><%= f.text_field :sales_tax_exemption, :class => "k-textbox" %></td>
+
         </tr>
       </table>
 

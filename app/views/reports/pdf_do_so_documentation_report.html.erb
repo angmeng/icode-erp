@@ -4,39 +4,32 @@
 <% arr = [] %>
 <% array = [] %>
 <%# count = 0 %>
-  
-
-
-    
-<% @detail_invoice_documentation_report.each do |p| %>
-  
-  s_tax<%= s_tax     = p.sales_tax.to_f %>
-  t charges<%= t_charges = p.tport_c.to_f %>      
-      
-	
+<%# p = @detail_invoice_documentation_report  %>
+	<% @detail_invoice_documentation_report.each do |p|%>
 <!-- 	<%# if count % 6 == 0 %>  
 	<div style="page-break-before: always;">
 
 	 
-
  -->
+ <div class="line_items">
 	<div>
-	<br />
-	<br />
-	<br />
 	
+	<br />
+	<br />
+	<br />
 	<table style="width:100%">
 		<tr>
 			<td style="width:10cm;">
 					<div class="part1">
-						<%= p.trade_company.name %> /
-						<%= p.trade_company.address_1 %>
-						<%= p.trade_company.address_2 %>
-						<%= p.trade_company.address_3 %>
-						<%= p.trade_company.tel_no_1 %>
-						<%= p.trade_company.tel_no_2 %>
-						<%= p.trade_company.fax_no %>
+						<p><%= p.trade_company.name rescue'-'%></p> /
+						<p><%= p.trade_company.address_1 rescue'-'%></p>
+						<p><%= p.trade_company.address_2 rescue'-'%></p>
+						<p><%= p.trade_company.address_3 rescue'-'%></p>
+						<p>Tel :<%= p.trade_company.tel_no_1 rescue'-'%>
+						<%= p.trade_company.tel_no_2 rescue'-'%> / 
+						Fax :<%= p.trade_company.fax_no rescue'-' %></p>
 					</div>
+
 				
 				
 			</td>
@@ -102,26 +95,37 @@
 	
 		
 	
-	<table class="fix_h350_w100_bottom">	
+	<table class="fix_doi_size">	
 		<thead>
 		<tr>
-			<th width="10"></th>
-			<th width="50"></th>
-			<th width="80"></th>
-			<th width="20"></th>
-			<th width="50"></th>
-			<th width="30"></th>
-			<th width="30"></th>
+			<th width="1%"></th>
+			<th width="10%"></th>
+			<th width="29%"></th>
+			<th width="10%"></th>
+			<th width="25%"></th>
+			<th width="15%"></th>
+			<th width="15%"></th>
 		</tr>
 	</thead>
 	<tbody>
-          <% p.delivery_order_items.each_with_index do |doi , index| %>
+		<% p.delivery_order_items.each_with_index do |doi , index| %>
 	    <tr> 
 	      <td align="center"><%= index + 1 %></td>
-	      <td align="center"><%= doi.client_po %> / <%= doi.client_lot rescue'-' %></td>
-	      <td align="center"><%= doi.part_no rescue'-' %> <%= simple_format(doi.sales_order_item.product.desc) rescue'-' %> </td>
+	      <td align="center"> 
+	      	<%#= render '/product_categories/join_product_category'  , :pc => doi %>
+	      	<p><%= doi.client_po rescue'-' %></p>
+	      	<p><%= doi.client_lot rescue'-' %></p>
+	      </td>
+	      <td align="center">
+	      	<% if doi.part_no.present? %>
+	      		<p><%= doi.part_no rescue'-' %></p>
+	      	<% else %>
+	      		<p><%= doi.sales_order_item.part_no rescue'-' %></p>
+	      	<% end %>
+	      	<p><%= doi.sales_order_item.product.desc rescue'-' %> </p>
+	      </td>
 	      <td align="center"><%= doi.no_of_carton rescue'-' %></td>
-	      <td align="center"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
+	      <td align="center"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item_id.unit_measurement rescue'-' %></td>
 	      	<% array << doi.no_of_carton %>
 	      <td align="right"><%= doi.unit_price rescue'-' %></td>
 	      	
@@ -133,39 +137,41 @@
       
         <%# count += 1 %>
         <% end %>
-    <% end %>
-        <tr>
+        <%# top until here %>
+       <% end %>
+          <tr>
         	<td></td>
         	<td></td>
         	<td align="right">Total :</td>
-        	<td><%= two_precision(array.sum) %></td>
+        	<td><%= no_precision(array.sum) %></td>
         	<td></td>
-        	<td></td>
+        	<td align="center">Total :</td>
         	<td align="right"><%= two_precision(arr.sum) %></td>
         </tr>
-
+       <% @detail_invoice_documentation_report.each do |s|%>
 	   <tr>
 	   	   <% 5.times do |td| %><td></td><% end %>
            <td align="center">+ S/Tax 0%:</td>
-          <% @detail_invoice_documentation_report.each do |e| %>
-          <% e.delivery_order_items.each_with_index do |doi , index| %>
-           <td align="right"><%= doi.delivery_order.sales_tax rescue'-' %></td>
+     
+      
+           <td align="right"><%= s.sales_tax rescue'-' %></td>
            
         </tr>
         <tr>
-        	<% 5.times do |td| %><td></td><%# end %>
+        	<% 5.times do |td| %><td></td><% end %>
            <td align="center">+ T/Charges:</td>
-           <td align="right"><%#= doi.delivery_order.tport_c rescue'-' %></td>
-           <% arr << doi.delivery_order.sales_tax + doi.delivery_order.tport_c %>
-           <% end %>
-          <% end %>
+           <td align="right"><%= s.tport_c rescue'-' %></td>
+           <% arr << s.sales_tax + s.tport_c %>
+	      
        </tr>
+       <% end %>
        <tr>
         	<% 6.times do |td| %><td></td><% end %>
            <td align="right"><%= two_precision(arr.sum) %></td>
        </tr>
 		</tbody>
 	</table>
+</div>
 
  
 	<% elsif @detail_delivery_order_documentation_report.present? %>
@@ -179,8 +185,9 @@
 	 
 
  -->
+ <div class="line_items"> 
 	<div>
-	<br />
+	
 	<br />
 	<br />
 	<br />
@@ -258,9 +265,8 @@
 		</div>
 	</div>
 	
-	<% p.delivery_order_items.each_with_index do |doi , index| %>
 	
-	<table class="fix_h350_w100_bottom">	
+	<table class="fix_doi_size">	
 		<thead>
 		<tr>
 			<th width="10"></th>
@@ -273,6 +279,8 @@
 		</tr>
 	</thead>
 	<tbody>
+		<% p.delivery_order_items.each_with_index do |doi , index| %>
+	
 	    <tr> 
 	      <td align="center"><%= index + 1 %></td>
 	      <td align="center"><%= doi.client_lot rescue'-' %> / <%= doi.client_po %></td>
@@ -289,24 +297,27 @@
 	
       
         <%# count += 1 %>
-        <%# end %>
         <% end %>
+        
         <tr>
         	<td></td>
         	<td></td>
         	<td align="right">Total :</td>
         	<td><%= two_precision(array.sum) %></td>
-        	
+        </tr>
+        <% end %>
 		</tbody>
 	</table>
 	<% else %>
 		
 	<div>No Record Found</div>
 
-<% end %>
+	<% end %>
 
 
-</div>
+	</div>
+</div>		
+
 
 
 <style>
@@ -314,6 +325,7 @@
 table
 {
 font-family:"Times New Roman";
+font-size: 9px;
 }
 th
 {
@@ -340,20 +352,25 @@ height:20px;
   /*border-style: solid;*/
   /*height: 120px;
   width: 100%;*/
-  margin-bottom: 0cm;
+  /*margin-right: 1cm;*/
+  margin-bottom: 1cm;
 }
 
 
 
-.fix_h350_w100_bottom {
+.fix_doi_size {
     width:100%;
     border-width: 350px;
     
 }
 
-.fix_h350_w100_bottom th{
+.fix_doi_size th{
 	height:50px;
-	
+	border:1px solid black;
 }
+
+.line_items {
+                page-break-before: always;
+        }
 
 </style>

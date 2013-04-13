@@ -394,12 +394,28 @@ end
       end
     elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
-        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
+
+        #a = DeliveryOrder.find(params[:doc_ids].first)
+        # a = DeliveryOrder.find(params[:doc_ids])
+        # if a.authorize_print == false
+        # redirect_to do_so_documentation_report_reports_path, notice: 'Please get an authorize from supervisor'
+        # elsif a.authorize_print == 1
+        
+       #@detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids].first)
+       @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
+
        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
         @kit = PDFKit.new(html)
         send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
                                 :type => 'application/pdf' ,
                                 :disposition => "attachement" )
+        # a.authorize_print = false
+        # a.save!
+      # generate_history
+        
+
+       
+
       end 
       else
       redirect_to do_so_documentation_report_reports_path
@@ -413,6 +429,10 @@ end
   def pdf_sales_order_listing_report
     render :text => "pdf sales order listing report"
   end
+
+  def pdf_debit_note_report
+    render :text => "pdf_debit_note_report"
+  end 
 
   # ======================================= end of pdf ============================================
 
@@ -463,8 +483,8 @@ end
 
 
   def pr_report
-    @pr_report = PurchaseRequisition.search(params[:search])
-    @show_pr_report = @pr_report.all
+    #@pr_report = PurchaseRequisition.search(params[:search])
+    @show_pr_report = PurchaseRequisition.all
     #@take_ids = @show_pr_report.map(&:id)
   end
 
@@ -533,8 +553,11 @@ end
   end
 
   def do_so_documentation_report
-    @do_so_documentation_report       = DeliveryOrder.search(params[:search]).where(:status => DeliveryOrder::ACTIVE)
-    @show_do_so_documentation_report  = @do_so_documentation_report.all
+
+    @do_so_documentation_report = DeliveryOrder.search(params[:search])
+    @show_do_so_documentation_report = @do_so_documentation_report.all
+    # where(:authorize_print => true)
+
   end
 
   def delivery_order_summary_report
@@ -547,7 +570,15 @@ end
     @show_sales_order_listing_report = @sales_order_listing_report.all
   end
 
-  
+  def debit_note_report
+    # @debit_note_report = DebitNote.search(params[:search])
+    @show_debit_note_report = DebitNote.all
+  end 
+
+  def credit_note_report
+    @show_credit_note_report = CreditNote.all
+  end
+
  
 end   
 
