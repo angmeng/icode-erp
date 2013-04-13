@@ -15,6 +15,7 @@ class SalesOrder < ActiveRecord::Base
   ACTIVE = 'Active'
   IN_PROGRESS = 'IP'
   KEEP_IN_VIEW = "KIV"
+  COMPLETED = 'CPD'
   SALES = 1
   
   default_scope order("sales_order_no DESC")
@@ -78,9 +79,11 @@ class SalesOrder < ActiveRecord::Base
     sale_orders.each do |so|
       so_no = so.sales_order_no
       so.sales_order_items.each do |soi|
-        mix << ["[#{so_no rescue '-'}][#{soi.product.product_combobox.product_code rescue '-'}] #{soi.product.desc rescue '-'}", soi.id]
+        mix << ["[#{so_no rescue '-'}][#{soi.product.product_combobox.product_code rescue '-'}] #{soi.product.desc rescue '-'}", soi.id] if soi.is_pending?
       end
     end
     return mix
   end
+  
+
 end

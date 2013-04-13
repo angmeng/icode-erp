@@ -1,6 +1,6 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::INVENTORY_NEW) %>  
-    <b><%= link_to "Add - New Inventory", new_inventory_history_path, :class => "show_without_refresh_page_800x450 k-button", "data-fancybox-type" => "iframe" %></b>
+    <b><%= link_to "Add - New Inventory", new_inventory_history_path, :class => "iframe_800x450 k-button", "data-fancybox-type" => "iframe" %></b>
   <% else %>
     <%= disabled_style "Add - New Inventory" %>
   <% end %>

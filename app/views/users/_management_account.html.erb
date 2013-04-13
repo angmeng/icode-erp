@@ -3,24 +3,21 @@
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th width="150">MODULE</th>
-      <th width="200">SUB-MODULE</th>
-      <th width="50">Add or Exist Files</th>
-      <th width="50">Save</th>
+      <th width="380">SUB-MODULE</th>
+      <th width="50">Add</th>
       <th width="50">Show</th>
       <th width="50">Edit</th>
       <th width="50">Drop To KIV</th>
       <th width="50">Printer</th>
       <th width="50">Show KIV</th>
       <th width="50">Recover</th>
-      <th width="50">Apply</th>
-      <th width="50">Submit to</th>
-      <th width="50">Send Mail</th>
-      <th width="50">Costing Sheet</th>
     </tr>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
   </thead>
   
   <tbody>
-    <!-- ACCOUNT -->
-    <%#= render "/inventory_management_systems/ims_account", :checkboxes => @checkboxes %>
+    <%= render "/inventory_management_systems/ims_ac_receivable", :checkboxes => @checkboxes %>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
+    <%= render "/inventory_management_systems/ims_ac_general", :checkboxes => @checkboxes %>
   </tbody>
 </table>

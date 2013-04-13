@@ -1,10 +1,10 @@
-<%= form_for(@receipt_item) do |f| %>
-  <% if @receipt_item.errors.any? %>
+<%= form_for(@journal_voucher_item) do |f| %>
+  <% if @journal_voucher_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@receipt_item.errors.count, "error") %> prohibited this receipt_item from being saved:</h2>
+      <h2><%= pluralize(@journal_voucher_item.errors.count, "error") %> prohibited this journal_voucher_item from being saved:</h2>
 
       <ul>
-      <% @receipt_item.errors.full_messages.each do |msg| %>
+      <% @journal_voucher_item.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :receipt_type %><br />
-    <%= f.number_field :receipt_type %>
+    <%= f.label :document_type %><br />
+    <%= f.text_field :document_type %>
   </div>
   <div class="field">
     <%= f.label :document_no %><br />
-    <%= f.text_field :document_no %>
+    <%= f.number_field :document_no %>
   </div>
   <div class="field">
     <%= f.label :document_date %><br />
@@ -38,10 +38,6 @@
   <div class="field">
     <%= f.label :os_amount %><br />
     <%= f.text_field :os_amount %>
-  </div>
-  <div class="field">
-    <%= f.label :receipt_id %><br />
-    <%= f.number_field :receipt_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

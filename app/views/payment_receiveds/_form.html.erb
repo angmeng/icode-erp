@@ -1,6 +1,6 @@
 <%= form_for(@payment_received) do |f| %>
   <div id="valid_payment">
-    <div class="fix_800x450">
+    <div class="popup_content">
       <table>
         <tr>
           <td><b>Trade Company</b></td>
@@ -22,38 +22,43 @@
             <% else %>
               <%= f.text_field :payment_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Payment Date" %>
             <% end %>
+            <span class="k-invalid-msg" data-for="payment_received[payment_date]"></span>
           </td>
         </tr>
         
         <tr>
           <td><b>Bank</b></td>
-          <td><%= f.text_field :bank, :class => "k-textbox" %></td>
+          <td><%= f.text_field :bank, :class => "k-textbox", "required validationMessage" => "Please Enter Bank" %></td>
         </tr>
         
         <tr>
           <td><b>Place</b></td>
-          <td><%= f.text_field :place, :class => "k-textbox" %></td>
+          <td><%= f.text_field :place, :class => "k-textbox", "required validationMessage" => "Please Enter Place" %></td>
         </tr>
         
         <tr>
           <td><b>Cheque No</b></td>
-          <td><%= f.text_field :cheque_no, :class => "k-textbox" %></td>
+          <td><%= f.text_field :cheque_no, :class => "k-textbox", "required validationMessage" => "Please Enter Cheque No." %></td>
         </tr>
         
         <tr>
           <td><b>Cheque Date</b></td>
           <td>
             <% if @payment_received.cheque_date.present? %>
-              <%= f.text_field :cheque_date, :value => @payment_received.cheque_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
+              <%= f.text_field :cheque_date, :value => @payment_received.cheque_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Cheque Date" %>
             <% else %>
               <%= f.text_field :cheque_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Cheque Date" %>
             <% end %>
+            <span class="k-invalid-msg" data-for="payment_received[cheque_date]"></span>
           </td>
         </tr>
         
         <tr>
           <td><b>Cheque Amount</b></td>
-          <td><%= f.text_field :cheque_amount, :class => "kendo_precision_2" %></td>
+          <td>
+            <%= f.text_field :cheque_amount, :class => "kendo_precision_2", "required validationMessage" => "Please Enter Cheque Amount" %>
+            <span class="k-invalid-msg" data-for="payment_received[cheque_amount]"></span>
+          </td>
         </tr>
         
         <tr>
@@ -90,7 +95,9 @@
         var validator = $("#valid_payment").kendoValidator().data("kendoValidator");
         
         $("#save_button").click(function() {
-            if (validator.validate()) {}
+            var amount = parseFloat($("#payment_received_cheque_amount").val());
+            if (amount <= 0.0000){ alert("You should key-in the Cheque Amount."); return false; }
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
     });

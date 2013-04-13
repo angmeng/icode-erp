@@ -1,0 +1,7 @@
+<%= title_head "LISTING PAYMENT RECEIVED BY PERIOD" %>
+
+<% if @payment_receiveds.present? %>
+  <div class="table_background"><%= render "listing_payment_receiveds", :payment_receiveds => @payment_receiveds %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>

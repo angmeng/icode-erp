@@ -1,24 +1,44 @@
 <table>
-  <!--tr>
-    <td><b>Receipt No.</b></td>
-    <td><%#= f.text_field :receipt_no_contains, :class => "k-textbox" %></td>
+  <tr>
+    <td><b>Trade Company</b></td>
+    <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_both_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;" } %></td>
   </tr>
   <tr>
-    <td><b>Receipt Date</b></td>
+    <td><b>Payment Date</b></td>
     <td>
-      <%# if @search.receipt_date_gte.present? %>
-        <%#= f.text_field :receipt_date_gte, :value => @search.receipt_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
-      <%# else %>
-        <%#= f.text_field :receipt_date_gte, :include_blank => true, :class => "mkendo_date" %>
-      <%# end %>
+      <% if @search.payment_date_gte.present? %>
+        <%= f.text_field :payment_date_gte, :value => @search.payment_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :payment_date_gte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
        - 
-      <%# if @search.receipt_date_lte.present? %>
-        <%#= f.text_field :receipt_date_lte, :value => @search.receipt_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
-      <%# else %>
-        <%#= f.text_field :receipt_date_lte, :include_blank => true, :class => "mkendo_date" %>
-      <%# end %>
+      <% if @search.payment_date_lte.present? %>
+        <%= f.text_field :payment_date_lte, :value => @search.payment_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :payment_date_lte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
     </td>
-  </tr-->
+  </tr>
+  <tr>
+    <td><b>Cheque No.</b></td>
+    <td><%= f.text_field :cheque_no_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>Cheque Date</b></td>
+    <td>
+      <% if @search.cheque_date_gte.present? %>
+        <%= f.text_field :cheque_date_gte, :value => @search.cheque_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :cheque_date_gte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+       - 
+      <% if @search.cheque_date_lte.present? %>
+        <%= f.text_field :cheque_date_lte, :value => @search.cheque_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+      <% else %>
+        <%= f.text_field :cheque_date_lte, :include_blank => true, :class => "mkendo_date" %>
+      <% end %>
+    </td>
+  </tr>
   <tr>
     <td colspan="10" align="right"><%= f.submit 'Search',:class => "k-button" %></td>
   </tr>

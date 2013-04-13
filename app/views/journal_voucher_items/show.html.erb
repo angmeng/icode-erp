@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Document type:</b>
+  <%= @journal_voucher_item.document_type %>
+</p>
+
+<p>
+  <b>Document no:</b>
+  <%= @journal_voucher_item.document_no %>
+</p>
+
+<p>
+  <b>Document date:</b>
+  <%= @journal_voucher_item.document_date %>
+</p>
+
+<p>
+  <b>Document amount:</b>
+  <%= @journal_voucher_item.document_amount %>
+</p>
+
+<p>
+  <b>Balance amount:</b>
+  <%= @journal_voucher_item.balance_amount %>
+</p>
+
+<p>
+  <b>Fp:</b>
+  <%= @journal_voucher_item.fp %>
+</p>
+
+<p>
+  <b>Os amount:</b>
+  <%= @journal_voucher_item.os_amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_journal_voucher_item_path(@journal_voucher_item) %> |
+<%= link_to 'Back', journal_voucher_items_path %>

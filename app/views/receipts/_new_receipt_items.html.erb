@@ -1,0 +1,52 @@
+<table class="white-line-table target_table">
+  <thead>
+    <tr class="header_line">
+      <th>Receipt Type</th>
+      <th>Document No.</th>
+      <th>Document Date</th>
+      <th>Document Amount</th>
+      <th>Balance Amount</th>
+      <th>F/P</th>
+      <th>O/S Amount</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @receipt.receipt_items.present? %>
+
+      <% @receipt.receipt_items.each_with_index do |item, index| %>
+        <tr class="<%= cycle('odd_line', 'even_line') %>">
+          <td align="center"><%= text_field_tag   "datarow[#{index}][receipt_type]", item.receipt_type, :class => "k-textbox", "required validationMessage" => "Please Enter Receipt Type" %></td>
+          <td align="center"><%= text_field_tag   "datarow[#{index}][document_no]", item.document_no, :class => "k-textbox", "required validationMessage" => "Please Enter Document No." %></td>
+          <td align="center">
+            <%= text_field_tag   "datarow[#{index}][document_date]", item.document_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Document Date" %>
+            <span class="k-invalid-msg" data-for="datarow[0][document_date]"></span>
+          </td>
+          <td align="right"><%= text_field_tag   "datarow[#{index}][document_amount]", four_precision(item.document_amount), :class => "numberKey k-textbox", "required validationMessage" => "Please Enter Document Amount" %></td>        
+          <td align="right"><span id="bal_amount_<%= index %>"></span></td>
+          <td align="center"><%= text_field_tag   "datarow[#{index}][fp]", item.fp, :class => "k-textbox", "required validationMessage" => "Please Enter F/P", :style => "width: 50px;" %></td>
+          <td align="right"><%= text_field_tag   "datarow[#{index}][os_amount]", four_precision(item.os_amount), :class => "numberKey k-textbox", "required validationMessage" => "Please Enter OS Amount" %></td>
+          <td align="center"><%= remove_row_button %></td>
+        </tr>
+      <% end %>
+
+    <% else %>
+
+      <tr class="<%= cycle('odd_line', 'even_line') %>">
+        <td align="center"><%= text_field_tag   "datarow[0][receipt_type]", "", :class => "k-textbox", "required validationMessage" => "Please Enter Receipt Type" %></td>
+        <td align="center"><%= text_field_tag   "datarow[0][document_no]", "", :class => "k-textbox", "required validationMessage" => "Please Enter Document No." %></td>
+        <td align="center">
+          <%= text_field_tag   "datarow[0][document_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Document Date" %>
+          <span class="k-invalid-msg" data-for="datarow[0][document_date]"></span>
+        </td>
+        <td align="center"><%= text_field_tag   "datarow[0][document_amount]", 0.0000, :class => "numberKey k-textbox", "required validationMessage" => "Please Enter Document Amount" %></td>
+        <td align="right"><span id="bal_amount_0"></span></td>
+        <td align="center"><%= text_field_tag   "datarow[0][fp]", "", :class => "k-textbox", "required validationMessage" => "Please Enter F/P", :style => "width: 50px;" %></td>
+        <td align="center"><%= text_field_tag   "datarow[0][os_amount]", 0.0000, :class => "numberKey k-textbox", "required validationMessage" => "Please Enter OS Amount" %></td>
+        <td align="center"><%= remove_row_button %></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>

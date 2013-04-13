@@ -1,16 +1,16 @@
 <div class="icon_tag">
   
-  <%# if roles.include?(InventoryManagementSystem::PR_KIV_SHOW) %>
-    <span id="on_show_kiv" showClass="show_without_refresh_page_800x450"><%= not_link_binary %></span>
-  <%# else %>
-    <!--span class="word_opac"><%#= not_link_binary %></span-->
-  <%# end %>
+  <% if roles.include?(InventoryManagementSystem::RECEIPT_KIV_SHOW) %>
+    <span id="on_show_kiv" showClass="show_without_refresh_page_800x600"><%= not_link_binary %></span>
+  <% else %>
+    <%= not_link_binary %>
+  <% end %>
 
-  <%# if roles.include?(InventoryManagementSystem::PR_KIV_RECOVER) %>
+  <% if roles.include?(InventoryManagementSystem::RECEIPT_KIV_RECOVER) %>
     <span id="on_recover"><%= not_link_recover %></span>
-  <%# else %>
-    <!--span class="word_opac"><%#= not_link_recover %></span-->
-  <%# end %>
+  <% else %>
+    <%= not_link_recover %>
+  <% end %>
    
   <%= link_home_button %>
 

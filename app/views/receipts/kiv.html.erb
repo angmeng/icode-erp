@@ -4,15 +4,10 @@
 </div>
 <div><%= render "search_receipt_kiv" %></div>
 
-<div id="container">
+<% if @receipts.present? %>
+  <div class="table_background"><%= render "listing_receipts", :receipts => @receipts %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
 
-  <% if @receipts.present? %>
-    <%= render "listing_receipts", :receipts => @receipts %>
-  <% else %>
-    <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
-  <% end %>
-
-  <%= render "action_receipt_kiv" %>  
-      
-</div>
-
+<%= render "action_receipt_kiv" %>  

@@ -17,12 +17,15 @@
       <th width="50">Send Mail</th>
       <th width="50">Costing Sheet</th>
     </tr>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
   </thead>
   
   <tbody>
     <!--OTHER-->
     <%= render "/inventory_management_systems/ims_sales_tax_exemption", :checkboxes => @checkboxes %>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
     <%= render "/inventory_management_systems/ims_formulation_for_all", :checkboxes => @checkboxes %>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
     <%= render "/inventory_management_systems/ims_formulation_for_costing", :checkboxes => @checkboxes %>
   </tbody>
 </table>

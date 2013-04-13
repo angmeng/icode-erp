@@ -13,16 +13,22 @@ class CreditNote < ActiveRecord::Base
   
   default_scope order("credit_note_no DESC")
   
+  self.per_page = 50
+  
   def self.db_active(search)
-    search.where(:status_id => Status::ACTIVE)
+    search.where(:status_id => DataStatus::ACTIVE)
   end
   
   def self.db_kiv(search)
-    search.where(:status_id => Status::KEEP_IN_VIEW)
+    search.where(:status_id => DataStatus::KEEP_IN_VIEW)
   end
   
   def updater_name
     User.find_by_id(self.updated_by).name
+  end
+  
+  def uppercase_text
+    self.credit_type.upcase! if self.credit_type.present?
   end
   
   def update_credit_thing(company)
@@ -30,9 +36,5 @@ class CreditNote < ActiveRecord::Base
     company.save!
     @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.credit_note_date, :transaction_type => "CN", :credit_note_id => self.id, :debit_note_id => 0)
     @soa.save!
-  end
-  
-  def uppercase_text
-    self.credit_type.upcase! if self.credit_type.present?
   end
 end

@@ -1,0 +1,35 @@
+<h1>Listing journal_voucher_items</h1>
+
+<table>
+  <tr>
+    <th>Document type</th>
+    <th>Document no</th>
+    <th>Document date</th>
+    <th>Document amount</th>
+    <th>Balance amount</th>
+    <th>Fp</th>
+    <th>Os amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @journal_voucher_items.each do |journal_voucher_item| %>
+  <tr>
+    <td><%= journal_voucher_item.document_type %></td>
+    <td><%= journal_voucher_item.document_no %></td>
+    <td><%= journal_voucher_item.document_date %></td>
+    <td><%= journal_voucher_item.document_amount %></td>
+    <td><%= journal_voucher_item.balance_amount %></td>
+    <td><%= journal_voucher_item.fp %></td>
+    <td><%= journal_voucher_item.os_amount %></td>
+    <td><%= link_to 'Show', journal_voucher_item %></td>
+    <td><%= link_to 'Edit', edit_journal_voucher_item_path(journal_voucher_item) %></td>
+    <td><%= link_to 'Destroy', journal_voucher_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Journal voucher item', new_journal_voucher_item_path %>

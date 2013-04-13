@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  document_type: MyString
+  document_no: 1
+  document_date: 2013-04-13
+  document_amount: 9.99
+  balance_amount: 9.99
+  fp: 1
+  os_amount: 9.99
+
+two:
+  document_type: MyString
+  document_no: 1
+  document_date: 2013-04-13
+  document_amount: 9.99
+  balance_amount: 9.99
+  fp: 1
+  os_amount: 9.99

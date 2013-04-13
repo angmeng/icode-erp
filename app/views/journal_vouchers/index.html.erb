@@ -1,0 +1,13 @@
+<div class="title_head">
+  <strong style="color:white;">LISITING JOURNAL VOUCHERS</strong>
+  <%= search_button %>
+</div>
+<div><%#= render "search_debit_note" %></div>
+
+<% if @journal_vouchers.present? %>
+  <div class="table_background"><%= render "listing_journal_vouchers", :journal_vouchers => @journal_vouchers %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
+
+<%= render "action_journal_vouchers" %>

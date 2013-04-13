@@ -106,39 +106,5 @@
   </div>
 <% end %>
   
-<% content_for :jquery_script do %>
-  <script>
-    $(document).ready(function() {   
-        $(".numberKey").forceNumeric();
-        
-        var validator = $("#valid_sales_order").kendoValidator().data("kendoValidator");
-        
-        $("#sales_order_purchase_order_no").keyup(function(){
-            var hitting = $(this).val();
-            if (hitting.length > 0){
-              $('input[id$="_customer_po"]').each(function(k, v) {
-                  $(this).attr("disabled", "disabled");
-                  $(this).val('');
-              });
-            } else {
-              $('input[id$="_customer_po"]').each(function(k, v) {
-                  $(this).removeAttr("disabled");
-              });
-            }
-        });
-        
-        $("#save_button").click(function() {
-            if (validator.validate()) {
-                $(this).ajaxStart(function(){  
-                   $('*').css('cursor','wait');
-                }).ajaxComplete(function(){  
-                   $('*').css('cursor','auto');
-                });
-            }
-            else { alert("Invalid Data Form..."); return false; } 
-        });        
-        
-    });
-  </script>
-<% end %>
+<%= render "js_sales_order" %>
   

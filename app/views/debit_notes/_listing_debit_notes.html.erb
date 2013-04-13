@@ -21,7 +21,7 @@
         <td><%= debit_note.debit_type rescue '-' %></td>
         <td align="center"><%= debit_note.currency.name rescue '-' %></td>
         <td align="center"><%= debit_note.updater_name rescue '-' %></td>
-        <td align="right"><%= debit_note.amount rescue '-' %></td>
+        <td align="right"><%= four_precision(debit_note.amount) rescue '-' %></td>
       </tr>
     <% end %>
   </tbody>

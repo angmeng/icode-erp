@@ -1,16 +1,20 @@
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%= will_paginate @payment_receiveds, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
 <div class="icon_tag">
   
-  <%# if roles.include?(InventoryManagementSystem::PR_KIV_SHOW) %>
+  <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_SHOW) %>
     <span id="on_show_kiv" showClass="show_without_refresh_page_800x450"><%= not_link_binary %></span>
-  <%# else %>
-    <!--span class="word_opac"><%#= not_link_binary %></span-->
-  <%# end %>
+  <% else %>
+    <%= not_link_binary %>
+  <% end %>
 
-  <%# if roles.include?(InventoryManagementSystem::PR_KIV_RECOVER) %>
+  <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_RECOVER) %>
     <span id="on_recover"><%= not_link_recover %></span>
-  <%# else %>
-    <!--span class="word_opac"><%#= not_link_recover %></span-->
-  <%# end %>
+  <% else %>
+    <%= not_link_recover %>
+  <% end %>
    
   <%= link_home_button %>
 

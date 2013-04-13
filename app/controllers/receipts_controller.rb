@@ -4,12 +4,12 @@ class ReceiptsController < ApplicationController
   
   def index
     @search = Receipt.search(params[:search])
-    @receipts = Receipt.db_active(@search)
+    @receipts = Receipt.db_active(@search).paginate(:page => params[:page])
   end
   
   def kiv
     @search = Receipt.search(params[:search])
-    @receipts = Receipt.db_kiv(@search)
+    @receipts = Receipt.db_kiv(@search).paginate(:page => params[:page])
   end
 
   def show
@@ -28,7 +28,7 @@ class ReceiptsController < ApplicationController
     @receipt = Receipt.new(params[:receipt])
     AccountManagement.manage_receipts(params[:datarow], @receipt)
     if @receipt.save
-      company.update_attributes(:sn_receipt_no => @receipt.receipt_no)
+      @receipt.update_to_statement(company)
       redirect_to @receipt, notice: "Receipt No # #{@receipt.receipt_no} was successfully created."
     else
       flash[:alert] = @receipt.errors.full_messages.join(", ")
@@ -49,17 +49,13 @@ class ReceiptsController < ApplicationController
 
   def destroy
     @receipt = Receipt.find(params[:id])
-    @receipt.update_attributes(:status_id => Status::KEEP_IN_VIEW)
-
-    respond_to do |format|
-      format.html { redirect_to receipts_url, notice: "Receipt No # #{@receipt.receipt_no} was dropped to KIV."  }
-      format.json { head :no_content }
-    end
+    @receipt.update_attributes!(:status_id => DataStatus::KEEP_IN_VIEW)
+    redirect_to receipts_url, notice: "Receipt No # #{@receipt.receipt_no} was dropped to KIV."
   end
   
   def recover
     @receipt = Receipt.find(params[:id])
-    @receipt.update_attributes!(:status_id => Status::ACTIVE)
+    @receipt.update_attributes!(:status_id => DataStatus::ACTIVE)
     redirect_to kiv_receipts_url, :notice => "Receipt No # #{@receipt.receipt_no} has recovered from KIV."
   end
 end

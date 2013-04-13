@@ -1,4 +1,11 @@
 class DataStatus
+  #PR - 1
+  #PO - 2
+  #RN - 3
+  #QR - 4
+  #SO - 5
+  #DO - 6
+  
   ACTIVE        = 1
   KEEP_IN_VIEW  = 2
   
@@ -23,5 +30,11 @@ class DataStatus
   
 #  INCOMING_REJECT = 12
 #  CANCEL          = 13
+
+  
+  #Delivery Order Status and Delivery Order Items Status
+  DOI_PENDING    = 601
+  DOI_PROCESSING = 602
+  DOI_COMPLETED  = 603
   
 end

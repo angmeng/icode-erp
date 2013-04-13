@@ -394,6 +394,7 @@ end
       end
     elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
+
         #a = DeliveryOrder.find(params[:doc_ids].first)
         # a = DeliveryOrder.find(params[:doc_ids])
         # if a.authorize_print == false
@@ -402,11 +403,14 @@ end
         
        #@detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids].first)
        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
-       # html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
-       #  @kit = PDFKit.new(html)
-       #  send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
-       #                          :type => 'application/pdf' ,
-       #                          :disposition => "attachement" )
+
+
+       html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+        @kit = PDFKit.new(html)
+        send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
+                                :type => 'application/pdf' ,
+                                :disposition => "attachement" )
+
         # a.authorize_print = false
         # a.save!
       # generate_history
@@ -551,9 +555,11 @@ end
   end
 
   def do_so_documentation_report
+
     @do_so_documentation_report = DeliveryOrder.search(params[:search])
     @show_do_so_documentation_report = @do_so_documentation_report.all
     # where(:authorize_print => true)
+
   end
 
   def delivery_order_summary_report

@@ -21,7 +21,7 @@
         <td><%= credit_note.credit_type rescue '-' %></td>
         <td align="center"><%= credit_note.currency.name rescue '-' %></td>
         <td align="center"><%= credit_note.updater_name rescue '-' %></td>
-        <td align="right"><%= credit_note.amount rescue '-' %></td>
+        <td align="right"><%= four_precision(credit_note.amount) rescue '-' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,8 +1,14 @@
-<table id="jgrid" class="zebraLight">
+<% if action_name == "list_debtor" or action_name == "list_period" %>
+  <table id="jgrid_searching" class="zebraLight">
+<% else %>
+  <table id="jgrid" class="zebraLight">
+<% end %>
   <thead>
     <tr class="header_line">
-      <th class="check_highlight"></th>      
-      <th>Trade Company</th>
+      <th class="check_highlight"></th>
+      <% unless @search.trade_company_id_equals.present? %>
+        <th>Trade Company</th>
+      <% end %>
       <th>Payment Date</th>
       <th>Bank</th>
       <th>Place</th>
@@ -18,7 +24,9 @@
     <% payment_receiveds.each do |payment| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= payment.id %>">
         <td></td>
-        <td><%= company_code_and_name(payment.trade_company) %></td>
+        <% unless @search.trade_company_id_equals.present? %>
+          <td><%= company_code_and_name(payment.trade_company) %></td>
+        <% end %>
         <td align="center"><%= payment.payment_date.strftime("%d-%m-%Y") rescue '-' %></td>
         <td align="center"><%= payment.bank rescue '-' %></td>
         <td align="center"><%= payment.place rescue '-' %></td>

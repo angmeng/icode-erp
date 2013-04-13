@@ -20,21 +20,7 @@
     <% items.each do |sales_order_item| %>
       <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="sales_order_items" rowsId="<%= sales_order_item.id %>">
         <td></td>
-        <td align="center">
-          <% if sales_order_item.status == SalesOrderItem::APPROVED %>
-            APPROVED
-          <% elsif sales_order_item.status == SalesOrderItem::PENDING %>
-            PENDING
-          <% elsif sales_order_item.status == SalesOrderItem::KEEP_IN_VIEW %>
-            KIV  
-          <% elsif sales_order_item.status == SalesOrderItem::IN_PROCESS %>
-            IN PROGRESS
-          <% elsif sales_order_item.status == SalesOrderItem::PRODUCTION %>
-            PRODUCTION
-          <% else %>
-            -
-          <% end %>
-        </td>
+        <td align="center"><%= SalesOrderItem.do_case(sales_order_item) %></td>
         <td class="t_product"><%= render "/product_categories/join_product_category", :pc => sales_order_item %></td>
         <td><%= sales_order_item.product.desc rescue '-' %></td>
         <td align="center"><%= sales_order_item.quantity rescue '-' %> <%= sales_order_item.unit_measurement.code rescue '-' %></td>

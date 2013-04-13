@@ -1,0 +1,31 @@
+<div id="searching">
+  <%= form_for @search, :url => list_debtor_payment_receiveds_path do |f| %>
+    <table>
+      <tr>
+        <td><b>Trade Company</b></td>
+        <% if @search.trade_company_id_equals.present? %>
+          <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_both_with_code, @search.trade_company_id_equals), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;" } %></td>
+        <% else %>
+          <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_both_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;" } %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td><b>Payment Date</b></td>
+        <td>
+          <% if @search.payment_date_gte.present? %>
+            <%= f.text_field :payment_date_gte, :value => @search.payment_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+          <% else %>
+            <%= f.text_field :payment_date_gte, :include_blank => true, :class => "mkendo_date" %>
+          <% end %>
+           - 
+          <% if @search.payment_date_lte.present? %>
+            <%= f.text_field :payment_date_lte, :value => @search.payment_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "mkendo_date" %>
+          <% else %>
+            <%= f.text_field :payment_date_lte, :include_blank => true, :class => "mkendo_date" %>
+          <% end %>
+        </td>
+        <td><%= f.submit 'Search', :class => "k-button" %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

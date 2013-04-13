@@ -3,7 +3,6 @@
     <div class="popup_content">
       <table>
         <tr>
-
           <% if @credit_note.credit_note_no.present? %>
             <td><b>C/N No #</b></td>
             <td><%= @credit_note.credit_note_no rescue '-' %></td>
@@ -15,8 +14,8 @@
             </td>
           <% end %>
           
+          <td><b>C/N Date</b></td>
           <td>
-            <b>C/N Date</b>&nbsp;
             <% if @credit_note.credit_note_date.present? %>
               <%= f.text_field :credit_note_date, :value => @credit_note.credit_note_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Credit Note Date" %>
             <% else %>
@@ -26,7 +25,7 @@
         </tr>
         
         <tr>
-          <td><b>Trade Company</b></td>
+          <td><b>To Trade Company</b></td>
           <td>
             <% if @credit_note.trade_company_id.present? %>
               <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code, @credit_note.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
@@ -40,19 +39,16 @@
         <tr>
           <td colspan="3">
             <b>Your A/C Has Been Credited For Being</b>&nbsp;
-            <%= f.text_field :credit_type, :class=> "k-textbox", :style => "width: 250px;", "required validationMessage" => "Please Enter.." %>
+            <%= f.text_field :credit_type, :class=> "k-textbox", :style => "width: 250px;", "required validationMessage" => "Please Enter" %>
           </td>
         </tr>
         
         <tr>
           <td><b>Currency</b></td>
-          <td colspan="2">
+          <td>
             <%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @credit_note.currency_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %>
             <span class="k-invalid-msg" data-for="credit_note[currency_id]"></span>
           </td>
-        </tr>
-        
-        <tr>
           <td><b>Updated By</b></td>
           <td>
             <% if @credit_note.updated_by.present? %>
@@ -66,14 +62,14 @@
         
         <tr>
           <td><b>Amount</b></td>
-          <% if @credit_note.amount > 0 %>
-            <td><%= four_precision(@credit_note.amount) %></td>
-          <% else %>
-            <td colspan="2">
+          <td colspan="2">
+            <% if @credit_note.amount > 0 %>
+              <%= f.text_field :amount, :value => @credit_note.amount, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Amount" %>
+            <% else %>
               <%= f.text_field :amount, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Amount" %>
-              <span class="k-invalid-msg" data-for="credit_note[amount]"></span>
-            </td>
-          <% end %>
+            <% end %>
+            <span class="k-invalid-msg" data-for="credit_note[amount]"></span>
+          </td>
         </tr>
       </table>
     </div>
@@ -86,14 +82,13 @@
 
 <% content_for :jquery_script do %>
   <script>
-    $(document).ready(function() {   
-        
+    $(document).ready(function() {
         var validator = $("#valid_credit_note").kendoValidator().data("kendoValidator");
         
         $("#save_button").click(function() {
             var amount = parseFloat($("#credit_note_amount").val());
             if (amount <= 0){ alert("You should key-in the amount value."); return false; }
-            if (validator.validate()) {}
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
     });
