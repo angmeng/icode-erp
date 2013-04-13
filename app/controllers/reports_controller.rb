@@ -394,7 +394,7 @@ end
       end
     elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
-       @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
+        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
         @kit = PDFKit.new(html)
         send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
@@ -533,8 +533,8 @@ end
   end
 
   def do_so_documentation_report
-    @do_so_documentation_report = DeliveryOrder.search(params[:search])
-    @show_do_so_documentation_report = @do_so_documentation_report.all
+    @do_so_documentation_report       = DeliveryOrder.search(params[:search]).where(:status => DeliveryOrder::ACTIVE)
+    @show_do_so_documentation_report  = @do_so_documentation_report.all
   end
 
   def delivery_order_summary_report

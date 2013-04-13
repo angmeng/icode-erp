@@ -4,15 +4,10 @@
 </div>
 <div><%= render "search_payment_received_kiv" %></div>
 
-<div id="container">
+<% if @payment_receiveds.present? %>
+  <div class="table_background"><%= render "listing_payment_receiveds", :payment_receiveds => @payment_receiveds %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
 
-  <% if @payment_receiveds.present? %>
-    <%= render "listing_payment_receiveds", :payment_receiveds => @payment_receiveds %>
-  <% else %>
-    <div class="fix_h450" style="padding: 5px;">Not Record Found</div>
-  <% end %>
-
-  <%= render "action_payment_received_kiv" %>  
-      
-</div>
-
+<%= render "action_payment_received_kiv" %>  

@@ -212,12 +212,11 @@ class InventoryManagementSystem < ActiveRecord::Base
   SALES_TAX_EXEMPTION_MENU                          = 61
 
   #sub module 
-#  SALES_TAX_EXEMPTION_NEW                           = 62
+
   
   SALES_TAX_EXEMPTION_SUPPLIER_VALID                = 63
   SALES_TAX_EXEMPTION_CUSTOMER_VALID                = 225
-#  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID              = 64
-#  SALES_TAX_EXEMPTION_CUSTOMER_UNVALID              = 226
+
   SALES_TAX_EXEMPTION_KIV_SUPPLIER                  = 65
   SALES_TAX_EXEMPTION_KIV_CUSTOMER                  = 227
   
@@ -239,15 +238,6 @@ class InventoryManagementSystem < ActiveRecord::Base
   SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES   = 232
 #  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW_HISTORIES = 152
   
-  #transaction unvalid
-#  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW      = 71
-#  SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_SHOW      = 233
-#  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_EDIT      = 72
-#  SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_EDIT      = 234
-#  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_KIV       = 73
-#  SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_KIV       = 235
-#  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_PRINTABLE = 74
-#  SALES_TAX_EXEMPTION_CUSTOMER_UNVALID_PRINTABLE = 236
   
   #kiv
   STE_KIV_SUPPLIER_SHOW                                = 75
@@ -352,12 +342,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   CUSTOMER_KIV_SHOW                       = 113
   CUSTOMER_KIV_RECOVER                    = 114
   
-#  PRODUCT_CATEGORY_MENU                   = 115
-#  PRODUCT_CATEGORY_NEW                    = 116
-#  PRODUCT_CATEGORY_SHOW                   = 117
-#  PRODUCT_CATEGORY_EDIT                   = 118
-#  PRODUCT_CATEGORY_KIV                    = 119
-#  PRODUCT_CATEGORY_PRINTABLE              = 120
+
   
   
   
@@ -408,20 +393,17 @@ class InventoryManagementSystem < ActiveRecord::Base
  ########## Price Control ########## 
   PRICE_CONTROL_MENU                                 = 258
   
-#  PRICE_CONTROL_ADD                                  = 252
-#  PRICE_CONTROL_SAVE                                 = 253
-  
   PRICE_CONTROL_CUSTOMER_LISTING                     = 254
   PRICE_CONTROL_CUSTOMER_NEW                         = 251
   PRICE_CONTROL_CUSTOMER_HISTORY                     = 247  # Change SHOW to HISTORY, 3/4/2013
-#  PRICE_CONTROL_CUSTOMER_EDIT                        = 248
+
 #  PRICE_CONTROL_CUSTOMER_KIV                         = 249
 #  PRICE_CONTROL_CUSTOMER_PRINTABLE                   = 250
   
   PRICE_CONTROL_VENDOR_LISTING                       = 279
   PRICE_CONTROL_VENDOR_NEW                           = 280
   PRICE_CONTROL_VENDOR_HISTORY                       = 281  # Change SHOW to HISTORY, 3/4/2013
-#  PRICE_CONTROL_VENDOR_EDIT                          = 282
+
 #  PRICE_CONTROL_VENDOR_KIV                           = 283
 #  PRICE_CONTROL_VENDOR_PRINTABLE                     = 284
   
@@ -431,15 +413,101 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   #===== ===== Accounts ===== =====
   
-  ACCOUNT_RECEIPT_ENTRY                             = 263
-  ACCOUNT_RECEIPT_SHOW                              = 264
-  ACCOUNT_RECEIPT_EDIT                              = 265
-  ACCOUNT_RECEIPT_KIV                               = 266
-  ACCOUNT_RECEIPT_PRINTABLE                         = 267
+  AC_RECEIVABLE                                     = 297
+  
+  #===== ===== Credit Note ===== =====
+  CREDIT_NOTE_INDEX                                 = 506
+  CREDIT_NOTE_ADD                                   = 298
+  CREDIT_NOTE_SHOW                                  = 299
+  CREDIT_NOTE_EDIT                                  = 501
+  CREDIT_NOTE_KIV                                   = 502
+  CREDIT_NOTE_PRINTABLE                             = 503
+  
+  CREDIT_NOTE_KIV_INDEX                             = 515
+  CREDIT_NOTE_KIV_SHOW                              = 504
+  CREDIT_NOTE_KIV_RECOVER                           = 505
   
   
- 
-  #start at 297
+  #===== ===== Debit Note ===== =====
+  DEBIT_NOTE_INDEX                                  = 507
+  DEBIT_NOTE_ADD                                    = 508
+  DEBIT_NOTE_SHOW                                   = 509
+  DEBIT_NOTE_EDIT                                   = 510
+  DEBIT_NOTE_KIV                                    = 511
+  DEBIT_NOTE_PRINTABLE                              = 512
+  
+  DEBIT_NOTE_KIV_INDEX                              = 516
+  DEBIT_NOTE_KIV_SHOW                               = 513
+  DEBIT_NOTE_KIV_RECOVER                            = 514
+  
+  #===== ===== Receipt ===== =====
+  RECEIPT_INDEX                                     = 517
+  RECEIPT_ADD                                       = 518
+  RECEIPT_SHOW                                      = 519
+  RECEIPT_EDIT                                      = 520
+  RECEIPT_KIV                                       = 521
+  RECEIPT_PRINTABLE                                 = 522
+  
+  RECEIPT_KIV_INDEX                                 = 523
+  RECEIPT_KIV_SHOW                                  = 524
+  RECEIPT_KIV_RECOVER                               = 525
+  
+  #===== ===== Payment Received ===== =====
+  PAYMENT_RECEIVED_INDEX                            = 526
+  PAYMENT_RECEIVED_ADD                              = 527
+  PAYMENT_RECEIVED_SHOW                             = 528
+  PAYMENT_RECEIVED_EDIT                             = 529
+  PAYMENT_RECEIVED_KIV                              = 530
+  PAYMENT_RECEIVED_PRINTABLE                        = 531
+  
+  PAYMENT_RECEIVED_KIV_INDEX                        = 532
+  PAYMENT_RECEIVED_KIV_SHOW                         = 533
+  PAYMENT_RECEIVED_KIV_RECOVER                      = 534
+  
+  PAYMENT_RECEIVED_BY_DEBTOR                        = 535
+  PAYMENT_RECEIVED_BY_PERIOD                        = 536
+  
+  PAYMENT_RECEIVED_BY_DEBTOR_PRINTABLE              = 537
+  PAYMENT_RECEIVED_BY_PERIOD_PRINTABLE              = 538
+  
+  AC_GENERAL                                        = 263
+  AC_GENERAL_JV_DEBTOR_INDEX                        = 264
+  AC_GENERAL_JV_DEBTOR_ADD                          = 265
+  AC_GENERAL_JV_DEBTOR_SHOW                         = 266
+  AC_GENERAL_JV_DEBTOR_EDIT                         = 267
+  AC_GENERAL_JV_DEBTOR_KIV                          = 252
+  AC_GENERAL_JV_DEBTOR_PRINTABLE                    = 253 
+  
+  AC_GENERAL_JV_DEBTOR_KIV_INDEX                    = 539
+  AC_GENERAL_JV_DEBTOR_KIV_SHOW                     = 248
+  AC_GENERAL_JV_DEBTOR_KIV_RECOVER                  = 282
+  
+  AC_GENERAL_JV_CREDITOR_INDEX                      = 115
+  AC_GENERAL_JV_CREDITOR_ADD                        = 116
+  AC_GENERAL_JV_CREDITOR_SHOW                       = 117
+  AC_GENERAL_JV_CREDITOR_EDIT                       = 118
+  AC_GENERAL_JV_CREDITOR_KIV                        = 119
+  AC_GENERAL_JV_CREDITOR_PRINTABLE                  = 120 
+  
+  AC_GENERAL_JV_CREDITOR_KIV_INDEX                  = 64
+  AC_GENERAL_JV_CREDITOR_KIV_SHOW                   = 226
+  AC_GENERAL_JV_CREDITOR_KIV_RECOVER                = 62
+  
+  AC_GENERAL_JV_INDEX                               = 71
+  AC_GENERAL_JV_ADD                                 = 233
+  AC_GENERAL_JV_SHOW                                = 72
+  AC_GENERAL_JV_EDIT                                = 234
+  AC_GENERAL_JV_KIV                                 = 73
+  AC_GENERAL_JV_PRINTABLE                           = 235
+  
+  AC_GENERAL_JV_KIV_INDEX                           = 74
+  AC_GENERAL_JV_KIV_SHOW                            = 236
+  AC_GENERAL_JV_KIV_RECOVER                         = 540
+  
+    
+
+    
+  #start at 299, jump to 541
   
   
 

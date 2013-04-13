@@ -13,11 +13,14 @@
       <th width="50">Recover</th>
       <th width="50">History</th>
     </tr>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
   </thead>
   
   <tbody>
     <%= render "/inventory_management_systems/ims_company_profile", :checkboxes => @checkboxes %>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
     <%= render "/inventory_management_systems/ims_trade_company", :checkboxes => @checkboxes %>
+    <tr style="background-color: black;"><td colspan="100"></td></tr>
     <%= render "/inventory_management_systems/ims_price_control", :checkboxes => @checkboxes %>
   </tbody>
 </table>

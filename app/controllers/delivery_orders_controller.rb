@@ -28,10 +28,10 @@ class DeliveryOrdersController < ApplicationController
 
   def create
     @delivery_order = DeliveryOrder.new(params[:delivery_order])
-    check_delivery_order, msg = DeliveryOrder.running_delivery_order_items(params[:datarow], @delivery_order)
+    check_delivery_order, msg = DeliveryOrderManagement.running_delivery_order_items(params[:datarow], @delivery_order)
     if @delivery_order.save and check_delivery_order.present?
       company.update_attributes(:sn_deliver_order_no => @delivery_order.do_no)
-      # reduce Inventory and Product's current stock
+      DeliveryOrderManagement.manage_inventory_and_product(@delivery_order)  # reduce Inventory and Product's current stock
       redirect_to @delivery_order, notice: 'Delivery Order was successfully created.'
     else
       msg.present? ? msg : msg = []
@@ -39,7 +39,6 @@ class DeliveryOrdersController < ApplicationController
       flash[:alert] = msg.join(', ')
       render action: "new"
     end
-
   end
 
   def update
@@ -56,8 +55,6 @@ class DeliveryOrdersController < ApplicationController
     end
   end
 
-  # DELETE /delivery_orders/1
-  # DELETE /delivery_orders/1.json
   def destroy
     @delivery_order = DeliveryOrder.find(params[:id])
     @delivery_order.update_attributes(:status => DeliveryOrder::KEEP_IN_VIEW)

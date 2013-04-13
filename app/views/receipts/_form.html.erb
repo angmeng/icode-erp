@@ -1,131 +1,90 @@
 <%= form_for(@receipt) do |f| %>
-  
-    <div id="valid_receipt">
-      <div class="popup_content">
-        <table>
-          <tr>
-            <% if @receipt.receipt_no.present? %>
-              <td><b>Receipt No #</b></td>
-              <td><%= @receipt.receipt_no rescue '-' %></td>
+  <div id="valid_receipt">
+    <div class="popup_content">
+      <table>
+        <tr>
+          <% if @receipt.receipt_no.present? %>
+            <td><b>Receipt No #</b></td>
+            <td><%= @receipt.receipt_no rescue '-' %></td>
+          <% else %>
+            <td><b>Current Receipt No.</b></td>
+            <td>
+              <%= rpt_no = company.sn_receipt_no + 1 %>
+              <%= f.hidden_field "receipt_no", :value => rpt_no  %>
+            </td>
+          <% end %>
+
+          <td><b>Receipt Date</b></td>
+          <td>
+            <% if @receipt.receipt_date.present? %>
+              <%= f.text_field :receipt_date, :value => @receipt.receipt_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
             <% else %>
-              <td><b>Current Receipt No.</b></td>
-              <td>
-                <%= rpt_no = company.sn_receipt_no + 1 %>
-                <%= f.hidden_field "receipt_no", :value => rpt_no  %>
-              </td>
+              <%= f.text_field :receipt_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Receipt Date" %>
             <% end %>
+          </td>
+          <td colspan="2"><span class="k-invalid-msg" data-for="receipt[receipt_date]"></span></td>
+        </tr>
 
-            <td>
-              <b>Receipt Date</b>&nbsp;
-              <% if @receipt.receipt_date.present? %>
-                <%= f.text_field :receipt_date, :value => @receipt.receipt_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
-              <% else %>
-                <%= f.text_field :receipt_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Receipt Date" %>
-              <% end %>
-              <td colspan="2"><span class="k-invalid-msg" data-for="receipt[receipt_date]"></span></td>
-            </td>
-          </tr>
-
-          <tr>
-            <td><b>Trade Company</b></td>
-            <td>
-              <% if @receipt.trade_company_id.present? %>
-                <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code, @receipt.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
-              <% else %>
-                <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code),                            { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
-              <% end %>
-            </td>
-            <td colspan="2"><span class="k-invalid-msg" data-for="receipt[trade_company_id]"></span></td>
-          </tr>
-
-          <tr>
-            <td colspan="10">
-              <b>Cash Amount</b>:&nbsp;<%= f.text_field :cash_amount, :class => "kendo_precision_4" %>&nbsp;&nbsp;
-              <b>Cheque Amount</b>:&nbsp;<%= f.text_field :cheque_amount, :class => "kendo_precision_4" %>&nbsp;&nbsp;
-              <b>Total Amount</b>:&nbsp;<span id="total_amount"><%= @receipt.total_amount.present? ? four_precision(@receipt.total_amount) : 0.0000 %></span>
-            </td>
-          </tr>
-
-          <tr>
-            <td><b>Journal Voucher No</b></td>
-            <td><%= f.text_field :journal_voucher_no, :class => "k-textbox" %></td>
-          </tr>
-
-          <tr>
-            <td><b>Updated By</b></td>
-            <td>
-              <% if @receipt.updated_by.present? %>
-                <%= updater_name(@receipt.updated_by) rescue '-' %>
-              <% else %>
-                <%= current_user.name %>
-                <%= f.hidden_field :updated_by, :value => current_user.id %>
-              <% end %>
-            </td>
-          </tr>
-
-          <tr>
-            <td valign="top"><b>Remark</b></td>
-            <td colspan="2">
-              <%= f.text_area "remark", :size => "50x3" %>
-            </td>
-          </tr>
-        </table>
-        
-        <hr/>
-        
-        <table id="grid_h295" class="target_table">
-          <thead>
-            <tr class="header_line">
-              <th>Receipt Type</th>
-              <th>Document No.</th>
-              <th>Document Date</th>
-              <th>Document Amount</th>
-              <th>F/P</th>
-              <th>O/S Amount</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% if @receipt.receipt_items.present? %>
-
-              <% @receipt.receipt_items.each_with_index do |item, index| %>
-                <tr class="<%= cycle('odd_line', 'even_line') %>">
-                  <td align="center"><%= text_field_tag   "datarow[#{index}][receipt_type]", item.receipt_type %></td>
-                  <td align="center"><%= text_field_tag   "datarow[#{index}][document_no]", item.document_no %></td>
-                  <td align="center"><%= text_field_tag   "datarow[#{index}][document_date]", item.document_date.strftime("%d-%m-%Y"), :placeholder => "dd-mm-yyyy" %>
-                  <td align="center"><%= text_field_tag   "datarow[#{index}][document_amount]", four_precision(item.document_amount), :class => "doc_amount" %></td>        
-                  <td align="center"><%= text_field_tag   "datarow[#{index}][fp]", item.fp %></td>
-                  <td align="center"><%= text_field_tag   "datarow[#{index}][os_amount]", four_precision(item.os_amount) %></td>
-                  <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
-                </tr>
-              <% end %>
-
+        <tr>
+          <td><b>Customer Company</b></td>
+          <td>
+            <% if @receipt.trade_company_id.present? %>
+              <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @receipt.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
             <% else %>
-
-              <tr class="<%= cycle('odd_line', 'even_line') %>">
-                <td align="center"><%= text_field_tag   "datarow[0][receipt_type]" %></td>
-                <td align="center"><%= text_field_tag   "datarow[0][document_no]" %></td>
-                <td align="center"><%= text_field_tag   "datarow[0][document_date]", "", :placeholder => "dd-mm-yyyy" %>
-                <td align="center"><%= text_field_tag   "datarow[0][document_amount]", "", :class => "doc_amount" %></td>        
-                <td align="center"><%= text_field_tag   "datarow[0][fp]" %></td>
-                <td align="center"><%= text_field_tag   "datarow[0][os_amount]" %></td>
-                <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
-              </tr>
-
+              <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code),                            { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
             <% end %>
-          </tbody>
-        </table>        
-      </div>
+          </td>
+          <td colspan="2"><span class="k-invalid-msg" data-for="receipt[trade_company_id]"></span></td>
+        </tr>
 
-      <%= render "action_receipt_entry" %>
+        <tr>
+          <td colspan="2">
+            <b>Cash Amount</b>:&nbsp;<%= f.text_field :cash_amount, :class => "kendo_precision_4" %>&nbsp;&nbsp;
+            <b>Cheque Amount</b>:&nbsp;<%= f.text_field :cheque_amount, :class => "kendo_precision_4" %>&nbsp;&nbsp;
+          </td>
+          <td><b>Total Amount</b></td>
+          <td colspan="10">
+            <span id="total_amount"><%= @receipt.total_amount.present? ? four_precision(@receipt.total_amount) : 0.0000 %></span>
+            <span id="remaining_amount" style="display:none;"></span>
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Journal Voucher No</b></td>
+          <td><%= f.text_field :journal_voucher_no, :class => "k-textbox" %></td>
+          <td><b>Updated By</b></td>
+          <td>
+            <% if @receipt.updated_by.present? %>
+              <%= updater_name(@receipt.updated_by) rescue '-' %>
+            <% else %>
+              <%= current_user.name %>
+              <%= f.hidden_field :updated_by, :value => current_user.id %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="vertical-align: top;"><b>Remark</b></td>
+          <td colspan="2">
+            <%= f.text_area "remark", :size => "50x3" %>
+          </td>
+        </tr>
+      </table>
+
+      <hr/>
+
+      <%= render "new_receipt_items", :receipt => @receipt %>
     </div>
 
+    <%= render "action_receipt_entry" %>
+  </div>
 <% end %>
 
 <% content_for :jquery_script do %>
   <script>
     $(document).ready(function() {   
+        $(".numberKey").forceNumeric();
+        
         $("#receipt_cash_amount, #receipt_cheque_amount").keyup(function(){
             var cash         = +$("#receipt_cash_amount").val();
             var cheque       = +$("#receipt_cheque_amount").val();
@@ -133,15 +92,30 @@
             $("#total_amount").html(total.toFixed(4));
         });
         
+        $('input[id$="document_amount"]').blur(function(){
+            var host_amount = +$("#total_amount").html();
+            $("#remaining_amount").html(host_amount.toFixed(4));
+            
+            var grandTotal = 0;
+            
+            $('table.target_table tbody').find('[id$="document_amount"]').each(function(k, elem) {
+                var rem_amount  = +$("#remaining_amount").html();
+                var number = $(this).attr("name").match(/\[(\d+)\]/);
+                var number = parseInt(number[1], 10);
+                var balance = "#bal_amount_" + number;
+                
+                var select_value = +$(this).val();
+                console.log(select_value);
+                var cal = rem_amount - select_value;
+                $(balance).html(cal.toFixed(4));
+                $("#remaining_amount").html(cal.toFixed(4));
+            });
+        });
+        
         var validator = $("#valid_receipt").kendoValidator().data("kendoValidator");
         
-        $("#save_button").click(function() {
-            var grandTotal = 0;
-            $("[class^='doc_amount']").each(function() {
-                grandTotal += parseFloat($(this).val()); 
-            });
-            
-            if (validator.validate()) {}
+        $("#save_button").click(function() {          
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
     });

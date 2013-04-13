@@ -5,4 +5,20 @@ class DeliveryOrderItem < ActiveRecord::Base
   belongs_to :sales_order_item
   
   validates :sales_order_item_id, :delivery_qty, :unit_price, :presence => true
+  
+  def do_pending?
+    do_status == DataStatus::DOI_PENDING
+  end
+  
+  def do_processing?
+    do_status == DataStatus::DOI_PROCESSING
+  end
+  
+  def do_completed?
+    do_status == DataStatus::DOI_COMPLETED
+  end
+  
+  def so_balance_qty_is_zero?
+    balance_qty == 0
+  end
 end

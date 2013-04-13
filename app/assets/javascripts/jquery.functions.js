@@ -910,32 +910,6 @@ function compare_printing_width_n_length(os){
     }
 }
 
-
-
-//function select_exists() {
-//    $.ajax({
-//        dataType: "json",
-//        cache: false,
-//        url: '/trade_companies/active_customer',
-//        timeout: 2000,
-//        error: function(XMLHttpRequest, errorTextStatus, error){
-//            alert("Failed to submit : "+ errorTextStatus+" ;"+error);
-//        },
-//        success: function(data){
-//            $("#select_customer").empty();
-//            
-//            $("#select_customer").append('<select id="sales_order_trade_company_id" name="sales_order[trade_company_id]">');
-//            $("select#sales_order_trade_company_id").append('<option value=""></option>');
-//            $.each(data, function(i, j){
-//                row = "<option value=\"" + j.id + "\">" + j.name + "</option>"
-//                $("select#sales_order_trade_company_id").append(row);
-//            }); 
-//            $("#select_customer").append('</select>');
-//            $("#sales_order_trade_company_id").kendoComboBox({filter: "contains"});
-//        }
-//    });
-//}
-
 function select_qr(sel) {
     var qr = sel.value; 
 
@@ -1078,74 +1052,6 @@ function access_pp_no(sel) {
     }
 }
 
-function product_customer_data(sel){
-    var number = sel.name.match(/\[(\d+)\]/);
-    var number = parseInt(number[1], 10);
-    var product_id = sel.options[sel.selectedIndex].value;
-    var company_id = $("select.sales_order_trade_company_id option:selected").val();
-    
-    console.log(product_id);
-    console.log(company_id);
-    
-    if (company_id){
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            cache: false,
-            url: '/product_customers/take_data',
-            data: {'company_id' : company_id, 'product_id' : product_id},
-            success: function(data){ 
-                
-                if (data.jstatus == true) {
-                    var sellPrice   = data.selling_price;
-                    var um_id       = data.product.unit_measurement_id;
-                    var um_code     = data.um_code;
-                    var partCode      = data.product.part_code;
-                    
-                    var code    = '#um_code_' + number;
-                    var um      = '#datarow_' + number + '_unit_measurement_id';
-                    if (um_id != null){
-                        $(code).html(um_code);
-                        $(um).val(um_id);
-                    } else {
-                        $(code).html('');
-                        $(um).val('');
-                    }
-                    
-                    var value_sellPrice = '#datarow_' + number + '_unit_price';
-                    var html_sellPrice  = '#unit_price_' + number;
-                    if (sellPrice != null){
-                        var f_num = parseFloat(sellPrice).toFixed(4);
-                        $(html_sellPrice).html(f_num);
-                        $(value_sellPrice).val(f_num);
-                    } else {
-                        $(html_sellPrice).html('');
-                        $(value_sellPrice).val('');
-                    }
-                    
-                    var value_partNo = '#datarow_' + number + '_part_no';
-                    var html_partNo  = '#partCode_' + number;
-                    if (partCode != null) { 
-                        $(html_partNo).html(partCode);
-                        $(value_partNo).val(partCode);
-                    } else {
-                        $(html_partNo).html('');
-                        $(value_partNo).val('');
-                    }
-                    
-                } else {
-                    alert("Unit Price has not found. Please create new product price control.");
-                }
-                
-            }
-        });
-    } else {
-        alert("Customer Company can't blank.");
-    }
-}
-
-
-
 function addTableRow(table){
     var $tr = $(table).find("tbody tr:last").clone(true);
     datarow_all_attributes($tr);
@@ -1210,6 +1116,10 @@ function datarow_all_attributes(tr){
     string_last_number(tr, '[id^=clientPoNo]');
     string_last_number(tr, '[id^=do_status]');
     string_last_number(tr, '[id^=cur_stock]');
+    string_last_number(tr, '[id^=ori_cur_stock]');
+    
+    // balance amount
+    string_last_number(tr, '[id^=bal_amount]');
     
 }
 

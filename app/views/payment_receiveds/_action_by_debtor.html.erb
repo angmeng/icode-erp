@@ -1,0 +1,19 @@
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%= will_paginate @payment_receiveds, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
+<div class="icon_tag">
+  
+  <%= not_link_show %>
+  <%= not_link_edit %>
+  <%= not_link_kiv %>
+
+  <%# if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_BY_DEBTOR_PRINTABLE) %>
+    <%= link_to "Printer", printable_debtor_payment_receiveds_path(:search => @search), :target => "_blank", :class => "k-button" %>
+  <%# else %>
+    <%#= not_link_printable %>
+  <%# end %>
+  
+  <%= link_home_button %>
+
+</div>

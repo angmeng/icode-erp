@@ -1,7 +1,0 @@
-<table>
-  <tr>
-    <td><b>Trade Company</b></td>
-    <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_both_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %></td>
-    <td><%= submit_tag "Search", :class => "k-button" %></td>
-  </tr>
-</table>

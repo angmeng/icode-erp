@@ -1,8 +1,8 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::QR_NEW_ADD) %>
-    <%= link_to "Add Item", new_quotation_request_form_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %>
+    <%= link_to "Add Item", new_quotation_request_form_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    Add Item
+    <%= disabled_style "Add Item" %>
   <% end %>
 </div>
 

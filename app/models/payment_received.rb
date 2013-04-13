@@ -10,16 +10,24 @@ class PaymentReceived < ActiveRecord::Base
   
   default_scope order("payment_date DESC")
   
+  self.per_page = 50
+  
   def self.db_active(search)
-    search.where(:status_id => Status::ACTIVE)
+    search.where(:status_id => DataStatus::ACTIVE)
   end
   
   def self.db_kiv(search)
-    search.where(:status_id => Status::KEEP_IN_VIEW)
+    search.where(:status_id => DataStatus::KEEP_IN_VIEW)
+  end
+  
+  def payment_received_update_to_statement
+    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.payment_date, :transaction_type => "REC", :credit_note_id => self.id, :debit_note_id => 0)
+    @soa.save!
   end
   
   def uppercase_text
     self.bank.upcase! if self.bank.present?
+    self.cheque_no.upcase! if self.cheque_no.present?
     self.place.upcase! if self.place.present?
   end
 end

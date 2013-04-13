@@ -16,7 +16,7 @@ PDFKit.configure do |config|
 #    :disable_smart_shrinking => false
 #  }
 
-  config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+  config.wkhtmltopdf = 'C:\Program Files\wkhtmltopdf\wkhtmltopdf.exe'
   config.root_url = "http://localhost:3000"
   config.default_options = {
     :encoding => "UTF-8",

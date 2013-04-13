@@ -2,7 +2,7 @@ class SalesOrderItem < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :complete_qty, :current_stock, :customer_po, :description, :eta, :part_no, :product_id, :quantity, :sales_order_id, :status, :unit_measurement_id, :unit_price, :user_id, :trade_company_id, :um_name
+  attr_accessible :sales_order_id, :product_id, :quantity, :unit_measurement_id, :eta, :unit_price, :status, :customer_po, :part_no, :remaining_qty
   
   belongs_to :user
   belongs_to :product
@@ -12,16 +12,44 @@ class SalesOrderItem < ActiveRecord::Base
   
   validates :product_id, :quantity, :unit_price, :eta, :unit_measurement_id, :presence => true
   
-  PENDING  = "PD"
-  PRODUCTION = 'PDT'
-  IN_PROCESS = "IP"
-  APPROVED = "A"
-  KEEP_IN_VIEW = "KIV"
+  PENDING       = "PD"
+  PRODUCTION    = 'PDT'
+  IN_PROCESS    = "IP"
+  APPROVED      = "A"
+  COMPLETED     = "CPD"
+  KEEP_IN_VIEW  = "KIV"
+  
+  def self.do_case(soi)
+    case soi.status
+    when "PD"
+      "PENDING"
+    when "PDT"
+      "PRODUCTION"
+    when "IP"
+      "PROCESSING"
+    when "A"
+      "APPROVED"
+    when "CPD"
+      "COMPLETED"
+    when "KIV"
+      "KEEP IN VIEW"
+    else
+      "-"
+    end
+  end
   
   scope :db_pending, where(:status => SalesOrderItem::PENDING)
   
   def uppercase_text
     self.customer_po.upcase! if self.customer_po.present?
     self.part_no.upcase!     if self.part_no.present?
+  end
+  
+  def is_pending?
+    status == SalesOrderItem::PENDING
+  end
+  
+  def is_completed?
+    status == SalesOrderItem::COMPLETED
   end
 end

@@ -14,8 +14,8 @@
             </td>
           <% end %>
 
-          <td align="right">
-            <b>D/N Date</b>&nbsp;
+          <td align="right"><b>D/N Date</b></td>
+          <td>
             <% if @debit_note.debit_note_date.present? %>
               <%= f.text_field :debit_note_date, :value => @debit_note.debit_note_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
             <% else %>
@@ -26,7 +26,7 @@
         
         <tr>
           <td><b>Trade Company</b></td>
-          <td colspan="3">
+          <td>
             <% if @debit_note.trade_company_id.present? %>
               <%= f.select "trade_company_id", options_for_select(trade_company_both_with_code, @debit_note.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
             <% else %>
@@ -39,19 +39,16 @@
         <tr>
           <td colspan="3">
             <b>Your A/C Has Been Debited For Being</b>&nbsp;
-            <%= f.text_field :debit_type, :class=> "k-textbox", :style => "width: 250px;", "required validationMessage" => "Please Enter.." %>
+            <%= f.text_field :debit_type, :class=> "k-textbox", :style => "width: 250px;", "required validationMessage" => "Please Enter" %>
           </td>
         </tr>
         
         <tr>
           <td><b>Currency</b></td>
-          <td colspan="2">
+          <td>
             <%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @debit_note.currency_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %>
             <span class="k-invalid-msg" data-for="debit_note[currency_id]"></span>
           </td>
-        </tr>
-        
-        <tr>
           <td><b>Updated By</b></td>
           <td>
             <% if @debit_note.updated_by.present? %>
@@ -65,14 +62,14 @@
         
         <tr>
           <td><b>Amount</b></td>
-          <% if @debit_note.amount > 0 %>
-            <td><%= four_precision(@debit_note.amount) %></td>
-          <% else %>
-            <td colspan="2">
+          <td>
+            <% if @debit_note.amount > 0 %>
+              <%= f.text_field :amount, :value => @debit_note.amount, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Amount" %>
+            <% else %>
               <%= f.text_field :amount, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Amount" %>
-              <span class="k-invalid-msg" data-for="debit_note[amount]"></span>
-            </td>
-          <% end %>
+            <% end %>
+            <span class="k-invalid-msg" data-for="debit_note[amount]"></span>
+          </td>
         </tr>
       </table>
     </div>
@@ -92,7 +89,7 @@
         $("#save_button").click(function() {
             var amount = parseFloat($("#debit_note_amount").val());
             if (amount <= 0){ alert("You should key-in the amount value."); return false; }
-            if (validator.validate()) {}
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
     });

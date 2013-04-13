@@ -1,0 +1,41 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_DEBTOR_INDEX) %>
+    <%= link_to "Add - New Journal Debtor", new_journal_voucher_path, :class => "iframe_1600x900 k-button opac-icon font_bold", "data-fancybox-type" => "iframe" %>
+  <% else %>
+    <%= disabled_style "Add - New Journal Debtor" %>
+  <% end %>
+</div>
+
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%#= will_paginate @debit_notes, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_DEBTOR_SHOW) %>
+    <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
+  <% else %>
+    <%= not_link_show %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_DEBTOR_EDIT) %>
+    <span id="on_edit" editClass="iframe_800x450"><%= not_link_edit %></span>
+  <% else %>
+    <%= not_link_edit %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_DEBTOR_KIV) %>
+     <span id="on_kiv"><%= not_link_kiv %></span>
+  <% else %>
+    <%= not_link_kiv %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_DEBTOR_PRINTABLE) %>
+    <span id="on_printable"><%= not_link_printable %></span>
+  <% else %>
+    <%= not_link_printable %>
+  <% end %>
+  
+  <%= link_home_button %>
+
+</div>

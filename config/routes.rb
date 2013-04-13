@@ -1,11 +1,21 @@
 Merp::Application.routes.draw do
 
+  resources :journal_voucher_items
+
+  resources :journal_vouchers
+
   resources :statement_of_accounts
 
   get "documentation/product_rule"
 
   resources :payment_receiveds do
-    get "kiv", :on => :collection
+    collection do
+      get "kiv"
+      get "list_debtor"
+      get "list_period"
+      get "printable_debtor"
+      get "printable_period"
+    end
     put "recover", :on => :member
   end
 

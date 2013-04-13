@@ -24,6 +24,7 @@ class InventoryIssue < ActiveRecord::Base
   NEW_PRODUCT                   = 9
   TRANSFER_NOTE                 = 10
   FINISH_GOODS                  = 11
+  DELIVERY_ORDER_OUT            = 12
   
 end
 

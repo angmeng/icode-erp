@@ -4,16 +4,10 @@
 </div>
 <div><%= render "search_debit_note" %></div>
 
+<% if @debit_notes.present? %>
+  <div class="table_background"><%= render "listing_debit_notes", :debit_notes => @debit_notes %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
 
-  <% if @debit_notes.present? %>
-    <%= render "listing_debit_notes", :debit_notes => @debit_notes %>
-  <% else %>
-    <div class="content">Not Record Found</div>
-  <% end %>
-
-  <%= render "action_debit_note" %>  
-
-
-
-
-
+<%= render "action_debit_note" %>

@@ -1,0 +1,262 @@
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {  
+        $(".numberKey").forceNumeric();
+        
+        var validator = $("#valid_delivery_order").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+    
+    function delivery_order_company_change(sel){
+        var company_id = sel.value;
+        if (company_id){
+            $.ajax({
+                dataType: "json",
+                url: '/trade_companies/' + company_id,
+                success: function(data){
+                    if (data.trade_term_id != null){ 
+                        var combobox = $("#delivery_order_trade_term_id").data("kendoComboBox");
+                        combobox.value(data.trade_term_id);
+                    }
+                    if (data.type_of_sale_id != null){ 
+                        var combobox2 = $("#delivery_order_type_of_sale_id").data("kendoComboBox");
+                        combobox2.value(data.type_of_sale_id);
+                    }
+                }
+            });
+        }
+    }
+    
+    function clearing_data(number){
+        var order_qty = '#datarow_' + number + '_delivery_qty';
+        $(order_qty).val('');
+        var carton    = '#datarow_' + number + '_no_of_carton';
+        $(carton).val('');
+
+        var value_date = '#datarow_' + number + '_so_date';
+        $(value_date).val('');
+        var html_date  = '#so_date_' + number;
+        $(html_date).html('');
+
+        var value_order = '#datarow_' + number + '_order_qty'; 
+        $(value_order).val('');
+        var html_order  = '#so_order_qty_' + number;
+        $(html_order).html('');
+
+        var value_up = '#datarow_' + number + '_unit_price'; 
+        $(value_up).val('');
+        var html_up  = '#unit_price_' + number;
+        $(html_up).html('');
+
+        var value_bal = '#datarow_' + number + '_balance_qty'; 
+        $(value_bal).val('');
+        var html_bal  = '#so_balance_qty_' + number;
+        $(html_bal).html('');
+
+        var value_partno = '#datarow_' + number + '_part_no'; 
+        $(value_partno).val('');
+        var html_partno  = '#partno_' + number;
+        $(html_partno).html('');
+
+        var value_clientlot = '#datarow_' + number + '_client_lot'; 
+        $(value_clientlot).val('');
+        var html_clientlot  = '#clientLotNo_' + number;
+        $(html_clientlot).html('');
+
+        var value_clientpo = '#datarow_' + number + '_client_po'; 
+        $(value_clientpo).val('');
+        var html_clientpo  = '#clientPoNo_' + number;
+        $(html_clientpo).html('');
+
+        var value_stock = '#datarow_' + number + '_gen_cur_stock';
+        $(value_stock).val('');
+        var html_stock  = '#cur_stock_' + number;
+        $(html_stock).html('');
+        var temp_stock  = '#ori_cur_stock_' + number;
+        $(temp_stock).html('');
+
+        var value_status = '#datarow_' + number + '_do_status';
+        $(value_status).val('');
+        var html_status  = '#do_status_' + number;
+        $(html_status).html('');
+    }
+
+    function sales_order_item_data(sel){
+        var number = sel.name.match(/\[(\d+)\]/);
+        var number = parseInt(number[1], 10);
+        var sale_order_item = sel.options[sel.selectedIndex].value;
+        var count = 0;
+        
+        $('table.target_table tbody').find('[id$="sales_order_item_id"]').each(function(k, elem) {
+            var select_value = $(this).val();
+            if (select_value == sale_order_item){ count++; } 
+        });
+
+        if (count > 1) {
+          clearing_data(number);
+          alert("Your selector is duplicate. Please select another one.");
+        } else {
+            if (sale_order_item){
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    cache: false,
+                    url: '/sales_order_items/' + sale_order_item,
+                    success: function(data){ 
+
+                        var myDate      = Date.parse(data.so_date, "yyyy-MM-dd");
+                        var order_qty   = data.remaining_qty;
+                        var um          = data.order_um;
+                        var up          = data.unit_price;
+                        var partNo      = data.part_no;
+                        var clientLot   = data.client_lot;                
+                        var clientPo    = data.customer_po;  
+                        var cur_stock   = data.current_stock;
+                        var doStatus    = data.do_status;
+
+                        if (data.jstatus == true){
+                            if (myDate != null){
+                                var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
+                                var value_date = '#datarow_' + number + '_so_date';
+                                var html_date  = '#so_date_' + number;
+                                $(value_date).val(k_date);
+                                $(html_date).html(k_date);
+                            } else {
+                                $(value_date).val('');
+                                $(html_date).html('-');
+                            }
+
+                            if (order_qty != null){
+                                var value_order = '#datarow_' + number + '_order_qty'; 
+                                var html_order  = '#so_order_qty_' + number;
+                                $(value_order).val(order_qty);
+                                $(html_order).html(order_qty + ' ' + um);
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');
+                            }
+
+                            if (up != null){
+                                var value_order = '#datarow_' + number + '_unit_price'; 
+                                var html_order  = '#unit_price_' + number;
+                                $(value_order).val(up.toFixed(4));
+                                $(html_order).html(up.toFixed(4));
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');  
+                            }
+
+                            if (partNo != null){
+                                var value_order = '#datarow_' + number + '_part_no'; 
+                                var html_order  = '#partno_' + number;
+                                $(value_order).val(partNo);
+                                $(html_order).html(partNo);
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');
+                            }
+
+                            if (clientLot != null) {
+                                var value_order = '#datarow_' + number + '_client_lot'; 
+                                var html_order  = '#clientLotNo_' + number;
+                                $(value_order).val(clientLot);
+                                $(html_order).html(clientLot);
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');
+                            }
+
+                            if (clientPo != null) {
+                                var value_order = '#datarow_' + number + '_client_po'; 
+                                var html_order  = '#clientPoNo_' + number;
+                                $(value_order).val(clientPo);
+                                $(html_order).html(clientPo);
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');
+                            }
+
+                            if (cur_stock != null) {
+                                var value_order = '#datarow_' + number + '_gen_cur_stock';
+                                var html_order  = '#cur_stock_' + number;
+                                var temp_order  = '#ori_cur_stock_' + number;
+                                $(value_order).val(cur_stock);
+                                $(html_order).html(cur_stock);
+                                $(temp_order).html(cur_stock);
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');
+                                $(temp_order).html('');
+                            }
+
+                            if (doStatus != null) {
+                                var value_order = '#datarow_' + number + '_do_status';
+                                var html_order  = '#do_status_' + number;
+                                $(value_order).val(doStatus);
+                                $(html_order).html(doStatus);
+                            } else {
+                                $(value_order).val('');
+                                $(html_order).html('-');
+                            }
+                        }
+                    }
+                })
+            } else {
+                alert("Please select SO No.");
+            }
+        }
+    }
+
+    function calculate_balance(sel){
+        var number            = sel.name.match(/\[(\d+)\]/);
+        var number            = parseInt(number[1], 10);
+        var order_qty         = '#datarow_' + number + '_order_qty'; // SO qty
+        var value_order       = '#datarow_' + number + '_balance_qty';
+        var html_order        = '#so_balance_qty_' + number;
+        
+        var temp_order        = '#ori_cur_stock_' + number;
+        var answer_order      = '#cur_stock_' + number;
+        var current_stock     = '#datarow_' + number + '_gen_cur_stock';
+                
+        var delivery_qty      = parseInt(sel.value);
+        var val_order_qty     = parseInt($(order_qty).val());
+        var val_temp_order    = parseInt($(temp_order).html());
+        
+        var so_balance        = val_order_qty - delivery_qty;
+        var after_cur_stock   = val_temp_order - delivery_qty;
+        
+        if (delivery_qty > 0){
+          if (val_order_qty >= delivery_qty){
+            if (val_temp_order >= delivery_qty){
+              $("#save_button").attr("disabled", false);
+              if (so_balance != null) {
+                  $(value_order).val(so_balance);
+                  $(html_order).html(so_balance);
+
+                  $(current_stock).val(after_cur_stock);
+                  $(answer_order).html(after_cur_stock);
+              } else {
+                  $(value_order).val('');
+                  $(html_order).html('-');
+              }
+            } else {
+              alert("Sorry, your current stock is not enough.");
+              $("#save_button").attr("disabled", "disabled");
+            }
+          } else { 
+              alert("Should not excess S/O Qty"); 
+              $("#save_button").attr("disabled", "disabled");
+          }
+        } else {
+            $(value_order).val(val_order_qty);
+            $(html_order).html(val_order_qty);
+            $(current_stock).val(val_temp_order);
+            $(answer_order).html(val_temp_order);
+        }
+    }
+  </script>
+<% end %>

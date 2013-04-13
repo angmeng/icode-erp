@@ -1,0 +1,44 @@
+<%= form_for(@journal_voucher) do |f| %>
+
+  <div class="popup_content">
+    <div id="valid_journal_voucher">
+      <table>
+        <tr>
+          <td><%= f.label :jv_no, "Current JV No." %></td>
+          <td>
+            <%= company.sn_journal_voucher_no + 1 %>
+            <%= f.hidden_field :jv_no, :value => company.sn_journal_voucher_no + 1 %>
+          </td>
+          <td><%= f.label :jv_date %></td>
+          <td><%= f.text_field :jv_date, :class => "mkendo_date" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="field">
+    <br />
+  </div>
+  <div class="field">
+    <%= f.label :trade_company_id %><br />
+    <%= f.number_field :trade_company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :particular %><br />
+    <%= f.text_field :particular %>
+  </div>
+  <div class="field">
+    <%= f.label :debit_amount %><br />
+    <%= f.text_field :debit_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_amount %><br />
+    <%= f.text_field :credit_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :updated_by %><br />
+    <%= f.number_field :updated_by %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

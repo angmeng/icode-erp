@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Jv no:</b>
+  <%= @journal_voucher.jv_no %>
+</p>
+
+<p>
+  <b>Jv date:</b>
+  <%= @journal_voucher.jv_date %>
+</p>
+
+<p>
+  <b>Trade company:</b>
+  <%= @journal_voucher.trade_company_id %>
+</p>
+
+<p>
+  <b>Particular:</b>
+  <%= @journal_voucher.particular %>
+</p>
+
+<p>
+  <b>Debit amount:</b>
+  <%= @journal_voucher.debit_amount %>
+</p>
+
+<p>
+  <b>Credit amount:</b>
+  <%= @journal_voucher.credit_amount %>
+</p>
+
+<p>
+  <b>Updated by:</b>
+  <%= @journal_voucher.updated_by %>
+</p>
+
+
+<%= link_to 'Edit', edit_journal_voucher_path(@journal_voucher) %> |
+<%= link_to 'Back', journal_vouchers_path %>

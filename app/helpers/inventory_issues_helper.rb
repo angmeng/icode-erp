@@ -1,4 +1,4 @@
-module InventoryIssuesHelper
+module InventoryIssuesHelper  
   def inventory_issue_description(issue_id)
     if issue_id == InventoryIssue::BOM_PLAN_TO_PRODUCTION
       "Bom Plan To Production"
@@ -22,6 +22,10 @@ module InventoryIssuesHelper
       "Transfer Note"
     elsif issue_id == InventoryIssue::FINISH_GOODS
       "Finish Goods"
+    elsif issue_id == InventoryIssue::DELIVERY_ORDER_OUT
+      "Delivery Order"
+    else
+      "-"
     end
   end
 end

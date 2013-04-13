@@ -71,7 +71,7 @@
           var validator = $("#valid_price_control").kendoValidator().data("kendoValidator");
 
           $("#save_button").click(function() {
-              if (validator.validate()) {}
+              if (validator.validate()) { busyHours(); }
               else { alert("Invalid Data Form..."); return false; } 
           });
       });

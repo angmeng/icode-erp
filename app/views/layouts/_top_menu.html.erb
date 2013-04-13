@@ -791,89 +791,106 @@
     Accounts
     <ul>
 
-      <%# if roles.include?(InventoryManagementSystem::PR_MENU) %>
+      <% if roles.include?(InventoryManagementSystem::AC_RECEIVABLE) %>
         <li style="width:150px;">
           A/C Receivable
           <ul>
             <%# if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
               <!--li><%#= link_to "Sales Journal" %></li-->
             <%# else %>
-              <li class="text_gray">Sales Journal</li>
+              <li><%= disabled_menu_style "Sales Journal" %></li>
             <%# end %>
 
             <%# if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
               <!--li><%#= link_to "Debtor Ledger" %></li-->
             <%# else %>
-              <li class="text_gray">Debtor Ledger</li>
+              <li><%= disabled_menu_style "Debtor Ledger" %></li>
             <%# end %>
 
             <%# if roles.include?(InventoryManagementSystem::PR_NEW) %>
               <!--li><%#= link_to "A/C Statement" %></li-->
             <%# else %>
-              <li class="text_gray">A/C Statement</li>
+              <li><%= disabled_menu_style "A/C Statement" %></li>
             <%# end %>
 
-            <%# if roles.include?(InventoryManagementSystem::PR_KIV_VIEW) %>
-              <li>
-                Payment Processing
+            <li>
+              Payment Processing
 
-                <ul>
-                  <li><%= link_to "Receipts Data", receipts_path %></li>
-                  <li><%= link_to "Receipts Data - KIV", kiv_receipts_path %></li>
+              <ul>
+                <% if roles.include?(InventoryManagementSystem::RECEIPT_INDEX) %>
+                  <li><%= link_to "Receipts Record", receipts_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Receipts Record" %></li>
+                <% end %>
 
-                  <%# if roles.include?(InventoryManagementSystem::ACCOUNT_RECEIPT_ENTRY) %>
-                    <!--li><%#= link_to "Receipt Entry", new_receipt_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe"  %></li-->
-                  <%# else %>
-                    <!--li clas="text_gray">Receipt Entry</li-->
-                  <%# end %>
-
-                  <li><%= link_to "Payment Received Record Data", payment_receiveds_path %></li>
-                  <li><%= link_to "Payment Received Record Data - KIV", kiv_payment_receiveds_path %></li>
-                  <!--li class="text_gray">Payment Received Record</li-->
-                  <li class="disabled_menu">List Payment Recv By Debtor</li>
-                  <li class="disabled_menu">List Payment Recv By Period</li>
-                  <li class="disabled_menu">Receipt Cancellation</li>
-                  <li class="disabled_menu">List Payment Recv By Period</li>
-                </ul>
-              </li>
-            <%# else %>
-              <!--li class="text_gray">Payment Processing</li-->
-            <%# end %>
-
-            <%# if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %>
-              <!--li><%#= link_to "Transaction Processing" %></li-->
-              <li>
-                Transaction Processing
-                <ul>
-                  <li>
-                    Credit Notes
-                    <ul>
+                <% if roles.include?(InventoryManagementSystem::RECEIPT_KIV_INDEX) %>
+                  <li><%= link_to "Receipts Record - KIV (Receipt Cancellation)", kiv_receipts_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Receipts Record - KIV (Receipt Cancellation)" %></li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %>
+                  <li><%= link_to "Payment Received Record", payment_receiveds_path %></li>  
+                <% else %>
+                  <li><%= disabled_menu_style "Payment Received Record" %></li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %>
+                  <li><%= link_to "Payment Received Record - KIV", kiv_payment_receiveds_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Payment Received Record - KIV" %></li>
+                <% end %>
+                  
+                <li><hr/></li>
+                
+                <li><%= link_to "Listing Payment Received By Debtor", list_debtor_payment_receiveds_path %></li>
+                  
+                <li><%= link_to "Listing Payment Received By Period", list_period_payment_receiveds_path %></li>
+              </ul>
+            </li>
+            
+            <li>
+              Transaction Processing
+              <ul>
+                <li>
+                  Credit Notes
+                  <ul>
+                    <% if roles.include?(InventoryManagementSystem::CREDIT_NOTE_INDEX) %>
                       <li><%= link_to "Credit Notes Data", credit_notes_path %></li>
+                    <% else %>
+                      <li><%= disabled_menu_style "Credit Notes Data" %></li>
+                    <% end %>
+
+                    <% if roles.include?(InventoryManagementSystem::CREDIT_NOTE_KIV_INDEX) %>
                       <li><%= link_to "Credit Notes Data - KIV", kiv_credit_notes_path %></li>
-                    </ul>
-                  </li>
+                    <% else %>
+                      <li><%= disabled_menu_style "Credit Notes Data - KIV" %></li>
+                    <% end %>
+                  </ul>
+                </li>
 
-                  <li>
-                    Debit Notes
-                    <ul>
+                <li>
+                  Debit Notes
+                  <ul>
+                    <% if roles.include?(InventoryManagementSystem::DEBIT_NOTE_INDEX) %>
                       <li><%= link_to "Debit Notes Data", debit_notes_path %></li>
+                    <% else %>
+                      <li><%= disabled_menu_style "Debit Notes Data" %></li>
+                    <% end %>
+                      
+                    <% if roles.include?(InventoryManagementSystem::DEBIT_NOTE_KIV_INDEX) %>
                       <li><%= link_to "Debit Notes Data - KIV", kiv_debit_notes_path %></li>
-                    </ul>
-                  </li>
+                    <% else %>
+                      <li><%= disabled_menu_style "Debit Notes Data - KIV" %></li>
+                    <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </li>
 
-                  <li class="text_gray">Others</li>
-                  <li class="text_gray">Print CN/DN/OR - Period</li>
-                  <li class="text_gray">Print CN/DN/OR - Debtor</li>
-                  <li class="text_gray">Print Invoice Summary</li>
-                  <li class="text_gray">Down Load Document</li>
-                </ul>
-              </li>
-            <%# else %>
-              <!--li class="text_gray">Transaction Processing</li-->
-            <%# end %>
           </ul>
         </li>
-      <%# end %>
+      <% end %>
 
       <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
         <li style="width:150px;">
@@ -906,16 +923,33 @@
         </li>
       <%# end %>
 
-      <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
+      <% if roles.include?(InventoryManagementSystem::AC_GENERAL) %>
         <li style="width:150px;">
-          General
+          A/C General
           <ul>
-            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
-              <!--li><%#= link_to "General Journal" %></li-->
-            <%# else %>
-              <li class="text_gray">General Journal</li>
-            <%# end %>
-
+            <li>
+              General Journal
+              <ul>
+                <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_DEBTOR_INDEX) %>
+                  <li><%= link_to "Journal Voucher Data - Debtor", journal_vouchers_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Journal Voucher Data - Debtor" %></li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_CREDITOR_INDEX) %>
+                  <li><%= link_to "Journal Voucher Data - Creditor" %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Journal Voucher Data - Creditor" %></li>
+                <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::AC_GENERAL_JV_INDEX) %>
+                  <li><%= link_to "Journal Voucher Data - General" %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Journal Voucher Data - General" %></li>
+                <% end %>
+              </ul>
+            </li>
+            
             <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
               <!--li><%#= link_to "General Ledger" %></li-->
             <%# else %>
@@ -953,7 +987,7 @@
             <%# end %>
           </ul>
         </li>
-      <%# end %>
+      <% end %>
 
       <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %>
         <li style="width:150px;">

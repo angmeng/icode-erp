@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  jv_no: 1
+  jv_date: 2013-04-13
+  trade_company_id: 1
+  particular: MyString
+  debit_amount: 9.99
+  credit_amount: 9.99
+  updated_by: 1
+
+two:
+  jv_no: 1
+  jv_date: 2013-04-13
+  trade_company_id: 1
+  particular: MyString
+  debit_amount: 9.99
+  credit_amount: 9.99
+  updated_by: 1

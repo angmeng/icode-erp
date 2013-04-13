@@ -151,7 +151,7 @@ table.white-line-table {
 
 table.white-line-table th {
 	border-width: 1px;
-	padding: 1px;
+	padding: 2px 5px 2px 5px;
 	border-style: solid;
 	border-color: white;
 	background-color: transparent;
@@ -160,7 +160,7 @@ table.white-line-table th {
         
 table.white-line-table td {
 	border-width: 1px;
-        padding: 1px;
+        padding: 2px 5px 2px 5px;
 	border-style: solid;
 	border-color: white;
 	background-color: transparent; }
@@ -178,7 +178,7 @@ table.black-line-table {
 
 table.black-line-table th {
 	border-width: 1px;
-	padding: 1px;
+	padding: 2px 5px 2px 5px;
 	border-style: solid;
 	border-color: black;
 	background-color: transparent;
@@ -186,7 +186,7 @@ table.black-line-table th {
         
 table.black-line-table td {
 	border-width: 1px;
-        padding: 1px;
+        padding: 2px 5px 2px 5px;
 	border-style: solid;
 	border-color: black;
 	background-color: transparent;
@@ -204,7 +204,7 @@ table.normal_table_black {
 
 table.normal_table_black th {
 	border-width: 1px;
-	padding: 1px;
+        padding: 2px 5px 2px 5px;
 	border-style: solid;
 	border-color: black;
 	background-color: transparent;
@@ -212,7 +212,7 @@ table.normal_table_black th {
         
 table.normal_table_black td {
 	border-width: 1px;
-        padding: 1px;
+        padding: 2px 5px 2px 5px;
 	border-style: solid;
 	border-color: black;
 	background-color: transparent;
