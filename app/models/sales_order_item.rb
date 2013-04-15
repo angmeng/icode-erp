@@ -2,7 +2,7 @@ class SalesOrderItem < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :sales_order_id, :product_id, :quantity, :unit_measurement_id, :eta, :unit_price, :status, :customer_po, :part_no, :remaining_qty
+  attr_accessible :sales_order_id, :product_id, :quantity, :unit_measurement_id, :eta, :unit_price, :status, :customer_po, :part_no, :remaining_qty, :lot_no, :mfg_date, :exp_date
   
   belongs_to :user
   belongs_to :product

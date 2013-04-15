@@ -5,19 +5,20 @@
         
         var validator = $("#valid_sales_order").kendoValidator().data("kendoValidator");
         
-        $("#sales_order_purchase_order_no").keyup(function(){
-            var hitting = $(this).val();
-            if (hitting.length > 0){
-              $('input[id$="_customer_po"]').each(function(k, v) {
-                  $(this).attr("disabled", "disabled");
-                  $(this).val('');
-              });
-            } else {
-              $('input[id$="_customer_po"]').each(function(k, v) {
-                  $(this).removeAttr("disabled");
-              });
-            }
-        });
+        // Keep In View here, date: 15/4/2013
+        <%#*$("#sales_order_purchase_order_no").keyup(function(){%>
+            <%#*var hitting = $(this).val();%>
+            <%#*if (hitting.length > 0){%>
+              <%#*$('input[id$="_customer_po"]').each(function(k, v) {%>
+                  <%#*$(this).attr("disabled", "disabled");%>
+                  <%#*$(this).val('');%>
+              <%#*});%>
+            <%#*} else {%>
+              <%#*$('input[id$="_customer_po"]').each(function(k, v) {%>
+                  <%#*$(this).removeAttr("disabled");%>
+              <%#*});%>
+            <%#*}%>
+        <%#*});%>
         
         $("#save_button").click(function() {
             if (validator.validate()) { busyHours(); }
@@ -33,15 +34,15 @@
         
         var count = 0;
         
-        $('table.target_table tbody').find('[id$="product_id"]').each(function(k, elem) {
-            var select_value = $(this).val();
-            if (select_value == product_id){ count++; } 
-        });
+        <%#*$('table.target_table tbody').find('[id$="product_id"]').each(function(k, elem) {%>
+            <%#*var select_value = $(this).val();%>
+            <%#*if (select_value == product_id){ count++; }%> 
+        <%#*});%>
 
-        if (count > 1) {
-          clearing_data(number);
-          alert("Your selector is duplicate. Please select another one.");
-        } else {
+        <%#*if (count > 1) {%>
+          <%#*clearing_data(number);%>
+          <%#*alert("Your selector is duplicate. Please select another one.");%>
+        <%#*} else {%>
           if (company_id){
               $.ajax({
                   type: "GET",
@@ -97,33 +98,33 @@
           } else {
               alert("Customer Company can't blank.");
           }
-        }
+        <%#*}%>
     }
     
-    function clearing_data(number){
-        var value_qty = '#datarow_' + number + '_quantity'; 
-        $(value_qty).val('');
+    <%#*function clearing_data(number){%>
+        <%#*var value_qty = '#datarow_' + number + '_quantity';%> 
+        <%#*$(value_qty).val('');%>
         
-        var value_eta = '#datarow_' + number + '_eta_date'; 
-        $(value_eta).val('');
+        <%#*var value_eta = '#datarow_' + number + '_eta_date';%> 
+        <%#*$(value_eta).val('');%>
         
-        var value_cuspo = '#datarow_' + number + '_customer_po'; 
-        $(value_cuspo).val('');
+        <%#*var value_cuspo = '#datarow_' + number + '_customer_po';%> 
+        <%#*$(value_cuspo).val('');%>
     
-        var value_um = '#datarow_' + number + '_unit_measurement_id'; 
-        $(value_um).val('');
-        var html_um  = '#um_code_' + number;
-        $(html_um).html('');
+        <%#*var value_um = '#datarow_' + number + '_unit_measurement_id';%> 
+        <%#*$(value_um).val('');%>
+        <%#*var html_um  = '#um_code_' + number;%>
+        <%#*$(html_um).html('');%>
 
-        var value_up = '#datarow_' + number + '_unit_price';
-        $(value_up).val('');
-        var html_up  = '#unit_price_' + number;
-        $(html_up).html('');
+        <%#*var value_up = '#datarow_' + number + '_unit_price';%>
+        <%#*$(value_up).val('');%>
+        <%#*var html_up  = '#unit_price_' + number;%>
+        <%#*$(html_up).html('');%>
         
-        var value_partno = '#datarow_' + number + '_part_no';
-        $(value_partno).val('');
-        var html_partno  = '#partCode_' + number;
-        $(html_partno).html('');
-    }
+        <%#*var value_partno = '#datarow_' + number + '_part_no';%>
+        <%#*$(value_partno).val('');%>
+        <%#*var html_partno  = '#partCode_' + number;%>
+        <%#*$(html_partno).html('');%>
+    <%#*}%>
   </script>
 <% end %>

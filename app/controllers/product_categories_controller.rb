@@ -80,15 +80,12 @@ class ProductCategoriesController < ApplicationController
       @new_category = ProductCategory.new(params[:product_category])
     end
     
-    respond_to do |format|
-      if @new_category.save
-        ProductManagement.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
-        format.html { redirect_to @new_category, :notice => 'Sub Group / Product Type was successfully created.' } 
-        format.js   { render js: "window.location.pathname='#{product_category_path(@new_category)}'" }
-      else
-        format.html { render action: 'new' }
-        format.js   { render js: "alert('#{@new_category.errors.full_messages.join(", ")}');" }
-      end
+    if @new_category.save
+      ProductManagement.checkbox_field(@new_category, params[:prod_field]) if @new_category.level == 1
+      redirect_to @new_category, :notice => 'Sub Group / Product Type was successfully created.'
+    else
+      flash[:alert] = @new_category.errors.full_messages.join(", ")
+      render action: 'new'
     end
   end
     
