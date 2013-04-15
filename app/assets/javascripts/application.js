@@ -130,7 +130,7 @@ $(document).ready(function () {
                 scrolling: "yes"
             });
             
-    }, 100);
+    }, 500);
 });
 
 

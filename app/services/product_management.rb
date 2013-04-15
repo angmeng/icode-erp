@@ -209,35 +209,35 @@ class ProductManagement
   end
   
   #Don't delete, it is useful in the future.. 8/3/2013
-  def self.delete_folder_and_file(pc)
-    @ret = []
-    pc.children.present? ? self.take_child_id(pc) : pc.destroy
-    self.ready_delete(@ret) if @ret.present?
-  end
-
-  def self.ready_delete(ret)
-    @manage_product = {}
-    @ret = ret
-    @ret.each do |rt|
-      take_file    = ProductCategory.find(rt)
-      if take_file.present?
-        if take_file.is_file?
-          self.base_and_sub_name(take_file)
-          prod = take_file.product
-          pri  = PurchaseRequisitionItem.find_all_by_product_id(prod.id)
-          inv  = InventoryHistory.find_all_by_product_id(prod.id)
-          prod.product_vendor.destroy                 if prod.product_vendor.present?
-          prod.purchase_requisition_items.delete_all  if pri.present?
-          prod.packing_quantities.delete_all          if prod.packing_quantities.present?
-          prod.inventory_histories.delete_all         if inv.present?
-          prod.product_combobox.destroy               if prod.product_combobox.present?
-          @manage_product[:running_no].destroy        if @manage_product[:running_no].present?
-          prod.destroy                                if prod.present?
-          take_file.destroy                           if take_file.present?
-        end
-      end
-    end
-  end
+#  def self.delete_folder_and_file(pc)
+#    @ret = []
+#    pc.children.present? ? self.take_child_id(pc) : pc.destroy
+#    self.ready_delete(@ret) if @ret.present?
+#  end
+#
+#  def self.ready_delete(ret)
+#    @manage_product = {}
+#    @ret = ret
+#    @ret.each do |rt|
+#      take_file    = ProductCategory.find(rt)
+#      if take_file.present?
+#        if take_file.is_file?
+#          self.base_and_sub_name(take_file)
+#          prod = take_file.product
+#          pri  = PurchaseRequisitionItem.find_all_by_product_id(prod.id)
+#          inv  = InventoryHistory.find_all_by_product_id(prod.id)
+#          prod.product_vendor.destroy                 if prod.product_vendor.present?
+#          prod.purchase_requisition_items.delete_all  if pri.present?
+#          prod.packing_quantities.delete_all          if prod.packing_quantities.present?
+#          prod.inventory_histories.delete_all         if inv.present?
+#          prod.product_combobox.destroy               if prod.product_combobox.present?
+#          @manage_product[:running_no].destroy        if @manage_product[:running_no].present?
+#          prod.destroy                                if prod.present?
+#          take_file.destroy                           if take_file.present?
+#        end
+#      end
+#    end
+#  end
   
   def self.update_all_kiv(pc)
     @ret = []

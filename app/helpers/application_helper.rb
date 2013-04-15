@@ -33,19 +33,19 @@ module ApplicationHelper
             if category.product.present?
               ret << "<td><div><a href='/products/finish_good_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]  #{category.product.desc rescue '-'}</a></div></td></tr></table>"
             else
-              ret << "<td><div><a href='/products/finish_good_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]</a></div></td></tr></table>"
+              ret << "<td><div><a href='/products/finish_good_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]  #{category.desc rescue '-'}</a></div></td></tr></table>"
             end
           elsif category.category_type == ProductCategory::NON_OPERATION
             if category.product.present?
               ret << "<td><div><a href='/products/non_operation_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]  #{category.product.desc rescue '-'}</a></div></td></tr></table>"
             else
-              ret << "<td><div><a href='/products/non_operation_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]</a></div></td></tr></table>"
+              ret << "<td><div><a href='/products/non_operation_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]  #{category.desc rescue '-'}</a></div></td></tr></table>"
             end
           elsif category.category_type == ProductCategory::OPERATION
             if category.product.present?
               ret << "<td><div><a href='/products/operation_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]  #{category.product.desc rescue '-'}</a></div></td></tr></table>"
             else
-              ret << "<td><div><a href='/products/operation_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]</a></div></td></tr></table>"
+              ret << "<td><div><a href='/products/operation_info?category_id=#{category.id}' class='remove_underline'>[#{category.code}]  #{category.desc rescue '-'}</a></div></td></tr></table>"
             end
           end
               

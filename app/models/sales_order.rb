@@ -2,7 +2,7 @@ class SalesOrder < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :currency_id, :purchase_order_no, :purpose, :revision, :sales_order_no, :sales_rep, :trade_company_id, :trade_term_id, :updated_by, :so_date, :status, :lot_no, :mfg_date, :exp_date
+  attr_accessible :currency_id, :purchase_order_no, :purpose, :revision, :sales_order_no, :sales_rep, :trade_company_id, :trade_term_id, :updated_by, :so_date, :status
   
   validates :so_date, :trade_company_id, :revision, :purpose, :currency_id, :presence => true
   
@@ -41,7 +41,6 @@ class SalesOrder < ActiveRecord::Base
   def uppercase_text
     self.purchase_order_no.upcase!  if self.purchase_order_no.present?
     self.sales_rep.upcase!          if self.sales_rep.present?
-    self.lot_no.upcase!             if self.lot_no.present?
   end
   
 #  def self.running_sales_order_items(datarow, sales_order)
