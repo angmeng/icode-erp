@@ -19,7 +19,7 @@ class SalesOrderItemsController < ApplicationController
       format.html
       format.json { 
           if @sales_order_item.present?
-            render json: @sales_order_item.attributes.merge({ "jstatus" => true, :so_date => @sales_order_item.sales_order.so_date, :client_lot => @sales_order_item.sales_order.lot_no, :current_stock => @sales_order_item.product.current_stock, :order_um => @sales_order_item.unit_measurement.code, :do_status => SalesOrderItem.do_case(@sales_order_item) }) 
+            render json: @sales_order_item.attributes.merge({ "jstatus" => true, :so_date => @sales_order_item.sales_order.so_date, :current_stock => @sales_order_item.product.current_stock, :order_um => @sales_order_item.unit_measurement.code, :do_status => SalesOrderItem.do_case(@sales_order_item) }) 
           else
             render json: { :jstatus => false }
           end

@@ -43,6 +43,7 @@ class SalesOrderItem < ActiveRecord::Base
   def uppercase_text
     self.customer_po.upcase! if self.customer_po.present?
     self.part_no.upcase!     if self.part_no.present?
+    self.lot_no.upcase!     if self.lot_no.present?
   end
   
   def is_pending?
