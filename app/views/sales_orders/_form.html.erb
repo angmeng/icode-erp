@@ -48,7 +48,10 @@
           <td></td>
 
           <td><b>Purpose *</b></td>
-          <td><%= f.select :purpose, options_for_select({ "SALES" => SalesOrder::SALES }, @sales_order.purpose), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Purpose" } %></td>
+          <td>
+            <%= f.select :purpose, options_for_select({ "SALES" => SalesOrder::SALES }, @sales_order.purpose), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Purpose" } %>
+            <span class="k-invalid-msg" data-for="sales_order[purpose]"></span>
+          </td>
         </tr>
         
         <tr>
@@ -56,7 +59,10 @@
           <td><%= f.text_field :sales_rep, :class => "k-textbox" %></td>
           <td></td>
           <td><b>Currency *</b></td>
-          <td><%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id),{ :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %></td>
+          <td>
+            <%= f.select :currency_id, options_from_collection_for_select(currency, "id", "name", @sales_order.currency_id),{ :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %>
+            <span class="k-invalid-msg" data-for="sales_order[currency_id]"></span>
+          </td>
         </tr>
 
         <tr>
@@ -67,7 +73,10 @@
           </td>
           <td></td>
           <td><b>Trade Term *</b></td>
-          <td><%= f.select :trade_term_id, options_from_collection_for_select(trade_term, "id", "name", @sales_order.trade_term_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Term" } %></td>
+          <td>
+            <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, "id", "name", @sales_order.trade_term_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Term" } %>
+            <span class="k-invalid-msg" data-for="sales_order[trade_term_id]"></span>
+          </td>
         </tr>
       </table>
       

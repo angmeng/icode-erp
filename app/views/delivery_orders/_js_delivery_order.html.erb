@@ -91,6 +91,8 @@
         var sale_order_item = sel.options[sel.selectedIndex].value;
         var count = 0;
         
+        alert(number);
+        
         $('table.target_table tbody').find('[id$="sales_order_item_id"]').each(function(k, elem) {
             var select_value = $(this).val();
             if (select_value == sale_order_item){ count++; } 
