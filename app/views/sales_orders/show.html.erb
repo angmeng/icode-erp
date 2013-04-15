@@ -8,15 +8,6 @@
       <td width="50"></td>
       <td width="100"><b>SO Date</b></td>
       <td><%= @sales_order.so_date.strftime("%d-%m-%Y") rescue '-' %></td>
-      <td width="50"></td>
-      <td><b>Lot No</b></td>
-      <td>
-        <% if @sales_order.lot_no.present? %>
-          <%= @sales_order.lot_no %>
-        <% else %>
-          -
-        <% end %>
-      </td>
     </tr>
 
     <tr>
@@ -25,9 +16,6 @@
       <td></td>
       <td><b>Revision</b></td>
       <td><%= @sales_order.revision rescue '-' %></td>
-      <td></td>
-      <td><b>Mfg Date</b></td>
-      <td><%= @sales_order.mfg_date.strftime("%d-%m-%Y") rescue '-' %></td>
     </tr>
 
     <tr>
@@ -42,9 +30,6 @@
           -
         <% end %>
       </td>
-      <td></td>
-      <td><b>Exp Date</b></td>
-      <td><%= @sales_order.exp_date.strftime("%d-%m-%Y") rescue '-' %></td>
     </tr>
 
     <tr>

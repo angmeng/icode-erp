@@ -58,14 +58,14 @@
             <% if soi.mfg_date.present? %>
               <%= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
             <% else %>
-              <%= text_field_tag "datarow[#{index}][mfg_date]", '', :class => "mkendo_date" %>
+              <%= text_field_tag "datarow[#{index}][mfg_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
             <% end %>
           </td>
           <td align="center">
             <% if soi.exp_date.present? %>
               <%= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
             <% else %>
-              <%= text_field_tag "datarow[#{index}][exp_date]", '', :class => "mkendo_date" %>
+              <%= text_field_tag "datarow[#{index}][exp_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
             <% end %>
           </td>
           <td align="center"><%= remove_row_button  %></td>
