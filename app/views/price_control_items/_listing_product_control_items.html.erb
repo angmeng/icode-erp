@@ -2,6 +2,9 @@
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
+      <% if action_name == "show" %>
+        <th>Product ID</th>
+      <% end %>
       <th>Old Unit Price</th>
       <th>Old Effective Date</th>
       <th>New Unit Price</th>
@@ -13,6 +16,9 @@
     <% p_control.each do |prod_price| %>
         <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="price_control_items" rowsId="<%= prod_price.id %>">
           <td></td>
+          <% if action_name == "show" %>
+            <td>[<%= prod_price.product.product_combobox.product_code rescue '-' %>] <%= prod_price.product.desc rescue '-' %></td>
+          <% end %>
           <% if prod_price.old_unit_price.present? %>
             <td class="t_unit_price"><%= four_precision(prod_price.old_unit_price) rescue '-' %></td>
           <% else %>

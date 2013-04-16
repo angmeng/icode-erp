@@ -75,6 +75,88 @@
               else { alert("Invalid Data Form..."); return false; } 
           });
       });
+      
+      function price_control_data(sel) {
+          var number = sel.name.match(/\[(\d+)\]/);
+          var number = parseInt(number[1], 10);
+          var product_id = sel.options[sel.selectedIndex].value;
+          var company_id = $("select.price_control_trade_company_id option:selected").val();
+          var count = 0;
+
+          $('table.target_table tbody').find('[id$="product_id"]').each(function(k, elem) {
+              var select_value = $(this).val();
+              if (select_value == product_id){ count++; } 
+          });
+
+          if (count > 1) {
+                clearing_data(number);
+                $("#save_button").attr("disabled", true);
+                alert("Your selector is duplicate. Please select another one.");
+          } else {
+                  $("#save_button").attr("disabled", false);
+                  if (company_id){
+                      $.ajax({
+                          type: "GET",
+                          dataType: "json",
+                          url: '/price_controls/take_old_unit_price_and_eff_date',
+                          data: {'company_id' : company_id, 'product_id' : product_id},
+                          success: function(data){ 
+
+                              var value_date = '#datarow_' + number + '_old_eff_date';
+                              var html_date  = '#old_date_' + number;
+                              var value_sellPrice = '#datarow_' + number + '_old_unit_price';
+                              var html_sellPrice  = '#old_up_' + number;
+
+                              if (data.jstatus == true){
+
+                                  var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
+                                  var sellPrice = data.selling_price;
+
+                                  if (myDate){
+                                      var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
+                                      $(value_date).val(k_date);
+                                      $(html_date).html(k_date); } 
+                                  else {
+                                      $(value_date).val(' ');
+                                      $(html_date).html('-'); }
+
+                                  if (sellPrice){
+                                      var f_num = parseFloat(sellPrice).toFixed(4);  
+                                      $(value_sellPrice).val(f_num);
+                                      $(html_sellPrice).html(f_num); }
+                                  else {
+                                      $(value_sellPrice).val(' ');
+                                      $(html_sellPrice).html('-'); }
+
+                              } else {
+                                  $(value_date).val("");
+                                  $(html_date).html('-');
+                                  $(value_sellPrice).val("");
+                                  $(html_sellPrice).html('-');
+                              }
+
+                          }
+                      });
+                  } else {
+                      alert("Trade Company can't blank.");
+                  }
+          }
+      }
+      
+      function clearing_data(number){
+          var value_old_date = '#datarow_' + number + '_old_eff_date';
+          var html_old_date  = '#old_date_' + number;
+          var value_old_sellPrice = '#datarow_' + number + '_old_unit_price';
+          var html_old_sellPrice  = '#old_up_' + number;
+          var value_new_date = '#datarow_' + number + '_new_eff_date';
+          var value_new_sellPrice = '#datarow_' + number + '_new_unit_price';
+          $(value_old_date).val('');
+          $(html_old_date).html('');
+          $(value_old_sellPrice).val('');
+          $(html_old_sellPrice).html('');
+          $(value_new_date).val('');
+          $(value_new_sellPrice).val('');
+      }
   </script>
 
 <% end %>

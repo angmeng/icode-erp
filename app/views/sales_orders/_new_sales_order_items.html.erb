@@ -39,7 +39,7 @@
             <%= hidden_field_tag "datarow[#{index}][unit_price]", soi.unit_price, "required validationMessage" => "Please Enter Unit Price" %>
           </td>
           <td align="center">
-            <%= text_field_tag "datarow[#{index}][eta_date]", soi.eta.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date", :style => "width: 100px;" %>
+            <%= text_field_tag "datarow[#{index}][eta_date]", soi.eta.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date", :style => "width: 130px;" %>
             <span class="k-invalid-msg" data-for="datarow[<%= index %>][eta_date]"></span>
           </td>
           <!--td align="center">
@@ -55,18 +55,20 @@
           </td>  
           <td align="center"><%= text_field_tag "datarow[#{index}][lot_no]", soi.lot_no, :class => "k-textbox" %></td>
           <td align="center">
-            <% if soi.mfg_date.present? %>
-              <%= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
-            <% else %>
-              <%= text_field_tag "datarow[#{index}][mfg_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
-            <% end %>
+            <%= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date, :class => "k-textbox", :style => "width: 80px;" %>
+            <%# if soi.mfg_date.present? %>
+              <%#= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
+            <%# else %>
+              <%#= text_field_tag "datarow[#{index}][mfg_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
+            <%# end %>
           </td>
           <td align="center">
-            <% if soi.exp_date.present? %>
-              <%= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
-            <% else %>
-              <%= text_field_tag "datarow[#{index}][exp_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
-            <% end %>
+            <%= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date, :class => "k-textbox", :style => "width: 80px;" %>
+            <%# if soi.exp_date.present? %>
+              <%#= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
+            <%# else %>
+              <%#= text_field_tag "datarow[#{index}][exp_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
+            <%# end %>
           </td>
           <td align="center"><%= remove_row_button  %></td>
 
@@ -95,7 +97,7 @@
           <%= hidden_field_tag "datarow[0][unit_price]", '', "required validationMessage" => "Please Enter Unit Price" %>
         </td>
         <td align="center">
-          <%= text_field_tag "datarow[0][eta_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date", :style => "width: 100px;" %>
+          <%= text_field_tag "datarow[0][eta_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date", :style => "width: 130px;" %>
           <span class="k-invalid-msg" data-for="datarow[0][eta_date]"></span>
         </td>
         <!--td align="center" width="150"><%#= text_field_tag "datarow[0][customer_po]", '', :class => "k-textbox" %></td-->
@@ -104,8 +106,8 @@
           <%= hidden_field_tag "datarow[0][part_no]", '' %>
         </td>
         <td align="center"><%= text_field_tag "datarow[0][lot_no]", '', :class => "k-textbox" %></td>
-        <td align="center"><%= text_field_tag "datarow[0][mfg_date]", '', :class => "mkendo_date", :style => "width: 100px;" %></td>
-        <td align="center"><%= text_field_tag "datarow[0][exp_date]", '', :class => "mkendo_date", :style => "width: 100px;" %></td>
+        <td align="center"><%= text_field_tag "datarow[0][mfg_date]", '', :class => "k-textbox", :style => "width: 80px;" %></td>
+        <td align="center"><%= text_field_tag "datarow[0][exp_date]", '', :class => "k-textbox", :style => "width: 80px;" %></td>
         <td align="center"><%= remove_row_button  %></td>
         
       </tr>

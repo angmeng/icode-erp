@@ -32,8 +32,7 @@
         var product_id = sel.options[sel.selectedIndex].value;
         var company_id = $("select.sales_order_trade_company_id option:selected").val();
         
-        var count = 0;
-        
+        <%#*var count = 0;%>
         <%#*$('table.target_table tbody').find('[id$="product_id"]').each(function(k, elem) {%>
             <%#*var select_value = $(this).val();%>
             <%#*if (select_value == product_id){ count++; }%> 
@@ -64,6 +63,7 @@
                               $(code).html(um_code);
                               $(um).val(um_id);
                           } else {
+                              alert("Sorry, unit measurement was undefined!");
                               $(code).html('');
                               $(um).val('');
                           }
@@ -75,6 +75,7 @@
                               $(html_sellPrice).html(f_num);
                               $(value_sellPrice).val(f_num);
                           } else {
+                              alert("Sorry, Selling Pirce was undefined!");
                               $(html_sellPrice).html('');
                               $(value_sellPrice).val('');
                           }

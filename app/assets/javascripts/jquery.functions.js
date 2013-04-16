@@ -20,19 +20,16 @@ $(document).ready(function() {
     
     $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
     $("#panelbar").kendoPanelBar({expandMode: "single"});
-    
-//    $("#custom_trade_company_id, #combox_company, #combo_ste, #vendor_id, #trade_company_sales_tax_exemption_id").kendoComboBox({filter: "contains"});
-//    $('select[class^="kendo_combobox_multiple"]').kendoComboBox({filter: "contains"});
-//    $("#kendo_date, #product_cutoff_date, #sales_order_item_eta, #purchase_order_po_date, #receive_note_rn_date, #search_po_date_gte, #search_po_date_lte, #search_rn_date_gte, #search_rn_date_lte, #incoming_reject_ir_date, #quotation_request_form_qrf_date").kendoDatePicker({format: "dd-MM-yyyy"}); 
 
     $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+    
     $(".mkendo_combobox").kendoComboBox({filter: "contains"});
-//    $("#kendo_price").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     
     $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
     $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
     $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
     $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
+    
     
 //    $(".inputNum_integer").forceNumeric({fixDecimals: 0});
 //    $(".integer").numeric(false, function() { alert("Integers only"); this.value = ""; this.focus(); });
@@ -974,59 +971,7 @@ function price_control_add(id){
     $("#add_item").html(add_button);
 }
 
-function price_control_data(sel) {
-    var number = sel.name.match(/\[(\d+)\]/);
-    var number = parseInt(number[1], 10);
-    var product_id = sel.options[sel.selectedIndex].value;
-    var company_id = $("select.price_control_trade_company_id option:selected").val();
-    
-    if (company_id){
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '/price_controls/take_old_unit_price_and_eff_date',
-            data: {'company_id' : company_id, 'product_id' : product_id},
-            success: function(data){ 
-                
-                var value_date = '#datarow_' + number + '_old_eff_date';
-                var html_date  = '#old_date_' + number;
-                var value_sellPrice = '#datarow_' + number + '_old_unit_price';
-                var html_sellPrice  = '#old_up_' + number;
-                
-                if (data.jstatus == true){
-                
-                    var myDate = Date.parse(data.eff_date, "yyyy-MM-dd");
-                    var sellPrice = data.selling_price;
 
-                    if (myDate){
-                        var k_date = myDate.getDate() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getFullYear();
-                        $(value_date).val(k_date);
-                        $(html_date).html(k_date); } 
-                    else {
-                        $(value_date).val(' ');
-                        $(html_date).html('-'); }
-
-                    if (sellPrice){
-                        var f_num = parseFloat(sellPrice).toFixed(4);  
-                        $(value_sellPrice).val(f_num);
-                        $(html_sellPrice).html(f_num); }
-                    else {
-                        $(value_sellPrice).val(' ');
-                        $(html_sellPrice).html('-'); }
-                        
-                } else {
-                    $(value_date).val("");
-                    $(html_date).html('-');
-                    $(value_sellPrice).val("");
-                    $(html_sellPrice).html('-');
-                }
-                
-            }
-        });
-    } else {
-        alert("Trade Company can't blank.");
-    }
-}
 
 function access_pp_no(sel) {
     $('*').css('cursor','wait');
