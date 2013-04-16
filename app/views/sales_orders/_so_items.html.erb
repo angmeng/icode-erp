@@ -32,8 +32,8 @@
         <!--td align="center"><%#= sales_order_item.customer_po rescue '-' %></td-->
         <td align="center"><%= sales_order_item.part_no rescue '-' %></td>
         <td align="center"><%= sales_order_item.lot_no rescue '-' %></td>
-        <td align="center"><%= sales_order_item.mfg_date.strftime("%d-%m-%Y") rescue '-' %></td>
-        <td align="center"><%= sales_order_item.exp_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="center"><%= sales_order_item.mfg_date rescue '-' %></td>
+        <td align="center"><%= sales_order_item.exp_date rescue '-' %></td>
         <td align="right"><%= iproduct(sales_order_item.unit_price, sales_order_item.quantity) %></td>
       </tr>
       <% array << sales_order_item.unit_price * sales_order_item.quantity %>
