@@ -56,39 +56,38 @@
 	<br />
 <table style="margin-left:290px;">
 		<tr>
-			
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.sales_tax_licence_no.present? %>
-						<%= p.trade_company.sales_tax_licence_no rescue'-'%>
+                  <td><%= p.trade_company.sales_tax_licence_no rescue'-'%></td>
 					<% else %>
-						&nbsp;
+                  <td>&nbsp;</td>
 					<% end %>
 				<% end %>
 			
 		</tr>
 		<tr>
 				<% if p.sales_tax_exemption.present? %>
-					<%= p.sales_tax_exemption rescue'-' %>
+                  <td><%= p.sales_tax_exemption rescue'-' %></td>
 				<%else%>
-						&nbsp;
+                  <td>&nbsp;</td>
 				<%end%>
 		</tr>
 		<tr>
 			
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.warehouse_licence_no.present? %>
-						<%= p.trade_company.warehouse_licence_no rescue'-' %>
+                  <td><%= p.trade_company.warehouse_licence_no rescue'-' %></td>
 					<% else %>
-						&nbsp;
+                  <td>&nbsp;</td>
 					<% end %>
 				<% end %>
 		</tr>
 		<tr>
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.mfg_warehouse_licence_no.present? %>
-						<%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
+                  <td><%= p.trade_company.mfg_warehouse_licence_no rescue'-' %></td>
 					<% else %>
-						&nbsp;
+                  <td>&nbsp;</td>
 					<% end %>
 				<% end %>
 		</tr>
@@ -119,7 +118,7 @@
 	      	<%= doi.client_lot rescue'-' %>
 	      </td>
 	      <td align="center">
-	      	<%= doi.sales_order_item.product.product_category.parent.code rescue'-' %><br />
+	      	<%= doi.sales_order_item.product.product_category.parent.parent.desc rescue'-' %><br />
 	      	<%= doi.sales_order_item.part_no rescue'-' %><br />
 	      	<%= doi.sales_order_item.product.desc rescue'-' %>
 	      </td>
