@@ -411,6 +411,7 @@ end
          send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
                                  :type => 'application/pdf' ,
                                  :disposition => "attachement" )
+
         #  @detail_invoice_documentation_report = History_invoice.new(params[:doc_ids])
         #   respond_to do |format|
         #     if @detail_invoice_documentation_report.save
