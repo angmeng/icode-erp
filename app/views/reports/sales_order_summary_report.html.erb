@@ -47,7 +47,7 @@
       		<tr class="<%= cycle("odd_line", "even_line") %>">
       			<% @show_sales_order_summary_report.each do |so| %>
             <td align="center"><%= check_box_tag "sos_ids[]" , so.id %></td>
-      			<td align="center"><%= so.sales_order.sales_order_no rescue'-' %></td>
+      			<td align="center"><%= so.sales_order_no rescue'-' %></td>
       			<td align="center"><%= render '/product_categories/join_product_category' , :pc => so %></td>
       			<td align="center"><%= so.description rescue '-'%></td>
       			<td align="center"><%= so.quantity rescue'-' %></td>

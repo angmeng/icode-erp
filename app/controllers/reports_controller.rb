@@ -359,7 +359,7 @@ end
   def pdf_so_customer_po_detail_report
     if params[:commit] == "PDF Report"
       if params[:so_ids].present?
-        @detail_so_customer_po_detail_report = SalesOrderItem.find(params[:so_ids])
+        @detail_so_customer_po_detail_report = SalesOrder.find(params[:so_ids])
         html = render_to_string(:layout => false , :action => "pdf_so_customer_po_detail_report.html.erb")
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf ,:filename => "pdf_so_customer_po_detail_report.pdf",
@@ -368,7 +368,7 @@ end
         end
       elsif params[:commit] == "Show"
         if params[:so_ids].present?
-          @detail_so_customer_po_detail_report =  SalesOrderItem.find(params[:so_ids])
+          @detail_so_customer_po_detail_report =  SalesOrder.find(params[:so_ids])
           respond_to do |format|
             format.html
         end
@@ -395,27 +395,22 @@ end
     elsif params[:commit] == "Print Invoice"
       if params[:doc_ids].present?
 
+        Report.pdf_do_so_documentation_report(params[:doc_ids])
+        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
+        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
+         @kit = PDFKit.new(html , :page_size => 'Letter')
+         send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
+                                 :type => 'application/pdf' ,
+                                 :disposition => "attachement" )
+
+
         #a = DeliveryOrder.find(params[:doc_ids].first)
         # a = DeliveryOrder.find(params[:doc_ids])
         # if a.authorize_print == false
         # redirect_to do_so_documentation_report_reports_path, notice: 'Please get an authorize from supervisor'
         # elsif a.authorize_print == 1
         
-       #@detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids].first)
-       @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
-
-
-
-        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
-         @kit = PDFKit.new(html)
-         send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
-                                 :type => 'application/pdf' ,
-                                 :disposition => "attachement" )
-
-        #  @detail_invoice_documentation_report = History_invoice.new(params[:doc_ids])
-        #   respond_to do |format|
-        #     if @detail_invoice_documentation_report.save
-            
+       #@detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids].first) 
         # a.authorize_print = false
         # a.save!
       # generate_history
@@ -555,7 +550,7 @@ end
   end
 
   def so_customer_po_detail_report
-    @so_customer_po_detail_report = SalesOrderItem.search(params[:search])
+    @so_customer_po_detail_report = SalesOrder.search(params[:search])
     @show_so_customer_po_detail_report = @so_customer_po_detail_report.all
   end
 
