@@ -23,8 +23,8 @@ class Receipt < ActiveRecord::Base
   
   def update_to_statement(company)
     company.update_attributes!(:sn_receipt_no => self.receipt_no)
-    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.receipt_date, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => self.id)
-    @soa.save!
+#    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.receipt_date, :transaction_type => "RCT", :credit_note_id => 0, :debit_note_id => self.id)
+#    @soa.save!
   end
   
   private

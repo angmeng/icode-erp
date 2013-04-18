@@ -37,6 +37,8 @@ class DeliveryOrderManagement
               doi.sales_order_item.update_attributes!(:remaining_qty => doi.balance_qty)
               doi.sales_order_item.update_attributes!(:status => SalesOrderItem::COMPLETED) if doi.so_balance_qty_is_zero?
               self.shipping_full_stock(doi.sales_order_item)
+              
+              self.insert_account_statement(doi.sales_order_item)
             end
           end
         end
@@ -50,5 +52,10 @@ class DeliveryOrderManagement
     max_count = so.sales_order_items.count
     so.sales_order_items.each { |soi| count += 1  if soi.is_completed? }
     so.update_attributes!(:status => SalesOrder::COMPLETED) if count == max_count
+  end
+  
+  def self.insert_account_statement(soi)
+    @soa = StatementOfAccount.new(:trade_company_id => self.sales_order.trade_company_id, :transaction_date => self.sales_order.so_date, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => self.id)
+    @soa.save!
   end
 end
