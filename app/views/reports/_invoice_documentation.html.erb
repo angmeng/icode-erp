@@ -49,7 +49,7 @@
 	<!-- <div class="break_page_before"></div> -->
 	<table style="page-break-before:always;">
 	<% end %>
-	<table style="width:100%;margin-top:100px;">
+	<table style="width:100%;margin-top:120px;">
 	
 		<tr>
 			<td style="width:10cm;">
@@ -79,7 +79,7 @@
 			</td>
 			<td style="width:2cm;"></td>
 			<td style="width:8cm;">
-				<div class="part2" style="margin-left:200px;margin-top:40px;">
+				<div class="part2" style="margin-left:200px;margin-top:20px;">
 					<%= p.do_no rescue'-' %><br />
 					<%= p.do_date.strftime("%d-%m-%Y") rescue'-' %><br />
 					<%= p.trade_term.name rescue'-' %><br />
@@ -193,9 +193,6 @@
 	      	<% arr << doi.delivery_qty * doi.unit_price %>
 	    </tr>
 	    <tr></tr>
-
-	
-      	
         <%# count += 1 %>
         <% end %>
 
@@ -204,7 +201,7 @@
           <tr>
         	<td></td>
         	<td></td>
-        	<td align="right">Total :</td>
+        	<td align="center">Total :</td>
         	<td align="left">
 
         		<p>--------</p>
@@ -212,7 +209,7 @@
         		<p>--------</p>
         	</td>
         	<td></td>
-        	<td align="left">Total :</td>
+        	<td align="center">Total :</td>
         	<td align="center">
 
         		<p>-------</p>
@@ -285,8 +282,8 @@ height:20px;
   height: 150px;
   /*border-style: solid;*/
   width: 100%;
-  margin-left: 2cm;
-  margin-bottom: -2cm;
+  margin-left: 1cm;
+  margin-bottom: -1cm;
 }
 
 
@@ -295,10 +292,10 @@ height:20px;
     width: 50px;
     /*overflow: hidden;*/
     display: inline-block;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 .column_2 {
-    width: 100px;
+    width: 120px;
     /*overflow: hidden;*/
     display: inline-block;
     /*white-space: nowrap;*/
@@ -312,11 +309,11 @@ height:20px;
 .column_4 {
     width: 70px;
     /*overflow: hidden;*/
-    /*display: inline-block;*/
+    display: inline-block;
     /*white-space: nowrap;*/
 }
 .column_5 {
-    width: 100px;
+    width: 80px;
     /*overflow: hidden;*/
     display: inline-block;
     /*white-space: nowrap;*/
