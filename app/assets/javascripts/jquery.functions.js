@@ -5,10 +5,10 @@ $(document).ready(function() {
               
     $(".maskDate").keydown(function(e){
         if ($(this).val().length <= 10){
-          if(e.keyCode < 48 || e.keyCode > 57) {
+          if ((e.keyCode < 48 || e.keyCode > 57) && ( (e.keyCode != 46)) ) {
               return false;
           } else {
-              if (e.keyCode != 8){
+              if ((e.keyCode != 8) || (e.keyCode != 46)) {
                   if      ($(this).val().length == 2){ return $(this).val($(this).val() + "-"); }
                   else if ($(this).val().length == 5){ return $(this).val($(this).val() + "-"); }
               }
