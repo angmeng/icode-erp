@@ -3,15 +3,19 @@ $(document).ready(function() {
     $("#k_menu").kendoMenu({openOnClick: true});
     
               
-    $(".maskDate").keyup(function(e){
-          if (e.keyCode != 8){
-              if ($(this).val().length <= 10){
+    $(".maskDate").keydown(function(e){
+        if ($(this).val().length <= 10){
+          if(e.keyCode < 48 || e.keyCode > 57) {
+              return false;
+          } else {
+              if (e.keyCode != 8){
                   if      ($(this).val().length == 2){ return $(this).val($(this).val() + "-"); }
                   else if ($(this).val().length == 5){ return $(this).val($(this).val() + "-"); }
-              } else {
-                  $(this).val($.trim($(this).val()).slice(0, -1));
               }
           }
+        } else {
+            $(this).val($.trim($(this).val()).slice(0, -1));
+        }
     }); 
     
     $(".digg_pagination").append('<i style="color: red;">*pg</i>');
