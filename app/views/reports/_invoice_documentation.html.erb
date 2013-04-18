@@ -16,33 +16,29 @@
 	<table style="page-break-before:always;">
 	<% end %>
 	<table style="width:100%;margin-top:100px;">
-	
 		<tr>
-			<td style="width:10cm;">
-					<div class="part1">
-						<%= p.trade_company.name rescue'-'%><br />
-						<%= p.trade_company.address_1 rescue'-'%><br />
-						
-		                <% if p.trade_company.postcode_one.present? %>
-		                  <%= p.trade_company.postcode_one rescue '-' %>&nbsp;
-		                <% end %>
-		                <% if p.trade_company.city_one.present? %>
-		                  <%= p.trade_company.city_one rescue '-' %>,&nbsp;
-		                <% end %>
-		                <% if p.trade_company.state_one.present? %>
-		                  <%= p.trade_company.state_one rescue '-' %>,&nbsp;
-		                <% end %>
-		                <% if p.trade_company.country_one.present? %>
-		                  <%= p.trade_company.country_one rescue '-' %>.
-		                <% end %> 
-						<p>Tel :<%= p.trade_company.tel_no_1 rescue'-'%>
-						<%= p.trade_company.tel_no_2 rescue'-'%>/ 
-						Fax :<%= p.trade_company.fax_no rescue'-' %></p>
-					</div>
-
+		<td style="width:10cm;">
+			<div class="part1">
+				<%= p.trade_company.name rescue'-'%><br />
+				<%= p.trade_company.address_1 rescue'-'%><br />
 				
-				
-			</td>
+	            <% if p.trade_company.postcode_one.present? %>
+	              <%= p.trade_company.postcode_one rescue '-' %>&nbsp;
+	            <% end %>
+	            <% if p.trade_company.city_one.present? %>
+	              <%= p.trade_company.city_one rescue '-' %>,&nbsp;
+	            <% end %>
+	            <% if p.trade_company.state_one.present? %>
+	              <%= p.trade_company.state_one rescue '-' %>,&nbsp;
+	            <% end %>
+	            <% if p.trade_company.country_one.present? %>
+	              <%= p.trade_company.country_one rescue '-' %>.
+	            <% end %> 
+				<p>Tel :<%= p.trade_company.tel_no_1 rescue'-'%>
+				<%= p.trade_company.tel_no_2 rescue'-'%>/ 
+				Fax :<%= p.trade_company.fax_no rescue'-' %></p>
+			</div>
+		</td>
 			<td style="width:2cm;"></td>
 			<td style="width:8cm;">
 				<div class="part2" style="margin-left:200px;margin-top:20px;">
