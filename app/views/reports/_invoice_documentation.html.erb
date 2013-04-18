@@ -1,4 +1,4 @@
-
+<!-- 
 
 <table>
 	<tr>
@@ -27,7 +27,224 @@
 		<td>11</td>
 		<td>12</td>
 	</tr>
+</table> -->
+
+
+
+<%# count = 0 %>
+<% if @detail_invoice_documentation_report.present? %>
+	<% @detail_invoice_documentation_report.each_with_index do |p, index|%>
+<!-- 	<%# if count % 6 == 0 %>  
+	<div style="page-break-before: always;">-->
+
+	<% arr = [] %>
+	<% array = [] %>
+	 
+ 
+	<br />
+	<br />
+	<br />
+	<br />
+	<% if index == 0 %>
+	<div>
+	<% else %>
+	<!-- <div class="break_page_before"></div> -->
+	<table style="width:100%;page-break-before:always;">
+	<% end %>
+	
+	
+		<tr>
+			<td style="width:10cm;">
+					<div class="part1">
+						<%= p.trade_company.name rescue'-'%><br />
+						<%= p.trade_company.address_1 rescue'-'%><br />
+						<%= p.trade_company.address_2 rescue'-'%><br />
+						<%= p.trade_company.address_3 rescue'-'%><br />
+						<p>Tel :<%= p.trade_company.tel_no_1 rescue'-'%>
+						<%= p.trade_company.tel_no_2 rescue'-'%>/ 
+						Fax :<%= p.trade_company.fax_no rescue'-' %></p>
+					</div>
+
+				
+				
+			</td>
+			<td style="width:2cm;"></td>
+			<td style="width:8cm;">
+				<div>
+					<div class="part2" style="margin-left:240px;margin-top:47px;">
+					<div><%= p.do_no rescue'-' %></div>
+					<div><%= p.do_date.strftime("%d-%m-%Y") rescue'-' %></div>
+					<div><%= p.trade_term.name rescue'-' %></div>
+					<div><%= p.currency.name rescue'-' %></div>
+					<div><%= p.sales_rep rescue'-' %></div>
+					<div><%= p.transport.name rescue'-' %></div>
+				</div>
+				</div>
+				
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+<table>
+		<tr style="padding-left:200px;">
+			
+				<% if p.trade_company.present? %>
+					<% if p.trade_company.sales_tax_licence_no.present? %>
+						<%= p.trade_company.sales_tax_licence_no rescue'-'%>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+			
+		</tr>
+		<tr style="padding-left:200px;">
+				<% if p.sales_tax_exemption.present? %>
+					<%= p.sales_tax_exemption rescue'-' %>
+				<%else%>
+						&nbsp;
+				<%end%>
+		</tr>
+		<tr style="padding-left:200px;">
+			
+				<% if p.trade_company.present? %>
+					<% if p.trade_company.warehouse_licence_no.present? %>
+						<%= p.trade_company.warehouse_licence_no rescue'-' %>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+		</tr>
+		<tr style="padding-left:200px;">
+				<% if p.trade_company.present? %>
+					<% if p.trade_company.mfg_warehouse_licence_no.present? %>
+						<%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
+					<% else %>
+						&nbsp;
+					<% end %>
+				<% end %>
+		</tr>
+	</tr>
 </table>
+	
+		
+	
+<table class="fix_doi_size">	
+	<thead>
+		<tr>
+			<th width="50px"></th>
+			<th width="250px"></th>
+			<th width="400px"></th>
+			<th width="150px"></th>
+			<th width="200px"></th>
+			<th width="160px"></th>
+			<th width="200px"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% p.delivery_order_items.each_with_index do |doi , index| %>
+	    <tr> 
+	      <td align="center"><%= index + 1 %></td>
+	      <td align="center">
+	       	<%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %><br/>
+	      	<%= doi.client_po rescue'-' %><br />
+	      	<%= doi.client_lot rescue'-' %>
+	      </td>
+	      <td align="left">
+
+	      	<% if doi.sales_order_item.present? %>
+					<% if doi.sales_order_item.product.present? %>
+						<% if doi.sales_order_item.product.product_category.present? %>
+							<% if doi.sales_order_item.product.product_category.refer_category_id.present? %>
+			<% @pc = ProductCategory.find(doi.sales_order_item.product.product_category.refer_category_id) %>
+					<%= @pc.code rescue'-' %><br />
+					<% else %>
+						-
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+	      	<%= doi.sales_order_item.part_no rescue'-' %><br />
+	      	<%= doi.sales_order_item.product.desc rescue'-' %>
+	      </td>
+	      <td align="center"><%= doi.no_of_carton rescue'-' %></td>
+	      <td align="center">
+	      	<%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
+	      	<% array << doi.no_of_carton %>
+	      <td align="center"><%= doi.unit_price rescue'-' %></td>
+	      	
+	      <td align="right"><%= iproduct(doi.delivery_qty, doi.unit_price) %></td>
+	      	<% arr << doi.delivery_qty * doi.unit_price %>
+	    </tr>
+	    <tr></tr>
+
+	
+      	
+        <%# count += 1 %>
+        <% end %>
+
+        
+       
+          <tr>
+        	<td></td>
+        	<td></td>
+        	<td align="right">Total :</td>
+        	<td align="center">
+        		<p>--------</p>
+        		<p><%= no_precision(array.sum) %></p>
+        		<p>--------</p>
+        	</td>
+        	<td></td>
+        	<td align="center">Total :</td>
+        	<td align="right">
+        		<p>-------</p>
+        		<p><%= two_precision(arr.sum) %></p>
+        		<p>-------</p>
+        	</td>
+        </tr>
+       <%# @detail_invoice_documentation_report.each do |s|%>
+	   <tr>
+	   	   <% 5.times do |td| %><td></td><% end %>
+           <td align="center">+ S/Tax 0%:</td>      
+           <td align="right"><%= p.sales_tax rescue'-' %></td> 
+        </tr>
+        <tr>
+           <% 5.times do |td| %><td></td><% end %>
+           <td align="center">+ T/Charges:</td>
+           <td align="right"><%= p.tport_c rescue'-' %></td>
+           <% arr << p.sales_tax + p.tport_c %>
+       </tr>
+       <%# end %>
+       	
+		
+       <tr>
+        	<% 6.times do |td| %><td></td><% end %>
+           <td align="right">
+           	<p>-------</p>
+           	<p><%= two_precision(arr.sum) %></p>
+           	<p>-------</p>
+           	</td>
+           	
+           <% end %>
+       </tr>
+	</tbody>
+		
+</table>
+
+<% else %>
+
+<h2>no record found </h2>
+
+<% end %>
+
+ 
+<br />
+<br />
+<br />
+<br />
+
+	
+
 
 
 
