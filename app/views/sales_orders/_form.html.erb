@@ -20,12 +20,12 @@
           
           <% if @sales_order.so_date.present? %>
             <td>
-              <%= f.text_field :so_date, :value => @sales_order.so_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter SO Date" %>
+              <%= f.text_field :so_date, :value => @sales_order.so_date.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter SO Date" %>
               <span class="k-invalid-msg" data-for="sales_order[so_date]"></span>
             </td>
           <% else %>
             <td>
-              <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter SO Date" %>
+              <%= f.text_field :so_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter SO Date" %>
               <span class="k-invalid-msg" data-for="sales_order[so_date]"></span>
             </td>
           <% end %>

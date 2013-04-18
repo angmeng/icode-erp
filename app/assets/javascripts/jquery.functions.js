@@ -4,7 +4,6 @@ $(document).ready(function() {
     
               
     $(".maskDate").keyup(function(e){
-        
           if (e.keyCode != 8){
               if ($(this).val().length <= 10){
                   if      ($(this).val().length == 2){ return $(this).val($(this).val() + "-"); }
@@ -12,8 +11,7 @@ $(document).ready(function() {
               } else {
                   $(this).val($.trim($(this).val()).slice(0, -1));
               }
-          } 
-      
+          }
     }); 
     
     $(".digg_pagination").append('<i style="color: red;">*pg</i>');
@@ -992,14 +990,15 @@ function access_pp_no(sel) {
 }
 
 function addTableRow(table){
-    console.log($(table));
-//    var $tr = $(table).find("tbody tr:last").clone(true);
-
-//      return $("#table-id tr").length + $("#table2-id tr").length; // etc, for all table ID's.
-
-//    datarow_all_attributes($tr);
-//    $(table).find("tbody tr:last").after($tr);
-//    running_kendoui();
+//    var tr_length = $(table).find("tbody tr").length;
+//    if (tr_length <= 4){
+        var $tr = $(table).find("tbody tr:last").clone(true);
+        datarow_all_attributes($tr);
+        $(table).find("tbody tr:last").after($tr);
+        running_kendoui();
+//    } else {
+//        alert("Must be limit to 5 items.");
+//    }
 }
 
 function datarow_all_attributes(tr){
