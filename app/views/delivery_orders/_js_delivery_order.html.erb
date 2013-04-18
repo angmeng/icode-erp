@@ -9,6 +9,20 @@
             if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
+        
+        $(".printable_limit").click(function() {
+          var tr_length = $(".target_table").find("tbody tr").length;
+          if (tr_length <= 4) {
+            $(this).attr("disabled", false);
+          } else {
+            $(this).attr("disabled", true);
+          }
+        });
+        
+        $("table.target_table").on('click','.remove_datarow',function(event){
+          $(".printable_limit").attr("disabled", false);
+        });
+        
     });
     
     function delivery_order_company_change(sel){

@@ -39,7 +39,7 @@
             <%= hidden_field_tag "datarow[#{index}][unit_price]", soi.unit_price, "required validationMessage" => "Please Enter Unit Price" %>
           </td>
           <td align="center">
-            <%= text_field_tag "datarow[#{index}][eta_date]", soi.eta.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date", :style => "width: 130px;" %>
+            <%= text_field_tag "datarow[#{index}][eta_date]", soi.eta.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter ETA Date", :style => "width: 130px;" %>
             <span class="k-invalid-msg" data-for="datarow[<%= index %>][eta_date]"></span>
           </td>
           <!--td align="center">
@@ -83,7 +83,7 @@
           <%= hidden_field_tag "datarow[0][unit_price]", '', "required validationMessage" => "Please Enter Unit Price" %>
         </td>
         <td align="center">
-          <%= text_field_tag "datarow[0][eta_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA Date", :style => "width: 130px;" %>
+          <%= text_field_tag "datarow[0][eta_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter ETA Date", :style => "width: 130px;" %>
           <span class="k-invalid-msg" data-for="datarow[0][eta_date]"></span>
         </td>
         <!--td align="center" width="150"><%#= text_field_tag "datarow[0][customer_po]", '', :class => "k-textbox" %></td-->
