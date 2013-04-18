@@ -6,31 +6,42 @@
 	<table id="jgrid" class="black-line-table">
 		<thead>
 			<tr class="header_line">
-				<th>No.</th>
 				<th>SO #</th>
         <th>Part /Prod ID</th>
         <th>Description</th>
         <th>Date</th>
+        <th>MGF Date</th>
         <th>Order</th>
-        <th>Out sid</th>
+        <th>Remaining Qty</th>
         <th>Status</th>
 			</tr>
 		</thead>
 
+
 		<tbody>
-		<% @detail_so_customer_po_detail_report.each_with_index do |so , index| %>
+		<% @detail_so_customer_po_detail_report.each do |so| %>
+       <% so.sales_order_items.each_with_index do |soi , index | %>
 			<tr>
-				<td align="center"><%= index + 1 %></td>
-				<td align="center"><%= so.sales_order.sales_order_no rescue'-' %></td>
-        <td align="center"><%= render '/product_categories/join_product_category' , :pc => so %></td>
-        <td align="center"><%= so.description rescue'-' %></td>
-        <td align="center"><%= so.sales_order.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
-        <td align="center"><%#=  %></td>
-        <td align="center"><%#=  %></td>  
-        <td align="center"><%= so.status rescue'-' %></td>      
+        <% if index == 0 %>
+        <td align="center" rowspan="<%= so.sales_order_items.count %>">
+        <%= so.sales_order_no rescue'-' %></td>
+        <% end %>
+        <td align="center"><%= soi.part_no rescue'-' %> / 
+          <%= render '/product_categories/join_product_category' , :pc => soi %></td>
+        <td align="center"> 
+          <%= soi.product.desc rescue'-' %></td>
+        <td align="center"><%= soi.mgf_date rescue'-' %></td>
+        <td align="center"><%= soi.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td align="center"><%= soi.quantity rescue'-' %></td>
+        <td align="center"><%= soi.remaining_qty rescue'-' %></td>
+        <td align="center"><%= soi.status rescue'-' %></td>
+         <% end %> 
 			</tr>
+      <tr style="border-top: 2px solid;">
+        <td ></td>
+      </tr>
 			
-		<% end %>
+		<% end %> 
 		</tbody>
 
 		<% else %>

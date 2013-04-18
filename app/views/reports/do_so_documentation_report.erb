@@ -40,7 +40,7 @@
 </div>
           
 
-    <div class="icon_tag" style="float:left">
+    <div class="left_icon_tag">
       <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
 
       <% if roles.include?(InventoryManagementSystem::INVOICE_DOCUMENTATION_REPORT_PRINT) %>
@@ -49,9 +49,7 @@
         <%= not_link_printable %>
       <% end %>
     </div>
-
-    <div class="icon_tag" style="float:right;">
-
+    <div class="icon_tag">
       <span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
