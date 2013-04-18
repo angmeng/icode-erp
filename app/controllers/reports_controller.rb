@@ -397,6 +397,7 @@ end
 
         Report.pdf_do_so_documentation_report(params[:doc_ids])
         @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
+        
         html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
          @kit = PDFKit.new(html , :page_size => 'Letter')
          send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
