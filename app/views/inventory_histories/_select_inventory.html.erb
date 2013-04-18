@@ -28,10 +28,7 @@
           <td><%= inventory_history.product.desc rescue '-' %></td>
         <% end %>
             
-        <td align="center">
-          <%= inventory_issue_description(inventory_history.inventory_issue_id) rescue '-' %>
-          <%#= inventory_history.inventory_issue.description rescue '-' %>
-        </td>
+        <td align="center"><%= inventory_history.inventory_issue.description rescue '-' %></td>
         <td align="center"><%= inventory_history.stock_in rescue '0' %></td>
         <td align="center"><%= inventory_history.stock_out rescue '0' %></td>
         <td align="center"><%= inventory_history.amount rescue '0' %></td>

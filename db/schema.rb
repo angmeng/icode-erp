@@ -545,6 +545,7 @@ ActiveRecord::Schema.define(:version => 20130415031047) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "product_category_id"
+    t.string   "copied_name"
   end
 
   add_index "product_running_numbers", ["product_category_id"], :name => "index_product_running_numbers_on_product_category_id"
@@ -1076,12 +1077,16 @@ ActiveRecord::Schema.define(:version => 20130415031047) do
     t.string   "transaction_type"
     t.integer  "debit_note_id"
     t.integer  "credit_note_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "payment_received_id", :default => 0
+    t.integer  "delivery_order_id",   :default => 0
   end
 
   add_index "statement_of_accounts", ["credit_note_id"], :name => "index_statement_of_accounts_on_credit_note_id"
   add_index "statement_of_accounts", ["debit_note_id"], :name => "index_statement_of_accounts_on_debit_note_id"
+  add_index "statement_of_accounts", ["delivery_order_id"], :name => "index_statement_of_accounts_on_delivery_order_id"
+  add_index "statement_of_accounts", ["payment_received_id"], :name => "index_statement_of_accounts_on_payment_received_id"
   add_index "statement_of_accounts", ["trade_company_id"], :name => "index_statement_of_accounts_on_trade_company_id"
 
   create_table "stock_outs", :force => true do |t|
@@ -1097,6 +1102,7 @@ ActiveRecord::Schema.define(:version => 20130415031047) do
     t.string   "location"
     t.string   "reference_no"
     t.integer  "status",                                             :default => 1
+    t.decimal  "previous_stock",      :precision => 10, :scale => 2, :default => 0.0
   end
 
   add_index "stock_outs", ["product_id"], :name => "index_stock_outs_on_product_id"

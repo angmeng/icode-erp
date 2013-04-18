@@ -101,12 +101,12 @@
 	<thead>
 		<tr>
 			<th width="50px"></th>
+			<th width="250px"></th>
+			<th width="400px"></th>
+			<th width="100px"></th>
 			<th width="200px"></th>
-			<th width="300px"></th>
-			<th width="70px"></th>
+			<th width="160px"></th>
 			<th width="200px"></th>
-			<th width="150px"></th>
-			<th width="150px"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -125,7 +125,7 @@
 						<% if doi.sales_order_item.product.product_category.present? %>
 							<% if doi.sales_order_item.product.product_category.refer_category_id.present? %>
 			<% @pc = ProductCategory.find(doi.sales_order_item.product.product_category.refer_category_id) %>
-							<%= @pc.code rescue'-' %><br />
+							<%= @pc.desc rescue'-' %><br />
 					<% else %>
 						-
 							<% end %>
@@ -160,16 +160,16 @@
         	<td></td>
         	<td align="right">Total :</td>
         	<td align="center">
-        		<p>--------</p>
-        		<p><%= no_precision(array.sum) %></p>
+                  <p>--------</p>
+                  <p><%= no_precision(array.sum) %></p>
         		<p>--------</p>
         	</td>
         	<td></td>
         	<td align="center">Total :</td>
         	<td align="right">
-        		<p>-------</p>
-        		<p><%= two_precision(arr.sum) %></p>
-        		<p>-------</p>
+        		<p>--------</p>
+                        <p><%= two_precision(arr.sum) %></p>
+        		<p>--------</p>
         	</td>
         </tr>
        <%# @detail_invoice_documentation_report.each do |s|%>

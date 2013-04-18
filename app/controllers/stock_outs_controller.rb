@@ -22,38 +22,30 @@ class StockOutsController < ApplicationController
     end
   end
 
-  # GET /stock_outs/1
-  # GET /stock_outs/1.json
   def show
     @stock_out = StockOut.find(params[:id])
   end
 
-  # GET /stock_outs/new
-  # GET /stock_outs/new.json
   def new
     @stock_out = StockOut.new
-    render :layout => "sheetbox"
   end
 
-  # GET /stock_outs/1/edit
   def edit
     @stock_out = StockOut.find(params[:id])
   end
 
   def create
     @stock_out = StockOut.new(params[:stock_out])
-      if @stock_out.save
-        company.update_attributes(:sn_transfer_slip_no => @stock_out.transfer_note_no)
-        InventoryManagement.generate_stock_out(@stock_out, InventoryIssue::TRANSFER_NOTE)
-        redirect_to @stock_out, notice: "Transfer Note No # #{@stock_out.transfer_note_no} was successfully created."
-      else
-        flash[:alert] = @stock_out.errors.full_messages.join(", ")
-        render action: "new"
-      end
+    if @stock_out.save
+      company.update_attributes(:sn_transfer_slip_no => @stock_out.transfer_note_no)
+      InventoryManagement.generate_stock_out(@stock_out, InventoryIssue.find_by_description("TRANSFER NOTE").id)
+      redirect_to @stock_out, notice: "Transfer Note No # #{@stock_out.transfer_note_no} was successfully created."
+    else
+      flash[:alert] = @stock_out.errors.full_messages.join(", ")
+      render action: "new"
+    end
   end
 
-  # PUT /stock_outs/1
-  # PUT /stock_outs/1.json
   def update
     @stock_out = StockOut.find(params[:id])
 

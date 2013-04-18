@@ -1,6 +1,6 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::TRANSFER_NOTES_NEW) %> 
-    <li><%= link_to "Add - New Transfer Note", new_stock_out_path, :class => "show_without_refresh_page_800x450 k-button font_bold", "data-fancybox-type" => "iframe" %></li>
+    <li><%= link_to "Add - New Transfer Note", new_stock_out_path, :class => "iframe_800x450 k-button font_bold", "data-fancybox-type" => "iframe" %></li>
   <% else %>
     <li><%= disabled_menu_style "Add - New Transfer Note" %></li>
   <% end %>

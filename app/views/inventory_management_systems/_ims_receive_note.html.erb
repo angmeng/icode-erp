@@ -4,99 +4,72 @@
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU), :disabled => true %> Receive Note</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW), :disabled => true %> New RNs</td>
-        <td></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SAVE, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_SAVE), :disabled => true %></td>
-        <% 10.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_MENU) %> Receive Notes</td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %> Receive Notes Data</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_NEW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE) %></td>
+        <% 4.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
         <td></td>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION), :disabled => true %> RN Transactions & Histories</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV), :disabled => true %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE), :disabled => true %></td>
-        <% 6.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %> RN Completed View</td>
         <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW), :disabled => true %> RN Completed View</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW), :disabled => true %></td>
-        <% 9.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %></td>
+        <% 7.times do |td| %><td></td><% end %>
       </tr>
   
     <% else %>
   
       <tr>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> Receive Note</td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %> New RNs</td>
-        <td></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SAVE, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_SAVE) %></td>
-        <% 10.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_MENU) %> Receive Notes</td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %> Receive Notes Data</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_NEW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE) %></td>
+        <% 4.times do |td| %><td></td><% end %>
       </tr>
 
       <tr>
         <td></td>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %> RN Transactions & Histories</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV) %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE) %></td>
-        <% 6.times do |td| %><td></td><% end %>
-      </tr>
-
-      <tr>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %> RN Completed View</td>
         <td></td>
-        <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %> RN Completed View</td>
-        <td></td><td><%#= "save" %></td>
-        <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW, checkboxes.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %></td>
-        <% 9.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %></td>
+        <% 7.times do |td| %><td></td><% end %>
       </tr>
       
     <% end %>
     
   <% else %>
     
-    <tr>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_MENU %> Receive Note</td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_NEW %> New RNs</td>
-      <td></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_SAVE %></td>
-      <% 10.times do |td| %><td></td><% end %>
-    </tr>
-    
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION %> RN Transactions & Histories</td>
-      <td></td><td><%#= "save" %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE %></td>
-      <% 6.times do |td| %><td></td><% end %>
-    </tr>
-    
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW %> RN Completed View</td>
-      <td></td><td><%#= "save" %></td>
-      <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW %></td>
-      <% 9.times do |td| %><td></td><% end %>
-    </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> Receive Notes</td>
+        <td><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %> Receive Notes Data</td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_NEW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION_PRINTABLE) %></td>
+        <% 4.times do |td| %><td></td><% end %>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %> RN Completed View</td>
+        <td></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %></td>
+        <% 7.times do |td| %><td></td><% end %>
+      </tr>
     
   <% end %>
 <%#*</table>%>

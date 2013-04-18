@@ -110,4 +110,14 @@
     <%= not_link_delete %>
   <% end %>
 
+  <% if data.product.present? %>
+      <%# if roles.include?(InventoryManagementSystem::PRODUCT_OPERATION_COMMON) %>
+        <%#= link_common(common_product_category_path(data)) %>
+      <%# else %>
+        <%#= disabled_style "Copy" %>
+      <%# end %>
+  <% else %>
+    <%= disabled_style "Copy" %>
+  <% end %>
+
 <% end %>

@@ -11,9 +11,9 @@
           <td><b>P/P Date *</b></td>
           <td>
             <% if @price_control.pp_date.present? %>
-              <%= f.text_field :pp_date , :value => @price_control.pp_date.strftime("%d-%m-%Y"), :class => "mkendo_date" ,  "required validationMessage" => "Please Select P/P Date" %>
+              <%= f.text_field :pp_date , :value => @price_control.pp_date.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Select P/P Date" %>
             <% else %>
-              <%= f.text_field :pp_date , :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date" ,  "required validationMessage" => "Please Select P/P Date" %>
+              <%= f.text_field :pp_date , :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Select P/P Date" %>
             <% end %>
             <span class="k-invalid-msg" data-for="price_control[pp_date]"></span>
           </td>

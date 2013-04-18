@@ -2,6 +2,20 @@ $(document).ready(function() {
     
     $("#k_menu").kendoMenu({openOnClick: true});
     
+              
+    $(".maskDate").keyup(function(e){
+        
+          if (e.keyCode != 8){
+              if ($(this).val().length <= 10){
+                  if      ($(this).val().length == 2){ return $(this).val($(this).val() + "-"); }
+                  else if ($(this).val().length == 5){ return $(this).val($(this).val() + "-"); }
+              } else {
+                  $(this).val($.trim($(this).val()).slice(0, -1));
+              }
+          } 
+      
+    }); 
+    
     $(".digg_pagination").append('<i style="color: red;">*pg</i>');
       
     $('#checkall:checkbox').change(function () {
@@ -587,27 +601,7 @@ function place_customer_id_to_trade_company_id(sel){
 
 
 
-function getCombo_product(sel) {
-    var product = sel.options[sel.selectedIndex].value; 
-//    alert(product);
 
-    $.ajax({
-        dataType: "json",
-        cache: false,
-        url: '/products/' + product + '/current_stock',
-        timeout: 2000,
-        success: function(data){
-            $("#current_product_stock").html(data.current_stock);
-            $("#stock_out_um").html(data.um);
-            $("#stock_out_unit_measurement_id").val(data.unit_measurement_id);
-
-            if (data.current_stock == 0){
-                alert("Current stock has not available now.")   
-                $("#stock_out_save_button").hide();
-            }
-        }
-    });
-}
 
 function fg_product(sel) {
     var product = sel.options[sel.selectedIndex].value; //16
@@ -998,10 +992,14 @@ function access_pp_no(sel) {
 }
 
 function addTableRow(table){
-    var $tr = $(table).find("tbody tr:last").clone(true);
-    datarow_all_attributes($tr);
-    $(table).find("tbody tr:last").after($tr);
-    running_kendoui();
+    console.log($(table));
+//    var $tr = $(table).find("tbody tr:last").clone(true);
+
+//      return $("#table-id tr").length + $("#table2-id tr").length; // etc, for all table ID's.
+
+//    datarow_all_attributes($tr);
+//    $(table).find("tbody tr:last").after($tr);
+//    running_kendoui();
 }
 
 function datarow_all_attributes(tr){
@@ -1065,7 +1063,6 @@ function datarow_all_attributes(tr){
     
     // balance amount
     string_last_number(tr, '[id^=bal_amount]');
-    
 }
 
 function string_last_number(tr, last_number){

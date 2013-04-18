@@ -552,6 +552,10 @@ module ApplicationHelper
   def link_common(linked)
     link_to "Common", linked, :class => "iframe_800x450 k-button opac-icon", "data-fancybox-type" => "iframe"
   end
+  
+  def link_copy(linked)
+    link_to "Copy", linked, :class => "iframe_800x450 k-button opac-icon", "data-fancybox-type" => "iframe", :confirm => "Are you sure to duplicate?"
+  end
     
   def not_link_common
     content_tag :span, :class => "k-button", :style => "color: grey; background-color: white; cursor: default;" do 
@@ -606,7 +610,7 @@ module ApplicationHelper
   end
     
   def link_save_button
-    submit_tag "Save", :class => "k-button font_bold", :id => "save_button"
+    submit_tag "Save", :class => "k-button font_bold", :id => "save_button", :style => "cursor: pointer;"
   end
     
   def link_fsave_button(f)

@@ -2,7 +2,7 @@ class ProductRunningNumber < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :base_name, :sub_name, :running_no, :product_category_id
+  attr_accessible :base_name, :sub_name, :running_no, :product_category_id, :copied_name
   
   belongs_to :product_category
   
