@@ -49,15 +49,26 @@
 	<!-- <div class="break_page_before"></div> -->
 	<table style="page-break-before:always;">
 	<% end %>
-	<table style="width:100%;margin-top:150px;">
+	<table style="width:100%;margin-top:100px;">
 	
 		<tr>
 			<td style="width:10cm;">
 					<div class="part1">
 						<%= p.trade_company.name rescue'-'%><br />
 						<%= p.trade_company.address_1 rescue'-'%><br />
-						<%= p.trade_company.address_2 rescue'-'%><br />
-						<%= p.trade_company.address_3 rescue'-'%><br />
+						
+		                <% if p.trade_company.postcode_one.present? %>
+		                  <%= p.trade_company.postcode_one rescue '-' %>&nbsp;
+		                <% end %>
+		                <% if p.trade_company.city_one.present? %>
+		                  <%= p.trade_company.city_one rescue '-' %>,&nbsp;
+		                <% end %>
+		                <% if p.trade_company.state_one.present? %>
+		                  <%= p.trade_company.state_one rescue '-' %>,&nbsp;
+		                <% end %>
+		                <% if p.trade_company.country_one.present? %>
+		                  <%= p.trade_company.country_one rescue '-' %>.
+		                <% end %> 
 						<p>Tel :<%= p.trade_company.tel_no_1 rescue'-'%>
 						<%= p.trade_company.tel_no_2 rescue'-'%>/ 
 						Fax :<%= p.trade_company.fax_no rescue'-' %></p>
@@ -68,7 +79,7 @@
 			</td>
 			<td style="width:2cm;"></td>
 			<td style="width:8cm;">
-				<div class="part2" style="margin-left:240px;margin-top:47px;">
+				<div class="part2" style="margin-left:200px;margin-top:40px;">
 					<%= p.do_no rescue'-' %><br />
 					<%= p.do_date.strftime("%d-%m-%Y") rescue'-' %><br />
 					<%= p.trade_term.name rescue'-' %><br />
@@ -82,7 +93,7 @@
 	</table>
 	
 	<br />
-	<table class="table_middle">
+	<table>
 		<tr >
 			<td width="290"></td>
 			<td >
@@ -90,7 +101,7 @@
 					<% if p.trade_company.sales_tax_licence_no.present? %>
 						<%= p.trade_company.sales_tax_licence_no rescue'-'%>
 					<% else %>
-						&nbsp;
+						&nbsp;111
 					<% end %>
 				<% end %>
 			</td>
@@ -101,7 +112,7 @@
 				<% if p.sales_tax_exemption.present? %>
 					<%= p.sales_tax_exemption rescue'-' %>
 				<%else%>
-						&nbsp;
+						&nbsp;111
 				<%end%>
 			</td>
 		</tr>
@@ -112,7 +123,7 @@
 					<% if p.trade_company.warehouse_licence_no.present? %>
 						<%= p.trade_company.warehouse_licence_no rescue'-' %>
 					<% else %>
-						&nbsp;
+						&nbsp;111
 					<% end %>
 				<% end %>
 			</td>
@@ -124,7 +135,7 @@
 					<% if p.trade_company.mfg_warehouse_licence_no.present? %>
 						<%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
 					<% else %>
-						&nbsp;
+						&nbsp;111
 					<% end %>
 				<% end %>
 			</td>
@@ -149,8 +160,8 @@
 	<tbody>
 		<% p.delivery_order_items.each_with_index do |doi , index| %>
 	    <tr> 
-	      <td align="left"><%= index + 1 %></td>
-	      <td align="center">
+	      <td align="left" style="vertical_align:top;"><%= index + 1 %></td>
+	      <td align="left">
 	       	<%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %><br/>
 	      	<%= doi.client_po rescue'-' %><br />
 	      	<%= doi.client_lot rescue'-' %>
@@ -172,8 +183,8 @@
 	      	<%= doi.sales_order_item.product.desc rescue'-' %><br />
 	      	<%= doi.sales_order_item.part_no rescue'-' %>
 	      </td>
-	      <td align="center"><%= doi.no_of_carton rescue'-' %></td>
-	      <td align="center">
+	      <td align="left"><%= doi.no_of_carton rescue'-' %></td>
+	      <td align="left">
 	      	<%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
 	      	<% array << doi.no_of_carton %>
 	      <td align="center"><%= doi.unit_price rescue'-' %></td>
@@ -194,14 +205,16 @@
         	<td></td>
         	<td></td>
         	<td align="right">Total :</td>
-        	<td align="center">
+        	<td align="left">
+
         		<p>--------</p>
         		<p><%= no_precision(array.sum) %></p>
         		<p>--------</p>
         	</td>
         	<td></td>
-        	<td align="center">Total :</td>
-        	<td align="right">
+        	<td align="left">Total :</td>
+        	<td align="center">
+
         		<p>-------</p>
         		<p><%= two_precision(arr.sum) %></p>
         		<p>-------</p>
@@ -276,9 +289,6 @@ height:20px;
   margin-bottom: -2cm;
 }
 
-table.table_middle  td{
-	
-}
 
 
 .column_1 {
@@ -291,47 +301,48 @@ table.table_middle  td{
     width: 100px;
     /*overflow: hidden;*/
     display: inline-block;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 .column_3 {
     width: 200px;
     /*overflow: hidden;*/
     display: inline-block;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 .column_4 {
     width: 70px;
     /*overflow: hidden;*/
-    display: inline-block;
-    white-space: nowrap;
+    /*display: inline-block;*/
+    /*white-space: nowrap;*/
 }
 .column_5 {
     width: 100px;
     /*overflow: hidden;*/
     display: inline-block;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 .column_6 {
     width: 100px;
     /*overflow: hidden;*/
     display: inline-block;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 .column_7 {
     width: 100px;
     /*overflow: hidden;*/
     display: inline-block;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 
 .fix_doi_size {
 	width:fixed;
+	/*margin-bottom: 150px;*/
 	
 }
 
 .fix_doi_size th{
-	height:50px;
+	height:20px;
 	/*border:1px solid black;*/
 }
 
