@@ -24,8 +24,6 @@ class InventoryHistory < ActiveRecord::Base
   
   default_scope order("created_at DESC")
   
-  
-  
   def self.grouping
     order('created_at DESC').select('product_id').uniq
   end

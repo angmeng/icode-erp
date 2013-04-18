@@ -2,7 +2,7 @@ class StockOut < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
 
-  attr_accessible :quantity, :balance, :product_id, :transfer_note_no, :unit_measurement_id, :collector_name, :issued_by, :location, :reference_no, :status
+  attr_accessible :quantity, :balance, :product_id, :transfer_note_no, :unit_measurement_id, :collector_name, :issued_by, :location, :reference_no, :status, :previous_stock
   
   validates :quantity, :balance, :product_id, :transfer_note_no, :unit_measurement_id, :collector_name, :issued_by, :location, :presence => true
   

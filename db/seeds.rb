@@ -6,105 +6,105 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-TypeOfSale.create([
-  {:name => 'SALES WITH TAX'},
-  {:name => 'LOCAL SALES (MAS)'},
-  {:name => 'OTHERS'},
-  {:name => 'FREE TRADE ZONE'},
-  {:name => 'LMW EXEMPTION / WL'},
-  {:name => 'CJ5 LICENCE MANUFACTURER'},
-  {:name => 'EXPORT SALES'},
-  {:name => 'IMPORT'}
-])
+#TypeOfSale.create([
+#  {:name => 'SALES WITH TAX'},
+#  {:name => 'LOCAL SALES (MAS)'},
+#  {:name => 'OTHERS'},
+#  {:name => 'FREE TRADE ZONE'},
+#  {:name => 'LMW EXEMPTION / WL'},
+#  {:name => 'CJ5 LICENCE MANUFACTURER'},
+#  {:name => 'EXPORT SALES'},
+#  {:name => 'IMPORT'}
+#])
 
-TradeTerm.create([
-  {:name => '30 DAYS'},
-  {:name => '60 DAYS'},
-  {:name => '90 DAYS'},
-  {:name => '45 DAYS'},
-  {:name => '120 DAYS'},
-  {:name => 'BANDRAFT'},
-  {:name => 'CASH PAYMENT'},
-  {:name => 'DP'},
-  {:name => 'L/C AT SIGHT'}
-])
+#TradeTerm.create([
+#  {:name => '30 DAYS'},
+#  {:name => '60 DAYS'},
+#  {:name => '90 DAYS'},
+#  {:name => '45 DAYS'},
+#  {:name => '120 DAYS'},
+#  {:name => 'BANDRAFT'},
+#  {:name => 'CASH PAYMENT'},
+#  {:name => 'DP'},
+#  {:name => 'L/C AT SIGHT'}
+#])
 
-UnitMeasurement.create([  
-  {:code => "BAG"}, 
-  {:code => "BOOK"}, 
-  {:code => "BOX"}, 
-  {:code => "BTL"}, 
-  {:code => "BUNDD"}, 
-  {:code => "CAN"}, 
-  {:code => "COIL"}, 
-  {:code => "CTN"}, 
-  {:code => "CYLN"}, 
-  {:code => "DRUM"}, 
-  {:code => "HR"}, 
-  {:code => "GM"}, 
-  {:code => "GSM"},
-  {:code => "KG"}, 
-  {:code => "LOAD"}, 
-  {:code => "METER"}, 
-  {:code => "NO"}, 
-  {:code => "PAD"}, 
-  {:code => "PAIR"}, 
-  {:code => "PC"}, 
-  {:code => "REAM"}, 
-  {:code => "ROLL"}, 
-  {:code => "SET"}, 
-  {:code => "TIN"}, 
-  {:code => "TUBE"}, 
-  {:code => "UNIT"}, 
-  {:code => "SHOT"}, 
-  {:code => "LOT"}, 
-  {:code => "SQFT"}, 
-  {:code => "GROSS"},
-  {:code => "LBS"},
-  {:code => "FT"},
-  {:code => "M2"},
-  {:code => "TRIP"},
-  {:code => "COPY"}
-])
+#UnitMeasurement.create([  
+#  {:code => "BAG"}, 
+#  {:code => "BOOK"}, 
+#  {:code => "BOX"}, 
+#  {:code => "BTL"}, 
+#  {:code => "BUNDD"}, 
+#  {:code => "CAN"}, 
+#  {:code => "COIL"}, 
+#  {:code => "CTN"}, 
+#  {:code => "CYLN"}, 
+#  {:code => "DRUM"}, 
+#  {:code => "HR"}, 
+#  {:code => "GM"}, 
+#  {:code => "GSM"},
+#  {:code => "KG"}, 
+#  {:code => "LOAD"}, 
+#  {:code => "METER"}, 
+#  {:code => "NO"}, 
+#  {:code => "PAD"}, 
+#  {:code => "PAIR"}, 
+#  {:code => "PC"}, 
+#  {:code => "REAM"}, 
+#  {:code => "ROLL"}, 
+#  {:code => "SET"}, 
+#  {:code => "TIN"}, 
+#  {:code => "TUBE"}, 
+#  {:code => "UNIT"}, 
+#  {:code => "SHOT"}, 
+#  {:code => "LOT"}, 
+#  {:code => "SQFT"}, 
+#  {:code => "GROSS"},
+#  {:code => "LBS"},
+#  {:code => "FT"},
+#  {:code => "M2"},
+#  {:code => "TRIP"},
+#  {:code => "COPY"}
+#])
 
-Currency.create([
-  {:name => 'AUD', :status => "ACTIVE"},
-  {:name => 'RM', :status => "ACTIVE"},
-  {:name => 'SGD', :status => "ACTIVE"},
-  {:name => 'USD', :status => "ACTIVE"},
-  {:name => 'YEN', :status => "ACTIVE"}
-])
+#Currency.create([
+#  {:name => 'AUD', :status => "ACTIVE"},
+#  {:name => 'RM', :status => "ACTIVE"},
+#  {:name => 'SGD', :status => "ACTIVE"},
+#  {:name => 'USD', :status => "ACTIVE"},
+#  {:name => 'YEN', :status => "ACTIVE"}
+#])
+#
+#Transport.create([
+#  {:name => 'AIR', :status => "ACTIVE"},
+#  {:name => 'RAIL', :status => "ACTIVE"},
+#  {:name => 'ROAD', :status => "ACTIVE"},
+#  {:name => 'SEA', :status => "ACTIVE"}
+#])
 
-Transport.create([
-  {:name => 'AIR', :status => "ACTIVE"},
-  {:name => 'RAIL', :status => "ACTIVE"},
-  {:name => 'ROAD', :status => "ACTIVE"},
-  {:name => 'SEA', :status => "ACTIVE"}
-])
+#Department.create([
+#  {:name => 'MANAGEMENT'},
+#  {:name => 'ACCOUNTS & FINANCE'},
+#  {:name => 'ADMIN & PERSONNEL'},
+#  {:name => 'DELIVERY'},
+#  {:name => 'FINISHING & PACKING'},
+#  {:name => 'GRAPHIC'},
+#  {:name => 'MAINTENANCE & ENGINE'},
+#  {:name => 'MARKETING & SALES'},
+#  {:name => 'PRINTING & CUTTER'},
+#  {:name => 'PURCHASING & PPC'},
+#  {:name => 'STORE & WAREHOUSE'}
+#])
 
-Department.create([
-  {:name => 'MANAGEMENT'},
-  {:name => 'ACCOUNTS & FINANCE'},
-  {:name => 'ADMIN & PERSONNEL'},
-  {:name => 'DELIVERY'},
-  {:name => 'FINISHING & PACKING'},
-  {:name => 'GRAPHIC'},
-  {:name => 'MAINTENANCE & ENGINE'},
-  {:name => 'MARKETING & SALES'},
-  {:name => 'PRINTING & CUTTER'},
-  {:name => 'PURCHASING & PPC'},
-  {:name => 'STORE & WAREHOUSE'}
-])
-
-PaymentType.create([
-  {:name => 'DEBTOR'},
-  {:name => 'OTHER DEBTOR'},
-  {:name => 'CREDITOR'},
-  {:name => 'OTHER CREDITOR'}
-])
+#PaymentType.create([
+#  {:name => 'DEBTOR'},
+#  {:name => 'OTHER DEBTOR'},
+#  {:name => 'CREDITOR'},
+#  {:name => 'OTHER CREDITOR'}
+#])
 
 InventoryIssue.create([
-  {:description => 'RECEIVED NOTE'},
+  {:description => 'RECEIVED NOTE', :in_out => "IN"},
   {:description => 'PRODUCTION RETURN', :in_out => "IN"},
   {:description => 'RETURN STOCK FORM LOAN', :in_out => "IN"},
   {:description => 'REJECT FOR REWORK / RETURN', :in_out => "OUT"},
@@ -112,46 +112,50 @@ InventoryIssue.create([
   {:description => 'REQUEST FOR SAMPLE', :in_out => "OUT"},
   {:description => 'ON LOAN', :in_out => "OUT"},
   {:description => 'SCRAP NOTE', :in_out => "OUT"},
-  {:description => 'NEW PRODUCT'}
+  {:description => 'NEW PRODUCT', :in_out => "IN"},
+  {:description => 'FINISH GOODS', :in_out => "IN"},
+  {:description => 'DELIVERY ORDER', :in_out => "OUT"},
+  {:description => 'EXPIRED SCRAP DAMAGED', :in_out => "OUT"},
+  {:description => 'TRANSFER NOTE', :in_out => "OUT"},
 ])
 
-Material.create([
-  {code: '1', :description => 'Spray Powder'},
-  {code: '2', :description => 'Ink Remover'},
-  {code: '3', :description => 'Plate Cleaner'},
-  {code: '4', :description => 'Cotton Rag'},
-  {code: '5', :description => 'OPP Varnish'},
-  {code: '6', :description => 'IPA'},
-  {code: '7', :description => 'Kerosene'},
-  {code: '8', :description => 'Water Base'},
-  {code: '9', :description => 'Lube Guard'},
-  {code: '10', :description => 'Anti Skin'},
-  
-  {code: '11', :description => 'Foamex'},
-  {code: '12', :description => 'Drier'},
-  {code: '13', :description => 'Orange Sponge'},
-  {code: '14', :description => 'Thinner'},
-  {code: '15', :description => 'Blanket with Bar'},
-  {code: '16', :description => 'Blanket'},
-  {code: '17', :description => 'Litho Thin Varnish'},
-  {code: '18', :description => 'Jelly Compound'},
-  {code: '19', :description => 'Die Cut Sponge'},
-  {code: '20', :description => 'Channel'},
-  
-  {code: '21', :description => 'SKP Tape'},
-  {code: '22', :description => 'Masking Tape'},
-  {code: '23', :description => 'Glue 8890'},
-  {code: '24', :description => 'Glue V2350'},
-  {code: '25', :description => 'Rubber Band'},
-  {code: '26', :description => 'OPP Tape'},
-  {code: '27', :description => 'Fountain'},
-  {code: '28', :description => 'Semi Auto Strap'},
-  {code: '29', :description => 'Clip'},
-  {code: '30', :description => 'Stretch Film'},
-  
-  {code: '31', :description => 'Double Side Tape'},
-  {code: '32', :description => 'Silicone Spray'}
-])
+#Material.create([
+#  {code: '1', :description => 'Spray Powder'},
+#  {code: '2', :description => 'Ink Remover'},
+#  {code: '3', :description => 'Plate Cleaner'},
+#  {code: '4', :description => 'Cotton Rag'},
+#  {code: '5', :description => 'OPP Varnish'},
+#  {code: '6', :description => 'IPA'},
+#  {code: '7', :description => 'Kerosene'},
+#  {code: '8', :description => 'Water Base'},
+#  {code: '9', :description => 'Lube Guard'},
+#  {code: '10', :description => 'Anti Skin'},
+#  
+#  {code: '11', :description => 'Foamex'},
+#  {code: '12', :description => 'Drier'},
+#  {code: '13', :description => 'Orange Sponge'},
+#  {code: '14', :description => 'Thinner'},
+#  {code: '15', :description => 'Blanket with Bar'},
+#  {code: '16', :description => 'Blanket'},
+#  {code: '17', :description => 'Litho Thin Varnish'},
+#  {code: '18', :description => 'Jelly Compound'},
+#  {code: '19', :description => 'Die Cut Sponge'},
+#  {code: '20', :description => 'Channel'},
+#  
+#  {code: '21', :description => 'SKP Tape'},
+#  {code: '22', :description => 'Masking Tape'},
+#  {code: '23', :description => 'Glue 8890'},
+#  {code: '24', :description => 'Glue V2350'},
+#  {code: '25', :description => 'Rubber Band'},
+#  {code: '26', :description => 'OPP Tape'},
+#  {code: '27', :description => 'Fountain'},
+#  {code: '28', :description => 'Semi Auto Strap'},
+#  {code: '29', :description => 'Clip'},
+#  {code: '30', :description => 'Stretch Film'},
+#  
+#  {code: '31', :description => 'Double Side Tape'},
+#  {code: '32', :description => 'Silicone Spray'}
+#])
 
 #CompanyProfile.create([
 #  :name => 'ETHEOS IMPRINT TECHNOLOGY SDN BHD',

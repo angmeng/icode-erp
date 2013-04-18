@@ -1,7 +1,6 @@
 class ReceiveNoteItemsController < ApplicationController
   before_filter :authenticate_user!
-  # GET /receive_note_items
-  # GET /receive_note_items.json
+
   def index
     @receive_note_items = ReceiveNoteItem.all
 
@@ -11,8 +10,6 @@ class ReceiveNoteItemsController < ApplicationController
     end
   end
 
-  # GET /receive_note_items/1
-  # GET /receive_note_items/1.json
   def show
     @receive_note_item = ReceiveNoteItem.find(params[:id])
 
@@ -22,8 +19,6 @@ class ReceiveNoteItemsController < ApplicationController
     end
   end
 
-  # GET /receive_note_items/new
-  # GET /receive_note_items/new.json
   def new
     @receive_note_item = ReceiveNoteItem.new
 
@@ -33,13 +28,10 @@ class ReceiveNoteItemsController < ApplicationController
     end
   end
 
-  # GET /receive_note_items/1/edit
   def edit
     @receive_note_item = ReceiveNoteItem.find(params[:id])
   end
 
-  # POST /receive_note_items
-  # POST /receive_note_items.json
   def create
     @receive_note_item = ReceiveNoteItem.new(params[:receive_note_item])
 
@@ -54,8 +46,6 @@ class ReceiveNoteItemsController < ApplicationController
     end
   end
 
-  # PUT /receive_note_items/1
-  # PUT /receive_note_items/1.json
   def update
     @receive_note_item = ReceiveNoteItem.find(params[:id])
 
@@ -70,8 +60,6 @@ class ReceiveNoteItemsController < ApplicationController
     end
   end
 
-  # DELETE /receive_note_items/1
-  # DELETE /receive_note_items/1.json
   def destroy
     @receive_note_item = ReceiveNoteItem.find(params[:id])
     @receive_note_item.destroy

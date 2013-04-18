@@ -8,11 +8,7 @@
     </tr>
     <tr>
       <td><b>Product ID</b></td>
-      <td><%= @stock_out.product.product_combobox.product_code rescue '-' %></td>
-    </tr>
-    <tr>
-      <td><b>Description</b></td>
-      <td><%= @stock_out.product.desc  rescue '-' %></td>
+      <td>[ <%= @stock_out.product.product_combobox.product_code rescue '-' %> ] <%= @stock_out.product.desc  rescue '-' %></td>
     </tr>
     <tr>
       <td><b>Quantity</b></td>

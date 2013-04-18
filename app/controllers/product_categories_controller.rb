@@ -121,6 +121,12 @@ class ProductCategoriesController < ApplicationController
     redirect_to @product_category, notice: 'Common Code was successfully updated.'
   end
   
+  def copy
+    @product_category = ProductCategory.find(params[:id])
+    ProductManagement.generate_copying(@product_category)
+    redirect_to @product_category, notice: 'Copy Code was successfully updated.'
+  end
+  
   #new folder is ok
   def new_folder
     @category = ProductCategory.new(params[:product_category])

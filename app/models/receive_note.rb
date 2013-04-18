@@ -79,7 +79,7 @@ class ReceiveNote < ActiveRecord::Base
               end
 
               rni = ReceiveNoteItem.create!(:receive_note_id => rn_id, :received_qty => received_qty, :purchase_order_item_line_id => item.id, :vendor_part_no => part_no)
-              InventoryHistory.create!(:receive_note_item_id => rni.id, :product_id => prod_id, :stock_in => received_qty, :stock_out => 0, :amount => sum, :inventory_issue_id => InventoryIssue::RECEIVED_NOTE, :created_at => rni.receive_note.rn_date)
+              InventoryHistory.create!(:receive_note_item_id => rni.id, :product_id => prod_id, :stock_in => received_qty, :stock_out => 0, :amount => sum, :inventory_issue_id => InventoryIssue.find_by_description("RECEIVED NOTE").id, :created_at => rni.receive_note.rn_date)
               item.purchase_requisition_item.product.update_attributes(:current_stock => sum)
               
               if balance == 0

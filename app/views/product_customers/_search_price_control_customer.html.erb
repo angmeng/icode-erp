@@ -10,6 +10,16 @@
             <%= f.select :trade_company_id_equals, options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %>
           <% end %>
         </td>
+      </tr>
+      <tr>
+        <td><b>Product ID</b></td>
+        <td>
+          <% if @search.product_id_equals.present? %>
+            <%= f.select :product_id_equals, options_for_select(product_finish_goods_with_combobox, @search.product_id_equals), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %>
+          <% else %>
+            <%= f.select :product_id_equals, options_for_select(product_finish_goods_with_combobox), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:600px;" } %>
+          <% end %>
+        </td>
         <td><%= submit_tag "Search", :class => "k-button" %></td>
       </tr>
     </table>

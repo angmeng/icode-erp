@@ -80,7 +80,7 @@ class ProductManagement
     @product.update_attributes!(:code => string)
     @combo = ProductCombobox.new(:product_code => Product.category(@product), :product_id => @product.id, :category_type => @product.product_category.category_type)
     @combo.save!
-    @inventory = @product.inventory_histories.new(:stock_in => @product.opening_stock, :stock_out => 0, :inventory_issue_id => InventoryIssue::NEW_PRODUCT)
+    @inventory = @product.inventory_histories.new(:stock_in => @product.opening_stock, :stock_out => 0, :inventory_issue_id => InventoryIssue.find_by_description("NEW PRODUCT").id)
     @inventory.save!
   end
   
@@ -97,8 +97,7 @@ class ProductManagement
   end
   
   def self.add_product_vendor(product, po_up, po_vendor_id)
-#    product.product_vendors.create!(:trade_company_id => po_vendor_id, :unit_price => po_up)
-    ProductVendor.create!(:trade_company_id => po_vendor_id, :unit_price => po_up)
+    ProductVendor.create!(:product_id => product.id, :trade_company_id => po_vendor_id, :unit_price => po_up)
   end
   
 #  Group Start
@@ -200,6 +199,33 @@ class ProductManagement
         end
       end
     end
+  end
+  
+  def self.generate_copying(product_category)
+    ProductCategory.transaction do
+      ProductCombobox.transaction do
+        Product.transaction do
+          
+          if product_category.is_file?
+            
+            self.base_and_sub_name_when_exist_product_id()
+            prod = take_file.product
+          end
+          
+#          if product_category.parent.present?
+#            new_product_category = product_category.dup
+#            new_product_category.code = common_code
+#            new_product_category.save!
+#            product_category.update_attributes!(:parent_id => new_product_category.id, :active_common => true) 
+#          end
+#          
+#          if product_category.product.present?
+#            prod = product_category.product
+#            prod.product_combobox.update_attributes!(:old_product_code => prod.product_combobox.product_code, :product_code => Product.category(prod)) if prod.product_combobox.present?
+#          end
+        end
+      end
+    end    
   end
   
   # Product - Delete Module

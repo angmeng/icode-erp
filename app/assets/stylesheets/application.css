@@ -478,7 +478,7 @@ tr.selected_row td{ background: gold; }
 /* Product Layout */
 .product_button     { padding: 5px; }
 .product_container  { margin: 5px; height: 450px; overflow: auto; }
-#right-pane         { background-color: gainsboro; }
+#right-pane         { background-color: papayawhip; }
 
 
 fieldset { border: 1px solid green; padding: 5px; }

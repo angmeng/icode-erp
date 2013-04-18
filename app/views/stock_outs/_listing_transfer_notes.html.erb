@@ -3,29 +3,29 @@
     <th class="check_highlight"></th>
     <th>Transfer Note No</th>
     <th>Product ID</th>
-    <th>Description</th>
     <th>Quantity</th>
+    <th>U/M</th>
+    <th>Previous Stock</th>
     <th>Balance</th>
     <th>Collector Name</th>
     <th>Location</th>
     <th>Reference No.</th>
     <th>Issued By</th>
-    <th>U/M</th>
   </tr>
 
   <% lists.each do |stock_out| %>
     <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= stock_out.id %>">
       <td></td>
       <td align="center"><%= stock_out.transfer_note_no rescue '-' %></td>
-      <td align="center"><%= stock_out.product.product_combobox.product_code rescue '-' %></td>
-      <td><%= stock_out.product.desc rescue '-' %></td>
+      <td>[ <%= stock_out.product.product_combobox.product_code rescue '-' %> ] <%= stock_out.product.desc rescue '-' %></td>
       <td align="center"><%= two_precision(stock_out.quantity) rescue '-' %></td>
+      <td align="center"><%= stock_out.unit_measurement.code rescue '-' %></td>
+      <td align="center"><%= two_precision(stock_out.previous_stock) rescue '-' %></td>
       <td align="center"><%= two_precision(stock_out.balance) rescue '-' %></td>
       <td align="center"><%= stock_out.collector_name rescue '-' %></td>
       <td align="center"><%= stock_out.location rescue '-' %></td>
       <td align="center"><%= stock_out.reference_no rescue '-' %></td>
       <td align="center"><%= User.find(stock_out.issued_by).name rescue '-' %></td>
-      <td align="center"><%= stock_out.unit_measurement.code rescue '-' %></td>
     </tr>
   <% end %>
 </table> 

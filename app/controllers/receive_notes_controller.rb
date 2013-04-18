@@ -2,7 +2,7 @@ class ReceiveNotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :implement_product_id
   before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:new, :edit]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
 
   def index
     @search = ReceiveNote.search(params[:search])
@@ -19,7 +19,6 @@ class ReceiveNotesController < ApplicationController
   def show
     @receive_note = ReceiveNote.find(params[:id])
     @poil = @receive_note.receive_note_items.first.purchase_order_item_line
-    render :layout => "sheetbox"
   end
 
   def new
@@ -36,7 +35,6 @@ class ReceiveNotesController < ApplicationController
   def edit
     @receive_note = ReceiveNote.find(params[:id])
     @po_no = PurchaseOrder.find_company_id(@receive_note.trade_company_id)
-    render :layout => 'sheetbox'
   end
 
   def create

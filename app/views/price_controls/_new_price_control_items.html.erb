@@ -41,7 +41,7 @@
         </td>        
         
         <td align="center" width="150">
-          <%= text_field_tag   "datarow[0][new_eff_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Eff Date", :style => "width: 120px;" %>
+          <%= text_field_tag   "datarow[0][new_eff_date]", Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Eff Date", :style => "width: 120px;" %>
           <span class="k-invalid-msg" data-for="datarow[0][new_eff_date]"></span>
         </td>
         <td align="center"><%= remove_row_button %></td>

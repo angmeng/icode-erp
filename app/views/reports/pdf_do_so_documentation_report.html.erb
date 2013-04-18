@@ -1,11 +1,11 @@
 
 <% if @detail_invoice_documentation_report.present? %>
 
-	<%= render "invoice_documentation" %>
+  <div class="invoice_layout"><%= render "invoice_documentation" %></div>
 
 <% elsif @detail_delivery_order_documentation_report.present? %>
 
-	<%= render "delivery_order_documentation" %>
+	<div class="invoice_layout"><%= render "delivery_order_documentation" %></div>
 
  <% else %>
  	<div> No record found </div>
@@ -13,3 +13,11 @@
 
 
 
+        <style>
+.invoice_layout {
+  margin-top: 1.5cm;
+  margin-right: 10px;   
+  margin-bottom: 10px; 
+  margin-left: 10px;
+}
+</style>

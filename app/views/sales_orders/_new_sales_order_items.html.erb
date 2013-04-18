@@ -54,22 +54,8 @@
             <%= hidden_field_tag "datarow[#{index}][part_no]", soi.part_no %>
           </td>  
           <td align="center"><%= text_field_tag "datarow[#{index}][lot_no]", soi.lot_no, :class => "k-textbox" %></td>
-          <td align="center">
-            <%= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date, :class => "k-textbox", :style => "width: 80px;" %>
-            <%# if soi.mfg_date.present? %>
-              <%#= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
-            <%# else %>
-              <%#= text_field_tag "datarow[#{index}][mfg_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
-            <%# end %>
-          </td>
-          <td align="center">
-            <%= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date, :class => "k-textbox", :style => "width: 80px;" %>
-            <%# if soi.exp_date.present? %>
-              <%#= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date.strftime("%d-%m-%Y"), :class => "mkendo_date", :style => "width: 100px;" %>
-            <%# else %>
-              <%#= text_field_tag "datarow[#{index}][exp_date]", '', :class => "mkendo_date", :style => "width:100px;" %>
-            <%# end %>
-          </td>
+          <td align="center"><%= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date, :class => "k-textbox", :style => "width: 80px;" %></td>
+          <td align="center"><%= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date, :class => "k-textbox", :style => "width: 80px;" %></td>
           <td align="center"><%= remove_row_button  %></td>
 
         </tr>

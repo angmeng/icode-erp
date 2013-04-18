@@ -34,7 +34,7 @@ class DebitNote < ActiveRecord::Base
   def update_debit_thing(company)
     company.sn_debit_note_no  = self.debit_note_no
     company.save!
-    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.debit_note_date, :transaction_type => "DN", :credit_note_id => 0, :debit_note_id => self.id)
+    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.debit_note_date, :transaction_type => "DN", :credit_note_id => 0, :debit_note_id => self.id, :payment_received_id => 0, :delivery_order_id => 0)
     @soa.save!
   end
 end

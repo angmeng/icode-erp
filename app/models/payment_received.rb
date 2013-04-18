@@ -6,6 +6,8 @@ class PaymentReceived < ActiveRecord::Base
   
   validates :trade_company_id, :payment_date, :bank, :place, :cheque_amount, :cheque_date, :cheque_amount, :updated_by, :presence => true
   
+  has_many :statement_of_accounts, :dependent => :destroy
+  
   belongs_to :trade_company
   
   default_scope order("payment_date DESC")
@@ -21,7 +23,7 @@ class PaymentReceived < ActiveRecord::Base
   end
   
   def payment_received_update_to_statement
-    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.payment_date, :transaction_type => "REC", :credit_note_id => self.id, :debit_note_id => 0)
+    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.payment_date, :transaction_type => "REC", :credit_note_id => 0, :debit_note_id => 0, :payment_received_id => self.id, :delivery_order_id => 0)
     @soa.save!
   end
   

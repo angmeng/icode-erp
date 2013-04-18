@@ -34,7 +34,7 @@ class CreditNote < ActiveRecord::Base
   def update_credit_thing(company)
     company.sn_credit_note_no  = self.credit_note_no
     company.save!
-    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.credit_note_date, :transaction_type => "CN", :credit_note_id => self.id, :debit_note_id => 0)
+    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.credit_note_date, :transaction_type => "CN", :credit_note_id => self.id, :debit_note_id => 0, :payment_received_id => 0, :delivery_order_id => 0)
     @soa.save!
   end
 end

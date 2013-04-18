@@ -15,7 +15,10 @@
         </tr>
         <tr>
           <td><b>Current Stock</b></td>
-          <td><span id="current_product_stock"></span></td>
+          <td>
+            <span id="current_product_stock"></span>
+            <%= f.text_field :previous_stock %>
+          </td>
         </tr>
         <tr>
           <td><b>Quantity *</b></td>
@@ -64,15 +67,15 @@
   <script>
     $(document).ready(function() {
         $("#stock_out_quantity").keyup(function(){
-          var a = $("#stock_value").html();
-          var b = $("#stock_out_quantity").val();
-          balance = a - b;
+          var a = +$("#current_product_stock").html();
+          var b = +$("#stock_out_quantity").val();
+          var balance = a - b;
           $("#stock_out_balance").val(balance);
           $("#stock_out_balance_span").html(balance);
           
           if (balance < 0){ 
             if (balance){ alert("Over Stock"); }
-            else { alert("Should not use negative value."); }
+            else        { alert("Should not use negative value."); }
             $("#stock_out_save_button").hide(); 
           } 
           else {
@@ -83,11 +86,33 @@
         var validator = $("#valid_transfer_note").kendoValidator().data("kendoValidator");
         
         $("#save_button").click(function() {
-            if (validator.validate()) {}
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
         
     });
+    
+    function getCombo_product(sel) {
+        var product = sel.options[sel.selectedIndex].value;
+
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            url: '/products/' + product + '/current_stock',
+            timeout: 2000,
+            success: function(data){
+                $("#current_product_stock").html(data.current_stock);
+                $("#stock_out_previous_stock").val(data.current_stock);
+                $("#stock_out_um").html(data.um);
+                $("#stock_out_unit_measurement_id").val(data.unit_measurement_id);
+
+                if (data.current_stock == 0){
+                    alert("Current stock has not available now.")   
+                    $("#stock_out_save_button").hide();
+                }
+            }
+        });
+    }
 
   </script>
 
