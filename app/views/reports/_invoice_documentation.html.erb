@@ -84,6 +84,8 @@
 	<br />
 	<table class="table_middle">
 		<tr >
+			<td width="290"></td>
+			<td >
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.sales_tax_licence_no.present? %>
 						<%= p.trade_company.sales_tax_licence_no rescue'-'%>
@@ -91,17 +93,21 @@
 						&nbsp;
 					<% end %>
 				<% end %>
-			
+			</td>
 		</tr>
 		<tr>
+			<td width="290"></td>
+			<td>
 				<% if p.sales_tax_exemption.present? %>
 					<%= p.sales_tax_exemption rescue'-' %>
 				<%else%>
 						&nbsp;
 				<%end%>
+			</td>
 		</tr>
 		<tr>
-			
+			<td width="290"></td>
+			<td>
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.warehouse_licence_no.present? %>
 						<%= p.trade_company.warehouse_licence_no rescue'-' %>
@@ -109,8 +115,11 @@
 						&nbsp;
 					<% end %>
 				<% end %>
+			</td>
 		</tr>
 		<tr>
+			<td width="290"></td>
+			<td>
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.mfg_warehouse_licence_no.present? %>
 						<%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
@@ -118,6 +127,7 @@
 						&nbsp;
 					<% end %>
 				<% end %>
+			</td>
 		</tr>
 	</tr>
 	</table>
@@ -266,8 +276,8 @@ height:20px;
   margin-bottom: -2cm;
 }
 
-.table_middle tr{
-	margin-left: 290px;
+table.table_middle  td{
+	
 }
 
 
