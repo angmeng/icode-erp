@@ -49,7 +49,7 @@
 	<!-- <div class="break_page_before"></div> -->
 	<table style="page-break-before:always;">
 	<% end %>
-	<table style="width:100%;margin-top:100px;">
+	<table style="width:100%;margin-top:150px;">
 	
 		<tr>
 			<td style="width:10cm;">
@@ -149,7 +149,7 @@
 	<tbody>
 		<% p.delivery_order_items.each_with_index do |doi , index| %>
 	    <tr> 
-	      <td align="center"><%= index + 1 %></td>
+	      <td align="left"><%= index + 1 %></td>
 	      <td align="center">
 	       	<%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %><br/>
 	      	<%= doi.client_po rescue'-' %><br />
@@ -288,13 +288,13 @@ table.table_middle  td{
     white-space: nowrap;
 }
 .column_2 {
-    width: 200px;
+    width: 100px;
     /*overflow: hidden;*/
     display: inline-block;
     white-space: nowrap;
 }
 .column_3 {
-    width: 250px;
+    width: 200px;
     /*overflow: hidden;*/
     display: inline-block;
     white-space: nowrap;
