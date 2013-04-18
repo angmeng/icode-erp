@@ -1,255 +1,217 @@
-<!-- 
-
-<table>
-	<tr>
-		<th>1</th>
-		<th>1</th>
-		<th>1</th>
-		<th>1</th>
-	</tr>
-
-
-	
-	<tr class="page_break_after">
-		<td>1</td>
-		<td>2</td>
-		<td>3</td>
-		<td>4</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td>6</td>
-		<td>7</td>
-		<td>8</td>
-	</tr>
-	<tr>
-		<td>9</td>
-		<td>10</td>
-		<td>11</td>
-		<td>12</td>
-	</tr>
-</table> -->
-
-
-
-<%# count = 0 %>
 <% if @detail_invoice_documentation_report.present? %>
-	<% @detail_invoice_documentation_report.each_with_index do |p, index|%>
-<!-- 	<%# if count % 6 == 0 %>  
-	<div style="page-break-before: always;">-->
+  <% @detail_invoice_documentation_report.each_with_index do |p, index|%>
 
-	<% arr = [] %>
-	<% array = [] %>
+    <% arr = [] %>
+    <% array = [] %>
 	 
-
-	
-	<% if index == 0 %>
-	<div>
-	<% else %>
-	<!-- <div class="break_page_before"></div> -->
-	<table style="page-break-before:always;">
-	<% end %>
-	<table style="width:100%;margin-top:120px;">
-	
-		<tr>
-			<td style="width:10cm;">
-					<div class="part1">
-						<%= p.trade_company.name rescue'-'%><br />
-						<%= p.trade_company.address_1 rescue'-'%><br />
-						
-		                <% if p.trade_company.postcode_one.present? %>
-		                  <%= p.trade_company.postcode_one rescue '-' %>&nbsp;
-		                <% end %>
-		                <% if p.trade_company.city_one.present? %>
-		                  <%= p.trade_company.city_one rescue '-' %>,&nbsp;
-		                <% end %>
-		                <% if p.trade_company.state_one.present? %>
-		                  <%= p.trade_company.state_one rescue '-' %>,&nbsp;
-		                <% end %>
-		                <% if p.trade_company.country_one.present? %>
-		                  <%= p.trade_company.country_one rescue '-' %>.
-		                <% end %> 
-						<p>Tel :<%= p.trade_company.tel_no_1 rescue'-'%>
-						<%= p.trade_company.tel_no_2 rescue'-'%>/ 
-						Fax :<%= p.trade_company.fax_no rescue'-' %></p>
-					</div>
-
-				
-				
-			</td>
-			<td style="width:2cm;"></td>
-			<td style="width:8cm;">
-				<div class="part2" style="margin-left:200px;margin-top:20px;">
-					<%= p.do_no rescue'-' %><br />
-					<%= p.do_date.strftime("%d-%m-%Y") rescue'-' %><br />
-					<%= p.trade_term.name rescue'-' %><br />
-					<%= p.currency.name rescue'-' %><br />
-					<%= p.sales_rep rescue'-' %><br />
-					<%= p.transport.name rescue'-' %>
-				</div>
-			</td>
-		</tr>
-	</table>
-	</table>
-	
-	<br />
-	<table>
-		<tr >
-			<td width="290"></td>
-			<td >
-				<% if p.trade_company.present? %>
-					<% if p.trade_company.sales_tax_licence_no.present? %>
-						<%= p.trade_company.sales_tax_licence_no rescue'-'%>
-					<% else %>
-						&nbsp;111
-					<% end %>
-				<% end %>
-			</td>
-		</tr>
-		<tr>
-			<td width="290"></td>
-			<td>
-				<% if p.sales_tax_exemption.present? %>
-					<%= p.sales_tax_exemption rescue'-' %>
-				<%else%>
-						&nbsp;111
-				<%end%>
-			</td>
-		</tr>
-		<tr>
-			<td width="290"></td>
-			<td>
-				<% if p.trade_company.present? %>
-					<% if p.trade_company.warehouse_licence_no.present? %>
-						<%= p.trade_company.warehouse_licence_no rescue'-' %>
-					<% else %>
-						&nbsp;111
-					<% end %>
-				<% end %>
-			</td>
-		</tr>
-		<tr>
-			<td width="290"></td>
-			<td>
-				<% if p.trade_company.present? %>
-					<% if p.trade_company.mfg_warehouse_licence_no.present? %>
-						<%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
-					<% else %>
-						&nbsp;111
-					<% end %>
-				<% end %>
-			</td>
-		</tr>
-	</tr>
-	</table>
-	
-		
-	
-<table class="fix_doi_size">	
-	<thead>
-		<tr>
-			<th class="column_1"></th>
-			<th class="column_2"></th>
-			<th class="column_3"></th>
-			<th class="column_4"></th>
-			<th class="column_5"></th>
-			<th class="column_6"></th>
-			<th class="column_7"></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% p.delivery_order_items.each_with_index do |doi , index| %>
-	    <tr> 
-	      <td align="left" style="vertical_align:top;"><%= index + 1 %></td>
-	      <td align="left">
-	       	<%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %><br/>
-	      	<%= doi.client_po rescue'-' %><br />
-	      	<%= doi.client_lot rescue'-' %>
-	      </td>
-	      <td align="left">
-
-	      	<% if doi.sales_order_item.present? %>
-					<% if doi.sales_order_item.product.present? %>
-						<% if doi.sales_order_item.product.product_category.present? %>
-							<% if doi.sales_order_item.product.product_category.refer_category_id.present? %>
-			<% @pc = ProductCategory.find(doi.sales_order_item.product.product_category.refer_category_id) %>
-					<%= @pc.code rescue'-' %><br />
-					<% else %>
-						-
-							<% end %>
-						<% end %>
-					<% end %>
-				<% end %>
-	      	<%= doi.sales_order_item.product.desc rescue'-' %><br />
-	      	<%= doi.sales_order_item.part_no rescue'-' %>
-	      </td>
-	      <td align="left"><%= doi.no_of_carton rescue'-' %></td>
-	      <td align="left">
-	      	<%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
-	      	<% array << doi.no_of_carton %>
-	      <td align="center"><%= doi.unit_price rescue'-' %></td>
-	      	
-	      <td align="right"><%= iproduct(doi.delivery_qty, doi.unit_price) %></td>
-	      	<% arr << doi.delivery_qty * doi.unit_price %>
-	    </tr>
-	    <tr></tr>
-        <%# count += 1 %>
-        <% end %>
-
+    <% if index == 0 %>
+      <div style="margin-top: 200px;">
+      <%#*<table style="margin-top: 200px;">%>
+        <%#*<tr>%>
+          <%#*<td>%>
+    <% else %>
+      <div style="page-break-before: always;">
+        <br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br />
+        <br/>
+      <%#*<table style="margin-top: 300px; page-break-before:always; ">%>
+        <%#*<tr>%>
+          <%#*<td>%>
+    <% end %>
         
-       
-          <tr>
-        	<td></td>
-        	<td></td>
-        	<td align="center">Total :</td>
-        	<td align="left">
+            <table style="width:100%;">
+              <tr>
+                <td style="width: 600px;" class="part1">
+                  <%= p.trade_company.name rescue'-'%><br />
+                  <%= p.trade_company.address_1 rescue'-'%><br />
 
-        		<p>--------</p>
-        		<p><%= no_precision(array.sum) %></p>
-        		<p>--------</p>
-        	</td>
-        	<td></td>
-        	<td align="center">Total :</td>
-        	<td align="center">
+                  <% if p.trade_company.postcode_one.present? %>
+                    <%= p.trade_company.postcode_one rescue '-' %>&nbsp;
+                  <% end %>
+                  <% if p.trade_company.city_one.present? %>
+                    <%= p.trade_company.city_one rescue '-' %>,&nbsp;
+                  <% end %>
+                  <% if p.trade_company.state_one.present? %>
+                    <%= p.trade_company.state_one rescue '-' %>,&nbsp;
+                  <% end %>
+                  <% if p.trade_company.country_one.present? %>
+                    <%= p.trade_company.country_one rescue '-' %>.
+                  <% end %> 
 
-        		<p>-------</p>
-        		<p><%= two_precision(arr.sum) %></p>
-        		<p>-------</p>
-        	</td>
-        </tr>
-       <%# @detail_invoice_documentation_report.each do |s|%>
-	   <tr>
-	   	   <% 5.times do |td| %><td></td><% end %>
-           <td align="center">+ S/Tax 0%:</td>      
-           <td align="right"><%= p.sales_tax rescue'-' %></td> 
-        </tr>
-        <tr>
-           <% 5.times do |td| %><td></td><% end %>
-           <td align="center">+ T/Charges:</td>
-           <td align="right"><%= p.tport_c rescue'-' %></td>
-           <% arr << p.sales_tax + p.tport_c %>
-       </tr>
-       <%# end %>
-       	
-		
-       <tr>
-        	<% 6.times do |td| %><td></td><% end %>
-           <td align="right">
-           	<p>-------</p>
-           	<p><%= two_precision(arr.sum) %></p>
-           	<p>-------</p>
-           	</td>
-           	
-           <% end %>
-       </tr>
-	</tbody>
-		
-</table>
+                  <br/>
 
+                  Tel: <%= p.trade_company.tel_area_code_one rescue '-' %>-<%= p.trade_company.tel_no_1 rescue '-' %>
+                  <% unless p.trade_company.tel_no_2.blank? %>
+                    / <%= p.trade_company.tel_area_code_two rescue '-' %>-<%= p.trade_company.tel_no_2 rescue '-' %>
+                  <% end %><br/>
+                  Fax :<%= p.trade_company.fax_no rescue'-' %><br/>
+                </td>
+
+                <td style="width: 100px;"></td>
+
+                <td style="width: 380px;">
+                        <div class="part2" style="margin-left: 150px; margin-top:40px;">
+                                <%= p.do_no rescue'-' %><br />
+                                <%= p.do_date.strftime("%d-%m-%Y") rescue'-' %><br />
+                                <%= p.trade_term.name rescue'-' %><br />
+                                <%= p.currency.name rescue'-' %><br />
+                                <%= p.sales_rep rescue'-' %><br />
+                                <%= p.transport.name rescue'-' %>
+                        </div>
+                </td>
+              </tr>
+            </table>
+
+            <br />
+
+            <table>
+              <tr>
+                <td width="290"></td>
+                <td>
+                  <% if p.trade_company.present? %>
+                          <% if p.trade_company.sales_tax_licence_no.present? %>
+                                  <%= p.trade_company.sales_tax_licence_no rescue'-'%>
+                          <% else %>
+                                  &nbsp;
+                          <% end %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td width="290"></td>
+                <td>
+                  <% if p.sales_tax_exemption.present? %>
+                    <%= p.sales_tax_exemption rescue'-' %>
+                  <% else %>
+                    &nbsp;
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td width="290"></td>
+                <td>
+                  <% if p.trade_company.present? %>
+                    <% if p.trade_company.warehouse_licence_no.present? %>
+                      <%= p.trade_company.warehouse_licence_no rescue'-' %>
+                    <% else %>
+                      &nbsp;
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td width="290"></td>
+                <td>
+                  <% if p.trade_company.present? %>
+                    <% if p.trade_company.mfg_warehouse_licence_no.present? %>
+                      <%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
+                    <% else %>
+                      &nbsp;
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+
+            <table class="fix_doi_size">	
+  
+                <tr>
+                            <th width="40"></th>
+                            <th width="170"></th>
+                            <th width="270"></th>
+                            <th width="60"></th>
+                            <th width="184"></th>
+                            <th width="127"></th>
+                            <th width="127"></th>
+
+                </tr>
+
+                <% p.delivery_order_items.each_with_index do |doi , index| %>
+                  <% array << doi.no_of_carton %>
+                  <% arr << doi.delivery_qty * doi.unit_price %>
+                  <tr> 
+                    <td align="left" style="vertical-align: top;"><%= index + 1 %></td>
+                    <td align="left" style="vertical-align: top;">
+                      <%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %><br/>
+                      <%= doi.client_po rescue'-' %><br />
+                      <%= doi.client_lot rescue'-' %>
+                    </td>
+                    <td align="left" style="vertical-align: top;">
+                      <% if doi.sales_order_item.present? %>
+                        <% if doi.sales_order_item.product.present? %>
+                          <% if doi.sales_order_item.product.product_category.present? %>
+                            <% if doi.sales_order_item.product.product_category.refer_category_id.present? %>
+                              <% @pc = ProductCategory.find(doi.sales_order_item.product.product_category.refer_category_id) %>
+                              <%= @pc.code rescue'-' %><br />
+                            <% else %>
+                              -
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                      <%= doi.sales_order_item.product.desc rescue'-' %><br />
+                      <%= doi.sales_order_item.part_no rescue'-' %>
+                    </td>
+                    <td align="center"><%= doi.no_of_carton rescue'-' %></td>
+                    <td align="center"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
+                    <td align="right" style="padding-right: 5px;"><%= four_precision(doi.unit_price) rescue'-' %></td>
+                    <td align="right" style="padding-right: 5px;"><%= iproduct(doi.delivery_qty, doi.unit_price) %></td>
+                  </tr>
+                  <tr>
+                    <td height="5px;"></td>
+                  </tr>
+                <% end %>
+
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td align="center">Total :</td>
+                  <td align="center">
+                    --------<br/>
+                    <%= no_precision(array.sum) %><br/>
+                    --------<br/>
+                  </td>
+                  <td></td>
+                  <td align="center">Total :</td>
+                  <td align="right" style="padding-right:5px;">
+                    --------<br/>
+                    <%= two_precision(arr.sum) %><br/>
+                    --------<br/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <% 5.times do |td| %><td></td><% end %>
+                  <td align="center">+ S/Tax 0%:</td>      
+                  <td align="right"><%= p.sales_tax rescue'-' %></td> 
+                </tr>
+
+                <tr>
+                  <% 5.times do |td| %><td></td><% end %>
+                  <td align="center">+ T/Charges:</td>
+                  <td align="right"><%= p.tport_c rescue'-' %></td>
+                  <% arr << p.sales_tax + p.tport_c %>
+                </tr>
+
+                <tr>
+                  <% 6.times do |td| %><td></td><% end %>
+                  <td align="right">
+                    -------<br/>
+                    <%= two_precision(arr.sum) %><br/>
+                    -------<br/>
+                  </td>
+                </tr>
+
+            </table>
+
+        <%#*</td>%>
+      <%#*</tr>%>
+    <%#*</table>%>
+    </div>
+  <% end %>
+        
 <% else %>
-
-<h2>no record found </h2>
-
+  <h2>No Record Found</h2>
 <% end %>
 
 
@@ -264,7 +226,7 @@
 table
 {
 font-family:"Times New Roman";
-font-size: 12px;
+font-size: 15px;
 }
 /*th
 {
@@ -279,11 +241,10 @@ height:20px;
 }*/
 
 .part1 {
-  height: 150px;
+  <%#*height: 150px;%>
   /*border-style: solid;*/
-  width: 100%;
-  margin-left: 1cm;
-  margin-bottom: -1cm;
+  <%#*width: 100%;%>
+  padding-left: 50px;
 }
 
 
@@ -334,35 +295,15 @@ height:20px;
 
 .fix_doi_size {
 	width:fixed;
+        width: 970px;
 	/*margin-bottom: 150px;*/
 	
 }
 
 .fix_doi_size th{
-	height:20px;
+	height:50px;
 	/*border:1px solid black;*/
-}
-
-@media print {
-.break_page_after td{
-		page-break-after:always;
-	}
-.break_page_inside {
-		page-break-inside:auto;
-	}
-.break_page_before td{
-		page-break-before:always;
-	}
 }
  
 
 </style>
-
-<script type="text/javascript">
-// 	function breakeveryheader(){
-// 		var thestyle=(document.forms.myform.mybox.checked)? "always" : "auto"
-// 		for (i=0; i<document.getElementsByTagName("H2").length; i++)
-// 		document.getElementsByTagName("H2")[i].style.pageBreakBefore=thestyle
-// 	}
-
-// </script>
