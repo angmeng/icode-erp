@@ -41,18 +41,15 @@
 	<% arr = [] %>
 	<% array = [] %>
 	 
- 
-	<br />
-	<br />
-	<br />
-	<br />
+
+	
 	<% if index == 0 %>
 	<div>
 	<% else %>
 	<!-- <div class="break_page_before"></div> -->
-	<table style="width:100%;page-break-before:always;">
+	<table style="page-break-before:always;">
 	<% end %>
-	
+	<table style="width:100%;margin-top:100px;">
 	
 		<tr>
 			<td style="width:10cm;">
@@ -71,25 +68,22 @@
 			</td>
 			<td style="width:2cm;"></td>
 			<td style="width:8cm;">
-				<div>
-					<div class="part2" style="margin-left:240px;margin-top:47px;">
-					<div><%= p.do_no rescue'-' %></div>
-					<div><%= p.do_date.strftime("%d-%m-%Y") rescue'-' %></div>
-					<div><%= p.trade_term.name rescue'-' %></div>
-					<div><%= p.currency.name rescue'-' %></div>
-					<div><%= p.sales_rep rescue'-' %></div>
-					<div><%= p.transport.name rescue'-' %></div>
+				<div class="part2" style="margin-left:240px;margin-top:47px;">
+					<%= p.do_no rescue'-' %><br />
+					<%= p.do_date.strftime("%d-%m-%Y") rescue'-' %><br />
+					<%= p.trade_term.name rescue'-' %><br />
+					<%= p.currency.name rescue'-' %><br />
+					<%= p.sales_rep rescue'-' %><br />
+					<%= p.transport.name rescue'-' %>
 				</div>
-				</div>
-				
 			</td>
 		</tr>
 	</table>
+	</table>
 	
 	<br />
-<table>
-		<tr style="padding-left:200px;">
-			
+	<table class="table_middle">
+		<tr >
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.sales_tax_licence_no.present? %>
 						<%= p.trade_company.sales_tax_licence_no rescue'-'%>
@@ -99,14 +93,14 @@
 				<% end %>
 			
 		</tr>
-		<tr style="padding-left:200px;">
+		<tr>
 				<% if p.sales_tax_exemption.present? %>
 					<%= p.sales_tax_exemption rescue'-' %>
 				<%else%>
 						&nbsp;
 				<%end%>
 		</tr>
-		<tr style="padding-left:200px;">
+		<tr>
 			
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.warehouse_licence_no.present? %>
@@ -116,7 +110,7 @@
 					<% end %>
 				<% end %>
 		</tr>
-		<tr style="padding-left:200px;">
+		<tr>
 				<% if p.trade_company.present? %>
 					<% if p.trade_company.mfg_warehouse_licence_no.present? %>
 						<%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
@@ -126,20 +120,20 @@
 				<% end %>
 		</tr>
 	</tr>
-</table>
+	</table>
 	
 		
 	
 <table class="fix_doi_size">	
 	<thead>
 		<tr>
-			<th width="50px"></th>
-			<th width="250px"></th>
-			<th width="400px"></th>
-			<th width="150px"></th>
-			<th width="200px"></th>
-			<th width="160px"></th>
-			<th width="200px"></th>
+			<th class="column_1"></th>
+			<th class="column_2"></th>
+			<th class="column_3"></th>
+			<th class="column_4"></th>
+			<th class="column_5"></th>
+			<th class="column_6"></th>
+			<th class="column_7"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -165,8 +159,8 @@
 						<% end %>
 					<% end %>
 				<% end %>
-	      	<%= doi.sales_order_item.part_no rescue'-' %><br />
-	      	<%= doi.sales_order_item.product.desc rescue'-' %>
+	      	<%= doi.sales_order_item.product.desc rescue'-' %><br />
+	      	<%= doi.sales_order_item.part_no rescue'-' %>
 	      </td>
 	      <td align="center"><%= doi.no_of_carton rescue'-' %></td>
 	      <td align="center">
@@ -238,11 +232,6 @@
 
 <% end %>
 
- 
-<br />
-<br />
-<br />
-<br />
 
 	
 
@@ -257,17 +246,17 @@ table
 font-family:"Times New Roman";
 font-size: 12px;
 }
-th
+/*th
 {
 height:20px;
-}
+}*/
 
-.invoice_layout {
+/*.invoice_layout {
   margin-top: 1.5cm;
   margin-right: 10px;   
   margin-bottom: 10px; 
   margin-left: 10px;
-}
+}*/
 
 .part1 {
   height: 150px;
@@ -277,17 +266,57 @@ height:20px;
   margin-bottom: -2cm;
 }
 
+.table_middle tr{
+	margin-left: 290px;
+}
+
 
 .column_1 {
-    width: 800px;
-    overflow: hidden;
+    width: 50px;
+    /*overflow: hidden;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+.column_2 {
+    width: 200px;
+    /*overflow: hidden;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+.column_3 {
+    width: 250px;
+    /*overflow: hidden;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+.column_4 {
+    width: 70px;
+    /*overflow: hidden;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+.column_5 {
+    width: 100px;
+    /*overflow: hidden;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+.column_6 {
+    width: 100px;
+    /*overflow: hidden;*/
+    display: inline-block;
+    white-space: nowrap;
+}
+.column_7 {
+    width: 100px;
+    /*overflow: hidden;*/
     display: inline-block;
     white-space: nowrap;
 }
 
 
 .fix_doi_size {
-	width:auto;
+	width:fixed;
 	
 }
 
