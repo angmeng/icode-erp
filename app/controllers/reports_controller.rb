@@ -333,7 +333,7 @@ end
   def pdf_sales_order_summary_report
     if params[:commit] == "PDF Report"
       if params[:sos_ids].present?
-        @detail_sales_order_summary_report = SalesOrderItem.find(params[:sos_ids])
+        @detail_sales_order_summary_report = SalesOrder.find(params[:sos_ids])
         html = render_to_string(:layout => false , :action => "pdf_sales_order_summary_report.html.erb")
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf ,:filename => "pdf_sales_order_summary_report.pdf",
@@ -342,7 +342,7 @@ end
         end
       elsif params[:commit] == "Show"
         if params[:sos_ids].present?
-          @detail_sales_order_summary_report =  SalesOrderItem.find(params[:sos_ids])
+          @detail_sales_order_summary_report =  SalesOrder.find(params[:sos_ids])
           respond_to do |format|
             format.html
         end
@@ -419,18 +419,62 @@ end
 
        
 
-      end 
+        end 
       else
       redirect_to do_so_documentation_report_reports_path
     end
   end
 
   def pdf_delivery_order_summary_report
-    render :text => "pdf DO order summary report"
+    if params[:commit] == "PDF Report"
+      if params[:doc_ids].present?
+        @detail_delivery_order_summary_report = DeliveryOrder.find(params[:doc_ids])
+        html = render_to_string(:layout => false , :action => "pdf_delivery_order_summary_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf ,:filename => "pdf_delivery_order_summary_report.pdf",
+                                :type => 'application/pdf' , 
+                                :disposition => "attachement")
+        end
+      elsif params[:commit] == "Show"
+        if params[:doc_ids].present?
+          @detail_delivery_order_summary_report =  DeliveryOrder.find(params[:doc_ids])
+          respond_to do |format|
+            format.html
+        end
+      end
+    elsif params[:commit] == "Excel Report"
+      # if params[:so_ids].present?
+      #   redirect_to excel_so_customer_po_detail_report_reports_path(:so_ids => params[:so_ids] , :format => "xls")
+      # end
+    else
+      redirect_to so_customer_po_detail_report_reports_path
+      end 
   end
 
   def pdf_sales_order_listing_report
-    render :text => "pdf sales order listing report"
+    if params[:commit] == "PDF Report"
+      if params[:sol_ids].present?
+        @detail_sales_order_listing_report = SalesOrder.find(params[:sol_ids])
+        html = render_to_string(:layout => false , :action => "pdf_sales_order_listing_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf ,:filename => "pdf_sales_order_listing_report.pdf",
+                                :type => 'application/pdf' , 
+                                :disposition => "attachement")
+        end
+      elsif params[:commit] == "Show"
+        if params[:sol_ids].present?
+          @detail_sales_order_listing_report =  SalesOrder.find(params[:sol_ids])
+          respond_to do |format|
+            format.html
+        end
+      end
+    elsif params[:commit] == "Excel Report"
+      # if params[:so_ids].present?
+      #   redirect_to excel_so_customer_po_detail_report_reports_path(:so_ids => params[:so_ids] , :format => "xls")
+      # end
+    else
+      redirect_to so_customer_po_detail_report_reports_path
+      end 
   end
 
   def pdf_debit_note_report
@@ -546,7 +590,7 @@ end
   # end
 
   def sales_order_summary_report
-    @sales_order_summary_report = SalesOrderItem.search(params[:search])
+    @sales_order_summary_report = SalesOrder.search(params[:search])
     @show_sales_order_summary_report = @sales_order_summary_report.all
   end
 
@@ -564,12 +608,12 @@ end
   end
 
   def delivery_order_summary_report
-    @delivery_order_summary_report = DeliveryOrderItem.search(params[:search])
+    @delivery_order_summary_report = DeliveryOrder.search(params[:search])
     @show_delivery_order_summary_report = @delivery_order_summary_report.all
   end
 
   def sales_order_listing_report
-    @sales_order_listing_report = SalesOrderItem.search(params[:search])
+    @sales_order_listing_report = SalesOrder.search(params[:search])
     @show_sales_order_listing_report = @sales_order_listing_report.all
   end
 

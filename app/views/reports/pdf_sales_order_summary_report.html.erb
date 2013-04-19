@@ -1,5 +1,5 @@
 <div id="container">
-<h2><u>Sales Order Report</u></h2>
+<h2><u>Sales Order Summary Report</u></h2>
 
 
 	<% if @detail_sales_order_summary_report.present? %>
@@ -18,15 +18,22 @@
         <tbody>
       		<tr>
       			<% @detail_sales_order_summary_report.each do |sos| %>
-            	
-      			<td align="center"><%= sos.sales_order.sales_order_no rescue'-' %></td>
-      			<td align="center"><%= render '/product_categories/join_product_category' , :pc => sos %></td>
-      			<td align="center"><%= sos.description rescue '-'%></td>
-      			<td align="center"><%= sos.quantity rescue'-' %></td>
-      			<td align="center"><%= sos.unit_price rescue'-' %></td>
-      			<td align="center"><%= sos.eta rescue'-' %></td>
-      			<td align="center"><%= sos.complete_qty rescue'-' %></td>
+            <% sos.sales_order_items.each_with_index do |soi , index| %>
+              <% if index == 0 %>
+      			<td align="center" rowspan="<%= sos.sales_order_items.count %>"><%= sos.sales_order_no rescue'-' %></td>
+              <% end %>
+      			<td align="center"><%= soi.product.product_combobox.product_code rescue'-' %></td>
+      			<td align="center"><%= soi.product.desc rescue '-'%></td>
+      			<td align="center"><%= soi.quantity rescue'-' %></td>
+      			<td align="center"><%= soi.unit_price rescue'-' %></td>
+      			<td align="center"><%= soi.eta rescue'-' %></td>
+      			<td align="center"><%= soi.remaining_qty rescue'-' %></td>
       		</tr>
+          <% end %>
+          <tr style="border-top: 1px solid;">
+           <td ></td>
+          </tr>
+      
       		<% end %>	
 		</tbody>
 		<% else %>

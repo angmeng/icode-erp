@@ -92,6 +92,7 @@ $(document).ready(function () {
         // "bInfo": false,   //exp :showing 1 of 15 pages 
         //"bAutoWidth": true
         
+        
      });
 
     // When it is popup...

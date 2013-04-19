@@ -1,0 +1,94 @@
+<div id="container">
+<h2><u>Sales Order Listing Report</u></h2>
+
+
+  <% if @detail_sales_order_listing_report.present? %>
+  <table id="jgrid" class="black-line-table">
+    <thead>
+      <tr class="header_line">
+        <th>No.</th>
+        <th>Customer P/O</th>
+        <th>Description</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>ETA</th>
+        <th>****</th>
+      </tr>
+    </thead>
+
+
+    <tbody>
+    <% @detail_sales_order_listing_report.each do |so| %>
+       <% so.sales_order_items.each_with_index do |soi , index |  %>
+      <tr>
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= soi.customer_po rescue '-'%></td>
+        <td align="center"><%= soi.product.desc rescue '-'%></td>
+        <td align="center"><%= soi.quantity rescue '-'%></td>
+        <td align="center"><%= soi.unit_price rescue '-'%></td>
+        <td align="center"><%= soi.eta rescue '-'%></td>
+        <td align="center"><%= soi.exp_date.strftime("%d-%m-%Y") rescue '-' %></td>
+      </tr>
+      <% end %>
+      <!-- <tr style="border-top: 2px solid;">
+        <td ></td> -->
+      </tr>
+      
+    <% end %> 
+    </tbody>
+    <% else %>
+      no report found
+  <% end %>
+    
+  </table>
+
+  
+
+</div>
+
+
+<style>
+table{
+    width:100%;
+  }
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+   tbody tr {
+    border-top: 3pt solid white;
+ }
+  
+</style>
