@@ -72,7 +72,7 @@
 	                  <% if p.trade_company.sales_tax_licence_no.present? %>
                           <%= p.trade_company.sales_tax_licence_no rescue'-'%>
 	                  <% else %>
-	                      &nbsp;111
+	                      &nbsp;
 	                  <% end %>
                   <% end %>
                 </td>
@@ -83,7 +83,7 @@
                   <% if p.sales_tax_exemption.present? %>
                     <%= p.sales_tax_exemption rescue'-' %>
                   <% else %>
-                    &nbsp;111
+                    &nbsp;
                   <% end %>
                 </td>
               </tr>
@@ -94,7 +94,7 @@
                     <% if p.trade_company.warehouse_licence_no.present? %>
                       <%= p.trade_company.warehouse_licence_no rescue'-' %>
                     <% else %>
-                      &nbsp;111
+                      &nbsp;
                     <% end %>
                   <% end %>
                 </td>
@@ -106,7 +106,7 @@
                     <% if p.trade_company.mfg_warehouse_licence_no.present? %>
                       <%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
                     <% else %>
-                      &nbsp;111
+                      &nbsp;
                     <% end %>
                   <% end %>
                 </td>
@@ -135,18 +135,19 @@
                       <%= doi.client_lot rescue'-' %>
                     </td>
                     <td align="left" style="vertical-align:top;margin-left:10px;">
-                      <% if doi.sales_order_item.present? %>
-                        <% if doi.sales_order_item.product.present? %>
-                          <% if doi.sales_order_item.product.product_category.present? %>
-                            <% if doi.sales_order_item.product.product_category.refer_category_id.present? %>
-                              <% @pc = ProductCategory.find(doi.sales_order_item.product.product_category.refer_category_id) %>
-                              <%= @pc.code rescue'-' %><br />
-                            <% else %>
-                              -
-                            <% end %>
-                          <% end %>
-                        <% end %>
-                      <% end %>
+                      <%# if doi.sales_order_item.present? %>
+                        <%# if doi.sales_order_item.product.present? %>
+                          <%# if doi.sales_order_item.product.product_category.present? %>
+                            <%# if doi.sales_order_item.product.product_category.refer_category_id.present? %>
+                              <%# @pc = ProductCategory.find(doi.sales_order_item.product.product_category.refer_category_id) %>
+                              <!-- <%#= @pc.code rescue'-' %><br /> -->
+                            <%# else %>
+                              <!-- - -->
+                            <%# end %>
+                          <%# end %>
+                        <%# end %>
+                      <%# end %>
+                      <%= doi.sales_order_item.product.product_category.parent.parent.desc rescue'-' %>
                       <%= doi.sales_order_item.product.desc rescue'-' %><br />
                       <%= doi.sales_order_item.part_no rescue'-' %>
                     </td>
@@ -261,7 +262,7 @@ height:20px;
     /*white-space: nowrap;*/
 }
 .column_3 {
-    width: 200px;
+    width: 250px;
     /*overflow: hidden;*/
     display: inline-block;
     /*white-space: nowrap;*/

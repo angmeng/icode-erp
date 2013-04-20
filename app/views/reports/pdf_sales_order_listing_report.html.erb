@@ -12,8 +12,9 @@
         <th>Qty</th>
         <th>Unit Price</th>
         <th>ETA</th>
-        <th>****</th>
+        <th>Status</th>
       </tr>
+      
     </thead>
 
 
@@ -26,8 +27,8 @@
         <td align="center"><%= soi.product.desc rescue '-'%></td>
         <td align="center"><%= soi.quantity rescue '-'%></td>
         <td align="center"><%= soi.unit_price rescue '-'%></td>
-        <td align="center"><%= soi.eta rescue '-'%></td>
-        <td align="center"><%= soi.exp_date.strftime("%d-%m-%Y") rescue '-' %></td>
+        <td align="center"><%= soi.eta.strftime("%d-%m-%Y") rescue '-'%></td>
+        <td align="center"><%= so.status rescue '-' %></td>
       </tr>
       <% end %>
       <!-- <tr style="border-top: 2px solid;">
