@@ -48,12 +48,12 @@ class PurchaseRequisitionItemsController < ApplicationController
      end 
     end 
     
-    product_value = Product.find(@purchase_requisition_item.product_id) if @purchase_requisition_item.product_id.present?
-    if product_value.present?
-      @aa = Product.running_option(product_value, company_name)
-    else
-      @all_companies = TradeCompany.order("name").all.collect {|c| [c.name, c.name] }
-    end
+#    product_value = Product.find(@purchase_requisition_item.product_id) if @purchase_requisition_item.product_id.present?
+#    if product_value.present?
+#      @aa = Product.running_option(product_value, company_name)
+#    else
+#      @all_companies = TradeCompany.order("name").all.collect {|c| [c.name, c.name] }
+#    end
   end
 
   def update

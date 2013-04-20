@@ -1,4 +1,4 @@
-<div class="title_head"><strong style="color:white;">NEW PURCHASE REQUISITION APPLICATION</strong></div>
+<%= title_head "NEW PURCHASE REQUISITION APPLICATION" %>
 
 <table width="100%" class="header_content">
   <tr>
@@ -25,15 +25,6 @@
     <div style="padding: 0 5px;">No Record Found</div>
   <% end %>
 </div>
-
-<!--div id="new_item_request" style="display: none;">
-  <div style="position: absolute; top: 50%; left: 50%; margin-left: -80px; margin-top: -50px;" >
-    <h3>New Item Request?</h3>
-    <br/>
-    <%#= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
-    <%#= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
-  </div>
-</div-->
 
 <div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:300px;height:150px;'>
   <div style="position: absolute; top: 50%; left: 50%; margin-left: -80px; margin-top: -50px;" >

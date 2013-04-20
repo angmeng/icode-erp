@@ -1,10 +1,8 @@
-<div class="title_head"><strong style="color:white;">EDITING PURCHASE REQUISITION ITEMS</strong></div>
+<%= title_head "EDITING PURCHASE REQUISITION ITEMS" %>
 
-<div>
-  <% if @purchase_requisition_item.product_id.blank?  %>
-    <%= render "new_product" %>
-  <% else %>
-    <%= render "exist_product" %>
-  <% end %>
-</div>
+<% if @purchase_requisition_item.product_id.blank?  %>
+  <%= render "new_product" %>
+<% else %>
+  <%= render "exist_product" %>
+<% end %>
 

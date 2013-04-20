@@ -540,7 +540,7 @@ module ApplicationHelper
     
     
   def link_delete(linked)
-    link_to "Delete", linked, confirm: "Are you sure to delete?", method: :delete, :class => "k-button"
+    link_to "Delete Folder", linked, confirm: "Are you sure to delete?", method: :delete, :class => "k-button"
   end
     
   def not_link_delete
@@ -554,7 +554,11 @@ module ApplicationHelper
   end
   
   def link_copy(linked)
-    link_to "Copy", linked, :class => "iframe_800x450 k-button opac-icon", "data-fancybox-type" => "iframe", :confirm => "Are you sure to duplicate?"
+    link_to "Copy", linked, :class => "k-button", :confirm => "Are you sure to duplicate this Product ID?", :method => :post
+  end
+  
+  def link_delete_product_id(linked)
+    link_to "Delete Product ID", linked, :class => "k-button", :confirm => "Are you confirm to delete those Product ID?", method: :delete
   end
     
   def not_link_common

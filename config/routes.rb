@@ -435,6 +435,7 @@ Merp::Application.routes.draw do
       get "common"
       post "update_common"
       post "copy"
+      delete "delete_product_id"
     end
   end
 

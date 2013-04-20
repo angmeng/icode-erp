@@ -298,7 +298,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   COMPANY_PROFILE_MENU                    = 88
   
-  COMPANY_PROFILE_VIEW                    = 89
+#  COMPANY_PROFILE_VIEW                    = 89
   
   COMPANY_PROFILE_SHOW                    = 90
   COMPANY_PROFILE_EDIT                    = 91
@@ -366,6 +366,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_NON_OPERATION_KIV                          = 216
   PRODUCT_NON_OPERATION_RECOVER                      = 217
   PRODUCT_NON_OPERATION_COMMON                       = 268
+  PRODUCT_NON_OPERATION_COPY                         = 541
   
   PRODUCT_OPERATION_GROUP                            = 142
   PRODUCT_OPERATION_GROUP_EDIT                       = 143 #add
@@ -377,6 +378,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_OPERATION_KIV                              = 219
   PRODUCT_OPERATION_RECOVER                          = 220
   PRODUCT_OPERATION_COMMON                           = 269
+  PRODUCT_OPERATION_COPY                             = 542
   
   PRODUCT_FINISH_GOOD_GROUP                          = 147
   PRODUCT_FINISH_GOOD_GROUP_EDIT                     = 148 #add
@@ -388,6 +390,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   PRODUCT_FINISH_GOOD_KIV                            = 222
   PRODUCT_FINISH_GOOD_RECOVER                        = 223
   PRODUCT_FINISH_GOOD_COMMON                         = 270
+  PRODUCT_FINISH_GOOD_COPY                           = 543
   
   
  ########## Price Control ########## 
@@ -507,7 +510,7 @@ class InventoryManagementSystem < ActiveRecord::Base
     
 
     
-  #start at 299, jump to 541
+  #start at 299, jump to 544
   
   
 

@@ -1,11 +1,9 @@
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION_APPLY) %>
-    <span id="on_apply_vendor_reg" applyClass="iframe_1024x800">
-      <span class="k-button" style="color: grey; background-color: white;">Add New Vendor</span>
-    </span>
+    <span id="on_apply_vendor_reg" applyClass="iframe_1600x900"><%= disabled_style "Add New Vendor" %></span>
   <% else %>
-    <span class="k-button" style="color: grey; background-color: white;">Add New Vendor</span>
+    <%= disabled_style "Add New Vendor" %>
   <% end %>
     
   <span><%= not_link_submit_to %></span>

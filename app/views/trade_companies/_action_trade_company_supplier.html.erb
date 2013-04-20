@@ -1,11 +1,9 @@
 <div class="left_icon_tag">
-  
   <% if roles.include?(InventoryManagementSystem::VENDOR_NEW) %>
-    <%= link_to 'Add - New Supplier', new_trade_company_path(:option => TradeCompany::SUPPLIER), :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %>
+    <%= link_to 'Add - New Supplier', new_trade_company_path(:option => TradeCompany::SUPPLIER), :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <span id="disabled_on_left" class="k-button">Add - New Supplier</span>
+    <%= disabled_style "Add - New Supplier" %>
   <% end %>
-      
 </div>
 
 <div class="icon_tag">

@@ -3,10 +3,8 @@
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>PR No.</th>
-      <th>Product ID</th>
       <th>Approved Vendor</th>
       <th>Qty</th>
-      <th>U/M</th>
       <th>ETA</th>
       <th>Unit Price</th>
       <th>Amount</th>
@@ -37,10 +35,8 @@
           <% end %>
               <td></td>
               <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
-              <td><%= render "/product_categories/join_product_category", :pc => proposed %></td>
               <td class="red_alert"><%= sources.company_name rescue '-' %></td>
-              <td align="center"><%= proposed.quantity rescue '0' %></td>
-              <td align="center"><%= proposed.unit_measurement.code rescue '-' %></td>
+              <td align="right"><%= proposed.quantity rescue '-' %> <%= proposed.unit_measurement.code rescue '-' %></td>
               <td align="center">
                 <% if proposed.eta < Date.today %>
                   <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>

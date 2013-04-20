@@ -1,5 +1,19 @@
 class PurchaseOrderManagement
   
+  def self.goto_create_new_sources(select_items, datarow)
+    select_items.each do |click_index|
+      datarow.each do |key, content|
+        if key == click_index
+          @pr_item = PurchaseRequisitionItem.find(content[:item_id])
+          if @pr_item.present? and content[:company_name].present? and content[:unit_price].present?
+            self.goto_create_sources(@pr_item, content[:company_name], content[:unit_price])
+            @pr_item.update_attributes(:maintenance => 0, :proposed_vendor => 1)
+          end
+        end
+      end
+    end
+  end
+  
   def self.goto_create_sources(pr_item, company_name, unit_price)
     if pr_item.temporary_sources.present?
       pr_item.temporary_sources.find_by_select_vendor(TRUE).update_attributes(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)

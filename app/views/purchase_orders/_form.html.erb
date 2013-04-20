@@ -9,13 +9,7 @@
     <% end %>
     <td width="50"></td>
     <td width="100"><b>Revision</b></td>
-    <td>
-      <% if action_name == "edit" %>
-        <%= f.text_field :revision, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
-      <% else %>
-        <%= f.text_field :revision, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
-      <% end %>
-    </td>
+    <td><%= f.text_field :revision, :class => "k-textbox", "required validationMessage" => "Please Enter Revision", :style => "width: 50px" %></td>
     <td width="50"></td>
     <td><b>Remark</b></td>
     <td rowspan="2"><%= f.text_area :remark, :rows => 3 %></td>
@@ -25,18 +19,18 @@
     <td><b>P/O Date</b></td>
     <td>
       <% if action_name == "edit" %>
-        <%= f.text_field :po_date, :value => @purchase_order.po_date.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+        <%= f.text_field :po_date, :value => @purchase_order.po_date.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %>
       <% else %>
-        <%= f.text_field :po_date, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" %>
+        <%= f.text_field :po_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %>
       <% end %>
     </td>
     <td></td>
     <td><b>S/Tax</b></td>
     <td>
-      <% if action_name == "edit" %>
-        <%= f.text_field :tax, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
+      <% if action_name == "edit" %> 
+        <%= f.text_field :tax, :class => "k-textbox", "required validationMessage" => "Please Enter Tax", :style => "width: 50px" %>
       <% else %>
-        <%= f.text_field :tax, :value => 0, :required => "true", :validType => "maxLength[5]", :class => "easyui-validatebox", :size => 5 %>
+        <%= f.text_field :tax, :value => 0, :class => "k-textbox", "required validationMessage" => "Please Enter Revision", :style => "width: 50px" %>
       <% end %>
     </td>
   </tr>
@@ -53,7 +47,7 @@
     </td>
     <td></td>
     <td><b>Currency</b></td>
-    <td><%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @purchase_order.currency_id), { :include_blank => true } %></td>
+    <td><%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @purchase_order.currency_id), { :include_blank => true }, { :class => "mkendo_combobox" } %></td>
   </tr>
 
   <tr>
@@ -70,9 +64,9 @@
     <td><b>Trade Term</b></td>
     <td>
       <% if action_name == "edit" %>
-        <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @purchase_order.trade_term_id) %>
+        <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @purchase_order.trade_term_id), {:include_blank => true}, {:class => "mkendo_combobox"} %>
       <% else %>
-        <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @vendor_id.trade_term_id) %>
+        <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @vendor_id.trade_term_id), {:include_blank => true}, {:class => "mkendo_combobox"} %>
       <% end %>
     </td>
   </tr>
@@ -93,7 +87,7 @@
     </td>
     <td></td>
     <td><b>Transport</b></td>
-    <td><%= f.select :transport_id, options_from_collection_for_select(transport, 'id', 'name', @purchase_order.transport_id), { :include_blank => true } %></td>
+    <td><%= f.select :transport_id, options_from_collection_for_select(transport, 'id', 'name', @purchase_order.transport_id), { :include_blank => true }, {:class => "mkendo_combobox"} %></td>
   </tr>
   
   <% if @vendor_id.sales_tax_exemption.present? %>

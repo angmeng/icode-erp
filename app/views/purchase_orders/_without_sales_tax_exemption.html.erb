@@ -1,9 +1,7 @@
 <%= form_for @purchase_order, :url => "/purchase_orders/create_without_sales_tax_exemption", :method => :post do |f| %>
 
-  <%= render "form", :f => f %>
-  <div class="fix_1600x900_h400">
-    <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %>
-  </div>
+  <div class="table_details"><%= render "form", :f => f %></div>
+  <div class="table_background"><%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %></div>
 
   <div class="icon_tag">
       <% unless action_name == "edit" %>

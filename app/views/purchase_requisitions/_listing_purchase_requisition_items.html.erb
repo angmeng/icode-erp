@@ -11,11 +11,10 @@
       <th>Item Status</th>
       <th>Urgent</th>
       <th>Product ID</th>
-      <th>Vendor Name</th>
       <th>Description (in Detail)</th>
+      <th>Vendor Name</th>
       <th>ETA</th>
       <th>Qty</th>
-      <th>U/M</th>
       <th>Unit Price</th>
       <th>Total</th>
       <th>Remark</th>
@@ -55,6 +54,7 @@
             <% end %>
           <% end %>
         </td>
+        <td><%= pri.description %></td>
         <td>
           <% unless pri.maintenance == TRUE %>
             <% if source.present? %>
@@ -68,7 +68,6 @@
             <% end %>
           <% end %>
         </td>
-        <td><%= pri.description %></td>
         <td align="center">
           <% if pri.status == PurchaseRequisitionItem::RECEIVED_FULL %>
             <%= pri.eta.strftime("%d-%m-%Y") rescue '-' %>
@@ -80,8 +79,7 @@
             <% end %>
           <% end %>
         </td>
-        <td align="center"><%= pri.quantity rescue '-' %></td>
-        <td align="center"><%= pri.unit_measurement.code rescue '-' %></td>
+        <td align="right"><%= pri.quantity rescue '-' %> <%= pri.unit_measurement.code rescue '-' %></td>
 
         <% if pri.maintenance == TRUE %>
           <td></td><td></td>

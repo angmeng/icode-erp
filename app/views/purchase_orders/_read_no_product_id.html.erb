@@ -1,11 +1,11 @@
-<table id="jgrid_linking" class="white-line-table zebraLight">
+<table id="jgrid_linking" class="zebraLight">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>Description</th>
+      <th>Vendor Name</th>
       <th>U/M</th>
       <th>Unit Price</th>
-      <th>Vendor Name</th>
     </tr>
   </thead>
   
@@ -16,9 +16,9 @@
         <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="purchase_requisition_items" rowsId="<%= prod.id %>">
             <td></td>
             <td><%= simple_format(prod.description) rescue '-' %></td>
-            <td align="center"><%= prod.unit_measurement.code rescue '-' %></td>
-            <td align="center"><%= four_precision(prod.unit_price) rescue '-' %></td>
             <td>[<%= prod.trade_company.code rescue '-' %>] <%= prod.trade_company.name rescue "-" %></td>
+            <td align="center"><%= prod.unit_measurement.code rescue '-' %></td>
+            <td align="right"><%= four_precision(prod.unit_price) rescue '-' %></td>
         </tr>
         
       <% end %>

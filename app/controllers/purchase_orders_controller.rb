@@ -1,6 +1,7 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :inventory_management_system, :except => [:show]
+  layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance]
 
   def index
     @po_title = PurchaseOrder.title
@@ -24,13 +25,11 @@ class PurchaseOrdersController < ApplicationController
   
   def printable
     @purchase_order = PurchaseOrder.find(params[:id])
-    render :layout => "sheetbox"
   end
   
   def new
     @purchase_order = PurchaseOrder.new #with ste
     callback_module(params[:company_id]) if params[:company_id].present?
-    render :layout => "sheetbox"
   end
   
   def create
@@ -166,18 +165,31 @@ class PurchaseOrdersController < ApplicationController
   
   # when click apply
   def add_vendor
-    @pr_item = PurchaseRequisitionItem.find(params[:purchase_requisition_item_id])
-    
-    if params[:company_name].present? and params[:unit_price].present?
-      PurchaseOrderManagement.goto_create_sources(@pr_item, params[:company_name], params[:unit_price])
-      redirect_to display_maintenance_purchase_order_path(@pr_item), :notice => "Update Successfully."
+    maintenance
+    if params[:select_items].present?
+      if params[:datarow].present?
+        PurchaseOrderManagement.goto_create_new_sources(params[:select_items], params[:datarow])
+        redirect_to maintenance_purchase_orders_path, :notice => "Submit to Vendor Selection Successfully."
+      else
+        flash[:alert] = "Please key-in Proposed Vendor and Unit Price."
+        render "maintenance"
+      end
+#      @pr_item = PurchaseRequisitionItem.find(params[:purchase_requisition_item_id])
+#      if params[:company_name].present? and params[:unit_price].present?
+#        PurchaseOrderManagement.goto_create_sources(@pr_item, params[:company_name], params[:unit_price])
+#        redirect_to display_maintenance_purchase_order_path(@pr_item), :notice => "Update Successfully."
+#      else
+#        flash[:alert] = "Supplier Name or Unit Price can't blank."
+#        render "display_maintenance"
+#      end
+      
     else
-      flash[:alert] = "Supplier Name or Unit Price can't blank."
-      render "display_maintenance"
+      flash[:alert] = "Please select the checkboxes."
+      render "maintenance"
     end
   end
   
-  #Submit Vendor Selection
+  #Submit Vendor Selection, no useful on 20/4/2013
   def submit_vselect    
     @pr_item = PurchaseRequisitionItem.find(params[:id])
     if @pr_item.update_attributes(:maintenance => 0, :proposed_vendor => 1)

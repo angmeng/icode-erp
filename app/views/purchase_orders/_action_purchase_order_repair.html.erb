@@ -1,18 +1,18 @@
 <div class="icon_tag">
   
-  <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY ) %>
-    <span id="on_apply" applyClass="iframe_800x450" ><%= not_link_apply %></span>
-  <% else %>
-    <span class="word_opac"><%= not_link_apply %></span>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_APPLY ) %>
+    <!--span id="on_apply" applyClass="iframe_800x450" ><%#= not_link_apply %></span-->
+  <%# else %>
+    <%= not_link_apply %>
+  <%# end %>
     
   <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR_SUBMIT_TO) %>
-    <span id="on_submit_to"><%= not_link_submit_to %></span>
+    <!--span id="on_submit_to"><%#= not_link_submit_to %></span-->
+    <%= submit_tag "Submit To", :class => "k-button", :confirm => "Are you confirm submit to Vendor Selection?" %>
   <% else %>
-    <span class="word_opac"><%= not_link_submit_to %></span>
+    <%= not_link_submit_to %>
   <% end %>
    
-  <%#= link_close_button %>
   <%= link_home_button %>
 
 </div>

@@ -1,4 +1,4 @@
-<div class="title_head"><strong style="color:white;">MANAGE APPROVE / REJECT PURCHASE REQUISITION</strong></div>
+<%= title_head "MANAGE APPROVE / REJECT PURCHASE REQUISITION" %>
 
 <table width="100%" class="header_content">
   <tr>
@@ -39,27 +39,27 @@
       
 </div>
   
-<div id='pr_remark_one' class='easyui-window' title='Remark for Approval(1)' closed='true' minimizable='false' style='width:400px;height:250px;'>
+<div id='pr_remark_one' class='easyui-window' title='Remark for Approval(1)' closed='true' minimizable='false' style='width:400px;height:240px;padding:10px;'>
   <%= form_tag no_approval_one_purchase_requisition_path(@purchase_requisition), :method => :put do %>
-    Remark:<br/>
-    <%= text_area_tag :remark, params[:remark], :cols => 40, :required => 'true' %><br/>
-    <%= submit_tag "Submit" %>
+    <b>Remark:</b><br/>
+    <%= text_area_tag :remark, params[:remark], :cols => 46, :rows => 8, "required validationMessage" => "Please Enter Remark" %><br/>
+    <div class="icon_tag"><%= submit_tag "Submit", :class => "k-button" %></div>
   <% end %>
 </div>
 
-<div id='pr_remark_om' class='easyui-window' title='Remark for Approval(OM)' closed='true' minimizable='false' style='width:400px;height:250px;'>
+<div id='pr_remark_om' class='easyui-window' title='Remark for Approval(OM)' closed='true' minimizable='false' style='width:400px;height:240px;padding:10px;'>
   <%= form_tag no_approval_om_purchase_requisition_path(@purchase_requisition), :method => :put do %>
-    Remark:<br/>
-    <%= text_area_tag :remark, params[:remark], :cols => 40, :required => 'true' %><br/>
-    <%= submit_tag "Submit" %>
+    <b>Remark:</b><br/>
+    <%= text_area_tag :remark, params[:remark], :cols => 46, :rows => 8, "required validationMessage" => "Please Enter Remark" %><br/>
+    <div class="icon_tag"><%= submit_tag "Submit", :class => "k-button" %></div>
   <% end %>
 </div>
 
-<div id='pr_remark_three' class='easyui-window' title='Remark for Approval(3)' closed='true' minimizable='false' style='width:400px;height:250px;'>
+<div id='pr_remark_three' class='easyui-window' title='Remark for Approval(3)' closed='true' minimizable='false' style='width:400px;height:240px;padding:10px;'>
   <%= form_tag no_approval_three_purchase_requisition_path(@purchase_requisition), :method => :put do %>
-    Remark:<br/>
-    <%= text_area_tag :remark, params[:remark], :cols => 40, :required => 'true' %><br/>
-    <%= submit_tag "Submit" %>
+    <b>Remark:</b><br/>
+    <%= text_area_tag :remark, params[:remark], :cols => 46, :rows => 8, "required validationMessage" => "Please Enter Remark" %><br/>
+    <div class="icon_tag"><%= submit_tag "Submit", :class => "k-button" %></div>
   <% end %>
 </div>
 

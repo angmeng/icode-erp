@@ -68,9 +68,9 @@
                 <td><b>ETA *</b></td>
                 <td>
                   <% if @purchase_requisition_item.eta.present? %>
-                    <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :class => "mkendo_date" , "required validationMessage" => "Please Enter ETA" %>
+                    <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" , "required validationMessage" => "Please Enter ETA" %>
                   <% else %>
-                    <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter ETA" %>
+                    <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter ETA" %>
                   <% end %>
                   <span class="k-invalid-msg" data-for="purchase_requisition_item[eta]"></span>
                 </td>

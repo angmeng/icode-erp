@@ -1,8 +1,10 @@
 <div class="left_icon_tag">
-  <% if session[:option] == TradeCompany::CUSTOMER %>
-    <%= submit_tag "Next New Customer", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new_customer" %>
-  <% else %>
-    <%= submit_tag "Next New Supplier", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new_supplier" %>
+  <% unless @vendor.present? %>
+    <% if session[:option] == TradeCompany::CUSTOMER %>
+      <%= submit_tag "Next New Customer", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new_customer" %>
+    <% else %>
+      <%= submit_tag "Next New Supplier", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new_supplier" %>
+    <% end %>
   <% end %>
 </div>
 

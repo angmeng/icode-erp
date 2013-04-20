@@ -29,21 +29,20 @@
 
       <tr><td colspan="10"><hr/></td></tr>
 
-      <tr>
+      <!--tr>
         <td><b>Description</b></td>
         <td>
-          <% if @purchase_requisition_item.product_id.present? %>
-            <span class="get_desc"><%= @purchase_requisition_item.description %></span>
-          <% else %>
+          <%# if @purchase_requisition_item.product_id.present? %>
+            <span class="get_desc"><%#= @purchase_requisition_item.description %></span>
+          <%# else %>
             <span class="get_desc"></span>
-          <% end %>
+          <%# end %>
         </td>
-      </tr>
+      </tr-->
 
       <tr>
         <td><b>Quantity *</b></td>
         <td>
-          <%#= f.text_field :quantity, :size => 10, :required => "true" %>
           <%= f.text_field :quantity, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Quantity" %>
           <span class="k-invalid-msg" data-for="purchase_requisition_item[quantity]"></span>
           <b>U/M:</b>
@@ -80,9 +79,9 @@
         <td><b>ETA *</b></td>
         <td>
           <% if @purchase_requisition_item.eta.present? %>
-            <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA"%>
+            <%= f.text_field :eta, :value => @purchase_requisition_item.eta.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" , "required validationMessage" => "Please Enter ETA" %>
           <% else %>
-            <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :id => "kendo_date" , "required validationMessage" => "Please Enter ETA" %>
+            <%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" , "required validationMessage" => "Please Enter ETA" %>
           <% end %>
           <span class="k-invalid-msg" data-for="purchase_requisition_item[eta]"></span>
         </td>
@@ -115,4 +114,55 @@
     <%= link_save_button %>
     <%= link_close_button %>
   </div>
+<% end %>
+  
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {  
+        $("#purchase_requisition_item_quantity, #estimated_price").keyup(function(){
+            var numerictextbox = $("#estimated_price").data("kendoNumericTextBox");
+            var estimated_price = numerictextbox.value();
+          
+            var estimated_qty         = $("#purchase_requisition_item_quantity").val();
+            <%#*var estimated_price       = $("#estimated_price").val();%>
+            var estimated_total_price = parseInt(estimated_qty) * parseFloat(estimated_price);
+            $("#estimated_total_price").html(estimated_total_price.toFixed(4));
+        });
+    });
+    
+    function put_product_description(sel){
+        var product_id = sel.value;
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            url: '/products/' + product_id,
+            timeout: 2000,
+            success: function(data){ 
+                <%#*$(".get_desc").html(data.desc);%>
+                $("#data_um").html(data.um);
+            }
+        });
+    }
+    
+    function getCombo_pr_company(sel) {
+      var sel_product = $("#purchase_requisition_item_product_id").val();
+      var sel_vendor  = sel.value;
+
+      $.ajax({
+          type: "GET",
+          dataType: "json",
+          url: '/purchase_requisition_items/product_vendor_unit_price_in_pr',
+          data: {product_id: sel_product, vendor_id: sel_vendor},
+          success: function(response){                    
+              if (response){
+                  var price = parseFloat(response.unit_price);
+                  var numerictextbox = $("#estimated_price").data("kendoNumericTextBox");
+                  numerictextbox.value(price.toFixed(4));
+              } else {
+                  alert("Could not found the unit price.");
+              }
+           }
+      });
+    }
+  </script>
 <% end %>

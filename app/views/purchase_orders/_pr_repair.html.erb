@@ -3,91 +3,126 @@
     <thead>
       <tr class="header_line">
         <th class="check_highlight"></th>
+        <th title="Check & Submit">C & S</th>
         <th>Urgent</th>
         <th>PR No.</th>
         <th>Proposed Vendor</th>
         <th>Description</th>
         <th>ETA</th>
         <th>Quantity</th>
-        <th>U/M</th>
         <th>Unit Price</th>
         <th>Total Price</th>
       </tr>
     </thead>
     
     <tbody>
-      <% maintenance.each do |item| %>
-        <% unless item.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
-      
-          <% if item.temporary_sources.present? %> 
-            <% if item.temporary_sources.find_by_select_vendor(TRUE).present? %>
-              <% source = item.temporary_sources.find_by_select_vendor(TRUE) %>
+
+        <% maintenance.each_with_index do |item, index| %>
+          <% unless item.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
+
+            <% if item.temporary_sources.present? %> 
+              <% if item.temporary_sources.find_by_select_vendor(TRUE).present? %>
+                <% source = item.temporary_sources.find_by_select_vendor(TRUE) %>
+              <% end %>
             <% end %>
-          <% end %>
 
-          <%# if item.urgent == TRUE %>
-            <%# if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <!--tr class="<%#= cycle("odd_line", "even_line") %>" controllerName="<%#= controller_name %>" rowsId="<%#= item.id %>"-->
-            <%# else %>
-              <!--tr class="<%#= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%#= controller_name %>" rowsId="<%#= item.id %>"-->
-            <%# end %>
-          <%# else %>
             <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= item.id %>">
-          <%# end %>
-              <td></td>            
+              <td></td> 
+              
               <td align="center">
-              <% if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-                NO
-              <% else %>
-                <%= item.urgent? ? "YES" : "NO" %>
-              <% end %>
-            </td>
-            <td align="center"><%= item.purchase_requisition.pr_no rescue '-' %></td>
-
-            <td>
-              <% if source.present? %>
-                <% if company = TradeCompany.find_by_name(source.company_name) %>
-                  <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
-                    <%= source.company_name rescue '-' %>
-                  <% end %>
+                <%= check_box_tag "select_items[]", index %>
+                <%= hidden_field_tag "datarow[#{index}][item_id]", item.id %>
+              </td>
+              
+              <td align="center">
+                <% if item.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+                  NO
                 <% else %>
-                  <span class="red_alert"><%= source.company_name rescue '-' %></span>
+                  <%= item.urgent? ? "YES" : "NO" %>
                 <% end %>
-              <% end %>
-            </td>
+              </td>
 
-            <td><%= simple_format(item.description) rescue '0' %></td>
+              <td align="center"><%= item.purchase_requisition.pr_no rescue '-' %></td>
 
-            <td align="center">
-              <% if item.eta < Date.today %>
-                <span class="red_alert"><%= item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
-                <%= item.eta.strftime("%d-%m-%Y") rescue '-' %>
-              <% end %>
-            </td>
+              <td align="center"><%= text_field_tag "datarow[#{index}][company_name]", "", :style => "width:400px;", :class => "autoComplete_for_suppliers" %></td>
+              
+              <!--td>
+                <%# if source.present? %>
+                  <%# if company = TradeCompany.find_by_name(source.company_name) %>
+                    <%#= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                      <%#= source.company_name rescue '-' %>
+                    <%# end %>
+                  <%# else %>
+                    <span class="red_alert"><%#= source.company_name rescue '-' %></span>
+                  <%# end %>
+                <%# end %>
+              </td-->
 
-            <td align="center"><%= item.quantity rescue '0' %></td>
+              <td><%= simple_format(item.description) rescue '0' %></td>
 
-            <td align="center"><%= item.unit_measurement.code rescue '-' %></td>
+              <td align="center">
+                <% if item.eta < Date.today %>
+                  <span class="red_alert"><%= item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+                <% else %>
+                  <%= item.eta.strftime("%d-%m-%Y") rescue '-' %>
+                <% end %>
+              </td>
 
-            <td align="right">
-              <% if source.present? %>
-                <%= four_precision(source.unit_price) rescue '-' %>
-              <% else %>
-                -
-              <% end %>
-            </td>
+              <td align="right"><span id="qty_<%= index %>"><%= item.quantity rescue '-' %></span> <%= item.unit_measurement.code rescue '-' %></td>
 
-            <td align="right">
-              <% if source.present? %>
-                <%= iproduct(item.quantity, source.unit_price) %>
-              <% else %>
-                -
-              <% end %>
-            </td>
-          </tr>
+              <td align="right"><%= text_field_tag "datarow[#{index}][unit_price]", "", :class => "k-textbox numberKey", :onblur => "calculate_amount(this)" %></td>
+              
+              <!--td align="right">
+                <%# if source.present? %>
+                  <%#= four_precision(source.unit_price) rescue '-' %>
+                <%# else %>
+                  -
+                <%# end %>
+              </td-->
+
+              <td id="total_price_<%= index %>"></td>
+              
+              <!--td align="right">
+                <%# if source.present? %>
+                  <%#= iproduct(item.quantity, source.unit_price) %>
+                <%# else %>
+                  -
+                <%# end %>
+              </td-->
+            </tr>
+            
+          <% end %>
         <% end %>
-      <% end %>
+
     </tbody>
   </table>
 <% end %> 
+
+   
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() { 
+        $(".numberKey").forceNumeric();
+        
+        // Just autocomplete all suppliers only
+        $(".autoComplete_for_suppliers").kendoAutoComplete({    
+            minLength: 2,
+            filter: "contains",
+            dataTextField: "company_name", // use JSON property name
+            dataSource: new kendo.data.DataSource({
+                type: "json", // specifies data protocol
+                transport: {read: "/trade_companies/all_suppliers.json"}
+            })
+        })
+    });
+    
+    function calculate_amount(sel){
+        var number     = sel.name.match(/\[(\d+)\]/);
+        var number     = parseInt(number[1], 10);
+        var unit_price = sel.value;
+        var qty        = +$("#qty_" + number).html();
+        var calculate  = qty * unit_price;
+        $("#total_price_" + number).html(calculate);
+    }
+  </script>
+<% end %>

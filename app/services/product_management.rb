@@ -202,27 +202,47 @@ class ProductManagement
   end
   
   def self.generate_copying(product_category)
-    ProductCategory.transaction do
-      ProductCombobox.transaction do
+    @manage_product = {}
+    ProductRunningNumber.transaction do
+      ProductCategory.transaction do
         Product.transaction do
-          
-          if product_category.is_file?
-            
-            self.base_and_sub_name_when_exist_product_id()
-            prod = take_file.product
+          ProductCombobox.transaction do
+            InventoryHistory.transaction do
+              
+              if product_category.is_file?
+                self.base_and_sub_name(product_category.parent)
+                new_cp_no = @manage_product[:running_no].copied_no.to_i + 1
+
+                @copy_product_category = product_category.dup
+                @copy_product_category.code = "#{@copy_product_category.code}-#{new_cp_no}"
+                @copy_product_category.save!
+
+                @copy_product_id = product_category.product.dup
+                @copy_product_id.code = "#{@copy_product_id.code}-#{new_cp_no}"
+                @copy_product_id.current_stock = 0
+                @copy_product_id.product_category_id = @copy_product_category.id
+                @copy_product_id.save!
+
+                @copy_combo = ProductCombobox.new(:product_code => Product.category(@copy_product_id), :product_id => @copy_product_id.id, :category_type => @copy_product_id.product_category.category_type)
+                @copy_combo.save!
+
+                @inventory = @copy_product_id.inventory_histories.new(:stock_in => @copy_product_id.opening_stock, :stock_out => 0, :inventory_issue_id => InventoryIssue.find_by_description("NEW PRODUCT").id)
+                @inventory.save!
+
+                @copy_packing_qty = product_category.product.packing_quantities
+                if @copy_packing_qty.present?
+                  @copy_packing_qty.each do |packing_qty|
+                    @pq = packing_qty.dup
+                    @pq.product_id = @copy_product_id.id
+                    @pq.save!
+                  end
+                end
+
+                @manage_product[:running_no].update_attributes!(:copied_no => new_cp_no)
+              end
+              
+            end
           end
-          
-#          if product_category.parent.present?
-#            new_product_category = product_category.dup
-#            new_product_category.code = common_code
-#            new_product_category.save!
-#            product_category.update_attributes!(:parent_id => new_product_category.id, :active_common => true) 
-#          end
-#          
-#          if product_category.product.present?
-#            prod = product_category.product
-#            prod.product_combobox.update_attributes!(:old_product_code => prod.product_combobox.product_code, :product_code => Product.category(prod)) if prod.product_combobox.present?
-#          end
         end
       end
     end    
@@ -235,35 +255,36 @@ class ProductManagement
   end
   
   #Don't delete, it is useful in the future.. 8/3/2013
-#  def self.delete_folder_and_file(pc)
-#    @ret = []
-#    pc.children.present? ? self.take_child_id(pc) : pc.destroy
-#    self.ready_delete(@ret) if @ret.present?
-#  end
-#
-#  def self.ready_delete(ret)
-#    @manage_product = {}
-#    @ret = ret
-#    @ret.each do |rt|
-#      take_file    = ProductCategory.find(rt)
-#      if take_file.present?
-#        if take_file.is_file?
-#          self.base_and_sub_name(take_file)
-#          prod = take_file.product
-#          pri  = PurchaseRequisitionItem.find_all_by_product_id(prod.id)
-#          inv  = InventoryHistory.find_all_by_product_id(prod.id)
-#          prod.product_vendor.destroy                 if prod.product_vendor.present?
-#          prod.purchase_requisition_items.delete_all  if pri.present?
-#          prod.packing_quantities.delete_all          if prod.packing_quantities.present?
-#          prod.inventory_histories.delete_all         if inv.present?
-#          prod.product_combobox.destroy               if prod.product_combobox.present?
-#          @manage_product[:running_no].destroy        if @manage_product[:running_no].present?
-#          prod.destroy                                if prod.present?
-#          take_file.destroy                           if take_file.present?
-#        end
-#      end
-#    end
-#  end
+  def self.delete_folder_and_file(pc)
+    @ret = []
+    pc.children.present? ? self.take_child_id(pc) : pc.destroy
+    self.ready_delete(@ret) if @ret.present?
+  end
+
+  #Don't delete, it is useful in the future.. 8/3/2013
+  def self.ready_delete(ret)
+    @manage_product = {}
+    @ret = ret
+    @ret.each do |rt|
+      take_file    = ProductCategory.find(rt)
+      if take_file.present?
+        if take_file.is_file?
+          self.base_and_sub_name(take_file)
+          prod = take_file.product
+          pri  = PurchaseRequisitionItem.find_all_by_product_id(prod.id)
+          inv  = InventoryHistory.find_all_by_product_id(prod.id)
+          prod.product_vendor.destroy                 if prod.product_vendor.present?
+          prod.purchase_requisition_items.delete_all  if pri.present?
+          prod.packing_quantities.delete_all          if prod.packing_quantities.present?
+          prod.inventory_histories.delete_all         if inv.present?
+          prod.product_combobox.destroy               if prod.product_combobox.present?
+          @manage_product[:running_no].destroy        if @manage_product[:running_no].present?
+          prod.destroy                                if prod.present?
+          take_file.destroy                           if take_file.present?
+        end
+      end
+    end
+  end
   
   def self.update_all_kiv(pc)
     @ret = []

@@ -16,7 +16,7 @@
               </tr>
               <% unless @purchase_requisition.remark.blank? %>
                 <tr>
-                  <td><b>Remark</b></td>
+                  <td style="vertical-align: top;"><b>Remark</b></td>
                   <td style="color:white; background: red;"><%= @purchase_requisition.remark rescue '-' %></td>
                 </tr>
               <% end %>

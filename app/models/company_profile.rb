@@ -24,7 +24,6 @@ class CompanyProfile < ActiveRecord::Base
   
   ROLE = [
     InventoryManagementSystem::COMPANY_PROFILE_MENU,
-    InventoryManagementSystem::COMPANY_PROFILE_VIEW,
     InventoryManagementSystem::COMPANY_PROFILE_SHOW,
     InventoryManagementSystem::COMPANY_PROFILE_EDIT,
     InventoryManagementSystem::COMPANY_PROFILE_KIV,

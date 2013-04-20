@@ -8,11 +8,10 @@
           <th>Status</th>
           <th>Urgent</th>
           <th>Product ID</th>
-          <th>Vendor Name</th>
           <th>Description(in Detail)</th>
+          <th>Vendor Name</th>
           <th>ETA</th>
           <th>QTY</th>
-          <th>U/M</th>
           <th width="60">U/P</th>
           <th>Total</th>
           <th>Remark</th>
@@ -48,6 +47,7 @@
                 <% end %>
               <% end %>
             </td>
+            <td><%= p.description %></td>
             <td>
               <% unless p.maintenance == TRUE %>
                 <% if source.present? %>
@@ -61,7 +61,6 @@
                 <% end %>
               <% end %>
             </td>
-            <td><%= p.description %></td>
             <td align="center">
               <% if p.eta < Date.today %>
                 <span class="red_alert"><%= p.eta.strftime("%d-%m-%Y") rescue '-' %></span>
@@ -69,8 +68,7 @@
                 <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
               <% end %>
             </td>
-            <td align="center"><%= p.quantity %></td>
-            <td align="center"><%= p.unit_measurement.code rescue '-' %></td>
+            <td align="right"><%= p.quantity %> <%= p.unit_measurement.code rescue '-' %></td>
             <% if p.maintenance == TRUE %>
               <td></td><td></td>
             <% else %>

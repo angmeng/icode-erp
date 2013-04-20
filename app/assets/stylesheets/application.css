@@ -285,7 +285,7 @@ table.normal_table_white td {
     cursor: pointer; }
 /*, .generate_button*/
 
-.new_button { 
+/*.new_button { 
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -295,7 +295,7 @@ table.normal_table_white td {
     font-size: 12px;
     text-decoration: none;
     font-weight: bold;   
-}
+}*/
 
 .type_window_patching { display:none; }
 .type_varnish { display:none; }
