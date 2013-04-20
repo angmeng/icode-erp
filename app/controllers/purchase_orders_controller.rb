@@ -45,7 +45,7 @@ class PurchaseOrdersController < ApplicationController
     else
       callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
       flash[:alert] = @purchase_order.errors.full_messages.join(", ")
-      render action: "new", layout: "sheetbox"
+      render action: "new"
     end
   end
   
@@ -72,7 +72,6 @@ class PurchaseOrdersController < ApplicationController
       callback_module(@purchase_order.trade_company_id) 
       @pri_company = @purchase_order.purchase_requisition_items
     end
-    render :layout => "sheetbox"
   end
 
   def update
@@ -94,7 +93,7 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order.update_attributes(:status => PurchaseOrder::KEEP_IN_VIEW)
 
     respond_to do |format|
-      format.html { redirect_to purchase_orders_url, :notice => "The PO has dropped to KIV." }
+      format.html { redirect_to purchase_orders_url, :notice => "P/O No # #{@purchase_order.po_no} has dropped to KIV." }
       format.json { head :no_content }
     end
   end
@@ -104,7 +103,7 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order.update_attributes(:status => PurchaseOrder::ACTIVE)
 
     respond_to do |format|
-      format.html { redirect_to kiv_purchase_orders_url, :notice => "The PO has recovered from KIV." }
+      format.html { redirect_to kiv_purchase_orders_url, :notice => "P/O No # #{@purchase_order.po_no} has recovered from KIV." }
       format.json { head :no_content }
     end
   end

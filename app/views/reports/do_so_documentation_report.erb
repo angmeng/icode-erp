@@ -2,66 +2,37 @@
   <div class="title_head"><strong style="color:white;">Print D/O Invoice </strong></div>
 
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
+  
+ <!--  <div id="user_strip">
+  <ul>
+      <li class="k-state-active">Search</li>
+      <li>show</li>
+  </ul>
 
-  <div class="fix_1600x900_h450">
-    <%= form_tag pdf_do_so_documentation_report_reports_path ,:name=>"form1",:target=>"_blank" ,:method =>"get" do %>
-    <table id="jdatatable" class="display">
-      <%#*data-source="<%= pdf_do_so_documentation_report_reports_path(format: "json") %> 
-              <thead>
-                <tr class="header_line">
-                  <th></th>
-                  <th>DO No.</th>
-                  <th>Trade Company</th>
-                  <th>Term</th>
-                  <th>Carton</th>
-                  <%#*<th>Quantity</th>%>
-                </tr>
-              </thead>
-          <tbody>
-
-            <% @show_do_so_documentation_report.each_with_index do |doc , index| %>
-    
-              <tr class="<%= cycle("odd_line", "even_line") %>">
-               
-                <td align="center"><%= check_box_tag "doc_ids[]" , doc.id  %></td>
-                <td align="center"><%= doc.do_no rescue '-' %></td>
-                <td align="center"><%= doc.trade_company.name rescue '-' %> / 
-                  <%= doc.trade_company.address_1 rescue'-' %></td>
-                
-                <td align="center"><%= doc.delivery_order.trade_term.name rescue'-' %></td>
-                <td align="center"><%= doc.no_of_carton rescue '-' %></td>
-                      
-              </tr>
-                  <% end %>
-              </tbody>
-            </table>
-    </div>
-
-</div>
+  <div>
+    <%#= form_for @do_so_documentation_report  do |f| %>
+      <table>
+        <tr>
+          <td>Trade Company </td>
+          <td><%#= f.text_field :trade_company_contains, :size => 12 %>          
+        </tr>
+        <tr>
+          <%# form_for f.DeliveryOrderItem  %>
+          <td>Customer P/O #</td>
+          <td><%#= f.text_field :customr_po_contains, :size => 12 , :id=> "kendo_date" %></td>
           
+        </tr>
+        
+        <tr>
+        <td><%#= f.submit "Search" %></td>
+         </tr>
+      </table>
+      <%# end %>
+    <%# end %>
+  </div> -->
 
-    <div class="left_icon_tag">
-      <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
-
-      <% if roles.include?(InventoryManagementSystem::INVOICE_DOCUMENTATION_REPORT_PRINT) %>
-        <span><%= submit_tag "Print Invoice" , :class =>"k-button" %></span>
-      <% else %>
-        <%= not_link_printable %>
-      <% end %>
-    </div>
-    <div class="icon_tag">
-      <span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
-      <span><%= not_link_edit %></span>
-      <span><%= not_link_recover %></span>
-        <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT_PRINT) %>
-          <span><%= submit_tag "Print D/O" , :class => "k-button" %></span>
-        <% else %>
-          <%= not_link_printable %>
-        <% end %>
-      <% end %>
-
-      <%= link_close_button %>
-    </div>
+  <div><%= render "show_invoice_documentation" %></div>
+<!-- </div> -->
 
    
 

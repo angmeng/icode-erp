@@ -4,7 +4,7 @@
 <input type="checkbox" name="all" id="checkall" />Check All
 
   <div class="fix_1600x900_h450">
-          <%#= form_tag pdf_delivery_order_summary_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+          <%= form_tag pdf_delivery_order_summary_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <table id="jdatatable" class="display">
             
                     <thead>
@@ -12,10 +12,7 @@
                         <th></th>
                         <th>Date</th>
                         <th>D/O No.</th>
-                        <th>Product ID & Description</th>
-                        <th>Delivery Qty</th>
                         <th>Status</th>
-                   
                       </tr>
                     </thead>
                 <tbody>
@@ -26,11 +23,9 @@
                     <tr class="<%= cycle("odd_line", "even_line") %>">
                      
                       <td align="center"><%= check_box_tag "doc_ids[]" , doc.id %></td>
-                      <td align="center"><%= doc.delivery_order.do_date rescue'-' %></td>
-                      <td align="center"><%= doc.delivery_order.do_no rescue '-' %></td>
-                      <td align="center"><%= render '/product_categories/join_product_category' , :pc => doc rescue '-' %></td>
-                      <td align="center"><%= doc.delivery_qty rescue'-' %></td>
-                      <td align="center"><%= doc.do_status rescue'-' %></td>
+                      <td align="center"><%= doc.do_date.strftime("%d-%m-%Y") rescue'-' %></td>
+                      <td align="center"><%= doc.do_no rescue '-' %></td>
+                      <td align="center"><%= doc.status rescue'-' %></td>
                     </tr>
                         <% end %>
                     </tbody>
@@ -52,18 +47,18 @@
     <div class="icon_tag" style="float:right;">
 
     <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_SHOW) %>
-      <span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_show %></span>
+      <span><%= submit_tag "Show" , :class => "k-button" %><%#= not_link_show %></span>
       <% else %>
         <%= not_link_show %>
       <% end %>
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
     <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT_PRINT) %>
-      <span><%= not_link_printable %><%#= submit_tag "Print D/O Report" , :class => "k-button" %></span>
+      <span><%#= not_link_printable %><%= submit_tag "Print D/O Report" , :class => "k-button" %></span>
         <% else %>
         <%= not_link_printable %>
       <% end %>
-
+      <% end %>
       <%= link_close_button %>
     </div>
 

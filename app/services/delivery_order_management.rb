@@ -32,7 +32,7 @@ class DeliveryOrderManagement
         delivery_order.delivery_order_items.each do |doi|
           if doi.present?
             if doi.sales_order_item.present?
-              InventoryHistory.create!(:product_id => doi.sales_order_item.product_id, :stock_in => 0, :stock_out => doi.delivery_qty, :amount => doi.gen_current_stock, :inventory_issue_id => InventoryIssue::DELIVERY_ORDER_OUT)
+              InventoryHistory.create!(:product_id => doi.sales_order_item.product_id, :stock_in => 0, :stock_out => doi.delivery_qty, :amount => doi.gen_current_stock, :inventory_issue_id => InventoryIssue.find_by_description("DELIVERY ORDER").id)
               doi.sales_order_item.product.update_attributes!(:current_stock => doi.gen_current_stock)
               doi.sales_order_item.update_attributes!(:remaining_qty => doi.balance_qty)
               doi.sales_order_item.update_attributes!(:status => SalesOrderItem::COMPLETED) if doi.so_balance_qty_is_zero?

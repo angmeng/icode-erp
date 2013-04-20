@@ -1,21 +1,20 @@
+<%= title_head "EDITING PURCHASE ORDER NO." %>
 
-  <%= title_head "EDITING PURCHASE ORDER NO." %>
-  
-  <%= form_for @purchase_order, :method => :put do |f| %>
+<%= form_for @purchase_order, :method => :put do |f| %>
 
-    <%= render "form", :f => f %>
-  
-    <div class="fix_1600x900_h400"> 
-      <% if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
-        <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
-      <% else %>
-        <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %>
-      <% end %>
-    </div>
+  <div class="table_details"><%= render "form", :f => f %></div>
 
-    <div class="icon_tag">
-      <%= link_save_button %>
-      <%= link_close_button %>
-    </div>
+  <div class="table_background"> 
+    <% if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
+      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
+    <% else %>
+      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %>
+    <% end %>
+  </div>
 
-  <% end %>
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+
+<% end %>

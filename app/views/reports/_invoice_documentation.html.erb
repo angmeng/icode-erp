@@ -19,9 +19,9 @@
           <%#*<td>%>
     <% end %>
         
-            <table style="width:100%;">
+            <table style="width:990px;">
               <tr>
-                <td style="width: 600px;" class="part1">
+                <td style="width: 60%;margin-left: 50px;" class="part1">
                   <%= p.trade_company.name rescue'-'%><br />
                   <%= p.trade_company.address_1 rescue'-'%><br />
 
@@ -47,10 +47,10 @@
                   Fax :<%= p.trade_company.fax_no rescue'-' %><br/>
                 </td>
 
-                <td style="width: 100px;"></td>
+                <td style="width: 5%;"></td>
 
-                <td style="width: 380px;">
-                        <div class="part2" style="margin-left: 150px; margin-top:40px;">
+                <td style="width: 35%;">
+                        <div style="margin-left: 150px; margin-top:40px;">
                                 <%= p.do_no rescue'-' %><br />
                                 <%= p.do_date.strftime("%d-%m-%Y") rescue'-' %><br />
                                 <%= p.trade_term.name rescue'-' %><br />
@@ -69,11 +69,11 @@
                 <td width="290"></td>
                 <td>
                   <% if p.trade_company.present? %>
-                          <% if p.trade_company.sales_tax_licence_no.present? %>
-                                  <%= p.trade_company.sales_tax_licence_no rescue'-'%>
-                          <% else %>
-                                  &nbsp;
-                          <% end %>
+	                  <% if p.trade_company.sales_tax_licence_no.present? %>
+                          <%= p.trade_company.sales_tax_licence_no rescue'-'%>
+	                  <% else %>
+	                      &nbsp;111
+	                  <% end %>
                   <% end %>
                 </td>
               </tr>
@@ -83,7 +83,7 @@
                   <% if p.sales_tax_exemption.present? %>
                     <%= p.sales_tax_exemption rescue'-' %>
                   <% else %>
-                    &nbsp;
+                    &nbsp;111
                   <% end %>
                 </td>
               </tr>
@@ -94,7 +94,7 @@
                     <% if p.trade_company.warehouse_licence_no.present? %>
                       <%= p.trade_company.warehouse_licence_no rescue'-' %>
                     <% else %>
-                      &nbsp;
+                      &nbsp;111
                     <% end %>
                   <% end %>
                 </td>
@@ -106,7 +106,7 @@
                     <% if p.trade_company.mfg_warehouse_licence_no.present? %>
                       <%= p.trade_company.mfg_warehouse_licence_no rescue'-' %>
                     <% else %>
-                      &nbsp;
+                      &nbsp;111
                     <% end %>
                   <% end %>
                 </td>
@@ -116,27 +116,25 @@
             <table class="fix_doi_size">	
   
                 <tr>
-                            <th width="40"></th>
-                            <th width="170"></th>
-                            <th width="270"></th>
-                            <th width="60"></th>
-                            <th width="184"></th>
-                            <th width="127"></th>
-                            <th width="127"></th>
-
+	                <th width="40"></th>
+	                <th width="170"></th>
+	                <th width="270"></th>
+	                <th width="60"></th>
+	                <th width="184"></th>
+	                <th width="127"></th>
+	                <th width="127"></th>
                 </tr>
-
                 <% p.delivery_order_items.each_with_index do |doi , index| %>
                   <% array << doi.no_of_carton %>
                   <% arr << doi.delivery_qty * doi.unit_price %>
                   <tr> 
-                    <td align="left" style="vertical-align: top;"><%= index + 1 %></td>
-                    <td align="left" style="vertical-align: top;">
+                    <td align="left" style="vertical-align: top;margin-left:10px;"><%= index + 1 %></td>
+                    <td align="left" style="vertical-align: top;margin-left:10px;">
                       <%= doi.sales_order_item.product.product_combobox.product_code rescue'-' %><br/>
                       <%= doi.client_po rescue'-' %><br />
                       <%= doi.client_lot rescue'-' %>
                     </td>
-                    <td align="left" style="vertical-align: top;">
+                    <td align="left" style="vertical-align:top;margin-left:10px;">
                       <% if doi.sales_order_item.present? %>
                         <% if doi.sales_order_item.product.present? %>
                           <% if doi.sales_order_item.product.product_category.present? %>
@@ -245,6 +243,7 @@ height:20px;
   /*border-style: solid;*/
   <%#*width: 100%;%>
   padding-left: 50px;
+  margin-left: 50px;
 }
 
 

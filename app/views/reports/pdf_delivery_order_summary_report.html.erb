@@ -1,0 +1,101 @@
+<div id="container">
+<h2>Delivery Order Summary Report</h2>
+
+
+	 <% if @detail_delivery_order_summary_report.present? %>
+
+		<!-- <table style="border:1 cellpadding:3 cellspacing:1 width:100%; "> -->
+		<table id="jgrid" class="black-line-table">
+			<thead>
+				<tr class="header_line">
+					<th>Date</th>
+	        <th>D/O No.</th>
+				  <th>Product Id & Description</th>
+					<th>Delivery Order</th>
+          <th>Status</th>
+				</tr>
+			</thead>
+
+			<%# arr = [] %>	 
+
+			<tbody>
+      <% @detail_delivery_order_summary_report.each do |dos | %>
+        <% dos.delivery_order_items.each_with_index do |doi, index| %>
+			<tr>
+				<% if index == 0 %>
+				<td align="center" rowspan="<%= dos.delivery_order_items.count %>"><%= dos.do_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td align="center" rowspan="<%= dos.delivery_order_items.count %>"><%= dos.do_no rescue '-' %></td>
+        <% end %>
+      
+				<td align="center"><%= doi.sales_order_item.product.product_combobox.product_code rescue '-'%></td>
+				<td align="center"><%= doi.delivery_qty rescue '-'%></td>
+      
+        <% if index == 0 %>
+        <td align="center" rowspan="<%= dos.delivery_order_items.count %>"><%= dos.status rescue '-' %></td>
+        <% end %>
+			</tr>
+      <% end %>
+      <tr style="border-top: 1px solid;">
+       <td></td>
+      </tr>
+      <% end %>
+			</body>
+		</table>
+
+    <% else %>
+      no record found
+    <% end %>
+  		
+</div>
+
+
+
+<style>
+  
+  body {
+    background-color: #fff;
+    
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  tbody tr {
+    border-top: 3pt solid white
+  }
+  thead td {
+      /* Introduce a `short' style */
+      border-bottom: 5pt short(4pt) solid red
+  }
+
+  
+</style>

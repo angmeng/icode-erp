@@ -34,26 +34,20 @@
           <thead>
       		<tr class="header_line">
             <th></th>
-      			<th>SO / PO</th>
-      			<th>Product ID / Part #</th>
-      			<th>Description</th>
-      			<th>Order Qty</th>
-      			<th>U/P</th>
-      			<th>ETA</th>
-      			<th>Q/S Qty</th>
+      			<th>Trade Company Code</th>
+      			<th>Sales Order No.</th>
+            <th>Sales Rep.</th>
+            <th>Trade Term</th>
       		</tr>
         </thead>
         <tbody>
       		<tr class="<%= cycle("odd_line", "even_line") %>">
       			<% @show_sales_order_summary_report.each do |so| %>
             <td align="center"><%= check_box_tag "sos_ids[]" , so.id %></td>
+            <td align="center"><%= so.trade_company.code %></td>
       			<td align="center"><%= so.sales_order_no rescue'-' %></td>
-      			<td align="center"><%= render '/product_categories/join_product_category' , :pc => so %></td>
-      			<td align="center"><%= so.description rescue '-'%></td>
-      			<td align="center"><%= so.quantity rescue'-' %></td>
-      			<td align="center"><%= so.unit_price rescue'-' %></td>
-      			<td align="center"><%= so.eta rescue'-' %></td>
-      			<td align="center"><%= so.complete_qty rescue'-' %></td>
+      			<td align="center"><%= so.sales_rep rescue'-'%></td>
+            <td align="center"><%= so.trade_term.name rescue'-' %></td>
       		</tr>
             <% end %>
           

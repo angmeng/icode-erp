@@ -48,51 +48,57 @@
           Purchase Orders
           <ul>
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
-              <li><%= link_to "PO Transactions & Histories", purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "PO Transactions & Histories", purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">PO Transactions & Histories</li>
+              <li><%= disabled_menu_style "PO Transactions & Histories" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR) %>
-              <li><%= link_to "Approved From PR", approved_pr_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Approved From PR", approved_pr_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">Approved From PR</li>
+              <li><%= disabled_menu_style "Approved From PR" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR) %>
-              <li><%= link_to "PR-Repair", maintenance_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "PR-Repair", maintenance_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">PR-Repair</li>
+              <li><%= disabled_menu_style "PR-Repair" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR) %>
-              <li><%= link_to "Proposed Vendor", proposed_vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Proposed Vendor", proposed_vendor_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">Proposed Vendor</li>
+              <li><%= disabled_menu_style "Proposed Vendor" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION) %>
-              <li><%= link_to "Vendor Selection", pending_approval_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Vendor Selection", pending_approval_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">Vendor Selection</li>
+              <li><%= disabled_menu_style "Vendor Selection" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION) %>
-              <li><%= link_to "Vendor Registration", vendor_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Vendor Registration", vendor_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">Vendor Registration</li>
+              <li><%= disabled_menu_style "Vendor Registration" %></li>
+            <% end %>
+          
+            <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION) %>
+              <li><%= link_to "Product ID Registration (Non Operation and Operation)", no_product_id_purchase_orders_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Product ID Registration (Non Operation and Operation)" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY) %>
-              <li><%= link_to "PO Entry", make_purchase_order_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "PO Entry", make_purchase_order_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">PO Entry</li>
+              <li><%= disabled_menu_style "PO Entry" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_KIV_VIEW) %>
-              <li><%= link_to "Listing Purchase Orders - KIV", kiv_purchase_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Listing Purchase Orders - KIV", kiv_purchase_orders_path %></li>
             <% else %>
-              <li class="text_gray">Listing Purchase Orders - KIV</li>
+              <li><%= disabled_menu_style "Listing Purchase Orders - KIV" %></li>
             <% end %>
           </ul>
         </li>
@@ -103,18 +109,16 @@
           Received Notes
           <ul>
             <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
-              <li><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "RN Transactions & Histories", receive_notes_path %></li>
             <% else %>
               <li class="text_gray">RN Transactions & Histories</li>
             <% end %>
 
-            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW) %>
-              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %>
-                <li><%= link_to "Received Notes Completed", info_receive_notes_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
-              <% else %>
-                <li class="text_gray">Received Notes Completed</li>
-              <% end %>
-            <%# end %>
+            <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %>
+              <li><%= link_to "Received Notes Completed", info_receive_notes_path %></li>
+            <% else %>
+              <li class="text_gray">Received Notes Completed</li>
+            <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
               <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
@@ -310,7 +314,7 @@
               <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
             <li><%= link_to "Customer P/O Report", so_customer_po_detail_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-              <li class="text_gray">Customer P/O Report</li>
+              <li class="text_gray">SO Cus P/O Report</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::SO_LISTING_REPORT) %>
@@ -329,19 +333,19 @@
           <% if roles.include?(InventoryManagementSystem::DELIVERY_ORDER_REPORT_MENU) %>
               
             <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
-            <li><%= link_to "Print D/O,Invoice Report", do_so_documentation_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Print D/O,Invoice", do_so_documentation_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
              <li class="text_gray">Print D/O,Invoice Report</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
-            <li><%= link_to "Delivery Order Summary Report", delivery_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "D/O Summary Report", delivery_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
             <li class="text_gray">Delivery Order Summary Report</li>
             <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
-            <li><%= link_to "Invoice Print History", history_invoices_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Print Invoice History", history_invoices_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <%# else %>
              <!-- <li class="text_gray">Print D/O,Invoice Report</li> -->
             <%# end %>

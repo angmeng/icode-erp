@@ -90,7 +90,7 @@
 
         <tr class="footer_line">
           <% if action_name == "printable" %>
-            <td align="right" colspan="7"><b>Sub-Total</b></td>
+            <td align="right" colspan="6"><b>Sub-Total</b></td>
           <% elsif action_name == "show" or action_name == "edit" %>
             <td align="right" colspan="8"><b>Sub-Total</b></td>
           <% elsif action_name == "new" or action_name == "create" %>
@@ -104,7 +104,7 @@
 
         <tr class="footer_line">
           <% if action_name == "printable" %>
-            <td align="right" colspan="7"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
+            <td align="right" colspan="6"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
           <% elsif action_name == "show" or action_name == "edit" %>
             <td align="right" colspan="8"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
           <% elsif action_name == "new" or action_name == "create" %>
@@ -118,7 +118,7 @@
 
         <tr class="footer_line">
           <% if action_name == "printable" %>
-            <td align="right" colspan="7"><b>Grand Total</b></td>
+            <td align="right" colspan="6"><b>Grand Total</b></td>
           <% elsif action_name == "show" or action_name == "edit" %>
             <td align="right" colspan="8"><b>Grand Total</b></td>
           <% elsif action_name == "new" or action_name == "create" %>

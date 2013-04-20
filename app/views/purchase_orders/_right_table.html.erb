@@ -1,6 +1,6 @@
 <table>
       <tr>
-        <td width="100"><b>P/O No.</b></td>
+        <td width="140"><b>P/O No.</b></td>
         <td>:</td>
         <td><%= @purchase_order.po_no rescue "-" %></td>
       </tr>
@@ -30,7 +30,7 @@
       </tr>
 
       <tr>
-        <td><b>Tax Exemption</b></td>
+        <td><b>Sales Tax Exemption</b></td>
         <td>:</td>
         <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
       </tr>
