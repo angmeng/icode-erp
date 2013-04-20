@@ -79,7 +79,7 @@
               <% else %>
                 
                 <tr>
-                  <td valign="top"><b>Vendor Address *</b></td>
+                  <td style="vertical-align: top;"><b>Vendor Address *</b></td>
                   <td><%= f.text_area :address_1, :size => "50x3", :placeholder => "Vendor Address", "required validationMessage" => "Please Enter Vendor Address" %></td>
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
 
               <tr>
                 <td><b>Website</b></td>
-                <td><%= f.text_field :website, :class => "k-textbox" %></td>
+                <td><%= f.text_field :website, :class => "k-textbox", :style => "width: 400px;" %></td>
               </tr>
 
               <tr>
@@ -250,7 +250,7 @@
               <tr>
                 <td><b>Sales Tax Licence No.</b></td>
                 <td></td>
-                <td><%= f.text_field 'sales_tax_licence_no', :class => "k-textbox" %></td>
+                <td><%= f.text_field 'sales_tax_licence_no', :class => "k-textbox", :style => "width: 300px;" %></td>
               </tr>
               <tr>
                 <td><b>Sales Tax Exemption No.</b></td>
@@ -275,12 +275,12 @@
               <tr>
                 <td><b>Warehouse Licence No.</b></td>
                 <td></td>
-                <td><%= f.text_field 'warehouse_licence_no', :class => "k-textbox" %></td>
+                <td><%= f.text_field 'warehouse_licence_no', :class => "k-textbox", :style => "width: 300px;" %></td>
               </tr>
               <tr>
                 <td><b>MFG Warehouse Licence No.</b></td>
                 <td></td>
-                <td><%= f.text_field 'mfg_warehouse_licence_no', :class => "k-textbox" %></td>
+                <td><%= f.text_field 'mfg_warehouse_licence_no', :class => "k-textbox", :style => "width: 300px;" %></td>
               </tr>
               <tr>
                 <td><b><%= f.label :sales_rep, "Sales Rep." %></b></td>

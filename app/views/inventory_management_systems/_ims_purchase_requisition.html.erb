@@ -16,19 +16,19 @@
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE), :disabled => true %> PR Approval / Reject Tasks</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_SIGNATURE) %> PR Approval / Reject Tasks</td>
           <td></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_SHOW, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_EDIT, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_EDIT), :disabled => true %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_SIGNATURE_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_SIGNATURE_EDIT) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_KIV, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_SIGNATURE_PRINTABLE, checkboxes.include?(InventoryManagementSystem::PR_SIGNATURE_PRINTABLE), :disabled => true %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PR_SIGNATURE_PRINTABLE) %></td>
           <% 4.times do |td| %><td></td><% end %>
         </tr>
 
          <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION), :disabled => true %> PR Transactions & Histories</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION), :disabled => true %> Purchase Requisitions Data</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_SHOW), :disabled => true %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_EDIT), :disabled => true %></td>
@@ -100,7 +100,7 @@
         <tr>
           <td></td>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION) %> PR Transactions & Histories</td>
+          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION) %> Purchase Requisitions Data</td>
           <td></td>
           <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_SHOW, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_SHOW) %></td>
           <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_EDIT, checkboxes.include?(InventoryManagementSystem::PR_TRANSACTION_EDIT) %></td>
@@ -174,7 +174,7 @@
       <tr>
         <td></td>
         <td></td>
-        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION %> PR Transactions & Histories</td>
+        <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION %> Purchase Requisitions Data</td>
         <td></td>
         <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_SHOW %></td>
         <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::PR_TRANSACTION_EDIT %></td>

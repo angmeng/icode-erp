@@ -124,7 +124,7 @@ class ProductCategoriesController < ApplicationController
   def copy
     @product_category = ProductCategory.find(params[:id])
     ProductManagement.generate_copying(@product_category)
-    redirect_to @product_category, notice: 'Copy Code was successfully updated.'
+    redirect_to @product_category, notice: 'You were successfully duplicated new Product ID.'
   end
   
   #new folder is ok
@@ -154,6 +154,12 @@ class ProductCategoriesController < ApplicationController
     ProductManagement.delete_folder(@product_category)  if @product_category.icon == ProductCategory::ICON_FOLDER
     # Please remain below code for delete product id in the future...
 #    ProductManagement.delete_folder_and_file(@product_category)
+    goto_direction(@product_category)
+  end
+  
+  def delete_product_id
+    @product_category = ProductCategory.find(params[:id])
+    ProductManagement.delete_folder_and_file(@product_category)
     goto_direction(@product_category)
   end
   

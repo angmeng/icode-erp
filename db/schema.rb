@@ -546,7 +546,7 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "product_category_id"
-    t.string   "copied_name"
+    t.integer  "copied_no",           :default => 0
   end
 
   add_index "product_running_numbers", ["product_category_id"], :name => "index_product_running_numbers_on_product_category_id"

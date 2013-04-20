@@ -11,9 +11,9 @@
     <% end %>
   </div>
 
-  <div class="left_icon_tag">
-    <%= submit_tag "Next New Product ID", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new" %>
-  </div>
+  <% unless action_name == "no_product_id" %>
+    <div class="left_icon_tag"><%= submit_tag "Next New Product ID", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new" %></div>
+  <% end %>
 
   <div class="icon_tag">
     <%= link_save_button %>
@@ -28,7 +28,7 @@
         var validator = $("#valid_product_field").kendoValidator().data("kendoValidator");
         
         $("#save_button, #left_save_button").click(function() {
-            if (validator.validate()) {}
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
           

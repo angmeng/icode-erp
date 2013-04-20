@@ -1,7 +1,6 @@
-<div class="title_head"><strong style="color: white;"></strong></div>
 <%= title_head "PURCHASE ORDER NO. [#{@purchase_order.po_no}]" %>
 
-<table>
+<table class="table_details">
     <tr>
       <td width="100"><b>Vendor</b></td>
       <td>[<%= @purchase_order.trade_company.code %>] <%= @purchase_order.trade_company.name rescue "-" %></td>
@@ -14,7 +13,13 @@
       <td width="100"></td>
 
       <td width="100"><b>Remark</b></td>
-      <td><%= @purchase_order.remark rescue '-' %></td>
+      <td>
+        <% if @purchase_order.remark.present? %>
+          <%= @purchase_order.remark %>
+        <% else %>
+          -
+        <% end %>
+      </td>
     </tr>
 
     <tr>
@@ -82,7 +87,7 @@
 
 <hr/>
 
-<div class="fix_1600x900_h400">
+<div class="table_background">
   <% if @purchase_order.trade_company.sales_tax_exemption.present? %>
     <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @purchase_order.purchase_requisition_items %>
   <% else %>

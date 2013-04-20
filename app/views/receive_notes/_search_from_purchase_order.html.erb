@@ -44,9 +44,9 @@
                 <td align="center">
                   <% unless rn.checked == TRUE %>
                     <% if params[:rn_qty].present? %>
-                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", params[:rn_qty]["#{rn.purchase_requisition_item.id.to_s}"][:qty], :size => 10, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}" %>
+                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", params[:rn_qty]["#{rn.purchase_requisition_item.id.to_s}"][:qty], :size => 10, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}", :class => "k-textbox numberKey", :style => "width: 80px;" %>
                     <% else %>
-                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", 0, :size => 10, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}" %>
+                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", 0, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}", :class => "k-textbox numberKey", :style => "width: 80px;" %>
                     <% end %>
                   <% else %>
                     <%= rn.received_qty rescue '-' %>

@@ -269,12 +269,7 @@ $(document).ready(function() {
         $(".bal_qty_ir").html(balance_qty);
     });
                                              
-    $("#purchase_requisition_item_quantity, #estimated_price").keyup(function(){
-        var estimated_qty         = $("#purchase_requisition_item_quantity").val();
-        var estimated_price       = $("#estimated_price").val();
-        var estimated_total_price = parseInt(estimated_qty) * parseFloat(estimated_price);
-        $("#estimated_total_price").html(estimated_total_price.toFixed(4));
-    });
+
     
     $("#quotation_request_form_quantity, #quotation_request_form_unit_price").keyup(function(){
         var quotation_qty         = $("#quotation_request_form_quantity").val();
@@ -505,7 +500,7 @@ $(document).ready(function() {
 $(function() {
         $('input, textarea').placeholder();
     
-	$("#menu a").each(function() {
+	$("#k_menu a").each(function() {
                 if (this.href == window.location) {
                         $(this).css("color", "brown").css("font-weight", "bold");
                         $(this).parent('li').parent('ul').parent('li').addClass('highlight');
@@ -533,19 +528,7 @@ $(function() {
 	});
 });
 
-function put_product_description(sel){
-    var product_id = sel.value;
-    $.ajax({
-        dataType: "json",
-        cache: false,
-        url: '/products/' + product_id,
-        timeout: 2000,
-        success: function(data){ 
-            $(".get_desc").html(data.desc);
-            $("#data_um").html(data.um);
-        }
-    });
-}
+
 
 function getCombo_tradecompany_code(sel) {
     var value = sel.options[sel.selectedIndex].value;  
@@ -564,26 +547,7 @@ function getCombo_tradecompany_code(sel) {
     });
 }
 
-function getCombo_pr_company(sel) {
-    var sel_product = $("#purchase_requisition_item_product_id").val();
-    var sel_vendor  = sel.value;
-    
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: '/purchase_requisition_items/product_vendor_unit_price_in_pr',
-        data: {product_id: sel_product, vendor_id: sel_vendor},
-        success: function(response){                    
-            if (response){
-                var price = parseFloat(response.unit_price);
-                $("#estimated_price").val(price.toFixed(4));
-            } else {
-                alert("Could not found the unit price.");
-            }
-         }
-    });
-    
-}
+
 
 function place_customer_id_to_trade_company_id(sel){
     var sel_name = sel.value;

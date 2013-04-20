@@ -1,9 +1,11 @@
-<div align="center" style="width: 200px; position: relative; top: 200px; left: 650px;">
+<div align="center" style="width: 200px; position: relative; top: 50%; left: 50%; background-color: skyblue; padding: 50px; margin-top: -100px; margin-left: -100px;">
    
-  <div class="new_button"><%= link_to "Non-Operation", non_operation_products_path %></div>
+  <%= link_to "Non-Operation", non_operation_products_path, :class => "k-button", :style => "width:150px;" %>
   
   <br/>
+  <br/>
+  <br/>
   
-  <div class="new_button"><%= link_to "Operation"    , operation_products_path %></div>
+  <%= link_to "Operation", operation_products_path, :class => "k-button", :style => "width:150px;" %>
   
 </div>

@@ -31,6 +31,13 @@
             height: pr_new_signature_height,
             scrolling: "yes"
         });
+        
+        var validator = $("#valid_credit_note").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
     });
   </script>
 <% end %>

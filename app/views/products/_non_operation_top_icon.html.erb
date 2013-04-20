@@ -88,6 +88,16 @@
     <%= not_link_common %>
   <% end %>
 
+  <% if data.product.present? %>
+      <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_COPY) %>
+        <%= link_copy(copy_product_category_path(data)) %>
+      <% else %>
+        <%= disabled_style "Copy" %>
+      <% end %>
+  <% else %>
+    <%= disabled_style "Copy" %>
+  <% end %>
+
   <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV) %>
     <%= link_kiv(product_category_path(data)) %>
   <% else %>
@@ -99,25 +109,17 @@
       <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION_DELETE) %>
         <%= link_delete(delete_data_product_category_path(data)) %>
       <% else %>
-        <%= not_link_delete %>
+        <%= disabled_style "Delete Folder" %>
       <% end %>
-    <%# elsif data.icon == ProductCategory::ICON_FILE %>
-      <%#= link_delete(delete_data_product_category_path(data)) %>
     <% else %>
-      <%= not_link_delete %>
+      <%= disabled_style "Delete Folder" %>
     <% end %>
   <% else %>
-    <%= not_link_delete %>
+    <%= disabled_style "Delete Folder" %>
   <% end %>
 
-  <% if data.product.present? %>
-      <%# if roles.include?(InventoryManagementSystem::PRODUCT_OPERATION_COMMON) %>
-        <%#= link_common(common_product_category_path(data)) %>
-      <%# else %>
-        <%#= disabled_style "Copy" %>
-      <%# end %>
-  <% else %>
-    <%= disabled_style "Copy" %>
+  <% if user_is_admin? %>
+    <%= link_delete_product_id(delete_product_id_product_category_path(data)) %>
   <% end %>
 
 <% end %>

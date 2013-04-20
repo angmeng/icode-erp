@@ -5,9 +5,9 @@
     <%= hidden_field_tag "purchase_requisition_item_id", params[:purchase_requisition_item_id] %>
   <% end %>
 
-  <div style="background-color:blue"><strong style="color:white;">MAINTENANCE</strong></div>
+  <%= title_head "MAINTENANCE" %>
   
-  <div class="fix_800x450">
+  <div class="popup_content">
     
     <% if @pr_item.temporary_sources.present? %> 
       <% if @pr_item.temporary_sources.find_by_select_vendor(TRUE).present? %>
@@ -25,18 +25,18 @@
         <%# end %>
           
         <% if source.present? %>
-          <td><%= text_field_tag :company_name, source.company_name, :style => "width:400px;", :id => "autoComplete_trade_companies" %></td>
+          <td><%= text_field_tag :company_name, source.company_name, :style => "width:400px;", :id => "autoComplete_suppliers" %></td>
         <% else %>
-          <td><%= text_field_tag :company_name, params[:company_name], :style => "width:400px;", :id => "autoComplete_trade_companies" %></td>
+          <td><%= text_field_tag :company_name, params[:company_name], :style => "width:400px;", :id => "autoComplete_suppliers" %></td>
         <% end %>
       </tr>
 
       <tr>
         <td><b>Estimated Price</b></td>
         <% if source.present? %>
-          <td><%= text_field_tag :unit_price, source.unit_price, :size => 8 %></td>
+          <td><%= text_field_tag :unit_price, source.unit_price, :class => "kendo_precision_4" %></td>
         <% else %>
-          <td><%= text_field_tag :unit_price, params[:unit_price], :size => 8 %></td>
+          <td><%= text_field_tag :unit_price, params[:unit_price], :class => "kendo_precision_4" %></td>
         <% end %>
       </tr>
       

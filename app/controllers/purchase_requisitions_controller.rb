@@ -6,7 +6,7 @@ class PurchaseRequisitionsController < ApplicationController
   def index
     @search = PurchaseRequisition.search(params[:search])
     @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions(@search)
-    @purchase_requisitions.find_all_by_department_id(current_user.department_id) unless user_is_admin?
+    @purchase_requisitions = @purchase_requisitions.where(:department_id => current_user.department_id) unless user_is_admin?
     @purchase_requisitions = @purchase_requisitions.paginate(:page => params[:page])
     loading
   end
@@ -14,6 +14,7 @@ class PurchaseRequisitionsController < ApplicationController
   def kiv
     @search = PurchaseRequisition.search(params[:search])
     @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions_kiv(@search)
+    @purchase_requisitions = @purchase_requisitions.where(:department_id => current_user.department_id) unless user_is_admin?
     @purchase_requisitions = @purchase_requisitions.paginate(:page => params[:page])
     loading
   end
@@ -247,6 +248,5 @@ class PurchaseRequisitionsController < ApplicationController
   def loading
     @pr_status      = PurchaseRequisition.uniq_status
     @pr_requestor   = PurchaseRequisition.uniq_requestor
-#    @pr_department  = PurchaseRequisition.uniq_department
   end
 end

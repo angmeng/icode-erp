@@ -2,11 +2,10 @@
 
   <table>
     <tr>
-      
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_APPROVED_FROM_PR) %>
         <td rowspan="2"><%= link_to "Approved From PR", approved_pr_purchase_orders_path, :class => "k-button"  %></td>
       <% else %>
-        <td rowspan="2">Approved From PR</td>
+        <td rowspan="2"><%= disabled_style "Approved From PR" %></td>
       <% end %>
       
       <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
@@ -14,18 +13,16 @@
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PR_REPAIR) %>
         <td><%= link_to "PR-Repair", maintenance_purchase_orders_path, :class => "k-button" %></td>
       <% else %>
-        <td>PR-Repair</td>
+        <td><%= disabled_style "PR-Repair" %></td>
       <% end %>
       
       <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-      
-      <td rowspan="2">
-        <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION) %>
-          <%= link_to "Vendor Selection", pending_approval_purchase_orders_path, :class => "k-button" %> 
-        <% else %>
-          Vendor Selection
-        <% end %>
-      </td>
+
+      <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION) %>
+        <td rowspan="2"><%= link_to "Vendor Selection", pending_approval_purchase_orders_path, :class => "k-button" %></td>
+      <% else %>
+        <td rowspan="2"><%= disabled_style "Vendor Selection" %></td>
+      <% end %>
       
       <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
       
@@ -42,7 +39,7 @@
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY) %>
         <td rowspan="2"><%= link_to "PO Entry", make_purchase_order_purchase_orders_path, :class => "k-button" %></td>
       <% else %>
-        <td rowspan="2">PO Entry</td>
+        <td rowspan="2"><%= disabled_style "PO Entry" %></td>
       <% end %>
       
       <td rowspan="2"><%= image_tag "arrow-right.png", :width => "30px" %></td>
@@ -50,7 +47,7 @@
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION) %>
         <td rowspan="2"><%= link_to "PO Transactions & Histories", purchase_orders_path, :class => "k-button" %></td>
       <% else %>
-        <td rowspan="2">PO Transactions & Histories</td>
+        <td rowspan="2"><%= disabled_style "PO Transactions & Histories" %></td>
       <% end %>
     </tr>
     
@@ -60,7 +57,7 @@
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PROPOSED_VENDOR) %>
         <td><%= link_to "Proposed Vendor", proposed_vendor_purchase_orders_path, :class => "k-button" %></td>
       <% else %>
-        <td>Proposed Vendor</td>
+        <td><%= disabled_style "Proposed Vendor" %></td>
       <% end %>
       
       <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
@@ -69,22 +66,18 @@
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION) %>
         <td><%= link_to "Vendor Registration", vendor_purchase_orders_path, :class => "k-button" %></td>
       <% else %>
-        <td>Vendor Registration</td>
+        <td><%= disabled_style "Vendor Registration" %></td>
       <% end %>
         
       <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
       
-      <!-- Start -->        
       <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION) %>
         <td><%= link_to "Product ID Registration (Non Operation and Operation)", no_product_id_purchase_orders_path, :class => "k-button" %></td>
       <% else %>
-        <td>Product ID Registration (Non Operation and Operation)</td>
+        <td><%= disabled_style "Product ID Registration (Non Operation and Operation)" %></td>
       <% end %>
         
       <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
-      
-
-      <!-- End -->
     </tr>
   </table>
   

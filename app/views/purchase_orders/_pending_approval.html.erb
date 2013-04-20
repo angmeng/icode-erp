@@ -5,9 +5,9 @@
         <th class="check_highlight"></th>
         <th class="std_pr_no">PR No.</th>
         <th class="std_pid">Product ID</th>
+        <th>Description</th>
         <th class="std_company">Proposed Vendor</th>
         <th class="std_qty">Qty</th>
-        <th class="std_um">U/M</th>
         <th class="std_eta">ETA</th>
         <th class="std_up">Unit Price</th>
         <th class="std_total">Amount</th>
@@ -42,6 +42,8 @@
                 <% end %>
               <% end %>
             </td>
+            
+            <td><%= proposed.description rescue '-' %></td>
 
             <td>
               <% unless proposed.maintenance == TRUE %>
@@ -57,8 +59,7 @@
               <% end %>
             </td>
 
-            <td align="center"><%= proposed.quantity rescue '0' %></td>
-            <td align="center"><%= proposed.unit_measurement.code rescue '-' %></td>
+            <td align="right"><%= proposed.quantity rescue '-' %> <%= proposed.unit_measurement.code rescue '-' %></td>
             <td align="center">
               <% if proposed.eta < Date.today %>
                 <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>

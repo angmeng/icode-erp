@@ -21,9 +21,9 @@
           <td></td>
           <% if action_name == "signature_report" %>
             <% if pr.remark.blank? %>
-              <td align="center">Approve</td>
+              <td align="center">Approving</td>
             <% else %>
-              <td align="center">Reject</td>
+              <td align="center">Rejected</td>
             <% end %>
           <% end %>
           <td align="center"><%= pr.pr_no %></td>

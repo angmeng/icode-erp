@@ -1,22 +1,16 @@
-<table width="100%">
-  <tr>
-    <td><%= link_to 'Search', "#", :class => "search_link" %></td>
-  </tr>
-</table>
-
+<div class="title_head">
+  <strong style="color:white;">LISITING CUSTOMERS - KIV</strong>
+  <%= search_button %>
+</div>
 <div><%= render "search_kiv_customer" %></div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING KIV CUSTOMERS</strong></div>
+<% if @trade_companies.present? %>
+  <div class="table_background"><%= render "listing_trade_company", :trade_company => @trade_companies %></div>
+<% else %>
+  <div class="content">Not Record Found</div>
+<% end %>
 
-<div class="fix_1600x900">
-  <% if @trade_companies.present? %>
-    <%= render "listing_trade_company", :trade_company => @trade_companies %>
-  <% else %>
-    Not Record Found.
-  <% end %>
-</div>
-
-<%= render "action_trade_company_kiv" %>
+<%= render "action_trade_company_customer_kiv" %>
 
 
   

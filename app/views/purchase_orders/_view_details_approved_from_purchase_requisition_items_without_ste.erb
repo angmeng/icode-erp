@@ -1,7 +1,7 @@
   <% if action_name == "printable" %>
     <table id="grid_h390" class="black-line-table">
   <% else %>
-    <table id="grid_h390" class="white-line-table">
+    <table class="jgrid_popup">
   <% end %>
 
       <thead>
@@ -18,7 +18,6 @@
               <th style="font-size: 12px;" width="100">Correct ETA</th>
             <% end %>
             <th style="font-size: 12px;">QUANTITY</th>
-            <th style="font-size: 12px;">U/M</th>
             <th style="font-size: 12px;">UNIT PRICE</th>
             <th style="font-size: 12px;">AMOUNT</th>
         </tr>
@@ -60,7 +59,7 @@
               <% end %>
             </td>
 
-            <td><%= simple_format(k.description) %></td>
+            <td><%= k.description rescue '-' %></td>
 
             <td align="center">
               <% if k.status == PurchaseRequisitionItem::RECEIVED_FULL %>
@@ -75,11 +74,10 @@
             </td>
 
             <% if action_name == "new" or action_name == "create" %>
-              <td><%= text_field_tag "datarow[#{k.id}][correct_eta]", '' %></td>
+              <td><%= text_field_tag "datarow[#{k.id}][correct_eta]", '', :class => "k-textbox" %></td>
             <% end %>
 
-            <td align="center"><%= k.quantity rescue '0' %></td>
-            <td align="center"><%= k.unit_measurement.code rescue '-' %></td>
+            <td align="right"><%= k.quantity rescue '-' %> <%= k.unit_measurement.code rescue '-' %></td>
             <td align="right"><%= four_precision(k.unit_price) %></td>
             <td align="right">
               <%= iproduct(k.quantity, k.unit_price) %>
@@ -92,8 +90,10 @@
 
         <tr class="footer_line">
           <% if action_name == "printable" %>
-            <td align="right" colspan="7"><b>Sub-Total</b></td>
+            <td align="right" colspan="6"><b>Sub-Total</b></td>
           <% elsif action_name == "show" or action_name == "edit" %>
+            <td align="right" colspan="8"><b>Sub-Total</b></td>
+          <% elsif action_name == "new" or action_name == "create" %>
             <td align="right" colspan="9"><b>Sub-Total</b></td>
           <% else %>
             <td align="right" colspan="11"><b>Sub-Total</b></td>
@@ -104,8 +104,10 @@
 
         <tr class="footer_line">
           <% if action_name == "printable" %>
-            <td align="right" colspan="7"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
+            <td align="right" colspan="6"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
           <% elsif action_name == "show" or action_name == "edit" %>
+            <td align="right" colspan="8"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
+          <% elsif action_name == "new" or action_name == "create" %>
             <td align="right" colspan="9"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
           <% else %>
             <td align="right" colspan="11"><b>Add S/Tax <span id="po_percent"><%= @purchase_order.tax rescue '0' %></span>%</b></td>
@@ -116,8 +118,10 @@
 
         <tr class="footer_line">
           <% if action_name == "printable" %>
-            <td align="right" colspan="7"><b>Grand Total</b></td>
+            <td align="right" colspan="6"><b>Grand Total</b></td>
           <% elsif action_name == "show" or action_name == "edit" %>
+            <td align="right" colspan="8"><b>Grand Total</b></td>
+          <% elsif action_name == "new" or action_name == "create" %>
             <td align="right" colspan="9"><b>Grand Total</b></td>
           <% else %>
             <td align="right" colspan="11"><b>Grand Total</b></td>

@@ -1,0 +1,17 @@
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::CUSTOMER_KIV_SHOW) %>
+    <span id="on_show_kiv" showClass="show_without_refresh_page_800x600"><%= not_link_binary %></span>
+  <% else %>
+    <%= not_link_binary %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::CUSTOMER_KIV_RECOVER) %>
+    <span id="on_recover"><%= not_link_recover %></span>
+  <% else %>
+    <%= not_link_recover %>
+  <% end %>
+   
+  <%= link_home_button %>
+
+</div>

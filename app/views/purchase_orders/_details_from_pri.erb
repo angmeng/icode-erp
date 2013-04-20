@@ -10,7 +10,6 @@
         <th>Description (in Detail)</th>
         <th>ETA</th>
         <th>Qty</th>
-        <th>U/M</th>
         <th>Unit Price</th>
         <th>Total</th>
         <th>Remark</th>
@@ -81,8 +80,7 @@
               <%= p.eta.strftime("%d-%m-%Y") rescue '-' %>
             <% end %>
           </td>
-          <td align="center"><%= p.quantity %></td>
-          <td align="center"><%= p.unit_measurement.code rescue '-' %></td>
+          <td align="right"><%= p.quantity %> <%= p.unit_measurement.code rescue '-' %></td>
           
           <% if p.maintenance == TRUE %>
             <td></td><td></td>

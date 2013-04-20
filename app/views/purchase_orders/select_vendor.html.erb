@@ -1,102 +1,91 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">PROPOSED VENDOR - APPLY</strong></div>
+<%= title_head "PROPOSED VENDOR - APPLY" %>
 
-  <%= form_tag change_vendor_purchase_order_path(@purchase_requisition_item), :method => :post do %>
-    <div class="fix_800x600">
-      <% if @purchase_requisition_item.temporary_sources.present? %>
-        <div style="height: 130px;">
-          <table>
-            <tr class="header_line">
-              <th></th>
-              <th style="font-size: 12px;">Vendor</th>
-              <th style="font-size: 12px;">U/P</th>
-              <th style="font-size: 12px;">Remark</th>
-            </tr>
-
-            <% @purchase_requisition_item.temporary_sources.each do |p| %>
-              <tr>
-                <td>
-                  <% if p.select_vendor == TRUE %>
-                    <%= radio_button_tag :vendor_radio, p.id, true %>
-                  <% else %>
-                    <%= radio_button_tag :vendor_radio, p.id, false %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= text_field_tag "vendor_name[#{p.id.to_s}][data]", p.company_name, :style => "width:380px;", :class => "autoComplete_trade_company_#{p.id.to_s}" %>
-                </td>
-                <td>
-                  <%= text_field_tag "price[#{p.id.to_s}][data]", number_with_precision(p.unit_price, :precision => 4), :size => 15, :class => "four_precision_#{p.id.to_s}" %>
-                </td>
-                <td>
-                  <%= text_field_tag "remark[#{p.id.to_s}][data]", p.remark, :size => 30 %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
-      <% end %>
-
-      <hr/>
-
-      <div style="height: 150px;">
-        <% if @purchase_requisition_item.urgent == TRUE %>
-          <div style="float:right"><%= image_tag("urgent_time.png", :alt => "Urgent", :title => "Urgent", :class => 'cube35' ) %></div>  
-        <% end %>
-
+<%= form_tag change_vendor_purchase_order_path(@purchase_requisition_item), :method => :post do %>
+  <div class="popup_content">
+    <% if @purchase_requisition_item.temporary_sources.present? %>
         <table>
-            <% if @purchase_requisition_item.product_id.present? %>
-              <tr>
-                <td><b>Product</b></td>
-                <td><%= render "/product_categories/join_product_category", :pc => @purchase_requisition_item %></td>
-              </tr>
-            <% end %>
+          <tr class="header_line">
+            <th></th>
+            <th style="font-size: 12px;">Vendor</th>
+            <th style="font-size: 12px;">U/P</th>
+            <th style="font-size: 12px;">Remark</th>
+          </tr>
 
+          <% @purchase_requisition_item.temporary_sources.each do |p| %>
             <tr>
-              <td width="150"><b>Description</b></td>
-              <td><%= simple_format(@purchase_requisition_item.description) %></td>
-            </tr>
-
-            <tr>
-              <td><b>Quantity</b></td>
-              <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>
-            </tr>
-
-            <tr>
-              <td><b>ETA</b></td>
               <td>
-                <% if @purchase_requisition_item.eta < Date.today %>
-                  <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+                <% if p.select_vendor == TRUE %>
+                  <%= radio_button_tag :vendor_radio, p.id, true %>
                 <% else %>
-                  <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
+                  <%= radio_button_tag :vendor_radio, p.id, false %>
                 <% end %>
               </td>
+              <td><%= text_field_tag "vendor_name[#{p.id.to_s}][data]", p.company_name, :style => "width:380px;", :class => "k-textbox autoComplete_trade_company_#{p.id.to_s}" %></td>
+              <td><%= text_field_tag "price[#{p.id.to_s}][data]", number_with_precision(p.unit_price, :precision => 4), :class => "kendo_precision_4 four_precision_#{p.id.to_s}" %></td>
+              <td><%= text_field_tag "remark[#{p.id.to_s}][data]", p.remark, :class => "k-textbox" %></td>
             </tr>
-
-            <% unless @purchase_requisition_item.remark.blank? %>
-              <tr>
-                <td><b>Remark</b></td>
-                <td><%= @purchase_requisition_item.remark %></td>
-              </tr>
-            <% end %>
+          <% end %>
         </table>
-      </div>
+    <% end %>
 
-      <div style="height: 100px;">
-        <% if @purchase_requisition_item.approval_remark.present? %>
-          <div class="approval_remark">
-            <strong>Vendor Selection Remark:</strong><br/>
-            <%= @purchase_requisition_item.approval_remark rescue '-' %>
-          </div>
-        <% end %>
-      </div>
+    <hr/>
+
+    <div style="height: 150px;">
+      <% if @purchase_requisition_item.urgent == TRUE %>
+        <div style="float:right"><%= image_tag("urgent_time.png", :alt => "Urgent", :title => "Urgent", :class => 'cube35' ) %></div>  
+      <% end %>
+
+      <table>
+          <% if @purchase_requisition_item.product_id.present? %>
+            <tr>
+              <td><b>Product</b></td>
+              <td><%= render "/product_categories/join_product_category", :pc => @purchase_requisition_item %></td>
+            </tr>
+          <% end %>
+
+          <tr>
+            <td width="150" style="vertical-align: top;"><b>Description</b></td>
+            <td><%= simple_format(@purchase_requisition_item.description) %></td>
+          </tr>
+
+          <tr>
+            <td><b>Quantity</b></td>
+            <td><%= @purchase_requisition_item.quantity %> <%= @purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+          </tr>
+
+          <tr>
+            <td><b>ETA</b></td>
+            <td>
+              <% if @purchase_requisition_item.eta < Date.today %>
+                <span class="red_alert"><%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+              <% else %>
+                <%= @purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %>
+              <% end %>
+            </td>
+          </tr>
+
+          <% unless @purchase_requisition_item.remark.blank? %>
+            <tr>
+              <td><b>Remark</b></td>
+              <td><%= @purchase_requisition_item.remark %></td>
+            </tr>
+          <% end %>
+      </table>
     </div>
 
-    <div class="icon_tag">
-      <%= link_save_button %>
-      <%= link_close_button  %>
+    <div style="height: 100px;">
+      <% if @purchase_requisition_item.approval_remark.present? %>
+        <div class="approval_remark">
+          <strong>Vendor Selection Remark:</strong><br/>
+          <%= @purchase_requisition_item.approval_remark rescue '-' %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  
-</div>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button  %>
+  </div>
+<% end %>
 

@@ -135,7 +135,7 @@ class Product < ActiveRecord::Base
   def self.running_option(product_value, company_name)
     option = ""
     if company_name.present?
-      product_value.product_vendors.each do |c|
+      product_value.product_vendor.each do |c|
         if company_name == c.trade_company.name
           option += "<option selected='selected' title='#{c.unit_price}' value='#{c.trade_company.name}'>#{c.trade_company.name}</option>"
         else
