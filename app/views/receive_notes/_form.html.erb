@@ -52,5 +52,13 @@
             else { alert("Invalid Data Form..."); return false; } 
         });
     });
+    
+    function calculate_rn_qty(sel){
+        var number = sel.name.match(/\[(\d+)\]/);
+        var number = parseInt(number[1], 10);
+        alert(number);
+        <%#*var rn_item = sel.options[sel.selectedIndex].value;%>
+        <%#*var count = 0;%>
+    }
   </script>
 <% end %>
