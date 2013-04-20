@@ -113,16 +113,16 @@
               </tr>
             </table>
 
-            <table>	
+            <table class="fix_doi_size">	
   
-                <tr style="height:70px;">
-	                <th width="40"></th>
-	                <th width="170"></th>
-	                <th width="320"></th>
-	                <th width="60"></th>
-	                <th width="190"></th>
-	                <th width="127"></th>
-	                <th width="127"></th>
+                <tr>
+	                <th style="width:fixed; width: 40px;"></th>
+	                <th style="width:fixed; width: 200px;"></th>
+	                <th style="width:fixed; width: 370px;"></th>
+	                <th style="width:fixed; width: 60px;"></th>
+	                <th style="width:fixed; width: 190px;"></th>
+	                <th style="width:fixed; width: 127px;"></th>
+	                <th style="width:fixed; width: 127px;"></th>
                 </tr>
                 <% p.delivery_order_items.each_with_index do |doi , index| %>
                   <% array << doi.no_of_carton %>
@@ -134,7 +134,7 @@
                       <%= doi.client_po rescue'-' %><br />
                       <%= doi.client_lot rescue'-' %>
                     </td>
-                    <td align="left" style="vertical-align:top;margin-left:10px;">
+                    <td align="left" style="vertical-align:top;">
                       <%# if doi.sales_order_item.present? %>
                         <%# if doi.sales_order_item.product.present? %>
                           <%# if doi.sales_order_item.product.product_category.present? %>
