@@ -5,7 +5,6 @@
       <th style="font-size: 12px;">Product ID</th>
       <th style="font-size: 12px;">Description</th>
       <th style="font-size: 12px;">PO Qty</th>
-      <th style="font-size: 12px;">U/M</th>
       <th style="font-size: 12px;">ETA</th>
       <th style="font-size: 12px;">RN Qty</th>
       <th style="font-size: 12px;">Vendor Part No.</th>
@@ -38,15 +37,16 @@
                   <% end %>
                 </td>
                 <td><%= simple_format(rn.purchase_requisition_item.description) %></td>
-                <td align="center"><%= rn.purchase_requisition_item.quantity %></td>
-                <td align="center"><%= rn.purchase_requisition_item.unit_measurement.code rescue '-' %></td>
+                <td align="right"><%= rn.purchase_requisition_item.quantity %> <%= rn.purchase_requisition_item.unit_measurement.code rescue '-' %></td>
                 <td align="center"><%= rn.purchase_requisition_item.eta.strftime("%d-%m-%Y") rescue '-' %></td>
                 <td align="center">
                   <% unless rn.checked == TRUE %>
                     <% if params[:rn_qty].present? %>
+                      <span id="rn_no_<%= rn.purchase_requisition_item.id.to_s %>"></span>
                       <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", params[:rn_qty]["#{rn.purchase_requisition_item.id.to_s}"][:qty], :size => 10, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}", :class => "k-textbox numberKey", :style => "width: 80px;" %>
                     <% else %>
-                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", 0, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}", :class => "k-textbox numberKey", :style => "width: 80px;" %>
+                      <span id="rn_no_<%= rn.purchase_requisition_item.id.to_s %>"></span>
+                      <%= text_field_tag "rn_qty[#{rn.purchase_requisition_item.id.to_s}][qty]", 0, :id => "supplier_#{rn.purchase_requisition_item.id.to_s}", :class => "k-textbox numberKey", :style => "width: 80px;", :onblur => "calculate_rn_qty(this)" %>
                     <% end %>
                   <% else %>
                     <%= rn.received_qty rescue '-' %>
