@@ -113,14 +113,14 @@
               </tr>
             </table>
 
-            <table class="fix_doi_size">	
+            <table>	
   
-                <tr>
+                <tr style="height:70px;">
 	                <th width="40"></th>
 	                <th width="170"></th>
 	                <th width="320"></th>
 	                <th width="60"></th>
-	                <th width="184"></th>
+	                <th width="190"></th>
 	                <th width="127"></th>
 	                <th width="127"></th>
                 </tr>
@@ -151,7 +151,7 @@
                       <%= doi.sales_order_item.product.desc rescue'-' %><br />
                       <%= doi.sales_order_item.part_no rescue'-' %>
                     </td>
-                    <td align="center"><%= doi.no_of_carton rescue'-' %></td>
+                    <td align="right"><%= doi.no_of_carton rescue'-' %></td>
                     <td align="right"><%= doi.delivery_qty rescue'-' %> <%= doi.sales_order_item.unit_measurement.code rescue'-' %></td>
                     <td align="right" style="padding-right: 5px;"><%= four_precision(doi.unit_price) rescue'-' %></td>
                     <td align="right" style="padding-right: 5px;"><%= iproduct(doi.delivery_qty, doi.unit_price) %></td>
@@ -165,7 +165,7 @@
                   <td></td>
                   <td></td>
                   <td align="right">Total :</td>
-                  <td align="center">
+                  <td align="right">
                     --------<br/>
                     <%= no_precision(array.sum) %><br/>
                     --------<br/>
