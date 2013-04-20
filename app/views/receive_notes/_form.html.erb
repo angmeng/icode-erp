@@ -56,9 +56,13 @@
     function calculate_rn_qty(sel){
         var number = sel.name.match(/\[(\d+)\]/);
         var number = parseInt(number[1], 10);
-        alert(number);
-        <%#*var rn_item = sel.options[sel.selectedIndex].value;%>
-        <%#*var count = 0;%>
+        <%#*var rn_no_%>
+        
+        var rn_item = sel.value;
+        
+        if (rn_item > 0){ 
+          
+        }
     }
   </script>
 <% end %>
