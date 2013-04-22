@@ -1,0 +1,23 @@
+<h2>Purchase Part ETA Inquire Report</h2>
+
+<table class="jdatatable" >
+	<tr>
+		<th>No.</th>
+		<th>PO No.</th>
+		<th>Vendor</th>
+		<th>Date</th>
+		<th>Term</th>
+	<tr>
+
+	
+	<tr>
+		<% @show_purcase_part_eta_inquire_report.each_with_index do |pp| %>
+		<td><% index + 1 %></td>
+		<td><%= pp.po_no %></td>
+		<td><%= pp.trade_company.code rescue'-' %> / <%= pp.trade_company.name rescue'-' %></td>
+		<td><%= pp.po_date rescue'-' %></td>
+		<td><%= pp.trade_term. %></td>
+	</tr>
+
+
+</table>

@@ -49,26 +49,28 @@ Merp::Application.routes.draw do
 
   resources :reports do
     collection do
-    get "delivery_order_summary_report"
+    get "company_report"
+    get "customer_report"
+    get "credit_note_report"
+    get "do_summary_report"
+    get "do_so_documentation_report"
+    get "debit_note_report"
+    get "inventory_report"
     get "pr_report"
     get "price_report"
     get "po_report"
-    get "sales_tax_exemption_report"
-    get "sales_order_summary_report"
-    get "sales_cj5_summary_co_report"
-    get "sales_order_listing_report"
-    get "so_customer_po_detail_report"
     get "product_report"
-    get "company_report"
     get "purchase_by_creditor_report"
-    get "inventory_report"
-    get "customer_report"
-    get "receive_note_report"
-    get "rn_part_summary_report"
-    get "do_so_documentation_report"
-    get "debit_note_report"
-    get "credit_note_report"
+    get "rn_report"
+    get "rn_part_summary_report"  
+    get "sales_tax_exemption_report"
+    get "sales_cj5_summary_co_report"
+    get "so_listing_report"
+    get "so_customer_po_detail_report"
+    get "so_summary_report"
 
+
+    #=========== pdf part ===============
     get "pdf_sales_tax_exemption_report"
     get "pdf_sales_order_summary_report"
     get "pdf_sales_order_listing_report"
@@ -84,6 +86,7 @@ Merp::Application.routes.draw do
     get "pdf_delivery_order_summary_report"
     get "pdf_sales_orde_listing_report"
 
+    #========= excel part ================
     get "excel_sales_cj5_summary_co_report"
     get "excel_product_report"
     get "excel_inventory_report"

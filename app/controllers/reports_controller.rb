@@ -589,7 +589,7 @@ end
   #   @show_delivery_order_report = @delivery_order_report.all
   # end
 
-  def sales_order_summary_report
+  def so_summary_report
     @sales_order_summary_report = SalesOrder.search(params[:search])
     @show_sales_order_summary_report = @sales_order_summary_report.all
   end
@@ -607,12 +607,12 @@ end
 
   end
 
-  def delivery_order_summary_report
+  def do_summary_report
     @delivery_order_summary_report = DeliveryOrder.search(params[:search])
     @show_delivery_order_summary_report = @delivery_order_summary_report.all
   end
 
-  def sales_order_listing_report
+  def so_listing_report
     @sales_order_listing_report = SalesOrder.search(params[:search])
     @show_sales_order_listing_report = @sales_order_listing_report.all
   end
@@ -624,6 +624,11 @@ end
 
   def credit_note_report
     @show_credit_note_report = CreditNote.all
+  end
+
+  def purchase_pat_eta_inquire_report
+    @show_purcase_part_eta_inquire_report = PuchaseOrder.search(params[:search])
+    @show_purcase_part_eta_inquire_report = @purchase_part_eta_inquire_report.all
   end
 
  
