@@ -77,14 +77,15 @@ $(document).ready(function () {
 
 
     $('#jdatatable').dataTable({
+        "sScrollY": content_height - 97,
         "sPaginationType": "full_numbers",  // "bPaginate": false,
         "bJQueryUI": true,
         "bProcessing": true,
         //"bServerSide": true,
         //"sAjaxSource": $('#products').data('source'),
         "oLanguage": {
-                "sZeroRecords":  "No ids found.",
-                "sSearch": "Search all columns:"
+                "sZeroRecords":  "No Record Found.",
+                "sSearch": "Search All Columns:"
             }
         // "bLengthChange": false,
         // "bFilter": true,

@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+  layout "sheetbox", :except => [:do_so_documentation_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
