@@ -262,27 +262,9 @@
             <% else %>
               <li><%= disabled_menu_style "Sales Orders Data - KIV" %></li>
             <% end %>
-
-            <%# if roles.include?(InventoryManagementSystem::SO_KIV_ITEM) %>
-              <!--li><%#= link_to "KIV - Sales Order Items", kiv_sales_order_items_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <!--li class="text_gray">KIV - Sales Order Items</li-->
-            <%# end %>
           </ul>
         </li>
       <% end %>
-        
-            <%# if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
-              <!--li><%#= link_to "Product ID Registration", product_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <%#*<li class="text_gray">Product ID Registration</li>%>
-            <%# end %>
-
-            <%# if roles.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %>
-              <!--li><%#= link_to "Customer Registration", customer_registration_sales_orders_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <%#*<li class="text_gray">Customer Registration</li>%>
-            <%# end %>
 
       <% if roles.include?(InventoryManagementSystem::DO_MENU) %>
         <li style="width:150px;">
@@ -293,9 +275,6 @@
             <% else %>
               <li class="text_gray">Delivery Orders Data</li>
             <% end %>
-            
-            <li><%#= link_to "Transactions", delivery_orders_path %></li>
-            <li><%#= link_to "New", new_delivery_order_path %></li>
           </ul>
         </li>
       <% end %>
@@ -333,15 +312,21 @@
           <% if roles.include?(InventoryManagementSystem::DELIVERY_ORDER_REPORT_MENU) %>
               
             <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
-            <li><%= link_to "Print D/O,Invoice", do_so_documentation_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Print D/O, Invoice", do_so_documentation_report_reports_path %></li>
             <% else %>
-             <li class="text_gray">Print D/O,Invoice Report</li>
+             <li><%= disabled_menu_style "Print D/O, Invoice" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
+<<<<<<< HEAD
             <li><%= link_to "D/O Summary Report", do_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
               <% else %>
             <li class="text_gray">DO Summary Report</li>
+=======
+              <li><%= link_to "D/O Summary Report", delivery_order_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <% else %>
+              <li><%= disabled_menu_style "D/O Summary Report" %></li>
+>>>>>>> 8e8e1b5a64e75f6515da173d2a45a8cc0c19cfb7
             <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>

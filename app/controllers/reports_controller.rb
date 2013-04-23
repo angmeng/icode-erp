@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+  layout "sheetbox", :except => [:do_so_documentation_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -475,6 +475,27 @@ end
     else
       redirect_to so_customer_po_detail_report_reports_path
       end 
+  end
+
+  def pdf_purchase_part_eta_inquire_report
+    if params[:commit] == "PDF Report"
+      if params[:].present?
+        @detail_purchase_part_eta_inquire_report = PurchaseOrder.find(params[:])
+        html = render_to_string(:layout => false , :action => "pdf_sales_order_listing_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf ,:filename => "pdf_sales_order_listing_report.pdf",
+                                :type => 'application/pdf' , 
+                                :disposition => "attachement")
+        end
+      elsif params[:commit] == "Show"
+        if params[:].present?
+          @detail_purcahse_part_eta_inquire_report = PurchaseOrder.find(params[:])
+          respond_to do |format|
+            format.html
+        end
+      end
+    else 
+      redirect_to purchase_part_eta_inquire_report_reports_path
   end
 
   def pdf_debit_note_report

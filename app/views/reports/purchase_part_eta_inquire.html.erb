@@ -8,8 +8,6 @@
 		<th>Date</th>
 		<th>Term</th>
 	<tr>
-
-	
 	<tr>
 		<% @show_purcase_part_eta_inquire_report.each_with_index do |pp| %>
 		<td><% index + 1 %></td>
@@ -18,6 +16,16 @@
 		<td><%= pp.po_date rescue'-' %></td>
 		<td><%= pp.trade_term. %></td>
 	</tr>
-
-
 </table>
+
+<div align="left">
+	<span><% not_link_excel %></span>
+</div>
+
+<div align="right">
+	<span><% not_link_show %></span>
+	<span><% not_link_edit %></span>
+	<span><% not_link_recover %></span>
+	<span><% not_link_printable %></span>
+
+</div>
