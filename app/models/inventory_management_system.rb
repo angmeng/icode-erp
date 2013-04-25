@@ -660,7 +660,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   RN_PART_SUMMARY_REPORT_PRINT                      = 398
 
   
-    #==== ==== DELIVERY ORDER REPORT ==== ====
+  #==== ==== DELIVERY ORDER REPORT ==== ====
   DELIVERY_ORDER_REPORT_MENU                        = 399
 
   #==== ==== SUB MODULE REPORT ==== ====

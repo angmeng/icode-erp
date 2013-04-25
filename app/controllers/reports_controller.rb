@@ -1,6 +1,10 @@
 class ReportsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox", :except => [:do_so_documentation_report]
+  layout "sheetbox", :except => [:company_report , :credit_note_report , :customer_report , :debit_repot, 
+  :show_do_so_documentation_report, :do_summary_report , :inventory_report , :po_report , :pr_report,
+  :price_report , :product_report , :purchase_by_creditor_report , :purchase_part_eta_inquire_report ,
+  :rn_part_summary_report, :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
+  :so_customer_po_detail_report , :so_listing_report , :so_summary_report ]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -15,9 +19,6 @@ class ReportsController < ApplicationController
         redirect_to so_customer_po_detail_report_reports_path
       end          
   end
-
-
-
 
   def excel_sales_order_summary_report
     if params[:sos_ids].present?
@@ -466,7 +467,7 @@ end
           @detail_sales_order_listing_report =  SalesOrder.find(params[:sol_ids])
           respond_to do |format|
             format.html
-        end
+          end
       end
     elsif params[:commit] == "Excel Report"
       # if params[:so_ids].present?
@@ -479,23 +480,23 @@ end
 
   def pdf_purchase_part_eta_inquire_report
     if params[:commit] == "PDF Report"
-      if params[:].present?
-        @detail_purchase_part_eta_inquire_report = PurchaseOrder.find(params[:])
-        html = render_to_string(:layout => false , :action => "pdf_sales_order_listing_report.html.erb")
+      if params[:pp_ids].present?
+        @detail_purchase_part_eta_inquire_report = PurchaseOrder.find(params[:pp_ids])
+        html = render_to_string(:layout => false , :action => "pdf_purchase_part_eta_inquire_report.html.erb")
           @kit = PDFKit.new(html)
-          send_data(@kit.to_pdf ,:filename => "pdf_sales_order_listing_report.pdf",
+          send_data(@kit.to_pdf ,:filename => "pdf_purchase_part_eta_inquire_report.pdf",
                                 :type => 'application/pdf' , 
                                 :disposition => "attachement")
         end
+        # render :text => params[:pp_ids].to_json
       elsif params[:commit] == "Show"
-        if params[:].present?
-          @detail_purcahse_part_eta_inquire_report = PurchaseOrder.find(params[:])
-          respond_to do |format|
-            format.html
-        end
+        if params[:pp_ids].present?
+          @detail_purchase_part_eta_inquire_report =  PurchaseOrder.find(params[:pp_ids])
+          
       end
     else 
       redirect_to purchase_part_eta_inquire_report_reports_path
+    end
   end
 
   def pdf_debit_note_report
@@ -647,9 +648,9 @@ end
     @show_credit_note_report = CreditNote.all
   end
 
-  def purchase_pat_eta_inquire_report
-    @show_purcase_part_eta_inquire_report = PuchaseOrder.search(params[:search])
-    @show_purcase_part_eta_inquire_report = @purchase_part_eta_inquire_report.all
+  def purchase_part_eta_inquire_report
+    @purcase_part_eta_inquire_report = PurchaseOrder.search(params[:search])
+    @show_purcase_part_eta_inquire_report = PurchaseOrder.all
   end
 
  

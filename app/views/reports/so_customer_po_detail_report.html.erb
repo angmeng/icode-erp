@@ -41,7 +41,7 @@
               <td align="center"><%= check_box_tag "so_ids[]" , so.id %></td>
               <td align="center"><%= so.sales_order_no rescue'-' %></td>
               <td align="center"><%= so.trade_company.code rescue'-' %> /
-                <%= so.trade_company.name%></td>
+                <%= so.trade_company.name %></td>
               <td align="center"><%= so.purchase_order_no rescue'-' %></td>
               <td align="center"><%= so.trade_term.name rescue'-' %></td>
               <td align="center"><%= so.so_date.strftime("%d-%m-%Y") rescue'-' %></td>

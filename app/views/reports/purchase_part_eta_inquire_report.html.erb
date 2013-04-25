@@ -1,0 +1,59 @@
+<%= title_head "Purchase Part ETA Inquire Report" %>
+<div id="popup_container">
+	<%= form_tag pdf_purchase_part_eta_inquire_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+<input type="checkbox" name="all" id="checkall" />Check All
+
+<table id="jdatatable" class="display">
+	<thead>
+	<tr>
+		<th></th>
+		<th>No.</th>
+		<th>PO No.</th>
+		<th>Vendor</th>
+		<th>Date</th>
+		<th>Term</th>
+	</tr>
+</thead>
+<tbody>
+		<% @show_purcase_part_eta_inquire_report.each_with_index do |pp , index | %>
+	<tr class="<%= cycle("odd_line", "even_line") %>">
+		
+		<td align="center"><%= check_box_tag "pp_ids[]" , pp.id %></td>
+		<td align="center"><%= index + 1 %></td>
+		<td align="center"><%= pp.po_no %></td>
+		<td align="center"><%= pp.trade_company.code rescue'-' %> / <%= pp.trade_company.name rescue'-' %></td>
+		<td align="center"><%= pp.po_date rescue'-' %></td>
+		<td align="center"><%= pp.trade_term.name rescue'-' %></td>
+		
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<div class="icon_tag" align="left">
+	<% if roles.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_EXCEL) %>
+	<span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_excel %></span>
+	<% else %>
+      <%= not_link_excel %>
+      <% end %>
+</div>
+
+<div class="icon_tag" align="right">
+   <%# if roles.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_SHOW) %>
+	  <span><%= submit_tag "Show" , :class => "k-button" %><%# not_link_show %></span>
+	<%# else %>
+      <%#= not_link_show %>
+    <%# end %>
+
+	<span><%= not_link_edit %></span>
+    <span><%= not_link_recover %></span>
+
+  <%# if roles.include?(InventoryManagementSystem::PO_PURCHASE_PART_ETA_INQUIRE_REPORT_PRINT) %>
+	  <span><%= submit_tag "PDF Report" , :class => "k-button" %><%# not_link_printable %></span>
+	<%# else %>
+      <%#= not_link_printable %>
+    <%# end %>
+
+    <% end %>
+
+</div>

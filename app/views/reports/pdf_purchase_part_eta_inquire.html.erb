@@ -1,8 +1,9 @@
-
+<% if @detail_purchase_part_eta_inquire_report.present? %>
+<div style="magin-bottom:200px;" ></div>
 <h3>Purchase Order</h3>
 <table>
 	<tr>
-		<td>Vendor : </td>
+		<td>Vendor :</td>
 		<td>P/O No. :</td>
 	</tr>
 	<tr>
@@ -35,31 +36,60 @@
 		<th>Unit Price</th>
 		<th>Amount</th>
 	</tr>
-	<% %>
+	<% detail_purchase_part_eta_inquire_report.each_with_index do |pp , index | %>
 	<tr>
+		<td><% index + 1 %></td>
+		<% pp.purchase_requisition.purchase_requisition_item.each do |pr| %>
+		<td><%= pr..product.product_combobox.product_code rescue'-'  %></td>
+		<td><%= pr.product.desc rescue'-' %></td>
+		<td><%= pr.eta rescue'-' %></td>
+		<td><%= pr.quantity rescue'-' %></td>
+		<td><%= pr.unit_price rescue'-' %></td>
+		<td><%= pr.amount rescue'-' %></td>
+		<% end %>
+	</tr>
+	<tr>
+		<% 4.times do |td| %><td></td><% end %>
+		<td>Sub-Total	:</td>
 		<td></td>
+	</tr>
+	<tr>
+		<% 4.times do |td| %><td></td><% end %>
+		<td>Add S/Tax 0%	:</td>
 		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+	</tr>
+	<tr>
+		<% 4.times do |td| %><td></td><% end %>
+		<td>Grand Total 	:</td>
 		<td></td>
 	</tr>
 
 </table>
 
+<% end %>  <%# end of if statement %>
+
 <table>
 	<tr>
-		<th ></th>
-		<th></th>
-		<th></th>
-		<th></th>
+		<th>Notes To Vendor : -<br />
+			1. Goods of Inferior Quatity<br />
+			2. Please chop , sign & return<br />
+			   the attached acknowledge.br />
+			3. Please quote P/O No. in your <br />
+			invoices & D/Os. </th>
+		<th rowspan="3">Remark :</th>
+		
 	</tr>
 
 	<tr>
 		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>Purchase By</td>
+		<td>Prepared By</td>
+		<td>Authorised By</td>
+	</tr>
+	<tr>
+		<td>Vendor's & Signature</td>
+		<td>Purchasing & PP</td>
+		<td>Name *</td>
+		<td>Name *</td>
 	</tr>
 </table>
