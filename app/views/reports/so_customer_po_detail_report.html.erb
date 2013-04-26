@@ -18,14 +18,14 @@
   </div> -->
   
 
-    <input type="checkbox" name="all" id="checkall" />Check All
+   <!--  <input type="checkbox" id="checkall" />Check All -->
 
     	<div class="fix_1600x900_h450">
         	<%= form_tag pdf_so_customer_po_detail_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
         	<table  id="jdatatable" class="display" >
             <thead>
         		<tr class="header_line">
-              <th></th>
+              <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
               <th>Sales Order No.</th>
               <th>Trade Company Code / Name</th>
               <th>Customer PO.</th>
@@ -41,7 +41,7 @@
               <td align="center"><%= check_box_tag "so_ids[]" , so.id %></td>
               <td align="center"><%= so.sales_order_no rescue'-' %></td>
               <td align="center"><%= so.trade_company.code rescue'-' %> /
-                <%= so.trade_company.name%></td>
+                <%= so.trade_company.name %></td>
               <td align="center"><%= so.purchase_order_no rescue'-' %></td>
               <td align="center"><%= so.trade_term.name rescue'-' %></td>
               <td align="center"><%= so.so_date.strftime("%d-%m-%Y") rescue'-' %></td>

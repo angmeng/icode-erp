@@ -23,7 +23,7 @@
   <%# end %>
 </div> -->
 
-<input type="checkbox" name="all" id="checkall" />Check All
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
 <div class="fix_1600x900_h450">
 	<fieldset>
@@ -32,7 +32,7 @@
 	<thead>
 		<tr class="header_line">
 			<th class="check_highlight"></th>
-			<th></th>
+			<th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
 			<th>No.</th>
 			<th>P/O No.</th>
 			<th>Ref Doc</th>

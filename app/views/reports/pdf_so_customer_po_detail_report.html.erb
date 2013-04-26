@@ -1,8 +1,8 @@
-<div id="container">
+<!-- <div id="container">
 <h2><u>Sales Order Customer P/O Detail Report</u></h2>
 
 
-	<% if @detail_so_customer_po_detail_report.present? %>
+	<%# if @detail_so_customer_po_detail_report.present? %>
 	<table id="jgrid" class="black-line-table">
 		<thead>
 			<tr class="header_line">
@@ -19,9 +19,86 @@
 
 
 		<tbody>
-		<% @detail_so_customer_po_detail_report.each do |so| %>
-       <% so.sales_order_items.each_with_index do |soi , index | %>
+		<%# @detail_so_customer_po_detail_report.each do |so| %>
+       <%# so.sales_order_items.each_with_index do |soi , index | %>
 			<tr>
+        <%# if index == 0 %>
+        <td align="center" rowspan="<%= so.sales_order_items.count %>">
+        <%#= so.sales_order_no rescue'-' %></td>
+        <%# end %>
+        <td align="center"><%#= soi.part_no rescue'-' %> / 
+          <%#= render '/product_categories/join_product_category' , :pc => soi %></td>
+        <td align="center"> 
+          <%#= soi.product.desc rescue'-' %></td>
+        <td align="center"><%#= soi.mgf_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td align="center"><%#= soi.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td align="center"><%#= soi.quantity rescue'-' %></td>
+        <td align="center"><%#= soi.remaining_qty rescue'-' %></td>
+        <td align="center"><%#= soi.status rescue'-' %></td>
+         <%# end %> 
+			</tr>
+      <tr style="border-top: 2px solid;">
+        <td ></td>
+      </tr>
+			
+		<%# end %> 
+		</tbody>
+
+		<%# else %>
+			no report found
+		<%# end %>
+	</table>
+
+</div> -->
+
+<div id="container">
+<h2><u>Sales Order Customer P/O Detail Report</u></h2>
+
+
+  <% if @detail_so_customer_po_detail_report.present? %>
+  <table>
+    <tr>
+      <td>
+        Customer : Xxxx   Xxxxxxx<br/>
+        Xxxxx<br />
+        Xxxxx<br />
+      </td>
+
+      <td>
+        Sales Order No. :Xxxxx <br />
+        Date            :Xxxxx <br />
+        Page            :Xxxxx <br />
+        Rev             :Xxxxx <br />
+        Term            :Xxxxx <br />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Sales Rep : Xxxxx</td>
+    </tr>
+
+  </table>
+
+  <table id="jgrid" class="black-line-table">
+    <thead>
+      <tr class="header_line">
+        <th>No.</th>
+        <th>Prod Code</th>
+        <th>Part no. / Description</th>
+        <th>Quantity</th>
+        <th>U/P (RM)</th>
+        <th>Amount</th>
+        <th>ETA Date</th>
+        <th>P/O</th>
+        <th>Satus</th>
+      </tr>
+    </thead>
+
+<!-- ======================= do until here ================== -->
+    <tbody>
+    <% @detail_so_customer_po_detail_report.each do |so| %>
+       <% so.sales_order_items.each_with_index do |soi , index | %>
+      <tr>
         <% if index == 0 %>
         <td align="center" rowspan="<%= so.sales_order_items.count %>">
         <%= so.sales_order_no rescue'-' %></td>
@@ -36,18 +113,18 @@
         <td align="center"><%= soi.remaining_qty rescue'-' %></td>
         <td align="center"><%= soi.status rescue'-' %></td>
          <% end %> 
-			</tr>
+      </tr>
       <tr style="border-top: 2px solid;">
         <td ></td>
       </tr>
-			
-		<% end %> 
-		</tbody>
+      
+    <% end %> 
+    </tbody>
 
-		<% else %>
-			no report found
-		<% end %>
-	</table>
+    <% else %>
+      no report found
+    <% end %>
+  </table>
 
 </div>
 
