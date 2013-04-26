@@ -1,9 +1,9 @@
 class ReportsController < ApplicationController
   before_filter :authenticate_user!
   layout "sheetbox", :except => [:company_report , :credit_note_report , :customer_report , :debit_repot, 
-  :show_do_so_documentation_report, :do_summary_report , :inventory_report , :po_report , :pr_report,
-  :price_report , :product_report , :purchase_by_creditor_report , :purchase_part_eta_inquire_report ,
-  :rn_part_summary_report, :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
+  :do_so_documentation_report, :do_summary_report , :inventory_report , :purchase_order_report , :pr_report,
+  :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,
+  :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :so_summary_report ]
 
   def excel_so_customer_po_detail_report
@@ -180,19 +180,19 @@ def pdf_pr_report
     
 end
 
-def pdf_po_report
+def pdf_po_listing_vendor_report
   if params[:commit] == "PDF Report"
      if params[:po_ids].present?
-      @detail_po_report = PurchaseOrder.find(params[:po_ids])
-      html = render_to_string(:layout => false , :action => "pdf_po_report.html.erb")
+      @detail_po_listing_vendor_report = PurchaseOrder.find(params[:po_ids])
+      html = render_to_string(:layout => false , :action => "pdf_po_listing_vendor_report.html.erb")
           @kit = PDFKit.new(html)
-          send_data(@kit.to_pdf, :filename => "pdf_po_report.pdf" ,
+          send_data(@kit.to_pdf, :filename => "pdf_po_listing_vendor_report.pdf" ,
                                  :type => 'application/pdf' ,
                                  :disposition => "attachement" )
     end
     elsif params[:commit] == "Show"
       if params[:po_ids].present?
-      @detail_po_report = PurchaseOrder.find(params[:po_ids])
+      @detail_po_listing_vendor_report = PurchaseOrder.find(params[:po_ids])
       respond_to do |format|
         format.html
       end
@@ -478,24 +478,26 @@ end
       end 
   end
 
-  def pdf_purchase_part_eta_inquire_report
+  def pdf_purchase_order_report
     if params[:commit] == "PDF Report"
       if params[:pp_ids].present?
-        @detail_purchase_part_eta_inquire_report = PurchaseOrder.find(params[:pp_ids])
-        html = render_to_string(:layout => false , :action => "pdf_purchase_part_eta_inquire_report.html.erb")
+        @detail_purchase_order_report = PurchaseOrder.find(params[:pp_ids])
+        html = render_to_string(:layout => false , :action => "pdf_purchase_order_report.html.erb")
           @kit = PDFKit.new(html)
-          send_data(@kit.to_pdf ,:filename => "pdf_purchase_part_eta_inquire_report.pdf",
+          send_data(@kit.to_pdf ,:filename => "pdf_purchase_order_report.pdf",
                                 :type => 'application/pdf' , 
                                 :disposition => "attachement")
         end
         # render :text => params[:pp_ids].to_json
       elsif params[:commit] == "Show"
         if params[:pp_ids].present?
-          @detail_purchase_part_eta_inquire_report =  PurchaseOrder.find(params[:pp_ids])
-          
+          @detail_purchase_order_report =  PurchaseOrder.find(params[:pp_ids])
+          respond_to do |format|
+            format.html
+        end
       end
     else 
-      redirect_to purchase_part_eta_inquire_report_reports_path
+      redirect_to purchase_order_report_reports_path
     end
   end
 
@@ -568,12 +570,6 @@ end
     @show_rn_part_summary_report = @rn_part_summary_report.all
   end
 
-  def po_report
-    @po_report = PurchaseOrder.search(params[:search])
-    @show_po_report = @po_report.all
-    #@take_ids = @show_po_report.map(&:id) #for pdf 
-  end
-
   def customer_report
     @product_customer_report = ProductCustomer.search(params[:search])
     @show_product_customer_report = @product_customer_report.all
@@ -622,7 +618,6 @@ end
   end
 
   def do_so_documentation_report
-
     @do_so_documentation_report = DeliveryOrder.search(params[:search])
     @show_do_so_documentation_report = @do_so_documentation_report.all
     # where(:authorize_print => true)
@@ -648,10 +643,18 @@ end
     @show_credit_note_report = CreditNote.all
   end
 
-  def purchase_part_eta_inquire_report
-    @purcase_part_eta_inquire_report = PurchaseOrder.search(params[:search])
-    @show_purcase_part_eta_inquire_report = PurchaseOrder.all
+  def purchase_order_report
+    @purchase_order_report = PurchaseOrder.search(params[:search])
+    @show_purchase_order_report = PurchaseOrder.all
   end
+
+  def po_listing_vendor_report
+    @po_listing_vendor_report = PurchaseOrder.search(params[:search])
+    @show_po_listing_vendor_report = @po_listing_vendor_report.all
+    #@take_ids = @show_po_report.map(&:id) #for pdf 
+  end
+
+
 
  
 end   

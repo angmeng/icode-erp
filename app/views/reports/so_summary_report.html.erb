@@ -26,14 +26,14 @@
 </div> -->
 
 
-  <input type="checkbox" name="all" id="checkall" />Check All
+  <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
       <div class="fix_1600x900_h450">
       	<%= form_tag pdf_sales_order_summary_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
       	<table id="jdatatable" class="display" >
           <thead>
       		<tr class="header_line">
-            <th></th>
+            <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
       			<th>Trade Company Code</th>
       			<th>Sales Order No.</th>
             <th>Sales Rep.</th>

@@ -20,7 +20,7 @@
 			</table>
 		</div>
  -->
-		<input type="checkbox" name="all" id="checkall" />Check All
+		<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
 		<div class="fix_1600x900_h450">
 			
@@ -29,7 +29,7 @@
 				<thead>
 				<tr class="header_line">
 					
-					<th></th>
+					<th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
 					<th>No.</th>
 					<th>Date</th>
 					<th>Received From</th> <!--  (trade company) -->

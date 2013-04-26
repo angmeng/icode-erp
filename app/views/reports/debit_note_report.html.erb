@@ -23,7 +23,7 @@
 
   <hr />
  -->
-<input type="checkbox" name="all" id="checkall" />Check All
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
   <div class="fix_1600x900_h450">
           <%#= form_tag pdf_debit_note_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
@@ -32,7 +32,7 @@
 
                     <thead>
                       <tr>
-                        <th></th>
+                        <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
                         <th>No.</th>
                         <th>Debit Note Date</th>
                         <th>Debit Note No.</th>

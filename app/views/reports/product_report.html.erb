@@ -31,7 +31,7 @@
 
 </div> -->
 
-<input type="checkbox" name="all" id="checkall" />Check All
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
 <div class="fix_1600x900_h450">
 	
@@ -39,7 +39,7 @@
 	<table id="jdatatable" class="display" data-source="<%= product_report_reports_path(format: "json") %> ">
 		<thead>
 			<tr>
-                <th></th>
+                <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
 				<th>No.</th>
 				 <%#= check_box_tag('check_all', 'check_all', false, :onClick => "check(document.myform)") %>
 				<th>Product ID</th>

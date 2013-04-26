@@ -1,6 +1,4 @@
 Merp::Application.routes.draw do
-
-
   resources :journal_voucher_items
 
   resources :journal_vouchers
@@ -58,10 +56,10 @@ Merp::Application.routes.draw do
     get "inventory_report"
     get "pr_report"
     get "price_report"
-    get "po_report"
     get "product_report"
     get "purchase_by_creditor_report"
-    get "purchase_part_eta_inquire_report"
+    get "purchase_order_report"
+    get "po_listing_vendor_report"
     get "rn_report"
     get "rn_part_summary_report"  
     get "sales_tax_exemption_report"
@@ -76,11 +74,11 @@ Merp::Application.routes.draw do
     get "pdf_sales_order_summary_report"
     get "pdf_sales_order_listing_report"
     get "pdf_purchase_by_creditor_report"
-    get "pdf_purchase_part_eta_inquire_report"
     get "pdf_product_report"
     get "pdf_inventory_report"
     get "pdf_pr_report"
-    get "pdf_po_report"
+    get "pdf_purchase_order_report"
+    get "pdf_po_listing_vendor_report"
     get "pdf_receive_note_report"
     get "pdf_sales_cj5_summary_co_report"
     get "pdf_so_customer_po_detail_report"
@@ -93,7 +91,6 @@ Merp::Application.routes.draw do
     get "excel_product_report"
     get "excel_inventory_report"
     get "excel_pr_report"
-    get "excel_po_report"
     get "excel_receive_note_report"
     get "excel_sales_tax_exemption_report"
     get "excel_sales_order_summary_report"

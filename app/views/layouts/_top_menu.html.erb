@@ -156,14 +156,14 @@
             Purchase Order Report
             <ul>
                <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU) %>
-                  <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT) %>
-                <li><%= link_to "Purchase Order Report", po_report_reports_path %></li>
+                  <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT) %>
+                <li><%#= link_to "Purchase Order Report", po_report_reports_path %></li>
                  
-                <% else %>
-                <li class="text_gray">Purchase Order</li>
-                <% end %>
+                <%# else %>
+                <!-- <li class="text_gray">Purchase Order</li> -->
+                <%# end %>
                 <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU) %>
-                <li><%= link_to "Pruchase Part ETA Inquire Report", purchase_part_eta_inquire_report_reports_path %></li>
+                <li><%= link_to "Pruchase order Report", purchase_order_report_reports_path %></li>
 
 
               <% end %>
