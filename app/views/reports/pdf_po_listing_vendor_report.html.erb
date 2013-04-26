@@ -1,0 +1,92 @@
+<div id="container">
+<h2>Purchase Order Report</h1>
+<% arr >> [] %>
+      <% if @detail_po_report.present? %>
+  	<table id="jgrid" class="black-line-table">
+  		<thead>
+  			<tr class="header_line">
+  				<th>P/O #</th>
+          <th>Date</th>
+  				<th>Product Code / Description</th>
+  				<th>Quantity</th>
+          <th>Out Standing</th>
+          <th>Unit Measurement<th>
+  				<th>Unit Price</th>
+  				<th>Amount</th>
+  				
+  			</tr>
+  		</thead>
+      
+  	<tbody>
+      
+      <% @detail_purchase_order_listing_report.each do |po| %>
+  		<tr>
+  			<td align="center"><%= po.po_no rescue'-' %></td>
+        <td align="center"><%= po. %></td>
+  			<td align="center"><%= po. rescue '-' %></td>
+  			<td align="center"><%= po. rescue '-' %></td>
+        <td align="center"><%= po. rescue '-' %></td>
+        <td align="center"><%= po. rescue '-' %></td>
+  			<td align="center"><%= po. rescue '-' %></td>
+  			<td align="center"><%=  rescue '-' %></td>
+  			 
+  		</tr>
+      <% end %>
+  	</tbody>
+  	
+    </table>
+   
+   <% else %>
+   no record found
+    <% end %>
+  
+</div>
+
+<style>
+
+  table {
+    width: 100px;
+  }
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+        }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+  
+</style>
