@@ -11,4 +11,7 @@
     <td><b>Department</b></td>
     <td><%= f.select :department_id_equals, options_from_collection_for_select(departments, :id, :name, params[:department_id_equals].to_s), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:200px;" } %></td>
   </tr>
+  <tr>
+    <td colspan="2" align="right"><%= f.submit "Search", :class => "k-button" %></td>
+  </tr>
 </table>

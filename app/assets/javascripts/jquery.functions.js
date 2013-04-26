@@ -1,7 +1,6 @@
 $(document).ready(function() {
     
     $("#k_menu").kendoMenu({openOnClick: true});
-    
               
     $(".maskDate").keydown(function(e){
         if ($(this).val().length <= 10){
@@ -18,7 +17,7 @@ $(document).ready(function() {
         }
     }); 
     
-    $(".digg_pagination").append('<i style="color: red;">*pg</i>');
+//    $(".digg_pagination").append('<i style="color: red;">*pg</i>');
       
     $('#checkall:checkbox').change(function () {
         if($(this).attr("checked")) $('input:checkbox').attr('checked','checked');
@@ -46,14 +45,19 @@ $(document).ready(function() {
     $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
     $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
     
-    
-//    $(".inputNum_integer").forceNumeric({fixDecimals: 0});
-//    $(".integer").numeric(false, function() { alert("Integers only"); this.value = ""; this.focus(); });
-
-//    $('input[class^="kendo_precision_4"]').each(function(k, v) {
-//        var string_id = $(this).attr('class');
-//        console.log($(this).kendoNumericTextBox({min: 0, format: "n4"}))
-//    });
+    $('#j_tabify').tabify();
+        
+    $('#j_tabify').click(function(){
+      if (location.hash == "#tabify_listing-tab"){
+        $(".left_icon_tag").hide();
+        $(".center_icon_tag").hide();
+        $(".icon_tag").hide();
+      } else if (location.hash == "#tabify_search-tab"){
+        $(".left_icon_tag").show();
+        $(".center_icon_tag").show();
+        $(".icon_tag").show();
+      } 
+    });
     
     // Just autocomplete all suppliers only
     $("#autoComplete_suppliers").kendoAutoComplete({    
@@ -526,6 +530,16 @@ $(function() {
                         });
 		};
 	});
+        
+        if (location.hash == "#tabify_listing-tab"){
+            $(".left_icon_tag").show();
+            $(".center_icon_tag").show();
+            $(".icon_tag").show();
+        } else if (location.hash == "#tabify_search-tab"){
+            $(".left_icon_tag").hide();
+            $(".center_icon_tag").hide();
+            $(".icon_tag").hide();
+        } 
 });
 
 

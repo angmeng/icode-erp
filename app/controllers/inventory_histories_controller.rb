@@ -33,7 +33,11 @@ class InventoryHistoriesController < ApplicationController
     
     if @check.present? && @inventory_history.save
       params[:in_out] == "IN" ? @product.update_attributes(:current_stock => @product.current_stock + @inventory_history.stock_in) : @product.update_attributes(:current_stock => @product.current_stock - @inventory_history.stock_out)
-      redirect_to @inventory_history, notice: 'New Inventory was successfully created.'
+      if params[:save_and_new_inventory]
+        redirect_to new_inventory_history_path, notice: "[#{@inventory_history.product.product_combobox.product_code rescue '-'}]... New Inventory was successfully created."
+      else
+        redirect_to @inventory_history, notice: "[#{@inventory_history.product.product_combobox.product_code rescue '-'}]... New Inventory was successfully created."
+      end
     else
       msg.present? ? msg : msg = []
       msg << @inventory_history.errors.full_messages

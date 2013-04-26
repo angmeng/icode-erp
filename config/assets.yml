@@ -47,14 +47,7 @@ css:
   # http://mintdigital.github.com/asset_hat/doc/classes/AssetHat/CSS/Engines.html
 
   bundles:
-    css-bundle-1:
-      - css-file-1-1
-      - css-file-1-2
-      - css-file-1-3
-    css-bundle-2:
-      - css-file-2-1
-      - css-file-2-2
-      - css-file-2-3
+    application: []
 
 js:
   engine: jsmin
@@ -71,11 +64,31 @@ js:
   # http://mintdigital.github.com/asset_hat/doc/classes/AssetHat/JS/Vendors.html
 
   bundles:
-    js-bundle-1:
-      - js-file-1-1
-      - js-file-1-2
-      - js-file-1-3
-    js-bundle-2:
-      - js-file-2-1
-      - js-file-2-2
-      - js-file-2-3
+    application: []
+      
+      
+      
+#<link href="/assets/application.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/jquery.ui.core.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/jquery.ui.theme.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/dataTables/src/demo_table_jui.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/easyui/default/easyui.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/easyui/icon.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/jquery.fancybox.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/kendo.blueopal.min.css?body=1" media="all" rel="stylesheet" type="text/css" />
+#<link href="/assets/kendo.common.min.css?body=1" media="all" rel="stylesheet" type="text/css" />  
+
+#<script src="/assets/jquery.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery-ui.js?body=1" type="text/javascript"></script>
+#<script src="/assets/date.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery.chromatable.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery.easyui.min.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery.fancybox.pack.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery.forcenumeric.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery.functions.js?body=1" type="text/javascript"></script>
+#<script src="/assets/jquery.placeholder.js?body=1" type="text/javascript"></script>
+#<script src="/assets/kendo.web.min.js?body=1" type="text/javascript"></script>
+#<script src="/assets/dataTables/jquery.dataTables.js?body=1" type="text/javascript"></script>
+#<script src="/assets/turbolinks.js?body=1" type="text/javascript"></script>
+#<script src="/assets/application.js?body=1" type="text/javascript"></script>

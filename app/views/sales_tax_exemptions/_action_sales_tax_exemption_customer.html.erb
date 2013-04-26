@@ -1,10 +1,14 @@
-<div style="float:left">
-  <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES) %>
-    <span id="on_show_history">Show Histories for Customer</span>
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER) %>
+    <%= link_to "New Sales Tax Exemption for Customer", new_customer_sales_tax_exemptions_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <% content_tag :span, :class => "k-button", :style => "color: grey; background-color: white;" do %>
-      Show Histories for Customer
-    <% end %>
+    <%= disabled_style "New Sales Tax Exemption for Customer" %>
+  <% end %>
+    
+  <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES) %>
+    <span id="on_show_history"><%= disabled_style "Show Histories For Customer" %></span>
+  <% else %>
+    <%= disabled_style "Show Histories For Customer" %>
   <% end %>
 </div>
 
@@ -13,27 +17,27 @@
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW) %>
     <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_show %></span>
+    <%= not_link_show %>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT) %>
     <span id="on_edit" editClass="iframe_800x600"><%= not_link_edit %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_edit %></span>
+    <%= not_link_edit %>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV) %>
      <span id="on_kiv"><%= not_link_kiv %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_kiv %></span>
+    <%= not_link_kiv %>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE) %>
     <span id="on_printable"><%= not_link_printable %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_printable %></span>
+    <%= not_link_printable %>
   <% end %>
    
-  <%= link_close_button %>
+  <%= link_home_button %>
 
 </div>

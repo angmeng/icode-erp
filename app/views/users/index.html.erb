@@ -1,13 +1,33 @@
-<div class="title_head">
-  <strong style="color: white;">LISTING USERS</strong>
-  <%= search_button %>
-</div>
-<div class="search_engine"><%= render "search_user" %></div>
+<!--div class="title_head">
+  <strong style="color:white;">LISTING USERS</strong>
+  <%#= search_button %>
+</div-->
+<%#= render "search_user" %>
 
-<% if @users.present? %>
-  <div class="table_background"><%= render "listing_users", :list_users => @users %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
+<%# if @users.present? %>
+  <!--div class="table_background"><%#= render "listing_users", :list_users => @users %></div-->
+<%# else %>
+  <!--div class="content">Not Record Found</div-->
+<%# end %>
+  
+<%#= render "action_user" %>
+
+
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISTING USERS</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+
+<div id="tabify_listing">
+  <% if @users.present? %>
+    <div class="table_background"><%= render "listing_users", :list_users => @users %></div>
+  <% else %>
+    <div class="content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%= render "search_user" %>
+</div>
 
 <%= render "action_user" %>

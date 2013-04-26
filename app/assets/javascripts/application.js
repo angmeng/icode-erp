@@ -20,6 +20,7 @@
 $(document).ready(function () {
     
     var window_height           = $(window).height();
+    var tabify_height           = $(".class_tabify").height();    
     var mainHeader_height       = $("#main_header").height();
     var mainFooter_height       = $("#main_footer").height();
     var menu_height             = $("#k_menu").height();
@@ -27,11 +28,13 @@ $(document).ready(function () {
     var searching_height        = $("#searching").height();
     var title_height            = $(".title_head").height();
     var button_height           = $(".icon_tag").height();
-    var ctn_width               = $(".title_head").width() - 10; // It is for table width
+//    var ctn_width               = $(".title_head").width() - 10; // It is for table width
+    var ctn_width               = $(window).width() - 20; // It is for table width
     
     // Wrapper is calculate the height only available when without popup
     var wrapper_height           = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
     var content_height           = wrapper_height - title_height - button_height - 12;
+    var tabify_content_height    = wrapper_height - tabify_height - button_height - 12;    
     var linking_content_height   = wrapper_height - linking_height - title_height - button_height - 13;
     var searching_content_height = wrapper_height - searching_height - title_height - button_height - 13;
 
@@ -40,6 +43,9 @@ $(document).ready(function () {
     
     // It is for .content
     $(".content").css({ 'height': content_height }).addClass("page_wrapper");
+    
+    // It is Tabbing with tabify
+    $(".tabify_content").css({ 'height': tabify_content_height }).addClass("page_wrapper");
     
     // It is for .content with linking
     $(".linking_content").css({ 'height': linking_content_height }).addClass("page_wrapper");
@@ -75,7 +81,6 @@ $(document).ready(function () {
     $("#treeview").kendoTreeView();
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
 
-
     $('#jdatatable').dataTable({
         "sScrollY": content_height - 97,
         "sPaginationType": "full_numbers",  // "bPaginate": false,
@@ -92,8 +97,23 @@ $(document).ready(function () {
         // "bSort": false,
         // "bInfo": false,   //exp :showing 1 of 15 pages 
         //"bAutoWidth": true
+     });
+     
+     $('#tabify_datatable').dataTable({
+        "sScrollY": tabify_content_height - 97,
         
+        "sPaginationType": "full_numbers",
+        "bJQueryUI": true,
         
+//        "bProcessing": true,
+//        "bServerSide": true,
+//        "sAjaxSource": $('#tabify_datatable').data('source'),
+        
+        "oLanguage": {
+                "sZeroRecords":  "No Record Found.",
+                "sSearch": "Search All Columns:"
+        },
+        "bAutoWidth": true
      });
 
     // When it is popup...

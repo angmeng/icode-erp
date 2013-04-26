@@ -23,13 +23,19 @@
         <% unless action_name == "edit" %>
           <% if params[:in_out] == "IN" or @inventory_history.stock_out == 0 %>
             <tr class="show_in">
-              <td><b>Stock In</b></td>
-              <td><%= f.text_field :stock_in, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock In" %></td>
+              <td><b>Stock In Qty</b></td>
+              <td>
+                <%= f.text_field :stock_in, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock In" %>
+                <span class="k-invalid-msg" data-for="inventory_history[stock_in]"></span>
+              </td>
             </tr>
           <% else %>
             <tr style="display:none;" class="show_in">
-              <td><b>Stock In</b></td>
-              <td><%= f.text_field :stock_in, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock In" %></td>
+              <td><b>Stock In Qty</b></td>
+              <td>
+                <%= f.text_field :stock_in, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock In" %>
+                <span class="k-invalid-msg" data-for="inventory_history[stock_in]"></span>
+              </td>
             </tr>
           <% end %>
         <% end %>
@@ -37,13 +43,19 @@
         <% unless action_name == "edit" %>
           <% if params[:in_out] == "OUT" or @inventory_history.stock_in == 0 %>
             <tr class="show_out">
-              <td><b>Stock Out</b></td>
-              <td><%= f.text_field :stock_out, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock Out" %></td>
+              <td><b>Stock Out Qty</b></td>
+              <td>
+                <%= f.text_field :stock_out, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock Out" %>
+                <span class="k-invalid-msg" data-for="inventory_history[stock_out]"></span>
+              </td>
             </tr>
           <% else %>
             <tr style="display:none;" class="show_out">
-              <td><b>Stock Out</b></td>
-              <td><%= f.text_field :stock_out, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock Out" %></td>
+              <td><b>Stock Out Qty</b></td>
+              <td>
+                <%= f.text_field :stock_out, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Stock Out" %>
+                <span class="k-invalid-msg" data-for="inventory_history[stock_out]"></span>
+              </td>
             </tr>
           <% end %>
         <% end %>
@@ -55,10 +67,9 @@
       </table>
     </div>
   </div>
-  <div class="icon_tag">
-    <%= link_save_button %>
-    <%= link_close_button %>
-  </div>
+
+  <%= render "action_inventory_new" %>
+
 <% end %>
 
 
@@ -69,7 +80,7 @@
         
         var validator = $("#valid_inventory").kendoValidator().data("kendoValidator");
         
-        $("#save_button").click(function() {
+        $("#save_button, #left_save_button").click(function() {
             if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
@@ -97,10 +108,34 @@
                     row = "<option value=\"" + j.id + "\">" + j.description + "</option>";
                     $(row).appendTo("select#inventory_history_inventory_issue_id"); 
                 });
+                $("select#inventory_history_inventory_issue_id").kendoComboBox({filter: "contains"});
             }
         });
     }
 
+    function getCombo_product(sel) {
+        var product = sel.options[sel.selectedIndex].value;
+
+        $.ajax({
+            dataType: "json",
+            cache: false,
+            url: '/products/' + product + '/current_stock',
+            timeout: 2000,
+            success: function(data){
+                var vhtml = data.current_stock;
+                $("#current_product_stock").html(vhtml);
+                $("#stock_value").html(data.current_stock);
+                $("#stock_out_um").html(data.um);
+                $("#stock_out_unit_measurement_id").val(data.unit_measurement_id);
+                $("#stock_out_description").html(data.desc);
+
+                <%#*if (data.current_stock == 0){%>
+                    <%#*alert("Current stock has not available now.")%>   
+                    <%#*$("#stock_out_save_button").hide();%>
+                <%#*}%>
+            }
+        });
+    }
   </script>
 
 <% end %>
