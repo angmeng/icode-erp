@@ -39,17 +39,19 @@ class ProductCombobox < ActiveRecord::Base
   
   def self.qr_comboboxes
     combobox = self.db_active_finish_goods
-    mix = combobox.collect { |pcombo| ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id] }  # e.g [A0001] APPLE (M) SDN BHD
+    mix = combobox.collect do |pcombo|
+      if pcombo.product_code.present? && pcombo.product.present? && pcombo.product_id.present?
+        ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id] # e.g [A0001] APPLE (M) SDN BHD
+      end
+    end
     return mix
   end
   
   def self.db_all
     combobox = self.all
     mix = combobox.collect do |pcombo| 
-      if pcombo.product.present?
-        if pcombo.product.desc.present?
-          ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id]  # e.g [A0001] APPLE (M) SDN BHD
-        end
+      if pcombo.product_code.present? && pcombo.product.present? && pcombo.product_id.present?
+        ["[#{pcombo.product_code}] #{pcombo.product.desc.gsub(/\n/, ' ')}", pcombo.product_id]  # e.g [A0001] APPLE (M) SDN BHD
       end
     end
     return mix

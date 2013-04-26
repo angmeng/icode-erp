@@ -3,15 +3,15 @@
   <% if roles.include?(InventoryManagementSystem::STE_KIV_SUPPLIER_SHOW) %>
     <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_binary %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_binary %></span>
+    <%= not_link_binary %>
   <% end %>
 
   <% if roles.include?(InventoryManagementSystem::STE_KIV_SUPPLIER_RECOVER) %>
     <span id="on_recover"><%= not_link_recover %></span>
   <% else %>
-    <span class="word_opac"><%= not_link_recover %></span>
+    <%= not_link_recover %>
   <% end %>
    
-  <%= link_close_button %>
+  <%= link_home_button %>
 
 </div>

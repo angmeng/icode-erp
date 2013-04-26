@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @users  = User.search_users(@search).paginate(:page => params[:page])
 #    respond_to do |format|
 #      format.html
-#      format.json { render json: @users }
+#      format.json { render json: UsersDatatable.new(view_context) }
 #    end
   end
   

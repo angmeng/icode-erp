@@ -135,6 +135,20 @@ p#alert {
 #menu a:hover { background-color: gold; }
 /*=================================== MENU TOOL (END) =====================================*/
 
+/* Background Gradient for Monochromatic Colors */
+.class_tabify {
+    background-color: #A6B1FF;
+    background: #A6B1FF -webkit-gradient(linear, left top, left bottom, from(#081BA2), to(#A6B1FF)) no-repeat;
+    background: #A6B1FF -moz-linear-gradient(top, #081BA2, #A6B1FF) no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#081BA2, endColorstr=#A6B1FF) no-repeat;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#081BA2, endColorstr=#081BA2)" no-repeat;
+    height: 20px;
+}
+.class_tabify { clear: both; }
+.class_tabify li { display: inline; }
+.class_tabify li a { background: #ccf; padding: 10px; border-right: 1px solid #ccf; border-bottom: none; text-decoration: none; color: #000; font-weight: bold;}
+.class_tabify li.active a { background: #eef; }
+
 /* Table Layout Design */
 table th, table td  { padding: 0 5px 0 5px; vertical-align: middle; }
 .pad_wall           { padding: 0 5px 0 5px; vertical-align: middle; }
@@ -329,6 +343,7 @@ table.normal_table_white td {
 .check_highlight    { width: 25px; }
 .remove_underline   { text-decoration: none; }
 .table_background   { background-color: white; }
+.table_searching    { background-color: white; padding: 10px; }
 
 /*.disabled_button    { color: grey; background-color: white; cursor: default; border: 1px solid #94C0D2; text-align: center; padding: 5px; }*/
 /*#disabled_on_left   { color: grey; background-color: white; cursor: default; }*/
@@ -353,7 +368,7 @@ table.normal_table_white td {
 
 /* new_form */
 
-.fix_h
+
 
 .fix_1600x900_h450, .fix_h450 {
     border: 1px solid black;

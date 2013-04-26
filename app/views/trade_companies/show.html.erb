@@ -260,13 +260,13 @@
           <tr>
             <td><b>Type of Sales</b></td>
             <td></td>
-            <td><%= @trade_company.type_of_sale.name rescue '-' %></td>
+            <td><%= @trade_company.type_of_sale.present? ? @trade_company.type_of_sale.name : '-' %></td>
           </tr>
           
           <tr>
             <td><b>Sales Tax Licence No.</b></td>
             <td></td>
-            <td><%= @trade_company.sales_tax_licence_no rescue '-' %></td>
+            <td><%= @trade_company.sales_tax_licence_no.present? ? @trade_company.sales_tax_licence_no : '-' %></td>
           </tr>
           
           <tr>
@@ -287,19 +287,19 @@
           <tr>
             <td><b>Warehouse Licence No.</b></td>
             <td></td>
-            <td><%= @trade_company.warehouse_licence_no rescue '-' %></td>
+            <td><%= @trade_company.warehouse_licence_no.present? ? @trade_company.warehouse_licence_no : '-' %></td>
           </tr>
           
           <tr>
             <td><b>MFG Ware warehouse Licence No.</b></td>
             <td></td>
-            <td><%= @trade_company.mfg_warehouse_licence_no rescue '-' %></td>
+            <td><%= @trade_company.mfg_warehouse_licence_no.present? ? @trade_company.mfg_warehouse_licence_no : '-' %></td>
           </tr>
           
           <tr>
             <td><b>Sales Rep.</b></td>
             <td></td>
-            <td><%= @trade_company.sales_rep %></td>
+            <td><%= @trade_company.sales_rep.present? ? @trade_company.sales_rep : '-' %></td>
           </tr>
           
           <tr>
@@ -311,13 +311,13 @@
           <tr>
             <td><b>Trade Term</b></td>
             <td></td>
-            <td><%= @trade_company.trade_term.name rescue '-' %></td>
+            <td><%= @trade_company.trade_term.present? ?  @trade_company.trade_term.name : '-' %></td>
           </tr>
           
           <tr>
             <td><b>Certification</b></td>
             <td></td>
-            <td><%= @trade_company.certification rescue '-' %></td>
+            <td><%= @trade_company.certification.present? ?  @trade_company.certification : '-' %></td>
           </tr>
 
         </table>

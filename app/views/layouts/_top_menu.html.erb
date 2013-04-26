@@ -111,22 +111,14 @@
             <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
               <li><%= link_to "RN Transactions & Histories", receive_notes_path %></li>
             <% else %>
-              <li class="text_gray">RN Transactions & Histories</li>
+              <li><%= disabled_menu_style "RN Transactions & Histories" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_COMPLETED_VIEW_SHOW) %>
               <li><%= link_to "Received Notes Completed", info_receive_notes_path %></li>
             <% else %>
-              <li class="text_gray">Received Notes Completed</li>
+              <li><%= disabled_menu_style "Received Notes Completed" %></li>
             <% end %>
-
-            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW) %>
-              <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_NEW_ADD) %>
-                  <!--li><%#= link_to "New RNs", new_receive_note_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
-              <%# else %>
-                  <%#*<li class="text_gray">New RNs</li>%>
-              <%# end %>
-            <%# end %>
           </ul>
         </li>
       <% end %>
@@ -215,13 +207,13 @@
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::QR_APPROVED_REJECT) %>
-              <li><%= link_to 'Approve / Reject QRs Tasks', signature_quotation_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to 'Approve / Reject QRs Tasks', signature_quotation_quotation_request_forms_path %></li>
             <% else %>
               <li class="text_gray">Approve / Reject QRs Tasks</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
-              <li><%= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path %></li>
             <% else %>
               <li class="text_gray">New & Pending QRs</li>
             <% end %>
@@ -233,13 +225,13 @@
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %>
-              <li><%= link_to 'Costing Sheet - KIV', kiv_costing_sheets_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to 'Costing Sheet - KIV', kiv_costing_sheets_path %></li>
             <% else %>
               <li class="text_gray">Costing Sheet - KIV</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
-              <li><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path %></li>
             <% else %>
               <li class="text_gray">QR Customer Feedback</li>
             <% end %>
@@ -273,7 +265,7 @@
             <% if roles.include?(InventoryManagementSystem::DO_TRANSACTION) %>
               <li><%= link_to "Delivery Orders Data", delivery_orders_path %></li>
             <% else %>
-              <li class="text_gray">Delivery Orders Data</li>
+              <li><%= disabled_menu_style "Delivery Orders Data" %></li>
             <% end %>
           </ul>
         </li>
@@ -393,18 +385,6 @@
               <li class="text_gray">Listing Sales Tax Exemption for Vendors</li>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_SUPPLIER) %>
-              <li><%= link_to "New Sales Tax Exemption for Vendor", new_sales_tax_exemption_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
-            <% else %>
-              <li class="text_gray">New Sales Tax Exemption for Vendor</li>
-            <% end %>
-
-            <%# if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_UNVALID) %>
-              <!--li><%#= link_to "Listing Sales Tax Exemption for Suppliers - INVALID", supplier_invalid_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <%#*<li class="text_gray">Listing Sales Tax Exemption for Suppliers - INVALID</li>%>
-            <%# end %>
-
             <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER) %>
               <li><%= link_to "Listing Sales Tax Exemption for Vendors - KIV", kiv_supplier_sales_tax_exemptions_path %></li>
             <% else %>
@@ -415,25 +395,15 @@
 
             <!-- For Customers -->
             <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID) %>
-              <li><%= link_to "Listing Sales Tax Exemption for Customers", customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Listing Sales Tax Exemption for Customers", customer_sales_tax_exemptions_path %></li>
             <% else %>
               <li class="text_gray">Listing Sales Tax Exemption for Customers</li>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_NEW_CUSTOMER) %>
-              <li><%= link_to "New Sales Tax Exemption for Customer", new_customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
-            <% else %>
-              <li class="text_gray">New Sales Tax Exemption for Customer</li>
-            <% end %>
 
-            <%# if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_UNVALID) %>
-              <!--li><%#= link_to "Listing Sales Tax Exemption for Customers - INVALID", customer_invalid_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li-->
-            <%# else %>
-              <!--li class="text_gray">Listing Sales Tax Exemption for Customers - INVALID</li-->
-            <%# end %>
 
             <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER) %>
-              <li><%= link_to "Lisiting Sales Tax Exemption for Customers - KIV", kiv_customer_sales_tax_exemptions_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+              <li><%= link_to "Lisiting Sales Tax Exemption for Customers - KIV", kiv_customer_sales_tax_exemptions_path %></li>
             <% else %>
               <li class="text_gray">Listing Sales Tax Exemption for Customers - KIV</li>
             <% end %>

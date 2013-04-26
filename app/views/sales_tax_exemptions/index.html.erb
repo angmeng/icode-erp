@@ -1,12 +1,13 @@
-<div id="popup_container">
-  <div class="title_head">
-    <strong style="color:white;">LISTING SALES TAX EXEMPTION FOR SUPPLIERS</strong>
-    <%= link_to 'Search', "#", :class => "search_link" %>
-  </div>
-  
-  <%= render "search_sales_tax_exemption_supplier" %>
-
-  <%= render "content", :sales_tax_exemptions => @sales_tax_exemptions %>
-
-  <%= render "action_sales_tax_exemption_supplier" %>
+<div class="title_head">
+  <strong style="color:white;">LISTING SALES TAX EXEMPTION FOR SUPPLIERS</strong>
+  <%= link_to 'Search', "#", :class => "search_link" %>
 </div>
+<%= render "search_sales_tax_exemption_supplier" %>
+
+<% if @sales_tax_exemptions.present? %>
+  <div class="table_background"><%= render "listing_sales_tax_exemption", :sales_tax_exemptions => @sales_tax_exemptions %></div>
+<% else %>
+  <div class="content">No Record Found</div>
+<% end %>
+
+<%= render "action_sales_tax_exemption_supplier" %>

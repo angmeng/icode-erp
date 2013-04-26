@@ -4,7 +4,7 @@
 <% if @inventories.present? %>
   <div class="table_background"><%= render "select_inventory", :inventory_histories => @inventories %></div>
 <% else %>
-  <div class="searching_content">Not Record Found</div>
+  <div class="searching_content">No Record Found</div>
 <% end %>
 
 <%= render "action_inventory" %>

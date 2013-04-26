@@ -1,19 +1,5 @@
-<div class="search_engine">
+<%#*<div class="search_engine">%>
   <%= form_for @search, :url => kiv_users_path do |f| %>
-    <table>
-      <tr>
-        <td>Name</td>
-        <td><%= f.text_field :name_contains %></td>
-      </tr>
-      <tr>
-        <td>Job Title</td>
-        <td><%= f.text_field :job_title_contains %></td>
-      </tr>
-      <tr>
-        <td>Department</td>
-        <td><%= f.select :department_id_equals, options_from_collection_for_select(departments, :id, :name, params[:department_id_equals].to_s), :include_blank => true %></td>
-      </tr>
-      <tr><td colspan="10" align="right"><%= f.submit 'Search' %></td></tr>
-    </table>
+    <%= render "search_engine_form", :f => f %>
   <% end %>
-</div>
+<%#*</div>%>
