@@ -413,18 +413,18 @@
 
       <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE) %>
         <li style="width:150px;">
-          Formulation For All
+          Unit Measurement Conventor
           <ul>
             <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX) %>
-              <li><%= link_to "Listing formulation for all", formulations_path %></li>
+              <li><%= link_to "Lisiting Unit Measurement Conventor", formulations_path %></li>
             <% else %>
-              <li class="text_gray">Listing formulation for all</li>
+              <%= disabled_style "Lisiting Unit Measurement Conventor" %>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW) %>
               <li><%= link_to "New Formulation", new_formulation_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-              <li class="text_gray">New Formulation</li>
+              <%= disabled_style "New Formulation" %>
             <% end %>
           </ul>
         </li>

@@ -52,7 +52,6 @@ class SalesTaxExemptionsController < ApplicationController
     @perihal_barang = SalesTaxExemption.perihal_barang_customer
   end
 
-  # GET /sales_tax_exemptions/1/edit
   def edit
     @sales_tax_exemption = SalesTaxExemption.find(params[:id])
     @perihal_barang = @sales_tax_exemption.company_type == SalesTaxExemption::CUSTOMER ? SalesTaxExemption.perihal_barang_customer : SalesTaxExemption.perihal_barang_supplier
@@ -60,22 +59,17 @@ class SalesTaxExemptionsController < ApplicationController
 
   def create
     @sales_tax_exemption = SalesTaxExemption.new(params[:sales_tax_exemption])
-    SalesTaxExemptionManagement.running_items(params[:datarow], @sales_tax_exemption)
-    
-    respond_to do |format|
-      if @sales_tax_exemption.save
-        format.html { 
-          SalesTaxExemptionManagement.connect_company(@sales_tax_exemption)
-          company.update_attributes(:sn_sales_tax_exemption_no => @sales_tax_exemption.running_no)
-          redirect_to @sales_tax_exemption, notice: 'Sales tax exemption was successfully created.' 
-        }
-        format.json { render json: @sales_tax_exemption, status: :created, location: @sales_tax_exemption }
-      else
-        @perihal_barang = @sales_tax_exemption.company_type == SalesTaxExemption::CUSTOMER ? SalesTaxExemption.perihal_barang_customer : SalesTaxExemption.perihal_barang_supplier
-        flash[:alert] = @sales_tax_exemption.errors.full_messages.join(", ")
-        format.html { render action: "new" }
-        format.json { render json: @sales_tax_exemption.errors, status: :unprocessable_entity }
-      end
+    ste, msg = SalesTaxExemptionManagement.running_items(params[:datarow], @sales_tax_exemption)
+    if ste.present? && @sales_tax_exemption.save
+      SalesTaxExemptionManagement.connect_company(@sales_tax_exemption)
+      company.update_attributes(:sn_sales_tax_exemption_no => @sales_tax_exemption.running_no)
+      redirect_to @sales_tax_exemption, notice: 'Sales tax exemption was successfully created.'
+    else      
+      @perihal_barang = @sales_tax_exemption.company_type == SalesTaxExemption::CUSTOMER ? SalesTaxExemption.perihal_barang_customer : SalesTaxExemption.perihal_barang_supplier
+      msg.present? ? msg : msg = []
+      msg << @sales_tax_exemption.errors.full_messages
+      flash[:alert] = msg.join(',')
+      render action: "new"
     end
   end
 

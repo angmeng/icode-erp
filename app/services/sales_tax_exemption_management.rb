@@ -9,12 +9,24 @@ class SalesTaxExemptionManagement
           @formula = Formulation.where(:from_unit_measurement_id => content[:unit_measurement_id].to_i, :to_unit_measurement_id => content[:calculate_um_id].to_i).last
           if @formula.present?
             answer_value = content[:apply_qty].to_i * @formula.convert_value.to_i
-            ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => answer_value)
+            ste_control = ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => answer_value)
+          else
+            msg = []
+            a = UnitMeasurement.find(content[:unit_measurement_id])
+            b = UnitMeasurement.find(content[:calculate_um_id])
+            return false, msg << "From #{a.code} to #{b.code}, the unit measurement conventor was not found."
+            break;
           end
         else
-          ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => content[:apply_qty])
+          ste_control = ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => content[:apply_qty])
         end
+        
+        unless ste_control.valid?
+          return false, msg = ste_control.errors.full_messages
+          break;
+        end  
       end
+      
       return ste
     end
   end

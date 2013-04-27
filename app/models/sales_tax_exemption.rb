@@ -99,8 +99,7 @@ class SalesTaxExemption < ActiveRecord::Base
   # category_type is finish_goods
   def self.perihal_barang_customer
     prod_id = []
-    @product_category = ProductCategory.where("level = ? and status = ?", 1, ProductCategory::ACTIVE)
-    @product_category = @product_category.where("category_type = ?", ProductCategory::FINISH_GOOD)
+    @product_category = ProductCategory.where("level = ? and status = ? and category_type = ?", 1, ProductCategory::ACTIVE, ProductCategory::FINISH_GOOD)
     self.looping_prod(@product_category, prod_id)
     return prod_id
   end
@@ -108,19 +107,20 @@ class SalesTaxExemption < ActiveRecord::Base
   def self.looping_prod(prod_cat, prod_id)
     if prod_cat.present?
       prod_cat.each do |product_category|
-        prod_id << self.collect_perihal_barang(product_category)
+#        prod_id << self.collect_perihal_barang(product_category)
+        prod_id << product_category.desc 
       end
     end
   end
   
-  def self.collect_perihal_barang(pc)
-    @ret = []
-    @category = ProductCategory.find(pc.id)
-    if @category.present?
-      self.take_child_code(@category) 
-      return @ret.join("-")
-    end
-  end
+#  def self.collect_perihal_barang(pc)
+#    @ret = []
+#    @category = ProductCategory.find(pc.id)
+#    if @category.present?
+#      self.take_child_code(@category) 
+#      return @ret.join("-")
+#    end
+#  end
   
 #  def self.running_items(data, ste)
 #    if data.present?

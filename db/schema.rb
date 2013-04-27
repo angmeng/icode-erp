@@ -956,15 +956,9 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.integer  "trade_company_id"
     t.date     "period_start"
     t.date     "period_end"
-    t.string   "tarif_code"
-    t.float    "apply_qty",              :default => 0.0
-    t.float    "complete_qty",           :default => 0.0
-    t.integer  "unit_measurement_id"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
-    t.boolean  "valid_condition",        :default => false
-    t.float    "remaining_total"
-    t.string   "perihal_barang"
+    t.boolean  "valid_condition",        :default => true
     t.string   "registration_no"
     t.string   "status",                 :default => "ACTIVE"
     t.string   "type_of_exemption"

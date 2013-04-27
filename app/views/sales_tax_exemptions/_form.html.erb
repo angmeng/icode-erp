@@ -5,117 +5,134 @@
     <% else %>
       <%= f.hidden_field :company_type, :value => SalesTaxExemption::SUPPLIER %>
     <% end %>
-    <%= f.hidden_field :valid_condition, :value => TRUE %>
   <% end %>
 
   <div class="popup_content">
-    <table>
-      <tr>
-        <% if action_name == "edit" %>
-          <td width="200"><b>Running No#</b></td>
-          <td><%= @sales_tax_exemption.running_no rescue '-' %></td>
-        <% else %>
-          <td width="200"><b>Current Running No.</b></td>
-          <td>
-            <%= company.sn_sales_tax_exemption_no.to_i + 1 %>
-            <%= f.text_field :running_no, :value => company.sn_sales_tax_exemption_no.to_i + 1 %>
-          </td>
-        <% end %>
-      </tr>
-      
-      <tr>
-        <td><b>Type of Exemption</b></td>
-        <td><%= f.text_field :type_of_exemption, :size => 5 %></td>
-      </tr>
-      
-      <tr>
-        <td><b><%= f.label :sales_tax_exemption_no, "Sales Tax Exemption No. *" %></b></td>
-        <td><%= f.text_field :sales_tax_exemption_no, :validType => "maxLength[50]", :class => "easyui-validatebox", :size => 50 %></td>
-      </tr>
-      
-      <tr>
-        <td><b><%= f.label :registration_no, "Registration No." %></b></td>
-        <td><%= f.text_field :registration_no %></td>
-      </tr>
-      
-      <tr>
-        <td><b><%= f.label :trade_company_id, "Vendor Company" %></b></td>
-        <td>
+    <div id ="valid_sales_tax_exemption">
+      <table>
+        <tr>
           <% if action_name == "edit" %>
-           <%= f.select "trade_company_id", options_for_select(trade_company_vendor_with_code, @sales_tax_exemption.trade_company_id.to_i), {:include_blank => true}, {:style => "width:400px;", :id => "kendo_combobox_two"} %>
+            <td width="200"><b>Running No#</b></td>
+            <td><%= @sales_tax_exemption.running_no rescue '-' %></td>
           <% else %>
-           <%= f.select "trade_company_id", options_for_select(trade_company_vendor_with_code), { :include_blank => true }, { :style => "width:400px;", :id => "kendo_combobox_two" } %>
+            <td width="200"><b>Current Running No.</b></td>
+            <td>
+              <%= company.sn_sales_tax_exemption_no.to_i + 1 %>
+              <%= f.hidden_field :running_no, :value => company.sn_sales_tax_exemption_no.to_i + 1 %>
+            </td>
           <% end %>
-          <%#= f.select :trade_company_id, options_from_collection_for_select(trade_company_vendor, 'id', 'code', @sales_tax_exemption.trade_company_id.to_i), { :include_blank => true }, :onchange => "getCombo_tradecompany_code(this)" %>
-          <span id="ste_company_name"><%= @sales_tax_exemption.trade_company.name if @sales_tax_exemption.trade_company_id.present? %></span>
-        </td>
-      </tr>
-      
-      <tr>
-        <td><b>Period</b></td>
-        <td>
-          <% if action_name == "edit" %>
-            <%= f.text_field :period_start, :value => @sales_tax_exemption.period_start.strftime("%d-%m-%Y"), :size => 10, :id => "kendo_date" %> - <%= f.text_field :period_end, :value => @sales_tax_exemption.period_end.strftime("%d-%m-%Y"), :size => 10, :id => "kendo_date" %>
-          <% else %>
-            <%= f.text_field :period_start, :size => 10, :id => "kendo_date" %> - <%= f.text_field :period_end, :size => 10, :id => "kendo_date" %>
-          <% end %>
-        </td>
-      </tr> 
-    </table>
-
-    <hr/>
-  
-    <table class="white-line-table target_table">
-      <thead>
-        <tr class="header_line">
-          <th>Perihal Barang</th>
-          <th>Tarif Code</th>
-          <th>Apply Qty</th>
-          <th>Origin U/M</th>
-          <th>Calculate U/M</th>
-          <!--th>Completed Qty</th-->
-          <th>Action</th>
         </tr>
-      </thead>
-      
-      <tbody>
-        <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
-          
-          <% @sales_tax_exemption.sales_tax_exemption_barangs.each_with_index do |goods, index| %>
-            <tr class="<%= cycle('odd_line', 'even_line') %>">
-              <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true %></td>
-              <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :size => 20 %></td>
-              <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :size => 20 %>
-              <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), { :include_blank => true } %></td>        
-              <td align="center"><%= select_tag       "datarow[#{index}][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', @sales_tax_exemption.calculate_um_id.to_i), { :include_blank => true } %></td>
-              <!--td align="right">0<%#= hidden_field_tag "datarow[#{index}][complete_qty]", goods.complete_qty %></td-->
-              <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
-            </tr>
-          <% end %>
-          
-        <% else %>
-            
-          <tr class="<%= cycle('odd_line', 'even_line') %>">
-            <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true %></td>
-            <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :size => 20 %></td>
-            <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :size => 20 %>
-            <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', @sales_tax_exemption.unit_measurement_id.to_i), { :include_blank => true } %></td>        
-            <td align="center"><%= select_tag       "datarow[0][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), { :include_blank => true } %></td>
-            <!--td align="right">0<%#= hidden_field_tag "datarow[0][complete_qty]", 0 %></td-->
-            <td><%= link_to "Remove", "#", :onclick => "$(this).closest('tr').remove();" %></td>
+
+        <tr>
+          <td><b>Type of Exemption</b></td>
+          <td><%= f.text_field :type_of_exemption, :class => "k-textbox"  %></td>
+        </tr>
+
+        <tr>
+          <td><b><%= f.label :sales_tax_exemption_no, "Sales Tax Exemption No. *" %></b></td>
+          <td><%= f.text_field :sales_tax_exemption_no, :class=> "k-textbox", :style => "width: 250px;", "required validationMessage" => "Please Enter Sales Tax Exemption No." %></td>
+        </tr>
+
+        <tr>
+          <td><b><%= f.label :registration_no, "Registration No." %></b></td>
+          <td><%= f.text_field :registration_no, :class => "k-textbox" %></td>
+        </tr>
+
+        <tr>
+          <td><b><%= f.label :trade_company_id, "Customer Company *" %></b></td>
+          <td>
+            <% if action_name == "edit" %>
+             <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @sales_tax_exemption.trade_company_id.to_i), {:include_blank => true}, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
+            <% else %>
+             <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
+            <% end %>
+            <span class="k-invalid-msg" data-for="sales_tax_exemption[trade_company_id]"></span>
+            <!--span id="ste_company_name"><%#= @sales_tax_exemption.trade_company.name if @sales_tax_exemption.trade_company_id.present? %></span-->
+          </td>
+        </tr>
+
+        <tr>
+          <td><b>Period</b></td>
+          <td width="300">
+            <% if action_name == "edit" %>
+              <%= f.text_field :period_start, :value => @sales_tax_exemption.period_start.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period Start" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_start]"></span>
+              -
+              <%= f.text_field :period_end, :value => @sales_tax_exemption.period_end.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period End" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_end]"></span>
+            <% else %>
+              <%= f.text_field :period_start, :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period Start", :style => "width: 150px;" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_start]"></span>
+              -
+              <%= f.text_field :period_end, :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period End", :style => "width: 150px;" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_end]"></span>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+
+      <hr/>
+  
+      <table class="white-line-table target_table">
+        <thead>
+          <tr class="header_line">
+            <th>Perihal Barang</th>
+            <th>Tarif Code</th>
+            <th>Apply Qty</th>
+            <th>Origin U/M</th>
+            <th>Calculate U/M</th>
+            <th>Action</th>
           </tr>
-          
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% if @sales_tax_exemption.sales_tax_exemption_barangs.present? %>
+
+            <% @sales_tax_exemption.sales_tax_exemption_barangs.each_with_index do |goods, index| %>
+              <tr class="<%= cycle('odd_line', 'even_line') %>">
+                <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true, :class => "mkendo_combobox" %></td>
+                <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :class => "k-textbox" %></td>
+                <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :class => "numberKey k-textbox" %>
+                <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), :include_blank => true, :class => "mkendo_combobox" %></td>        
+                <td align="center"><%= select_tag       "datarow[#{index}][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.calculate_um_id.to_i), :include_blank => true, :class => "mkendo_combobox" %></td>
+                <td align="center"><%= remove_row_button %></td>
+              </tr>
+            <% end %>
+
+          <% else %>
+
+            <tr class="<%= cycle('odd_line', 'even_line') %>">
+              <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true, :class => "mkendo_combobox" %></td>
+              <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :class => "k-textbox" %></td>
+              <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :class => "numberKey k-textbox" %>
+              <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => "mkendo_combobox" %></td>
+              <td align="center"><%= select_tag       "datarow[0][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => 'mkendo_combobox' %></td>
+              <td align="center"><%= remove_row_button %></td>
+            </tr>
+
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="left_icon_tag">
-    <%= link_to "Add Item", "#", :id => "add_bottom_row", :class => "k-button font_bold" %>
+    <%= add_row_button("Add Item") %>
   </div>
 
   <div class="icon_tag">
     <%= link_save_button %>
     <%= link_close_button  %>
   </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+        $(".numberKey").forceNumeric();
+        
+        var validator = $("#valid_sales_tax_exemption").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
 <% end %>
