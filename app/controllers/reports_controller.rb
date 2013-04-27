@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   :do_so_documentation_report, :do_summary_report , :inventory_report , :purchase_order_report , :pr_report,
   :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
-  :so_customer_po_detail_report , :so_listing_report , :so_summary_report ]
+  :so_customer_po_detail_report , :so_listing_report , :so_summary_report , :po_listing_vendor_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -475,7 +475,7 @@ end
       # end
     else
       redirect_to so_customer_po_detail_report_reports_path
-      end 
+    end 
   end
 
   def pdf_purchase_order_report

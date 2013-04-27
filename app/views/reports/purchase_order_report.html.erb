@@ -1,0 +1,71 @@
+<%= title_head "Purchase Part ETA Inquire Report" %>
+<div id="popup_container">
+	<%= form_tag pdf_purchase_order_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
+<table id="jdatatable" class="display">
+	<thead>
+	<tr>
+		<th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
+		<th>PO No.</th>
+		<th>vendor</th>
+        <th>Order date</th>
+        <th>Currency</th>
+        <th>Term</th>
+        <th>Transport</th>
+        <th>Purchase By.</th>
+        <th>Requested By.</th>
+	</tr>
+</thead>
+<tbody>
+	<% @show_purchase_order_report.each_with_index do |pp , index | %>
+	<tr class="<%= cycle("odd_line", "even_line") %>">
+		<td align="center"><%= check_box_tag "pp_ids[]" , pp.id %></td>
+		<td align="center"><%= pp.po_no rescue'-' %></td>
+		<td align="center"><%= pp.trade_company.name rescue '-' %></td>
+		<td align="center"><%= pp.po_date.strftime("%d-%m-%Y") rescue '-' %></td>
+		<td align="center"><%= pp.currency.name rescue '-' %></td>
+	    <td align="center"><%= pp.trade_term.name rescue '-' %></td>
+	    <td align="center"><%= pp.transport.name rescue '-' %></td>
+		<td align="center"><%= pp.purchase_by.name rescue '-' %></td>
+		<td align="center"><%= pp.request_by.name rescue '-' %></td>
+
+		
+		<!-- <td align="center"><%#= check_box_tag "pp_ids[]" , pp.id %></td>
+		<td align="center"><%#= index + 1 %></td>
+		<td align="center"><%#= pp.po_no %></td>
+		<td align="left"><%#= pp.trade_company.code rescue'-' %> / <%#= pp.trade_company.name rescue'-' %></td>
+		<td align="center"><%#= pp.po_date rescue'-' %></td>
+		<td align="center"><%#= pp.trade_term.name rescue'-' %></td> -->
+		
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<div class="icon_tag" style="float:left;">
+	<% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL) %>
+	<span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_excel %></span>
+	<% else %>
+      <%= not_link_excel %>
+      <% end %>
+</div>
+
+<div class="icon_tag" style="float:right;">
+   <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW) %>
+	  <span><%= submit_tag "Show" , :class => "k-button" %><%# not_link_show %></span>
+	<%# else %>
+      <%#= not_link_show %>
+    <%# end %>
+
+	<span><%= not_link_edit %></span>
+    <span><%= not_link_recover %></span>
+
+  <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_PRINT) %>
+	  <span><%= submit_tag "PDF Report" , :class => "k-button" %><%# not_link_printable %></span>
+	<%# else %>
+      <%#= not_link_printable %>
+    <%# end %>
+
+    <% end %>
+    <%= link_close_button %>
+</div>

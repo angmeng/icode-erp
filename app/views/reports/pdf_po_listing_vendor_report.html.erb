@@ -1,0 +1,102 @@
+<div id="container">
+<h2>PO Listing Vendor Report</h1>
+<% arr = [] %>
+
+    <% if @detail_po_listing_vendor_report.present? %>
+      <% @detail_po_listing_vendor_report.each do |po| %>
+        
+    <div><a> Vendor : <%= po.trade_company.code rescue'-' %> / <%= po.trade_company.name rescue'-' %></a></div>
+  	<table class="black-line-table">
+  		<thead>
+  			<tr class="header_line">
+  				<th>P/O #</th>
+          <th>Date</th>
+  				<th>Product Code / Description</th>
+  				<th>Quantity</th>
+          <th>Out Standing</th>
+          <th>Unit Measurement</th>
+  				<th>Unit Price</th>
+  				<th>Amount</th>
+  			</tr>
+  		</thead>
+      
+    	<tbody>
+        <% po.purchase_requisition.purchase_requisition_items.each do |pr| %>
+    		<tr>
+    			<td align="center"><%= po.po_no rescue'-' %></td>
+          <td align="center"><%= pr.eta rescue'-' %></td>
+    			<td align="center"><%= pr.product.product_combobox.product_code rescue '-' %> / 
+            <%= pr.description rescue'-' %></td>
+    			<td align="center"><%= pr.quantity rescue '-' %></td>
+          <td align="center"><%= pr.remark rescue '-' %></td>
+          <td align="center"><%= pr.unit_measurement.code rescue '-' %></td>
+    			<td align="center"><%= pr.unit_price rescue '-' %></td>
+          
+    			<td align="center"><%= iproduct(pr.quantity, pr.unit_price) %>
+                      <% arr << pr.quantity * pr.unit_price %></td>
+    		</tr>
+        <% end %>
+        
+        <tr style="border-top: 1px solid;">
+          <td colspan="7" align="right">Total :</td>
+          <td align="center"><%= two_precision(arr.sum) %></td>
+        </tr>
+        
+    	</tbody>
+     
+    </table>
+    <br />
+    <% end %>
+    
+   
+   <% else %>
+   no record found
+  <% end %>
+  
+</div>
+
+<style>
+
+
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+        }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+  
+</style>

@@ -1,0 +1,77 @@
+<div id="popup_container">
+  <div class="title_head"><strong style="color:white;">Purchase Order Listing Report</strong></div>
+
+<!-- <ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">Purchase Order Listing</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul> -->
+
+<div class="fix_1600x900_h450">
+    <!-- <fieldset> -->
+    <%= form_tag pdf_po_listing_vendor_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+      <table id="jdatatable" class="display">
+        <thead>
+          <tr class="header_line">
+            <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
+            <th>No.</th>
+            <th>Po No.</th>
+            <th>Vendor</th>
+            <th>Trade Term</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @show_po_listing_vendor_report.each_with_index do |po , index| %>
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+            
+            <td align="center"><%= check_box_tag "po_ids[]" , po.id %></td>
+            <td align="center"><%= index + 1 %></td>
+            <td align="center"><%= po.po_no rescue'-' %><%#= render '/product_categories/join_product_category' , :pc => pri rescue'-' %><%#= pri.pr_no %></td>
+            <td align="center"><%= po.trade_company.name rescue'-' %></td>
+            <td align="center"><%= po.trade_term.name rescue'-' %></td>
+            <td align="center"><%= po.status rescue '-'%></td>
+          </tr>
+          <% end %>
+        </tbody>
+
+      
+        
+
+        
+    </table>
+  
+</div>
+  <!-- </fieldset> -->
+
+
+  <div class="icon_tag" style="float:left">
+      <span><%#t_link_excel %><%= submit_tag "Excel Report" , :class => "k-button" %><%#= link_to "Excel Report", excel_pr_report_reports_path(:pr_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+  </div>
+
+    <div class="icon_tag" style="float:right;">
+
+      <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_SHOW) %>
+      <span><%= submit_tag "Show" , :class => "k-button" %></span>
+      <%# else %>
+      <%#= not_link_show %>
+      <%# end %>
+      <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+      <span><%= not_link_recover %></span>
+      <%# if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_PRINT) %>
+      <span><%= submit_tag "PDF Report",:class => "k-button" %></span>
+      <%# else %>
+      <%#= not_link_printable %>
+      
+      <%# end %>
+    <% end %>
+    
+
+
+      <%= link_close_button %>
+    </div>
+</div>
+   
+
+
+
