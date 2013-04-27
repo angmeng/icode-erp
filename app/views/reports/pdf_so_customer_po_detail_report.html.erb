@@ -23,7 +23,7 @@
        <%# so.sales_order_items.each_with_index do |soi , index | %>
 			<tr>
         <%# if index == 0 %>
-        <td align="center" rowspan="<%= so.sales_order_items.count %>">
+        <td align="center" rowspan="<%#= so.sales_order_items.count %>">
         <%#= so.sales_order_no rescue'-' %></td>
         <%# end %>
         <td align="center"><%#= soi.part_no rescue'-' %> / 
@@ -56,7 +56,7 @@
 
 
   <% if @detail_so_customer_po_detail_report.present? %>
-  <table>
+  <!-- <table>
     <tr>
       <td>
         Customer : Xxxx   Xxxxxxx<br/>
@@ -77,10 +77,11 @@
       <td>Sales Rep : Xxxxx</td>
     </tr>
 
-  </table>
-
+  </table> -->
+<% arr = [] %>
   <table id="jgrid" class="black-line-table">
     <thead>
+      <% @detail_so_customer_po_detail_report.each do |so| %>
       <tr class="header_line">
         <th>No.</th>
         <th>Prod Code</th>
@@ -96,35 +97,56 @@
 
 <!-- ======================= do until here ================== -->
     <tbody>
-    <% @detail_so_customer_po_detail_report.each do |so| %>
+    
        <% so.sales_order_items.each_with_index do |soi , index | %>
       <tr>
-        <% if index == 0 %>
-        <td align="center" rowspan="<%= so.sales_order_items.count %>">
-        <%= so.sales_order_no rescue'-' %></td>
-        <% end %>
-        <td align="center"><%= soi.part_no rescue'-' %> / 
-          <%= render '/product_categories/join_product_category' , :pc => soi %></td>
-        <td align="center"> 
-          <%= soi.product.desc rescue'-' %></td>
-        <td align="center"><%= soi.mgf_date.strftime("%d-%m-%Y") rescue'-' %></td>
-        <td align="center"><%= soi.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td align="center"><%= index + 1 %></td>
+        <%# if index == 0  ///  rowspan="<%= so.sales_order_items.count %>
+        <td align="center"><%= soi.product.product_combobox.product_code rescue'-' %><br />
+        <%= soi.lot_no rescue'-' %></td>
+        <%# end %>
+        <td align="left"><%= soi.part_no rescue'-' %> <br /> 
+          <%= soi.product.desc rescue'-' %> <br />
+          <%= soi.product.product_category.parent.parent.desc rescue'-' %></td>
         <td align="center"><%= soi.quantity rescue'-' %></td>
-        <td align="center"><%= soi.remaining_qty rescue'-' %></td>
-        <td align="center"><%= soi.status rescue'-' %></td>
+        <td align="center"><%= soi.unit_price rescue'-' %> <%= soi.unit_measurement.code rescue'-' %></td>
+        <td align="center"><%= iproduct(soi.quantity , soi.unit_price ) rescue'-' %></td>
+        <td align="center"><%= soi.eta.strftime("%d-%m-%Y")  rescue'-' %></td>
+        <td align="center"><%= so.purchase_order_no rescue'-' %></td>
+        <td align="center"><%= so.status rescue'-' %></td>
+        <% arr << soi.quantity * soi.unit_price %>
          <% end %> 
       </tr>
-      <tr style="border-top: 2px solid;">
-        <td ></td>
+      <tr style="border-top: 1px solid;">
+          <td colspan="7" align="right">Total :</td>
+          <td align="center"><%= two_precision(arr.sum) %></td>
       </tr>
-      
-    <% end %> 
+
+       <% end %>
     </tbody>
 
-    <% else %>
+    
+  </table>
+
+  <!-- <p>
+        <a align="left"> Prepared & Checked By.</a>
+        <a align="center"> Approved By :</a>
+        <a align="right"> Received By : </a>
+      </p>
+
+      <p>
+        <a align="left">___________ </a>
+        <a align="center">____________</a>
+        <a align="right">___________</a>
+      </p> -->
+      
+    
+
+  
+  
+  <% else %>
       no report found
     <% end %>
-  </table>
 
 </div>
 
@@ -170,7 +192,7 @@ table{
           border-color: black;
           background-color: transparent; }
    tbody tr {
-    border-top: 3pt solid white;
+    border-top: 2px solid white;
  }
   
 </style>

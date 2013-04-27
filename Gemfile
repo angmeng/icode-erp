@@ -54,6 +54,6 @@ gem 'turbolinks'
 gem 'mime-types'
 #gem "asset_hat", "~> 0.4.2"
 
-#gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary'
 
 

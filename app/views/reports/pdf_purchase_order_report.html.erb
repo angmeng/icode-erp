@@ -1,8 +1,6 @@
 <%# xx = User.find(@purchase_order.purchase_by) %>
 <%#= xx.name rescue'-' %>
 
-
-
 <% arr = [] %>
 
 <% if @detail_purchase_order_report.present? %>
@@ -16,9 +14,10 @@
 				Vendor : 
 				<br />
 				<br />
+				<br />
 				Fax No. :
 			</td>
-			<td align="left">
+			<td align="left" style="width:400px;">
 				<%= pp.trade_company.name rescue'-'%><br />
                 <%= pp.trade_company.address_1 rescue'-'%><br />
 
@@ -59,20 +58,21 @@
 	</table>
 
 <table>
+	<thead>
 	<tr>
-		<th>No.<br />------</th>
-		<th>Prod .Code<br />----------------</th>
-		<th>Description<br />-----------------</th>
-		<th>ETA<br />------</th>
-		<th>Quantity<br />-----------</th>
-		<th>Unit Price<br />------------</th>
-		<th>Amount<br />-----------</th>
+		<th>No.<br />---</th>
+		<th style="width:150px;">Prod. Code<br />------------</th>
+		<th style="width:200px;">Description<br />-------------</th>
+		<th style="width:90px;">ETA<br />------</th>
+		<th>Quantity<br />--------</th>
+		<th style="width:110px;">Unit Price<br />---------</th>
+		<th style="width:90px;">Amount<br />--------</th>
 	</tr>
-	
+	</thead>
+	<tbody>
 	<% pp.purchase_requisition.purchase_requisition_items.each_with_index do |pr , index | %>
 	<tr>
 		<td align="center"><%= index + 1 %></td>
-		
 		<td align="center"><%= pr.product.product_combobox.product_code rescue'-'  %></td>
 		<td align="left"><%= pr.product.desc rescue'-' %></td>
 		<td align="center"><%= pr.eta rescue'-' %></td>
@@ -86,17 +86,17 @@
 	<tr>
 		<%# array << arr %>
 		<% 5.times do |td| %><td></td><% end %>
-		<td align="right">-------------------------<br />
+		<td align="right">-------------------<br />
 						Sub-Total	:
 		</td>
-		<td align="right">------------------------<br />
+		<td align="right">------------------<br />
 						<%= two_precision(arr.sum) %>
 						  
 		</td>
 	</tr>
 	<tr>
 		<% 5.times do |td| %><td></td><% end %>
-		<td align="right">-------------------------<br />
+		<td align="right">-------------------<br />
 			Add S/Tax 0%	:</td>
 		<td align="right"><% pp.tax rescue'-' %></td>
 	</tr>
@@ -104,43 +104,40 @@
 		
 		<% 5.times do |td| %><td></td><% end %>
 		<td align="right">Grand Total 	:<br />
-						   ------------------------</td>
+						   ------------------</td>
 		<td align="right"><%= two_precision(arr.sum + pp.tax) %><br />
-						   ------------------------</td>
+						   ------------------</td>
 	</tr>
-	
+	</tbody>
 </table>
 
   
 
-<table>
-	<tr style="height:200px;">
-		<td style="text-align:left;width:250px;">Notes To Vendor : -<br />
+<table class="po_bottom_layout">
+	<tr style="height:100px;">
+		<td style="text-align:left;">Notes To Vendor : -<br />
 			1. Goods of Inferior Quatity<br />
 			2. Please chop , sign & return<br />
 			   the attached acknowledge.<br />
 			3. Please quote P/O No. in your <br />
 			invoices & D/Os. </th>
-		<td colspan="3" style="text-align:left;border:1px solid black;">Remark :</td>
-		<td></td>
-		<td></td>
+		<td colspan="3" style="text-align:left;">Remark :</td>
 		
 	</tr>
 	<tr style="height:50px;">
-		<td style="padding:50px;width:200px;"></td>
+		<td rowspan="2"></td>
 		<td>Purchase By</td>
 		<td>Prepared By</td>
 		<td>Authorised By</td>
 	</tr>
 
 	<tr style="height:50px;">
-		<td style="width:200px;"></td>
 		<td></td>
 		<td></td>
 		<td></td>
 	</tr>
-	<tr style="height:50px;border:1px solid black;">
-		<td style="width:250px;">Vendor's & Signature></td>
+	<tr style="height:50px;">
+		<td >Vendor's & Signature></td>
 		<td><% a = User.find(pp.purchase_by) %>
 			<%= a.name rescue'-' %></td>
 		<td><% b = User.find(pp.request_by) %>
@@ -152,18 +149,27 @@
 	<% end %> <%# end of if statement %>
 </div>
 
+
+
+
 <style>
 
 table {
 	width:100%;
+	font-family:"Times New Roman";
+	font-size: 12px;
+}
+
+.po_bottom_layout table{
+ 	width:100%;
+	border: 1px solid black;
+}
+.po_bottom_layout tr td{
 	border: 1px solid black;
 }
 
 .layout {
 	margin-top: 150px;
-	margin-bottom: 200px;
-	margin-right: 50px;
-	margin-left: 50px;
 }
 
 </style>
