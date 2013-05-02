@@ -1,8 +1,16 @@
-<div style="background-color:blue"><strong style="color:white;">SHOW FORMULATION DETAILS</strong></div>
+<%= title_head "SHOW FORMULATION DETAIL" %>
 
-<div class="fix_800x450">
-  <b>From:</b> <%= two_precision(@formulation.per_value) %> <%= @formulation.belongs_from_um.code rescue '-' %>
-  <b>To:</b> <%= two_precision(@formulation.convert_value) %> <%= @formulation.belongs_to_um.code rescue '-' %>
+<div class="popup_content">
+  <table>
+    <tr>
+      <td><b>From</b></td>
+      <td><%= two_precision(@formulation.per_value) %></td>
+      <td><%= @formulation.belongs_from_um.code rescue '-' %></td>
+    </tr>
+    <td><b>To</b></td>
+    <td><%= two_precision(@formulation.convert_value) %></td>
+    <td><%= @formulation.belongs_to_um.code rescue '-' %></td>
+  </table>
 </div>
 
 <div class="icon_tag">

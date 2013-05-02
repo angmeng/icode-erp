@@ -1,34 +1,19 @@
-<div id="popup_container">
-  
-  <div class="title_head">
-    <strong style="color: white;">LISTING FORMULATIONS</strong>
-    <%= search_button %>
-  </div>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISTING FORMULATIONS</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-  <%#= render "search_sales_tax_exemption_supplier" %>
-  
-  <div class="fix_1600x900_h450">
-    <% if @formulations.present? %>
-      <%= render "content", :fmts => @formulations %>
-    <% else %>
-      No record found
-    <% end %>
-  </div>
-
-  <%= render "action_formulation" %>
+<div id="tabify_listing">    
+  <% if @formulations.present? %>
+    <div class="table_background"><%= render "content", :fmts => @formulations %></div>
+  <% else %>
+    <div class="tabify_content table_background">No Record Found</div>
+  <% end %>
 </div>
 
-<%#= link_to 'New Formulation', new_formulation_path, :class => "iframe_800x450", "data-fancybox-type" => "iframe" %>
+<div id="tabify_search">
+  <%#= render "search_user" %>
+</div>
 
-<!--div>
-  Converting the formulation
-  <%#= form_tag formulations_path, :method => :get do %>
-    From: <%#= select_tag :from_um, options_from_collection_for_select(unit_measurement, :id, :code, params[:from_um]), :include_blank => true %>
-    To: <%#= select_tag :to_um, options_from_collection_for_select(unit_measurement, :id, :code, params[:to_um]), :include_blank => true %>
-    Current Value: <%#= text_field_tag :current_value, params[:current_value]%><br/>
-    Convert Value: <%#= params[:convert_value] %><br/><br/>
-    <%#= submit_tag "Convert", :name => nil %>
-  <%# end %>
-</div-->
-
+<%= render "action_formulation" %>
 

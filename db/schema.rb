@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417075702) do
+ActiveRecord::Schema.define(:version => 20130430071730) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -279,21 +279,20 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
   create_table "delivery_orders", :force => true do |t|
     t.integer  "do_no"
     t.integer  "trade_company_id"
-    t.integer  "sales_tax",                                          :default => 0
+    t.integer  "sales_tax",                                             :default => 0
     t.integer  "type_of_sale_id"
-    t.decimal  "tport_c",             :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "tport_c",                :precision => 10, :scale => 2, :default => 0.0
     t.integer  "currency_id"
     t.integer  "bk_two"
     t.integer  "trade_term_id"
     t.integer  "updated_by"
     t.integer  "transport_id"
     t.string   "sales_rep"
-    t.string   "sales_tax_exemption"
-    t.datetime "created_at",                                                               :null => false
-    t.datetime "updated_at",                                                               :null => false
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
     t.date     "do_date"
-    t.string   "status",                                             :default => "Active"
-    t.boolean  "authorize_print",                                    :default => false
+    t.string   "status",                                                :default => "Active"
+    t.integer  "sales_tax_exemption_id"
   end
 
   add_index "delivery_orders", ["currency_id"], :name => "index_delivery_orders_on_currency_id"
@@ -314,8 +313,9 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.integer  "from_unit_measurement_id"
     t.decimal  "convert_value",            :precision => 8, :scale => 2
     t.integer  "to_unit_measurement_id"
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
+    t.integer  "status",                                                 :default => 1
   end
 
   create_table "history_invoices", :force => true do |t|
@@ -688,6 +688,7 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.text     "remark"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
+    t.string   "status"
     t.string   "trade_company_new_name"
     t.integer  "user_id"
     t.boolean  "maintenance",             :default => false
@@ -695,7 +696,6 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.boolean  "approval_proposed",       :default => false
     t.string   "approval_remark"
     t.boolean  "urgent",                  :default => false
-    t.string   "status"
     t.boolean  "skip_to_purchase_order",  :default => false
   end
 
@@ -706,6 +706,7 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
 
   create_table "purchase_requisitions", :force => true do |t|
     t.integer  "pr_no"
+    t.string   "status"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "requested_by"
@@ -718,7 +719,6 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.date     "approved_by_level_five_date"
     t.string   "remark"
     t.integer  "tasks"
-    t.string   "status"
     t.string   "recover_status"
     t.integer  "department_id"
   end
@@ -928,7 +928,7 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.float    "complete_qty",           :default => 0.0
     t.integer  "unit_measurement_id"
     t.string   "tarif_code"
-    t.boolean  "valid_condition",        :default => true
+    t.boolean  "valid_weight_condition", :default => true
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.float    "available_qty",          :default => 0.0
@@ -938,17 +938,16 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
   add_index "sales_tax_exemption_barangs", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_barangs_on_sales_tax_exemption_id"
   add_index "sales_tax_exemption_barangs", ["unit_measurement_id"], :name => "index_sales_tax_exemption_barangs_on_unit_measurement_id"
 
-  create_table "sales_tax_exemption_items", :force => true do |t|
+  create_table "sales_tax_exemption_lines", :force => true do |t|
     t.integer  "sales_tax_exemption_id"
-    t.integer  "product_id"
+    t.integer  "trade_company_id"
+    t.boolean  "validate_condition",     :default => true
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
-    t.integer  "receive_note_item_id"
-    t.integer  "purchase_order_id"
-    t.integer  "before_available_qty",      :default => 0
-    t.integer  "after_available_qty",       :default => 0
-    t.integer  "accumulative_complete_qty", :default => 0
   end
+
+  add_index "sales_tax_exemption_lines", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_lines_on_sales_tax_exemption_id"
+  add_index "sales_tax_exemption_lines", ["trade_company_id"], :name => "index_sales_tax_exemption_lines_on_trade_company_id"
 
   create_table "sales_tax_exemptions", :force => true do |t|
     t.integer  "running_no"
@@ -956,15 +955,9 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.integer  "trade_company_id"
     t.date     "period_start"
     t.date     "period_end"
-    t.string   "tarif_code"
-    t.float    "apply_qty",              :default => 0.0
-    t.float    "complete_qty",           :default => 0.0
-    t.integer  "unit_measurement_id"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
-    t.boolean  "valid_condition",        :default => false
-    t.float    "remaining_total"
-    t.string   "perihal_barang"
+    t.boolean  "valid_date_condition",   :default => true
     t.string   "registration_no"
     t.string   "status",                 :default => "ACTIVE"
     t.string   "type_of_exemption"
@@ -1166,6 +1159,7 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.string   "city_two"
     t.string   "state_two"
     t.string   "country_two"
+    t.integer  "decimal_point",                                           :default => 2
   end
 
   add_index "trade_companies", ["trade_term_id"], :name => "index_trade_companies_on_trade_term_id"
@@ -1225,12 +1219,12 @@ ActiveRecord::Schema.define(:version => 20130417075702) do
     t.datetime "updated_at",                                   :null => false
     t.string   "name"
     t.integer  "department_id"
-    t.string   "job_title"
     t.integer  "level"
+    t.string   "status",                 :default => "ACTIVE"
+    t.string   "job_title"
     t.boolean  "admin",                  :default => false
     t.integer  "level_two"
     t.integer  "level_three"
-    t.string   "status",                 :default => "ACTIVE"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

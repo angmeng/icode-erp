@@ -2,10 +2,10 @@
 
 one:
   sales_tax_exemption_id: 1
-  product_id: 1
-  remaining_total: 1.5
+  trade_company_id: 1
+  validate_condition: false
 
 two:
   sales_tax_exemption_id: 1
-  product_id: 1
-  remaining_total: 1.5
+  trade_company_id: 1
+  validate_condition: false

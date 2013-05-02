@@ -1,4 +1,4 @@
-<table id="grid_h445" class="white-line-table zebraLight">
+<table id="tabify_datatable" class="zebraLight display">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -13,10 +13,10 @@
     <% fmts.each do |formulation| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= formulation.id %>">
         <td></td>
-        <td align="center"><%= formulation.per_value %></td>
-        <td align="center"><%= two_precision(formulation.belongs_from_um.code) rescue '-' %></td>
-        <td align="center"><%= formulation.convert_value %></td>
-        <td align="center"><%= two_precision(formulation.belongs_to_um.code) rescue '-' %></td>
+        <td align="center"><%= two_precision(formulation.per_value) %></td>
+        <td align="center"><%= formulation.belongs_from_um.code rescue '-' %></td>
+        <td align="center"><%= two_precision(formulation.convert_value) %></td>
+        <td align="center"><%= formulation.belongs_to_um.code rescue '-' %></td>
       </tr>
     <% end %>
   </tbody>

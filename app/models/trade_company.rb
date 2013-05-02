@@ -2,12 +2,14 @@ class TradeCompany < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
+  attr_accessor :ste_name
+  
   attr_accessible :address_3, :code, :name, :sales_rep, :contact_attributes,
     :sales_tax_no, :status, :trade_term_id, :type_of_sale_id, :customer_approval, 
     :company_reg_no, :payment_type_id, :opening_ac_date, :opening_ac_amount, :limit_amount, :banking_name, 
     :banking_account, :email, :user_type, :sales_tax_exemption_id, :sales_tax_licence_no, :warehouse_licence_no, 
     :mfg_warehouse_licence_no, :subcon, :website, :certification, :performance_monitoring, :contact_person,
-    :tel_area_code_one, :tel_no_1, :tel_area_code_two, :tel_no_2, :fax_area_code, :fax_no,
+    :tel_area_code_one, :tel_no_1, :tel_area_code_two, :tel_no_2, :fax_area_code, :fax_no, :decimal_point,
     :address_1, :postcode_one, :city_one, :state_one, :country_one, 
     :address_2, :postcode_two, :city_two, :state_two, :country_two
   
@@ -25,6 +27,7 @@ class TradeCompany < ActiveRecord::Base
   has_one  :credit_note
   has_one  :receipt
   has_one  :payment_received
+  has_one  :sales_tax_exemption_line
   
   has_many :product_vendors
   has_many :product_customers
@@ -200,6 +203,18 @@ class TradeCompany < ActiveRecord::Base
     end
   end
   
-  
+  def loading_ste
+    if sales_tax_exemption_line.present?
+      if sales_tax_exemption_line.validate_condition == true
+        if sales_tax_exemption_line.sales_tax_exemption.present?
+          return "[#{sales_tax_exemption_line.sales_tax_exemption.running_no}] #{sales_tax_exemption_line.sales_tax_exemption.sales_tax_exemption_no}"
+        end
+      else
+        if sales_tax_exemption_line.sales_tax_exemption.present?
+          return "stop_ste", "The Sales Tax Exemption [#{sales_tax_exemption_line.sales_tax_exemption.running_no}] was invalid."
+        end
+      end
+    end
+  end
   
 end

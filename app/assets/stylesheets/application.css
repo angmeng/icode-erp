@@ -524,7 +524,7 @@ legend   { padding: 5px; border:1px solid green; color: green; font-weight: bold
 
 #sheetbox_height { border: 1px solid black; }
 
-.content, .popup_content, .pr_content, .linking_content, .searching_content, .popup_form_table { padding: 0px 5px; border: 1px solid grey; background-color: white; }
+.content, .popup_content, .pr_content, .linking_content, .searching_content, .popup_form_table, .tabify_content { padding: 0px 5px; border: 1px solid grey; background-color: white; }
 .qr_content { border: 1px solid grey; background-color: white; }
 
 

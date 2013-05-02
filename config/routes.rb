@@ -1,4 +1,6 @@
 Merp::Application.routes.draw do
+  resources :sales_tax_exemption_lines
+
   resources :journal_voucher_items
 
   resources :journal_vouchers
@@ -218,7 +220,13 @@ Merp::Application.routes.draw do
 
   resources :received_item_and_qties
 
-  resources :formulations
+  resources :formulations do
+    collection do
+      get "kiv"
+      get "output_value"
+    end
+    put "recover", :on => :member
+  end
 
   resources :roles
 
@@ -245,8 +253,6 @@ Merp::Application.routes.draw do
     end
     put "recover", :on => :member
   end
-
-  resources :sales_tax_exemption_items
 
   resources :inventory_issues
 

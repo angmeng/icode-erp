@@ -5,16 +5,16 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', "~> 0.3.11"
 
-gem 'json'
+gem 'json', "1.7.5"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-#  gem 'sass-rails',   '~> 3.2.3'
-#  gem 'coffee-rails', '~> 3.2.1'
-#  gem 'uglifier', '>= 1.0.3'
+ 	# gem 'sass-rails',   '~> 3.2.3'
+ 	# gem 'coffee-rails', '~> 3.2.1'
+ 	# gem 'uglifier', '>= 1.0.3'
 	gem 'jquery-datatables-rails'
 	gem 'jquery-ui-rails'
 end
@@ -24,6 +24,7 @@ group :development do
 #  gem "binding_of_caller", "~> 0.6.8"
 end
 
+#gem 'jquery-rails', "2.1.4"
 gem 'jquery-rails'
 gem "devise", "~> 2.1.0"
 gem "devise-encryptable"
@@ -50,10 +51,10 @@ gem "pdfkit"
 gem "squeel"
 gem "meta_search"
 gem "paperclip"
-gem 'turbolinks'
+# gem 'turbolinks'
 gem 'mime-types'
 #gem "asset_hat", "~> 0.4.2"
 
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
 
 

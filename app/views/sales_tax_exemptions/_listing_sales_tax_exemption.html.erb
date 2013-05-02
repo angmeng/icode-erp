@@ -1,4 +1,4 @@
-<table id="jgrid" class="zebraLight">
+<table id="tabify_datatable" class="zebraLight display">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -6,7 +6,11 @@
       <th>Type of Exemption</th>
       <th>Sales Tax Exemption No.</th>
       <th>Registration No.</th>
-      <th>Company Name</th>
+      <% if action_name == "index" %>
+        <th>Supplier Company</th>
+      <% else %>
+        <th>Customer Company</th>
+      <% end %>
       <th>Period Start</th>
       <th>Period End</th>
     </tr>
@@ -17,9 +21,9 @@
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= ste.id %>">
         <td></td>
         <td align="center"><%= ste.running_no rescue '-' %></td>
-        <td align="center"><%= ste.type_of_exemption rescue '-' %></td>
-        <td align="center"><%= ste.sales_tax_exemption_no rescue '-' %></td>
-        <td align="center"><%= ste.registration_no rescue '-' %></td>
+        <td><%= ste.type_of_exemption rescue '-' %></td>
+        <td><%= ste.sales_tax_exemption_no rescue '-' %></td>
+        <td><%= ste.registration_no rescue '-' %></td>
         <td>[<%= ste.trade_company.code rescue '-' %>] <%= ste.trade_company.name rescue '-' %></td>
         <td align="center"><%= ste.period_start.strftime("%d-%m-%Y") rescue '-' %></td>
         <td align="center"><%= ste.period_end.strftime("%d-%m-%Y") rescue '-' %></td>

@@ -237,6 +237,11 @@
                 <td><b><%= f.label :banking_account, "Banking Account" %></b></td>
                 <td><%= f.text_field :banking_account, :class => "k-textbox" %></td>
               </tr>
+              <tr>
+                <td><b>Decimal Point</b></td>
+                <td><%= f.text_field :decimal_point, :class => "k-textbox" %></td>
+              </tr>
+              
             </table>
           </div>
 
@@ -318,6 +323,15 @@
 <% content_for :jquery_script do %>
   <script>
     $(document).ready(function() {
+        $("#trade_company_decimal_point").blur(function(){
+            var dp = $(this).val();
+            if (dp < 5){}
+            else { 
+              alert("Maximum is 4.");
+              $(this).val(2);
+            }
+        });
+      
         var validator = $("#valid_company").kendoValidator().data("kendoValidator");
 
         $("#left_save_button, #save_button").click(function() {

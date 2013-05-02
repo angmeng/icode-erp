@@ -1,26 +1,65 @@
 <table>
-  <tr>
-    <td><b><%= f.label :registration_no_equals, "Registration No" %></b></td>
-    <td><%= f.text_field :registration_no_equals %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :sales_tax_exemption_no_contains, "Sales Tax Exemption No." %></b></td>
-    <td><%= f.text_field :sales_tax_exemption_no_contains %></td>
-  </tr>
-  <tr>
-    <td><b>Vendor</b></td>
-    <td><%= f.text_field :trade_company_name_contains %></td>
-  </tr>
-  <tr>
-    <td><b>Perihal Barang</b></td>
-    <td><%= f.text_field :perihal_barang_contains %></td>
-  </tr>
-  <tr>
-    <td><b>Tarif Code</b></td>
-    <td><%= f.text_field :tarif_code_contains %></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td align="right"><%= f.submit 'Search', :class => "k-button" %></td>
-  </tr>
-</table>
+    <tr>
+      <td><b><%= f.label :running_no_equals, "Running No." %></b></td>
+      <td><%= f.text_field :running_no_equals, :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b><%= f.label :type_of_exemption_contains, "Type Of Exemption" %></b></td>
+      <td><%= f.text_field :type_of_exemption_contains, :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b><%= f.label :sales_tax_exemption_no_contains, "Sales Tax Exemption No." %></b></td>
+      <td><%= f.text_field :sales_tax_exemption_no_contains, :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td><b><%= f.label :registration_no_contains, "Registration No." %></b></td>
+      <td><%= f.text_field :registration_no_contains, :class => "k-textbox" %></td>
+    </tr>
+    <% if action_name == "customer" or action_name == "kiv_customer" %>
+      <tr>
+        <td><b>Customer Company</b></td>
+        <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;" } %></td>
+      </tr>
+    <% elsif action_name == "index" or action_name == "kiv_supplier" %>
+      <tr>
+        <td><b>Vendor Company</b></td>
+        <td><%= f.select :trade_company_id_equals, options_for_select(trade_company_vendor_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;" } %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><b>Period Start</b></td>
+      <td>
+        <% if @search.period_start_gte.present? %>
+          <%= f.text_field :period_start_gte, :value => @search.period_start_gte.strftime("%d-%m-%Y"), :include_blank => true, :placeholder => "From Period Start", :class => "mkendo_date maskDate" %>
+        <% else %>
+          <%= f.text_field :period_start_gte, :include_blank => true, :placeholder => "From Period Start", :class => "mkendo_date maskDate" %>
+        <% end %>
+         - 
+        <% if @search.period_start_lte.present? %>
+          <%= f.text_field :period_start_lte, :value => @search.period_start_lte.strftime("%d-%m-%Y"), :include_blank => true, :placeholder => "To Period Start", :class => "mkendo_date maskDate" %>
+        <% else %>
+          <%= f.text_field :period_start_lte, :include_blank => true, :placeholder => "To Period Start", :class => "mkendo_date maskDate" %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Period End</b></td>
+      <td>
+        <% if @search.period_end_gte.present? %>
+          <%= f.text_field :period_end_gte, :value => @search.period_end_gte.strftime("%d-%m-%Y"), :include_blank => true, :placeholder => "From Period End", :class => "mkendo_date maskDate" %>
+        <% else %>
+          <%= f.text_field :period_end_gte, :include_blank => true, :placeholder => "From Period End", :class => "mkendo_date maskDate" %>
+        <% end %>
+         - 
+        <% if @search.period_end_lte.present? %>
+          <%= f.text_field :period_end_lte, :value => @search.period_end_lte.strftime("%d-%m-%Y"), :include_blank => true, :placeholder => "To Period End", :class => "mkendo_date maskDate" %>
+        <% else %>
+          <%= f.text_field :period_end_lte, :include_blank => true, :placeholder => "To Period End", :class => "mkendo_date maskDate" %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td align="right"><%= f.submit 'Search', :class => "k-button" %></td>
+    </tr>
+  </table>

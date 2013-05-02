@@ -1,15 +1,12 @@
 <div class="left_icon_tag">
-      
   <% if roles.include?(InventoryManagementSystem::CUSTOMER_NEW) %>
-    <%= link_to 'Add - Customer Entry', new_trade_company_path(:option => TradeCompany::CUSTOMER), :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
+    <%= link_to 'Add - New Customer', new_trade_company_path(:option => TradeCompany::CUSTOMER), :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <%= disabled_style("Add - Customer Entry") %>
+    <%= disabled_style "Add - New Customer" %>
   <% end %>
-      
 </div>
 
 <div class="icon_tag">
-  
   <% if roles.include?(InventoryManagementSystem::CUSTOMER_SHOW) %>
     <span id="on_show" showClass="show_without_refresh_page_1024x800"><%= not_link_show %></span>
   <% else %>
@@ -35,5 +32,4 @@
   <% end %>
    
   <%= link_home_button %>
-
 </div>

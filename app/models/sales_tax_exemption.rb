@@ -2,7 +2,7 @@ class SalesTaxExemption < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :apply_qty, :complete_qty, :period_end, :period_start, :sales_tax_exemption_no, :tarif_code, :trade_company_id, :unit_measurement_id, :valid_condition, :remaining_total, :perihal_barang, :registration_no, :status,
+  attr_accessible :apply_qty, :complete_qty, :period_end, :period_start, :sales_tax_exemption_no, :tarif_code, :trade_company_id, :unit_measurement_id, :valid_date_condition, :remaining_total, :perihal_barang, :registration_no, :status,
                   :running_no, :type_of_exemption, :company_type, :sales_tax_exemption_barangs_attributes
 
 #  ROLE = [
@@ -36,17 +36,19 @@ class SalesTaxExemption < ActiveRecord::Base
   
   belongs_to :unit_measurement
   has_one :trade_company
+  has_one :sales_tax_exemption_line
   
   has_many :sales_tax_exemption_barangs, :dependent => :destroy
   accepts_nested_attributes_for :sales_tax_exemption_barangs, :allow_destroy => true
   
-  has_many :sales_tax_exemption_items, :dependent => :destroy
   has_many :products
   
   ACTIVE = "ACTIVE"
+  DEACTIVATE = "DEACTIVATE"
   KEEP_IN_VIEW = "KIV"
   CUSTOMER = "CUSTOMER"
   SUPPLIER = "SUPPLIER"
+  
   
   default_scope order("running_no DESC")
   
@@ -62,22 +64,6 @@ class SalesTaxExemption < ActiveRecord::Base
   def self.only_customer(search)
     search.where("status = ?", SalesTaxExemption::ACTIVE).type_customer
   end
-  
-#  def self.order_supplier_valid(search)
-#    search.where("valid_condition = ? and status = ?", TRUE, SalesTaxExemption::ACTIVE).type_supplier
-#  end
-#  
-#  def self.order_customer_valid(search)
-#    search.where("valid_condition = ? and status = ?", TRUE, SalesTaxExemption::ACTIVE).type_customer
-#  end
-#  
-#  def self.order_supplier_invalid(search)
-#    search.where("valid_condition = ? and status = ?", FALSE, SalesTaxExemption::ACTIVE).type_supplier
-#  end
-#  
-#  def self.order_customer_invalid(search)
-#    search.where("valid_condition = ? and status = ?", FALSE, SalesTaxExemption::ACTIVE).type_customer
-#  end
   
   def self.order_kiv_supplier(search)
     search.where("status = ?", SalesTaxExemption::KEEP_IN_VIEW).type_supplier
@@ -99,8 +85,7 @@ class SalesTaxExemption < ActiveRecord::Base
   # category_type is finish_goods
   def self.perihal_barang_customer
     prod_id = []
-    @product_category = ProductCategory.where("level = ? and status = ?", 1, ProductCategory::ACTIVE)
-    @product_category = @product_category.where("category_type = ?", ProductCategory::FINISH_GOOD)
+    @product_category = ProductCategory.where("level = ? and status = ? and category_type = ?", 1, ProductCategory::ACTIVE, ProductCategory::FINISH_GOOD)
     self.looping_prod(@product_category, prod_id)
     return prod_id
   end
@@ -108,19 +93,20 @@ class SalesTaxExemption < ActiveRecord::Base
   def self.looping_prod(prod_cat, prod_id)
     if prod_cat.present?
       prod_cat.each do |product_category|
-        prod_id << self.collect_perihal_barang(product_category)
+#        prod_id << self.collect_perihal_barang(product_category)
+        prod_id << product_category.desc 
       end
     end
   end
   
-  def self.collect_perihal_barang(pc)
-    @ret = []
-    @category = ProductCategory.find(pc.id)
-    if @category.present?
-      self.take_child_code(@category) 
-      return @ret.join("-")
-    end
-  end
+#  def self.collect_perihal_barang(pc)
+#    @ret = []
+#    @category = ProductCategory.find(pc.id)
+#    if @category.present?
+#      self.take_child_code(@category) 
+#      return @ret.join("-")
+#    end
+#  end
   
 #  def self.running_items(data, ste)
 #    if data.present?

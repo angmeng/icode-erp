@@ -5,71 +5,71 @@
   
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE), :disabled => true %> Formulation For All</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX), :disabled => true %> Listing Formulation For all</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV), :disabled => true %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_PRINTABLE, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_PRINTABLE), :disabled => true %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_MENU) %> Unit Measurement Conventor</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_INDEX) %> Listing of Unit Measurement Conventor</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_NEW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_INDEX_KIV) %> Listing of Unit Measurement Conventor - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::FORMULATION_KIV_RECOVER) %></td>
           <td></td>
-          <td></td>
-          <td>New Formulation</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_NEW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW), :disabled => true %></td>
-          <td><%#= "save" %></td>
-          <% 10.times do |td| %><td></td><% end %>
         </tr>
         
       <% else %>
         
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE) %> Formulation For All</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX) %> Listing Formulation For all</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV) %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_PRINTABLE, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_PRINTABLE) %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_MENU) %> Unit Measurement Conventor</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_INDEX) %> Listing of Unit Measurement Conventor</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_NEW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_INDEX_KIV) %> Listing of Unit Measurement Conventor - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::FORMULATION_KIV_RECOVER) %></td>
           <td></td>
-          <td></td>
-          <td>New Formulation</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_NEW, checkboxes.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW) %></td>
-          <td><%#= "save" %></td>
-          <% 10.times do |td| %><td></td><% end %>
         </tr>
       
       <% end %>
       
     <% else %>
-        
+
         <tr>
           <td></td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE %> Formulation For All</td>
-          <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX %> Listing Formulation For all</td>
-          <td></td><td><%#= "save" %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_SHOW %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_EDIT %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_DROP_KIV %></td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_PRINTABLE %></td>
-          <% 6.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::FORMULATION_MENU) %> Unit Measurement Conventor</td>
+          <td><%= ims_new(InventoryManagementSystem::FORMULATION_INDEX) %> Listing of Unit Measurement Conventor</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_NEW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_PRINTABLE) %></td>
+          <% 3.times do |td| %><td></td><% end %>
         </tr>
         
         <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::FORMULATION_INDEX_KIV) %> Listing of Unit Measurement Conventor - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_KIV_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::FORMULATION_KIV_RECOVER) %></td>
           <td></td>
-          <td></td>
-          <td>New Formulation</td>
-          <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::FORMULATION_FOR_ALL_NEW %></td>
-          <td><%#= "save" %></td>
-          <% 10.times do |td| %><td></td><% end %>
         </tr>
 
     <% end %>
