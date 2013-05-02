@@ -2,7 +2,7 @@
 <table id="tabify_datatable" class="zebraLight display">
 
   <thead>
-    <tr class="header_line">
+    <tr>
       <th class="check_highlight"></th>
       <th>Name</th>
       <th>Job Title</th>
@@ -17,7 +17,7 @@
       <% lv2 = User.find_by_id(user.level_two) %>
       <% lv3 = User.find_by_id(user.level_three) %>
 
-      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= user.id %>">
+      <tr controllerName="<%= controller_name %>" rowsId="<%= user.id %>">
         <td></td>
         <td><%= user.name rescue '-' %></td>
         <td><%= user.job_title rescue '-' %></td>

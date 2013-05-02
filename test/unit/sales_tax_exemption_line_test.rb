@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SalesTaxExemptionItemTest < ActiveSupport::TestCase
+class SalesTaxExemptionLineTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

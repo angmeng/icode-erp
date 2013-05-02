@@ -1,0 +1,27 @@
+<h1>Listing sales_tax_exemption_lines</h1>
+
+<table>
+  <tr>
+    <th>Sales tax exemption</th>
+    <th>Trade company</th>
+    <th>Validate condition</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sales_tax_exemption_lines.each do |sales_tax_exemption_line| %>
+  <tr>
+    <td><%= sales_tax_exemption_line.sales_tax_exemption_id %></td>
+    <td><%= sales_tax_exemption_line.trade_company_id %></td>
+    <td><%= sales_tax_exemption_line.validate_condition %></td>
+    <td><%= link_to 'Show', sales_tax_exemption_line %></td>
+    <td><%= link_to 'Edit', edit_sales_tax_exemption_line_path(sales_tax_exemption_line) %></td>
+    <td><%= link_to 'Destroy', sales_tax_exemption_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sales tax exemption line', new_sales_tax_exemption_line_path %>

@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     admin == true
   end
   
-#  def self.clearing
+ # def self.clearing
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_categories")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_comboboxes")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE product_fields")
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE sales_tax_exemption_barangs")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE temporary_sources")
 #    ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
-#    user = User.new(:name => "DIRECTOR", :password => '12345678', :password_confirmation => "12345678" , :department_id => 1, :job_title => "Director", :admin => true, :level => UserLevel::LEVEL_FIVE)
-#    user.save!
-#  end
+   # user = User.new(:name => "DIRECTOR", :password => '12345678', :password_confirmation => "12345678" , :department_id => 1, :job_title => "Director", :admin => true, :level => UserLevel::LEVEL_FIVE)
+   # user.save!
+ # end
 end

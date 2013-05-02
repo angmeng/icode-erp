@@ -209,53 +209,52 @@ class InventoryManagementSystem < ActiveRecord::Base
   
 #===================================== SALES TAX EXEMPTION (START) ===========================================
   #MODULE
-  SALES_TAX_EXEMPTION_MENU                          = 61
+  SALES_TAX_EXEMPTION_MENU                    = 61
 
   #sub module 
+  SALES_TAX_EXEMPTION_SUPPLIER                = 63
+  SALES_TAX_EXEMPTION_CUSTOMER                = 225
 
-  
-  SALES_TAX_EXEMPTION_SUPPLIER_VALID                = 63
-  SALES_TAX_EXEMPTION_CUSTOMER_VALID                = 225
-
-  SALES_TAX_EXEMPTION_KIV_SUPPLIER                  = 65
-  SALES_TAX_EXEMPTION_KIV_CUSTOMER                  = 227
+  SALES_TAX_EXEMPTION_SUPPLIER_INDEX_KIV      = 65
+  SALES_TAX_EXEMPTION_CUSTOMER_INDEX_KIV      = 227
   
   #action new
-  SALES_TAX_EXEMPTION_NEW_SUPPLIER                  = 66
-  SALES_TAX_EXEMPTION_NEW_CUSTOMER                  = 224
+  SALES_TAX_EXEMPTION_SUPPLIER_NEW            = 66
+  SALES_TAX_EXEMPTION_CUSTOMER_NEW            = 224
   
   #transaction valid
-  SALES_TAX_EXEMPTION_SUPPLIER_VALID_SHOW        = 67
-  SALES_TAX_EXEMPTION_CUSTOMER_VALID_SHOW        = 228
-  SALES_TAX_EXEMPTION_SUPPLIER_VALID_EDIT        = 68
-  SALES_TAX_EXEMPTION_CUSTOMER_VALID_EDIT        = 229
-  SALES_TAX_EXEMPTION_SUPPLIER_VALID_KIV         = 69
-  SALES_TAX_EXEMPTION_CUSTOMER_VALID_KIV         = 230
-  SALES_TAX_EXEMPTION_SUPPLIER_VALID_PRINTABLE   = 70
-  SALES_TAX_EXEMPTION_CUSTOMER_VALID_PRINTABLE   = 231
+  SALES_TAX_EXEMPTION_SUPPLIER_SHOW           = 67
+  SALES_TAX_EXEMPTION_CUSTOMER_SHOW           = 228
+  SALES_TAX_EXEMPTION_SUPPLIER_EDIT           = 68
+  SALES_TAX_EXEMPTION_CUSTOMER_EDIT           = 229
+  SALES_TAX_EXEMPTION_SUPPLIER_KIV            = 69
+  SALES_TAX_EXEMPTION_CUSTOMER_KIV            = 230
+  SALES_TAX_EXEMPTION_SUPPLIER_PRINTABLE      = 70
+  SALES_TAX_EXEMPTION_CUSTOMER_PRINTABLE      = 231
   
-  SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES   = 135
-  SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES   = 232
-#  SALES_TAX_EXEMPTION_SUPPLIER_UNVALID_SHOW_HISTORIES = 152
-  
+  SALES_TAX_EXEMPTION_SUPPLIER_SHOW_HISTORIES = 135
+  SALES_TAX_EXEMPTION_CUSTOMER_SHOW_HISTORIES = 232
   
   #kiv
-  STE_KIV_SUPPLIER_SHOW                                = 75
-  STE_KIV_CUSTOMER_SHOW                                = 237
-  STE_KIV_SUPPLIER_RECOVER                             = 76
-  STE_KIV_CUSTOMER_RECOVER                             = 238
+  STE_KIV_SUPPLIER_SHOW                       = 75
+  STE_KIV_CUSTOMER_SHOW                       = 237
+  STE_KIV_SUPPLIER_RECOVER                    = 76
+  STE_KIV_CUSTOMER_RECOVER                    = 238
   
 #===================================== SALES TAX EXEMPTION (END) ===========================================
 
 #===================================== FORMULATION FOR ALL (START) ===========================================  
-  FORMULATION_FOR_ALL_MODULE      = 239
-#  FORMULATION_FOR_ALL_SUB_MODULE  = 240
-  FORMULATION_FOR_ALL_INDEX       = 241
-  FORMULATION_FOR_ALL_NEW         = 242
-  FORMULATION_FOR_ALL_EDIT        = 243
-  FORMULATION_FOR_ALL_SHOW        = 244
-  FORMULATION_FOR_ALL_DROP_KIV    = 245
-  FORMULATION_FOR_ALL_PRINTABLE   = 246
+  FORMULATION_MENU        = 239
+  FORMULATION_INDEX       = 241
+  FORMULATION_NEW         = 242
+  FORMULATION_EDIT        = 243
+  FORMULATION_SHOW        = 244
+  FORMULATION_KIV         = 245
+  FORMULATION_PRINTABLE   = 246
+  
+  FORMULATION_INDEX_KIV   = 240
+  FORMULATION_KIV_SHOW    = 89
+  FORMULATION_KIV_RECOVER = 152
 #===================================== FORMULATION FOR ALL (END) ===========================================  
 
 #===================================== COSTING SHEET (START) ===========================================  
@@ -298,7 +297,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   COMPANY_PROFILE_MENU                    = 88
   
-#  COMPANY_PROFILE_VIEW                    = 89
+
   
   COMPANY_PROFILE_SHOW                    = 90
   COMPANY_PROFILE_EDIT                    = 91

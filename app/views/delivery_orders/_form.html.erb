@@ -4,10 +4,10 @@
       <table>
         <tr>
           <% if action_name == 'edit' %>
-            <td width="140"><b>D/O No #</b></td>
+            <td width="150"><b>D/O No #</b></td>
             <td><%= @delivery_order.do_no rescue '-' %></td>
           <% else %>
-            <td width="140"><b>Current D/O No.</b></td>
+            <td width="150"><b>Current D/O No.</b></td>
             <td>
               <%= company.sn_deliver_order_no + 1 rescue '-' %>
               <%= f.hidden_field :do_no, :value => company.sn_deliver_order_no + 1 %>
@@ -64,8 +64,11 @@
         </tr>
 
         <tr>
-          <td><b>Sales Tax Exempt. No.</b></td>
-          <td><%= f.text_field :sales_tax_exemption, :class => "k-textbox", :style => "width: 400px;" %></td>
+          <td><b>Sales Tax Exemption No.</b></td>
+          <td>
+            <span id="ste_id"></span>
+            <%= f.hidden_field :sales_tax_exemption_id %>
+          </td>
           <td></td>
         </tr>
       </table>

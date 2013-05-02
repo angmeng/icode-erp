@@ -43,12 +43,6 @@ class DeliveryOrdersController < ApplicationController
 
   def update
     @delivery_order = DeliveryOrder.find(params[:id])
-     # a = DeliveryOrder.find(params[:id])
-     # if a.authorize_print.present?
-     #  a.authorize_print = 1
-     # else 
-     #  a.authorize_print = 0
-     #  end 
     respond_to do |format|
       if @delivery_order.update_attributes(params[:delivery_order])
         format.html { redirect_to @delivery_order, notice: 'Delivery order was successfully updated.' }

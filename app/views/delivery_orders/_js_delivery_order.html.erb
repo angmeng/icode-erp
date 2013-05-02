@@ -32,6 +32,16 @@
                 dataType: "json",
                 url: '/trade_companies/' + company_id,
                 success: function(data){
+                    if (data.ste_name != null){
+                      if (data.working == "stopped"){
+                        $("#save_button").attr("disabled", true)
+                        $("#ste_id").html(data.ste_name);
+                      } else {
+                        $("#save_button").attr("disabled", false)
+                        $("#delivery_order_sales_tax_exemption_id").val(data.sales_tax_exemption_id);
+                        $("#ste_id").html(data.ste_name);
+                      }
+                    }
                     if (data.trade_term_id != null){ 
                         var combobox = $("#delivery_order_trade_term_id").data("kendoComboBox");
                         combobox.value(data.trade_term_id);

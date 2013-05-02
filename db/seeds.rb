@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#TypeOfSale.create([
+# TypeOfSale.create([
 #  {:name => 'SALES WITH TAX'},
 #  {:name => 'LOCAL SALES (MAS)'},
 #  {:name => 'OTHERS'},
@@ -15,9 +15,9 @@
 #  {:name => 'CJ5 LICENCE MANUFACTURER'},
 #  {:name => 'EXPORT SALES'},
 #  {:name => 'IMPORT'}
-#])
+# ])
 
-#TradeTerm.create([
+# TradeTerm.create([
 #  {:name => '30 DAYS'},
 #  {:name => '60 DAYS'},
 #  {:name => '90 DAYS'},
@@ -27,9 +27,9 @@
 #  {:name => 'CASH PAYMENT'},
 #  {:name => 'DP'},
 #  {:name => 'L/C AT SIGHT'}
-#])
+# ])
 
-#UnitMeasurement.create([  
+# UnitMeasurement.create([  
 #  {:code => "BAG"}, 
 #  {:code => "BOOK"}, 
 #  {:code => "BOX"}, 
@@ -44,8 +44,10 @@
 #  {:code => "GM"}, 
 #  {:code => "GSM"},
 #  {:code => "KG"}, 
+#  {:code => "KGS"}, 
 #  {:code => "LOAD"}, 
 #  {:code => "METER"}, 
+#  {:code => "MTS"}, 
 #  {:code => "NO"}, 
 #  {:code => "PAD"}, 
 #  {:code => "PAIR"}, 
@@ -65,24 +67,24 @@
 #  {:code => "M2"},
 #  {:code => "TRIP"},
 #  {:code => "COPY"}
-#])
+# ])
 
-#Currency.create([
+# Currency.create([
 #  {:name => 'AUD', :status => "ACTIVE"},
 #  {:name => 'RM', :status => "ACTIVE"},
 #  {:name => 'SGD', :status => "ACTIVE"},
 #  {:name => 'USD', :status => "ACTIVE"},
 #  {:name => 'YEN', :status => "ACTIVE"}
-#])
-#
-#Transport.create([
+# ])
+
+# Transport.create([
 #  {:name => 'AIR', :status => "ACTIVE"},
 #  {:name => 'RAIL', :status => "ACTIVE"},
 #  {:name => 'ROAD', :status => "ACTIVE"},
 #  {:name => 'SEA', :status => "ACTIVE"}
-#])
+# ])
 
-#Department.create([
+# Department.create([
 #  {:name => 'MANAGEMENT'},
 #  {:name => 'ACCOUNTS & FINANCE'},
 #  {:name => 'ADMIN & PERSONNEL'},
@@ -94,30 +96,30 @@
 #  {:name => 'PRINTING & CUTTER'},
 #  {:name => 'PURCHASING & PPC'},
 #  {:name => 'STORE & WAREHOUSE'}
-#])
+# ])
 
-#PaymentType.create([
+# PaymentType.create([
 #  {:name => 'DEBTOR'},
 #  {:name => 'OTHER DEBTOR'},
 #  {:name => 'CREDITOR'},
 #  {:name => 'OTHER CREDITOR'}
-#])
+# ])
 
-InventoryIssue.create([
-  {:description => 'RECEIVED NOTE', :in_out => "IN"},
-  {:description => 'PRODUCTION RETURN', :in_out => "IN"},
-  {:description => 'RETURN STOCK FORM LOAN', :in_out => "IN"},
-  {:description => 'REJECT FOR REWORK / RETURN', :in_out => "OUT"},
-  {:description => 'BOM PLAN TO PRODUCTION', :in_out => "OUT"},
-  {:description => 'REQUEST FOR SAMPLE', :in_out => "OUT"},
-  {:description => 'ON LOAN', :in_out => "OUT"},
-  {:description => 'SCRAP NOTE', :in_out => "OUT"},
-  {:description => 'NEW PRODUCT', :in_out => "IN"},
-  {:description => 'FINISH GOODS', :in_out => "IN"},
-  {:description => 'DELIVERY ORDER', :in_out => "OUT"},
-  {:description => 'EXPIRED SCRAP DAMAGED', :in_out => "OUT"},
-  {:description => 'TRANSFER NOTE', :in_out => "OUT"},
-])
+# InventoryIssue.create([
+#   {:description => 'RECEIVED NOTE', :in_out => "IN"},
+#   {:description => 'PRODUCTION RETURN', :in_out => "IN"},
+#   {:description => 'RETURN STOCK FORM LOAN', :in_out => "IN"},
+#   {:description => 'REJECT FOR REWORK / RETURN', :in_out => "OUT"},
+#   {:description => 'BOM PLAN TO PRODUCTION', :in_out => "OUT"},
+#   {:description => 'REQUEST FOR SAMPLE', :in_out => "OUT"},
+#   {:description => 'ON LOAN', :in_out => "OUT"},
+#   {:description => 'SCRAP NOTE', :in_out => "OUT"},
+#   {:description => 'NEW PRODUCT', :in_out => "IN"},
+#   {:description => 'FINISH GOODS', :in_out => "IN"},
+#   {:description => 'DELIVERY ORDER', :in_out => "OUT"},
+#   {:description => 'EXPIRED SCRAP DAMAGED', :in_out => "OUT"},
+#   {:description => 'TRANSFER NOTE', :in_out => "OUT"},
+# ])
 
 #Material.create([
 #  {code: '1', :description => 'Spray Powder'},
@@ -157,39 +159,39 @@ InventoryIssue.create([
 #  {code: '32', :description => 'Silicone Spray'}
 #])
 
-#CompanyProfile.create([
-#  :name => 'ETHEOS IMPRINT TECHNOLOGY SDN BHD',
-#  :address => 'EOT 603 KAW PERINDUSTRIAN
-#                KG TELUK SG DUA
-#                13800 BUTTERWORTH PENANG.',
-#  :tel_no_1 => '04-3565872',
-#  :tel_no_2 => '04-3565870',
-#  :fax_no => '04-3565879',
-#  :sales_tax_no => 'A061583',
-#  :reg_no => '362823-K',
-#  :sn_sales_order_no => 21662,
-#  :sn_purchase_order_no => 23438,
-#  :sn_deliver_order_no => 35056,
-#  :sn_receive_note_no => 28134,
-#  :sn_transfer_slip_no => 0,
-#  :sn_store_voucher_no => 0,
-#  :sn_incoming_reject_no => 11,
-#  :sn_outgoing_reject_no => 331,
-#  :sn_credit_note_no => 924,
-#  :sn_debit_note_no => 712,
-#  :sn_billing_order_no => 0,
-#  :sn_purchase_req_no => 106,
-#  :sn_product_price_no => 2034,
-#  :sn_job_order_no => 0,
-#  :sn_shipment_schedule => 0,
-#  :sn_scrap_sheet_no => 0,
-#  :sn_receiving_instr_no => 0,
-#  :sn_shipping_instr_no => 0,
-#  :sn_receipt_no => 6189,
-#  :sn_bankin_slip_no => 0,
-#  :sn_journal_voucher_no => 312,
-#  :sn_payment_voucher_no => 0,
-#  :sn_product_id_no => 70,
-#  :sn_sales_tax_exemption_no => 22,
-#  :sn_quotation_request_no => 4
-#])
+CompanyProfile.create([
+ :name => 'ETHEOS IMPRINT TECHNOLOGY SDN BHD',
+ :address => 'EOT 603 KAW PERINDUSTRIAN
+              KG TELUK SG DUA
+              13800 BUTTERWORTH PENANG.',
+ :tel_no_1 => '04-3565872',
+ :tel_no_2 => '04-3565870',
+ :fax_no => '04-3565879',
+ :sales_tax_no => 'A061583',
+ :reg_no => '362823-K',
+
+ :sn_purchase_req_no => 0,
+ :sn_purchase_order_no => 0,
+ :sn_receive_note_no => 0,
+ :sn_quotation_request_no => 0,
+ :sn_sales_order_no => 0,
+ :sn_deliver_order_no => 0,
+ :sn_transfer_slip_no => 0,
+ :sn_store_voucher_no => 0,
+ :sn_incoming_reject_no => 0,
+ :sn_outgoing_reject_no => 0,
+ :sn_credit_note_no => 0,
+ :sn_debit_note_no => 0,
+ :sn_billing_order_no => 0,
+ :sn_product_price_no => 0,
+ :sn_job_order_no => 0,
+ :sn_shipment_schedule => 0,
+ :sn_scrap_sheet_no => 0,
+ :sn_receiving_instr_no => 0,
+ :sn_shipping_instr_no => 0,
+ :sn_receipt_no => 0,
+ :sn_bankin_slip_no => 0,
+ :sn_journal_voucher_no => 0,
+ :sn_payment_voucher_no => 0,
+ :sn_sales_tax_exemption_no => 0
+])

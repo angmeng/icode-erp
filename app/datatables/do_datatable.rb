@@ -23,11 +23,12 @@ class ProductsDatatable
 
 	def datatable_columns(column_id)
 	  
-case column_id.to_i
+    case column_id.to_i
     when 2
       return "objects.do_date"     
-    else
+    when 3
       return "objects.delivery_order.sales_rep"
+    end
 	end
 
 	def conditions

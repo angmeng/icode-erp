@@ -1,5 +1,4 @@
-<%= title_head "Purchase Part ETA Inquire Report" %>
-<div id="popup_container">
+<%= title_head "Purchase Order Report" %>
 	<%= form_tag pdf_purchase_order_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 <table id="jdatatable" class="display">
@@ -42,7 +41,7 @@
 </tbody>
 </table>
 
-<div class="icon_tag" style="float:left;">
+<div class="left_icon_tag">
 	<% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_EXCEL) %>
 	<span><%#= submit_tag "Show" , :class => "k-button" %><%= not_link_excel %></span>
 	<% else %>
@@ -50,7 +49,7 @@
       <% end %>
 </div>
 
-<div class="icon_tag" style="float:right;">
+<div class="icon_tag">
    <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_SHOW) %>
 	  <span><%= submit_tag "Show" , :class => "k-button" %><%# not_link_show %></span>
 	<%# else %>

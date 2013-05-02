@@ -25,10 +25,21 @@ class TradeCompaniesController < ApplicationController
 
   def show
     @trade_company = TradeCompany.find(params[:id])
+    ste_name, msg = @trade_company.loading_ste
     
     respond_to do |format|
       format.html
-      format.json { render json: @trade_company }
+      format.json { 
+        if ste_name.present?
+          if ste_name == "stop_ste"
+            render json: @trade_company.attributes.merge({ "ste_name" => msg, "working" => "stopped" }) 
+          else
+            render json: @trade_company.attributes.merge({ "ste_name" => ste_name }) 
+          end
+        else
+          render json: @trade_company          
+        end
+      }
     end
   end
 

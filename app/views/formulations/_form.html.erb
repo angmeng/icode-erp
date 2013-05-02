@@ -1,34 +1,47 @@
 <%= form_for(@formulation) do |f| %>
-  <div class="fix_800x450">
-    <table>
-      <tr>
-        <td><b><%= f.label :per_value, "From Value *" %></b></td>
-        <td><%= f.text_field :per_value, "required validationMessage" => "Please Enter From Value" %></td>
-      </tr>
-      <tr>
-        <td><b><%= f.label :from_unit_measurement_id, "From Unit Measurement *" %></b></td>
-        <td><%= f.select :from_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.from_unit_measurement_id), :include_blank => true, "required validationMessage" => "Please Enter From Unit Measurement Id" %></td>
-      </tr>
-      <tr>
-        <td><b><%= f.label :convert_value , "To Value *" %></b></td>
-        <td><%= f.text_field :convert_value, "required validationMessage" => "Please Enter Convert Value" %></td>
-      </tr>
-      <tr>
-        <td><b><%= f.label :to_unit_measurement_id, "To Unit Measurement *" %></b></td>
-        <td><%= f.select :to_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.to_unit_measurement_id), :include_blank => true, "required validationMessage" => "Please Enter To Unit Measurement Id" %></td>
-      </tr>
-    </table>
+  <div id="valid_formulation">
+    <div class="popup_content">
+      <table>
+        <tr>
+          <td><b><%= f.label :per_value, "From Value *" %></b></td>
+          <td>
+            <%= f.text_field :per_value, :class => "kendo_precision_2", "required validationMessage" => "Please Enter From Value" %>
+            <span class="k-invalid-msg" data-for="formulation[per_value]"></span>
+          </td>
+          <td>
+            <%= f.select :from_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.from_unit_measurement_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter From U/M" } %>
+            <span class="k-invalid-msg" data-for="formulation[from_unit_measurement_id]"></span>
+          </td>
+        </tr>
+        <tr>
+          <td><b><%= f.label :convert_value , "To Value *" %></b></td>
+          <td>
+            <%= f.text_field :convert_value, :class => "kendo_precision_2", "required validationMessage" => "Please Enter To Value" %>
+            <span class="k-invalid-msg" data-for="formulation[convert_value]"></span>
+          </td>
+          <td>
+            <%= f.select :to_unit_measurement_id, options_from_collection_for_select(unit_measurement, :id, :code, @formulation.to_unit_measurement_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter To U/M" }%>
+            <span class="k-invalid-msg" data-for="formulation[to_unit_measurement_id]"></span>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
   <div class="icon_tag">
     <%= link_save_button %>
     <%= link_close_button %>
   </div>
-<% end %>
-
+<% end %>  
+  
 <% content_for :jquery_script do %>
   <script>
     $(document).ready(function() {
-      $("#formulation_per_value, #formulation_convert_value").kendoNumericTextBox();
+        var validator = $("#valid_formulation").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
     });
   </script>
 <% end %>

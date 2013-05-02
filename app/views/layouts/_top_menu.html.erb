@@ -147,7 +147,7 @@
         <li style="width:150px;">
             Purchase Order Report
             <ul>
-               <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU) %>
+               <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT_MENU) %>
                   <%# if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_REPORT) %>
                 <li><%#= link_to "Purchase Order Report", po_report_reports_path %></li>
                  
@@ -159,7 +159,7 @@
                 <li><%= link_to "Listing - Vendor Report", po_listing_vendor_report_reports_path %></li>
 
 
-              <% end %>
+              <%# end %>
             </ul>
           </li>   
 
@@ -376,63 +376,61 @@
     Custom
     <ul>
       <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_MENU) %>
-        <li style="width:150px;">
+        <li style="width:180px;">
           Sales Tax Exemption
           <ul>
             <!-- For Suppliers -->   
-            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_VALID) %>
+            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER) %>
               <li><%= link_to "Listing Sales Tax Exemption for Vendors", sales_tax_exemptions_path %></li>
             <% else %>
-              <li class="text_gray">Listing Sales Tax Exemption for Vendors</li>
+              <li><%= disabled_menu_style "Listing Sales Tax Exemption for Vendors" %></li>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_SUPPLIER) %>
+            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_SUPPLIER_INDEX_KIV) %>
               <li><%= link_to "Listing Sales Tax Exemption for Vendors - KIV", kiv_supplier_sales_tax_exemptions_path %></li>
             <% else %>
-              <li class="text_gray">Listing Sales Tax Exemption for Vendors - KIV</li>
+              <li><%= disabled_menu_style "Listing Sales Tax Exemption for Vendors - KIV" %></li>
             <% end %>
 
             <li><hr/></li>
 
             <!-- For Customers -->
-            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_VALID) %>
+            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER) %>
               <li><%= link_to "Listing Sales Tax Exemption for Customers", customer_sales_tax_exemptions_path %></li>
             <% else %>
-              <li class="text_gray">Listing Sales Tax Exemption for Customers</li>
+              <li><%= disabled_menu_style "Listing Sales Tax Exemption for Customers" %></li>
             <% end %>
 
-
-
-            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_KIV_CUSTOMER) %>
+            <% if roles.include?(InventoryManagementSystem::SALES_TAX_EXEMPTION_CUSTOMER_INDEX_KIV) %>
               <li><%= link_to "Lisiting Sales Tax Exemption for Customers - KIV", kiv_customer_sales_tax_exemptions_path %></li>
             <% else %>
-              <li class="text_gray">Listing Sales Tax Exemption for Customers - KIV</li>
+              <li><%= disabled_menu_style "Listing Sales Tax Exemption for Customer - KIV" %></li>
             <% end %>
           </ul>
         </li>
       <% end %>
 
-      <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_MODULE) %>
-        <li style="width:150px;">
+      <% if roles.include?(InventoryManagementSystem::FORMULATION_MENU) %>
+        <li style="width:180px;">
           Unit Measurement Conventor
           <ul>
-            <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_INDEX) %>
-              <li><%= link_to "Lisiting Unit Measurement Conventor", formulations_path %></li>
+            <% if roles.include?(InventoryManagementSystem::FORMULATION_INDEX) %>
+              <li><%= link_to "Listing Unit Measurement Conventor", formulations_path %></li>
             <% else %>
-              <%= disabled_style "Lisiting Unit Measurement Conventor" %>
+              <%= disabled_menu_style "Listing Unit Measurement Conventor" %>
             <% end %>
 
-            <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_ALL_NEW) %>
-              <li><%= link_to "New Formulation", new_formulation_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+            <% if roles.include?(InventoryManagementSystem::FORMULATION_INDEX_KIV) %>
+              <li><%= link_to "Listing Unit Measurement Conventor - KIV", kiv_formulations_path %></li>
             <% else %>
-              <%= disabled_style "New Formulation" %>
+              <li><%= disabled_menu_style "Listing Unit Measurement Conventor - KIV" %></li>
             <% end %>
           </ul>
         </li>
       <% end %>
 
       <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_MENU) %>
-        <li style="width:150px;">
+        <li style="width:180px;">
           Costing Sheet
           <ul>
             <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
@@ -469,7 +467,7 @@
         </li-->
       <%# end %>
 
-      <li style="width:150px;">
+      <li style="width:180px;">
             Report
             <ul>
               <% if roles.include?(InventoryManagementSystem::CUSTOM_SALES_TAX_EXEMPTION_REPORT_MENU) %>

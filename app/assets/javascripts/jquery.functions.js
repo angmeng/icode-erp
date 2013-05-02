@@ -59,66 +59,68 @@ $(document).ready(function() {
         }
     });
     
-    $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
-    $("#panelbar").kendoPanelBar({expandMode: "single"});
+//    $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
+//    $("#panelbar").kendoPanelBar({expandMode: "single"});
 
-    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+//    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
     
-    $(".mkendo_combobox").kendoComboBox({filter: "contains"});
+//    $(".mkendo_combobox").kendoComboBox({filter: "contains"});
     
-    $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
-    $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
-    $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
-    $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
+//    $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
+//    $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+//    $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
+//    $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
     
     $('#j_tabify').tabify();
         
     $('#j_tabify').click(function(){
-      if (location.hash == "#tabify_listing-tab"){
-        $(".left_icon_tag").hide();
-        $(".center_icon_tag").hide();
-        $(".icon_tag").hide();
-      } else if (location.hash == "#tabify_search-tab"){
-        $(".left_icon_tag").show();
-        $(".center_icon_tag").show();
-        $(".icon_tag").show();
-      } 
+        setTimeout(function(){
+          if (location.hash == "#tabify_listing-tab"){
+            $(".left_icon_tag").show();
+            $(".center_icon_tag").show();
+            $(".icon_tag").show();            
+          } else if (location.hash == "#tabify_search-tab"){
+            $(".left_icon_tag").hide();
+            $(".center_icon_tag").hide();
+            $(".icon_tag").hide();
+          }            
+        },100);
     });
     
     // Just autocomplete all suppliers only
-    $("#autoComplete_suppliers").kendoAutoComplete({    
-        minLength: 2,
-        filter: "contains",
-        dataTextField: "company_name", // use JSON property name
-        dataSource: new kendo.data.DataSource({
-            type: "json", // specifies data protocol
-            transport: {read: "/trade_companies/all_suppliers.json"}
-        })
-    })
+//    $("#autoComplete_suppliers").kendoAutoComplete({    
+//        minLength: 2,
+//        filter: "contains",
+//        dataTextField: "company_name", // use JSON property name
+//        dataSource: new kendo.data.DataSource({
+//            type: "json", // specifies data protocol
+//            transport: {read: "/trade_companies/all_suppliers.json"}
+//        })
+//    })
     
     // Just autocomplete all customers only
-    $("#autoComplete_customers").kendoAutoComplete({
-        minLength: 2,
-        filter: "contains",
-        dataTextField: "company_name", // use JSON property name
-        dataSource: new kendo.data.DataSource({
-            type: "json", // specifies data protocol
-            transport: {read: "/trade_companies/all_customers.json"}
-        })
-    })
+//    $("#autoComplete_customers").kendoAutoComplete({
+//        minLength: 2,
+//        filter: "contains",
+//        dataTextField: "company_name", // use JSON property name
+//        dataSource: new kendo.data.DataSource({
+//            type: "json", // specifies data protocol
+//            transport: {read: "/trade_companies/all_customers.json"}
+//        })
+//    })
     
     // Just autocomplete all suppliers de product id de description only
-    $("#autoComplete_suppliers_product_description").kendoAutoComplete({
-        minLength: 2,
-        dataTextField: "description", // use JSON property name
-        dataSource: new kendo.data.DataSource({
-            type: "json", // specifies data protocol
-            transport: {read: "/product_comboboxes/supplier_product_description.json"}
-        })
-    })
+//    $("#autoComplete_suppliers_product_description").kendoAutoComplete({
+//        minLength: 2,
+//        dataTextField: "description", // use JSON property name
+//        dataSource: new kendo.data.DataSource({
+//            type: "json", // specifies data protocol
+//            transport: {read: "/product_comboboxes/supplier_product_description.json"}
+//        })
+//    })
     
+    // IFRAME
     $(".iframe_1600x900").fancybox({
-//        .pr_iframe, .ste_iframe, 
             padding     : 5,
             maxWidth	: 1600,
             maxHeight	: 900,
@@ -132,7 +134,6 @@ $(document).ready(function() {
             afterClose  : function() {location.reload();return false;}
     });
     
-//    .ste_iframe_800x450, .inventory_iframe_800x450, 
     $(".iframe_800x450").fancybox({
             padding     : 5,
             maxWidth	: 800,
@@ -162,7 +163,6 @@ $(document).ready(function() {
     });
     
     $(".iframe_1024x800").fancybox({
-//        .rn_iframe, .ir_iframe, 
             padding     : 5,
             maxWidth	: 1024,
             maxHeight	: 800,
@@ -176,13 +176,14 @@ $(document).ready(function() {
             afterClose  : function() {location.reload();return false;}
     });
     
+    // IFRAME WITHOUT REFRESH
     $(".show_without_refresh_page_1600x900").fancybox({
             padding     : 5,
-//            maxWidth	: 1600,
-//            maxHeight	: 900,
+            maxWidth	: $(window).width() - 50,
+            maxHeight	: $(window).height() - 50,
             fitToView	: false,
-            width	: '100%',
-            height	: '100%',
+            width	: $(window).width(),
+            height	: $(window).height(),
             autoSize	: false,
             closeClick	: false,
             openEffect	: 'elastic',
@@ -1053,7 +1054,7 @@ function datarow_all_attributes(tr){
     string_last_number(tr, '[id^=old_date]');
 
     // Sales Order, Unit Price will join with Delivery Order
-    string_last_number(tr, '[id^=um_code]');
+    string_last_number(tr, '[id^=um_code]');    // for sales order and sales tax exemption
     string_last_number(tr, '[id^=partCode]');
 
     // Delivery Order     cur_stock_0

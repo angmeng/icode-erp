@@ -13,9 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require_tree .
+//= require kendo.web.min
+//= require jquery.fancybox.pack
+//= require date
+//= require jquery.chromatable
+//= require jquery.easyui.min
+//= require jquery.forcenumeric
+//= require jquery.functions
+//= require jquery.placeholder
+//= require jquery.tabify
 //= require dataTables/jquery.dataTables
-//= require turbolinks
+//= require_self
 
 $(document).ready(function () {
     
@@ -28,7 +36,6 @@ $(document).ready(function () {
     var searching_height        = $("#searching").height();
     var title_height            = $(".title_head").height();
     var button_height           = $(".icon_tag").height();
-//    var ctn_width               = $(".title_head").width() - 10; // It is for table width
     var ctn_width               = $(window).width() - 20; // It is for table width
     
     // Wrapper is calculate the height only available when without popup
@@ -37,6 +44,21 @@ $(document).ready(function () {
     var tabify_content_height    = wrapper_height - tabify_height - button_height - 12;    
     var linking_content_height   = wrapper_height - linking_height - title_height - button_height - 13;
     var searching_content_height = wrapper_height - searching_height - title_height - button_height - 13;
+    
+//    $(".show_without_refresh_page_1600x900").fancybox({
+//            padding     : 5,
+//            maxWidth	: ctn_width - 50,
+//            maxHeight	: window_height - 50,
+//            fitToView	: false,
+//            width	: ctn_width,
+//            height	: window_height,
+//            autoSize	: false,
+//            closeClick	: false,
+//            openEffect	: 'elastic',
+//            closeEffect	: 'elastic'
+//    });
+    
+    
 
     // It is for normal page for without popup
     $("#main_wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
@@ -78,7 +100,7 @@ $(document).ready(function () {
     var popup_content_height    = window_height - title_height - button_height - 12;
     var popup_tab_height        = popup_content_height - 50;
     
-    $("#treeview").kendoTreeView();
+//    $("#treeview").kendoTreeView();
     $("#horizontal").css({ 'height': popup_content_height }).css({ 'margin': '0 auto' });   // It is for popup product page
 
     $('#jdatatable').dataTable({
@@ -113,6 +135,7 @@ $(document).ready(function () {
                 "sZeroRecords":  "No Record Found.",
                 "sSearch": "Search All Columns:"
         },
+        "bInfo": false,   //exp :showing 1 of 15 pages 
         "bAutoWidth": true
      });
 

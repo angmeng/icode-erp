@@ -53,16 +53,20 @@
 
         <tr>
           <td><b>Period</b></td>
-          <td width="300">
-            <% if action_name == "edit" %>
-              <%= f.text_field :period_start, :value => @sales_tax_exemption.period_start.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period Start" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_start]"></span>
-              -
-              <%= f.text_field :period_end, :value => @sales_tax_exemption.period_end.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period End" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_end]"></span>
-            <% else %>
-              <%= f.text_field :period_start, :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period Start", :style => "width: 150px;" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_start]"></span>
-              -
-              <%= f.text_field :period_end, :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period End", :style => "width: 150px;" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_end]"></span>
-            <% end %>
+          <td>
+            <table style="table-layout: fixed;">
+              <tr>
+              <% if action_name == "edit" %>
+                <td width="150"><%= f.text_field :period_start, :value => @sales_tax_exemption.period_start.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period Start" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_start]"></span></td>
+                <td>-</td>
+                <td width="150"><%= f.text_field :period_end, :value => @sales_tax_exemption.period_end.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period End" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_end]"></span></td>
+              <% else %>
+                <td width="150"><%= f.text_field :period_start, :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period Start" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_start]"></span></td>
+                <td>-</td>
+                <td width="150"><%= f.text_field :period_end, :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Period End" %><span class="k-invalid-msg" data-for="sales_tax_exemption[period_end]"></span></td>
+              <% end %>
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
@@ -86,11 +90,14 @@
 
             <% @sales_tax_exemption.sales_tax_exemption_barangs.each_with_index do |goods, index| %>
               <tr class="<%= cycle('odd_line', 'even_line') %>">
-                <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true, :class => "mkendo_combobox" %></td>
-                <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :class => "k-textbox" %></td>
-                <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :class => "numberKey k-textbox" %>
-                <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), :include_blank => true, :class => "mkendo_combobox" %></td>        
-                <td align="center"><%= select_tag       "datarow[#{index}][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.calculate_um_id.to_i), :include_blank => true, :class => "mkendo_combobox" %></td>
+                <td align="center"><%= select_tag       "datarow[#{index}][perihal_barang]", options_for_select(@perihal_barang, goods.perihal_barang), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Perihal Barang" %></td>
+                <td align="center"><%= text_field_tag   "datarow[#{index}][tarif_code]", goods.tarif_code, :class => "k-textbox", "required validationMessage" => "Please Enter Tarif Code" %></td>
+                <td align="center"><%= text_field_tag   "datarow[#{index}][apply_qty]", goods.apply_qty, :class => "numberKey k-textbox", "required validationMessage" => "Please Enter Apply Qty" %>
+                <td align="center"><%= select_tag       "datarow[#{index}][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.unit_measurement_id.to_i), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Origin U/M" %></td>        
+                <td align="center">
+                  <span id="um_code_<%= index %>"><%= goods.available_qty rescue '-' %></span>
+                  <%= select_tag "datarow[#{index}][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.calculate_um_id.to_i), :include_blank => true, :class => "mkendo_combobox", :onchange => "calculate_um(this)", "required validationMessage" => "Please Enter Calculate U/M" %>
+                </td>
                 <td align="center"><%= remove_row_button %></td>
               </tr>
             <% end %>
@@ -98,11 +105,14 @@
           <% else %>
 
             <tr class="<%= cycle('odd_line', 'even_line') %>">
-              <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true, :class => "mkendo_combobox" %></td>
-              <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :class => "k-textbox" %></td>
-              <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :class => "numberKey k-textbox" %>
-              <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => "mkendo_combobox" %></td>
-              <td align="center"><%= select_tag       "datarow[0][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => 'mkendo_combobox' %></td>
+              <td align="center"><%= select_tag       "datarow[0][perihal_barang]", options_for_select(@perihal_barang), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Perihal Barang" %></td>
+              <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :class => "k-textbox", "required validationMessage" => "Please Enter Tarif Code" %></td>
+              <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :class => "numberKey k-textbox", "required validationMessage" => "Please Enter Apply Qty" %>
+              <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Origin U/M" %></td>
+              <td align="center">
+                <span id="um_code_0"></span>
+                <%= select_tag "datarow[0][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => 'mkendo_combobox', :onchange => "calculate_um(this)", "required validationMessage" => "Please Enter Calculate U/M" %>
+              </td>
               <td align="center"><%= remove_row_button %></td>
             </tr>
 
@@ -134,5 +144,42 @@
             else { alert("Invalid Data Form..."); return false; } 
         });
     });
+    
+    function calculate_um(sel){
+        var number = sel.name.match(/\[(\d+)\]/);
+        var number = parseInt(number[1], 10);
+        var cal_umid = sel.options[sel.selectedIndex].value;
+
+        if (cal_umid){
+            var apply_qty   = "#datarow_" + number + "_apply_qty";
+            var ask_qty    = $(apply_qty).val();
+            var um_from     = "#datarow_" + number + "_unit_measurement_id";
+            var ask_um_from = $(um_from).val();
+            var result_val  = "#um_code_" + number;
+            var um_to       = "#datarow_" + number + "_calculate_um_id";          
+            var ask_um_to   = $(um_to).val();
+          
+            $.ajax({             
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                url: '/formulations/output_value',
+                data: { 'from_um' : ask_um_from, 'to_um' : ask_um_to, 'current_value' : ask_qty },
+                success: function(data){ 
+                    if (data.jstatus == true){
+                      $(result_val).html(data.result);
+                      $("#save_button").attr("disabled", false); 
+                    } 
+                    else if (data.jstatus == false){ 
+                      alert("No match. Please create new in Formulations."); 
+                      $("#save_button").attr("disabled", true); 
+                    }
+                }
+            })
+        } else {
+            alert("No Match.");
+            $("#save_button").attr("disabled", true);
+        }
+    }
   </script>
 <% end %>
