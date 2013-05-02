@@ -599,7 +599,7 @@ end
 
   def pr_report
     @pr_report = PurchaseRequisition.search(params[:search])
-    @show_pr_report = PurchaseRequisition.all
+    @show_pr_report = @pr_report.all
     #@take_ids = @show_pr_report.map(&:id)
   end
 
@@ -679,17 +679,18 @@ end
   end
 
   def debit_note_report
-    # @debit_note_report = DebitNote.search(params[:search])
-    @show_debit_note_report = DebitNote.all
+    @debit_note_report = DebitNote.search(params[:search])
+    @show_debit_note_report = @debit_note_report.all
   end 
 
   def credit_note_report
-    @show_credit_note_report = CreditNote.all
+    @credit_note_report = CreditNote.search(params[:search])
+    @show_credit_note_report = @credit_note_report.all
   end
 
   def purchase_order_report
     @purchase_order_report = PurchaseOrder.search(params[:search])
-    @show_purchase_order_report = PurchaseOrder.all
+    @show_purchase_order_report = @purchase_order_report.all
   end
 
   def po_listing_vendor_report

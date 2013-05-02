@@ -1,28 +1,9 @@
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">Credit Note Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>       
 
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">CREDIT NOTE REPROT</strong></div>
-
- 
-          <!-- <table>
-            <%#= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
-            <tr>
-                    <td>Product ID :
-                    <%#= f.text_field :product_code_contains , :size => 9 %></td>
-                    <td>Description : 
-                    <%#= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
-                    <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
-                    <td>Transaction
-                      <%#= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
-
-            </tr>
-            <tr>
-                    <td><%#= submit_tag "Search" %></td>
-            </tr>
-            <%# end %>
-          </table>
-
-  <hr />
- -->
+<div id="tabify_listing">
  <%= form_tag pdf_credit_note_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
   <div class="fix_1600x900_h450">
           <table id="jdatatable" class="display">
@@ -91,9 +72,28 @@
 
       <%= link_close_button %>
     </div>
+  </div>
 
    
-
+<div id="tabify_search" >
+    <table>
+    <%= form_for @credit_note_report, :url => credit_note_report_reports_path  do |f| %>
+      <tr>
+          <td>Credit Note Date :</td>
+          <td><%= f.text_field :credit_note_date_gte, :size => 9 , :class=> "mkendo_date" %>
+            -
+              <%= f.text_field :credit_note_date_lte, :size => 9 , :class => "mkendo_date" %></td>
+      </tr>
+      <tr>
+        <td>Trade Company</td>
+        <td><%= f.text_field :trade_company_name_contains , :size => 12 %></td>
+      </tr>
+      <tr>
+          <td><%= submit_tag "Search" %></td>
+      </tr>
+            <% end %>
+          </table>
+</div>
 
 
 

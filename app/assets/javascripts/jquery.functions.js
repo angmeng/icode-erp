@@ -62,7 +62,7 @@ $(document).ready(function() {
 //    $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
 //    $("#panelbar").kendoPanelBar({expandMode: "single"});
 
-//    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
     
 //    $(".mkendo_combobox").kendoComboBox({filter: "contains"});
     
