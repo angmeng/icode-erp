@@ -24,8 +24,8 @@ group :development do
 #  gem "binding_of_caller", "~> 0.6.8"
 end
 
-#gem 'jquery-rails', "2.1.4"
-gem 'jquery-rails'
+gem 'jquery-rails', "2.1.4"
+#gem 'jquery-rails'
 gem "devise", "~> 2.1.0"
 gem "devise-encryptable"
 gem "omniauth"
@@ -51,7 +51,6 @@ gem "pdfkit"
 gem "squeel"
 gem "meta_search"
 gem "paperclip"
-# gem 'turbolinks'
 gem 'mime-types'
 #gem "asset_hat", "~> 0.4.2"
 
