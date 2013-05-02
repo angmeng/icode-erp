@@ -1,5 +1,12 @@
 require 'rubygems'
 
+# Delete the server.pid
+begin
+  File.delete(File.expand_path('../../tmp/pids/server.pid',  __FILE__))
+rescue
+  # Do nothing
+end
+
 # Set up gems listed in the Gemfile.
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 

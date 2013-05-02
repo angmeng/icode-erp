@@ -29,15 +29,6 @@ $(document).ready(function() {
             } else {
                 return false;
             }
-                
-//          if ((e.keyCode < 48 || e.keyCode > 57) && (e.keyCode != 8)) {
-//              return false;
-//          } else {
-//              if (e.keyCode != 8) {
-//                  if      ($(this).val().length == 2){ return $(this).val($(this).val() + "-"); }
-//                  else if ($(this).val().length == 5){ return $(this).val($(this).val() + "-"); }
-//              }
-//          }
         } else {
             $(this).val($.trim($(this).val()).slice(0, -1));
         }
@@ -59,17 +50,17 @@ $(document).ready(function() {
         }
     });
     
-//    $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
-//    $("#panelbar").kendoPanelBar({expandMode: "single"});
+    $("#product_tabStrip, #purchase_order_tabStrip, #user_strip, #company_strip, #qr_strip").kendoTabStrip({animation: {open: {effects: "fadeIn"}}});
+    $("#panelbar").kendoPanelBar({expandMode: "single"});
 
-//    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
+    $('input[class^="mkendo_date"]').kendoDatePicker({format: "dd-MM-yyyy"});
     
-//    $(".mkendo_combobox").kendoComboBox({filter: "contains"});
+    $(".mkendo_combobox").kendoComboBox({filter: "contains"});
     
-//    $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
-//    $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
-//    $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
-//    $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
+    $(".kendo_precision_6").kendoNumericTextBox({min: 0, decimals: 6, format: "n6"});
+    $(".kendo_precision_4").kendoNumericTextBox({min: 0, decimals: 4, format: "n4"});
+    $(".kendo_precision_2").kendoNumericTextBox({min: 0, decimals: 2, format: "n2"});
+    $(".kendo_precision_0").kendoNumericTextBox({min: 0, decimals: 0, format: "n0"});
     
     $('#j_tabify').tabify();
         
@@ -88,146 +79,36 @@ $(document).ready(function() {
     });
     
     // Just autocomplete all suppliers only
-//    $("#autoComplete_suppliers").kendoAutoComplete({    
-//        minLength: 2,
-//        filter: "contains",
-//        dataTextField: "company_name", // use JSON property name
-//        dataSource: new kendo.data.DataSource({
-//            type: "json", // specifies data protocol
-//            transport: {read: "/trade_companies/all_suppliers.json"}
-//        })
-//    })
+    $("#autoComplete_suppliers").kendoAutoComplete({    
+        minLength: 2,
+        filter: "contains",
+        dataTextField: "company_name", // use JSON property name
+        dataSource: new kendo.data.DataSource({
+            type: "json", // specifies data protocol
+            transport: {read: "/trade_companies/all_suppliers.json"}
+        })
+    })
     
     // Just autocomplete all customers only
-//    $("#autoComplete_customers").kendoAutoComplete({
-//        minLength: 2,
-//        filter: "contains",
-//        dataTextField: "company_name", // use JSON property name
-//        dataSource: new kendo.data.DataSource({
-//            type: "json", // specifies data protocol
-//            transport: {read: "/trade_companies/all_customers.json"}
-//        })
-//    })
+    $("#autoComplete_customers").kendoAutoComplete({
+        minLength: 2,
+        filter: "contains",
+        dataTextField: "company_name", // use JSON property name
+        dataSource: new kendo.data.DataSource({
+            type: "json", // specifies data protocol
+            transport: {read: "/trade_companies/all_customers.json"}
+        })
+    })
     
     // Just autocomplete all suppliers de product id de description only
-//    $("#autoComplete_suppliers_product_description").kendoAutoComplete({
-//        minLength: 2,
-//        dataTextField: "description", // use JSON property name
-//        dataSource: new kendo.data.DataSource({
-//            type: "json", // specifies data protocol
-//            transport: {read: "/product_comboboxes/supplier_product_description.json"}
-//        })
-//    })
-    
-    // IFRAME
-    $(".iframe_1600x900").fancybox({
-            padding     : 5,
-            maxWidth	: 1600,
-            maxHeight	: 900,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
-    });
-    
-    $(".iframe_800x450").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 450,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
-    });
-    
-    $(".iframe_800x600").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 600,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
-    });
-    
-    $(".iframe_1024x800").fancybox({
-            padding     : 5,
-            maxWidth	: 1024,
-            maxHeight	: 800,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
-    });
-    
-    // IFRAME WITHOUT REFRESH
-    $(".show_without_refresh_page_1600x900").fancybox({
-            padding     : 5,
-            maxWidth	: $(window).width() - 50,
-            maxHeight	: $(window).height() - 50,
-            fitToView	: false,
-            width	: $(window).width(),
-            height	: $(window).height(),
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
-    });
-    
-    $(".show_without_refresh_page_800x450").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 450,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
-    });
-    
-    $(".show_without_refresh_page_800x600").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 600,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
-    });
-    
-    $(".show_without_refresh_page_1024x800").fancybox({
-            padding     : 5,
-            maxWidth	: 1024,
-            maxHeight	: 800,
-            fitToView	: false,
-            width	: '100%',
-            height	: '100%',
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
-    });
+    $("#autoComplete_suppliers_product_description").kendoAutoComplete({
+        minLength: 2,
+        dataTextField: "description", // use JSON property name
+        dataSource: new kendo.data.DataSource({
+            type: "json", // specifies data protocol
+            transport: {read: "/product_comboboxes/supplier_product_description.json"}
+        })
+    })
 
     $(".pr_items_click").click(function() {$("#pr_items_show").window('open');});
     $('#on_button_one, #on_button_two').click(function() {$("#pr_items_show").window('close');});
@@ -418,10 +299,6 @@ $(document).ready(function() {
             $("#on_history").html(html_history);
         };
     });
-
-
-
-
 
     $("#get_size").click(function() { 
         var option_size = $("input[name='option_size']:checked").val();
