@@ -4,20 +4,21 @@ class ReportsController < ApplicationController
   :do_so_documentation_report, :do_summary_report , :inventory_report , :purchase_order_report , :pr_report,
   :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
-  :so_customer_po_detail_report , :so_listing_report , :so_summary_report , :po_listing_vendor_report]
+  :so_customer_po_detail_report , :so_listing_report , :so_summary_report , 
+  :po_listing_vendor_report , :debit_note_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
       #render :text => params[:search]
       @excel_so_customer_po_detail_report = SalesOrderItem.find(params[:so_ids])
-      respond_to do |format|
-        format.html
-        format.csv {render text: @excel_so_customer_po_detail_report.to_csv}
-        format.xls
-      end
+        respond_to do |format|
+          format.html
+          format.csv {render text: @excel_so_customer_po_detail_report.to_csv}
+          format.xls
+        end
       else
         redirect_to so_customer_po_detail_report_reports_path
-      end          
+      end
   end
 
   def excel_sales_order_summary_report
@@ -501,9 +502,52 @@ end
     end
   end
 
+  def pdf_credit_note_report
+    if params[:commit] == "PDF Report"
+      if params[:cn_ids].present?
+        @detail_credit_note_report = CreditNote.find(params[:cn_ids])
+        html = render_to_string(:layout => false , :action => "pdf_credit_note_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf , :filename => "pdf_credit_note_report.pdf",
+                                  :type => 'application/pdf' ,
+                                  :disposition => "attachement")
+        end
+      elsif params[:commit] == "Show"
+        if params[:cn_ids].present?
+          @detail_credit_note_report = CreditNote.find(params[:cn_ids])
+          respond_to do |format|
+            format.html
+        end
+      end
+      else
+        redirect_to credit_note_report_reports_path
+      end 
+  end
+
   def pdf_debit_note_report
-    render :text => "pdf_debit_note_report"
-  end 
+    if params[:commit] == "PDF Report"
+     if params[:dn_ids].present?
+        @detail_dedit_note_report = DebitNote.find(params[:dn_ids])
+        html = render_to_string(:layout => false , :action => "pdf_debit_note_report.html.erb")
+          @kit = PDFKit.new(html)
+          send_data(@kit.to_pdf , :filename => "pdf_debit_note_report.pdf",
+                                  :type => 'application/pdf' ,
+                                  :disposition => "attachement")
+        end
+    elsif params[:commit] == "Show"
+       if params[:dn_ids].present?
+          @detail_debit_note_report = DebitNote.find(params[:dn_ids])
+          respond_to do |format|
+            format.html
+        end
+      end
+    else
+        redirect_to dedit_note_report_reports_path
+    end 
+        
+
+  end
+
 
   # ======================================= end of pdf ============================================
 
@@ -554,7 +598,7 @@ end
 
 
   def pr_report
-    #@pr_report = PurchaseRequisition.search(params[:search])
+    @pr_report = PurchaseRequisition.search(params[:search])
     @show_pr_report = PurchaseRequisition.all
     #@take_ids = @show_pr_report.map(&:id)
   end

@@ -26,9 +26,9 @@
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
   <div class="fix_1600x900_h450">
-          <%#= form_tag pdf_debit_note_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+          <%= form_tag pdf_debit_note_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           
-          <table id="jdatatable" class="display" data-source="<%= inventory_report_reports_path(format: "json") %> ">
+          <table id="jdatatable" class="display" >
 
                     <thead>
                       <tr>
@@ -85,8 +85,8 @@
     </div>
 
     <div class="icon_tag" style="float:right;">
-        <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW) %>
-      <span><%= not_link_show %><%#= submit_tag "Show" , :class => "k-button" %></span>
+      <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_SHOW) %>
+      <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
       <% else %>
         <%= not_link_show %>
       <% end %>
@@ -94,10 +94,12 @@
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
 
-      <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT) %>
-        <span><%#= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_PRINT) %>
+        <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
       <% else %>
-        <% not_link_printable %>
+        <span><% not_link_printable %></span>
+      <% end %>
+
       <% end %>
 
       <%= link_close_button %>

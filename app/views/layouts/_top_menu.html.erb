@@ -166,9 +166,9 @@
           <li style="width:150px;">
             Received Note Report
             <ul>
-              <% if roles.include?(InventoryManagementSystem::INVENTORY_REPORT_MENU) %>
-              <% if roles.include?(InventoryManagementSystem::INVENTORY_REPORT) %>
-                <li><%= link_to "Received Note Report", rn_report_reports_path %></li>
+              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_REPORT_MENU) %>
+              <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_REPORT) %>
+                <li><%= link_to "Received Note Report", receive_note_report_reports_path %></li>
                 <% else %>
                 <li class="text_gray">Received Note Report</li>
                 <% end %>
@@ -278,19 +278,19 @@
 
           <% if roles.include?(InventoryManagementSystem::SALES_ORDER_REPORT_MENU) %>
               <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT) %>
-            <li><%= link_to "Cus Summary Report", so_summary_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Cus Summary Report", so_summary_report_reports_path %></li>
             <% else %>
               <li class="text_gray">Cus Summary Report</li>
             <% end %>
 
               <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
-            <li><%= link_to "Customer P/O Report", so_customer_po_detail_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Customer P/O Report", so_customer_po_detail_report_reports_path%></li>
             <% else %>
               <li class="text_gray">Cus P/O Report</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::SO_LISTING_REPORT) %>
-            <li><%= link_to "Sales Order Listing Report", so_listing_report_reports_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <li><%= link_to "Sales Order Listing Report", so_listing_report_reports_path %></li>
             <% else %>
               <li class="text_gray">SO Listing Report</li>
             <% end %>
@@ -1017,24 +1017,27 @@
 
          <li style="width:150px;">
           Account Report
-          <ul>
-            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
-              <li><%= link_to "Debit Note Report" , debit_note_report_reports_path %></li>
-            <%# else %>
-              <!-- <li class="text_gray">Debit Note Report</li> -->
-            <%# end %>
 
-            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
+          <ul>
+          <% if roles.include?(InventoryManagementSystem::ACCOUNT_REPORT_MENU) %>
+            <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT) %>
+              <li><%= link_to "Debit Note Report" , debit_note_report_reports_path %></li>
+            <% else %>
+              <li class="text_gray">Debit Note Report</li>
+            <% end %>
+
+            <% if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT) %>
              <li><%= link_to "Credit Note Report" , credit_note_report_reports_path %></li>
-            <%# else %>
-              <!-- <li class="text_gray">Debit Note Report</li> -->
-            <%# end %>
+            <% else %>
+              <li class="text_gray">Credit Note Report</li> 
+            <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
               <!--li><%#= link_to "Creditors / Debtors" %></li-->
             <%# else %>
               <li class="text_gray">Journel Report</li>
             <%# end %>
+            <% end %>
           </ul>
         </li>
       <%# end %>

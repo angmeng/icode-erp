@@ -1,6 +1,12 @@
-<%= title_head "Purchase Part ETA Inquire Report" %>
-<div id="popup_container">
-	<%= form_tag pdf_purchase_order_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+<%#= title_head "Purcahse Order Report" %>
+
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">Purcahse Order Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+
+<div id="tabify_listing">
+<%= form_tag pdf_purchase_order_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 <table id="jdatatable" class="display">
 	<thead>
@@ -68,4 +74,29 @@
 
     <% end %>
     <%= link_close_button %>
+</div>
+</div>
+
+<div id="tabify_search">
+	<br />	
+    <table>
+		<%= form_for @purchase_order_report, :url => purchase_order_report_reports_path do |f| %>
+      <tr>
+        <td>PR No.</td>
+        <td><%= f.text_field :po_no_gte, :size => 12 %> - 
+          <%= f.text_field :po_no_lte, :size => 12 %></td>
+        <td>Trade Company </td>
+        <td><%= f.text_field :trade_company_name_contains , :size => 10 %></td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td><%= f.text_field :po_date_gte, :size => 9 , :id=> "kendo_date" %> To 
+        <%= f.text_field :po_date_lte , :size => 9 , :id=> "kendo_date" %></td>
+      </tr>
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
+  <% end %>
 </div>

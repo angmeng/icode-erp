@@ -56,32 +56,46 @@
 
 
   <% if @detail_so_customer_po_detail_report.present? %>
-  <!-- <table>
+   <% @detail_so_customer_po_detail_report.each_with_index do |so , index| %>
+  <table>
     <tr>
-      <td>
-        Customer : Xxxx   Xxxxxxx<br/>
-        Xxxxx<br />
-        Xxxxx<br />
+      <td align="right">
+        Customer :
+        <br />
+        <br />
       </td>
-
-      <td>
-        Sales Order No. :Xxxxx <br />
-        Date            :Xxxxx <br />
-        Page            :Xxxxx <br />
-        Rev             :Xxxxx <br />
-        Term            :Xxxxx <br />
+      <td align="left">
+        <% so.trade_company.code rescue'-' %>/
+        <%= so.trade_company.address_1 rescue'-' %><br />
+        <%= so.trade_company.address_2 rescue'-' %><br />
+      </td>
+ 
+      <td align="right">
+        Sales Order No. :<br />
+        Date            :<br />
+        Page            :<br />
+        Rev             :<br />
+        Term            :<br />
+      </td>
+      <td align="left">
+        <%= so.sales_order_no rescue'-' %> <br />
+        <%= so.so_date.strftime("%d-%m-%Y") rescue'-' %> <br />
+        <%= index + 1 %> <br />
+        <%= so.revision rescue'-' %> <br />
+        <%= so.trade_term.name rescue'-' %><br />
       </td>
     </tr>
 
     <tr>
-      <td>Sales Rep : Xxxxx</td>
+      <td align="right">Sales Rep : </td>
+      <td><%= so.sales_rep rescue'-' %></td>
     </tr>
 
-  </table> -->
+  </table>
 <% arr = [] %>
   <table id="jgrid" class="black-line-table">
     <thead>
-      <% @detail_so_customer_po_detail_report.each do |so| %>
+     
       <tr class="header_line">
         <th>No.</th>
         <th>Prod Code</th>
@@ -105,9 +119,9 @@
         <td align="center"><%= soi.product.product_combobox.product_code rescue'-' %><br />
         <%= soi.lot_no rescue'-' %></td>
         <%# end %>
-        <td align="left"><%= soi.part_no rescue'-' %> <br /> 
-          <%= soi.product.desc rescue'-' %> <br />
-          <%= soi.product.product_category.parent.parent.desc rescue'-' %></td>
+        <td align="left"><%= soi.product.product_category.parent.parent.desc rescue'-' %><br /> 
+          <%= soi.product.desc rescue'-' %><br />
+          <%= soi.part_no rescue'-' %></td>
         <td align="center"><%= soi.quantity rescue'-' %></td>
         <td align="center"><%= soi.unit_price rescue'-' %> <%= soi.unit_measurement.code rescue'-' %></td>
         <td align="center"><%= iproduct(soi.quantity , soi.unit_price ) rescue'-' %></td>
@@ -118,29 +132,35 @@
          <% end %> 
       </tr>
       <tr style="border-top: 1px solid;">
-          <td colspan="7" align="right">Total :</td>
+          <td colspan="5" align="right">Total :</td>
           <td align="center"><%= two_precision(arr.sum) %></td>
       </tr>
 
-       <% end %>
+       <%# end %>
     </tbody>
+</table>
 
-    
-  </table>
+  <table>
+    <tr>
+      <td>Purchase By</td>
+      <td>Prepared By</td>
+      <td>Authorised By</td>
+    </tr>
+    <tr>
+      <td><br />..............</td>
+      <td><br />..............</td>
+      <td><br />..............</td>
+    </tr>
 
-  <!-- <p>
-        <a align="left"> Prepared & Checked By.</a>
-        <a align="center"> Approved By :</a>
-        <a align="right"> Received By : </a>
-      </p>
-
-      <p>
-        <a align="left">___________ </a>
-        <a align="center">____________</a>
-        <a align="right">___________</a>
-      </p> -->
-      
-    
+    <tr>
+      <td>111<%# a = User.find(pp.purchase_by) %>
+        <%#= a.name rescue'-' %></td>
+      <td>111<%# b = User.find(pp.request_by) %>
+        <%#= b.name rescue'-' %></td>
+      <td>B Y LIM </td>
+    </tr>
+    <% end %>
+  </table>    
 
   
   

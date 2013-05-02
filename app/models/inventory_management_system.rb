@@ -719,7 +719,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT         = 428
   ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT                = 429
   ACCOUNT_INVOICE_SUMMARY_REPORT                     = 430
-  ACCOUNT_CN_DN_OR_PERIOD_REPORT                     = 431
+  ACCOUNT_CN_DN_REPORT                               = 431
 
   #==== ==== ACTION ==== ==== 
   ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW    = 432
@@ -731,8 +731,8 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_INVOICE_SUMMARY_REPORT_SHOW                = 436
   ACCOUNT_INVOICE_SUMMARY_REPORT_PRINT               = 437
 
-  ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW                = 438
-  ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT               = 439
+  ACCOUNT_CN_DN_REPORT_SHOW                          = 438
+  ACCOUNT_CN_DN_REPORT_PRINT                         = 439
   
 
   #==== ==== LISTING REPORT ==== ====

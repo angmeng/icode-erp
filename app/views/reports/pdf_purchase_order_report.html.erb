@@ -5,7 +5,7 @@
 
 <% if @detail_purchase_order_report.present? %>
 	<div class="layout">
-	<h3>Purchase Order</h3>
+	<h4>Purchase Order</h4>
 	<table style="width:100%;">
 		<% @detail_purchase_order_report.each do |pp| %>
 		
@@ -46,7 +46,7 @@
 			</td>
 			<td align="left">
 				<%= pp.po_no rescue'-' %><br />
-				<%= pp.po_date rescue'-'  %><br />
+				<%= pp.po_date.strftime("%d-%m-%Y") rescue'-'  %><br />
 				<%= pp.trade_term.name rescue'-' %><br />
 				<%= pp.currency.name rescue'-' %><br />
 				<%= pp.revision rescue'-' %>
@@ -56,7 +56,7 @@
 			<td>Attn . :</td>
 		</tr>
 	</table>
-
+<div class="po_middle_layout">
 <table>
 	<thead>
 	<tr>
@@ -75,13 +75,12 @@
 		<td align="center"><%= index + 1 %></td>
 		<td align="center"><%= pr.product.product_combobox.product_code rescue'-'  %></td>
 		<td align="left"><%= pr.product.desc rescue'-' %></td>
-		<td align="center"><%= pr.eta rescue'-' %></td>
+		<td align="center"><%= pr.eta.strftime("%d-%m-%Y") rescue'-' %></td>
 		<td align="center"><%= pr.quantity rescue'-' %></td>
 		<td align="right"><%= pr.unit_price rescue'-' %></td>
 		<% arr << pr.quantity * pr.unit_price %>
 		<td align="right"><%= two_precision(pr.quantity * pr.unit_price ) rescue'-' %></td>
 		<% end %>
-		
 	</tr>
 	<tr>
 		<%# array << arr %>
@@ -110,6 +109,7 @@
 	</tr>
 	</tbody>
 </table>
+</div>
 
   
 
@@ -160,16 +160,22 @@ table {
 	font-size: 12px;
 }
 
+.po_middle_layout {
+	height:470px;
+	margin-right:20px;
+}
+
 .po_bottom_layout table{
  	width:100%;
 	border: 1px solid black;
+	margin-right: 20px;
 }
 .po_bottom_layout tr td{
 	border: 1px solid black;
 }
 
 .layout {
-	margin-top: 150px;
+	margin-top: 100px;
 }
 
 </style>

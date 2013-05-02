@@ -1,31 +1,13 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">Purchase requsition Report</strong></div>
-<!-- <div>
-  <%#= form_for @pr_report, :url => pr_report_reports_path  do |f| %>
-    <table>
-      <tr>
-        <td>PR No.</td>
-        <td><%#= f.text_field :pr_no_gte, :size => 12 %> - 
-          <%#= f.text_field :pr_no_lte, :size => 12 %></td>
-        <td>Status </td>
-        <td><%#= f.text_field :status_starts_with , :size => 10 %></td>
-      </tr>
-      <tr>
-        <td>Date</td>
-        <td><%#= f.text_field :requested_by_date_gte, :size => 9 , :id=> "kendo_date" %> To 
-        <%#= f.text_field :requested_by_date_lte , :size => 9 , :id=> "kendo_date" %></td>
-      </tr>
 
-      <tr>
-      <td><%#= f.submit "Search" %></td>
-       </tr>
-    </table>
-  <%# end %>
-</div> -->
+ <div align="center" class="title_head"><strong style="color:white;">Purchase requsition Report</strong></div>
 
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PR Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
-
-<div class="fix_1600x900_h450">
+<div id="tabify_listing">
+  <div class="fix_1600x900_h450">
     <!-- <fieldset> -->
     <%= form_tag pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
       <table id="jdatatable" class="display">
@@ -54,14 +36,9 @@
           </tr>
           <% end %>
         </tbody>
-
-      
-        
-
-        
     </table>
-  
-</div>
+  </div>
+
   <!-- </fieldset> -->
 
 
@@ -90,7 +67,34 @@
 
       <%= link_close_button %>
     </div>
+
 </div>
+
+<div id="tabify_search">
+  <%= form_for @pr_report, :url => pr_report_reports_path do |f| %>
+    <table>
+
+      <tr>
+        <td>PR No.</td>
+        <td><%= f.text_field :pr_no_gte, :size => 12 %> - 
+          <%= f.text_field :pr_no_lte, :size => 12 %></td>
+        <td>Status </td>
+        <td><%= f.text_field :status_starts_with , :size => 10 %></td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td><%= f.text_field :requested_by_date_gte, :size => 9 , :id=> "kendo_date" %> To 
+        <%= f.text_field :requested_by_date_lte , :size => 9 , :id=> "kendo_date" %></td>
+      </tr>
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
+  <% end %>
+</div>
+
+
    
 
 

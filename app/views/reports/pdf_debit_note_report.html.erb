@@ -1,0 +1,142 @@
+
+  <h2><u>Credit Note</u></h2>
+
+
+  <% if @detail_debit_note_report.present? %>
+  <% arr = [] %>
+        
+    <!-- it will take the choice of purchase requisition which related to pr_no -->
+    	<% @detail_debit_note_report.each_with_index do |dn , index| %>
+    	<table>
+      		<td>
+            <%= dn.trade_company.code rescue'-' %><br />
+            <%= dn.trade_company.name rescue'-' %><br />
+            <%= dn.trade_company.address_1 rescue'-' %><br />
+            <%= dn.trade_company.address_2 rescue'-' %><br />
+            <%= dn.trade_company.postcode_one %> <%= don.trade_company.city_one rescue'-' %>
+          </td>
+          <td align="right">
+            Credit Notes No :<br />
+            Date            :<br />
+            Page            :<br />
+            Currency        :<br />
+          </td>
+          <td>
+            <%= dn.debit_note_no rescue'-' %><br />
+            <%= dn.debit_note_date.strftime("%d/%m/%Y") rescue'-' %><br />
+             1 <br />
+             <%= dn.currency.name rescue'-' %>
+          </td>
+      	</table>
+        <br />
+
+      <table>
+        <thead>
+        <tr>
+          <th align="center">No.<br />--</th>
+          <th align="center">A/C ID<br />--------</th>
+          <th align="center">Particular<br />-------------------------------</th>
+          <th align="center">Amount<br />--------------</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td align="center"><%= index + 1 %></td>
+          <td align="center">AC No.</td>
+          <td align="left">description</td>
+          <td align="right"><%= dn.amount rescue'-' %></td>
+          <% arr << dn.amount %>
+        </tr>
+
+
+        <tr >
+          <% 2.times do |td| %><td></td><% end %>
+          <td align="right">===================<br />
+            Total Credited Amt :</td>
+          <td align="right"><%= two_precision(arr.sum) %></td>
+        </tr>
+
+        <tr>
+          <td align="left">Remarks :</td>
+          <td align="left"> XXxXXXXxxxx<br />
+          <%= dn.debit_note_date.strftime("%d/%m/%Y") %></td>
+          
+        </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tr>
+          <td>Prepared & Checked By</td>
+          <td>Confirmed By</td>
+          <td>Approved By</td>
+        </tr>
+        <br />
+        <br />
+        <tr>
+          <td>111<br />....................<br />
+            <%# a = User.find(cn.purchase_by) %>
+            <%#= a.name rescue'-' %></td>
+          <td>111<br />....................<br />
+            <%# a = User.find(cn.purchase_by) %>
+            <%#= a.name rescue'-' %></td>
+          <td>111<br />....................<br />By Ms.Lim</td>
+        </tr>
+      </table>
+      <% end %>
+    
+
+    <% else %>
+    no record had found ...
+    <% end %>
+
+<style>
+
+  table{
+    width:100%;
+  }
+  
+  body {
+    width:100%;
+    background-color: white;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+         
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+
+        }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+</style>

@@ -1,30 +1,10 @@
-<div class="title_head"><strong style="color:white;">RN (Part Summary) </strong></div>
 
-<!-- <div>
-    <%= form_for @rn_part_summary_report, :url => rn_part_summary_report_reports_path  do |f| %>
-      <table>
-        <tr>
-          <td>Part Code :</td>
-          <td><%#= f.text_field :, :size => 12 %> -
-            <%#= f.text_field :, :size => 12 %></td>
-          <td>Tarif Code </td>
-          <td><%#= f.text_field :tarif_code_sw , :size => 10 %></td>
-        </tr>
-        <tr>
-          <td>Invoice Period</th>
-          <td><%#= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
-          <%#= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
-        </tr>
-        
-        <tr>
-        <td><%= f.submit "Search" %></td>
-         </tr>
-      </table>
-  <%# end %>
-</div> -->
-
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">RN - Part Summary Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
-
+<div id="tabify_listing">
 <div class="fix_1600x900_h450">
 	<fieldset>
 	<!-- <table id="grid_h495" class="white-line-table zebraLight"> -->
@@ -82,3 +62,24 @@
 
 		   <%= link_close_button %>
 	</div>
+</div>
+
+<div id="tabify_listing">
+    <%= form_for @rn_part_summary_report, :url => rn_part_summary_report_reports_path  do |f| %>
+      <table>
+        <tr>
+          <td>Part Code :</td>
+          <td><%= f.text_field :vendor_part_no_contains, :size => 12 %></td>
+        </tr>
+        <tr>
+          <td>Invoice Period</th>
+          <td><%#= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
+          <%#= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
+        </tr>
+        
+        <tr>
+        <td><%= f.submit "Search" %></td>
+         </tr>
+      </table>
+  <% end %>
+</div>

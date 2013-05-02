@@ -1,27 +1,12 @@
-<div id="popup_container">
-<div class="title_head"><strong style="color:white;">Receive Note Report</strong></div>
 
-		<!-- <div>
-			<table>
-				<%= form_for @receive_note_report, :url => receive_note_report_reports_path  do |f| %>
-				<tr>
-					<td>Receive Note :</td>
-					<td><%= f.text_field :receive_note_no_gte ,:size => 9 %> - <%= f.text_field :receive_note_no_lte , :size => 9 %> </td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Vendor's D/O :</td>
-					<td><%= f.text_field :vendor_delivery_no_contains ,:size => 9 %></td>
-				</tr>
-				<tr>
-					<td><%= f.submit "Search" %></td>
-				</tr>
-				<% end %>
-			</table>
-		</div>
- -->
+
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">Receive Note Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+		
 		<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
-
+<div id="tabity_listing">
 		<div class="fix_1600x900_h450">
 			
 			<%= form_tag pdf_receive_note_report_reports_path , :method => "get" , :target => "_blank" do %>
@@ -78,6 +63,26 @@
 		   <%= link_close_button %>
 	</div>
 
+
+
+<div id="tabify_search">
+	<table>
+		<%= form_for @receive_note_report, :url => receive_note_report_reports_path  do |f| %>
+		<tr>
+			<td>Receive Note :</td>
+			<td><%= f.text_field :receive_note_no_gte ,:size => 9 %> - <%= f.text_field :receive_note_no_lte , :size => 9 %> </td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Vendor's D/O :</td>
+			<td><%= f.text_field :vendor_delivery_no_contains ,:size => 9 %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit "Search" %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
 	
 
 
