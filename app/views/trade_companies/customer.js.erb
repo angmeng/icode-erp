@@ -1,5 +1,0 @@
-<% if @customers.present? %>
-  $("#list_customers").html("<%= escape_javascript(render(@customers)) %>");
-<% else %>
-  $("#list_customers").html("");
-<% end %>

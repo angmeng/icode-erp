@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430071730) do
+ActiveRecord::Schema.define(:version => 20130503083621) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.datetime "updated_at",                                                                  :null => false
     t.date     "do_date"
     t.string   "status",                                                :default => "Active"
+    t.boolean  "authorize_print",                                       :default => false
     t.integer  "sales_tax_exemption_id"
   end
 
@@ -546,7 +547,6 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "product_category_id"
-    t.integer  "copied_no",           :default => 0
   end
 
   add_index "product_running_numbers", ["product_category_id"], :name => "index_product_running_numbers_on_product_category_id"
@@ -631,6 +631,7 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.string   "category"
     t.string   "window_code"
     t.string   "revision"
+    t.integer  "copied_no",                                                    :default => 0
   end
 
   add_index "products", ["sales_tax_exemption_id"], :name => "index_products_on_sales_tax_exemption_id"
@@ -688,7 +689,6 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.text     "remark"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
-    t.string   "status"
     t.string   "trade_company_new_name"
     t.integer  "user_id"
     t.boolean  "maintenance",             :default => false
@@ -696,6 +696,7 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.boolean  "approval_proposed",       :default => false
     t.string   "approval_remark"
     t.boolean  "urgent",                  :default => false
+    t.string   "status"
     t.boolean  "skip_to_purchase_order",  :default => false
   end
 
@@ -706,7 +707,6 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
 
   create_table "purchase_requisitions", :force => true do |t|
     t.integer  "pr_no"
-    t.string   "status"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "requested_by"
@@ -719,6 +719,7 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.date     "approved_by_level_five_date"
     t.string   "remark"
     t.integer  "tasks"
+    t.string   "status"
     t.string   "recover_status"
     t.integer  "department_id"
   end
@@ -1219,12 +1220,12 @@ ActiveRecord::Schema.define(:version => 20130430071730) do
     t.datetime "updated_at",                                   :null => false
     t.string   "name"
     t.integer  "department_id"
-    t.integer  "level"
-    t.string   "status",                 :default => "ACTIVE"
     t.string   "job_title"
+    t.integer  "level"
     t.boolean  "admin",                  :default => false
     t.integer  "level_two"
     t.integer  "level_three"
+    t.string   "status",                 :default => "ACTIVE"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

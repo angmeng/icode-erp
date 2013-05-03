@@ -933,6 +933,7 @@ function datarow_all_attributes(tr){
     // Sales Order, Unit Price will join with Delivery Order
     string_last_number(tr, '[id^=um_code]');    // for sales order and sales tax exemption
     string_last_number(tr, '[id^=partCode]');
+    string_last_number(tr, '[id^=lotNo]');
 
     // Delivery Order     cur_stock_0
     string_last_number(tr, '[id^=so_date]');

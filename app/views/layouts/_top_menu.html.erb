@@ -548,11 +548,11 @@
         <li>
           Product ID
           <ul>
-              <%# if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION) %>
+              <% if roles.include?(InventoryManagementSystem::LISTING_PRODUCT_ID) %>
                 <li><%= link_to "Listing Product ID", product_comboboxes_path %></li>
-              <%# else %>
-                <!--li class="text_gray">Listing Products</li-->
-              <%# end %>
+              <% else %>
+                <li><%= disabled_menu_style "Listing Product ID" %></li>
+              <% end %>
             
               <% unless action_name == "no_product_id" %>
                 <% if roles.include?(InventoryManagementSystem::PRODUCT_NON_OPERATION) %>

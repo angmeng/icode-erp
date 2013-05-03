@@ -20,6 +20,8 @@
       <td><b>Old Product ID</b></td>
       <td><%= f.text_field :old_product_code_contains, :class => "k-textbox" %></td>
     </tr>
+    <tr>
+      <td colspan="2" align="right"><%= f.submit "Search", :class => "k-button" %></td>
+    </tr>
   </table>
-  <%= search_button_with_f(f) %>
 <% end %>

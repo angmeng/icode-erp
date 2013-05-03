@@ -124,7 +124,8 @@ class ProductCategoriesController < ApplicationController
   def copy
     @product_category = ProductCategory.find(params[:id])
     ProductManagement.generate_copying(@product_category)
-    redirect_to @product_category, notice: 'You were successfully duplicated new Product ID.'
+    flash[:notice] = "The Product ID was duplicated successfully."
+    goto_direction(@product_category)
   end
   
   #new folder is ok

@@ -210,8 +210,9 @@ class ProductManagement
             InventoryHistory.transaction do
               
               if product_category.is_file?
-                self.base_and_sub_name(product_category.parent)
-                new_cp_no = @manage_product[:running_no].copied_no.to_i + 1
+#                self.base_and_sub_name(product_category.parent)
+#                new_cp_no = @manage_product[:running_no].copied_no.to_i + 1
+                new_cp_no = product_category.product.copied_no.to_i + 1 if product_category.product.present?
 
                 @copy_product_category = product_category.dup
                 @copy_product_category.code = "#{@copy_product_category.code}-#{new_cp_no}"
@@ -238,7 +239,7 @@ class ProductManagement
                   end
                 end
 
-                @manage_product[:running_no].update_attributes!(:copied_no => new_cp_no)
+                product_category.product.update_attributes!(:copied_no => new_cp_no) if product_category.product.present?
               end
               
             end

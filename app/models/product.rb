@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
                   :size, :model_no, :reorder_no, :art_no, :ref_no, :work_order_no, :mfg_date, :exp_date, :film_no, :bar_code,
                   :item_code, :part_code, :pantone_code, :color, :serial_no, :warranty, :capacity, :diameter,
                   :voltage, :watt, :pin, :ampere, :hp, :hz, :pureness, :ton, :consignee, :destination, :process, :status, :buffer_stock, :lot_no, :mould_no,
-                  :sales_tax_exemption_barang_id, :category, :window_code, :revision,:current_price
+                  :sales_tax_exemption_barang_id, :category, :window_code, :revision,:current_price, :copied_no
   
   belongs_to :product_category
   belongs_to :unit_measurement
@@ -26,7 +26,6 @@ class Product < ActiveRecord::Base
   has_many   :price_control_items, :dependent => :destroy
   has_many   :purchase_requisition_items
   has_many   :inventory_histories, :dependent => :destroy
-  has_many   :sales_tax_exemption_items, :dependent => :destroy
   has_many   :packing_quantities, :dependent => :destroy
   
 #  has_many :product_vendors, :dependent => :destroy

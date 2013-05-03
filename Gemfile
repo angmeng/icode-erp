@@ -25,7 +25,6 @@ group :development do
 end
 
 gem 'jquery-rails', "2.1.4"
-#gem 'jquery-rails'
 gem "devise", "~> 2.1.0"
 gem "devise-encryptable"
 gem "omniauth"
@@ -47,7 +46,7 @@ gem "omniauth"
 
 gem 'rabl'
 gem "will_paginate"
-gem "pdfkit"
+gem "pdfkit", "0.5.2"
 gem "squeel"
 gem "meta_search"
 gem "paperclip"
