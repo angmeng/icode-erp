@@ -2,7 +2,7 @@ class CreditNote < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :account_id, :amount, :credit_note_date, :credit_note_no, :credit_type, :updated_by, :trade_company_id, :currency_id, :status_id
+  attr_accessible :account_id, :amount, :credit_note_date, :credit_note_no, :credit_type, :updated_by, :trade_company_id, :currency_id, :status_id, :remark
   
   validates :credit_note_no, :amount, :credit_note_date, :credit_type, :updated_by, :trade_company_id, :currency_id, :presence => true
   

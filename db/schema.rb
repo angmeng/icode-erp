@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20130503083621) do
     t.integer  "status_id",                                       :default => 1
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
+    t.text     "remark"
   end
 
   add_index "credit_notes", ["currency_id"], :name => "index_credit_notes_on_currency_id"
@@ -248,6 +249,7 @@ ActiveRecord::Schema.define(:version => 20130503083621) do
     t.integer  "account_id"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
+    t.text     "remark"
   end
 
   add_index "debit_notes", ["currency_id"], :name => "index_debit_notes_on_currency_id"
