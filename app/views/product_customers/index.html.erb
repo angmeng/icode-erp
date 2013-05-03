@@ -4,7 +4,7 @@
 <% if @product_customers.present? %>
   <div class="table_background"><%= render "customer_price_listing", :lists => @product_customers %></div>
 <% else %>
-  <div class="content">Not Record Found</div>
+  <div class="searching_content">Not Record Found</div>
 <% end %>
   
 <%= render "action_index" %>

@@ -28,9 +28,11 @@ $(document).ready(function () {
     var searching_height        = $("#searching").height();
     var title_height            = $(".title_head").height();
     var button_height           = $(".icon_tag").height();
+    var quick_tip               = $("#bottom_quick_tip").height();
     
     // Wrapper is calculate the height only available when without popup
     var wrapper_height           = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
+    var wrapper_quick_tip        = wrapper_height - quick_tip - 50;
     var content_height           = wrapper_height - title_height - button_height - 12;
     var tabify_content_height    = wrapper_height - tabify_height - button_height - 12;    
     var linking_content_height   = wrapper_height - linking_height - title_height - button_height - 13;
@@ -38,6 +40,9 @@ $(document).ready(function () {
 
     // It is for normal page for without popup
     $("#main_wrapper").css({ 'height': wrapper_height }).addClass("page_wrapper"); 
+    
+    // It is Home Page
+    $("#top_quick_tip").css({ 'height': wrapper_quick_tip }).addClass("page_wrapper");
     
     // It is for .content
     $(".content").css({ 'height': content_height }).addClass("page_wrapper");
@@ -120,10 +125,10 @@ $(document).ready(function () {
     // IFRAME
     $(".iframe_1600x900").fancybox({
         padding     : 5,
-        maxWidth    : $(window).width() - 50,
-        maxHeight   : $(window).height() - 50,
-        width       : $(window).width(),
-        height      : $(window).height(),
+        maxWidth    : 1600,
+        maxHeight   : 900,
+        width       : "100%",
+        height      : "100%",
         fitToView   : false,
         autoSize    : false,
         closeClick  : false,
@@ -133,98 +138,98 @@ $(document).ready(function () {
     });
     
     $(".iframe_800x450").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 450,
-            width	: '100%',
-            height	: '100%',
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
+        padding     : 5,
+        maxWidth    : 800,
+        maxHeight   : 450,
+        width       : '100%',
+        height      : '100%',
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic',
+        afterClose  : function() {location.reload();return false;}
     });
     
     $(".iframe_800x600").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 600,
-            width	: '100%',
-            height	: '100%',
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
+        padding     : 5,
+        maxWidth    : 800,
+        maxHeight   : 600,
+        width       : '100%',
+        height      : '100%',
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic',
+        afterClose  : function() {location.reload();return false;}
     });
     
     $(".iframe_1024x800").fancybox({
-            padding     : 5,
-            maxWidth	: 1024,
-            maxHeight	: 800,
-            width	: '100%',
-            height	: '100%',
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic',
-            afterClose  : function() {location.reload();return false;}
+        padding     : 5,
+        maxWidth    : 1024,
+        maxHeight   : 800,
+        width       : '100%',
+        height      : '100%',
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic',
+        afterClose  : function() {location.reload();return false;}
     });
     
     // IFRAME WITHOUT REFRESH
     $(".show_without_refresh_page_1600x900").fancybox({
-            padding     : 5,
-            maxWidth	: $(window).width() - 50,
-            maxHeight	: $(window).height() - 50,
-            width	: $(window).width(),
-            height	: $(window).height(),
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
+        padding     : 5,
+        maxWidth    : 1600,
+        maxHeight   : 900,
+        width       : "100%",
+        height      : "100%",
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic'
     });
     
     $(".show_without_refresh_page_800x450").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 450,
-            width	: '100%',
-            height	: '100%',
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
+        padding     : 5,
+        maxWidth    : 800,
+        maxHeight   : 450,
+        width       : '100%',
+        height      : '100%',
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic'
     });
     
     $(".show_without_refresh_page_800x600").fancybox({
-            padding     : 5,
-            maxWidth	: 800,
-            maxHeight	: 600,
-            width	: '100%',
-            height	: '100%',
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
+        padding     : 5,
+        maxWidth    : 800,
+        maxHeight   : 600,
+        width       : '100%',
+        height      : '100%',
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic'
     });
     
     $(".show_without_refresh_page_1024x800").fancybox({
-            padding     : 5,
-            maxWidth	: 1024,
-            maxHeight	: 800,
-            width	: '100%',
-            height	: '100%',
-            fitToView	: false,
-            autoSize	: false,
-            closeClick	: false,
-            openEffect	: 'elastic',
-            closeEffect	: 'elastic'
+        padding     : 5,
+        maxWidth    : 1024,
+        maxHeight   : 800,
+        width       : '100%',
+        height      : '100%',
+        fitToView   : false,
+        autoSize    : false,
+        closeClick  : false,
+        openEffect  : 'elastic',
+        closeEffect : 'elastic'
     });
 
     // When it is popup...
@@ -246,15 +251,17 @@ $(document).ready(function () {
             $(".popup_form_table").css({ 'height': popup_form_table_height }).addClass("page_wrapper"); 
             
             // IMS - User Account
-            $("#name_entry").height(popup_tab_height).addClass("page_wrapper");
+            $("#name_entry, #ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_account, #ims_report_1,#ims_report_2, #ims_report_3").height(popup_tab_height).addClass("page_wrapper");
             $(".quotation").height(popup_tab_height_and_signature).addClass("page_wrapper");
             
             // Popup Tabbing Table -- IMS
-            $("#ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_report, #ims_account").chromatable({
-                width:  "-20",
-                height: popup_tab_height,
-                scrolling: "yes"
-            });
+//            $("#ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_report, #ims_account").chromatable({
+//                width:  $("#user_strip").width() - 50,
+//                height: popup_tab_height,
+//                scrolling: "yes"
+//            });
+
+//            $("#user_strip").css("height", popup_tab_height)
             
             // Popup Tabbing Table -- IMS
             $(".jgrid_popup").chromatable({
@@ -262,8 +269,6 @@ $(document).ready(function () {
                 height: popup_form_table_height,
                 scrolling: "yes"
             });
-
-            
     }, 500);
 });
 

@@ -1,13 +1,18 @@
-<div class="title_head">
-  <strong style="color: white;">LISTING PRODUCT ID</strong>
-  <%= search_button %>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISTING PRODUCT ID</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+
+<div id="tabify_listing">
+  <% if @product_comboboxes.present? %>
+    <div class="table_background"><%= render "listing_comboboxes", :combobox => @product_comboboxes %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
 </div>
-<div class="search_engine"><%= render "search_combobox" %></div>
 
-<% if @product_comboboxes.present? %>
-  <div class="table_background"><%= render "listing_comboboxes", :combobox => @product_comboboxes %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
-
+<div id="tabify_search">
+  <%= render "search_combobox" %>
+</div>
+  
 <%= render "action_combobox" %>

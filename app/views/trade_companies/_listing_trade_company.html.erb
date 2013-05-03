@@ -1,19 +1,38 @@
-<table id="jgrid" class="zebraLight">
-  <tr class="header_line">
-    <th class="check_highlight"></th>
-    <th>Code</th>
-    <th>Company Name</th>
-    <th>Phone No.</th>
-    <th>Email</th>
-  </tr>
-      
-  <% trade_company.each do |tc| %>
-    <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= tc.id %>">
-      <td></td>
-      <td align="center"><%= tc.code rescue '-' %></td>
-      <td><%= tc.name rescue '-' %></td>
-      <td align="center"><%= tc.tel_area_code_one %>-<%= tc.tel_no_1 %></td>
-      <td align="center"><%= tc.email rescue'-' %></td>
+<table id="tabify_datatable" class="zebraLight display">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Code</th>
+      <th>Company Name</th>
+      <th>Phone No.</th>
+      <th>Fax No.</th>
+      <th>Email</th>
+      <th>Contact Person</th>
     </tr>
-  <% end %>
+  </thead>
+  
+  <tbody>
+    <% trade_company.each do |tc| %>
+      <tr controllerName="<%= controller_name %>" rowsId="<%= tc.id %>">
+        <td></td>
+        <td align="center"><%= tc.code rescue '-' %></td>
+        <td><%= tc.name rescue '-' %></td>
+        <td>
+          <%= tc.tel_area_code_one rescue '-' %>-<%= tc.tel_no_1 rescue '-' %> 
+          <% unless tc.tel_no_2.blank? %>
+            / <%= tc.tel_area_code_two rescue '-' %>-<%= tc.tel_no_2 rescue '-' %>
+          <% end %>
+        </td>
+        <td>
+          <% if tc.fax_no.present? %>
+            <%= tc.fax_area_code rescue '-' %>-<%= tc.fax_no rescue '-' %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td><%= tc.email rescue'-' %></td>
+        <td><%= tc.contact_person rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

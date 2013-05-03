@@ -348,6 +348,9 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   PRODUCT_MENU                                       = 121
   
+  LISTING_PRODUCT_ID                                 = 544
+  LISTING_PRODUCT_ID_SHOW                            = 545
+  
   PRODUCT_NON_OPERATION                              = 139
   KIV_PRODUCT_NON_OPERATION                          = 212 
   PRODUCT_OPERATION                                  = 140
@@ -509,7 +512,7 @@ class InventoryManagementSystem < ActiveRecord::Base
     
 
     
-  #start at 299, jump to 544
+  #start at 299, jump to 546
   
   
 

@@ -1,28 +1,30 @@
-<table id="ims_sale" class="normal_table_black zebraLight">
-  <thead>
-    <tr class="header_line">
-      <th class="check_highlight"></th>
-      <th width="160">MODULE</th>
-      <th width="200">SUB-MODULE</th>
-      <th width="50">Add</th>
-      <th width="50">Show</th>
-      <th width="50">Edit</th>
-      <th width="50">Drop To KIV</th>
-      <th width="50">Printer</th>
-      <th width="50">Show KIV</th>
-      <th width="50">Recover</th>
-      <th width="50">Send Mail</th>
-      <th width="50">Costing Sheet</th>
-    </tr>
-    <tr style="background-color: black;"><td colspan="100"></td></tr>
-  </thead>
-  
-  <tbody>
-    <!--SALES-->
-    <%= render "/inventory_management_systems/ims_quotation_requisition", :checkboxes => @checkboxes %>
-    <tr style="background-color: black;"><td colspan="100"></td></tr>
-    <%= render "/inventory_management_systems/ims_sales_order", :checkboxes => @checkboxes %>
-    <tr style="background-color: black;"><td colspan="100"></td></tr>
-    <%= render "/inventory_management_systems/ims_delivery_order", :checkboxes => @checkboxes %>
-  </tbody>
-</table>
+<div id="ims_sale">
+  <table class="normal_table_black zebraLight">
+    <thead>
+      <tr class="header_line">
+        <th class="check_highlight"></th>
+        <th width="200">MODULE</th>
+        <th width="200">SUB-MODULE</th>
+        <th width="50">Add</th>
+        <th width="50">Show</th>
+        <th width="50">Edit</th>
+        <th width="50">Drop To KIV</th>
+        <th width="50">Printer</th>
+        <th width="50">Show KIV</th>
+        <th width="50">Recover</th>
+        <th width="50">Send Mail</th>
+        <th width="50">Costing Sheet</th>
+      </tr>
+      <tr style="background-color: black;"><td colspan="100"></td></tr>
+    </thead>
+
+    <tbody>
+      <!--SALES-->
+      <%= render "/inventory_management_systems/ims_quotation_requisition", :checkboxes => @checkboxes %>
+      <tr style="background-color: black;"><td colspan="100"></td></tr>
+      <%= render "/inventory_management_systems/ims_sales_order", :checkboxes => @checkboxes %>
+      <tr style="background-color: black;"><td colspan="100"></td></tr>
+      <%= render "/inventory_management_systems/ims_delivery_order", :checkboxes => @checkboxes %>
+    </tbody>
+  </table>
+</div>

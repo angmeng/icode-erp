@@ -335,7 +335,7 @@
         var validator = $("#valid_company").kendoValidator().data("kendoValidator");
 
         $("#left_save_button, #save_button").click(function() {
-            if (validator.validate()) {}
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
     });
