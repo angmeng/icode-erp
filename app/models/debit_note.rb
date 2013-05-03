@@ -2,7 +2,7 @@ class DebitNote < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :account_id, :currency_id, :debit_note_date, :debit_note_no, :debit_type, :status_id, :trade_company_id, :updated_by, :amount
+  attr_accessible :account_id, :currency_id, :debit_note_date, :debit_note_no, :debit_type, :status_id, :trade_company_id, :updated_by, :amount, :remark
   
   validates :currency_id, :debit_note_date, :debit_note_no, :debit_type, :trade_company_id, :updated_by, :amount, :presence => true
   

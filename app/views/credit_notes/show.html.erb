@@ -22,6 +22,10 @@
       <td><b>Amount</b></td>
       <td><%= four_precision(@credit_note.amount) %></td>
     </tr>
+    <tr>
+      <td style="vertical-align: top;"><b>Remark</b></td>
+      <td colspan="2"><%= simple_format(@credit_note.remark) rescue '-' %></td>
+    </tr>
   </table>
 </div>
 <div class="icon_tag">
