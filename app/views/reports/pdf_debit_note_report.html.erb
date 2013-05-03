@@ -43,7 +43,7 @@
         <tr>
           <td align="center"><%= index + 1 %></td>
           <td align="center">AC No.</td>
-          <td align="left">description</td>
+          <td align="left"><%= dn.debit_type rescue'-' %></td>
           <td align="right"><%= dn.amount rescue'-' %></td>
           <% arr << dn.amount %>
         </tr>
@@ -58,7 +58,7 @@
 
         <tr>
           <td align="left">Remarks :</td>
-          <td align="left"> XXxXXXXxxxx<br />
+          <td align="left"><%= dn.remark rescue'-' %><br />
           <%= dn.debit_note_date.strftime("%d/%m/%Y") %></td>
           
         </tr>
@@ -74,9 +74,9 @@
         <br />
         <br />
         <tr>
-          <td>111<br />....................<br />
-            <%# a = User.find(cn.purchase_by) %>
-            <%#= a.name rescue'-' %></td>
+          <td><br />....................<br />
+            <% a = User.find(dn.updated_by) %>
+            <%= a.name rescue'-' %></td>
           <td>111<br />....................<br />
             <%# a = User.find(cn.purchase_by) %>
             <%#= a.name rescue'-' %></td>

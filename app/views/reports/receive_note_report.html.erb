@@ -52,30 +52,30 @@
 
 	   <% end %>
 
-	   <%= link_close_button %>
+	   <span><%= link_close_button %></span>
 	</div>
 </div>
 
 
 
-<div id="tabify_search">
+<!-- <div id="tabify_search">
 	<table>
-		<%= form_for @receive_note_report, :url => receive_note_report_reports_path  do |f| %>
+		<%#= form_for @receive_note_report, :url => receive_note_report_reports_path  do |f| %>
 		<tr>
 			<td>Receive Note :</td>
-			<td><%= f.text_field :receive_note_no_gte ,:size => 9 %> - <%= f.text_field :receive_note_no_lte , :size => 9 %> </td>
+			<td><%#= f.text_field :receive_note_no_gte ,:size => 9 %> - <%#= f.text_field :receive_note_no_lte , :size => 9 %> </td>
 			<td></td>
 		</tr>
 		<tr>
 			<td>Vendor's D/O :</td>
-			<td><%= f.text_field :vendor_delivery_no_contains ,:size => 9 %></td>
+			<td><%#= f.text_field :vendor_delivery_no_contains ,:size => 9 %></td>
 		</tr>
 		<tr>
-			<td><%= f.submit "Search" %></td>
+			<td><%#= f.submit "Search" %></td>
 		</tr>
-		<% end %>
+		<%# end %>
 	</table>
-</div>
+</div> -->
 	
 
 
