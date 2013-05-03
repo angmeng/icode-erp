@@ -1,33 +1,11 @@
-<div id="popup_container">
-<div class="title_head"><strong style="color:white;">Sales Order Summary Report</strong></div>
-  
-  <!-- <div>
-  <%#= form_for @sales_order_summary_report, :url => sales_order_summary_report_reports_path  do |f| %>
-    <table>
-      <tr>
-        <td>Trade Company Code :</td>
-        <td><%#= f.text_field :trade_company_code_contains, :size => 12 %>
-
-        <td>Trade Company Name :</td>
-      	<td><%#= f.text_field :trade_company_name_contains , :size => 12 %></td>
-      </tr>
-
-      <tr>
-      	
-      	<td>Customer P/O :</td>
-        <td><%#= f.text_field :customer_po_contains , :size => 10 %></td>
-      </tr>
-
-      <tr>
-      <td><%#= f.submit "Search" %></td>
-       </tr>
-    </table>
-  <%# end %>
-</div> -->
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">SO Summary Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
 
 
   <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
-
+<div id="tabify_listing">
       <div class="fix_1600x900_h450">
       	<%= form_tag pdf_sales_order_summary_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
       	<table id="jdatatable" class="display" >
@@ -44,19 +22,16 @@
       		<tr class="<%= cycle("odd_line", "even_line") %>">
       			<% @show_sales_order_summary_report.each do |so| %>
             <td align="center"><%= check_box_tag "sos_ids[]" , so.id %></td>
-            <td align="center"><%= so.trade_company.code %></td>
-      			<td align="center"><%= so.sales_order_no rescue'-' %></td>
-      			<td align="center"><%= so.sales_rep rescue'-'%></td>
-            <td align="center"><%= so.trade_term.name rescue'-' %></td>
+            <td align="center"><%= so.sales_order.trade_company.code %></td>
+      			<td align="center"><%= so.sales_order.sales_order_no rescue'-' %></td>
+      			<td align="center"><%= so.sales_order.sales_rep rescue'-'%></td>
+            <td align="center"><%= so.sales_order.trade_term.name rescue'-' %></td>
       		</tr>
-            <% end %>
-          
+          <% end %>
           </tbody>
-          
   	</table>
 	</div>
 
-</div>
 
   <div class="icon_tag" style="float:left">
     <%# if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT_EXCEL) %>
@@ -87,4 +62,28 @@
 
       <%= link_close_button %>
   </div>
+</div>
+
+
+<div id="tabify_search">
+  <%= form_for @sales_order_summary_report, :url => so_summary_report_reports_path  do |f| %>
+    <table>
+      <tr>
+        <td>Trade Company Code :</td>
+        <td><%= f.text_field :sales_order_trade_company_code_contains, :size => 12 %>
+        <td>Trade Company Name :</td>
+        <td><%= f.text_field :sales_order_trade_company_name_contains , :size => 12 %></td>
+      </tr>
+
+      <tr>
+        <td>Customer P/O :</td>
+        <td><%= f.text_field :customer_po_contains , :size => 10 %></td>
+      </tr>
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
+  <% end %>
+</div>
 

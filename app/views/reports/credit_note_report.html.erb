@@ -54,7 +54,7 @@
     </div>
 
     <div class="icon_tag" style="float:right;">
-        <%# if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_SHOW) %>
+        <%# if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_SHOW) %>
       <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
       <%# else %>
         <%#= not_link_show %>
@@ -63,7 +63,7 @@
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
 
-      <%# if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_OR_PERIOD_REPORT_PRINT) %>
+      <%# if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_PRINT) %>
         <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
       <%# else %>
         <%# not_link_printable %>

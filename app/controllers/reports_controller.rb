@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :so_summary_report , 
-  :po_listing_vendor_report , :debit_note_report]
+  :po_listing_vendor_report , :debit_note_report , :receive_note_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -620,8 +620,8 @@ end
   end
 
   def sales_tax_exemption_report
-    @sales_tax_exemption = SalesTaxExemption.search(params[:search])
-    @show_sales_tax_exemption_report = @sales_tax_exemption.all
+    @sales_tax_exemption_report = SalesTaxExemption.search(params[:search])
+    @show_sales_tax_exemption_report = @sales_tax_exemption_report.all
     #@take_ids = @show_sale_tax_exemption_report.map(&:id)
   end
 
@@ -652,7 +652,7 @@ end
   # end
 
   def so_summary_report
-    @sales_order_summary_report = SalesOrder.search(params[:search])
+    @sales_order_summary_report = SalesOrderItem.search(params[:search])
     @show_sales_order_summary_report = @sales_order_summary_report.all
   end
 
@@ -669,8 +669,8 @@ end
   end
 
   def do_summary_report
-    @delivery_order_summary_report = DeliveryOrder.search(params[:search])
-    @show_delivery_order_summary_report = @delivery_order_summary_report.all
+    @do_summary_report = DeliveryOrder.search(params[:search])
+    @show_delivery_order_summary_report = @do_summary_report.all
   end
 
   def so_listing_report

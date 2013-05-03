@@ -1,6 +1,6 @@
 class HistoryInvoicesController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox"
+  layout "sheetbox", :except => [:index]
 
   # GET /history_invoices
   # GET /history_invoices.json

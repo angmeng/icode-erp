@@ -1,11 +1,9 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">Purchase Order Listing Report</strong></div>
-
-<!-- <ul id="j_tabify" class="class_tabify">
-  <li class="active"><a href="#tabify_listing">Purchase Order Listing</a></li>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PO Listing Vendor</a></li>
   <li><a href="#tabify_search">SEARCH ENGINE</a></li>
-</ul> -->
+</ul>
 
+<div id="tabify_listing">
 <div class="fix_1600x900_h450">
     <!-- <fieldset> -->
     <%= form_tag pdf_po_listing_vendor_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
@@ -71,7 +69,25 @@
       <%= link_close_button %>
     </div>
 </div>
-   
+
+<div id="tabify_search">
+  <%= form_for @po_listing_vendor_report, :url => po_listing_vendor_report_reports_path do |f| %>
+    <table>
+      <tr>
+        <td>Purchase Order</td>
+        <td><%= f.text_field :po_no_gte, :size => 9 %> - 
+          <%= f.text_field :po_no_lte , :size => 9 %></td>
+        <td>Trade Company Name</td>
+        <td><%= f.text_field :trade_company_name_contains , :size => 12 %></td>
+      </tr>
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
+  <% end %>
+</div>
+
 
 
 

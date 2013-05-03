@@ -1,32 +1,11 @@
-<div class="title_head"><strong style="color:white;">Sales tax exemption </strong></div>
-
-<!-- <div>
-    <%#= form_for @sales_tax_exemption, :url => sales_tax_exemption_report_reports_path  do |f| %>
-      <table>
-        <tr>
-          <td>Sales Tax Exemption :</td>
-          <td><%#= f.text_field :sales_tax_exemption_no_sw, :size => 12 %> To
-            <%#= f.text_field :sales_tax_exemption_no_ew, :size => 12 %></td>
-          <td>Tarif Code </td>
-          <td><%#= f.text_field :tarif_code_sw , :size => 10 %></td>
-        </tr>
-        <tr>
-          <td>Invoice Period</th>
-          <td><%#= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
-          <%#= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
-        </tr>
-        
-        <tr>
-        <td><%#= f.submit "Search" %></td>
-         </tr>
-      </table>
-  <%# end %>
-</div> -->
-
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">Sales Tax Exemption Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
 
+<div id="tabify_listing">
 <div class="fix_1600x900_h450">
-	
 	<%= form_tag pdf_sales_tax_exemption_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
 	<table id="jdatatable" class="display">
 	<thead>
@@ -58,7 +37,7 @@
 		<% end %>
 	</tbody>
 	</table>
-</div>
+
 
 	<div class="icon_tag" style="float:left">
 		<% if roles.include?(InventoryManagementSystem::CUSTOM_EXEMPTION_SUMMARY_REPORT_EXCEL) %>
@@ -86,5 +65,32 @@
    		<% end %>
    		<%= link_close_button %>
 	</div>
+  </div>
+</div>
+
+<div id="tabify_search">
+    <%= form_for @sales_tax_exemption_report, :url => sales_tax_exemption_report_reports_path  do |f| %>
+      <table>
+        <tr>
+          <td>Sales Tax Exemption No:</td>
+          <td><%= f.text_field :sales_tax_exemption_no_sw, :size => 12 %> To
+            <%= f.text_field :sales_tax_exemption_no_ew, :size => 12 %></td>
+          <td>Tarif Code:</td>
+          <td><%= f.text_field :tarif_code_sw , :size => 10 %></td>
+        </tr>
+        <tr>
+          <td>Invoice Period:</th>
+          <td><%= f.text_field :period_start_gte, :size => 9 , :id=> "kendo_date" %> To 
+          <%= f.text_field :period_end_lte , :size => 9 , :id=> "kendo_date" %></td>
+          <td>Trade Company:</td>
+          <td><%= f.text_field :trade_company_name_contains, :size => 12 %></td>
+        </tr>
+        
+        <tr>
+        <td><%= f.submit "Search" %></td>
+         </tr>
+      </table>
+  <% end %>
+</div>
 
 

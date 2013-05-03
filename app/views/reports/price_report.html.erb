@@ -1,10 +1,69 @@
-<div id="popup_container">
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">Price Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
 
-<div class="title_head"><strong style="color:white;">Price Report</strong></div>
+<div id="tabify_listing">
+<div class="fix_1600x900_h450">
+	<fieldset>
+	<table id="jdatatable" class="display" >
+		<thead>
+			<tr class="head-line">
+				
+				<th>No .</th>
+				<th>Product code</th>
+				<th>Old Unit Price</th>
+				<th>Old Eff Date</th>
+				<th>New Unit Price</th>
+				<th>New Eff Price</th>
+				<th>Status</th>
+				<th>Reference</th>
+				<th>Part No.</th>
+			</tr>
+		</thead>	
 
- 
+	
+	<tbody>
+	<% @show_price_report.each_with_index do |pri, index| %>
+		<tr class="<%= cycle("odd_line", "even_line") %>">
+			
+			<td align="center"><%= index + 1 %></td>
+			<td align="center"><%= pri.product.product_combobox.product_code rescue'-'%></td>
+			<td align="center"><%= pri.old_unit_price rescue '-'%></td>
+			<td align="center"><%= pri.old_eff_date rescue '-'%></td>
+			<td align="center"><%= pri.new_unit_date rescue '-'%></td>
+			<td align="center"><%= pri.new_eff_date rescue '-'%></td>
+			<td align="center"><%= pri.status rescue '-'%></td>
+			<td align="center"><%= pri.price_control_reference rescue '-'%></td>
+			<td align="center"><%= pri.part_no rescue '-'%></td>
+		</tr>
+	</tbody>
+	<% end %>
+	 
+	</table>
+	</fieldset>
+	</div>
 
-	<!-- <table>
+
+	 <div class="icon_tag" style="float:left">
+      <span><%= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+    </div>
+
+	<div class="icon_tag" style="float:right;">
+
+		<span><%= not_link_show %></span>
+		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+		<span><%= not_link_recover %></span>
+		
+		<span><%= not_link_printable %></span>
+
+	 	<%= link_close_button %>
+  <%# end %>
+	</div>
+</div>
+
+<div id="tabify_search">
+<table>
 		<%= form_for @price_report , :url => price_report_reports_path  do |f| %>
 		<tr>
 			<td>Company Code :</td>
@@ -22,63 +81,6 @@
 			<td><%= f.submit "Search" %></td>
 		</tr>
 			<% end %>
-	</table> -->
-	
-<div class="fix_1600x900_h450">
-	<fieldset>
-	<table id="jdatatable" class="display" >
-		<thead>
-			<tr class="head-line">
-				<th class="check_highlight"></th>
-				<th>No .</th>
-				<th>Product code</th>
-				<th>Old Unit Price</th>
-				<th>Old Eff Date</th>
-				<th>New Unit Price</th>
-				<th>New Eff Price</th>
-				<th>Status</th>
-				<th>Reference</th>
-				<th>Part No.</th>
-			</tr>
-		</thead>	
-
-	
-	<tbody>
-	<% @show_price_report.each_with_index do |pri, index| %>
-		<tr class="<%= cycle("odd_line", "even_line") %>">
-			<td></td>
-			<td align="center"><%= index + 1 %></td>
-			<td align="center"><%= pri.product_product_code rescue '-'%></td>
-			<td align="center"><%= pri.old_unit_price rescue '-'%></td>
-			<td align="center"><%= pri.old_eff_date rescue '-'%></td>
-			<td align="center"><%= pri.new_unit_date rescue '-'%></td>
-			<td align="center"><%= pri.new_eff_date rescue '-'%></td>
-			<td align="center"><%= pri.status rescue '-'%></td>
-			<td align="center"><%= pri.price_control_reference rescue '-'%></td>
-			<td align="center"><%= pri.part_no rescue '-'%></td>
-		</tr>
-	</tbody>
-	<% end %>
-	 
-	</table>
-	</fieldset>
-	</div>
+</table>
 </div>
-
-	 <div class="icon_tag" style="float:left">
-      <span><%= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
-    </div>
-
-	<div class="icon_tag" style="float:right;">
-
-		<span><%= not_link_show %></span>
-		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
-		<span><%= not_link_recover %></span>
-		
-		<span><%= not_link_printable %></span>
-
-	 	<%= link_close_button %>
-  <%# end %>
-	</div>
-
 
