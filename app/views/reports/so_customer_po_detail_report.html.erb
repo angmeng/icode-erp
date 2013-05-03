@@ -1,25 +1,11 @@
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">Customer P/O Detail</strong></div>
- <!--  
-  <div>
-    <%#= form_for @so_customer_po_detail_report, :url => so_customer_po_detail_report_reports_path  do |f| %>
-      <table>
-        <tr>
-          <td>Trade Company :</td>
-          <td><%#= f.text_field :sales_order_trade_company_code_contains, :size => 9 %></tD>
-          <td>Customer P/O #:</td>
-          <td><%#= f.text_field :sales_order_purchase_order_no_contains, :size => 9 %></td>
-        </tr>
-        <tr>
-        <td><%#= f.submit "Search" %></td>
-         </tr>
-      </table>
-    <%# end %>
-  </div> -->
-  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">SO Customer PO Detail Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+
 
    <!--  <input type="checkbox" id="checkall" />Check All -->
-
+<div id="tabify_listing">
     	<div class="fix_1600x900_h450">
         	<%= form_tag pdf_so_customer_po_detail_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
         	<table  id="jdatatable" class="display" >
@@ -52,9 +38,6 @@
     	</table>
   	 </div>
 
-  
-</div>
-
   <div class="icon_tag" style="float:left">
     <%# if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
       <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %><%#= link_to "Excel Report", excel_po_report_reports_path(:po_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
@@ -80,4 +63,21 @@
 
       <%= link_close_button %>
   </div>
+</div>
 
+ 
+  <div id="tabify_search">
+    <%= form_for @so_customer_po_detail_report, :url => so_customer_po_detail_report_reports_path  do |f| %>
+      <table>
+        <tr>
+          <td>Trade Company :</td>
+          <td><%= f.text_field :trade_company_code_contains, :size => 9 %></tD>
+          <td>Customer P/O #:</td>
+          <td><%= f.text_field :purchase_order_no_contains, :size => 9 %></td>
+        </tr>
+        <tr>
+        <td><%= f.submit "Search" %></td>
+         </tr>
+      </table>
+    <% end %>
+  </div> 

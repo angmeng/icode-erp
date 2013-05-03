@@ -1,44 +1,20 @@
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">Inventory Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>  
 
-<div id="popup_container">
-  <div class="title_head"><strong style="color:white;">INVENTORY REPORT</strong></div>
 
- 
-          <!-- <table>
-            <%#= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
-            <tr>
-                    <td>Product ID :
-                    <%#= f.text_field :product_code_contains , :size => 9 %></td>
-                    <td>Description : 
-                    <%#= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
-                    <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
-                    <td>Transaction
-                      <%#= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
-
-            </tr>
-            <tr>
-                    <td><%#= submit_tag "Search" %></td>
-            </tr>
-            <%# end %>
-          </table>
-
-  <hr />
- -->
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
-
+<div id="tabify_listing">
   <div class="fix_1600x900_h450">
           <%= form_tag pdf_inventory_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-          <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
-          <%#*<fieldset>%>
           <table id="jdatatable" class="display" data-source="<%= inventory_report_reports_path(format: "json") %> ">
-
                     <thead>
                       <tr>
                         <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
                         <th>No.</th>
                         <th>Product ID</th>
                         <th>Description</th>
-                        <th>Stock In</th>
-                        <th>Stock Out</th>
                         <th>Remaining</th>
                         <th>Transaction</th>
                         <%#*<th>Quantity</th>%>
@@ -48,48 +24,26 @@
                   <% arr = [] %>
 
                   <% @show_inventory_report.each_with_index do |pri , index| %>
-          
                       <tr>
-                       
                         <td align="center"><%= check_box_tag "in_ids[]" , pri.id %></td>
                         <td align="center"><%= index + 1 %></td>
-                        <td align="center"><%= render '/product_categories/join_product_category'  , :pc => pri %></td>
+                        <td align="center"><%= product.product_combobox.product_code rescue'-' %></td>
                         <td align="center"><%= pri.product.desc rescue '-' %></td>
-                        <td align="center"><%= pri.stock_in rescue '-'%></td>
-                        <td align="center"><%= pri.stock_out rescue '-'%></td>
                         <td align="center"><%= pri.amount %></td>
-                        <td align="center"><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>
-                              
+                        <td align="center"><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>             
                       </tr>
-                     
-          
-
-                          <% if pri.amount.present? %>
-                            <% arr << pri.amount * pri.amount %>
-                          <% end %>
+                          <%# if pri.amount.present? %>
+                            <%# arr << pri.amount * pri.amount %>
+                          <%# end %>
                            <% end %>
                       <% end %>
                     </tbody>
                   </table>
-
-          <%#*<table>%>
-    <%#*<div style="float:right;">%>
-              <%#*<tr >%>
-              <%#*<td>%>
-                <%#*Total Quantity :%>
-    <%#*</td>%>
-              <%#*<td >%>
-<%#= two_precision(arr.sum) %>
-    <%#*</td>%>
-              <%#*</tr>%>
-              <%#*</div>%>
-          <%#*</table>%>
-    </div>
-          <%#*</fieldset>%>
+                  </div>
 
     <div class="icon_tag" style="float:left">
       <% if roles.include?(InventoryManagementSystem::INVENTORY_REPORT_EXCEL) %>
-        <span><%= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
+        <span><%= submit_tag "Excel Report" , :class => "k-button" %></span>
       <% else %>
         <% not_link_excel %>
       <% end %> 
@@ -113,8 +67,23 @@
 
       <%= link_close_button %>
     </div>
+</div>
 
-   
+<div id="tabify_search">
+<table>
+  <%= form_for @inventory_report, :url => inventory_report_reports_path  do |f| %>
+      <tr>
+        <td>Product ID</td>
+        <td><%= f.text_field :product_product_combobox_product_code_contains , :size => 9 %></td>
+        <td>Description</td>
+        <td><%= f.text_field :inventory_issue_description_contains , :size => 9 %></td>
+      </tr>
+      <tr>
+              <td><%= submit_tag "Search" %></td>
+      </tr>
+      <% end %>
+</table>
+</div>
 
 
 
