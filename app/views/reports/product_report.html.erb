@@ -1,42 +1,13 @@
-<!-- <div id="popup_container"> -->
-<div class="title_head"><strong style="color:white;">Product Report</strong></div>
-
-<!-- <div>
-	<%#= form_for @product_report, :url => product_report_reports_path  do |f| %>
-	<table>
-		<thead>
-		<tr>
-			<td>Product ID :</td>
-			<td><%#= f.text_field :product_code_contains, :size => 10 %></td>
-			<%#= f.text_field :product_category_code_contains ,:size => 12 %>
-			<td>Product Name :</td>
-			<td><%#= f.text_field :product_product_name_contains, :size => 10 %></td>
-			<td>Part No. :</td>
-			<td><%#= f.text_field :product_part_code_contains , :size => 10 %></td>
-		</tr>
-		<tr>
-			<td>Tarif Code :</td>
-			<td><%#= f.text_field :product_tarif_code_contains, :size => 10 %></td>
-			<td>Description :</td>
-			<td><%#= f.text_field :product_desc_contains, :size => 10 %></td>
-		</tr>
-		<tr>
-			<td><%#= submit_tag "search" %></td>
-
-		</tr>
-		<thead>
-
-	</table>
-	<%# end %>
-
-</div> -->
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">Product Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
 
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
-
-<div class="fix_1600x900_h450">
-	
+<div id="tabify_listing">
+	<div class="fix_1600x900_h450">
 	<%= form_tag pdf_product_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-	<table id="jdatatable" class="display" data-source="<%= product_report_reports_path(format: "json") %> ">
+	<table id="tabify_datatable" class="display" data-source="<%= product_report_reports_path(format: "json") %> ">
 		<thead>
 			<tr>
                 <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
@@ -56,7 +27,6 @@
 		<tbody>
 		<% @show_product_report.each_with_index do |pro , index| %>
 			<tr>
-		       
 		        <td align="center"><%= check_box_tag "pro_ids[]", pro.id %></td>
 				<td align="center"><%= index + 1 %></td>
 				<%#= render '/product_categories/join_product_category' , :pc => pri.product_category %>
@@ -76,31 +46,54 @@
 				<td align="center"><%= pro.product.current_stock rescue '-'%></td>
 				<td align="center"><%= pro.product.unit_measurement.code rescue '-'%></td>
 			</tr>
-			<% end %>
+				<% end %>
 		</tbody>
-		
 	</table>
-	
 </div>
 	<div class="icon_tag" style="float:left">
 		<span><%= submit_tag "Excel Report" , :class=>"k-button"  %><%#= not_link_excel %><%#= submit_tag "Excel", :target => "_blank" ,  %>
 			<%#= link_to "Excel", excel_product_report_reports_path( :product_ids => @take_ids,:format=>"xls") , :method => "get" , :class=>"k-button", :target=>"_blank" %></span>
-
 	</div>
-
-	
 	<div class="icon_tag" style="float:right;">
-
 		<span><%= submit_tag "Show" , :class => "k-button" %><%#= not_link_show %></span>
 		<span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
 		<span><%= not_link_recover %></span>
-		
+
 		<span><%= submit_tag "PDF Report" , :class=>"k-button" %></span>
 		<% end %>
 
 	 	<%= link_close_button %>
-  <%# end %>
+  	<%# end %>
 	</div>
+
+</div>
+
+<div id="tabify_search">
+	<%= form_for @product_report, :url => product_report_reports_path  do |f| %>
+	<table>
+		<thead>
+		<tr>
+			<td>Product ID :</td>
+			<td><%= f.text_field :product_code_contains, :size => 10 %></td>
+			<%#= f.text_field :product_category_code_contains ,:size => 12 %>
+			<td>Product Name :</td>
+			<td><%= f.text_field :product_product_name_contains, :size => 10 %></td>
+			<td>Part No. :</td>
+			<td><%= f.text_field :product_part_code_contains , :size => 10 %></td>
+		</tr>
+		<tr>
+			<td>Tarif Code :</td>
+			<td><%= f.text_field :product_tarif_code_contains, :size => 10 %></td>
+			<td>Description :</td>
+			<td><%= f.text_field :product_desc_contains, :size => 10 %></td>
+		</tr>
+		<tr>
+			<td><%= submit_tag "search" %></td>
+		</tr>
+		<thead>
+	</table>
+	<% end %>
+</div>
 
 
 

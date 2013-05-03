@@ -1,6 +1,3 @@
-
- <div align="center" class="title_head"><strong style="color:white;">Purchase requsition Report</strong></div>
-
 <ul id="j_tabify" class="class_tabify">
   <li class="active"><a href="#tabify_listing">PR Report</a></li>
   <li><a href="#tabify_search">Search Engine</a></li>
@@ -10,7 +7,7 @@
   <div class="fix_1600x900_h450">
     <!-- <fieldset> -->
     <%= form_tag pdf_pr_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
-      <table id="jdatatable" class="display">
+      <table id="tabify_datatable" class="display">
         <thead>
           <tr class="header_line">
             <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
@@ -77,14 +74,14 @@
       <tr>
         <td>PR No.</td>
         <td><%= f.text_field :pr_no_gte, :size => 12 %> - 
-          <%= f.text_field :pr_no_lte, :size => 12 %></td>
+            <%= f.text_field :pr_no_lte, :size => 12 %></td>
         <td>Status </td>
         <td><%= f.text_field :status_starts_with , :size => 10 %></td>
       </tr>
       <tr>
         <td>Date</td>
         <td><%= f.text_field :requested_by_date_gte, :size => 9 , :id=> "kendo_date" %> To 
-        <%= f.text_field :requested_by_date_lte , :size => 9 , :id=> "kendo_date" %></td>
+            <%= f.text_field :requested_by_date_lte, :size => 9 , :id=> "kendo_date" %></td>
       </tr>
 
       <tr>
