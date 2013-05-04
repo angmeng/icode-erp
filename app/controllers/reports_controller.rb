@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :so_summary_report , 
-  :po_listing_vendor_report , :debit_note_report , :receive_note_report]
+  :po_listing_vendor_report , :debit_note_report , :receive_note_report , :journal_sales_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -544,9 +544,30 @@ end
     else
         redirect_to dedit_note_report_reports_path
     end 
-        
-
   end
+
+    def pdf_journal_sales_report
+      if params[:commit] == "PDF Report"
+       if params[:js_ids].present?
+          @detail_journal_sales_report = JournalVoucher.find(params[:js_ids])
+          html = render_to_string(:layout => false , :action => "pdf_journal_sales_report.html.erb")
+            @kit = PDFKit.new(html)
+            send_data(@kit.to_pdf , :filename => "pdf_journal_sales_report.pdf",
+                                    :type => 'application/pdf' ,
+                                    :disposition => "attachement")
+          end
+      elsif params[:commit] == "Show"
+         if params[:js_ids].present?
+            @detail_journal_sales_report = JournalVoucher.find(params[:js_ids])
+            respond_to do |format|
+              format.html
+          end
+        end
+      else
+          redirect_to journal_sales_report_reports_path
+      end
+    end
+
 
 
   # ======================================= end of pdf ============================================
@@ -698,6 +719,12 @@ end
     @show_po_listing_vendor_report = @po_listing_vendor_report.all
     #@take_ids = @show_po_report.map(&:id) #for pdf 
   end
+
+  def journal_sales_report
+    @journal_sales_report = JournalVoucher.search(params[:search])
+    @show_journal_sales_report = @journal_sales_report.all
+  end
+
 
 
 

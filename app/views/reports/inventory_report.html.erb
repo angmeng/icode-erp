@@ -23,14 +23,14 @@
                 <tbody>
                   <% arr = [] %>
 
-                  <% @show_inventory_report.each_with_index do |pri , index| %>
+                  <% @show_inventory_report.each_with_index do |inventory , index| %>
                       <tr>
-                        <td align="center"><%= check_box_tag "in_ids[]" , pri.id %></td>
+                        <td align="center"><%= check_box_tag "in_ids[]" , inventory.id %></td>
                         <td align="center"><%= index + 1 %></td>
-                        <td align="center"><%= product.product_combobox.product_code rescue'-' %></td>
-                        <td align="center"><%= pri.product.desc rescue '-' %></td>
-                        <td align="center"><%= pri.amount %></td>
-                        <td align="center"><%= inventory_issue_description(pri.inventory_issue_id) rescue '-' %></td>             
+                        <td align="center"><%= inventory.product.product_combobox.product_code rescue'-' %></td>
+                        <td align="center"><%= inventory.product.desc rescue '-' %></td>
+                        <td align="center"><%= inventory.amount %></td>
+                        <td align="center"><%= inventory_issue_description(inventory.inventory_issue_id) rescue '-' %></td>             
                       </tr>
                           <%# if pri.amount.present? %>
                             <%# arr << pri.amount * pri.amount %>

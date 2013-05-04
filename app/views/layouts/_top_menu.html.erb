@@ -1026,11 +1026,11 @@
               <li class="text_gray">Credit Note Report</li> 
             <% end %>
 
-            <%# if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
-              <!--li><%#= link_to "Creditors / Debtors" %></li-->
-            <%# else %>
-              <li class="text_gray">Journel Report</li>
-            <%# end %>
+            <% if roles.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT) %>
+              <li><%= link_to "Journal Sales Report" , journal_sales_report_reports_path %></li>
+            <% else %>
+              <li class="text_gray">Journel Sales Report</li>
+            <% end %>
             <% end %>
           </ul>
         </li>

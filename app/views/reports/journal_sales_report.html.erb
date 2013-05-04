@@ -1,0 +1,99 @@
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">Journal Sales Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
+<div id="tabify_listing">
+  <div class="fix_1600x900_h450">
+    <!-- <fieldset> -->
+    <%= form_tag pdf_journal_sales_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+      <table id="tabify_datatable" class="display">
+        <thead>
+          <tr class="header_line">
+            <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
+            <th>No.</th>
+            <th>Journal Sales No.</th>
+            <th>Trade Company Name</th>
+            <th>Particular</th>
+            <th>Journal Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @show_journal_sales_report.each_with_index do |js , index| %>
+          <tr class="<%= cycle("odd_line", "even_line") %>">
+            
+            <td align="center"><%= check_box_tag "js_ids[]" , js.id %></td>
+            <td align="center"><%= index + 1 %></td>
+            <td align="center"><%= js.jv_no rescue'-' %></td>
+            <td align="center"><%= js.trade_company_name rescue'-' %></td>
+            <td align="center"><%= js.particular rescue'-' %></th>
+            <td align="center"><%= js.jv_date.strftime("%d-%m-%Y") rescue'-' %></th>
+          </tr>
+          <% end %>
+        </tbody>
+    </table>
+  </div>
+
+  <!-- </fieldset> -->
+
+
+  <div class="icon_tag" style="float:left">
+      <span><%#t_link_excel %><%= submit_tag "Excel Report" , :class => "k-button" %><%#= link_to "Excel Report", excel_pr_report_reports_path(:pr_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+  </div>
+
+    <div class="icon_tag" style="float:right;">
+
+      <% if roles.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_SHOW) %>
+      <span><%= submit_tag "Show" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_show %>
+      <% end %>
+      <span><%= not_link_edit %></span><%#= submit_tag "show" , :class => "k-button" %>
+      <span><%= not_link_recover %></span>
+      <% if roles.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT_PRINT) %>
+        <span><%= submit_tag "PDF Report",:class => "k-button" %></span>
+      <% else %>
+        <%= not_link_printable %>
+      <% end %>
+    <% end %>
+    
+
+
+      <%= link_close_button %>
+    </div>
+
+</div>
+
+<div id="tabify_search">
+  <%= form_for @journal_sales_report, :url => journal_sales_report_reports_path do |f| %>
+    <table>
+      <tr>
+        <td>Journal No.</td>
+        <td><%= f.text_field :jv_no_gte , :size => 12 %> - 
+          <%= f.text_field :jv_no_lte ,:size => 12 %></td>
+        <td>Journal Date</td>
+        <td><%= f.text_field :jv_date_gte , :size => 9 , :class=> "mkendo_date"%> - 
+            <%= f.text_field :jv_date_lte ,:size => 9 , :class=> "mkendo_date" %></td>
+      </tr>
+
+      <tr>
+        <td>Particular</td>
+        <td><%= f.text_field :particular_contains , :size => 12 %></td>
+        <!-- <td>Trade Company Code / Name</td>
+        <td><%#= f.text_field :trade_company_name_contains,:size => 12 %></td> -->
+      </tr>
+     
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
+  <% end %>
+</div>
+
+
+   
+
+
+
