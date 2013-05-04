@@ -25,16 +25,16 @@
 
           <td></td>
           <td>[<%= delivery.sales_order_item.sales_order.sales_order_no rescue '-' %>][<%= delivery.sales_order_item.product.product_combobox.product_code rescue '-' %>][<%= delivery.sales_order_item.product.desc rescue '-' %>]</td>
-          <td align="center"><%= delivery.delivery_qty rescue '-' %></td>
+          <td align="right"><%= no_precision(delivery.delivery_qty) rescue '-' %></td>
           <td align="center"><%= delivery.no_of_carton rescue '-' %></td>
           <td align="center"><%= delivery.so_date.strftime("%d-%m-%Y") rescue'-' %></td>
-          <td align="center"><%= delivery.order_qty rescue '-' %> <%= delivery.sales_order_item.unit_measurement.code rescue '-' %></td>
+          <td align="right"><%= no_precision(delivery.order_qty) rescue '-' %> <%= delivery.sales_order_item.unit_measurement.code rescue '-' %></td>
           <td align="right"><%= four_precision(delivery.unit_price) rescue '-' %></td>
-          <td align="center"><%= delivery.balance_qty rescue '-' %></td>
+          <td align="right"><%= delivery.balance_qty rescue '-' %></td>
           <td align="center"><%= delivery.part_no rescue '-' %></td> 
           <td align="center"><%= delivery.client_lot rescue '-' %></td> 
           <td align="center"><%= delivery.client_po rescue '-' %></td> 
-          <td align="center"><%= delivery.gen_current_stock rescue '-' %></td>
+          <td align="right"><%= delivery.gen_current_stock rescue '-' %></td>
         </tr>
 
       <% end %>

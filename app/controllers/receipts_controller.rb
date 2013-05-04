@@ -18,6 +18,7 @@ class ReceiptsController < ApplicationController
 
   def new
     @receipt = Receipt.new
+    @payment_receiveds = PaymentReceived.where(:status_id => DataStatus::ACTIVE)
   end
 
   def edit

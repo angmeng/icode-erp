@@ -1,13 +1,18 @@
-<div class="title_head">
-  <strong style="color:white;">PAYMENT RECEIVED RECORD</strong>
-  <%= search_button %>
-</div>
-<div><%= render "search_payment_received" %></div>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PAYMENT RECEIVED RECORD</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<% if @payment_receiveds.present? %>
-  <div class="table_background"><%= render "listing_payment_receiveds", :payment_receiveds => @payment_receiveds %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
+<div id="tabify_listing">
+  <% if @payment_receiveds.present? %>
+    <div class="table_background"><%= render "listing_payment_receiveds", :payment_receiveds => @payment_receiveds %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%= render "search_payment_received" %>
+</div>
 
 <%= render "action_payment_received" %>

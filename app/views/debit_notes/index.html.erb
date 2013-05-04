@@ -1,13 +1,18 @@
-<div class="title_head">
-  <strong style="color:white;">LISITING DEBIT NOTES</strong>
-  <%= search_button %>
-</div>
-<div><%= render "search_debit_note" %></div>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">DEBIT NOTES DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<% if @debit_notes.present? %>
-  <div class="table_background"><%= render "listing_debit_notes", :debit_notes => @debit_notes %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
+<div id="tabify_listing">
+  <% if @debit_notes.present? %>
+    <div class="table_background"><%= render "listing_debit_notes", :debit_notes => @debit_notes %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%= render "search_debit_note" %>
+</div>
 
 <%= render "action_debit_note" %>

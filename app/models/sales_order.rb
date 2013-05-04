@@ -23,7 +23,7 @@ class SalesOrder < ActiveRecord::Base
   self.per_page = 50
   
   def self.db_active(search)
-    search.where(:status => SalesOrder::ACTIVE)
+    search.where("status = ? or status = ?", SalesOrder::ACTIVE, SalesOrder::COMPLETED)
   end
   
   def self.db_kiv(search)

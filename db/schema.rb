@@ -838,17 +838,19 @@ ActiveRecord::Schema.define(:version => 20130503083621) do
     t.string   "receipt_no"
     t.date     "receipt_date"
     t.integer  "trade_company_id"
-    t.decimal  "cash_amount",        :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "cheque_amount",      :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "total_amount",       :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "cash_amount",         :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "cheque_amount",       :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "total_amount",        :precision => 10, :scale => 2, :default => 0.0
     t.string   "journal_voucher_no"
     t.string   "remark"
     t.integer  "updated_by"
-    t.integer  "status_id",                                         :default => 1
-    t.datetime "created_at",                                                         :null => false
-    t.datetime "updated_at",                                                         :null => false
+    t.integer  "status_id",                                          :default => 1
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+    t.integer  "payment_received_id"
   end
 
+  add_index "receipts", ["payment_received_id"], :name => "index_receipts_on_payment_received_id"
   add_index "receipts", ["trade_company_id"], :name => "index_receipts_on_trade_company_id"
 
   create_table "receive_note_items", :force => true do |t|

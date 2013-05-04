@@ -36,32 +36,27 @@ class DeliveryOrderManagement
               doi.sales_order_item.product.update_attributes!(:current_stock => doi.gen_current_stock)
               doi.sales_order_item.update_attributes!(:remaining_qty => doi.balance_qty)
               doi.sales_order_item.update_attributes!(:status => SalesOrderItem::COMPLETED) if doi.so_balance_qty_is_zero?
-              self.shipping_full_stock(doi.sales_order_item, doi)
-              
-#              self.insert_account_statement(doi.sales_order_item)
+              self.shipping_full_stock(doi.sales_order_item)
             end
           end
         end
+        self.insert_account_statement(delivery_order)
       end
     end
   end
   
-  def self.shipping_full_stock(soi, doi)
+  def self.shipping_full_stock(soi)
     count     = 0
     so        = soi.sales_order
     max_count = so.sales_order_items.count
     so.sales_order_items.each { |soi| count += 1  if soi.is_completed? }
-    if count == max_count
-      so.update_attributes!(:status => SalesOrder::COMPLETED) 
-      self.insert_account_statement(doi)
-    end
+    so.update_attributes!(:status => SalesOrder::COMPLETED) if count == max_count
   end
   
-  def self.insert_account_statement(doi)
-    d_order = doi.delivery_order
+  def self.insert_account_statement(d_order)
     if d_order.present?
-      @soa = StatementOfAccount.new(:trade_company_id => d_order.trade_company_id, :transaction_date => Date.today, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => 0, :payment_received_id => 0, :delivery_order_id => d_order.id)
-      @soa.save!
+      d_order.statement_of_accounts.new(:trade_company_id => d_order.trade_company_id, :transaction_date => Date.today, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => 0, :payment_received_id => 0, :delivery_order_id => d_order.id)
+      d_order.save!
     end
   end
 end

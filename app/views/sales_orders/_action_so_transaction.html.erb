@@ -1,8 +1,8 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::SO_ENTRY) %>
-    <%= link_to "Add - Sales Order Entry", new_sales_order_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
+    <%= link_to "Add - New Sales Order", new_sales_order_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <%= disabled_style("Add - Sales Order Entry") %>
+    <%= disabled_style("Add - New Sales Order") %>
   <% end %>
 </div>
 

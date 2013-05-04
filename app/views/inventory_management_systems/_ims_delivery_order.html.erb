@@ -12,6 +12,14 @@
           <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
           <% 4.times do |td| %><td></td><% end %>
         </tr>
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_KIV) %> Delivery Orders Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
     <% else %>
         <tr>
           <td></td>
@@ -24,11 +32,19 @@
           <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
           <% 4.times do |td| %><td></td><% end %>
         </tr>
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_KIV) %> Delivery Orders Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DO_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
     <% end %>
   <% else %>
         <tr>
           <td></td>
-          <td><%= ims_new(InventoryManagementSystem::DO_MENU) %> DELIVERY ORDER</td>
+          <td><%= ims_new(InventoryManagementSystem::DO_MENU) %> Delivery Order</td>
           <td><%= ims_new(InventoryManagementSystem::DO_TRANSACTION) %> Delivery Orders Data</td>
           <td align="center"><%= ims_new(InventoryManagementSystem::DO_ENTRY) %></td>
           <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_SHOW) %></td>
@@ -36,6 +52,14 @@
           <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_KIV) %></td>
           <td align="center"><%= ims_new(InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
           <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::DO_KIV) %> Delivery Orders Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_KIV_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::DO_KIV_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
         </tr>
   <% end %>
 <%#*</table>%>

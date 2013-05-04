@@ -1,13 +1,18 @@
-<div class="title_head">
-  <strong style="color:white;">DELIVERY ORDERS DATA</strong>
-  <%= search_button %>
-</div>
-<div><%= render "search_delivery_order" %></div>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">DELIVERY ORDERS DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<% if @delivery_orders.present? %>
-  <div class="table_background"><%= render "listing_delivery_order", :listing_delivery_no => @delivery_orders %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
-  
+<div id="tabify_listing">
+  <% if @delivery_orders.present? %>
+    <div class="table_background"><%= render "listing_delivery_order", :listing_delivery_no => @delivery_orders %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%= render "search_delivery_order" %>
+</div>
+
 <%= render "action_delivery_order_index" %>

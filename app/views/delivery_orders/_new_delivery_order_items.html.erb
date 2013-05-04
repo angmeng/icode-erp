@@ -25,7 +25,7 @@
         <% delivery_order.delivery_order_items.each_with_index do |doi, index| %>
     
             <tr class="<%= cycle('odd_line', 'even_line') %>">
-              <td widht="600">[<%= doi.sales_order_item.sales_order.sales_order_no rescue '-' %>][<%= doi.sales_order_item.product.product_combobox.product_code rescue '-' %>][<%= doi.sales_order_item.product.desc rescue '-' %>]</td>
+              <td width="800">[<%= doi.sales_order_item.sales_order.sales_order_no rescue '-' %>][<%= doi.sales_order_item.product.product_combobox.product_code rescue '-' %>][<%= doi.sales_order_item.product.desc rescue '-' %>]</td>
               <td align="center"><%= doi.delivery_qty %></td>
               <td align="center"><%= doi.no_of_carton %></td>
               <td align="center"><%= doi.so_date.strftime("%d-%m-%Y") rescue'-' %></td>

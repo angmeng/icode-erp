@@ -19,6 +19,7 @@ Merp::Application.routes.draw do
       get "list_period"
       get "printable_debtor"
       get "printable_period"
+      get "cheque_active"
     end
     put "recover", :on => :member
   end

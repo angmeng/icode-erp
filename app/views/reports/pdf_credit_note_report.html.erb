@@ -12,7 +12,6 @@
             <%= cn.trade_company.code rescue'-' %><br />
             <%= cn.trade_company.name rescue'-' %><br />
             <%= cn.trade_company.address_1 rescue'-' %><br />
-            <%= cn.trade_company.address_2 rescue'-' %><br />
             <%= cn.trade_company.postcode_one %> <%= cn.trade_company.city_one rescue'-' %>
           </td>
           <td align="right">
@@ -34,7 +33,6 @@
         <thead>
         <tr>
           <th align="center">No.<br />--</th>
-          <th align="center">A/C ID<br />--------</th>
           <th align="center">Description<br />-------------------------------</th>
           <th align="center">Amount<br />--------------</th>
         </tr>
@@ -42,7 +40,6 @@
         <tbody>
         <tr>
           <td align="center"><%= index + 1 %></td>
-          <td align="center">AC No.</td>
           <td align="left">description</td>
           <td align="right"><%= cn.amount rescue'-' %></td>
           <% arr << cn.amount %>

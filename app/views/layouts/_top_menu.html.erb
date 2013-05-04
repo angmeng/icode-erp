@@ -268,6 +268,12 @@
             <% else %>
               <li><%= disabled_menu_style "Delivery Orders Data" %></li>
             <% end %>
+              
+            <% if roles.include?(InventoryManagementSystem::DO_KIV) %>
+              <li><%= link_to "Delivery Orders Data - KIV", kiv_delivery_orders_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Delivery Orders Data - KIV" %></li>
+            <% end %>
           </ul>
         </li>
       <% end %>
@@ -780,18 +786,6 @@
               Payment Processing
 
               <ul>
-                <% if roles.include?(InventoryManagementSystem::RECEIPT_INDEX) %>
-                  <li><%= link_to "Receipts Record", receipts_path %></li>
-                <% else %>
-                  <li><%= disabled_menu_style "Receipts Record" %></li>
-                <% end %>
-
-                <% if roles.include?(InventoryManagementSystem::RECEIPT_KIV_INDEX) %>
-                  <li><%= link_to "Receipts Record - KIV (Receipt Cancellation)", kiv_receipts_path %></li>
-                <% else %>
-                  <li><%= disabled_menu_style "Receipts Record - KIV (Receipt Cancellation)" %></li>
-                <% end %>
-                  
                 <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %>
                   <li><%= link_to "Payment Received Record", payment_receiveds_path %></li>  
                 <% else %>
@@ -802,6 +796,18 @@
                   <li><%= link_to "Payment Received Record - KIV", kiv_payment_receiveds_path %></li>
                 <% else %>
                   <li><%= disabled_menu_style "Payment Received Record - KIV" %></li>
+                <% end %>
+                
+                <% if roles.include?(InventoryManagementSystem::RECEIPT_INDEX) %>
+                  <li><%= link_to "Receipts Record", receipts_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Receipts Record" %></li>
+                <% end %>
+
+                <% if roles.include?(InventoryManagementSystem::RECEIPT_KIV_INDEX) %>
+                  <li><%= link_to "Receipts Record - KIV (Receipt Cancellation)", kiv_receipts_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Receipts Record - KIV (Receipt Cancellation)" %></li>
                 <% end %>
                   
                 <li><hr/></li>
@@ -815,39 +821,29 @@
             <li>
               Transaction Processing
               <ul>
-                <li>
-                  Credit Notes
-                  <ul>
-                    <% if roles.include?(InventoryManagementSystem::CREDIT_NOTE_INDEX) %>
-                      <li><%= link_to "Credit Notes Data", credit_notes_path %></li>
-                    <% else %>
-                      <li><%= disabled_menu_style "Credit Notes Data" %></li>
-                    <% end %>
+                <% if roles.include?(InventoryManagementSystem::CREDIT_NOTE_INDEX) %>
+                  <li><%= link_to "Credit Notes Data", credit_notes_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Credit Notes Data" %></li>
+                <% end %>
 
-                    <% if roles.include?(InventoryManagementSystem::CREDIT_NOTE_KIV_INDEX) %>
-                      <li><%= link_to "Credit Notes Data - KIV", kiv_credit_notes_path %></li>
-                    <% else %>
-                      <li><%= disabled_menu_style "Credit Notes Data - KIV" %></li>
-                    <% end %>
-                  </ul>
-                </li>
+                <% if roles.include?(InventoryManagementSystem::CREDIT_NOTE_KIV_INDEX) %>
+                  <li><%= link_to "Credit Notes Data - KIV", kiv_credit_notes_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Credit Notes Data - KIV" %></li>
+                <% end %>
 
-                <li>
-                  Debit Notes
-                  <ul>
-                    <% if roles.include?(InventoryManagementSystem::DEBIT_NOTE_INDEX) %>
-                      <li><%= link_to "Debit Notes Data", debit_notes_path %></li>
-                    <% else %>
-                      <li><%= disabled_menu_style "Debit Notes Data" %></li>
-                    <% end %>
-                      
-                    <% if roles.include?(InventoryManagementSystem::DEBIT_NOTE_KIV_INDEX) %>
-                      <li><%= link_to "Debit Notes Data - KIV", kiv_debit_notes_path %></li>
-                    <% else %>
-                      <li><%= disabled_menu_style "Debit Notes Data - KIV" %></li>
-                    <% end %>
-                  </ul>
-                </li>
+                <% if roles.include?(InventoryManagementSystem::DEBIT_NOTE_INDEX) %>
+                  <li><%= link_to "Debit Notes Data", debit_notes_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Debit Notes Data" %></li>
+                <% end %>
+
+                <% if roles.include?(InventoryManagementSystem::DEBIT_NOTE_KIV_INDEX) %>
+                  <li><%= link_to "Debit Notes Data - KIV", kiv_debit_notes_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Debit Notes Data - KIV" %></li>
+                <% end %>
               </ul>
             </li>
 

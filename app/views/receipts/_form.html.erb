@@ -31,10 +31,13 @@
             <% if @receipt.trade_company_id.present? %>
               <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @receipt.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
             <% else %>
-              <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code),                            { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
+              <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code),                            { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company", :onchange => "loading_cheque(this)" } %>
             <% end %>
+            <span class="k-invalid-msg" data-for="receipt[trade_company_id]"></span>
           </td>
-          <td colspan="2"><span class="k-invalid-msg" data-for="receipt[trade_company_id]"></span></td>
+          <td><b>Cheque No</b></td>
+          <td><%= f.select "payment_received_id", options_from_collection_for_select(@payment_receiveds, :id, :cheque_no), { :include_blank => true }, { "required validationMessage" => "Please Enter Cheque No", :onchange => "loading_cheque_amount(this)" } %></td>
+          <%#*:class => "mkendo_combobox",%> 
         </tr>
 
         <tr>
@@ -119,6 +122,43 @@
             else { alert("Invalid Data Form..."); return false; } 
         });
     });
+    
+    function loading_cheque(sel){
+      var trade_company_id = sel.options[sel.selectedIndex].value;
+
+      $.ajax({
+          dataType: "json",
+          cache: false,
+          url: '/payment_receiveds/cheque_active',
+          data: { "trade_company_id": trade_company_id },
+          timeout: 2000,
+          success: function(data){
+              $("select#receipt_payment_received_id").empty();
+              var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+              $(row).appendTo("select#receipt_payment_received_id");
+
+              $.each(data, function(i, j){
+                  row = "<option value=\"" + j.id + "\">" + j.cheque_no + "</option>";  
+                  $(row).appendTo("select#receipt_payment_received_id");
+              }); 
+          }
+      });
+    }
+    
+    function loading_cheque_amount(sel){
+      var payment_id = sel.options[sel.selectedIndex].value;
+
+      $.ajax({
+          dataType: "json",
+          cache: false,
+          url: '/payment_receiveds/' + payment_id,
+          timeout: 2000,
+          success: function(data){
+            var numerictextbox = $("#receipt_cheque_amount").data("kendoNumericTextBox");
+            numerictextbox.value(data.cheque_amount);
+          }
+      });
+    }
   </script>
 <% end %>
 
