@@ -12,7 +12,6 @@
             <%= dn.trade_company.code rescue'-' %><br />
             <%= dn.trade_company.name rescue'-' %><br />
             <%= dn.trade_company.address_1 rescue'-' %><br />
-            <%= dn.trade_company.address_2 rescue'-' %><br />
             <%= dn.trade_company.postcode_one %> <%= don.trade_company.city_one rescue'-' %>
           </td>
           <td align="right">
@@ -34,7 +33,6 @@
         <thead>
         <tr>
           <th align="center">No.<br />--</th>
-          <th align="center">A/C ID<br />--------</th>
           <th align="center">Particular<br />-------------------------------</th>
           <th align="center">Amount<br />--------------</th>
         </tr>
@@ -42,7 +40,6 @@
         <tbody>
         <tr>
           <td align="center"><%= index + 1 %></td>
-          <td align="center">AC No.</td>
           <td align="left"><%= dn.debit_type rescue'-' %></td>
           <td align="right"><%= dn.amount rescue'-' %></td>
           <% arr << dn.amount %>
@@ -74,13 +71,20 @@
         <br />
         <br />
         <tr>
-          <td><br />....................<br />
+          <td>
+          <br />
+          <br />
+          <br />....................<br />
             <% a = User.find(dn.updated_by) %>
             <%= a.name rescue'-' %></td>
-          <td>111<br />....................<br />
-            <%# a = User.find(cn.purchase_by) %>
-            <%#= a.name rescue'-' %></td>
-          <td>111<br />....................<br />By Ms.Lim</td>
+          <td>
+            <br />
+        <br /><br />....................<br />
+            <% a = User.find(cn.purchase_by) %>
+            <%= a.name rescue'-' %></td>
+          <td>
+            <br />
+        <br /><br />....................<br />By Ms.Lim</td>
         </tr>
       </table>
       <% end %>
