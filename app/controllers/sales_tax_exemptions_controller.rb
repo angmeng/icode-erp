@@ -98,8 +98,6 @@ class SalesTaxExemptionsController < ApplicationController
     @ste = SalesTaxExemption.find(params[:id])
   end
   
-  
-  
   private
 #  def inventory_management_system
 #    role(SalesTaxExemption::ROLE)

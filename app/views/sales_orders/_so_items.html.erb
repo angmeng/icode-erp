@@ -26,7 +26,7 @@
         <td align="center"><%= SalesOrderItem.do_case(sales_order_item) %></td>
         <td class="t_product"><%= render "/product_categories/join_product_category", :pc => sales_order_item %></td>
         <td><%= sales_order_item.product.desc rescue '-' %></td>
-        <td align="center"><%= sales_order_item.quantity rescue '-' %> <%= sales_order_item.unit_measurement.code rescue '-' %></td>
+        <td align="right"><%= no_precision(sales_order_item.quantity) rescue '-' %> <%= sales_order_item.unit_measurement.code rescue '-' %></td>
         <td align="right"><%= four_precision(sales_order_item.unit_price) %></td>
         <td align="center"><%= sales_order_item.eta.strftime("%d-%m-%Y") rescue '-' %></td>
         <!--td align="center"><%#= sales_order_item.customer_po rescue '-' %></td-->

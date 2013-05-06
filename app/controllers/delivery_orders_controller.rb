@@ -8,6 +8,12 @@ class DeliveryOrdersController < ApplicationController
     @delivery_orders = @delivery_orders.paginate(:page => params[:page])
   end
 
+  def kiv
+    @search = DeliveryOrder.search(params[:search])
+    @delivery_orders = DeliveryOrder.search_do_kiv(@search)
+    @delivery_orders = @delivery_orders.paginate(:page => params[:page])
+  end
+  
   def show
     @delivery_order = DeliveryOrder.find(params[:id])
     respond_to do |format|
@@ -57,10 +63,12 @@ class DeliveryOrdersController < ApplicationController
   def destroy
     @delivery_order = DeliveryOrder.find(params[:id])
     @delivery_order.update_attributes(:status => DeliveryOrder::KEEP_IN_VIEW)
-
-    respond_to do |format|
-      format.html { redirect_to delivery_orders_url, :notice => "Delivery Order No # #{@delivery_order.do_no} has dropped to KIV." }
-      format.json { head :no_content }
-    end
+    redirect_to delivery_orders_url, :notice => "Delivery Order No # #{@delivery_order.do_no} has dropped to KIV."
+  end
+  
+  def recover
+    @delivery_order = DeliveryOrder.find(params[:id])
+    @delivery_order.update_attributes(:status => DeliveryOrder::ACTIVE)
+    redirect_to kiv_delivery_orders_url, :notice => "Delivery Order No # #{@delivery_order.do_no} has recovered."
   end
 end

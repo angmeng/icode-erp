@@ -24,6 +24,10 @@ class PaymentReceivedsController < ApplicationController
   
   def show
     @payment_received = PaymentReceived.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @payment_received }  # use for ajax, 4/5/2013
+    end
   end
 
   def new
@@ -77,5 +81,10 @@ class PaymentReceivedsController < ApplicationController
     @search = PaymentReceived.search(params[:search])
     @payment_receiveds = PaymentReceived.db_active(@search).paginate(:page => params[:page])
     render :layout => false
+  end
+  
+  def cheque_active
+    @cheque = PaymentReceived.where("trade_company_id = ? and status_id = ?", params[:trade_company_id], DataStatus::ACTIVE)
+    render :json => @cheque
   end
 end

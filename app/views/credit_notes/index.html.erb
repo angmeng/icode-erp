@@ -1,13 +1,18 @@
-<div class="title_head">
-  <strong style="color:white;">CREDIT NOTES DATA</strong>
-  <%= search_button %>
-</div>
-<div><%= render "search_credit_note" %></div>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">CREDIT NOTES DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<% if @credit_notes.present? %>
-  <div class="table_background"><%= render "listing_credit_notes", :credit_notes => @credit_notes %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
+<div id="tabify_listing">
+  <% if @credit_notes.present? %>
+    <div class="table_background"><%= render "listing_credit_notes", :credit_notes => @credit_notes %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%= render "search_credit_note" %>
+</div>
 
 <%= render "action_credit_note" %>

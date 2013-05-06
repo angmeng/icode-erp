@@ -40,6 +40,8 @@
         <tbody>
         <tr>
           <td align="center"><%= index + 1 %></td>
+
+
           <td align="left"><%= cn.credit_type rescue'-' %></td>
           <td align="right"><%= cn.amount rescue'-' %></td>
           <% arr << cn.amount %>
@@ -68,16 +70,22 @@
           <td>Confirmed By</td>
           <td>Approved By</td>
         </tr>
-        <br />
-        <br />
+
         <tr>
-          <td><br />....................<br />
+          <td>
+            <br />
+            <br />
+            <br />....................<br />
             <% a = User.find(cn.updated_by) %>
             <%= a.name rescue'-' %></td>
-          <td><br />....................<br />
-            <%# a = User.find(cn.purchase_by) %>
-            <%#= a.name rescue'-' %></td>
-          <td><br />....................<br />By Ms.Lim</td>
+          <td>
+            <br />
+            <br />
+            <br />....................<br />
+            <%= a.department.name rescue'-' %></td>
+          <td>
+            <br /><br />
+            <br />....................<br />By Ms.Lim</td>
         </tr>
       </table>
       <% end %>

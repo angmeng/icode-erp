@@ -1,7 +1,7 @@
 class Receipt < ActiveRecord::Base
   before_save :cash_and_cheque
     
-  attr_accessible :cash_amount, :cheque_amount, :journal_voucher_no, :receipt_date, :receipt_no, :remark, :total_amount, :trade_company_id, :updated_by, :status_id
+  attr_accessible :cash_amount, :cheque_amount, :journal_voucher_no, :receipt_date, :receipt_no, :remark, :total_amount, :trade_company_id, :updated_by, :status_id, :payment_received_id
   
   validates :receipt_no, :receipt_date, :trade_company_id, :cash_amount, :cheque_amount, :updated_by, :presence => true
   

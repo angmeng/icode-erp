@@ -192,10 +192,6 @@ class InventoryManagementSystem < ActiveRecord::Base
   SO_PRODUCT_ID_REGISTRATION            = 183
   SO_PRODUCT_ID_REGISTRATION_ADD        = 184
   
-#  SO_KIV_ITEM                           = 190
-#  SO_KIV_ITEM_SHOW                      = 191
-#  SO_KIV_ITEM_RECOVER                   = 192
-  
   DO_MENU                               = 155
   DO_TRANSACTION                        = 273
   DO_ENTRY                              = 274
@@ -203,6 +199,10 @@ class InventoryManagementSystem < ActiveRecord::Base
   DO_TRANSACTION_EDIT                   = 276
   DO_TRANSACTION_KIV                    = 277
   DO_TRANSACTION_PRINTABLE              = 278
+  
+  DO_KIV                                = 190
+  DO_KIV_SHOW                           = 191
+  DO_KIV_RECOVER                        = 192
   
   
 #===================================== SALES ORDER (END) =====================================================

@@ -33,7 +33,7 @@
       <td><%= @delivery_order.currency.name rescue '-' %></td>
       <td></td>
       <td><b>BK. 2#</b></td>
-      <td><%= @delivery_order.bk_two %></td>
+      <td><%= @delivery_order.bk_two.present? ? @delivery_order.bk_two : '-' %></td>
     </tr>
 
     <tr>
@@ -41,7 +41,7 @@
       <td><%= @delivery_order.trade_term.name rescue '-' %></td>
       <td></td>
       <td><b>Sales Rep.</b></td>
-      <td><%= @delivery_order.sales_rep %></td>
+      <td><%= @delivery_order.sales_rep.present? ? @delivery_order.sales_rep : '-' %></td>
       
     </tr>
 
@@ -55,7 +55,13 @@
 
     <tr>
       <td><b>Sales Tax Exemp. No.</b></td>
-      <td><%#= @delivery_order.sales_tax_exemption %></td>
+      <td>
+        <% if @delivery_order.sales_tax_exemption_id.present? %>
+          <%= @delivery_order.sales_tax_exemption rescue '-' %>
+        <% else %>
+          -
+        <% end %>
+      </td>
     </tr>
   </table>
 </div>

@@ -1,4 +1,4 @@
-<table id="jgrid" class="zebraLight">
+<table id="tabify_datatable" class="zebraLight display">
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
@@ -11,6 +11,7 @@
       <th>Revision</th>
       <th>Purpose</th>
       <th>Updated By</th>
+      <th>Status</th>
     </tr>
   </thead>
 
@@ -32,6 +33,19 @@
         <td align="center">
           <% updater = User.find(sales_order.updated_by) %>
           <%= updater.name rescue '-' %>
+        </td>
+        <td align="center">
+          <% if sales_order.status == SalesOrder::ACTIVE %>
+            ACTIVE
+          <% elsif sales_order.status == SalesOrder::COMPLETED %>
+            COMPLETED
+          <% elsif sale_order.status == SalesOrder::IN_PROGRESS %>
+            IN PROGRESS
+          <% elsif sales_order.status == SalesOrder::KEEP_IN_VIEW %>
+            KIV
+          <% else %>
+            -
+          <% end %>
         </td>
       </tr>
     <% end %>

@@ -24,6 +24,10 @@ class DeliveryOrder < ActiveRecord::Base
   def self.search_do(search)
     search.where(:status => DeliveryOrder::ACTIVE)
   end
+  
+  def self.search_do_kiv(search)
+    search.where(:status => DeliveryOrder::KEEP_IN_VIEW)
+  end
 
   # def self.authorize_print
   #   if authorize_print == true

@@ -1,13 +1,9 @@
 <div class="left_icon_tag">
-  
   <% if roles.include?(InventoryManagementSystem::DO_ENTRY) %>
-    <%= link_to "Add - Delivery Order Entry", new_delivery_order_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
+    <%= link_to "Add - New Delivery Order", new_delivery_order_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
   <% else %>
-    <%= disabled_style("Add - Delivery Order Entry") %>
+    <%= disabled_style("Add - New Delivery Order") %>
   <% end %>
-  
-  <%#= link_to "test 400", new_delivery_order_path, :class => "iframe_800x450 k-button font_bold", "data-fancybox-type" => "iframe" %>
-  
 </div>
 
 <div class="center_icon_tag">
