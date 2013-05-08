@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503083621) do
+ActiveRecord::Schema.define(:version => 20130506101053) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -845,9 +845,16 @@ ActiveRecord::Schema.define(:version => 20130503083621) do
     t.string   "remark"
     t.integer  "updated_by"
     t.integer  "status_id",                                          :default => 1
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
     t.integer  "payment_received_id"
+    t.date     "payment_date"
+    t.string   "bank"
+    t.string   "place"
+    t.string   "cheque_no"
+    t.date     "cheque_date"
+    t.boolean  "outport_cheque",                                     :default => false
+    t.boolean  "third_party_cheque",                                 :default => false
   end
 
   add_index "receipts", ["payment_received_id"], :name => "index_receipts_on_payment_received_id"
@@ -1076,10 +1083,12 @@ ActiveRecord::Schema.define(:version => 20130503083621) do
     t.string   "transaction_type"
     t.integer  "debit_note_id"
     t.integer  "credit_note_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.integer  "payment_received_id", :default => 0
-    t.integer  "delivery_order_id",   :default => 0
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+    t.integer  "payment_received_id",                                :default => 0
+    t.integer  "delivery_order_id",                                  :default => 0
+    t.string   "fp",                                                 :default => "N"
+    t.decimal  "os_amount",           :precision => 10, :scale => 2
   end
 
   add_index "statement_of_accounts", ["credit_note_id"], :name => "index_statement_of_accounts_on_credit_note_id"

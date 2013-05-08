@@ -251,7 +251,7 @@ $(document).ready(function () {
             $(".popup_form_table").css({ 'height': popup_form_table_height }).addClass("page_wrapper"); 
             
             // IMS - User Account
-            $("#name_entry, #ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_account, #ims_report_1,#ims_report_2, #ims_report_3").height(popup_tab_height).addClass("page_wrapper");
+            $("#name_entry, #ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_account, #ims_report_1,#ims_report_2, #ims_report_3, #receipt_1, #receipt_2").height(popup_tab_height).addClass("page_wrapper");
             $(".quotation").height(popup_tab_height_and_signature).addClass("page_wrapper");
             
             // Popup Tabbing Table -- IMS

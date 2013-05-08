@@ -5,6 +5,7 @@ class ReceiptsController < ApplicationController
   def index
     @search = Receipt.search(params[:search])
     @receipts = Receipt.db_active(@search).paginate(:page => params[:page])
+    @statements = StatementOfAccount.where(:fp => StatementOfAccount::NULL_PAYMENT)
   end
   
   def kiv
@@ -18,7 +19,10 @@ class ReceiptsController < ApplicationController
 
   def new
     @receipt = Receipt.new
-    @payment_receiveds = PaymentReceived.where(:status_id => DataStatus::ACTIVE)
+#    @payment_receiveds = PaymentReceived.where(:status_id => DataStatus::ACTIVE)
+#params[:company_id]
+    @statements = StatementOfAccount.where("trade_company_id = ? and fp = ?", 18, StatementOfAccount::NULL_PAYMENT)
+#    render :text => @statements.to_json
   end
 
   def edit
