@@ -34,11 +34,7 @@ class DeliveryOrder < ActiveRecord::Base
   #     authorize_print.update_attributes
   # end
   
-
-  
   def uppercase_text
     self.sales_rep.upcase! if self.sales_rep.present?
   end
-  
-
 end

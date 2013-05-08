@@ -786,28 +786,28 @@
               Payment Processing
 
               <ul>
-                <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %>
-                  <li><%= link_to "Payment Received Record", payment_receiveds_path %></li>  
-                <% else %>
-                  <li><%= disabled_menu_style "Payment Received Record" %></li>
-                <% end %>
+                <%# if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %>
+                  <!--li><%#= link_to "Payment Received Record", payment_receiveds_path %></li-->
+                <%# else %>
+                  <!--li><%#= disabled_menu_style "Payment Received Record" %></li-->
+                <%# end %>
                   
-                <% if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %>
-                  <li><%= link_to "Payment Received Record - KIV", kiv_payment_receiveds_path %></li>
-                <% else %>
-                  <li><%= disabled_menu_style "Payment Received Record - KIV" %></li>
-                <% end %>
+                <%# if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %>
+                  <!--li><%#= link_to "Payment Received Record - KIV", kiv_payment_receiveds_path %></li-->
+                <%# else %>
+                  <!--li><%#= disabled_menu_style "Payment Received Record - KIV" %></li-->
+                <%# end %>
                 
                 <% if roles.include?(InventoryManagementSystem::RECEIPT_INDEX) %>
-                  <li><%= link_to "Receipts Record", receipts_path %></li>
+                  <li><%= link_to "Receipts", receipts_path %></li>
                 <% else %>
-                  <li><%= disabled_menu_style "Receipts Record" %></li>
+                  <li><%= disabled_menu_style "Receipts" %></li>
                 <% end %>
 
                 <% if roles.include?(InventoryManagementSystem::RECEIPT_KIV_INDEX) %>
-                  <li><%= link_to "Receipts Record - KIV (Receipt Cancellation)", kiv_receipts_path %></li>
+                  <li><%= link_to "Receipts - KIV (Receipt Cancellation)", kiv_receipts_path %></li>
                 <% else %>
-                  <li><%= disabled_menu_style "Receipts Record - KIV (Receipt Cancellation)" %></li>
+                  <li><%= disabled_menu_style "Receipts - KIV (Receipt Cancellation)" %></li>
                 <% end %>
                   
                 <li><hr/></li>
