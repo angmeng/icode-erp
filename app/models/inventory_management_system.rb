@@ -722,6 +722,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT                = 429
   ACCOUNT_INVOICE_SUMMARY_REPORT                     = 430
   ACCOUNT_CN_DN_REPORT                               = 431
+  ACCOUNT_PAYMENT_RECEIVED_REPORT                    = 464
 
   #==== ==== ACTION ==== ==== 
   ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW    = 432
@@ -735,6 +736,9 @@ class InventoryManagementSystem < ActiveRecord::Base
 
   ACCOUNT_CN_DN_REPORT_SHOW                          = 438
   ACCOUNT_CN_DN_REPORT_PRINT                         = 439
+
+  ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW               = 465
+  ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT              = 466 # UNTIL THIS NUMBER ***************
   
 
   #==== ==== LISTING REPORT ==== ====
@@ -772,6 +776,6 @@ class InventoryManagementSystem < ActiveRecord::Base
 #==== ==== ACTION ==== ====
   INVENTORY_REPORT_SHOW                             = 461
   INVENTORY_REPORT_PRINT                            = 462
-  INVENTORY_REPORT_EXCEL                            = 463  # UNTIL THIS NUMBER ***************
+  INVENTORY_REPORT_EXCEL                            = 463  
   #kai kean use 300-500
 end

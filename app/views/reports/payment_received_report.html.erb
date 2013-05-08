@@ -1,0 +1,96 @@
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">Payment Received Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+         
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
+<div id="tabify_listing">
+  <div class="fix_1600x900_h450">
+          <%= form_tag pdf_payment_received_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+          <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
+          <%#*<fieldset>%>
+      <table id="tabify_datatable" class="display">
+          <thead>
+            <tr class="header_line">
+              <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
+              <th>No.</th>
+              <th>Trade Company Code</th>
+              <th>Trade Company Name</th>
+              <th>Receipt No.</th>
+              <th>Date</th>
+
+              <%#*<th>Quantity</th>%>
+            </tr>
+          </thead>
+          <tbody>
+   
+
+        <% @show_payment_received_report.each_with_index do |pay , index| %>
+
+            <tr class="<%= cycle("odd_line", "even_line") %>">
+              <td align="center"><%= check_box_tag "pay_ids[]" , pay.id %></td>
+              <td align="center"><%= index + 1 %></td>
+              <td align="center"><%= trade_company.code rescue'-' %></td>
+              <td align="center"><%= trade_company.name rescue'-' %><br /> 
+              <%= trade_company.address_1 rescue'-' %></td>
+              <td align="center"><%= cheque_no rescue'-' %></td>
+              <td align="center"><%= cheque_date rescue'-' %></td>
+            </tr>
+              <% end %>
+          </tbody>
+    </table>
+    </div>
+
+
+          <%#*</fieldset>%>
+
+    <div class="icon_tag" style="float:left">
+       <%# if roles.include?(InventoryManagementSystem::SO_LISTING_REPORT_EXCEL) %>
+      <span><%= not_link_excel %><%#= submit_tag "Excel Report" , :class => "k-button" %><%#= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span> 
+      <%# else %>
+      <%#= not_link_excel %>
+      <%# end %>
+    </div>
+
+    <div class="icon_tag" style="float:right;">
+       <% if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW) %>
+        <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_show %>
+      <% end %>
+      
+      <span><%= not_link_edit %></span>
+      <span><%= not_link_recover %></span>
+
+       <% if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT) %>
+      <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <% else %>
+        <%= not_link_excel %>
+      <% end %>
+
+      <% end %>
+
+      <%= link_close_button %>
+    </div>
+  </div>
+
+<div id="tabify_search">
+    <table>
+      <%= form_for @payment_received_report, :url => payment_received_report_reports_path  do |f| %>
+      <tr>
+          <td>Trade Company Code:</td>
+          <td><%= f.text_field :trade_company_code_contains , :size => 12 %></td>
+          <td>Trade Company Name:</td>
+          <td><%= f.text_field :trade_company_name_contains ,:size => 12 %></td>
+      </tr>
+      <tr>
+        <td>Cheque Date :</td>
+        <td><%= f.text_field :cheque_date_gte , :size => 12, :class=> "mkendo_date"  %> - 
+          <%= f.text_field :cheque_date_lte , :size => 12 , :class=> "mkendo_date" %></td>
+      </tr>
+      <tr>
+          <td><%= submit_tag "Search" %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>

@@ -569,6 +569,29 @@ end
       end
     end
 
+    def pdf_payment_received_report
+      if params[:commit] == "PDF Report"
+        if params[:pay_ids].present?
+          @detail_payment_received_report = PaymentReceived.find(params[:pay_ids])
+          html = render_to_string(:layout => false , :action => "pdf_payment_received_report,html.erb")
+            @kit = PDFKit.new(html)
+            send_data(@kit.to_pdf , :filename => "pdf_payment_received_report.pdf",
+                                    :type => 'application/pdf' ,
+                                    :disposition => "attachement")
+        end
+        elsif params[:commit] == "Show"
+         if params[:pay_ids].present?
+            @detail_payment_received_report = PaymentReceived.find(params[:pay_ids])
+            respond_to do |format|
+              format.html
+          end
+        end
+      else
+          redirect_to payment_received_report_reports_path
+      end
+
+    end
+
 
 
   # ======================================= end of pdf ============================================
@@ -719,6 +742,11 @@ end
     @po_listing_vendor_report = PurchaseOrder.search(params[:search])
     @show_po_listing_vendor_report = @po_listing_vendor_report.all
     #@take_ids = @show_po_report.map(&:id) #for pdf 
+  end
+
+  def payment_received_report
+    @payment_received_report = PaymentReceived.search(params[:search])
+    @show_payment_received_report = @payment_received_report.all
   end
 
   def journal_sales_report
