@@ -9,14 +9,15 @@
           <%= form_tag pdf_sales_order_listing_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
           <%#= form_tag pdf_inventory_report_reports_path ,:name=>"myform" ,:target=>"_blank" ,:method =>"get" do %>
           <%#*<fieldset>%>
-      <table id="jdatatable" class="display" data-source="<%= so_listing_report_reports_path(format: "json") %> ">
+      <table id="tabify_datatable" class="display" data-source="<%= so_listing_report_reports_path(format: "json") %> ">
           <thead>
             <tr class="header_line">
               <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
               <th>No.</th>
               <th>Sales Order No.</th>
               <th>SO Date</th>
-              
+              <th>Trade Compny Name</th>
+              <th>Trade Term Name</th>
               <%#*<th>Quantity</th>%>
             </tr>
           </thead>
@@ -31,7 +32,8 @@
               <td align="center"><%= index + 1 %></td>
               <td align="center"><%= sol.sales_order_no rescue'-'%></td>
               <td align="center"><%= sol.so_date rescue'-' %></td>
-
+              <td align="center"><%= sol.trade_company_name rescue'-' %></td>
+              <td align="center"><%= sol.trade_term.name rescue'-' %></td>
             </tr>
               <% end %>
           </tbody>
@@ -84,22 +86,22 @@
     </div>
   </div>
 
-<!-- <div id="tabify_search">
+<div id="tabify_search">
     <table>
-      <%#= form_for @sales_order_listing_report, :url => inventory_report_reports_path  do |f| %>
+      <%= form_for @sales_order_listing_report, :url => so_listing_report_reports_path  do |f| %>
       <tr>
-              <td>Product ID :
-              <%#= f.text_field :product_code_contains , :size => 9 %></td>
-              <td>Description : 
-              <%#= f.text_field :inventory_issue_description_contains , :size => 12 %></td>
-              <td><%#= f.text_field :inventory_histories_inventory_issues_description_contains , :size => 9 %></td>
-              <td>Transaction
-                <%#= f.text_field :inventory_issue_description_contains , :size => 10 %></td>
-
+          <td>Trade Company :</td>
+          <td><%= f.text_field :trade_company_name_contains , :size => 12 %></td>
+          <td>Sales Order Date :</td>
+          <td><%= f.text_field :so_date_gte %> - <%= f.text_field :so_date_lte %></td>
       </tr>
       <tr>
-              <td><%#= submit_tag "Search" %></td>
+        <td>Trade Term</td>
+        <td><%= f.text_field :trade_term_name_contains ,:size => 12 %></td>
       </tr>
-      <%# end %>
+      <tr>
+              <td><%= submit_tag "Search" %></td>
+      </tr>
+      <% end %>
     </table>
-  </div> -->
+  </div>

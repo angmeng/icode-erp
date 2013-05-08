@@ -554,7 +554,8 @@ end
             @kit = PDFKit.new(html)
             send_data(@kit.to_pdf , :filename => "pdf_journal_sales_report.pdf",
                                     :type => 'application/pdf' ,
-                                    :disposition => "attachement")
+                                    :disposition => "attachement",
+                                    :page_size => "A3")
           end
       elsif params[:commit] == "Show"
          if params[:js_ids].present?
