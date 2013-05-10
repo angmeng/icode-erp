@@ -50,6 +50,18 @@
     <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL), :disabled => true %></td>
 	</tr>
 
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT), :disabled => true %>Payment Received Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW), :disabled => true %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT), :disabled => true %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL), :disabled => true %></td>
+    </tr>
+
 	<% else %>  <!-- edit part -->
 
 	<tr>
@@ -100,6 +112,18 @@
 
     <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL) %></td>
 	</tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT) %>Payment Received Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW, checkboxes.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW) %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT, checkboxes.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT) %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL, checkboxes.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL) %></td>
+    </tr>
 
 	<% end %>
 
@@ -153,5 +177,17 @@
 
     <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL %></td>
 	</tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT %>Payment Received Report</td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW %></td>
+
+    <td align="center"><%= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT %></td>
+
+    <td align="center"><%#= check_box_tag "inventory_management_system[]", InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_EXCEL %></td>
+    </tr>
 
 	<% end %>

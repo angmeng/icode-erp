@@ -1,0 +1,62 @@
+<% if @detail_invoice_documentation_report.present? %>
+  <% @detail_invoice_documentation_report.each_with_index do |p, index|%>
+
+    <% arr = [] %>
+
+    <table>
+
+    </table>
+
+
+
+        111 <br />
+        <%= index + 1 %><br />
+        <%= pay.payment_date.strftime("%d-%m-%Y") rescue'-' %><br />
+        <%= pay.trade_company.address_1 rescue'-' %><br />
+        <%= pay.trade_company.city_one rescue'-' %>
+        <%= pay.trade_company.code rescue'-' %> - 
+        <%= pay.trade_company.name rescue'-' %><br />
+        <%= pay.trade_company.postcode_one rescue'-' %><br />
+        Date :<br />
+        Page :<br />
+        Receipt No. :<br />
+      </td>
+      </td>
+      </td>
+      <td>
+      <td>111</td>
+      <td>111</td>
+      <td>111</td>
+      <td>111</td>
+      <td>111</td>
+      <td>111</td>
+      <td>111</td>
+      <td><%= index + 1 %></td>
+      <td><br />
+      <td>Received FRom :<br />
+      <th>Amount</th>
+      <th>Cash Amt</th>
+      <th>Cheque Amt</th>
+      <th>Contra Amt</th>
+      <th>Date</th>
+      <th>No.</th>
+      <th>Ref No.</th>
+      <th>Total</th>
+      <th>Type</th>
+    </tr>
+    </tr>
+    </tr>
+    <tr>
+    <tr>
+    <tr>
+  <% @detail_payment_received_report.each_with_index do |pay, index|%>
+  <% end %>
+  </table>
+  </table>
+  <div>(Valid Upon Cheque Clearence)</div>
+  <div>*** OFFICIAL RECEIPT ***</div>
+  <table>
+  <table>
+<% else %>
+<% end %>
+<% if @detail_payment_received_report.present? %>

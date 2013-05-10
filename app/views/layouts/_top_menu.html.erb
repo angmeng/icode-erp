@@ -1031,7 +1031,13 @@
             <% else %>
               <li class="text_gray">Journel Sales Report</li>
             <% end %>
+
+             <% if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT) %>
+              <li><%= link_to "Payment Received Report" , payment_received_report_reports_path %></li>
+            <% else %>
+              <li class="text_gray">Payment Received Report</li>
             <% end %>
+          <% end %>
           </ul>
         </li>
       <%# end %>
