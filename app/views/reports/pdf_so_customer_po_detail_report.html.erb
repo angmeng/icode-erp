@@ -50,14 +50,21 @@
 	</table>
 
 </div> -->
+<% if @detail_so_customer_po_detail_report.present? %>
+   <% @detail_so_customer_po_detail_report.each_with_index do |so , index| %>
+<% if index == 0 %>
+    <div></div>
+      
+    <% else %>
+      <div style="page-break-before: always;">
+      
+  <% end %>
 
-<div id="container">
 <h2><u>Sales Order Customer P/O Detail Report</u></h2>
 
 
-  <% if @detail_so_customer_po_detail_report.present? %>
-   <% @detail_so_customer_po_detail_report.each_with_index do |so , index| %>
-  <table>
+  
+  <table class="table_fix">
     <tr>
       <td align="right">
         Customer :
@@ -92,8 +99,8 @@
     </tr>
 
   </table>
-<% arr = [] %>
-  <table id="jgrid" class="black-line-table">
+  <% arr = [] %>
+  <table class="black-line-table" style="height:1000px;">
     <thead>
      
       <tr class="header_line">
@@ -153,22 +160,22 @@
     </tr>
 
     <tr>
-      <td>111<%# a = User.find(pp.purchase_by) %>
-        <%#= a.name rescue'-' %></td>
-      <td>111<%# b = User.find(pp.request_by) %>
-        <%#= b.name rescue'-' %></td>
+      <td><% a = User.find(so.updated_by) %>
+        <%= a.name rescue'-' %></td>
+      <td><% b = User.find(so.updated_by) %>
+        <%= b.department.name rescue'-' %></td>
       <td>B Y LIM </td>
     </tr>
-    <% end %>
+    
   </table>    
-
+</div>
   
-  
+  <% end %>
   <% else %>
       no report found
-    <% end %>
+  <% end %>
 
-</div>
+
 
 
 <style>
@@ -214,5 +221,10 @@ table{
    tbody tr {
     border-top: 2px solid white;
  }
+
+ /*.table_fix table {
+    height:13770px;
+    /*width:987px;*/
+ }*/
   
 </style>

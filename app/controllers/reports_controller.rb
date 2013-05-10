@@ -5,7 +5,8 @@ class ReportsController < ApplicationController
   :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :so_summary_report , 
-  :po_listing_vendor_report , :debit_note_report , :receive_note_report , :journal_sales_report]
+  :po_listing_vendor_report , :debit_note_report , :receive_note_report , 
+  :journal_sales_report , :statement_of_accounts_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -569,25 +570,27 @@ end
       end
     end
 
-    def pdf_payment_received_report
+    def pdf_statement_of_accounts_report
+
+      #render :text => params[:sta_ids].to_json
       if params[:commit] == "PDF Report"
-        if params[:pay_ids].present?
-          @detail_payment_received_report = PaymentReceived.find(params[:pay_ids])
-          html = render_to_string(:layout => false , :action => "pdf_payment_received_report,html.erb")
+        if params[:sta_ids].present?
+          @detail_statement_of_accounts_report = StatementOfAccount.find(params[:sta_ids])
+          html = render_to_string(:layout => false , :action => "pdf_statement_of_accounts_report_html.erb")
             @kit = PDFKit.new(html)
-            send_data(@kit.to_pdf , :filename => "pdf_payment_received_report.pdf",
+            send_data(@kit.to_pdf , :filename => "pdf_statement_of_accounts_report.pdf",
                                     :type => 'application/pdf' ,
                                     :disposition => "attachement")
         end
         elsif params[:commit] == "Show"
-         if params[:pay_ids].present?
-            @detail_payment_received_report = PaymentReceived.find(params[:pay_ids])
+         if params[:sta_ids].present?
+            @detail_statement_of_accounts_report = StatementOfAccount.find(params[:sta_ids])
             respond_to do |format|
               format.html
           end
         end
       else
-          redirect_to payment_received_report_reports_path
+          redirect_to statement_of_accounts_report_reports_path
       end
 
     end
@@ -744,9 +747,9 @@ end
     #@take_ids = @show_po_report.map(&:id) #for pdf 
   end
 
-  def payment_received_report
-    @payment_received_report = PaymentReceived.search(params[:search])
-    @show_payment_received_report = @payment_received_report.all
+  def statement_of_accounts_report
+    @statement_of_accounts_report = StatementOfAccount.search(params[:search])
+    @show_statement_of_accounts_report = @statement_of_accounts_report.all
   end
 
   def journal_sales_report

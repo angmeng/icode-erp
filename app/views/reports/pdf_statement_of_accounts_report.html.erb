@@ -1,0 +1,151 @@
+<% if @detail_statement_of_accounts_report.present? %>
+  <% @detail_statement_of_accounts_report.each_with_index do |pay, index|%>
+
+    <% arr = [] %>
+
+    <% if index == 0 %>
+      <div style="margin-top: 200px;">
+      
+    <% else %>
+      <div style="page-break-before: always;">
+        <br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br />
+        <br/>
+    <% end %>
+
+
+    <% counter = 0 %>
+    <% counter =+ 1 %>
+    <% if counter < 10 %>
+
+    <p> *** OFFICIAL RECEIPT ***</div>
+    <p>(Valid Upon Cheque Clearence)</div>
+
+    <table>
+      <tr>
+        <td>Received From :<br />
+          <%= pay.trade_company.code rescue'-' %> -
+          <%= pay.trade_company.name rescue'-' %><br />
+          <%= pay.trade_company.address_1 rescue'-' %><br />
+          <%= pay.trade_company.postcode_one rescue'-' %>&nbsp
+          <%= pay.trade_company.city_one rescue'-' %>
+        </td>
+
+        <td align="right">
+          <br/ >
+          Receipt No. :<br />
+          Date :<br />
+          Page :<br />
+        </td>
+
+        <td>
+          <br />
+          <%# a = Receipt.find(pay.receipt_no) %>111
+            <%#= a.receipt_no rescue'-' %><br />
+          <%= pay.transaction_date.strftime("%d-%m-%Y") %><br />
+          page number
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>No.</th>
+        <th>Type</th>
+        <th>Ref. No</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Cheque Amt</th>
+        <th>Cash Amt</th>
+        <th>Contra Amt</th>
+        <th>Total</th>
+      </tr>
+
+      <tr>
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= pay.transaction_type rescue'-' %></td>
+        <td align="center">ref no</td>
+        <td align="center"><%= pay.delivery_order.do_date.strftime("%d/%m/%Y") rescue'-' %></td>
+        <td align="center">amount</td>
+        <td align="center"><%= pay.cheque_amount rescue'-' %></td>
+        <td align="center"></td>
+        <%# arr << pay.A + pay.B - pay.C %>
+        <td><%#= pay. %></td>
+      </tr>
+      <% counter = 1 %>
+    </table>
+
+<% else %>
+    <p> *** OFFICIAL RECEIPT ***</p>
+    <p>(Valid Upon Cheque Clearence)</p>
+
+    <table>
+      <tr>
+        <td>Received From :<br />
+          <%= pay.trade_company.code rescue'-' %> -
+          <%= pay.trade_company.name rescue'-' %><br />
+          <%= pay.trade_company.address_1 rescue'-' %><br />
+          <%= pay.trade_company.postcode_one rescue'-' %>&nbsp
+          <%= pay.trade_company.city_one rescue'-' %>
+        </td>
+
+        <td align="right">
+          <br/ >
+          Receipt No. :<br />
+          Date :<br />
+          Page :<br />
+        </td>
+
+        <td>
+          <br />
+          <%# a = Receipt.find(pay.receipt_no) %>111
+            <%#= a.receipt_no rescue'-' %><br />
+          <%= pay.transaction_date.strftime("%d-%m-%Y") %><br />
+          page number
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>No.</th>
+        <th>Type</th>
+        <th>Ref. No</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Cheque Amt</th>
+        <th>Cash Amt</th>
+        <th>Contra Amt</th>
+        <th>Total</th>
+      </tr>
+
+      <tr>
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= pay.transaction_type rescue'-' %></td>
+        <td align="center">ref no</td>
+        <td align="center"><%= pay.delivery_order.do_date.strftime("%d/%m/%Y") rescue'-' %></td>
+        <td align="center">amount</td>
+        <td align="center"><%= pay.cheque_amount rescue'-' %></td>
+        <td align="center"></td>
+        <%# arr << pay.A + pay.B - pay.C %>
+        <td><%#= pay. %></td>
+      </tr>
+      
+    </table>
+    <% end %> 
+  <% end %>
+
+<% else %>
+  no record had found
+<% end %>
+
+<style>
+
+  table{
+    width:100%;
+  }
+
+  p{
+    text-align: center;
+  }
+  </style>

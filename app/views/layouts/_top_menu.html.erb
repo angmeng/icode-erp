@@ -1033,9 +1033,9 @@
             <% end %>
 
              <% if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT) %>
-              <li><%= link_to "Payment Received Report" , payment_received_report_reports_path %></li>
+              <li><%= link_to "Payment Received Report" , statement_of_accounts_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">Payment Received Report</li>
+              <li class="text_gray">Statement Of Account Report</li>
             <% end %>
           <% end %>
           </ul>
