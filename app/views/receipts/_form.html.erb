@@ -9,6 +9,7 @@
 
         <div>
           <div id="receipt_1">
+            <h3 style="background-color: blue; color: white; padding: 5px;">CHEQUE</h3>
             <table>
               <tr>
                 <td><b>Bank</b></td>
@@ -16,9 +17,9 @@
                 <td><b>Payment Date</b></td>
                 <td>
                   <% if @receipt.payment_date.present? %>
-                    <%= f.text_field :payment_date, :value => @receipt.payment_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
+                    <%= f.text_field :payment_date, :value => @receipt.payment_date.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %>
                   <% else %>
-                    <%= f.text_field :payment_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Payment Date" %>
+                    <%= f.text_field :payment_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Payment Date" %>
                   <% end %>
                   <span class="k-invalid-msg" data-for="receipt[payment_date]"></span>
                 </td>
@@ -35,9 +36,9 @@
                 <td><b>Cheque Date</b></td>
                 <td>
                   <% if @receipt.cheque_date.present? %>
-                    <%= f.text_field :cheque_date, :value => @receipt.cheque_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Cheque Date" %>
+                    <%= f.text_field :cheque_date, :value => @receipt.cheque_date.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Cheque Date" %>
                   <% else %>
-                    <%= f.text_field :cheque_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Cheque Date" %>
+                    <%= f.text_field :cheque_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Cheque Date" %>
                   <% end %>
                   <span class="k-invalid-msg" data-for="receipt[cheque_date]"></span>
                 </td>
@@ -77,9 +78,9 @@
                 <td><b>Receipt Date</b></td>
                 <td>
                   <% if @receipt.receipt_date.present? %>
-                    <%= f.text_field :receipt_date, :value => @receipt.receipt_date.strftime("%d-%m-%Y"), :class => "mkendo_date" %>
+                    <%= f.text_field :receipt_date, :value => @receipt.receipt_date.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %>
                   <% else %>
-                    <%= f.text_field :receipt_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Receipt Date" %>
+                    <%= f.text_field :receipt_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter Receipt Date" %>
                   <% end %>
                 </td>
                 <td colspan="2"><span class="k-invalid-msg" data-for="receipt[receipt_date]"></span></td>
@@ -164,7 +165,6 @@
                   if (e.keyCode != 8) {                       
                     
                       var host_amount = +$("#total_amount").html();
-                      alert(host_amount);
                       $("#remaining_amount").html(host_amount.toFixed(4));
 
                       var grandTotal = 0;
@@ -174,15 +174,25 @@
                           var number = $(this).attr("name").match(/\[(\d+)\]/);
                           var number = parseInt(number[1], 10);
                           var balance = "#bal_amount_" + number;
-
+                          var balance_val = "#datarow_" + number + "_balance_amount";
+                          var os_amount = "#datarow_" + number + "_os_amount";
+                          
+                          var doc_amt_html  = "#doc_amount_" + number;
+                          var doc_amt_val   = "#datarow_" + number + "_document_amount";
+                          var answer_ori        = +$(doc_amt_html).html();
+                          var answer_ori_entry  = +$(doc_amt_val).val();
                           var select_value = +$(this).val();
-                          console.log(select_value);
                           var cal = rem_amount - select_value;
+                          var real_os_amount = answer_ori - answer_ori_entry;
+                          
                           $(balance).html(cal.toFixed(4));
                           $("#remaining_amount").html(cal.toFixed(4));
+                          $(balance_val).val(cal.toFixed(4));
+                          $(os_amount).val(real_os_amount);
+                          
                       });
                       
-                      return $(this).val($(this).val()); 
+                      $(this).val($(this).val()); 
                   }
                 } else {
                     return false;
@@ -191,27 +201,6 @@
                 $(this).val($.trim($(this).val()).slice(0, -1));
             }
         }); 
-        
-        
-        <%#*$('input[id$="document_amount"]').blur(function(){%>
-            <%#*var host_amount = +$("#total_amount").html();%>
-            <%#*$("#remaining_amount").html(host_amount.toFixed(4));%>
-            
-            <%#*var grandTotal = 0;%>
-            
-            <%#*$('table.target_table tbody').find('[id$="document_amount"]').each(function(k, elem) {%>
-                <%#*var rem_amount  = +$("#remaining_amount").html();%>
-                <%#*var number = $(this).attr("name").match(/\[(\d+)\]/);%>
-                <%#*var number = parseInt(number[1], 10);%>
-                <%#*var balance = "#bal_amount_" + number;%>
-                
-                <%#*var select_value = +$(this).val();%>
-                <%#*console.log(select_value);%>
-                <%#*var cal = rem_amount - select_value;%>
-                <%#*$(balance).html(cal.toFixed(4));%>
-                <%#*$("#remaining_amount").html(cal.toFixed(4));%>
-            <%#*});%>
-        <%#*});%>
         
         var validator = $("#valid_receipt").kendoValidator().data("kendoValidator");
         
@@ -223,25 +212,15 @@
     
     function loading_cheque(sel){
       var trade_company_id = sel.options[sel.selectedIndex].value;
-
+      
       $.ajax({
-          dataType: "json",
-          cache: false,
-          url: '/payment_receiveds/cheque_active',
-          data: { "trade_company_id": trade_company_id },
-          timeout: 2000,
-          success: function(data){
-              $("select#receipt_payment_received_id").empty();
-              var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-              $(row).appendTo("select#receipt_payment_received_id");
-
-              $.each(data, function(i, j){
-                  row = "<option value=\"" + j.id + "\">" + j.cheque_no + "</option>";  
-                  $(row).appendTo("select#receipt_payment_received_id");
-              }); 
-          }
+          url: "/statement_of_accounts",
+          data: {company_id: trade_company_id},
+          success: function(data) { $("#listing_statement").html(data); }
       });
     }
+                  
+
     
     function loading_cheque_amount(sel){
       var payment_id = sel.options[sel.selectedIndex].value;

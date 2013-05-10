@@ -1,10 +1,16 @@
 class StatementOfAccount < ActiveRecord::Base
+  before_save :uppercase_text
+  before_update :uppercase_text
+  
   attr_accessible :credit_note_id, :debit_note_id, :trade_company_id, :transaction_date, :transaction_type, :payment_received_id, :delivery_order_id, :fp, :os_amount
   
   belongs_to :credit_note
   belongs_to :debit_note
   belongs_to :payment_received
   belongs_to :delivery_order
+  
+  has_many :receipt_statement_lines
+  has_many :receipts, :through => :receipt_statement_lines
   
   validates :trade_company_id, :transaction_date, :presence => true
   
@@ -59,6 +65,11 @@ class StatementOfAccount < ActiveRecord::Base
     else
       "-"
     end
+  end
+  
+    
+  def uppercase_text
+    self.fp.upcase!
   end
   
 #  def credit_note?

@@ -3,7 +3,6 @@
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>No.</th>
-      <th>Receipt Type</th>
       <th>Document No.</th>
       <th>Document Date</th>
       <th>Document Amount</th>
@@ -18,14 +17,16 @@
       <tr class="<%= cycle('odd_line', 'even_line') %>">
         <td></td>
         <td align="center"><%= index + 1 %></td>
-        <td align="center"><%= item.receipt_type rescue '-' %></td>
-        <td align="center"><%= item.document_no rescue '-' %></td>
-        <td align="center"><%= item.document_date.strftime("%d-%m-%Y") rescue '-' %>
-        <td align="right"><%= four_precision(item.document_amount) %></td>
-        <td align="right"><%= four_precision(item.balance_amount) %></td>
+        <td align="left"><%= StatementOfAccount.transacted(item) %></td>
+        <td align="center"><%= StatementOfAccount.transacted_date(item) %></td>
+        <td align="right"><%= four_precision(item.document_amount) rescue '-' %>
+        <td align="right"><%= four_precision(item.balance_amount) rescue '-' %></td>
         <td align="center"><%= item.fp rescue '-' %></td>
-        <td align="right"><%= four_precision(item.os_amount) %></td>
+        <td align="right"><%= four_precision(item.os_amount) rescue '-' %></td>
       </tr>
+      
+      
+      
     <% end %>
   </tbody>
   </table>

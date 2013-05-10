@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130510143141) do
 
   create_table "bill_of_materials", :force => true do |t|
@@ -38,6 +39,9 @@ ActiveRecord::Schema.define(:version => 20130510143141) do
   add_index "bom_materials", ["bill_of_material_id"], :name => "index_bom_materials_on_bill_of_material_id"
   add_index "bom_materials", ["material_id"], :name => "index_bom_materials_on_material_id"
   add_index "bom_materials", ["unit_measurement_id"], :name => "index_bom_materials_on_unit_measurement_id"
+=======
+ActiveRecord::Schema.define(:version => 20130510132123) do
+>>>>>>> 4f18be6bb1debcfaab2fb30fbc6ee31161c3220e
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -890,6 +894,16 @@ ActiveRecord::Schema.define(:version => 20130510143141) do
 
   add_index "receipt_items", ["receipt_id"], :name => "index_receipt_items_on_receipt_id"
 
+  create_table "receipt_statement_lines", :force => true do |t|
+    t.integer  "receipt_id"
+    t.integer  "statement_of_account_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "receipt_statement_lines", ["receipt_id"], :name => "index_receipt_statement_lines_on_receipt_id"
+  add_index "receipt_statement_lines", ["statement_of_account_id"], :name => "index_receipt_statement_lines_on_statement_of_account_id"
+
   create_table "receipts", :force => true do |t|
     t.string   "receipt_no"
     t.date     "receipt_date"
@@ -1141,6 +1155,8 @@ ActiveRecord::Schema.define(:version => 20130510143141) do
     t.datetime "updated_at",                                                          :null => false
     t.integer  "payment_received_id",                                :default => 0
     t.integer  "delivery_order_id",                                  :default => 0
+    t.decimal  "document_amount",     :precision => 10, :scale => 2
+    t.decimal  "balance_amount",      :precision => 10, :scale => 2
     t.string   "fp",                                                 :default => "N"
     t.decimal  "os_amount",           :precision => 10, :scale => 2
   end
@@ -1306,4 +1322,8 @@ ActiveRecord::Schema.define(:version => 20130510143141) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> 4f18be6bb1debcfaab2fb30fbc6ee31161c3220e
