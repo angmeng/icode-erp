@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Receipt:</b>
+  <%= @receipt_statement_line.receipt_id %>
+</p>
+
+<p>
+  <b>Statement of account:</b>
+  <%= @receipt_statement_line.statement_of_account_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_receipt_statement_line_path(@receipt_statement_line) %> |
+<%= link_to 'Back', receipt_statement_lines_path %>

@@ -3,49 +3,81 @@
   <div class="table_details">
     <table>
       <tr>
-        <td><b>Receipt No #</b></td>
-        <td><%= @receipt.receipt_no rescue '-' %></td>
-        <td><b>Receipt Date</b></td>
-        <td><%= @receipt.receipt_date.strftime("%d-%m-%Y") rescue '-' %></td>
-      </tr>
-
-      <tr>
-        <td><b>Trade Company</b></td>
-        <td><%= company_code_and_name(@receipt.trade_company) rescue '-' %></td>
-      </tr>
-
-      <tr>
-        <td colspan="10">
-          <b>Cash Amount</b>:&nbsp;<%= four_precision(@receipt.cash_amount) %>&nbsp;&nbsp;&nbsp;&nbsp;
-          <b>Cheque Amount</b>:&nbsp;<%= four_precision(@receipt.cheque_amount) %>&nbsp;&nbsp;&nbsp;&nbsp;
-          <b>Total Amount</b>:&nbsp;<%= four_precision(@receipt.total_amount) %>
+        <td><b>Bank</b></td>
+        <td><%= @receipt.bank %></td>
+        <td><b>Payment Date</b></td>
+        <td><%= @receipt.payment_date.strftime("%d-%m-%Y") %>
         </td>
+      </tr>
+
+      <tr>
+        <td><b>Place</b></td>
+        <td><%= @receipt.place %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cheque No</b></td>
+        <td><%= @receipt.cheque_no %></td>
+        <td><b>Cheque Date</b></td>
+        <td><%= @receipt.cheque_date.strftime("%d-%m-%Y") %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cheque Amount</b></td>
+        <td><%= @receipt.cheque_amount %></td>
+      </tr>
+
+      <tr>
+        <td><b>Outport Cheque</b></td>
+        <td><%= @receipt.outport_cheque == true ? "YES" : "NO" %></td>
+        <td><b>Third Party Cheque</b></td>
+        <td><%= @receipt.third_party_cheque == true ? "YES" : "NO" %></td>
+      </tr>
+    </table>
+
+    <hr/>
+
+    <table>
+      <tr>
+        <td><b>Receipt No #</b></td>
+        <td><%= @receipt.receipt_no %></td>
+        <td><b>Receipt Date</b></td>
+        <td><%= @receipt.receipt_date.strftime("%d-%m-%Y") %></td>
+      </tr>
+
+      <tr>
+        <td><b>Customer Company</b></td>
+        <td>[<%= @receipt.trade_company.code rescue '-' %>] <%= @receipt.trade_company.name rescue '-' %></td>
+      </tr>
+
+      <tr>
+        <td><b>Cash Amount</b></td>
+        <td><%= @receipt.cash_amount %></td>
+      </tr>
+
+      <tr>
+        <td><b>Total Amount</b></td>
+        <td colspan="10"><%= @receipt.total_amount.present? ? four_precision(@receipt.total_amount) : 0.0000 %></td>
       </tr>
 
       <tr>
         <td><b>Journal Voucher No</b></td>
-        <td>
-          <% if @receipt.journal_voucher_no.present? %>
-            <%= @receipt.journal_voucher_no rescue '-' %>
-          <% else %>
-            -
-          <% end %>
-        </td>
+        <td><%= @receipt.journal_voucher_no %></td>
         <td><b>Updated By</b></td>
         <td><%= updater_name(@receipt.updated_by) rescue '-' %></td>
       </tr>
 
       <tr>
-        <td valign="top"><b>Remark</b></td>
-        <td colspan="2"><%= @receipt.remark rescue '-' %></td>
+        <td style="vertical-align: top;"><b>Remark</b></td>
+        <td colspan="2"><%= @receipt.remark %></td>
       </tr>
     </table>
   </div>
 
   <hr/>
 
-  <% if @receipt.receipt_items.present? %>
-    <div class="table_background"><%= render "listing_receipt_items", :items => @receipt.receipt_items %></div>
+  <% if @receipt.statement_of_accounts.present? %>
+    <div class="table_background"><%= render "listing_receipt_items", :items => @receipt.statement_of_accounts %></div>
   <% else %>
     <div class="popup_form_table">Not Record Found</div>
   <% end %>

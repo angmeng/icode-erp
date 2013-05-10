@@ -949,6 +949,9 @@ function datarow_all_attributes(tr){
     
     // balance amount
     string_last_number(tr, '[id^=bal_amount]');
+    string_last_number(tr, '[id^=doc_amount]');
+    string_last_number(tr, '[id^=os_amount]');
+    
 }
 
 function string_last_number(tr, last_number){

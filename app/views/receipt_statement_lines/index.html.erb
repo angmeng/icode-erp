@@ -1,0 +1,25 @@
+<h1>Listing receipt_statement_lines</h1>
+
+<table>
+  <tr>
+    <th>Receipt</th>
+    <th>Statement of account</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @receipt_statement_lines.each do |receipt_statement_line| %>
+  <tr>
+    <td><%= receipt_statement_line.receipt_id %></td>
+    <td><%= receipt_statement_line.statement_of_account_id %></td>
+    <td><%= link_to 'Show', receipt_statement_line %></td>
+    <td><%= link_to 'Edit', edit_receipt_statement_line_path(receipt_statement_line) %></td>
+    <td><%= link_to 'Destroy', receipt_statement_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Receipt statement line', new_receipt_statement_line_path %>

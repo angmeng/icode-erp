@@ -1,13 +1,20 @@
 class Receipt < ActiveRecord::Base
+  before_save   :uppercase_text
+  before_update :uppercase_text
+  
   before_save :cash_and_cheque
     
-  attr_accessible :cash_amount, :cheque_amount, :journal_voucher_no, :receipt_date, :receipt_no, :remark, :total_amount, :trade_company_id, :updated_by, :status_id, :payment_received_id, :payment_date, :bank, :place, :cheque_no, :cheque_date, :output_cheque, :third_party_cheque
+  attr_accessible :cash_amount, :cheque_amount, :journal_voucher_no, :receipt_date, :receipt_no, :remark, :total_amount, :trade_company_id, :updated_by, :status_id, :payment_received_id, :payment_date, :bank, :place, :cheque_no, :cheque_date, :outport_cheque, :third_party_cheque
   
   validates :receipt_no, :receipt_date, :trade_company_id, :cash_amount, :cheque_amount, :updated_by, :payment_date, :bank, :place, :cheque_no, :cheque_date, :presence => true
   
   belongs_to :trade_company
   
-  has_many :receipt_items, :dependent => :destroy
+#  has_many :receipt_items, :dependent => :destroy
+  has_many :receipt_statement_lines, :dependent => :destroy
+  has_many :statement_of_accounts, :through => :receipt_statement_lines
+    
+
   
   default_scope order("receipt_no DESC")
   
@@ -25,6 +32,11 @@ class Receipt < ActiveRecord::Base
     company.update_attributes!(:sn_receipt_no => self.receipt_no)
 #    @soa = StatementOfAccount.new(:trade_company_id => self.trade_company_id, :transaction_date => self.receipt_date, :transaction_type => "RCT", :credit_note_id => 0, :debit_note_id => self.id)
 #    @soa.save!
+  end
+  
+  def uppercase_text
+    self.bank.upcase! if self.bank.present?
+    self.place.upcase!     if self.place.present?
   end
   
   private

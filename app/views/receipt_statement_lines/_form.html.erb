@@ -1,0 +1,25 @@
+<%= form_for(@receipt_statement_line) do |f| %>
+  <% if @receipt_statement_line.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@receipt_statement_line.errors.count, "error") %> prohibited this receipt_statement_line from being saved:</h2>
+
+      <ul>
+      <% @receipt_statement_line.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :receipt_id %><br />
+    <%= f.number_field :receipt_id %>
+  </div>
+  <div class="field">
+    <%= f.label :statement_of_account_id %><br />
+    <%= f.number_field :statement_of_account_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

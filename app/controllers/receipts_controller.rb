@@ -19,9 +19,7 @@ class ReceiptsController < ApplicationController
 
   def new
     @receipt = Receipt.new
-#    @payment_receiveds = PaymentReceived.where(:status_id => DataStatus::ACTIVE)
-#params[:company_id]
-    @statements = StatementOfAccount.where("trade_company_id = ? and fp = ?", 18, StatementOfAccount::NULL_PAYMENT)
+#    @statement_of_accounts = StatementOfAccount.where("trade_company_id = ? and fp = ?", 18, StatementOfAccount::NULL_PAYMENT)
 #    render :text => @statements.to_json
   end
 
@@ -31,8 +29,8 @@ class ReceiptsController < ApplicationController
 
   def create
     @receipt = Receipt.new(params[:receipt])
-    AccountManagement.manage_receipts(params[:datarow], @receipt)
     if @receipt.save
+      AccountManagement.manage_receipts(params[:datarow], @receipt)
       @receipt.update_to_statement(company)
       redirect_to @receipt, notice: "Receipt No # #{@receipt.receipt_no} was successfully created."
     else
