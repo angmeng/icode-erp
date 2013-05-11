@@ -42,7 +42,7 @@
           <td align="center"><%= index + 1 %></td>
 
 
-          <td align="left"><%= cn.credit_type rescue'-' %></td>
+          <td align="left">Your A/C Has Been Credited For Being <%= cn.credit_type rescue'-' %></td>
           <td align="right"><%= cn.amount rescue'-' %></td>
           <% arr << cn.amount %>
         </tr>

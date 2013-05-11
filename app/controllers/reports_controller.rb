@@ -385,7 +385,7 @@ end
   end
 
   def pdf_do_so_documentation_report
-    if params[:commit] == "Print D/O"
+    if params[:commit] == "D/O Printable"
        if params[:doc_ids].present?
        @detail_delivery_order_documentation_report = DeliveryOrder.find(params[:doc_ids])
        html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
@@ -394,7 +394,7 @@ end
                                 :type => 'application/pdf' ,
                                 :disposition => "attachement" )
       end
-    elsif params[:commit] == "Print Invoice"
+    elsif params[:commit] == "Invoice Printable"
       if params[:doc_ids].present?
 
         Report.pdf_do_so_documentation_report(params[:doc_ids])

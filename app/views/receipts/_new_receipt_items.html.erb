@@ -14,8 +14,8 @@
           </tr>
         </thead>
 
-        <tbody>
-            <% @statement_of_accounts.each_with_index do |statement| %>
+        <tbody>         
+            <% @statement_of_accounts.order("balance_amount DESC").each_with_index do |statement| %>
               <tr class="<%= cycle('odd_line', 'even_line') %>">
                 <td><%= StatementOfAccount.transacted(statement) %></td>
                 <td align="center"><%= StatementOfAccount.transacted_date(statement) %></td>
@@ -24,13 +24,13 @@
                   <%= text_field_tag   "datarow[#{statement.id}][document_amount]", StatementOfAccount.transacted_amount(statement), :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
                 </td>
                 <td align="right">
-                  <span id="bal_amount_<%= statement.id %>"></span>
-                  <%= hidden_field_tag "datarow[#{statement.id}][balance_amount]" %>
+                  <span id="bal_amount_<%= statement.id %>"><%= two_precision(statement.balance_amount) %></span>
+                  <%= hidden_field_tag "datarow[#{statement.id}][balance_amount]", statement.balance_amount %>
                 </td>
-                <td align="center"><%= text_field_tag "datarow[#{statement.id}][fp]", StatementOfAccount::NULL_PAYMENT, :class => "k-textbox", :style => "width: 50px;", "required validationMessage" => "Please Enter F/P" %></td>
-                <td align="center">
-                  <span id="os_amount_<%= statement.id %>"></span>
-                  <%= hidden_field_tag "datarow[#{statement.id}][os_amount]", '', :class => "k-textbox" %>
+                <td align="center"><%= text_field_tag "datarow[#{statement.id}][fp]", statement.fp, :class => "k-textbox", :style => "width: 50px;", "required validationMessage" => "Please Enter F/P" %></td>
+                <td align="right">
+                  <span id="os_amount_<%= statement.id %>"><%= two_precision(statement.os_amount) %></span>
+                  <%= hidden_field_tag "datarow[#{statement.id}][os_amount]", statement.os_amount, :class => "k-textbox" %>
                 </td>
               </tr>
             <% end %>

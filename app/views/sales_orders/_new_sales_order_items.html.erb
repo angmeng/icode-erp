@@ -54,8 +54,8 @@
             <%= hidden_field_tag "datarow[#{index}][part_no]", soi.part_no %>
           </td>  
           <td align="center">
-            <span id="lotNo_0"></span>
-            <%= hidden_field_tag "datarow[#{index}][lot_no]", soi.lot_no %>
+            <!--span id="lotNo_0"></span-->
+            <%= text_field_tag "datarow[#{index}][lot_no]", soi.lot_no, :class => "k-textbox", :style => "width: 100px;" %>
           </td>
           <td align="center"><%= text_field_tag "datarow[#{index}][mfg_date]", soi.mfg_date, :class => "k-textbox", :style => "width: 80px;" %></td>
           <td align="center"><%= text_field_tag "datarow[#{index}][exp_date]", soi.exp_date, :class => "k-textbox", :style => "width: 80px;" %></td>
@@ -95,8 +95,8 @@
           <%= hidden_field_tag "datarow[0][part_no]", '' %>
         </td>
         <td align="center">
-          <span id="lotNo_0"></span>
-          <%= hidden_field_tag "datarow[0][lot_no]", '', :class => "k-textbox" %>
+          <!--span id="lotNo_0"></span-->
+          <%= text_field_tag "datarow[0][lot_no]", '', :class => "k-textbox", :style => "width: 100px;" %>
         </td>
         <td align="center"><%= text_field_tag "datarow[0][mfg_date]", '', :class => "k-textbox", :style => "width: 80px;" %></td>
         <td align="center"><%= text_field_tag "datarow[0][exp_date]", '', :class => "k-textbox", :style => "width: 80px;" %></td>

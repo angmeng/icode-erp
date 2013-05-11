@@ -52,7 +52,7 @@
 
       <tr>
         <td><b>Cash Amount</b></td>
-        <td><%= @receipt.cash_amount %></td>
+        <td><%= two_precision(@receipt.cash_amount) %></td>
       </tr>
 
       <tr>
@@ -62,7 +62,7 @@
 
       <tr>
         <td><b>Journal Voucher No</b></td>
-        <td><%= @receipt.journal_voucher_no %></td>
+        <td><%= @receipt.journal_voucher_no.present? ? "#{@receipt.journal_voucher_no}" : "-" %></td>
         <td><b>Updated By</b></td>
         <td><%= updater_name(@receipt.updated_by) rescue '-' %></td>
       </tr>

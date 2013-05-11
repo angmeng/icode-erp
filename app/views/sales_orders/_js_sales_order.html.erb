@@ -56,7 +56,7 @@
                           var um_id       = data.product.unit_measurement_id;
                           var um_code     = data.um_code;
                           var partCode    = data.product.part_code;
-                          var lot_no      = data.product.lot_no;
+                          <%#*var lot_no      = data.product.lot_no;%>
 
                           var code    = '#um_code_' + number;
                           var um      = '#datarow_' + number + '_unit_measurement_id';
@@ -91,15 +91,15 @@
                               $(value_partNo).val('');
                           }
                           
-                          var value_lotNo = '#datarow_' + number + '_lot_no';
-                          var html_lotNo  = '#lotNo_' + number;
-                          if (lot_no != null) { 
-                              $(html_lotNo).html(lot_no);
-                              $(value_lotNo).val(lot_no);
-                          } else {
-                              $(html_lotNo).html('');
-                              $(value_lotNo).val('');
-                          }
+                          <%#*var value_lotNo = '#datarow_' + number + '_lot_no';%>
+                          <%#*var html_lotNo  = '#lotNo_' + number;%>
+                          <%#*if (lot_no != null) {%> 
+                              <%#*$(html_lotNo).html(lot_no);%>
+                              <%#*$(value_lotNo).val(lot_no);%>
+                          <%#*} else {%>
+                              <%#*$(html_lotNo).html('');%>
+                              <%#*$(value_lotNo).val('');%>
+                          <%#*}%>
 
                       } else {
                           alert("Unit Price has not found. Please create new product price control.");
