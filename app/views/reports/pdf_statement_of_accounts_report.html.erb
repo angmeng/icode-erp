@@ -1,0 +1,181 @@
+<% if @detail_statement_of_accounts_report.present? %>
+  <% @detail_statement_of_accounts_report.each_with_index do |rec, index|%>
+<% array = [] %>
+    
+  <% if index == 0 %>
+      <div></div>
+    
+    <% else %>
+      <div style="page-break-before: always;"></div>
+        
+    
+    <% end %>
+    <p align="center"> *** OFFICIAL RECEIPT ***</p>
+    <p align="center">(Valid Upon Cheque Clearence)</p>
+
+    <table>
+      <tr>
+        <td>Received From :<br />
+          <%= rec.trade_company.code rescue'-' %> -
+          <%= rec.trade_company.name rescue'-' %><br />
+          <%= rec.trade_company.address_1 rescue'-' %><br />
+          <%= rec.trade_company.postcode_one rescue'-' %>&nbsp
+          <%= rec.trade_company.city_one rescue'-' %>
+        </td>
+       
+        <td align="right">
+          <br/ >
+          Receipt No. :<br />
+          Date :<br />
+          Page :<br />
+        </td>
+
+        <td>
+          <br />
+          <%= rec.receipt_no rescue'-' %><br />
+          <%= rec.receipt_date.strftime("%d-%m-%Y") %><br />
+          <%= index + 1 %>
+        </td>
+      </tr>
+    </table>
+    
+    <table class="black-line-table">
+      <thead class="header_line">
+      <tr>
+        <th>No.</th>
+        <th>Type / Ref. No</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Cheque Amt</th>
+        <th>Cash Amt</th>
+        <th>Contra Amt</th>
+        <th>Total</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <% rec.statement_of_accounts.each_with_index do |pay , index| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>">
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= StatementOfAccount.transacted(pay) %></td>
+        <td align="center"><%= StatementOfAccount.transacted_date(pay) %></td>
+        <td align="right"><%= four_precision(pay.document_amount) rescue '-' %></td>
+        <% if index == 0 %>
+        <td align="right" style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>"><%= rec.cheque_amount rescue'-' %></td>
+        <% end %>
+        <% if index == 0 %>
+        <td align="right"  style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>"><%= rec.cash_amount rescue'-' %></td>
+        <% end %>
+        <% if index == 0 %>
+        <td align="right"  style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>">0.00</td>
+        <% end %>
+        <% if index == 0 %>
+        <td align="right"  style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>"><%= rec.total_amount rescue'-' %></td>
+        <% end %>
+        <!-- <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= pay.transaction_type rescue'-' %></td>
+        <td align="center">ref no</td>
+        <td align="center"><%= pay.transaction_date.strftime("%d/%m/%Y") rescue'-' %></td>
+        <td align="center"><%= pay.balance_amount rescue'-' %></td>
+        <% array << pay.balance_amount %> -->
+      </tr>
+      <% end %>
+
+    </tbody>
+
+    <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td align="center">total</td>
+        <td align="right"><%= rec.total_amount rescue'-' %></td>
+      </tr>
+    </table>
+
+    <table>
+
+      <tr>
+        Cheque(s) :-
+        <td><%= rec.cheque_no rescue'-' %></td>
+        <td align="left"><%= rec.cheque_date.strftime("%d/%m/%Y") rescue'-' %></td>
+        <td align="left"><%= rec.total_amount rescue'-' %></td>
+      </tr>
+      <tr>
+        <td>&nbsp</td>
+      </tr>
+
+      <tr>
+        <td>Prepared By,</td>
+        <td>Approved By,</td>
+      </tr>
+      <tr>
+        <br />
+        <td>
+          <br />-----------<br />
+          <% a = User.find(rec.updated_by) %>
+            <%= a.name rescue'-' %></td>
+          <td>
+          <br />-----------<br />
+          By LIM
+          </td>
+        </td>
+      </tr>
+    </table>
+    <% end %>
+<% else %>
+  no record had found
+<% end %>
+
+
+
+
+
+
+<style>
+
+table {
+  width:100%;
+}
+
+
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+        }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+  
+</style>

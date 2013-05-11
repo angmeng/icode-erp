@@ -1,6 +1,6 @@
 class AddCreatedDateToHistoryInvoices < ActiveRecord::Migration
   def change
-    add_column :history_invoices, :created_date, :date
+    # add_column :history_invoices, :created_date, :date
 
     change_column :sales_tax_exemptions, :valid_condition, :boolean, :default => true
     remove_column :sales_tax_exemptions, :tarif_code
