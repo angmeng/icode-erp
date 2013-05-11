@@ -1,5 +1,5 @@
 <ul id="j_tabify" class="class_tabify" >
-  <li class="active"><a href="#tabify_listing">Payment Received Report</a></li>
+  <li class="active"><a href="#tabify_listing">Statement of Report</a></li>
   <li><a href="#tabify_search">Search Engine</a></li>
 </ul>
          
@@ -25,17 +25,17 @@
           <tbody>
    
 
-        <% @show_statement_of_accounts_report.each_with_index do |sta , index| %>
-
+        <% @show_receipt_report.each_with_index do |rec , index| %>
             <tr class="<%= cycle("odd_line", "even_line") %>">
-              <td align="center"><%= check_box_tag "sta_ids[]" , sta.id %></td>
+              <td align="center"><%= check_box_tag "rec_ids[]" , rec.id %></td>
               <td align="center"><%= index + 1 %></td>
-              <td align="center"><%= sta.payment_received.trade_company.code rescue'-' %></td>
-              <td align="center"><%= sta.payment_received.trade_company.name rescue'-' %><br /> 
-              <%= sta.payment_received.trade_company.address_1 rescue'-' %></td>
-              <td align="center">111</td>
-              <td align="center"><%= sta.payment_received.payment_date.strftime("%d-%m-%Y") rescue'-' %></td>
+
+              <td align="center"><%= rec.trade_company.code rescue'-' %></td>
+              <td align="center"><%= rec.trade_company.name rescue'-' %><br /><%= rec.trade_company.address_1 rescue'-' %></td>
+              <td align="center"><%= rec.receipt_no rescue'-' %></td>
+              <td align="center"><%= rec.receipt_date.strftime("%d-%m-%Y") rescue'-' %></td>
             </tr>
+          
               <% end %>
           </tbody>
     </table>
@@ -53,20 +53,20 @@
     </div>
 
     <div class="icon_tag" style="float:right;">
-       <% if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW) %>
+       <%# if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_SHOW) %>
         <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
-      <% else %>
-        <%= not_link_show %>
-      <% end %>
+      <%# else %>
+        <%#= not_link_show %>
+      <%# end %>
       
       <span><%= not_link_edit %></span>
       <span><%= not_link_recover %></span>
 
-       <% if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT) %>
+       <%# if roles.include?(InventoryManagementSystem::ACCOUNT_PAYMENT_RECEIVED_REPORT_PRINT) %>
       <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
-      <% else %>
-        <%= not_link_excel %>
-      <% end %>
+      <%# else %>
+        <%#= not_link_excel %>
+      <%# end %>
 
       <% end %>
 
@@ -76,12 +76,13 @@
 
 <div id="tabify_search">
     <table>
-      <%= form_for @statement_of_accounts_report, :url => statement_of_accounts_report_reports_path  do |f| %>
+      <%= form_for @receipt_report, :url => statement_of_accounts_report_reports_path  do |f| %>
+
       <tr>
         <td>Cheque Date :</td>
 
-        <td><%= f.text_field :payment_received_cheque_date_gte , :size => 12, :class=> "mkendo_date"  %> - 
-          <%= f.text_field :payment_received_cheque_date_lte , :size => 12 , :class=> "mkendo_date" %></td>
+        <td><%= f.text_field :statement_of_accounts_transaction_date_gte , :size => 12, :class=> "mkendo_date"  %> - 
+          <%= f.text_field :statement_of_accounts_transaction_date_lte , :size => 12 , :class=> "mkendo_date" %></td>
       </tr>
       <tr>
           <td><%= submit_tag "Search" %></td>

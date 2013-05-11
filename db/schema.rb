@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130510143141) do
 
   create_table "bill_of_materials", :force => true do |t|
@@ -39,9 +38,6 @@ ActiveRecord::Schema.define(:version => 20130510143141) do
   add_index "bom_materials", ["bill_of_material_id"], :name => "index_bom_materials_on_bill_of_material_id"
   add_index "bom_materials", ["material_id"], :name => "index_bom_materials_on_material_id"
   add_index "bom_materials", ["unit_measurement_id"], :name => "index_bom_materials_on_unit_measurement_id"
-=======
-ActiveRecord::Schema.define(:version => 20130510132123) do
->>>>>>> 4f18be6bb1debcfaab2fb30fbc6ee31161c3220e
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -1322,8 +1318,4 @@ ActiveRecord::Schema.define(:version => 20130510132123) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> 4f18be6bb1debcfaab2fb30fbc6ee31161c3220e

@@ -574,8 +574,8 @@ end
 
       #render :text => params[:sta_ids].to_json
       if params[:commit] == "PDF Report"
-        if params[:sta_ids].present?
-          @detail_statement_of_accounts_report = StatementOfAccount.find(params[:sta_ids])
+        if params[:rec_ids].present?
+          @detail_statement_of_accounts_report = Receipt.find(params[:rec_ids])
           html = render_to_string(:layout => false , :action => "pdf_statement_of_accounts_report_html.erb")
             @kit = PDFKit.new(html)
             send_data(@kit.to_pdf , :filename => "pdf_statement_of_accounts_report.pdf",
@@ -583,8 +583,8 @@ end
                                     :disposition => "attachement")
         end
         elsif params[:commit] == "Show"
-         if params[:sta_ids].present?
-            @detail_statement_of_accounts_report = StatementOfAccount.find(params[:sta_ids])
+         if params[:rec_ids].present?
+            @detail_statement_of_accounts_report = Receipt.find(params[:rec_ids])
             respond_to do |format|
               format.html
           end
@@ -748,8 +748,8 @@ end
   end
 
   def statement_of_accounts_report
-    @statement_of_accounts_report = StatementOfAccount.search(params[:search])
-    @show_statement_of_accounts_report = @statement_of_accounts_report.all
+    @receipt_report = Receipt.search(params[:search])
+    @show_receipt_report = @receipt_report.all
   end
 
   def journal_sales_report
