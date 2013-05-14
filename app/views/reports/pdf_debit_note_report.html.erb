@@ -40,7 +40,7 @@
         <tbody>
         <tr>
           <td align="center"><%= index + 1 %></td>
-          <td align="left"><%= dn.debit_type rescue'-' %></td>
+          <td align="left">Your A/C Has Been Debited For Being <%= dn.debit_type rescue'-' %></td>
           <td align="right"><%= dn.amount rescue'-' %></td>
           <% arr << dn.amount %>
         </tr>
@@ -68,8 +68,7 @@
           <td>Confirmed By</td>
           <td>Approved By</td>
         </tr>
-        <br />
-        <br />
+        <tr><td>&nbsp;</td></tr>
         <tr>
           <td>
           <br />
@@ -80,8 +79,7 @@
           <td>
             <br />
         <br /><br />....................<br />
-            <% a = User.find(cn.purchase_by) %>
-            <%= a.name rescue'-' %></td>
+            <%= a.department.name rescue'-' %></td>
           <td>
             <br />
         <br /><br />....................<br />By Ms.Lim</td>

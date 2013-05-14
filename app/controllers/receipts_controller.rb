@@ -25,6 +25,7 @@ class ReceiptsController < ApplicationController
 
   def edit
     @receipt = Receipt.find(params[:id])
+    @statement_of_accounts = @receipt.statement_of_accounts
   end
 
   def create
@@ -41,8 +42,8 @@ class ReceiptsController < ApplicationController
 
   def update
     @receipt = Receipt.find(params[:id])
-    AccountManagement.manage_receipts(params[:datarow], @receipt)
     if @receipt.update_attributes(params[:receipt])
+      AccountManagement.manage_edit_receipts(params[:datarow], @receipt)
       redirect_to @receipt, notice: "Receipt No # #{@receipt.receipt_no} was successfully updated."
     else
       flash[:alert] = @receipt.errors.full_messages.join(", ")

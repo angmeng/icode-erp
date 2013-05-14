@@ -2,7 +2,6 @@
   <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
-      <th>No.</th>
       <th>Document No.</th>
       <th>Document Date</th>
       <th>Document Amount</th>
@@ -13,10 +12,9 @@
   </thead>
 
   <tbody>
-    <% items.each_with_index do |item, index| %>
+    <% items.order("balance_amount DESC").each do |item| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>">
         <td></td>
-        <td align="center"><%= index + 1 %></td>
         <td align="left"><%= StatementOfAccount.transacted(item) %></td>
         <td align="center"><%= StatementOfAccount.transacted_date(item) %></td>
         <td align="right"><%= four_precision(item.document_amount) rescue '-' %>

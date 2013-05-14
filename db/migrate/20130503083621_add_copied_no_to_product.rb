@@ -7,5 +7,4 @@ class AddCopiedNoToProduct < ActiveRecord::Migration
     # add_column :receipts, :payment_received_id, :integer
     # add_index :receipts, :payment_received_id
   end
-  
 end
