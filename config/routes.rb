@@ -67,13 +67,13 @@ Merp::Application.routes.draw do
     get "purchase_order_report"
     get "po_listing_vendor_report"
     get "receive_note_report"
+    get "receipt_report"
     get "rn_part_summary_report"  
     get "sales_tax_exemption_report"
     get "sales_cj5_summary_co_report"
     get "so_listing_report"
     get "so_customer_po_detail_report"
     get "so_summary_report"
-    get "statement_of_accounts_report"
 
 
     #=========== pdf part ===============
@@ -88,6 +88,7 @@ Merp::Application.routes.draw do
     get "pdf_purchase_order_report"
     get "pdf_po_listing_vendor_report"
     get "pdf_receive_note_report"
+    get "pdf_receipt_report"
     get "pdf_sales_cj5_summary_co_report"
     get "pdf_so_customer_po_detail_report"
     get "pdf_do_so_documentation_report"
@@ -95,7 +96,6 @@ Merp::Application.routes.draw do
     get "pdf_sales_orde_listing_report"
     get "pdf_credit_note_report"
     get "pdf_debit_note_report"
-    get "pdf_statement_of_accounts_report"
     
 
     #========= excel part ================

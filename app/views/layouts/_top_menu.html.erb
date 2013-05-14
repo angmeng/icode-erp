@@ -1032,10 +1032,10 @@
               <li class="text_gray">Journel Sales Report</li>
             <% end %>
 
-             <% if roles.include?(InventoryManagementSystem::ACCOUNT_STATEMENT_OF_ACCOUNT_REPORT) %>
-              <li><%= link_to "Statement Of Account Report" , statement_of_accounts_report_reports_path %></li>
+             <% if roles.include?(InventoryManagementSystem::ACCOUNT_RECEIPT_REPORT) %>
+              <li><%= link_to "Receipt Report" , receipt_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">Statement Of Account Report</li>
+              <li class="text_gray">Receipt Report</li>
             <% end %>
           <% end %>
           </ul>
