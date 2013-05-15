@@ -14,7 +14,7 @@ class Receipt < ActiveRecord::Base
   has_many :receipt_statement_lines, :dependent => :destroy
   has_many :statement_of_accounts, :through => :receipt_statement_lines
     
-
+  has_one  :statement_of_account
   
   default_scope order("receipt_no DESC")
   

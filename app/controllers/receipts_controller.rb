@@ -19,8 +19,6 @@ class ReceiptsController < ApplicationController
 
   def new
     @receipt = Receipt.new
-#    @statement_of_accounts = StatementOfAccount.where("trade_company_id = ? and fp = ?", 18, StatementOfAccount::NULL_PAYMENT)
-#    render :text => @statements.to_json
   end
 
   def edit
