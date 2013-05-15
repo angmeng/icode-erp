@@ -1,20 +1,18 @@
-<table width="100%">
-  <tr>
-    <td align="right">
-      <%= link_to 'Search', "#", :class => "search_link" %>
-    </td>
-  </tr>
-</table>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISITING UNIT MEASUREMENTS - KIV</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div><%= render "search_unit_measurement_kiv"  %></div>
+<div id="tabify_listing">
+  <% if @unit_measurements.present? %>
+    <div class="table_background"><%= render "listing_um", :ums => @unit_measurements %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING KIV - UNIT MEASUREMENTS</strong></div>
+<div id="tabify_search">
+  <%= render "search_unit_measurement_kiv" %>
+</div>
 
-<% if @unit_measurements.present? %>
-  <%= render "listing_um", :ums => @unit_measurements %>
-  <%= render "action_unit_measurement_kiv" %>            
-<% else %>
-  Not Record Found.
-<% end %>
-
-<br/>
+<%= render "action_unit_measurement_kiv" %>
