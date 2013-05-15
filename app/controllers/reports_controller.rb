@@ -6,7 +6,7 @@ class ReportsController < ApplicationController
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :so_summary_report , 
   :po_listing_vendor_report , :debit_note_report , :receive_note_report , 
-  :journal_sales_report , :statement_of_accounts_report]
+  :journal_sales_report , :receipt_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -570,27 +570,27 @@ end
       end
     end
 
-    def pdf_statement_of_accounts_report
+    def pdf_receipt_report
 
       #render :text => params[:sta_ids].to_json
       if params[:commit] == "PDF Report"
         if params[:rec_ids].present?
-          @detail_statement_of_accounts_report = Receipt.find(params[:rec_ids])
-          html = render_to_string(:layout => false , :action => "pdf_statement_of_accounts_report_html.erb")
+          @detail_receipt_report = Receipt.find(params[:rec_ids])
+          html = render_to_string(:layout => false , :action => "pdf_receipt_report_html.erb")
             @kit = PDFKit.new(html)
-            send_data(@kit.to_pdf , :filename => "pdf_statement_of_accounts_report.pdf",
+            send_data(@kit.to_pdf , :filename => "pdf_receipt_report.pdf",
                                     :type => 'application/pdf' ,
                                     :disposition => "attachement")
         end
         elsif params[:commit] == "Show"
          if params[:rec_ids].present?
-            @detail_statement_of_accounts_report = Receipt.find(params[:rec_ids])
+            @detail_receipt_report = Receipt.find(params[:rec_ids])
             respond_to do |format|
               format.html
           end
         end
       else
-          redirect_to statement_of_accounts_report_reports_path
+          redirect_to receipt_report_reports_path
       end
 
     end
@@ -747,7 +747,7 @@ end
     #@take_ids = @show_po_report.map(&:id) #for pdf 
   end
 
-  def statement_of_accounts_report
+  def receipt_report
     @receipt_report = Receipt.search(params[:search])
     @show_receipt_report = @receipt_report.all
   end

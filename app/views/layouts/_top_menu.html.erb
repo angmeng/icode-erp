@@ -1028,14 +1028,15 @@
             <% if roles.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT) %>
               <li><%= link_to "Journal Sales Report" , journal_sales_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">Journel Sales Report</li>
+              <li><%= disabled_menu_style "Journel Sales Report" %></li>
             <% end %>
 
-             <%# if roles.include?(InventoryManagementSystem::ACCOUNT_STATEMENT_OF_ACCOUNT_REPORT) %>
-              <li><%= link_to "Statement Of Account Report" , statement_of_accounts_report_reports_path %></li>
-            <%# else %>
-              <%#*<li class="text_gray">Statement Of Account Report</li>%>
-            <%# end %>
+             <% if roles.include?(InventoryManagementSystem::ACCOUNT_RECEIPT_REPORT) %>
+              <li><%= link_to "Receipt Report" , receipt_report_reports_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Receipt Report" %></li>
+            <% end %>
+
           <% end %>
           </ul>
         </li>
