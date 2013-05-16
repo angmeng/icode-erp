@@ -608,9 +608,8 @@
             <li>
               Unit Measurements
               <ul>
-                <li><%= link_to "Listing UM", unit_measurements_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
-                <li><%= link_to "New UM", new_unit_measurement_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
-                <li><%= link_to "KIV UM", kiv_unit_measurements_path, :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe" %></li>
+                <li><%= link_to "Listing Unit Measurement", unit_measurements_path %></li>
+                <li><%= link_to "Listing Unit Measurement - KIV", kiv_unit_measurements_path %></li>
               </ul>
             </li>
             <li>
@@ -1029,14 +1028,15 @@
             <% if roles.include?(InventoryManagementSystem::ACCOUNT_DEBTOR_SALES_JOURNAL_REPORT) %>
               <li><%= link_to "Journal Sales Report" , journal_sales_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">Journel Sales Report</li>
+              <li><%= disabled_menu_style "Journel Sales Report" %></li>
             <% end %>
 
              <% if roles.include?(InventoryManagementSystem::ACCOUNT_RECEIPT_REPORT) %>
               <li><%= link_to "Receipt Report" , receipt_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">Receipt Report</li>
+              <li><%= disabled_menu_style "Receipt Report" %></li>
             <% end %>
+
           <% end %>
           </ul>
         </li>

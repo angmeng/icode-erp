@@ -3,7 +3,7 @@ class StatementOfAccountsController < ApplicationController
   layout "sheetbox", :only => [:index]
   
   def index
-    @statement_of_accounts = StatementOfAccount.where(:trade_company_id => params[:company_id], :fp => StatementOfAccount::NULL_PAYMENT)
+    @statement_of_accounts = StatementOfAccount.where(:trade_company_id => params[:company_id], :fp => (StatementOfAccount::NULL_PAYMENT || StatementOfAccount::PARTIAL_PAYMENT))
     render :layout => false
   end
   

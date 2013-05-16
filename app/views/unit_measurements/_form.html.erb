@@ -1,16 +1,31 @@
 <%= form_for(@unit_measurement) do |f| %>
-  <div class="fix_800x450">
-    <table>
-      <tr>
-        <td width="100">Name</td>
-        <td><%= f.text_field :code %></td>
-      </tr>
-    </table>
+  <div class="popup_content">
+    <div id="valid_unit">
+      <table>
+        <tr>
+          <td width="100"><b>Name</b></td>
+          <td><%= f.text_field :code, :class => "k-textbox" %></td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div class="icon_tag">
     <%= link_save_button %>
     <%= link_close_button %>
   </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+        var validator = $("#valid_unit").kendoValidator().data("kendoValidator");
+        
+        $("#save_button").click(function() {          
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
 <% end %>
 

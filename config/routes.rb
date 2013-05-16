@@ -9,7 +9,6 @@ Merp::Application.routes.draw do
 
   resources :history_invoices
 
-
   resources :statement_of_accounts
 
   get "documentation/product_rule"
@@ -59,7 +58,7 @@ Merp::Application.routes.draw do
     get "do_so_documentation_report"
     get "debit_note_report"
     get "journal_sales_report"
-    get "inventory_report" 
+    get "inventory_report"
     get "pr_report"
     get "price_report"
     get "product_report"
@@ -96,7 +95,7 @@ Merp::Application.routes.draw do
     get "pdf_sales_orde_listing_report"
     get "pdf_credit_note_report"
     get "pdf_debit_note_report"
-    
+
 
     #========= excel part ================
     get "excel_sales_cj5_summary_co_report"

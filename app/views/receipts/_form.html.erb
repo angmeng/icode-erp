@@ -90,7 +90,8 @@
                 <td><b>Customer Company</b></td>
                 <td>
                   <% if @receipt.trade_company_id.present? %>
-                    <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @receipt.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
+                    [<%= @receipt.trade_company.code rescue '-' %>] <%= @receipt.trade_company.name rescue '-' %>                  
+                    <%#= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @receipt.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company" } %>
                   <% else %>
                     <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code),                            { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Trade Company", :onchange => "loading_cheque(this)" } %>
                   <% end %>
@@ -144,97 +145,4 @@
   </div>
 <% end %>
 
-<% content_for :jquery_script do %>
-  <script>
-    $(document).ready(function() {   
-        $(".numberKey").forceNumeric();
-        
-        $("#receipt_cash_amount, #receipt_cheque_amount").keyup(function(){
-            var cash         = +$("#receipt_cash_amount").val();
-            var cheque       = +$("#receipt_cheque_amount").val();
-            var total        = cash + cheque;
-            $("#total_amount").html(total.toFixed(4));
-        });
-        
-        $('input[id$="fp"]').keydown(function(e){
-            if ($(this).val().length <= 1){
-                var key = e.which || e.keyCode;
-                if (!e.shiftKey && !e.altKey && !e.ctrlKey && 
-                  // Press "N", "F", "P", Backspace, Tab, Home, End, left and right arrows, DEL
-                  key == 78 || key == 70 || key == 80 || key == 8 || key == 9 || key == 35 || key == 36 || key == 37 || key == 39 || key == 46) {
-                  if (e.keyCode != 8) {                       
-                    
-                      var host_amount = +$("#total_amount").html();
-                      $("#remaining_amount").html(host_amount.toFixed(4));
-
-                      var grandTotal = 0;
-
-                      $('table.target_table tbody').find('[id$="document_amount"]').each(function(k, elem) {
-                          var rem_amount  = +$("#remaining_amount").html();
-                          var number = $(this).attr("name").match(/\[(\d+)\]/);
-                          var number = parseInt(number[1], 10);
-                          var balance = "#bal_amount_" + number;
-                          var balance_val = "#datarow_" + number + "_balance_amount";
-                          var os_amount = "#datarow_" + number + "_os_amount";
-                          var doc_amt_html  = "#doc_amount_" + number;
-                          var doc_amt_val   = "#datarow_" + number + "_document_amount";
-                          var answer_ori        = +$(doc_amt_html).html();
-                          var answer_ori_entry  = +$(doc_amt_val).val();
-                          var select_value = +$(this).val();
-                          var cal = rem_amount - select_value;
-                          var real_os_amount = answer_ori - answer_ori_entry;
-                          
-                          $(balance).html(cal.toFixed(4));
-                          $("#remaining_amount").html(cal.toFixed(4));
-                          $(balance_val).val(cal.toFixed(4));
-                          $(os_amount).val(real_os_amount);
-                          
-                      });
-                      
-                      $(this).val($(this).val()); 
-                  }
-                } else {
-                    return false;
-                }
-            } else {
-                $(this).val($.trim($(this).val()).slice(0, -1));
-            }
-        }); 
-        
-        var validator = $("#valid_receipt").kendoValidator().data("kendoValidator");
-        
-        $("#save_button").click(function() {          
-            if (validator.validate()) { busyHours(); }
-            else { alert("Invalid Data Form..."); return false; } 
-        });
-    });
-    
-    function loading_cheque(sel){
-      var trade_company_id = sel.options[sel.selectedIndex].value;
-      
-      $.ajax({
-          url: "/statement_of_accounts",
-          data: {company_id: trade_company_id},
-          success: function(data) { $("#listing_statement").html(data); }
-      });
-    }
-                  
-
-    
-    function loading_cheque_amount(sel){
-      var payment_id = sel.options[sel.selectedIndex].value;
-
-      $.ajax({
-          dataType: "json",
-          cache: false,
-          url: '/payment_receiveds/' + payment_id,
-          timeout: 2000,
-          success: function(data){
-            var numerictextbox = $("#receipt_cheque_amount").data("kendoNumericTextBox");
-            numerictextbox.value(data.cheque_amount);
-          }
-      });
-    }
-  </script>
-<% end %>
-
+<%= render "js_receipt" %>

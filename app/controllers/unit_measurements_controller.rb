@@ -1,7 +1,7 @@
 class UnitMeasurementsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :are_you_director?
-  layout "sheetbox"
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
     
   def index
     @search = UnitMeasurement.search(params[:search])
@@ -13,14 +13,10 @@ class UnitMeasurementsController < ApplicationController
     @unit_measurements = UnitMeasurement.ordered_code_kiv(@search)
   end
 
-  # GET /unit_measurements/1
-  # GET /unit_measurements/1.json
   def show
     @unit_measurement = UnitMeasurement.find(params[:id])
   end
 
-  # GET /unit_measurements/new
-  # GET /unit_measurements/new.json
   def new
     @unit_measurement = UnitMeasurement.new
 

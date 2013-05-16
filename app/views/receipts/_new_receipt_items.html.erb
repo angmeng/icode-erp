@@ -15,13 +15,21 @@
         </thead>
 
         <tbody>         
-            <% @statement_of_accounts.order("balance_amount DESC").each_with_index do |statement| %>
+            <% @statement_of_accounts.each_with_index do |statement| %>
               <tr class="<%= cycle('odd_line', 'even_line') %>">
-                <td><%= StatementOfAccount.transacted(statement) %></td>
+                <td>
+                  <span id="receipt_type_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_type(statement) %></span>
+                  <%= StatementOfAccount.transacted(statement) %>
+                </td>
                 <td align="center"><%= StatementOfAccount.transacted_date(statement) %></td>
                 <td align="right">
-                  <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
-                  <%= text_field_tag   "datarow[#{statement.id}][document_amount]", StatementOfAccount.transacted_amount(statement), :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                  <% if action_name == "edit" %>
+                    <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
+                    <%= text_field_tag   "datarow[#{statement.id}][document_amount]", statement.document_amount, :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                  <% else %>
+                    <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
+                    <%= text_field_tag   "datarow[#{statement.id}][document_amount]", StatementOfAccount.transacted_amount(statement), :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                  <% end %>
                 </td>
                 <td align="right">
                   <span id="bal_amount_<%= statement.id %>"><%= two_precision(statement.balance_amount) %></span>
@@ -41,47 +49,51 @@
           $(document).ready(function() {
               $(".numberKey").forceNumeric();
 
-              $("#receipt_cash_amount, #receipt_cheque_amount").keyup(function(){
-                  var cash         = +$("#receipt_cash_amount").val();
-                  var cheque       = +$("#receipt_cheque_amount").val();
-                  var total        = cash + cheque;
-                  $("#total_amount").html(total.toFixed(4));
-              });
-
               $('input[id$="fp"]').keydown(function(e){
                   if ($(this).val().length <= 1){
                       var key = e.which || e.keyCode;
                       if (!e.shiftKey && !e.altKey && !e.ctrlKey && 
                         // Press "N", "F", "P", Backspace, Tab, Home, End, left and right arrows, DEL
                         key == 78 || key == 70 || key == 80 || key == 8 || key == 9 || key == 35 || key == 36 || key == 37 || key == 39 || key == 46) {
-                        if (e.keyCode != 8) {                       
-
-                            var host_amount = +$("#total_amount").html();
-                            $("#remaining_amount").html(host_amount.toFixed(4));
-
-                            var grandTotal = 0;
+                        if (e.keyCode != 8) {
+                            var cash         = +$("#receipt_cash_amount").val();
+                            var cheque       = +$("#receipt_cheque_amount").val();
+                            var total        = cash + cheque;
+                            $("#remaining_amount").html(total.toFixed(2));
 
                             $('table.target_table tbody').find('[id$="document_amount"]').each(function(k, elem) {
-                                var rem_amount  = +$("#remaining_amount").html();
-                                var number = $(this).attr("name").match(/\[(\d+)\]/);
-                                var number = parseInt(number[1], 10);
-                                var balance = "#bal_amount_" + number;
-                                var balance_val = "#datarow_" + number + "_balance_amount";
-                                var os_amount = "#datarow_" + number + "_os_amount";
+                                var rem_amount    = +$("#remaining_amount").html();
+                                var number        = $(this).attr("name").match(/\[(\d+)\]/);
+                                var number        = parseInt(number[1], 10);
+                                var receipt_type  = "#receipt_type_" + number;
                                 var doc_amt_html  = "#doc_amount_" + number;
                                 var doc_amt_val   = "#datarow_" + number + "_document_amount";
-                                var os_html = "#os_amount_" + number;
+                                var balance_html  = "#bal_amount_" + number;
+                                var balance_val   = "#datarow_" + number + "_balance_amount";
+                                var os_html       = "#os_amount_" + number;
+                                var os_amount     = "#datarow_" + number + "_os_amount";
                                 
                                 var answer_ori        = +$(doc_amt_html).html();
                                 var answer_ori_entry  = +$(doc_amt_val).val();
-                                var select_value = +$(this).val();
-                                var cal = rem_amount - select_value;
-                                var real_os_amount = answer_ori - answer_ori_entry;
-                                $(balance).html(cal.toFixed(4));
-                                $("#remaining_amount").html(cal.toFixed(4));
-                                $(balance_val).val(cal.toFixed(4));
-                                $(os_amount).val(real_os_amount);
+                                var select_value      = +$(this).val();
+                                var receipt_type      = $(receipt_type).html();
+                                
+                                if (receipt_type == "<%= StatementOfAccount::DEBIT_NOTE %>" || receipt_type == "<%= StatementOfAccount::INVOICE %>"){
+                                  var cal = rem_amount - select_value;
+                                  var real_os_amount = answer_ori - answer_ori_entry;
+                                } else if (receipt_type == "<%= StatementOfAccount::CREDIT_NOTE %>") {
+                                  var cal = rem_amount + select_value;
+                                  var real_os_amount = 0;
+                                } else {
+                                  var cal = 0;
+                                  var real_os_amount = 0;
+                                }
+                                                                
+                                $("#remaining_amount").html(cal.toFixed(2));
+                                $(balance_html).html(cal.toFixed(2));
+                                $(balance_val).val(cal.toFixed(2));
                                 $(os_html).html(real_os_amount);
+                                $(os_amount).val(real_os_amount);
                             });
 
                             $(this).val($(this).val()); 
