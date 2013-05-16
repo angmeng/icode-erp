@@ -528,7 +528,7 @@ end
   def pdf_debit_note_report
     if params[:commit] == "PDF Report"
      if params[:dn_ids].present?
-        @detail_dedit_note_report = DebitNote.find(params[:dn_ids])
+        @detail_debit_note_report = DebitNote.find(params[:dn_ids])
         html = render_to_string(:layout => false , :action => "pdf_debit_note_report.html.erb")
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf , :filename => "pdf_debit_note_report.pdf",
@@ -571,12 +571,11 @@ end
     end
 
     def pdf_receipt_report
-
-      #render :text => params[:sta_ids].to_json
+      #render :text => params[:rec_ids].to_json
       if params[:commit] == "PDF Report"
         if params[:rec_ids].present?
           @detail_receipt_report = Receipt.find(params[:rec_ids])
-          html = render_to_string(:layout => false , :action => "pdf_receipt_report_html.erb")
+          html = render_to_string(:layout => false , :action => "pdf_receipt_report.html.erb")
             @kit = PDFKit.new(html)
             send_data(@kit.to_pdf , :filename => "pdf_receipt_report.pdf",
                                     :type => 'application/pdf' ,

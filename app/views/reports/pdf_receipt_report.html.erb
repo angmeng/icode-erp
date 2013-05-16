@@ -1,6 +1,9 @@
 <% if @detail_receipt_report.present? %>
+  <%# counter = 0 %>
   <% @detail_receipt_report.each_with_index do |rec, index|%>
-<% array = [] %>
+  <%# counter += 1%>
+  <%# if counter < 4 %>
+  <% array = [] %>
     
   <% if index == 0 %>
       <div></div>
@@ -39,7 +42,7 @@
       </tr>
     </table>
     
-    <table class="black-line-table">
+  <table class="black-line-table">
       <thead class="header_line">
       <tr>
         <th>No.</th>
@@ -54,7 +57,6 @@
       </tr>
     </thead>
     <tbody>
-
       <% rec.statement_of_accounts.each_with_index do |pay , index| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>">
         <td align="center"><%= index + 1 %></td>
@@ -81,16 +83,10 @@
         <% array << pay.balance_amount %> -->
       </tr>
       <% end %>
-
     </tbody>
-
-    <tr>
-        <% 2.times do |td| %><td></td><% end %>
-        <td align="center">total</td>
-        <td align="right"><%= rec.total_amount rescue'-' %></td>
-      </tr>
-    </table>
-
+    <!-- <td>Continue Next Page</td> -->
+    <% else %>
+  </table>
     <table>
 
       <tr>
@@ -120,6 +116,7 @@
         </td>
       </tr>
     </table>
+    <%# end %>
     <% end %>
 <% else %>
   no record had found
