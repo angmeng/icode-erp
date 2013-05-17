@@ -1,8 +1,186 @@
 <% if @detail_sales_journel_report.present? %>
-	<% @detail_sales_journel_report.each_with_index do |sj, index|%>
 
-	<% end %>
+ 
+<%# counter = 0 %>
+<%# @users.each do |user| %>
+  <%# counter += 1 %>
+
+  <%# if counter < 4 %>
+<!-- 	<%# if index == 0 %>
+      <div></div>
+    
+    <%# else %>
+      <div style="page-break-before: always;"></div>
+        
+    
+    <%# end %> -->
+	
+
+	<p align="center">Etheos Imprint Technology</p>
+	<p align="center"><u>Monthly Sales Journal</u></p>
+
+	<table id="jgrid" class="black-line-table">
+		<thead>
+			<tr class="header_line">
+				<th>Date</th>
+				<th>Trade Company</th>
+				<th>Folio</th>
+				<th>INV #</th>
+				<th>Cash</th>
+				<th>Debtors</th>
+				<th>CJ5 EXEMPT.</th>
+				<th>Local EXEMPT.</th>
+				<th>LMW</th>
+				<th>FTZ</th>
+				<th>Export</th>
+				<th>Others</th>
+				<th>Taxable Sales</th>
+				<th>Sales Tax</th>
+			</tr>
+		</thead>
+
+		<% arr0 = [] %><% arr1 = [] %><% arr2 = [] %><% arr3 = [] %><% arr4 = [] %><% arr5 = [] %><% arr6 = [] %><% arr7 = [] %><% arr8 = [] %>
+
+		<tbody>
+
+			<% @detail_sales_journel_report.each do |sj|%>
+			<tr class="<%= cycle("odd_line", "even_line") %>">
+				
+			
+				
+
+				<td align="center"><%= sj.do_date.strftime("%d-%m-%Y") rescue'-' %></td>
+				<td align="center"><%= sj.trade_company.name rescue'-' %></td>
+				<td align="center"></td>
+				<td align="center"><%= sj.do_no rescue'-' %></td>
+				<td align="center"></td>
+				
+				<td align="center"><%= sj.calculate_sum_of_doi %></td>
+
+				<% arr0 << sj.calculate_sum_of_doi %>
+
+				<% if sj.type_of_sale_id == TypeOfSale::CJ5_LICENCE_MANUFACTURER %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr1 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::LOCAL_SALES_MAS %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr2 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::LMW_EXEMPTION_WL %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr3 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::FREE_TRADE_ZONE %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr4 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::EXPORT_SALES %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr5 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::OTHERS %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr6 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::IMPORT %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr7 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				<% if sj.type_of_sale_id == TypeOfSale::SALES_WITH_TAX %>
+					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<% arr8 << sj.calculate_sum_of_doi %>
+				<% else %>
+					<td>&nbsp;</td>
+				<% end %>
+				
+			</tr>
+			<% end %>
+			<tr>
+				<% 4.times do |td| %><td></td><% end %>
+				<td align="center">0.00</td>
+				<td align="center"><%= two_precision(arr0.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr1.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr2.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr3.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr4.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr5.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr6.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr7.sum) rescue'-' %></td>
+				<td align="center"><%= two_precision(arr8.sum) rescue'-' %></td>
+			</tr>
+		
+		</tbody>
+	</table>
+	
+	
 
 <% else %>
 No record found
 <% end %>
+
+<style>
+
+  table{
+    width:100%;
+    border:0px;
+  }
+  
+  body {
+    width:100%;
+    background-color: white;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+         
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+
+        }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+</style>

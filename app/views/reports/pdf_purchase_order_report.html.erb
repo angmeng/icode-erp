@@ -4,11 +4,22 @@
 <% arr = [] %>
 
 <% if @detail_purchase_order_report.present? %>
+<% @detail_purchase_order_report.each_with_index do |pp , index| %>
+	
+	<% if index == 0 %>
+      <div>
+      
+    <% else %>
+      <div style="page-break-before: always;">
+      	<br /><br /><br />
+        
+    <% end %>
+	
 	<div class="layout">
 	<h4>Purchase Order</h4>
 	<table style="width:100%;">
-		<% @detail_purchase_order_report.each do |pp| %>
-		
+
+
 		<tr>
 			<td align="left">
 				Vendor : 
@@ -57,6 +68,7 @@
 		</tr>
 	</table>
 <div class="po_middle_layout">
+	
 <table>
 	<thead>
 	<tr>
@@ -69,21 +81,21 @@
 		<th style="width:90px;">Amount<br />--------</th>
 	</tr>
 	</thead>
+	
 	<tbody>
 	<% pp.purchase_requisition.purchase_requisition_items.each_with_index do |pr , index | %>
-	<tr>
-		<td align="center"><%= index + 1 %></td>
-		<td align="center"><%= pr.product.product_combobox.product_code rescue'-'  %></td>
-		<td align="left"><%= pr.product.desc rescue'-' %></td>
-		<td align="center"><%= pr.eta.strftime("%d-%m-%Y") rescue'-' %></td>
-		<td align="center"><%= pr.quantity rescue'-' %></td>
-		<td align="right"><%= pr.unit_price rescue'-' %></td>
+		<tr>
+			<td align="center"><%= index + 1 %></td>
+			<td align="center"><%= pr.product.product_combobox.product_code rescue'-'  %></td>
+			<td align="left"><%= pr.product.desc rescue'-' %></td>
+			<td align="center"><%= pr.eta.strftime("%d-%m-%Y") rescue'-' %></td>
+			<td align="center"><%= pr.quantity rescue'-' %></td>
+			<td align="right"><%= pr.unit_price rescue'-' %></td>
+			<td align="right"><%= two_precision(pr.quantity * pr.unit_price ) rescue'-' %></td>
+		</tr>
 		<% arr << pr.quantity * pr.unit_price %>
-		<td align="right"><%= two_precision(pr.quantity * pr.unit_price ) rescue'-' %></td>
-		<% end %>
-	</tr>
+	<% end %>
 	<tr>
-		<%# array << arr %>
 		<% 5.times do |td| %><td></td><% end %>
 		<td align="right">-------------------<br />
 						Sub-Total	:
@@ -107,11 +119,13 @@
 		<td align="right"><%= two_precision(arr.sum + pp.tax) %><br />
 						   ------------------</td>
 	</tr>
+
+	
 	</tbody>
 </table>
 </div>
 
-  
+
 
 <table class="po_bottom_layout">
 	<tr style="height:100px;">
@@ -144,9 +158,15 @@
 			<%= b.name rescue'-' %></td>
 		<td>B Y LIM </td>
 	</tr>
-	<% end %>
+	
 </table>
+<% end %>
+
+<% else %>
+no record found
 	<% end %> <%# end of if statement %>
+</div>
+
 </div>
 
 
@@ -161,7 +181,7 @@ table {
 }
 
 .po_middle_layout {
-	height:470px;
+	/*height:auto;*/
 	margin-right:20px;
 }
 

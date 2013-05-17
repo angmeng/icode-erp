@@ -1,5 +1,5 @@
 <ul id="j_tabify" class="class_tabify">
-  <li class="active"><a href="#tabify_listing">Journal Sales Report</a></li>
+  <li class="active"><a href="#tabify_listing">Sales Journal Report</a></li>
   <li><a href="#tabify_search">Search Engine</a></li>
 </ul>
 <!-- <input type="checkbox" name="all" id="checkall" />Check All -->
@@ -12,10 +12,9 @@
           <tr class="header_line">
             <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
             <th>No.</th>
-            <th>Journal Sales No.</th>
+            <th>INV No.</th>
             <th>Trade Company Name</th>
-            <th>Particular</th>
-            <th>Journal Date</th>
+            <th>Date</th>
           </tr>
         </thead>
 
@@ -25,10 +24,9 @@
             
             <td align="center"><%= check_box_tag "js_ids[]" , js.id %></td>
             <td align="center"><%= index + 1 %></td>
-            <td align="center"><%= js.jv_no rescue'-' %></td>
-            <td align="center"><%= js.trade_company_name rescue'-' %></td>
-            <td align="center"><%= js.particular rescue'-' %></th>
-            <td align="center"><%= js.jv_date.strftime("%d-%m-%Y") rescue'-' %></th>
+            <td align="center"><%= js.do_no rescue'-'  %></td>
+            <td align="center"><%= js.trade_company.name rescue'-' %></td>
+            <td align="center"><%= js.do_date.strftime("%d-%m-%Y") rescue'-' %></th>
           </tr>
           <% end %>
         </tbody>
@@ -67,23 +65,15 @@
 
 <div id="tabify_search">
   <%= form_for @journal_sales_report, :url => journal_sales_report_reports_path do |f| %>
+  <br />
     <table>
       <tr>
-        <td>Journal No.</td>
-        <td><%= f.text_field :jv_no_gte , :size => 12 %> - 
-          <%= f.text_field :jv_no_lte ,:size => 12 %></td>
-        <td>Journal Date</td>
-        <td><%= f.text_field :jv_date_gte , :size => 9 , :class=> "mkendo_date"%> - 
-            <%= f.text_field :jv_date_lte ,:size => 9 , :class=> "mkendo_date" %></td>
+        <td>trade Company</td>
+        <td><%= f.text_field :trade_company_name_contains , :size => 12 %>
+        <td>Delivery Order Date</td>
+        <td><%= f.text_field :do_date_gte , :size => 9 , :class=> "mkendo_date"%> - 
+            <%= f.text_field :do_date_lte ,:size => 9 , :class=> "mkendo_date" %></td>
       </tr>
-
-      <tr>
-        <td>Particular</td>
-        <td><%= f.text_field :particular_contains , :size => 12 %></td>
-        <!-- <td>Trade Company Code / Name</td>
-        <td><%#= f.text_field :trade_company_name_contains,:size => 12 %></td> -->
-      </tr>
-     
 
       <tr>
       <td><%= f.submit "Search" %></td>

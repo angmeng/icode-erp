@@ -33,6 +33,45 @@ class DeliveryOrder < ActiveRecord::Base
   #   if authorize_print == true
   #     authorize_print.update_attributes
   # end
+
+
+  def calculate_sum_of_doi
+      delivery_order_items.map(&:unit_price).sum
+    #     delivery_order_items.each do |doi|
+    #   doi.map(&:unit_price).sum()
+    # end
+  end
+    # if type_of_sale_id == TypeOfSale::SALES_WITH_TAX
+    #   delivery_order_items.each do |p|
+    #     if type_of_sale_id == TypeOfSale::SALES_WITH_TAX
+    #     arr1 << p.delivery_qty.to_f
+  
+      
+    #   elsif type_of_sale == TypeOfSale::SALES_WITH_TAX
+    #     arr1 << delivery_qty.to_f
+
+    #   elsif type_of_sale == TypeOfSale::OTHERS
+    #     arr2 << delivery_qty.to_f
+
+    #   elsif type_of_sale == TypeOfSale::FREE_TRADE_ZONE
+    #     arr3 << delivery_qty.to_f
+    
+    #   elsif type_of_sale == TypeOfSale::LMW_EXEMPTION_WL
+    #     arr4 << delivery_qty.to_f
+      
+    #   elsif type_of_sale == TypeOfSale::CJ5_LICENCE_MANUFACTURER
+    #     arr5 << delivery_qty.to_f
+   
+    #   elsif type_of_sale == TypeOfSale::EXPORT_SALES
+    #     arr6 << delivery_qty.to_f
+  
+    #   elsif type_of_sale == TypeOfSale::IMPORT
+    #     arr7 << delivery_qty.to_f
+
+    #   elsif type_of_sale == TypeOfSale::LOCAL_SALES_MAS
+    #      arr8 << delivery_qty.to_f
+    #   end
+
   
   def uppercase_text
     self.sales_rep.upcase! if self.sales_rep.present?
