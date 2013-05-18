@@ -211,7 +211,7 @@ class TradeCompany < ActiveRecord::Base
         end
       else
         if sales_tax_exemption_line.sales_tax_exemption.present?
-          return "stop_ste", "The Sales Tax Exemption [#{sales_tax_exemption_line.sales_tax_exemption.running_no}] was invalid."
+          return "stop_ste", "The Sales Tax Exemption No. ##{sales_tax_exemption_line.sales_tax_exemption.running_no} was invalid."
         end
       end
     end

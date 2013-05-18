@@ -35,7 +35,7 @@
                     if (data.ste_name != null){
                       if (data.working == "stopped"){
                         $("#save_button").attr("disabled", true)
-                        $("#ste_id").html(data.ste_name);
+                        $("#ste_id").html(data.ste_name).css("color", "red");
                       } else {
                         $("#save_button").attr("disabled", false)
                         $("#delivery_order_sales_tax_exemption_id").val(data.sales_tax_exemption_id);
@@ -283,5 +283,17 @@
             $(answer_order).html(val_temp_order);
         }
     }
+    
+    <%#*function calculate_sales_tax_exemption_no(sel){%>
+        <%#*var number = sel.name.match(/\[(\d+)\]/);%>
+        <%#*var number = parseInt(number[1], 10);%>
+        <%#*var sale_order_item = sel.options[sel.selectedIndex].value;%>
+        <%#*var count = 0;%>
+        
+        <%#*$('table.target_table tbody').find('[id$="sales_order_item_id"]').each(function(k, elem) {%>
+            <%#*var select_value = $(this).val();%>
+            <%#*if (select_value == sale_order_item){ count++; }%> 
+        <%#*});%>
+    <%#*}%>
   </script>
 <% end %>

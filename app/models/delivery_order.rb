@@ -13,6 +13,7 @@ class DeliveryOrder < ActiveRecord::Base
   belongs_to :currency
   belongs_to :trade_term
   belongs_to :transport
+  belongs_to :sales_tax_exemption
   
   ACTIVE        = "Active"
   KEEP_IN_VIEW  = "KIV"

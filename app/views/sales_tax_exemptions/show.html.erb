@@ -46,10 +46,9 @@
         <th>Tarif Code</th>
         <th>Apply Qty</th>
         <th>Origin U/M</th>
-        <th>Complete Qty</th>
         <th>Available Qty</th>
         <th>Calculate U/M</th>
-
+        <th>Complete Qty</th>
       </tr>
     </thead>
     <tbody>
@@ -61,9 +60,9 @@
             <td align="center" width="100"><%= barang.tarif_code rescue '-' %></td>
             <td align="center" width="100"><%= two_precision(barang.apply_qty) rescue '-' %></td>
             <td align="center" width="100"><%= barang.unit_measurement.code rescue '-' %></td>
-            <td align="center" width="100"><%= two_precision(barang.complete_qty) rescue '-' %></td>
             <td align="center" width="100"><%= two_precision(barang.available_qty) rescue '-' %></td>
             <td align="center" width="100"><%= barang.belongs_to_cal_um.code rescue '-' %></td>
+            <td align="center" width="100"><%= two_precision(barang.complete_qty) rescue '-' %></td>
           </tr>
         <% end %>
       <% end %>

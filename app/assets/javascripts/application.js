@@ -20,7 +20,7 @@ $(document).ready(function () {
     
     var window_height           = $(window).height();
     var ctn_width               = $(window).width() - 20; // It is for table width
-    var tabify_height           = $(".class_tabify").height();    
+    var tabify_height           = $(".class_tabify").height();
     var mainHeader_height       = $("#main_header").height();
     var mainFooter_height       = $("#main_footer").height();
     var menu_height             = $("#k_menu").height();
@@ -237,18 +237,23 @@ $(document).ready(function () {
     setTimeout(function(){
             var window_height                   = $(window).height();
             var ctn_width                       = $(window).width() - 20; // It is for table width
+            var popup_tabify_height             = $(".class_tabify").height();
             var title_height                    = $(".title_head").height();
             var button_height                   = $(".icon_tag").height();
             var table_detail_height             = $(".table_details").height();
             var qr_signature_height             = $(".qr_signature").height();
+            
             var popup_content_height            = window_height - title_height - button_height - 12;
             var popup_tab_height                = popup_content_height - 50;
             var popup_form_table_height         = popup_content_height - table_detail_height - 15;
             var popup_tab_height_and_signature  = popup_content_height - qr_signature_height - 60;
+            
+            var popup_tabify_content_height     = window_height - popup_tabify_height - button_height - 12; 
 
             // It is for popup normal page
             $(".popup_content").css({ 'height': popup_content_height }).addClass("page_wrapper"); 
             $(".popup_form_table").css({ 'height': popup_form_table_height }).addClass("page_wrapper"); 
+            $(".popup_tabify").css({ 'height': popup_tabify_content_height }).addClass("page_wrapper"); 
             
             // IMS - User Account
             $("#name_entry, #ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_account, #ims_report_1,#ims_report_2, #ims_report_3, #receipt_1, #receipt_2").height(popup_tab_height).addClass("page_wrapper");
@@ -269,6 +274,13 @@ $(document).ready(function () {
                 height: popup_form_table_height,
                 scrolling: "yes"
             });
+            
+//            $(".jgrid_popup").chromatable({
+//                width:  ctn_width,
+//                height: popup_form_table_height,
+//                scrolling: "yes"
+//            });
+            
     }, 500);
 });
 
