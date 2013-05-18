@@ -528,7 +528,7 @@ end
   def pdf_debit_note_report
     if params[:commit] == "PDF Report"
      if params[:dn_ids].present?
-        @detail_dedit_note_report = DebitNote.find(params[:dn_ids])
+        @detail_debit_note_report = DebitNote.find(params[:dn_ids])
         html = render_to_string(:layout => false , :action => "pdf_debit_note_report.html.erb")
           @kit = PDFKit.new(html)
           send_data(@kit.to_pdf , :filename => "pdf_debit_note_report.pdf",
@@ -550,7 +550,7 @@ end
     def pdf_journal_sales_report
       if params[:commit] == "PDF Report"
        if params[:js_ids].present?
-          @detail_journal_sales_report = JournalVoucher.find(params[:js_ids])
+          @detail_sales_journel_report = DeliveryOrder.find(params[:js_ids])
           html = render_to_string(:layout => false , :action => "pdf_journal_sales_report.html.erb")
             @kit = PDFKit.new(html)
             send_data(@kit.to_pdf , :filename => "pdf_journal_sales_report.pdf",
@@ -559,8 +559,9 @@ end
                                     :page_size => "A3")
           end
       elsif params[:commit] == "Show"
+        #render :text => params[:js_ids].to_json
          if params[:js_ids].present?
-            @detail_journal_sales_report = JournalVoucher.find(params[:js_ids])
+            @detail_sales_journel_report = DeliveryOrder.find(params[:js_ids])
             respond_to do |format|
               format.html
           end
@@ -571,12 +572,11 @@ end
     end
 
     def pdf_receipt_report
-
-      #render :text => params[:sta_ids].to_json
+      #render :text => params[:rec_ids].to_json
       if params[:commit] == "PDF Report"
         if params[:rec_ids].present?
           @detail_receipt_report = Receipt.find(params[:rec_ids])
-          html = render_to_string(:layout => false , :action => "pdf_receipt_report_html.erb")
+          html = render_to_string(:layout => false , :action => "pdf_receipt_report.html.erb")
             @kit = PDFKit.new(html)
             send_data(@kit.to_pdf , :filename => "pdf_receipt_report.pdf",
                                     :type => 'application/pdf' ,
@@ -594,7 +594,6 @@ end
       end
 
     end
-
 
 
   # ======================================= end of pdf ============================================
@@ -753,7 +752,7 @@ end
   end
 
   def journal_sales_report
-    @journal_sales_report = JournalVoucher.search(params[:search])
+    @journal_sales_report = DeliveryOrder.search(params[:search])
     @show_journal_sales_report = @journal_sales_report.all
   end
 

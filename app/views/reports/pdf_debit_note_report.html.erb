@@ -41,16 +41,17 @@
         <tr>
           <td align="center"><%= index + 1 %></td>
           <td align="left">Your A/C Has Been Debited For Being <%= dn.debit_type rescue'-' %></td>
-          <td align="right"><%= dn.amount rescue'-' %></td>
+          <td align="right"><%= two_precision(dn.amount) rescue'-' %></td>
           <% arr << dn.amount %>
         </tr>
 
 
         <tr >
-          <% 2.times do |td| %><td></td><% end %>
+          <%# 2.times do |td| %><td></td><%# end %>
           <td align="right">===================<br />
             Total Credited Amt :</td>
-          <td align="right"><%= two_precision(arr.sum) %></td>
+          <td align="right">===================<br />
+            <%= two_precision(arr.sum) %></td>
         </tr>
 
         <tr>
