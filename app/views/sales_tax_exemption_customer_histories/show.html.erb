@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sales tax exemption:</b>
+  <%= @sales_tax_exemption_customer_history.sales_tax_exemption_id %>
+</p>
+
+<p>
+  <b>Trade company:</b>
+  <%= @sales_tax_exemption_customer_history.trade_company_id %>
+</p>
+
+<p>
+  <b>Delivery order item:</b>
+  <%= @sales_tax_exemption_customer_history.delivery_order_item_id %>
+</p>
+
+<p>
+  <b>Used qty:</b>
+  <%= @sales_tax_exemption_customer_history.used_qty %>
+</p>
+
+<p>
+  <b>Used date:</b>
+  <%= @sales_tax_exemption_customer_history.used_date %>
+</p>
+
+<p>
+  <b>Unit measurement:</b>
+  <%= @sales_tax_exemption_customer_history.unit_measurement_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_sales_tax_exemption_customer_history_path(@sales_tax_exemption_customer_history) %> |
+<%= link_to 'Back', sales_tax_exemption_customer_histories_path %>

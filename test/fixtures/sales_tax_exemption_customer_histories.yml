@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_tax_exemption_id: 1
+  trade_company_id: 1
+  delivery_order_item_id: 1
+  used_qty: 9.99
+  used_date: 2013-05-18
+  unit_measurement_id: 1
+
+two:
+  sales_tax_exemption_id: 1
+  trade_company_id: 1
+  delivery_order_item_id: 1
+  used_qty: 9.99
+  used_date: 2013-05-18
+  unit_measurement_id: 1

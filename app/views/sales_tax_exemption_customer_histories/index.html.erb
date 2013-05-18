@@ -1,0 +1,33 @@
+<h1>Listing sales_tax_exemption_customer_histories</h1>
+
+<table>
+  <tr>
+    <th>Sales tax exemption</th>
+    <th>Trade company</th>
+    <th>Delivery order item</th>
+    <th>Used qty</th>
+    <th>Used date</th>
+    <th>Unit measurement</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sales_tax_exemption_customer_histories.each do |sales_tax_exemption_customer_history| %>
+  <tr>
+    <td><%= sales_tax_exemption_customer_history.sales_tax_exemption_id %></td>
+    <td><%= sales_tax_exemption_customer_history.trade_company_id %></td>
+    <td><%= sales_tax_exemption_customer_history.delivery_order_item_id %></td>
+    <td><%= sales_tax_exemption_customer_history.used_qty %></td>
+    <td><%= sales_tax_exemption_customer_history.used_date %></td>
+    <td><%= sales_tax_exemption_customer_history.unit_measurement_id %></td>
+    <td><%= link_to 'Show', sales_tax_exemption_customer_history %></td>
+    <td><%= link_to 'Edit', edit_sales_tax_exemption_customer_history_path(sales_tax_exemption_customer_history) %></td>
+    <td><%= link_to 'Destroy', sales_tax_exemption_customer_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sales tax exemption customer history', new_sales_tax_exemption_customer_history_path %>
