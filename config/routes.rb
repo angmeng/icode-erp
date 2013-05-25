@@ -73,28 +73,32 @@ Merp::Application.routes.draw do
     get "so_listing_report"
     get "so_customer_po_detail_report"
     get "so_summary_report"
+    get "statement_of_accounts_report"
 
 
     #=========== pdf part ===============
+    get "pdf_credit_note_report"
+    get "pdf_debit_note_report"
+    get "pdf_delivery_order_summary_report"
+    get "pdf_do_so_documentation_report"
+    get "pdf_inventory_report"
+    get "pdf_journal_sales_report"
+    get "pdf_receive_note_report"
+    get "pdf_receipt_report"
     get "pdf_sales_tax_exemption_report"
     get "pdf_sales_order_summary_report"
     get "pdf_sales_order_listing_report"
     get "pdf_purchase_by_creditor_report"
     get "pdf_product_report"
-    get "pdf_journal_sales_report"
-    get "pdf_inventory_report"
     get "pdf_pr_report"
     get "pdf_purchase_order_report"
     get "pdf_po_listing_vendor_report"
-    get "pdf_receive_note_report"
-    get "pdf_receipt_report"
     get "pdf_sales_cj5_summary_co_report"
     get "pdf_so_customer_po_detail_report"
-    get "pdf_do_so_documentation_report"
-    get "pdf_delivery_order_summary_report"
     get "pdf_sales_orde_listing_report"
-    get "pdf_credit_note_report"
-    get "pdf_debit_note_report"
+    get "pdf_statement_of_accounts_report"
+   
+    
 
 
     #========= excel part ================

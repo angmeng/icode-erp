@@ -34,6 +34,7 @@ GEM
     better_errors (0.8.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    binding_of_caller (0.6.8)
     builder (3.0.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -140,6 +141,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  binding_of_caller (~> 0.6.8)
   devise (~> 2.1.0)
   devise-encryptable
   jquery-datatables-rails
