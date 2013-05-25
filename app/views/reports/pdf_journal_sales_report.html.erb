@@ -11,11 +11,11 @@
     
     <%# else %>
       <div style="page-break-before: always;"></div>
-        
+         	
     
     <%# end %> -->
 	
-
+			
 	<p align="center">Etheos Imprint Technology</p>
 	<p align="center"><u>Monthly Sales Journal</u></p>
 
@@ -55,54 +55,54 @@
 				<td align="center"><%= sj.do_no rescue'-' %></td>
 				<td align="center"></td>
 				
-				<td align="center"><%= sj.calculate_sum_of_doi %></td>
+				<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 
 				<% arr0 << sj.calculate_sum_of_doi %>
 
 				<% if sj.type_of_sale_id == TypeOfSale::CJ5_LICENCE_MANUFACTURER %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr1 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::LOCAL_SALES_MAS %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr2 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::LMW_EXEMPTION_WL %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr3 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::FREE_TRADE_ZONE %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr4 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::EXPORT_SALES %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr5 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::OTHERS %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr6 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::IMPORT %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr7 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>
 				<% end %>
 				<% if sj.type_of_sale_id == TypeOfSale::SALES_WITH_TAX %>
-					<td align="center"><%= sj.calculate_sum_of_doi %></td>
+					<td align="center"><%= two_precision(sj.calculate_sum_of_doi) %></td>
 					<% arr8 << sj.calculate_sum_of_doi %>
 				<% else %>
 					<td>&nbsp;</td>

@@ -19,5 +19,11 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def total_date_amount(balance)
+     balance = DeliveryOrder.first.calculate_sum_of_doi
+    StatementOfAccount.select("date(transaction_date) as ordered_date, sum(balance) 
+      as total_price").group("date(transaction_date)")
+  end
+
   
 end

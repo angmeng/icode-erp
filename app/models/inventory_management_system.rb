@@ -723,6 +723,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_INVOICE_SUMMARY_REPORT                     = 430
   ACCOUNT_CN_DN_REPORT                               = 431
   ACCOUNT_RECEIPT_REPORT                             = 464
+  ACCOUNT_STATEMENT_OF_ACCOUNTS_REPORT               = 467
 
   #==== ==== ACTION ==== ==== 
   ACCOUNT_AC_RECEIVABLE_SALES_JOURNAL_REPORT_SHOW    = 432
@@ -738,8 +739,10 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_CN_DN_REPORT_PRINT                         = 439
 
   ACCOUNT_RECEIPT_REPORT_SHOW                        = 465
-  ACCOUNT_RECEIPT_REPORT_PRINT                       = 466 # UNTIL THIS NUMBER ***************
+  ACCOUNT_RECEIPT_REPORT_PRINT                       = 466 
   
+  ACCOUNT_STATEMENT_OF_ACCOUNTS_REPORT_SHOW          = 468
+  ACCOUNT_STATEMENT_OF_ACCOUNTS_REPORT_PRINT         = 469  # UNTIL THIS NUMBER ***************
 
   #==== ==== LISTING REPORT ==== ====
   LISTING_REPORT_MENU                               = 440

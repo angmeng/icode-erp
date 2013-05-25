@@ -21,7 +21,7 @@ end
 
 group :development do
   gem "better_errors"
-#  gem "binding_of_caller", "~> 0.6.8"
+# gem "binding_of_caller", "~> 0.6.8"
   gem "sextant"
 end
 

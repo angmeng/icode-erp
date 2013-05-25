@@ -1,0 +1,48 @@
+<table class="statement_of_account_total">
+  <tbody>
+  	<tr>
+  		<td style="width:50px;">JAN</td>
+  		<td rowspan="4"></td>
+  		<td style="width:50px;">MAY</td>
+  		<td rowspan="4"></td>
+  		<td style="width:50px;">SEP</td>
+  		<td rowspan="4"></td>
+  		<td rowspan="4" style="width:150px;">Total: <br />
+        <%#= two_precision(balance) %></td>
+  	</tr>
+    <tr>
+      <td style="width:50px;">FEB</td>
+      <td style="width:50px;">JUN</td>
+      <td style="width:50px;">OCT</td>
+      
+    </tr>
+    <tr>
+      <td style="width:50px;">MAR</td>
+      <td style="width:50px;">JUL</td>
+      <td style="width:50px;">NOV</td>
+    </tr>
+    <tr>
+      <td style="width:50px;">APR</td>
+      <td style="width:50px;">AUG</td>
+      <td style="width:50px;">DEC</td>
+    </tr>
+  </tbody>
+</table>
+
+<style>
+
+  table.statement_of_account_total{
+    width:100%;
+    border: 1px solid 
+  }
+
+
+  table.statement_of_account_total td { 
+    width:50px;
+    border: 1px solid 
+  }
+
+  table..statement_of_account_total tbody tr {
+    border-top:2pt solid white;
+ }
+ </style>

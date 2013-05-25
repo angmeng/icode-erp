@@ -6,7 +6,7 @@ class ReportsController < ApplicationController
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :so_summary_report , 
   :po_listing_vendor_report , :debit_note_report , :receive_note_report , 
-  :journal_sales_report , :receipt_report]
+  :journal_sales_report , :receipt_report , :statement_of_accounts_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -592,7 +592,29 @@ end
       else
           redirect_to receipt_report_reports_path
       end
+    end
 
+    def pdf_statement_of_accounts_report
+      if params[:commit] == "PDF Report"
+        if params[:soa_ids].present?
+          # Report.pdf_do_so_documentation_report(params[:doc_ids])
+          @detail_statement_of_accounts_report = Receipt.find(params[:soa_ids])
+          html = render_to_string(:layout => false , :action => "pdf_statement_of_accounts_report.html.erb")
+            @kit = PDFKit.new(html)
+            send_data(@kit.to_pdf , :filename => "pdf_statement_of_accounts_report.pdf",
+                                    :type => 'application/pdf' ,
+                                    :disposition => "attachement")
+        end
+        elsif params[:commit] == "Show"
+         if params[:soa_ids].present?
+            @detail_statement_of_accounts_report = Receipt.find(params[:soa_ids])
+            respond_to do |format|
+              format.html
+          end
+        end
+      else
+          redirect_to statement_of_accounts_report_reports_path
+      end
     end
 
 
@@ -756,9 +778,10 @@ end
     @show_journal_sales_report = @journal_sales_report.all
   end
 
-
-
-
+  def statement_of_accounts_report
+    @statement_of_accounts_report = Receipt.search(params[:search])
+    @show_statement_of_accounts_report = @statement_of_accounts_report.all
+  end
  
 end   
 

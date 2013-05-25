@@ -1,0 +1,243 @@
+
+
+<% balance = 0 %>
+<% array = [] %>
+    <% if @detail_statement_of_accounts_report.present? %>
+      <% @detail_statement_of_accounts_report.each_with_index do |soa , index| %>
+    	<% counter = 0 %>
+    	<% if index == 0 %>
+      		<div>
+    	<% else %>
+      		<div style="page-break-before: always;"> 
+        
+    	<% end %>
+      <table>
+      	
+      	
+      	<tr>
+	      	<td><%= soa.trade_company.code rescue'-' %>&nbsp;
+	      		<%= soa.trade_company.name rescue'-' %><br />
+	      		<%= soa.trade_company.address_1 rescue'-' %><br />
+	      		<%= soa.trade_company.address_2 rescue'-' %><br />
+	      		<%= soa.trade_company.postcode_one rescue'-' %>
+	      		<%= soa.trade_company.state_one rescue'-' %></td>
+	      	<td>AS AT <%= soa.payment_date rescue'-' %><br />
+	      		<br />
+	      		Cur'cy : Malaysian Ringgit<br />
+	      		Page : 1
+	      	</td>
+      	</tr>
+	    <tr>
+	      	<td>Attn : <%= soa.trade_company.contact_person rescue'-' %>
+	      		Tel : <%= soa.trade_company.tel_no1 rescue'-' %>
+	      		fax : <%= soa.trade_company.fax_no rescue'-' %> </td>
+	    </tr>
+	  </table>
+
+	  <table class="black-line-table">
+	  	<tr>
+	  		<th>Date</th>
+	  		<th>Reference</th>
+	  		<th>Description</th>
+	  		<th></th>
+	  		<th>Debit</th>
+	  		<th>Credit</th>
+	  		<th>Balance</th>
+	  	</tr>
+	  	<% soa.statement_of_accounts.each_with_index do |acc ,index | %>
+	  	
+	  	<% counter += 1 %>
+    	<% if counter < 52 %>
+	  	<tr>
+	  		<td align="center"><%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+	  		<td align="center">
+	  			<%= acc.transaction_type rescue'-' %> &nbsp;
+	  			<% if acc.debit_note.present? %>
+	  				<%= acc.debit_note.debit_note_no rescue'-' %>
+	  			<% elsif acc.credit_note.present? %>
+	  				<%= acc.credit_note.credit_note_no rescue'-' %>
+	  			<% elsif acc.delivery_order.present? %>
+	  				<%= acc.delivery_order.delivery_order_no rescue'-' %>
+	  			<% end %>
+	  		</td>
+	  		<td align="left">
+	  			<% if acc.debit_note.present? %>
+	  				<%= acc.debit_note.debit_type rescue'-' %>
+	  			<% elsif acc.credit_note.present? %>
+	  				<%= acc.credit_note.credit_type rescue'-' %>
+	  			<% end %>
+	  		</td>
+	  		<td align="center">
+	  			<% if acc.fp == 'F' || acc.fp == 'f' %>
+	  			*
+	  			<% else %>
+	  			&nbsp;
+	  			<% end %>
+	  		</td>
+	  		<td align="right">
+	  			<% if acc.delivery_order.present? %>
+	  				<%= two_precision(acc.delivery_order.calculate_sum_of_doi) %>
+	  				<% balance += acc.delivery_order.calculate_sum_of_doi %>
+	  			<% else %>
+	  				&nbsp;
+	  			<% end %>
+	  		</td>
+	  		<td align="right">
+	  			<% if acc.credit_note.present? %>
+	  				<%= acc.credit_note.amount %>
+	  				<% balance -= acc.credit_note.amount %>
+	  			<% else %>
+	  				&nbsp;
+	  			<% end %>
+	  		</td>
+	  		<%# array << balance - acc.credit_note.amount %>
+	  		<td align="right">
+	  			<%= two_precision(balance) %>
+	  		</td>
+	  	</tr>
+	  	<% else %> <%# else for counter %>
+
+	  </table>
+	  <div style="page-break-before: always;">
+     <table>
+      	<tr>
+	      	<td><%= soa.trade_company.code rescue'-' %>&nbsp;
+	      		<%= soa.trade_company.name rescue'-' %><br />
+	      		<%= soa.trade_company.address_1 rescue'-' %><br />
+	      		<%= soa.trade_company.address_2 rescue'-' %><br />
+	      		<%= soa.trade_company.postcode_one rescue'-' %>
+	      		<%= soa.trade_company.state_one rescue'-' %></td>
+	      	<td>AS AT <%= soa.payment_date rescue'-' %><br />
+	      		<br />
+	      		Cur'cy : Malaysian Ringgit<br />
+	      		Page : 1
+	      	</td>
+      	</tr>
+	    <tr>
+	      	<td>Attn : <%= soa.trade_company.contact_person rescue'-' %>
+	      		Tel : <%= soa.trade_company.tel_no1 rescue'-' %>
+	      		fax : <%= soa.trade_company.fax_no rescue'-' %> </td>
+	    </tr>
+	  </table>
+
+	  <table class="black-line-table">
+	  	<tr>
+	  		<th>Date</th>
+	  		<th>Reference</th>
+	  		<th>Description</th>
+	  		<th></th>
+	  		<th>Debit</th>
+	  		<th>Credit</th>
+	  		<th>Balance</th>
+	  	</tr>
+	  	<tr>
+	  		<td align="center"><%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+	  		<td align="center">
+	  			<%= acc.transaction_type rescue'-' %> &nbsp;
+	  			<% if acc.debit_note.present? %>
+	  				<%= acc.debit_note.debit_note_no rescue'-' %>
+	  			<% elsif acc.credit_note.present? %>
+	  				<%= acc.credit_note.credit_note_no rescue'-' %>
+	  			<% elsif acc.delivery_order.present? %>
+	  				<%= acc.delivery_order.delivery_order_no rescue'-' %>
+	  			<% end %>
+	  		</td>
+	  		<td align="left">
+	  			<% if acc.debit_note.present? %>
+	  				<%= acc.debit_note.debit_type rescue'-' %>
+	  			<% elsif acc.credit_note.present? %>
+	  				<%= acc.credit_note.credit_type rescue'-' %>
+	  			<% end %>
+	  		</td>
+	  		<td align="center">
+	  			<% if acc.fp == 'F' || acc.fp == 'f' %>
+	  			*
+	  			<% else %>
+	  			&nbsp;
+	  			<% end %>
+	  		</td>
+	  		<td align="right">
+	  			<% if acc.delivery_order.present? %>
+	  				<%= two_precision(acc.delivery_order.calculate_sum_of_doi) %>
+	  				<% balance += acc.delivery_order.calculate_sum_of_doi %>
+	  			<% else %>
+	  				&nbsp;
+	  			<% end %>
+	  		</td>
+	  		<td align="right">
+	  			<% if acc.credit_note.present? %>
+	  				<%= acc.credit_note.amount %>
+	  				<% balance -= acc.credit_note.amount %>
+	  			<% else %>
+	  				&nbsp;
+	  			<% end %>
+	  		</td>
+
+	  		<%# array << balance - acc.credit_note.amount %>
+	  		<td align="right">
+	  			<%= two_precision(balance) %>
+	  		</td>
+	  	</tr>
+	  	<% counter = 1%> 
+	  	<% end %>
+	  	<% end %>
+	  </table>
+	  <br />
+	  <%= render "/reports/statement_of_accounts_total" %>
+	  <% end %> <%# end of each %>
+	</div>
+<% else %>
+No Record Found
+<% end %>
+
+<style>
+
+  table{
+    width:100%;
+  }
+  
+  body {
+    width:100%;
+    background-color: white;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; 
+    
+  }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+  		border-style:solid;
+		border-width:3px;
+        padding: 1px;
+        border-style: solid;
+        border-color: black;
+        background-color: transparent; }
+
+  table.black-line-table td {
+  		border-style:solid;
+        border-width: 0px;
+        padding: 1px;
+        border-style: solid;
+        border-color: black;
+
+        }
+  tbody tr {
+    border-top:2pt solid white;
+ }
+
+</style>

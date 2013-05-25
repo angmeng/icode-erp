@@ -35,9 +35,12 @@ class DeliveryOrder < ActiveRecord::Base
   #     authorize_print.update_attributes
   # end
 
-
+ #* &:delivery_qty + &:sales_tax - &:tport_c 
   def calculate_sum_of_doi
-      delivery_order_items.map(&:unit_price).sum
+      
+      a = delivery_order_items.collect {|c| (c.unit_price.to_f * c.delivery_qty.to_f) }
+      a << tport_c.to_f + sales_tax.to_f
+      return a.sum()
     #     delivery_order_items.each do |doi|
     #   doi.map(&:unit_price).sum()
     # end
