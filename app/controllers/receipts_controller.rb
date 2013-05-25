@@ -28,12 +28,17 @@ class ReceiptsController < ApplicationController
 
   def create
     @receipt = Receipt.new(params[:receipt])
-    if @receipt.save
-      AccountManagement.manage_receipts(params[:datarow], @receipt)
-      @receipt.update_to_statement(company)
-      redirect_to @receipt, notice: "Receipt No # #{@receipt.receipt_no} was successfully created."
+    if params[:datarow].present?
+      if @receipt.save
+        AccountManagement.manage_receipts(params[:datarow], @receipt)
+        @receipt.update_to_statement(company)
+        redirect_to @receipt, notice: "Receipt No # #{@receipt.receipt_no} was successfully created."
+      else
+        flash[:alert] = @receipt.errors.full_messages.join(", ")
+        render action: "new"
+      end
     else
-      flash[:alert] = @receipt.errors.full_messages.join(", ")
+      flase[:alert] = "Please assign your receipt assignment on the tab."
       render action: "new"
     end
   end

@@ -1,0 +1,42 @@
+<%= title_head "LISTING OF CREDIT NOTES" %>
+<%= form_tag update_cn_credit_notes_path, method: :post do %>
+  <div class="popup_content">
+    <% if @statement.present? %>
+      <div>[<%= @statement.first.trade_company.id rescue '-' %>] <%= @statement.first.trade_company.name rescue '-' %></div>
+      <table id="jgrid_popup">
+        <thead>
+          <tr class="header_line">
+            <th align="center" width="25"></th>
+            <th>C/N No</th>
+            <th>C/N Date</th>
+            <th>Credit Type</th>
+            <th>Currency</th>
+            <th>Amount</th>
+            <th>Updated by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @statement.present? %>
+            <% @statement.each do |soa| %>
+              <tr>
+                <td><%= check_box_tag "choose_cn[]", soa.id %></td>
+                <td align="center"><%= soa.credit_note.credit_note_no rescue '-' %></td>
+                <td align="center"><%= soa.credit_note.credit_note_date.strftime("%d-%m-%Y") rescue '-' %></td>
+                <td><%= soa.credit_note.credit_type rescue '-' %></td>
+                <td align="center"><%= soa.credit_note.currency.name rescue '-' %></td>
+                <td align="right"><%= four_precision(soa.credit_note.amount) rescue '-' %></td>
+                <td align="center"><%= soa.credit_note.updater_name rescue '-' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      No Record Found
+    <% end %>
+  </div>
+  <div class="icon_tag">
+    <%= submit_tag "Update", :class => "k-button" %>
+    <%= link_close_button %>
+  </div>
+<% end %> 

@@ -1,6 +1,5 @@
 <div id="receipt_2">
   <div id="listing_statement">
-    
     <% if @statement_of_accounts.present? %>
       <table class="white-line-table target_table">
         <thead>
@@ -16,31 +15,53 @@
 
         <tbody>         
             <% @statement_of_accounts.each_with_index do |statement| %>
-              <tr class="<%= cycle('odd_line', 'even_line') %>">
-                <td>
-                  <span id="receipt_type_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_type(statement) %></span>
-                  <%= StatementOfAccount.transacted(statement) %>
-                </td>
-                <td align="center"><%= StatementOfAccount.transacted_date(statement) %></td>
-                <td align="right">
-                  <% if action_name == "edit" %>
-                    <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
-                    <%= text_field_tag   "datarow[#{statement.id}][document_amount]", statement.document_amount, :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
-                  <% else %>
-                    <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
-                    <%= text_field_tag   "datarow[#{statement.id}][document_amount]", StatementOfAccount.transacted_amount(statement), :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
-                  <% end %>
-                </td>
-                <td align="right">
-                  <span id="bal_amount_<%= statement.id %>"><%= two_precision(statement.balance_amount) %></span>
-                  <%= hidden_field_tag "datarow[#{statement.id}][balance_amount]", statement.balance_amount %>
-                </td>
-                <td align="center"><%= text_field_tag "datarow[#{statement.id}][fp]", statement.fp, :class => "k-textbox", :style => "width: 50px;", "required validationMessage" => "Please Enter F/P" %></td>
-                <td align="right">
-                  <span id="os_amount_<%= statement.id %>"><%= two_precision(statement.os_amount) %></span>
-                  <%= hidden_field_tag "datarow[#{statement.id}][os_amount]", statement.os_amount, :class => "k-textbox" %>
-                </td>
-              </tr>
+              <% unless statement.transaction_type == StatementOfAccount::CREDIT_NOTE && statement.fp == StatementOfAccount::NULL_PAYMENT %>
+                <tr class="<%= cycle('odd_line', 'even_line') %>">
+                  <td>
+                    <span id="receipt_type_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_type(statement) %></span>
+                    <%= StatementOfAccount.transacted(statement) %>
+                  </td>
+                  <td align="center"><%= StatementOfAccount.transacted_date(statement) %></td>
+                  <td align="right">
+                    
+                    <% if action_name == "edit" %>
+                      <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
+                      <%= text_field_tag   "datarow[#{statement.id}][document_amount]", statement.document_amount, :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                    <% else %>
+                      
+                      <% if statement.fp == StatementOfAccount::TEMP_PAYMENT %>
+                        <span id="doc_amount_<%= statement.id %>"><%= StatementOfAccount.transacted_amount(statement) %></span>
+                        <%= hidden_field_tag   "datarow[#{statement.id}][document_amount]", StatementOfAccount.transacted_amount(statement), :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                      <% else %>
+                        <% if statement.document_amount.present? %>
+                          <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= statement.document_amount %></span>
+                          <%= text_field_tag   "datarow[#{statement.id}][document_amount]", statement.document_amount, :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                        <% else %>
+                          <span id="doc_amount_<%= statement.id %>" style="display:none;"><%= StatementOfAccount.transacted_amount(statement) %></span>
+                          <%= text_field_tag   "datarow[#{statement.id}][document_amount]", StatementOfAccount.transacted_amount(statement), :class => "numberKey k-textbox ", "required validationMessage" => "Please Enter Document Amount" %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                        
+                  </td>
+                  <td align="right">
+                    <span id="bal_amount_<%= statement.id %>"><%= two_precision(statement.balance_amount) %></span>
+                    <%= hidden_field_tag "datarow[#{statement.id}][balance_amount]", statement.balance_amount %>
+                  </td>
+                  <td align="center">
+                    <% if statement.fp == StatementOfAccount::TEMP_PAYMENT %>
+                      <span><%= statement.fp %></span>
+                      <%= hidden_field_tag "datarow[#{statement.id}][fp]", statement.fp, :style => "width: 50px;" %>
+                    <% else %>
+                      <%= text_field_tag "datarow[#{statement.id}][fp]", statement.fp, :class => "k-textbox", :style => "width: 50px;", "required validationMessage" => "Please Enter F/P" %>
+                    <% end %>
+                  </td>
+                  <td align="right">
+                    <span id="os_amount_<%= statement.id %>"><%= two_precision(statement.os_amount) %></span>
+                    <%= hidden_field_tag "datarow[#{statement.id}][os_amount]", statement.os_amount, :class => "k-textbox" %>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
         </tbody>
       </table>
@@ -59,41 +80,53 @@
                             var cash         = +$("#receipt_cash_amount").val();
                             var cheque       = +$("#receipt_cheque_amount").val();
                             var total        = cash + cheque;
-                            $("#remaining_amount").html(total.toFixed(2));
+                            $("#remaining_amount").html(total);
 
                             $('table.target_table tbody').find('[id$="document_amount"]').each(function(k, elem) {
+                                
                                 var rem_amount    = +$("#remaining_amount").html();
                                 var number        = $(this).attr("name").match(/\[(\d+)\]/);
                                 var number        = parseInt(number[1], 10);
                                 var receipt_type  = "#receipt_type_" + number;
+                                
                                 var doc_amt_html  = "#doc_amount_" + number;
                                 var doc_amt_val   = "#datarow_" + number + "_document_amount";
                                 var balance_html  = "#bal_amount_" + number;
                                 var balance_val   = "#datarow_" + number + "_balance_amount";
                                 var os_html       = "#os_amount_" + number;
                                 var os_amount     = "#datarow_" + number + "_os_amount";
+                                var fp_val        = "#datarow_" + number + "_fp";
                                 
                                 var answer_ori        = +$(doc_amt_html).html();
                                 var answer_ori_entry  = +$(doc_amt_val).val();
                                 var select_value      = +$(this).val();
                                 var receipt_type      = $(receipt_type).html();
+                                var answer_fp         = $(fp_val).val();
                                 
-                                if (receipt_type == "<%= StatementOfAccount::DEBIT_NOTE %>" || receipt_type == "<%= StatementOfAccount::INVOICE %>"){
-                                  var cal = rem_amount - select_value;
-                                  var real_os_amount = answer_ori - answer_ori_entry;
-                                } else if (receipt_type == "<%= StatementOfAccount::CREDIT_NOTE %>") {
-                                  var cal = rem_amount + select_value;
-                                  var real_os_amount = 0;
-                                } else {
-                                  var cal = 0;
-                                  var real_os_amount = 0;
+                                if (answer_fp == "F" || answer_fp == "f" || answer_fp == "P" || answer_fp == "p") {
+                                    if (receipt_type == "<%= StatementOfAccount::DEBIT_NOTE %>" || receipt_type == "<%= StatementOfAccount::INVOICE %>"){
+                                      var cal = rem_amount - select_value;
+                                      var real_os_amount = answer_ori - answer_ori_entry;
+                                    } else if (receipt_type == "<%= StatementOfAccount::CREDIT_NOTE %>") {
+                                      var cal = rem_amount + select_value;
+                                      var real_os_amount = 0;
+                                    } else {
+                                      var cal = 0;
+                                      var real_os_amount = 0;
+                                    }
+                                    $(balance_html).html(cal.toFixed(2));
+                                    $(balance_val).val(cal.toFixed(2));
+                                    $(os_html).html(real_os_amount);
+                                    $(os_amount).val(real_os_amount);
+                                    $("#remaining_amount").html(cal.toFixed(2));
+                                } else if (answer_fp == "N" || answer_fp == "n"){
+                                    var cal = 0;
+                                    var real_os_amount = 0;
+                                    $(balance_html).html(cal.toFixed(2));
+                                    $(balance_val).val(cal.toFixed(2));
+                                    $(os_html).html(real_os_amount);
+                                    $(os_amount).val(real_os_amount);
                                 }
-                                                                
-                                $("#remaining_amount").html(cal.toFixed(2));
-                                $(balance_html).html(cal.toFixed(2));
-                                $(balance_val).val(cal.toFixed(2));
-                                $(os_html).html(real_os_amount);
-                                $(os_amount).val(real_os_amount);
                             });
 
                             $(this).val($(this).val()); 

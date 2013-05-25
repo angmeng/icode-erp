@@ -1,0 +1,36 @@
+<%= title_head "SHOW CREDIT NOTES" %>
+  <div class="popup_content">
+    <div><% sta = @statements.first  %>[<%= sta.trade_company.code rescue '-' %>] <%= sta.trade_company.name rescue '-' %></div>
+    
+    <table id="jgrid_popup" class="zebraLight">
+      <thead>
+        <tr class="header_line">
+          <th align="center" width="25"></th>
+          <th>C/N No</th>
+          <th>C/N Date</th>
+          <th>Credit Type</th>
+          <th>Currency</th>
+          <th>Amount</th>
+          <th>Updated by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @statements.present? %>
+          <% @statements.each do |soa| %>
+            <tr>
+              <td></td>
+              <td align="center"><%= soa.credit_note.credit_note_no rescue '-' %></td>
+              <td align="center"><%= soa.credit_note.credit_note_date.strftime("%d-%m-%Y") rescue '-' %></td>
+              <td><%= soa.credit_note.credit_type rescue '-' %></td>
+              <td align="center"><%= soa.credit_note.currency.name rescue '-' %></td>
+              <td align="right"><%= four_precision(soa.credit_note.amount) rescue '-' %></td>
+              <td align="center"><%= soa.credit_note.updater_name rescue '-' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>

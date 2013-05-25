@@ -8,6 +8,7 @@ class StatementOfAccount < ActiveRecord::Base
   belongs_to :debit_note
   belongs_to :receipt
   belongs_to :delivery_order
+  belongs_to :trade_company
   
   has_many :receipt_statement_lines
   has_many :receipts, :through => :receipt_statement_lines
@@ -20,6 +21,7 @@ class StatementOfAccount < ActiveRecord::Base
   FULL_PAYMENT    = "F"
   PARTIAL_PAYMENT = "P"
   NULL_PAYMENT    = "N"
+  TEMP_PAYMENT    = "T"
   CREDIT_NOTE     = "CN"
   DEBIT_NOTE      = "DN"
   INVOICE         = "INV"

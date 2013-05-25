@@ -20,41 +20,53 @@
                       var cash         = +$("#receipt_cash_amount").val();
                       var cheque       = +$("#receipt_cheque_amount").val();
                       var total        = cash + cheque;
-                      $("#remaining_amount").html(total.toFixed(2));
+                      $("#remaining_amount").html(total);
 
                       $('table.target_table tbody').find('[id$="document_amount"]').each(function(k, elem) {
+
                           var rem_amount    = +$("#remaining_amount").html();
                           var number        = $(this).attr("name").match(/\[(\d+)\]/);
                           var number        = parseInt(number[1], 10);
                           var receipt_type  = "#receipt_type_" + number;
+
                           var doc_amt_html  = "#doc_amount_" + number;
                           var doc_amt_val   = "#datarow_" + number + "_document_amount";
                           var balance_html  = "#bal_amount_" + number;
                           var balance_val   = "#datarow_" + number + "_balance_amount";
                           var os_html       = "#os_amount_" + number;
                           var os_amount     = "#datarow_" + number + "_os_amount";
+                          var fp_val        = "#datarow_" + number + "_fp";
 
                           var answer_ori        = +$(doc_amt_html).html();
                           var answer_ori_entry  = +$(doc_amt_val).val();
                           var select_value      = +$(this).val();
                           var receipt_type      = $(receipt_type).html();
+                          var answer_fp         = $(fp_val).val();
 
-                          if (receipt_type == "<%= StatementOfAccount::DEBIT_NOTE %>" || receipt_type == "<%= StatementOfAccount::INVOICE %>"){
-                            var cal = rem_amount - select_value;
-                            var real_os_amount = answer_ori - answer_ori_entry;
-                          } else if (receipt_type == "<%= StatementOfAccount::CREDIT_NOTE %>") {
-                            var cal = rem_amount + select_value;
-                            var real_os_amount = 0;
-                          } else {
-                            var cal = 0;
-                            var real_os_amount = 0;
+                          if (answer_fp == "F" || answer_fp == "f" || answer_fp == "P" || answer_fp == "p") {
+                              if (receipt_type == "<%= StatementOfAccount::DEBIT_NOTE %>" || receipt_type == "<%= StatementOfAccount::INVOICE %>"){
+                                var cal = rem_amount - select_value;
+                                var real_os_amount = answer_ori - answer_ori_entry;
+                              } else if (receipt_type == "<%= StatementOfAccount::CREDIT_NOTE %>") {
+                                var cal = rem_amount + select_value;
+                                var real_os_amount = 0;
+                              } else {
+                                var cal = 0;
+                                var real_os_amount = 0;
+                              }
+                              $(balance_html).html(cal.toFixed(2));
+                              $(balance_val).val(cal.toFixed(2));
+                              $(os_html).html(real_os_amount);
+                              $(os_amount).val(real_os_amount);
+                              $("#remaining_amount").html(cal.toFixed(2));
+                          } else if (answer_fp == "N" || answer_fp == "n"){
+                              var cal = 0;
+                              var real_os_amount = 0;
+                              $(balance_html).html(cal.toFixed(2));
+                              $(balance_val).val(cal.toFixed(2));
+                              $(os_html).html(real_os_amount);
+                              $(os_amount).val(real_os_amount);
                           }
-
-                          $("#remaining_amount").html(cal.toFixed(2));
-                          $(balance_html).html(cal.toFixed(2));
-                          $(balance_val).val(cal.toFixed(2));
-                          $(os_html).html(real_os_amount);
-                          $(os_amount).val(real_os_amount);
                       });
 
                       $(this).val($(this).val()); 
@@ -77,27 +89,17 @@
     
     function loading_cheque(sel){
       var trade_company_id = sel.options[sel.selectedIndex].value;
-      
       $.ajax({
           url: "/statement_of_accounts",
           data: {company_id: trade_company_id},
-          success: function(data) { $("#listing_statement").html(data); }
+          success: function(data) { 
+            $("#listing_statement").html(data);
+            $("#cn_sum").html(data.sum_temp_cn)
+            var linking = "/credit_notes/selection_cn?trade_company_id=" + trade_company_id;
+            lhtml = "<a class='k-button iframe_800x450' data-fancybox-type='iframe' href=" + linking + "><b>Select Credit Notes</b></a>"
+            $("#after_click_trade_company_id").html(lhtml);
+          }
       });
     }
-    
-    <%#*function loading_cheque_amount(sel){%>
-      <%#*var payment_id = sel.options[sel.selectedIndex].value;%>
-
-      <%#*$.ajax({%>
-          <%#*dataType: "json",%>
-          <%#*cache: false,%>
-          <%#*url: '/payment_receiveds/' + payment_id,%>
-          <%#*timeout: 2000,%>
-          <%#*success: function(data){%>
-            <%#*var numerictextbox = $("#receipt_cheque_amount").data("kendoNumericTextBox");%>
-            <%#*numerictextbox.value(data.cheque_amount);%>
-          <%#*}%>
-      <%#*});%>
-    <%#*}%>
   </script>
 <% end %>

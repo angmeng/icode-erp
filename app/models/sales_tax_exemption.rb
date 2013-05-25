@@ -100,6 +100,10 @@ class SalesTaxExemption < ActiveRecord::Base
     end
   end
   
+  def check_period
+    if period_end. < 
+  end
+  
 #  def self.collect_perihal_barang(pc)
 #    @ret = []
 #    @category = ProductCategory.find(pc.id)

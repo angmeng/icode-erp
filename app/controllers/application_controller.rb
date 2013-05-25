@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   helper_method :perihal_barang_both
     
   def version
-    "Version 0.3.12"
+    "Version 0.3.13"
   end
     
   def company
@@ -233,7 +233,10 @@ class ApplicationController < ActionController::Base
     @roles = current_user.roles.map(&:inventory_management_system_id)
   end
   
-
+  def check_validate_of_period_in_ste
+    @period = SalesTaxExemption.where{ (valid_date_condition == true) }
+    @validate, msg = @period.check_period if @period.present?
+  end
   
   private
   

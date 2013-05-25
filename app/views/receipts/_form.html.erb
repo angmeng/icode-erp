@@ -6,7 +6,6 @@
           <li class="k-state-active">Receipt Form</li>
           <li>Receipt Assignment</li>
         </ul>
-
         <div>
           <div id="receipt_1">
             <h3 style="background-color: blue; color: white; padding: 5px;">CHEQUE</h3>
@@ -48,6 +47,7 @@
                 <td><b>Cheque Amount</b></td>
                 <td>
                   <%= f.text_field :cheque_amount, :class => "kendo_precision_4", "required validationMessage" => "Please Enter Cheque Amount" %>
+                  <!--span id="cn_sum"></span-->
                   <span class="k-invalid-msg" data-for="receipt[cheque_amount]"></span>
                 </td>
               </tr>

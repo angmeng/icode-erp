@@ -60,25 +60,6 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_KIV_SHOW) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_KIV_RECOVER) %></td>
       </tr>
-      
-      <tr>
-        <% 2.times do |td| %><td></td><% end %>
-        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %> Payment Processing - Payment Received Record</td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_ADD) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_SHOW) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_EDIT) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
-      </tr>
-      
-      <tr>
-        <% 2.times do |td| %><td></td><% end %>
-        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %> Payment Processing - Payment Received Record - KIV</td>
-        <% 5.times do |td| %><td></td><% end %>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV_SHOW) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV_RECOVER) %></td>
-      </tr>
   
     <% else %>
       
@@ -138,25 +119,6 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_KIV_SHOW) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_KIV_RECOVER) %></td>
-      </tr>
-      
-      <tr>
-        <% 2.times do |td| %><td></td><% end %>
-        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %> Payment Processing - Payment Received Record</td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_ADD) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_SHOW) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_EDIT) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
-      </tr>
-      
-      <tr>
-        <% 2.times do |td| %><td></td><% end %>
-        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %> Payment Processing - Payment Received Record - KIV</td>
-        <% 5.times do |td| %><td></td><% end %>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV_SHOW) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PAYMENT_RECEIVED_KIV_RECOVER) %></td>
       </tr>
   
     <% end %>
@@ -219,25 +181,6 @@
       <% 5.times do |td| %><td></td><% end %>
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_KIV_SHOW) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_KIV_RECOVER) %></td>
-    </tr>
-
-    <tr>
-      <% 2.times do |td| %><td></td><% end %>
-      <td><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %> Payment Processing - Payment Received Record</td>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_ADD) %></td>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_SHOW) %></td>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_EDIT) %></td>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_KIV) %></td>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_PRINTABLE) %></td>
-      <% 2.times do |td| %><td></td><% end %>
-    </tr>
-
-    <tr>
-      <% 2.times do |td| %><td></td><% end %>
-      <td><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %> Payment Processing - Payment Received Record - KIV</td>
-      <% 5.times do |td| %><td></td><% end %>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_SHOW) %></td>
-      <td align="center"><%= ims_new(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_RECOVER) %></td>
     </tr>
     
   <% end %>

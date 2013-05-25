@@ -1,6 +1,6 @@
 class CreditNotesController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :selection_cn, :show_cn, :update_cn]
  
   def index
     @search = CreditNote.search(params[:search])
@@ -10,6 +10,26 @@ class CreditNotesController < ApplicationController
   def kiv
     @search = CreditNote.search(params[:search])
     @credit_notes = CreditNote.db_kiv(@search).paginate(:page => params[:page])
+  end
+  
+  def selection_cn
+    @statement = StatementOfAccount.where(:trade_company_id => params[:trade_company_id], :transaction_type => StatementOfAccount::CREDIT_NOTE, :fp => StatementOfAccount::NULL_PAYMENT)
+  end
+  
+  def update_cn
+    @statement = StatementOfAccount.find(params[:choose_cn])
+    if @statement.present?
+      @statement.each { |st| st.update_attributes(:fp => StatementOfAccount::TEMP_PAYMENT) }
+      redirect_to show_cn_credit_notes_path(:trade_company_id => @statement.first.trade_company_id), :notice => "Updated successfully."
+    else
+      flash[:alert] = "Please select the checkboxes."
+      render "selection_cn"
+    end
+  end
+  
+  def show_cn
+    @statements = StatementOfAccount.where(:trade_company_id => 18, :transaction_type => StatementOfAccount::CREDIT_NOTE, :fp => StatementOfAccount::TEMP_PAYMENT)
+#    render :text => @statements.to_json
   end
   
   def show

@@ -54,7 +54,7 @@ class DeliveryOrderManagement
   
   def self.insert_account_statement(d_order)
     if d_order.present?
-      d_order.statement_of_accounts.new(:trade_company_id => d_order.trade_company_id, :transaction_date => Date.today, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => 0, :payment_received_id => 0, :delivery_order_id => d_order.id)
+      d_order.statement_of_accounts.new(:trade_company_id => d_order.trade_company_id, :transaction_date => Date.today, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => 0, :delivery_order_id => d_order.id)
       d_order.save!
     end
   end
@@ -62,16 +62,26 @@ class DeliveryOrderManagement
   def self.insert_sales_tax_exemption(d_order)
     ste_id = d_order.sales_tax_exemption_id
     d_order.delivery_order_items.each do |doi|
+      d_qty = doi.delivery_qty
+      
       if doi.sales_order_item.present?
         if doi.sales_order_item.product.present?
-          product_tarif_code = doi.sales_order_item.product.tarif_code if doi.sales_order_item.product.tarif_code.present?
+          if doi.sales_order_item.product.tarif_code.present?
+            product_tarif_code = doi.sales_order_item.product.tarif_code
+          end
         end
       end
       
+      # The important is we don't check the perihal barang, only check with tarif_code, :)
       @brg = SalesTaxExemptionBarang.where("sales_tax_exemption_id = ? and tarif_code = ? and valid_weight_condition = ?", ste_id, product_tarif_code, true)
       if @brg.present?
-        @brg
+        @brg.each do |brg|
+          brg.complete_qty  += d_qty.to_i
+          brg.available_qty -= d_qty.to_i
+          brg.save!
+        end
       end
     end
+    d_order
   end
 end

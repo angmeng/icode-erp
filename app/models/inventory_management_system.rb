@@ -458,16 +458,16 @@ class InventoryManagementSystem < ActiveRecord::Base
   RECEIPT_KIV_RECOVER                               = 525
   
   #===== ===== Payment Received ===== =====
-  PAYMENT_RECEIVED_INDEX                            = 526
-  PAYMENT_RECEIVED_ADD                              = 527
-  PAYMENT_RECEIVED_SHOW                             = 528
-  PAYMENT_RECEIVED_EDIT                             = 529
-  PAYMENT_RECEIVED_KIV                              = 530
-  PAYMENT_RECEIVED_PRINTABLE                        = 531
+#  PAYMENT_RECEIVED_INDEX                            = 526
+#  PAYMENT_RECEIVED_ADD                              = 527
+#  PAYMENT_RECEIVED_SHOW                             = 528
+#  PAYMENT_RECEIVED_EDIT                             = 529
+#  PAYMENT_RECEIVED_KIV                              = 530
+#  PAYMENT_RECEIVED_PRINTABLE                        = 531
   
-  PAYMENT_RECEIVED_KIV_INDEX                        = 532
-  PAYMENT_RECEIVED_KIV_SHOW                         = 533
-  PAYMENT_RECEIVED_KIV_RECOVER                      = 534
+#  PAYMENT_RECEIVED_KIV_INDEX                        = 532
+#  PAYMENT_RECEIVED_KIV_SHOW                         = 533
+#  PAYMENT_RECEIVED_KIV_RECOVER                      = 534
   
   PAYMENT_RECEIVED_BY_DEBTOR                        = 535
   PAYMENT_RECEIVED_BY_PERIOD                        = 536

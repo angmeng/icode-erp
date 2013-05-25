@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% items.each do |item| %>
+    <% items.order("balance_amount DESC").each do |item| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>">
         <td></td>
         <td align="left"><%= StatementOfAccount.transacted(item) %></td>
@@ -22,9 +22,6 @@
         <td align="center"><%= item.fp rescue '-' %></td>
         <td align="right"><%= four_precision(item.os_amount) rescue '-' %></td>
       </tr>
-      
-      
-      
     <% end %>
   </tbody>
   </table>

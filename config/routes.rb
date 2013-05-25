@@ -33,7 +33,12 @@ Merp::Application.routes.draw do
   end
 
   resources :credit_notes do
-    get "kiv", :on => :collection
+    collection do 
+      get "kiv"
+      get "selection_cn"
+      post "update_cn"
+      get "show_cn"
+    end
     put "recover", :on => :member
   end
 

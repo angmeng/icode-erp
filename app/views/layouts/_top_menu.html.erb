@@ -766,37 +766,25 @@
             <%# if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
               <!--li><%#= link_to "Sales Journal" %></li-->
             <%# else %>
-              <li><%= disabled_menu_style "Sales Journal" %></li>
+              <!--li><%#= disabled_menu_style "Sales Journal" %></li-->
             <%# end %>
 
             <%# if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
               <!--li><%#= link_to "Debtor Ledger" %></li-->
             <%# else %>
-              <li><%= disabled_menu_style "Debtor Ledger" %></li>
+              <!--li><%#= disabled_menu_style "Debtor Ledger" %></li-->
             <%# end %>
 
             <%# if roles.include?(InventoryManagementSystem::PR_NEW) %>
               <!--li><%#= link_to "A/C Statement" %></li-->
             <%# else %>
-              <li><%= disabled_menu_style "A/C Statement" %></li>
+              <!--li><%#= disabled_menu_style "A/C Statement" %></li-->
             <%# end %>
 
             <li>
               Payment Processing
 
-              <ul>
-                <%# if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_INDEX) %>
-                  <!--li><%#= link_to "Payment Received Record", payment_receiveds_path %></li-->
-                <%# else %>
-                  <!--li><%#= disabled_menu_style "Payment Received Record" %></li-->
-                <%# end %>
-                  
-                <%# if roles.include?(InventoryManagementSystem::PAYMENT_RECEIVED_KIV_INDEX) %>
-                  <!--li><%#= link_to "Payment Received Record - KIV", kiv_payment_receiveds_path %></li-->
-                <%# else %>
-                  <!--li><%#= disabled_menu_style "Payment Received Record - KIV" %></li-->
-                <%# end %>
-                
+              <ul>                
                 <% if roles.include?(InventoryManagementSystem::RECEIPT_INDEX) %>
                   <li><%= link_to "Receipts", receipts_path %></li>
                 <% else %>

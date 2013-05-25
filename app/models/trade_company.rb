@@ -34,6 +34,7 @@ class TradeCompany < ActiveRecord::Base
   has_many :purchase_requisition_items
   has_many :receive_notes
   has_many :sales_orders
+  has_many :statement_of_accounts
   
   has_many :contacts, :dependent => :destroy
   

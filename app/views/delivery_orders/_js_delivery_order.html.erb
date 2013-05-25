@@ -283,17 +283,5 @@
             $(answer_order).html(val_temp_order);
         }
     }
-    
-    <%#*function calculate_sales_tax_exemption_no(sel){%>
-        <%#*var number = sel.name.match(/\[(\d+)\]/);%>
-        <%#*var number = parseInt(number[1], 10);%>
-        <%#*var sale_order_item = sel.options[sel.selectedIndex].value;%>
-        <%#*var count = 0;%>
-        
-        <%#*$('table.target_table tbody').find('[id$="sales_order_item_id"]').each(function(k, elem) {%>
-            <%#*var select_value = $(this).val();%>
-            <%#*if (select_value == sale_order_item){ count++; }%> 
-        <%#*});%>
-    <%#*}%>
   </script>
 <% end %>

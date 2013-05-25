@@ -22,6 +22,7 @@ end
 group :development do
   gem "better_errors"
 #  gem "binding_of_caller", "~> 0.6.8"
+  gem "sextant"
 end
 
 gem 'jquery-rails', "2.1.4"
@@ -51,8 +52,8 @@ gem "squeel"
 gem "meta_search"
 gem "paperclip"
 gem 'mime-types'
-#gem "asset_hat", "~> 0.4.2"
+gem 'thin'
 
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
 
 

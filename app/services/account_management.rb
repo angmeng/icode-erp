@@ -6,7 +6,8 @@ class AccountManagement
       data.each do |number, content|
         
         @soa = StatementOfAccount.find(number)
-        unless content[:fp] == StatementOfAccount::NULL_PAYMENT or content[:fp] == "n"
+        
+        if content[:fp] == StatementOfAccount::FULL_PAYMENT or content[:fp] == "f"
           @soa.document_amount = content[:document_amount]
           @soa.balance_amount = content[:balance_amount]
           @soa.fp = content[:fp]
@@ -14,8 +15,15 @@ class AccountManagement
           @soa.save!
           receipt.receipt_statement_lines.build(:statement_of_account_id => @soa.id)
           receipt.save!
-        end
-        if content[:fp] == StatementOfAccount::PARTIAL_PAYMENT or content[:fp] == "p"
+        elsif content[:fp] == StatementOfAccount::PARTIAL_PAYMENT or content[:fp] == "p"
+          @soa.document_amount = content[:document_amount]
+          @soa.balance_amount = content[:balance_amount]
+          @soa.fp = content[:fp]
+          @soa.os_amount = content[:os_amount]
+          @soa.save!
+          receipt.receipt_statement_lines.build(:statement_of_account_id => @soa.id)
+          receipt.save!
+          
           @copy_soa = @soa.dup
           @copy_soa.document_amount = content[:os_amount]
           @copy_soa.balance_amount = 0
@@ -23,6 +31,16 @@ class AccountManagement
           @copy_soa.os_amount = 0
           @copy_soa.parent_id = @soa.id
           @copy_soa.save!
+        elsif content[:fp] == StatementOfAccount::TEMP_PAYMENT or content[:fp] == "t"
+          @soa.document_amount = content[:document_amount]
+          @soa.balance_amount = content[:balance_amount]
+          @soa.fp = StatementOfAccount::FULL_PAYMENT
+          @soa.os_amount = content[:os_amount]
+          @soa.save!
+          receipt.receipt_statement_lines.build(:statement_of_account_id => @soa.id)
+          receipt.save!
+        else
+          #skip if Null Payment "N"
         end
       
       end

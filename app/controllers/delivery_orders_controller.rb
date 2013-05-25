@@ -35,9 +35,9 @@ class DeliveryOrdersController < ApplicationController
   def create
     @delivery_order = DeliveryOrder.new(params[:delivery_order])
     check_delivery_order, msg = DeliveryOrderManagement.running_delivery_order_items(params[:datarow], @delivery_order)
-    if @delivery_order.save and check_delivery_order.present?
+    if check_delivery_order.present? && @delivery_order.save
       company.update_attributes(:sn_deliver_order_no => @delivery_order.do_no)
-      DeliveryOrderManagement.manage_inventory_and_product(@delivery_order)  # reduce Inventory and Product's current stock
+      DeliveryOrderManagement.manage_inventory_and_product(@delivery_order)
       redirect_to @delivery_order, notice: 'Delivery Order was successfully created.'
     else
       msg.present? ? msg : msg = []
