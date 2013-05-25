@@ -4,19 +4,17 @@ class DeliveryOrderManagement
     if data.present?
       delivery_order.delivery_order_items.delete_all if delivery_order.delivery_order_items.present?
       data.each do |key, content|
-        d_order = delivery_order.delivery_order_items.build(
-          :sales_order_item_id => content[:sales_order_item_id],
-          :so_date => content[:so_date],
-          :delivery_qty => content[:delivery_qty],
-          :order_qty => content[:order_qty],
-          :unit_price => content[:unit_price],
-          :balance_qty => content[:balance_qty],
-          :no_of_carton => content[:no_of_carton],
-          :gen_current_stock => content[:gen_cur_stock],
-          :part_no => content[:part_no],
-          :client_lot => content[:client_lot],
-          :client_po => content[:client_po]
-        )
+        d_order = delivery_order.delivery_order_items.build( :sales_order_item_id => content[:sales_order_item_id],
+                                                             :so_date => content[:so_date],
+                                                             :delivery_qty => content[:delivery_qty],
+                                                             :order_qty => content[:order_qty],
+                                                             :unit_price => content[:unit_price],
+                                                             :balance_qty => content[:balance_qty],
+                                                             :no_of_carton => content[:no_of_carton],
+                                                             :gen_current_stock => content[:gen_cur_stock],
+                                                             :part_no => content[:part_no],
+                                                             :client_lot => content[:client_lot],
+                                                             :client_po => content[:client_po] )
         unless d_order.valid?
           return false, msg = d_order.errors.full_messages
           break;
@@ -41,6 +39,7 @@ class DeliveryOrderManagement
           end
         end
         self.insert_account_statement(delivery_order)
+        self.insert_sales_tax_exemption(delivery_order) if delivery_order.sales_tax_exemption_id.present?
       end
     end
   end
@@ -57,6 +56,22 @@ class DeliveryOrderManagement
     if d_order.present?
       d_order.statement_of_accounts.new(:trade_company_id => d_order.trade_company_id, :transaction_date => Date.today, :transaction_type => "INV", :credit_note_id => 0, :debit_note_id => 0, :payment_received_id => 0, :delivery_order_id => d_order.id)
       d_order.save!
+    end
+  end
+  
+  def self.insert_sales_tax_exemption(d_order)
+    ste_id = d_order.sales_tax_exemption_id
+    d_order.delivery_order_items.each do |doi|
+      if doi.sales_order_item.present?
+        if doi.sales_order_item.product.present?
+          product_tarif_code = doi.sales_order_item.product.tarif_code if doi.sales_order_item.product.tarif_code.present?
+        end
+      end
+      
+      @brg = SalesTaxExemptionBarang.where("sales_tax_exemption_id = ? and tarif_code = ? and valid_weight_condition = ?", ste_id, product_tarif_code, true)
+      if @brg.present?
+        @brg
+      end
     end
   end
 end

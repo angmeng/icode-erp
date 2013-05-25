@@ -1,0 +1,2 @@
+module SalesTaxExemptionCustomerHistoriesHelper
+end

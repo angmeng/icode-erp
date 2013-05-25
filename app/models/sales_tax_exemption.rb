@@ -37,6 +37,7 @@ class SalesTaxExemption < ActiveRecord::Base
   belongs_to :unit_measurement
   has_one :trade_company
   has_one :sales_tax_exemption_line
+  has_one :delivery_order
   
   has_many :sales_tax_exemption_barangs, :dependent => :destroy
   accepts_nested_attributes_for :sales_tax_exemption_barangs, :allow_destroy => true

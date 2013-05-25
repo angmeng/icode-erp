@@ -1,0 +1,41 @@
+<%= form_for(@sales_tax_exemption_customer_history) do |f| %>
+  <% if @sales_tax_exemption_customer_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sales_tax_exemption_customer_history.errors.count, "error") %> prohibited this sales_tax_exemption_customer_history from being saved:</h2>
+
+      <ul>
+      <% @sales_tax_exemption_customer_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sales_tax_exemption_id %><br />
+    <%= f.number_field :sales_tax_exemption_id %>
+  </div>
+  <div class="field">
+    <%= f.label :trade_company_id %><br />
+    <%= f.number_field :trade_company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_order_item_id %><br />
+    <%= f.number_field :delivery_order_item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :used_qty %><br />
+    <%= f.text_field :used_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :used_date %><br />
+    <%= f.date_select :used_date %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_measurement_id %><br />
+    <%= f.number_field :unit_measurement_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

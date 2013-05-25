@@ -1,4 +1,6 @@
 Merp::Application.routes.draw do
+  resources :sales_tax_exemption_customer_histories
+
   resources :receipt_statement_lines
 
   resources :sales_tax_exemption_lines

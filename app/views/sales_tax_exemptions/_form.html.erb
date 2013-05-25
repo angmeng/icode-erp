@@ -155,27 +155,36 @@
             var ask_qty    = $(apply_qty).val();
             var um_from     = "#datarow_" + number + "_unit_measurement_id";
             var ask_um_from = $(um_from).val();
-            var result_val  = "#um_code_" + number;
             var um_to       = "#datarow_" + number + "_calculate_um_id";          
             var ask_um_to   = $(um_to).val();
-          
-            $.ajax({             
-                type: "GET",
-                dataType: "json",
-                cache: false,
-                url: '/formulations/output_value',
-                data: { 'from_um' : ask_um_from, 'to_um' : ask_um_to, 'current_value' : ask_qty },
-                success: function(data){ 
-                    if (data.jstatus == true){
-                      $(result_val).html(data.result);
-                      $("#save_button").attr("disabled", false); 
-                    } 
-                    else if (data.jstatus == false){ 
-                      alert("No match. Please create new in Formulations."); 
-                      $("#save_button").attr("disabled", true); 
-                    }
+            var result_val  = "#um_code_" + number;
+            
+            if (ask_qty > 0){
+                if (ask_um_from != ask_um_to){
+                  $.ajax({             
+                      type: "GET",
+                      dataType: "json",
+                      cache: false,
+                      url: '/formulations/output_value',
+                      data: { 'from_um' : ask_um_from, 'to_um' : ask_um_to, 'current_value' : ask_qty },
+                      success: function(data){ 
+                          if (data.jstatus == true){
+                            $(result_val).html(data.result);
+                            $("#save_button").attr("disabled", false); 
+                          } 
+                          else if (data.jstatus == false){ 
+                            alert("No match. Please create new in Formulations."); 
+                            $("#save_button").attr("disabled", true); 
+                          }
+                      }
+                  })
+                } else {
+                   $(result_val).html(ask_qty);
+                   $("#save_button").attr("disabled", false); 
                 }
-            })
+            } else {
+              alert("Please enter the apply qty.");
+            }
         } else {
             alert("No Match.");
             $("#save_button").attr("disabled", true);
