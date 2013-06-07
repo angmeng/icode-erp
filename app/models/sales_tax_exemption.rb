@@ -100,9 +100,7 @@ class SalesTaxExemption < ActiveRecord::Base
     end
   end
   
-  def check_period
-    if period_end. < 
-  end
+
   
 #  def self.collect_perihal_barang(pc)
 #    @ret = []
@@ -123,6 +121,12 @@ class SalesTaxExemption < ActiveRecord::Base
 #      end
 #    end
 #  end
+
+  def self.check_period(period)
+    period.each do |pd|
+      pd.update_attributes!(:valid_date_condition => false) if pd.period_end.strftime("%Y-%m-%d") < Date.today.strftime("%Y-%m-%d")
+    end
+  end
   
   private
   
@@ -141,6 +145,8 @@ class SalesTaxExemption < ActiveRecord::Base
     self.sales_tax_exemption_no.upcase! if self.sales_tax_exemption_no.present?
     self.registration_no.upcase! if self.registration_no.present?
   end
+  
+
   
 #  def self.formula(apply_qty, unit_measurement_id)
 #    if apply_qty.present? and unit_measurement_id.present?

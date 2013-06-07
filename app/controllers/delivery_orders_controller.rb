@@ -1,5 +1,6 @@
 class DeliveryOrdersController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_validate_of_period_in_ste, :only => [:new, :update]
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   
   def index

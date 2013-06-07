@@ -204,18 +204,21 @@ class TradeCompany < ActiveRecord::Base
     end
   end
   
-  def loading_ste
-    if sales_tax_exemption_line.present?
-      if sales_tax_exemption_line.validate_condition == true
+  def loading_ste 
+      
+      if sales_tax_exemption_line.present?
         if sales_tax_exemption_line.sales_tax_exemption.present?
-          return "[#{sales_tax_exemption_line.sales_tax_exemption.running_no}] #{sales_tax_exemption_line.sales_tax_exemption.sales_tax_exemption_no}"
-        end
-      else
-        if sales_tax_exemption_line.sales_tax_exemption.present?
-          return "stop_ste", "The Sales Tax Exemption No. ##{sales_tax_exemption_line.sales_tax_exemption.running_no} was invalid."
+      
+          if sales_tax_exemption_line.validate_condition == true && sales_tax_exemption_line.sales_tax_exemption.valid_date_condition == true
+            return "[#{sales_tax_exemption_line.sales_tax_exemption.running_no}] #{sales_tax_exemption_line.sales_tax_exemption.sales_tax_exemption_no}"
+          else
+            return "stop_ste", "The Sales Tax Exemption No. ##{sales_tax_exemption_line.sales_tax_exemption.running_no} was invalid."
+          end
+          
         end
       end
-    end
+    
+    
   end
   
 end

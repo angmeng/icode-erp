@@ -1,13 +1,12 @@
 <%= form_for(@trade_term) do |f| %>
-  <div class="fix_800x450">
+  <div class="popup_content">
     <table>
       <tr>
-        <td width="100">Name</td>
-        <td><%= f.text_field :name %></td>
+        <td width="100"><b>Name</b></td>
+        <td><%= f.text_field :name, :class => "k-textbox" %></td>
       </tr>
     </table>
   </div>
-
   <div class="icon_tag">
     <%= link_save_button %>
     <%= link_close_button %>

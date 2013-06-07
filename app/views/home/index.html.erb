@@ -148,10 +148,16 @@
 
           <% if roles.include?(InventoryManagementSystem::QR_MENU) %>
 
-            <% if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
-              <td><%= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path, :class => "k-button"%></td>
+            <%# if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
+              <!--td><%#= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path, :class => "k-button"%></td-->
+            <%# else %>
+              <!--td><%#= disabled_style("New & Pending QRs") %></td-->
+            <%# end %>
+              
+            <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
+              <td><%= link_to "Quotation Requisitions Data", quotation_request_forms_path, :class => "k-button" %></td>
             <% else %>
-              <td><%= disabled_style("New & Pending QRs") %></td>
+              <td><%= disabled_style("Quotation Requisitions Data") %></td>
             <% end %>
 
             <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
@@ -164,13 +170,13 @@
 
             <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-            <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
-              <td><%= link_to "QR Transactions & Histories", quotation_request_forms_path, :class => "k-button" %></td>
-            <% else %>
-              <td><%= disabled_style("QR Transactions & Histories") %></td>
-            <% end %>
+            <%# if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
+              <!--td><%#= link_to "QR Transactions & Histories", quotation_request_forms_path, :class => "k-button" %></td-->
+            <%# else %>
+              <!--td><%#= disabled_style("QR Transactions & Histories") %></td-->
+            <%# end %>
 
-            <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+            <!--td><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
 
             <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
               <td><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path,:class => "k-button" %></td>
@@ -219,6 +225,22 @@
               <td><%= disabled_style("Sales Orders Data") %></td>
             <% end %>
           <% end %>
+        </tr>
+        
+        <tr>
+          <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
+        </tr>
+        
+        <tr>
+          <th class="block_box">PRODUCTION</th>
+
+          <%# if roles.include?(InventoryManagementSystem::SO_MENU) %>
+            <%# if roles.include?(InventoryManagementSystem::SO_TRANSACTION) %>
+              <td><%= link_to "Job Sheet", job_sheets_path,:class => "k-button" %></td>
+            <%# else %>
+              <!--td><%#= disabled_style("Sales Orders Data") %></td-->
+            <%# end %>
+          <%# end %>
         </tr>
 
         <tr>

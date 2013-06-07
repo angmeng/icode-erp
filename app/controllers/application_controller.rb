@@ -235,7 +235,7 @@ class ApplicationController < ActionController::Base
   
   def check_validate_of_period_in_ste
     @period = SalesTaxExemption.where{ (valid_date_condition == true) }
-    @validate, msg = @period.check_period if @period.present?
+    SalesTaxExemption.check_period(@period) if @period.present?
   end
   
   private

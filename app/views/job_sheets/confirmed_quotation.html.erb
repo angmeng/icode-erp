@@ -1,0 +1,9 @@
+<%= title_head "SELECTION CUSTOMER PO NO" %>
+
+<% if @quotations.present? %>
+  <div class="table_background"><%= render "listing_confirmed_quotation", :quotations => @quotations %></div>
+<% else %>
+  <div class="linking_content">Not Record Found</div>
+<% end %>
+
+<%= render "action_confirmed_quotation" %>

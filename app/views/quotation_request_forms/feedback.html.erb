@@ -2,20 +2,20 @@
 
 <%= title_head "CUSTOMER FEEDBACK - QUOTATION REQUISITION" %>
 
-  <% if @quotation_request_forms.present? %>
-    <div class="qr_content">
-      <%= form_tag customer_confirm_quotation_request_forms_path do %>
-        <%= render "feedback_quotation_request", :quotations => @quotation_request_forms %>
-        <div style="padding: 5px;" id="qr_submit">
-          <b>Confirmed By</b> <%= current_user.name rescue '-' %><br/>
-          <%= hidden_field_tag :confirmed_by, current_user.id %>
-          <%= submit_tag "Submit", :confirm => "Are you sure to submit?", :class => "k-button" %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <div class="linking_content">No Record Found</div>
-  <% end %>
+<% if @quotation_request_forms.present? %>
+  <div class="table_background">
+    <%= form_tag customer_confirm_quotation_request_forms_path do %>
+      <%= render "feedback_quotation_request", :quotations => @quotation_request_forms %>
+      <div style="padding: 5px;" id="qr_submit">
+        <b>Confirmed By</b> <%= current_user.name rescue '-' %><br/>
+        <%= hidden_field_tag :confirmed_by, current_user.id %>
+        <%= submit_tag "Submit", :confirm => "Are you sure to submit?", :class => "k-button" %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="linking_content">No Record Found</div>
+<% end %>
 
 <%= render "action_quotation_feedback" %>
 

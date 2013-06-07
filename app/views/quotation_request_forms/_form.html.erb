@@ -57,7 +57,7 @@
       <%= form_tag no_button_quotation_request_form_path(@quotation_request_form), :method => :put do %>
         <b>Remark:</b><br/>
         <%= text_area_tag :status_remark, params[:status_remark], :cols => 40, :rows => 4 %><br/>
-        <%= submit_tag "Submit Remark", :class => "k-button" %>
+        <div class="icon_tag"><%= submit_tag "Submit Remark", :class => "k-button" %></div>
       <% end %>
     <% end %>
   </div>

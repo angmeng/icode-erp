@@ -1,0 +1,381 @@
+<%= form_for(@job_sheet) do |f| %>
+  <div id="valid_quotation">
+    <div class="popup_content">
+      <% if @quotation.present? %>
+        <table>
+          <tr>
+            <td colspan="4" align="center" width="70%"><b>ETHEOS IMPRINT TECHNOLOGY SDN BHD<br/>JOB SHEET</b></td>
+            <td width="10%"><b>REV</b>-<%= f.text_field :rev, :class => "k-textbox", :style => "width: 50px;" %></td>
+            <td width="10%"><b>DATE</b></td>
+            <td width="10%"><%= f.text_field :job_sheet_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %></td>
+          </tr>
+          <tr>
+            <td colspan="5"></td>
+            <td><b>JOB NO</b></td>
+            <td><%= f.text_field :job_no, :class => "k-textbox" %></td>
+          </tr>
+          <tr>
+            <td><b>ISSUED BY :</b></td><td></td>
+            <td><b>APPROVED BY :</b></td><td></td>
+            <td></td>
+            <td><b>PO NO</b></td>
+            <td><%= f.text_field :customer_po_no, :value => @quotation.customer_po_no, :class => "k-textbox" %></td>
+          </tr>
+          <tr><td colspan="10"><hr/></td></tr>
+          <tr>
+            <td><b>CLIENT</b></td>
+            <td>
+              <%= @quotation.trade_company.try(:code) %>
+              <%= f.hidden_field :trade_company_id, :value => @quotation.trade_company_id %>
+            </td>
+            <td><b>ETA</b></td>
+            <td><%= f.text_field :eta, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %></td>
+            <td></td>
+            <td><b>Mat. Extra Issue Note</b></td>
+            <td><%= f.text_area :issue_note, :rows => 2 %></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><b>DESCRIPTION</b></td>
+            <td colspan="3"><%= f.text_area :description, :value => @quotation.description, :rows => 3 %></td>
+            <td></td>
+            <td><b>Requested By</b></td>
+            <td><%= f.text_field :requested_by, :class => "k-textbox" %>&nbsp;&nbsp;<b>Qty</b>&nbsp;&nbsp;<%= f.number_field :requested_qty, :class => "k-textbox numberKey", :style => "width: 50px;" %></td>
+          </tr>
+          <tr>
+            <td><b>PROD SIZE</b></td>
+            <td>
+              <%= f.text_field :internal_dimensen_length, :value => @quotation.internal_dimensen_length, :class => "k-textbox", :style => "width: 50px;" %>&nbsp;X&nbsp;
+              <%= f.text_field :internal_dimensen_width, :value => @quotation.internal_dimensen_width, :class => "k-textbox", :style => "width: 50px;" %>&nbsp;X&nbsp;
+              <%= f.text_field :internal_dimensen_height, :value => @quotation.internal_dimensen_height, :class => "k-textbox", :style => "width: 50px;" %>&nbsp;MM
+            </td>
+            <td><b>Printing Qty : </b></td>
+            <td colspan="2"></td>
+            <td><b>Finishing</b></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><b>SIZE</b></td>
+            <td style="vertical-align: top;">
+              <table>
+                <tr>
+                  <td><b>XS=</b></td>
+                  <td><%= f.text_field :size_xs_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>S=</b></td>
+                  <td><%= f.text_field :size_s_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>M=</b></td>
+                  <td><%= f.text_field :size_m_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>L</b></td>
+                  <td><%= f.text_field :size_l_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>XL=</b></td>
+                  <td><%= f.text_field :size_xl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>XXL=</b></td>
+                  <td><%= f.text_field :size_xxl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+              </table>
+            </td>
+            <td></td>
+            <td style="vertical-align: top;">
+              <table>
+                <tr>
+                  <td><b>XS=</b></td>
+                  <td><%= f.text_field :printing_xs_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>S=</b></td>
+                  <td><%= f.text_field :printing_s_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>M=</b></td>
+                  <td><%= f.text_field :printing_m_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>L</b></td>
+                  <td><%= f.text_field :printing_l_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>XL=</b></td>
+                  <td><%= f.text_field :printing_xl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>XXL=</b></td>
+                  <td><%= f.text_field :printing_xxl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+              </table>
+            </td>
+            <td colspan="2"></td>
+            <td rowspan="9">
+              <table>
+                <tr>
+                  <td><b>UV</b></td>
+                  <td><%= f.text_field :uv, :value => "-", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>Varnish</b></td>
+                  <td><%= f.text_field :varnish, :value => (@quotation.varnish || "-"), :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>Lamin</b></td>
+                  <td><%= f.text_field :lamination, :value => (@quotation.lamination || "-"), :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>D/Cut</b></td>
+                  <% if @field_sets.include?(QuotationRequestForm::DIE_CUT_FIELDSET) %>
+                    <td><%= f.text_field :die_cut, :value => "X", :class => "k-textbox" %></td>
+                  <% else %>
+                    <td><%= f.text_field :die_cut, :value => "-", :class => "k-textbox" %></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <td><b>Glueing</b></td>
+                  <td>
+                    <% if @glueing_types_join.present? %>
+                      <% arr_glueing = [] %>
+
+                      <% @glueing_types_join.each do |gt| %>
+                        <% if gt.glueing == QuotationRequestForm::OTHERS %>
+                          <% arr_glueing << "OTHERS: #{gt.glueing_other}" %>
+                        <% else %>
+                          <% arr_glueing << gt.glueing %>
+                        <% end %>
+                      <% end %>
+
+                      <% a = arr_glueing.join(", ") %> 
+                    <% else %>
+                      <% a = '-' %>
+                    <% end %>
+                    
+                    <%= f.text_field :glueing, :value => "#{a}", :class => "k-textbox" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Window</b></td>
+                  <td>
+                    <% if @quotation.window_patching_type == QuotationRequestForm::OTHERS %>
+                      <% b = @quotation.window_patching_type_other rescue '-' %>
+                    <% elsif @quotation.window_patching_type == QuotationRequestForm::PRE_PRINT %>
+                      <% b = @quotation.pre_print_textbox rescue '-' %>
+                    <% else %>
+                      <% b = @quotation.window_patching_type rescue '-' %>
+                    <% end %>
+                    <%= f.text_field :window, :value => "#{b}", :class => "k-textbox" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Wax</b></td>
+                  <td>
+                    <% if @quotation.wax == TRUE %>
+                      <%= f.text_field :wax, :value => "X", :class => "k-textbox" %>
+                    <% else %>
+                      <%= f.text_field :wax, :value => "-", :class => "k-textbox" %>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Others</b></td>
+                  <td><%= f.text_field :finishing_other, :value => "-", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>Matt Varnish</b></td>
+                  <td><%= f.text_field :matt_varnish, :value => "-", :class => "k-textbox" %></td>
+                </tr>
+                
+              </table>             
+            </td>
+          </tr>
+          
+        </table>
+      
+        <hr/>
+        
+        <div style="height: 120px;">
+          <table>
+            <tr>
+              <td width="30%"><div style="border: 1px solid black; width: 200px; height: 100px;"></div></td>
+              <td width="30%"><div style="border: 1px solid black; width: 200px; height: 100px;"></div></td>
+              <td width="40%">
+                <% c = [] %>
+                <div style="border: 1px solid black; width: 500px; height: 100px; padding: 5px;">
+                  INK<br/>
+                  <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) %>
+                    <% if @quotation.try(:color_type) %>
+                      <% c << @quotation.color_type rescue '-' %>
+                    <% end %>
+                    <% if @quotation.colors.present? %>
+                      <% @quotation.colors.each do |name| %>
+                        <% c << name.color_name %>
+                      <% end %>
+                    <% end %>
+                    <% if @quotation.colors.present? %>
+                      <% @quotation.colors.each do |code| %>
+                        <% c << code.color_code %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <%= f.text_area :ink, :value => c.join("\n"), :rows => 5 %>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
+        <hr/>
+        
+        <table class="normal_table_black">
+          <tr>
+            <th width="40%">PAPER</th>
+            <th width="20%">ORIGINAL SIZE</th>
+            <th width="20%">TRIM SIZE</th>
+            <th width="10%">RATIO</th>
+            <th width="10%">QUANTITY (ORIGINAL SIZE)</th>
+          </tr>
+          <tr>
+            <td align="center">
+              <%= f.text_field :material_gramme, :value => @quotation.material_gramme, :style => "width: 50px;", :class => "k-textbox" %>
+              <%= f.text_field :unit_measurement_id, :value => @quotation.unit_measurement.code, :style => "width: 50px;", :class => "k-textbox" %>
+              <%= f.text_field :material_type, :value => @quotation.material_type, :class => "k-textbox" %>
+            </td>
+            <td align="center">
+              <%= f.text_field :paper_width, :value => @quotation.paper_width, :style => "width: 50px;", :class => "k-textbox" %> X <%= f.text_field :paper_length, :value => @quotation.paper_length, :style => "width: 50px;", :class => "k-textbox" %>
+            </td>
+            <td>
+              <% if @quotation.selection_printing_sizes.present? %>
+                  <% d = [] %>
+                  <% @quotation.selection_printing_sizes.each do |sps| %>
+                    <% d << "#{two_precision(sps.try(:width))} X #{two_precision(sps.try(:length))} (#{sps.try(:ups)} UPS)" %>
+                  <% end %>
+              <% end %>
+              <%= f.text_area :trim_size, :value => d.join("\n"), :rows => 3 %>
+            </td>
+            <td align="center"><%= f.text_field :ratio, :value => @quotation.ratio, :style => "width: 50px;", :class => "k-textbox" %></td>
+            <td align="center"><%= f.text_field :ori_size_qty, :class => "k-textbox" %></td>
+          </tr>
+        </table>
+      
+        <hr/>
+        
+        <table style="border: 1px solid black;">
+          <tr>
+            <td width="90%">
+              <% ff = [] %>
+              <% ff << "Size\tPart/Art No.\tCat/Reorder No.\tCustomer Stock Code" %>
+              <% @quotation.custom_productions.each do |cp| %>
+                <% ff << "#{cp.lot_size}\t#{cp.part_no}\t\t#{cp.category_no}\t\t#{cp.stock_reference}" %>
+              <% end %>
+              
+              <b>REMARKS:</b><br/> <%= f.text_area :remarks, :rows => 10, :cols => 100 %><br/>
+              <b>CUSTOMER REF:</b><br/> <%= f.text_area :customer_ref, :value => "#{ff.join("\n")}", :rows => 10, :cols => 100 %>
+            </td>
+            <td width="10%" style="border-left: 1px solid black;">
+              <table>
+                <tr><td>STOCK</td></tr>
+                <tr>
+                  <td><b>XS=</b></td>
+                  <td><%= f.text_field :stock_xs_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>S=</b></td>
+                  <td><%= f.text_field :stock_s_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>M=</b></td>
+                  <td><%= f.text_field :stock_m_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>L</b></td>
+                  <td><%= f.text_field :stock_l_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>XL=</b></td>
+                  <td><%= f.text_field :stock_xl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+                <tr>
+                  <td><b>XXL=</b></td>
+                  <td><%= f.text_field :stock_xxl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        
+        <hr/>
+        
+        <table class="normal_table_black">
+          <tr>
+            <td width="30%">
+              <div>
+                <b>PACKING QTY:</b> <%= f.text_field :packing_qty, :value => "#{@quotation.packed_quantity} PCS", :class => "k-textbox" %>
+              </div>
+              <div>
+                <% e = [] %>
+                <% if @quotation.selection_die_cut_moulds.present? %>
+                  <% @quotation.selection_die_cut_moulds.each do |mou| %>
+                    <% e << mou.mould_no %>
+                  <% end %>
+                <% end %>
+                <% if @quotation.selection_die_cut_moulds.present? %>
+                  <% @quotation.selection_die_cut_moulds.each do |win| %>
+                    <% e << win.window_no %>
+                  <% end %>
+                <% end %>
+                <b>MOULD NO:</b> <%= f.text_area :mould_no, :value => e.join("/"), :rows => 3 %>
+              </div>
+              <div>
+                <b>MASTER J/S PREPARED BY:</b> <%= f.text_field :prepared_by, :class => "k-textbox" %>
+              </div>
+            </td>
+            <td width="30%">
+              APPROVED BY:
+              <table>
+                <tr>
+                  <td width="100" height="50"></td>
+                  <td width="100" height="50"></td>
+                </tr>
+                <tr>
+                  <td height="50">SO # <%= f.text_field :sales_order_no, :class => "k-textbox", :style => "width: 80px;" %></td>
+                  <td height="50"></td>
+                </tr>
+              </table>
+            </td>
+            <td width="40%">
+              FILM NO:<br/>
+              <%= f.text_area :film_no, :rows => 6 %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+      
+      <div height="100px">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="icon_tag">
+    <span class="alert_msg"></span>
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+        $(".numberKey").forceNumeric();
+        var validator = $("#valid_quotation").kendoValidator().data("kendoValidator");
+
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; }
+        });
+    });
+
+  </script>
+<% end %>

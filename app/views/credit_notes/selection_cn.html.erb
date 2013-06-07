@@ -13,6 +13,7 @@
             <th>Currency</th>
             <th>Amount</th>
             <th>Updated by</th>
+            <th>N/T</th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                 <td align="center"><%= soa.credit_note.currency.name rescue '-' %></td>
                 <td align="right"><%= four_precision(soa.credit_note.amount) rescue '-' %></td>
                 <td align="center"><%= soa.credit_note.updater_name rescue '-' %></td>
+                <td align="center"><%= soa.fp %></td>
               </tr>
             <% end %>
           <% end %>

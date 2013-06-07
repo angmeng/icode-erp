@@ -1,23 +1,22 @@
-<table width="100%">
-  <tr>
-    <td align="right">
-      <%= link_to 'Search', "#", :class => "search_link" %>
-    </td>
-  </tr>
-</table>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISTING CURRENCIES - KIV</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div><%= render "search_currency_kiv" %></div>
+<div id="tabify_listing">
+  <% if @currencies.present? %>
+    <div class="table_background"><%= render "listing_currency", :cur => @currencies %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING KIV - CURRENCIES</strong></div>
+<div id="tabify_search">
+  <%= render "search_currency_kiv" %>
+</div>
 
-<% if @currencies.present? %>
-  <%= render "listing_currency", :cur => @currencies %>
-  <%= render "action_currency_kiv" %>   
-<% else %>
-  No Record Found..
-<% end %>
+<%= render "action_currency_kiv" %>  
 
-<br />
 
 
 

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Customer name:</b>
+  <%= @job_sheet.customer_name %>
+</p>
+
+<p>
+  <b>Qrf date:</b>
+  <%= @job_sheet.qrf_date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @job_sheet.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_sheet_path(@job_sheet) %> |
+<%= link_to 'Back', job_sheets_path %>

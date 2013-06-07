@@ -1,15 +1,16 @@
-<div class="fix_800x600">
-  <table class="white-line-table zebraLight">
+<table id="tabify_datatable" class="zebraLight display">
+  <thead>
     <tr class="header_line">
       <th class="check_highlight"></th>
       <th>Name</th>
     </tr>
-
+  </thead>
+  <tbody>
     <% trans.each do |transport| %>
       <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= transport.id %>">
         <td></td>
         <td><%= transport.name %></td>
       </tr>
     <% end %>
-  </table>
-</div>
+  </tbody>
+</table>

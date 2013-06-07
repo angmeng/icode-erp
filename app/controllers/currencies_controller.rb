@@ -1,7 +1,7 @@
 class CurrenciesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :are_you_director?
-  layout "sheetbox"
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
 
   def index
     @search = Currency.search(params[:search])

@@ -1,20 +1,18 @@
-<table width="100%">
-  <tr>
-    <td align="right">
-      <%= link_to 'Search', "#", :class => "search_link" %>
-    </td>
-  </tr>
-</table>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISTING CURRENCIES</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div><%= render "search_currency"  %></div>
+<div id="tabify_listing">
+  <% if @currencies.present? %>
+    <div class="table_background"><%= render "listing_currency", :cur => @currencies %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING - CURRENCIES</strong></div>
+<div id="tabify_search">
+  <%= render "search_currency" %>
+</div>
 
-<% if @currencies.present? %>
-  <%= render "listing_currency", :cur => @currencies %>
-  <%= render "action_currency" %>            
-<% else %>
-  Not Record Found.
-<% end %>
-
-<br/>
+<%= render "action_currency" %>

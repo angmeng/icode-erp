@@ -1,18 +1,15 @@
-<%= render "linking" %>
-
-<%= title_head "NEW QUOTATION REQUISITION APPLICATION" %>
+<%= title_head "NEW & PENDING OF QUOTATION REQUISITION APPLICATION" %>
   
 <% if @quotation_request_forms.present? %>
 
-  <div class="qr_content">
+  <div class="popup_content">
     <%= form_tag update_checkboxes_quotation_request_forms_path do %>
         <%= render "pending_qr_list", :quotations => @quotation_request_forms %>
         <div style="padding: 5px;" id="qr_submit"><%= submit_tag "Submit", :confirm => "Are you sure to submit?", :class => "k-button" %></div>
     <% end %>
   </div>
-
 <% else %>
-  <div class="linking_content">No Record Found</div>
+  <div class="popup_content">No Record Found</div>
 <% end %>
 
 <%= render "action_quotation_new_pending" %>
