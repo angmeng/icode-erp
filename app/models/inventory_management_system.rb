@@ -706,6 +706,7 @@ class InventoryManagementSystem < ActiveRecord::Base
 
   SO_CUS_SUMMARY_REPORT_SHOW                        = 421
   SO_CUS_SUMMARY_REPORT_PRINT                       = 422
+  SO_CUS_SUMMARY_REPORT_EXCEL                       = 470 # UNTIL THIS NUMBER ***************
 
   SO_CUSTOMER_PO_DETAIL_REPORT_SHOW                 = 423
   SO_CUSTOMER_PO_DETAIL_REPORT_PRINT                = 424
@@ -742,7 +743,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   ACCOUNT_RECEIPT_REPORT_PRINT                       = 466 
   
   ACCOUNT_STATEMENT_OF_ACCOUNTS_REPORT_SHOW          = 468
-  ACCOUNT_STATEMENT_OF_ACCOUNTS_REPORT_PRINT         = 469  # UNTIL THIS NUMBER ***************
+  ACCOUNT_STATEMENT_OF_ACCOUNTS_REPORT_PRINT         = 469  
 
   #==== ==== LISTING REPORT ==== ====
   LISTING_REPORT_MENU                               = 440

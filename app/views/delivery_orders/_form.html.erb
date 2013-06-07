@@ -69,7 +69,7 @@
               <%= f.hidden_field :updated_by, :value => current_user.id %>
             </td>
           </tr>
-
+         
           <tr>
             <td><b>Sales Tax Exemption No.</b></td>
             <td>
@@ -77,6 +77,9 @@
               <%= f.hidden_field :sales_tax_exemption_id %>
             </td>
             <td></td>
+            <td><b>Authorize Print</b></td>
+            <td><%= f.check_box :authorize_print %></td>
+            
           </tr>
         </table>
 

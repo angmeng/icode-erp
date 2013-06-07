@@ -12,7 +12,7 @@
           <thead>
       		<tr class="header_line">
             <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
-      			<th>Trade Company Code</th>
+      			<th>Trade Company Code / Name</th>
       			<th>Sales Order No.</th>
             <th>Sales Rep.</th>
             <th>Trade Term</th>
@@ -22,10 +22,11 @@
       		<tr class="<%= cycle("odd_line", "even_line") %>">
       			<% @show_sales_order_summary_report.each do |so| %>
             <td align="center"><%= check_box_tag "sos_ids[]" , so.id %></td>
-            <td align="center"><%= so.sales_order.trade_company.code %></td>
-      			<td align="center"><%= so.sales_order.sales_order_no rescue'-' %></td>
-      			<td align="center"><%= so.sales_order.sales_rep rescue'-'%></td>
-            <td align="center"><%= so.sales_order.trade_term.name rescue'-' %></td>
+            <td align="center"><%= so.trade_company.code rescue'-'%> / 
+                               <%= so.trade_comapny.name rescue'-'%></td>
+      			<td align="center"><%= so.sales_order_no rescue'-' %></td>
+      			<td align="center"><%= so.sales_rep rescue'-'%></td>
+            <td align="center"><%= so.trade_term.name rescue'-' %></td>
       		</tr>
           <% end %>
           </tbody>
@@ -34,11 +35,11 @@
 
 
   <div class="icon_tag" style="float:left">
-    <%# if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT_EXCEL) %>
-      <span><%#= submit_tag "Excel Report" , :class => "k-button" %></span> 
-      <%# else %>
+    <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT_EXCEL) %>
+      <span><%= submit_tag "Excel Report" , :class => "k-button" %></span> 
+      <% else %>
       <%= not_link_excel %>
-      <%# end %>
+      <% end %>
     </div>
 
   <div class="icon_tag" style="float:right;">
@@ -66,18 +67,18 @@
 
 
 <div id="tabify_search">
-  <%= form_for @sales_order_summary_report, :url => so_summary_report_reports_path  do |f| %>
+  <%= form_for @sales_order_summary_report, :url => sales_order_summary_report_reports_path  do |f| %>
     <table>
       <tr>
         <td>Trade Company Code :</td>
-        <td><%= f.text_field :sales_order_trade_company_code_contains, :size => 12 %>
+        <td><%= f.text_field :trade_company_code_contains, :size => 12 %>
         <td>Trade Company Name :</td>
-        <td><%= f.text_field :sales_order_trade_company_name_contains , :size => 12 %></td>
+        <td><%= f.text_field :trade_company_name_contains , :size => 12 %></td>
       </tr>
 
       <tr>
         <td>Customer P/O :</td>
-        <td><%= f.text_field :customer_po_contains , :size => 10 %></td>
+        <td><%#= f.text_field :customer_po_contains , :size => 10 %></td>
       </tr>
 
       <tr>

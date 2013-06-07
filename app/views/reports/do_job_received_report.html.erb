@@ -1,0 +1,89 @@
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">DO Schedule Job Received Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+
+
+<div id="tabify_listing">
+ <%= form_tag pdf_do_job_received_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+  <div class="fix_1600x900_h450">
+          <table id="jdatatable" class="display">
+
+              <thead>
+                <tr>
+                  <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
+                  <th>No.</th>
+                  
+                  
+                </tr>
+              </thead>
+              <tbody>
+               
+                <% @show_do_job_received_report.each_with_index do |cn , index| %>
+        
+                    <tr class="<%= cycle("odd_line", "even_line") %>">
+                      <td align="center"><%= check_box_tag "cn_ids[]" , cn.id %></td>
+                      <td align="center"><%= index + 1 %></td>
+                      
+                    </tr>
+                        <%# if pri.amount.present? %>
+                          <%# arr << pri.amount * pri.amount %>
+                        <%# end %>
+                      <% end %>
+                    <%# end %>
+                  </tbody>
+          </table>
+
+         
+    </div>
+          
+
+    <div class="icon_tag" style="float:left">
+      
+        <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %><%#= link_to "Excel Report", excel_inventory_report_reports_path(:inventory_ids => @take_ids,:format=>"xls") , :target=>"_blank", :method => "get" , :class=>"k-button" %></span>
+      <%# else %>
+        <%# not_link_excel %>
+      <%# end %> 
+    </div>
+
+    <div class="icon_tag" style="float:right;">
+        <%# if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_SHOW) %>
+      <span><%#= not_link_show %><%= submit_tag "Show" , :class => "k-button" %></span>
+      <%# else %>
+        <%#= not_link_show %>
+      <%# end %>
+      
+      <span><%= not_link_edit %></span>
+      <span><%= not_link_recover %></span>
+
+      <%# if roles.include?(InventoryManagementSystem::ACCOUNT_CN_DN_REPORT_PRINT) %>
+        <span><%= submit_tag "PDF Report" , :class => "k-button" %></span>
+      <%# else %>
+        <%# not_link_printable %>
+      <%# end %>
+      <% end %>
+
+      <%= link_close_button %>
+    </div>
+  </div>
+
+   
+<div id="tabify_search" >
+    <table>
+    <%= form_for @credit_note_report, :url => credit_note_report_reports_path  do |f| %>
+      <tr>
+          <td>Credit Note Date :</td>
+          <td><%= f.text_field :credit_note_date_gte, :size => 9 , :class=> "mkendo_date" %>
+            -
+              <%= f.text_field :credit_note_date_lte, :size => 9 , :class => "mkendo_date" %></td>
+      </tr>
+      <tr>
+        <td>Trade Company</td>
+        <td><%= f.text_field :trade_company_name_contains , :size => 12 %></td>
+      </tr>
+      <tr>
+          <td><%= submit_tag "Search" %></td>
+      </tr>
+            <% end %>
+          </table>
+</div>  

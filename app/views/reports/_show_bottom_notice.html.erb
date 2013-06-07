@@ -1,0 +1,32 @@
+<table class="po_bottom_layout">
+	<tr style="height:100px;">
+		<td style="text-align:left;">Notes To Vendor : -<br />
+			1. Goods of Inferior Quatity<br />
+			2. Please chop , sign & return<br />
+			   the attached acknowledge.<br />
+			3. Please quote P/O No. in your <br />
+			invoices & D/Os. </th>
+		<td colspan="3" style="text-align:left;">Remark :</td>
+		
+	</tr>
+	<tr style="height:50px;">
+		<td rowspan="2"></td>
+		<td>Purchase By</td>
+		<td>Prepared By</td>
+		<td>Authorised By</td>
+	</tr>
+
+	<tr style="height:50px;">
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr style="height:50px;">
+		<td >Vendor's & Signature></td>
+		<td><% a = User.find(pp.purchase_by) %>
+			<%= a.name rescue'-' %></td>
+		<td><% b = User.find(pp.request_by) %>
+			<%= b.name rescue'-' %></td>
+		<td>B Y LIM </td>
+	</tr>
+</table>

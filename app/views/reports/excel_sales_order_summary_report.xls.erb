@@ -1,36 +1,58 @@
-<div id="container">
+
 <h2><u>Sales Order Report</u></h2>
 	<% if @excel_sales_order_summary_report.present? %>
-		
+		<% @excel_sales_order_summary_report.each do |sos| %>
 		<table id="grid_h495" class="zebraLight normal_table_black" >
+      <thead>
       		<tr class="header_line">
-            
-      			<th>SO / PO</th>
-      			<th>Product ID / Part #</th>
-      			<th>Description</th>
-      			<th>Order Qty</th>
-      			<th>U/P</th>
-      			<th>ETA</th>
-      			<th>Q/S Qty</th>
-      		</tr>
+          <th>SO</th>
+          <th>Customer PO</th>
+          <th>Product ID / Part #</th>
+          <th>Description</th>
+          <th>Order Qty</th>
+          <th>Delivery Quantity</th>
+          <th>OutStanding</th>
+          <th>U/P</th>
+          <th>ETA</th>
+          <th>Q/S Qty</th>
+        </tr>
+      </thead>
+      <tbody>
       		<tr>
-      			<% @excel_sales_order_summary_report.each do |sos| %>
-            	
-      			<td align="center"><%= sos.sales_order.sales_order_no rescue'-' %></td>
-      			<td align="center"><%= render '/product_categories/join_product_category' , :pc => sos %></td>
-      			<td align="center"><%= sos.description rescue '-'%></td>
-      			<td align="center"><%= sos.quantity rescue'-' %></td>
-      			<td align="center"><%= sos.unit_price rescue'-' %></td>
-      			<td align="center"><%= sos.eta rescue'-' %></td>
-      			<td align="center"><%= sos.complete_qty rescue'-' %></td>
-      		</tr>
+          <% sos.sales_order_items.each_with_index do |soi , index| %>
+        
+            <%# if index == 0 %> 
+            <!-- rowspan="<%= sos.sales_order_items.count %>"  -->
+          <td align="center" >
+            <%= sos.sales_order_no rescue'-' %>
+          </td>
+          <%# end %>
+          <td align="center"><%= soi.customer_po rescue'-' %></td>
+          <td align="center"><%= soi.product.product_combobox.product_code rescue'-' %>
+            <br / >
+            <%= soi.part_no rescue'-' %>
+          </td>
+          <td align="center"><%= soi.product.desc rescue '-'%></td>
+          <td align="center"><%= soi.quantity rescue'-' %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+          <td align="center"><%= soi.unit_price rescue'-' %></td>
+          <td align="center"><%= soi.eta rescue'-' %></td>
+          <td align="center"><%= soi.remaining_qty rescue'-' %></td>
+        </tr>
+        
+        <tr style="border-top: 1px solid;">
+          <td></td>
+        </tr>
       		<% end %>	
-		
+		</tbody>
+  </table>
+  <% end %>
 		<% else %>
 		No Report Found
 	<% end %>
 	
-</div>
+
 
 
 <style>

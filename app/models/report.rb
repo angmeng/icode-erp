@@ -14,16 +14,33 @@ class Report < ActiveRecord::Base
 
   def self.pdf_do_so_documentation_report(doc_ids)
     doc_ids.each do |doc_id|
-      doc = HistoryInvoice.new(:created_date => Date.today, :delivery_order_id => doc_id) 
+      doc = HistoryInvoice.new(:created_date => Date.today, :delivery_order_id => doc_id)
+      #doc.authorize_print(params[doc_id]) 
       doc.save!
     end
   end
 
-  def total_date_amount(balance)
-     balance = DeliveryOrder.first.calculate_sum_of_doi
-    StatementOfAccount.select("date(transaction_date) as ordered_date, sum(balance) 
-      as total_price").group("date(transaction_date)")
+  def authorize_print?
+    authorize_print == TRUE
   end
+
+  # def calculate_sum_of_doi
+      
+  #     a = delivery_order_items.collect {|c| (c.unit_price.to_f * c.delivery_qty.to_f) }
+  #     a << tport_c.to_f + sales_tax.to_f
+  #     return a.sum()
+  #   #     delivery_order_items.each do |doi|
+  #   #   doi.map(&:unit_price).sum()
+  #   # end
+  # end
+
+
+  # def total_date_amount(calculate_sum_of_doi)
+  #    # balance = DeliveryOrder.first.calculate_sum_of_doi
+  #    balance = calculate_sum_of_doi
+  #   StatementOfAccount.select("date(transaction_date) as ordered_date, sum(balance) 
+  #     as total_price").group("date(transaction_date)")
+  # end
 
   
 end

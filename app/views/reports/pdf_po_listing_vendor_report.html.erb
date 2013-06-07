@@ -21,14 +21,20 @@
   		</thead>
       
     	<tbody>
-        <% po.purchase_requisition.purchase_requisition_items.each do |pr| %>
+        <% po.purchase_requisition.purchase_requisition_items.each_with_index do |pr , index| %>
     		<tr>
-    			<td align="center"><%= po.po_no rescue'-' %></td>
-          <td align="center"><%= pr.eta rescue'-' %></td>
+          <% if index == 0 %>
+    			<td align="center" rowspan="<%= pr.purchase_requisition.purchase_requisition_items.count %>"><%= po.po_no rescue'-' %></td>
+          <% end %>
+          <td align="center"><%= pr.eta.strftime("%d/%m/%Y") rescue'-' %></td>
     			<td align="center"><%= pr.product.product_combobox.product_code rescue '-' %> / 
             <%= pr.description rescue'-' %></td>
-    			<td align="center"><%= pr.quantity rescue '-' %></td>
-          <td align="center"><%= pr.remark rescue '-' %></td>
+    			<td align="center"><%= pr.quantity rescue'-' %></td>
+          <% if pr.remark.present? %>
+          <td align="center"><%= pr.remark rescue'-' %></td>
+          <% else %>
+          <td align="center">-</td>
+          <% end %>
           <td align="center"><%= pr.unit_measurement.code rescue '-' %></td>
     			<td align="center"><%= pr.unit_price rescue '-' %></td>
           
