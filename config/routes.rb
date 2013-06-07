@@ -61,7 +61,7 @@ Merp::Application.routes.draw do
     get "company_report"
     get "customer_report"
     get "credit_note_report"
-    get "do_summary_report"
+    get "delivery_order_summary_report"
     get "do_so_documentation_report"
     get "debit_note_report"
     get "journal_sales_report"
@@ -79,7 +79,7 @@ Merp::Application.routes.draw do
     get "sales_cj5_summary_co_report"
     get "so_listing_report"
     get "so_customer_po_detail_report"
-    get "so_summary_report"
+    get "sales_order_summary_report"
     get "statement_of_accounts_report"
 
 

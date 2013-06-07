@@ -1,4 +1,4 @@
-<div id="container">
+
 <h2><u>Sales Order Listing Report</u></h2>
 
 
@@ -28,11 +28,13 @@
         <td align="center"><%= soi.quantity rescue '-'%></td>
         <td align="center"><%= soi.unit_price rescue '-'%></td>
         <td align="center"><%= soi.eta.strftime("%d-%m-%Y") rescue '-'%></td>
-        <td align="center"><%= so.status rescue '-' %></td>
+        <% if index == 0 %>
+        <td align="center" rowspan="<%= so.sales_order_items.count %>" ><%= so.status rescue '-' %></td>
+        <% end %>
       </tr>
       <% end %>
-      <!-- <tr style="border-top: 2px solid;">
-        <td ></td> -->
+      <tr style="border-bottom: 2px solid;">
+        <td ></td>
       </tr>
       
     <% end %> 
@@ -43,9 +45,6 @@
     
   </table>
 
-  
-
-</div>
 
 
 <style>

@@ -1,11 +1,7 @@
-<%# xx = User.find(@purchase_order.purchase_by) %>
-<%#= xx.name rescue'-' %>
-
 <% arr = [] %>
-
 <% if @detail_purchase_order_report.present? %>
 <% @detail_purchase_order_report.each_with_index do |pp , index| %>
-	
+	<% counter = 0 %>
 	<% if index == 0 %>
       <div>
       
@@ -14,12 +10,10 @@
       	<br /><br /><br />
         
     <% end %>
-	
+
 	<div class="layout">
 	<h4>Purchase Order</h4>
 	<table style="width:100%;">
-
-
 		<tr>
 			<td align="left">
 				Vendor : 
@@ -67,9 +61,111 @@
 			<td>Attn . :</td>
 		</tr>
 	</table>
-<div class="po_middle_layout">
-	
-<table>
+<div class="po_middle_layout">	<%# first counter table %>
+	<table>
+		<thead>
+			<tr>
+				<th>No.<br />---</th>
+				<th style="width:150px;">Prod. Code<br />------------</th>
+				<th style="width:200px;">Description<br />-------------</th>
+				<th style="width:90px;">ETA<br />------</th>
+				<th>Quantity<br />--------</th>
+				<th style="width:110px;">Unit Price<br />---------</th>
+				<th style="width:90px;">Amount<br />--------</th>
+			</tr>
+		</thead>
+		<tbody>
+	<% pp.purchase_requisition.purchase_requisition_items.each_with_index do |pr , index | %>
+		  <% counter += 1%>
+			<% if counter < 6 %>
+				<tr>
+					<td align="center"><%= index + 1 %></td>
+					<td align="center"><%= pr.product.product_combobox.product_code rescue'-'  %></td>
+					<td align="left"><%= pr.product.desc rescue'-' %></td>
+					<td align="center"><%= pr.eta.strftime("%d-%m-%Y") rescue'-' %></td>
+					<td align="center"><%= pr.quantity rescue'-' %></td>
+					<td align="right"><%= pr.unit_price rescue'-' %></td>
+					<td align="right"><%= two_precision(pr.quantity * pr.unit_price ) rescue'-' %></td>
+				</tr>
+				<% arr << pr.quantity * pr.unit_price %>
+				<tr>
+				<% 5.times do |td| %><td></td><% end %>
+				<td align="right">-------------------<br />
+								Sub-Total	:
+				</td>
+				<td align="right">------------------<br />
+								<%= two_precision(arr.sum) %>
+								  
+				</td>
+			</tr>
+			<tr>
+				<% 5.times do |td| %><td></td><% end %>
+				<td align="right">-------------------<br />
+					Add S/Tax 0%	:</td>
+				<td align="right"><% pp.tax rescue'-' %></td>
+			</tr>
+			<tr>
+				<% 5.times do |td| %><td></td><% end %>
+				<td align="right">Grand Total 	:<br />
+								   ------------------</td>
+				<td align="right"><%= two_precision(arr.sum + pp.tax) %><br />
+								   ------------------</td>
+			</tr>
+		</tbody>
+			<% else %>  <%# else for counter %>
+	</table>
+</div>
+	<% render "show_bottom_notice" %>
+<div style="page-break-before: always;">
+
+<table style="width:100%;">
+		<tr>
+			<td align="left">
+				Vendor : 
+				<br />
+				<br />
+				<br />
+				Fax No. :
+			</td>
+			<td align="left" style="width:400px;">
+				<%= pp.trade_company.name rescue'-'%><br />
+                <%= pp.trade_company.address_1 rescue'-'%><br />
+
+	              <% if pp.trade_company.postcode_one.present? %>
+	                <%= pp.trade_company.postcode_one rescue '-' %>&nbsp;
+	              <% end %>
+	              <% if pp.trade_company.city_one.present? %>
+	                <%= pp.trade_company.city_one rescue '-' %>,&nbsp;
+	              <% end %>
+	              <% if pp.trade_company.state_one.present? %>
+	                <%= pp.trade_company.state_one rescue '-' %>.&nbsp;
+	              <% end %>
+	              <%# if pp.trade_company.country_one.present? %>
+	                <%#= pp.trade_company.country_one rescue '-' %><br/>
+	              <%# end %> 
+            	 <%= pp.trade_company.fax_no rescue'-' %>
+			</td>
+			<td align="right">
+				P/O No. :<br />
+				Date 	:<br />
+				Term	:<br />
+				Currency:<br />
+				Revision:
+			</td>
+			<td align="left">
+				<%= pp.po_no rescue'-' %><br />
+				<%= pp.po_date.strftime("%d-%m-%Y") rescue'-'  %><br />
+				<%= pp.trade_term.name rescue'-' %><br />
+				<%= pp.currency.name rescue'-' %><br />
+				<%= pp.revision rescue'-' %>
+			</td>
+		</tr>
+		<tr>
+			<td>Attn . :</td>
+		</tr>
+</table>
+
+<table>  <%# after else table %>
 	<thead>
 	<tr>
 		<th>No.<br />---</th>
@@ -83,7 +179,6 @@
 	</thead>
 	
 	<tbody>
-	<% pp.purchase_requisition.purchase_requisition_items.each_with_index do |pr , index | %>
 		<tr>
 			<td align="center"><%= index + 1 %></td>
 			<td align="center"><%= pr.product.product_combobox.product_code rescue'-'  %></td>
@@ -93,8 +188,7 @@
 			<td align="right"><%= pr.unit_price rescue'-' %></td>
 			<td align="right"><%= two_precision(pr.quantity * pr.unit_price ) rescue'-' %></td>
 		</tr>
-		<% arr << pr.quantity * pr.unit_price %>
-	<% end %>
+			<% arr << pr.quantity * pr.unit_price %>
 	<tr>
 		<% 5.times do |td| %><td></td><% end %>
 		<td align="right">-------------------<br />
@@ -119,53 +213,22 @@
 		<td align="right"><%= two_precision(arr.sum + pp.tax) %><br />
 						   ------------------</td>
 	</tr>
-
-	
 	</tbody>
-</table>
-</div>
-
-
-
-<table class="po_bottom_layout">
-	<tr style="height:100px;">
-		<td style="text-align:left;">Notes To Vendor : -<br />
-			1. Goods of Inferior Quatity<br />
-			2. Please chop , sign & return<br />
-			   the attached acknowledge.<br />
-			3. Please quote P/O No. in your <br />
-			invoices & D/Os. </th>
-		<td colspan="3" style="text-align:left;">Remark :</td>
+		<% counter = 1 %>
 		
-	</tr>
-	<tr style="height:50px;">
-		<td rowspan="2"></td>
-		<td>Purchase By</td>
-		<td>Prepared By</td>
-		<td>Authorised By</td>
-	</tr>
 
-	<tr style="height:50px;">
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr style="height:50px;">
-		<td >Vendor's & Signature></td>
-		<td><% a = User.find(pp.purchase_by) %>
-			<%= a.name rescue'-' %></td>
-		<td><% b = User.find(pp.request_by) %>
-			<%= b.name rescue'-' %></td>
-		<td>B Y LIM </td>
-	</tr>
-	
 </table>
-<% end %>
 
-<% else %>
-no record found
-	<% end %> <%# end of if statement %>
+	<% render "show_bottom_notice" %>
+	<% end %>
+<% end %>
+<% end %>
 </div>
+
+	<% else %>
+		no record found
+	<% end %> <%# end of if statement %>
+	</div>
 
 </div>
 

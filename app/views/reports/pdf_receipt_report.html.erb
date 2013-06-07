@@ -1,18 +1,14 @@
 <% if @detail_receipt_report.present? %>
-  <%# counter = 0 %>
+  <% counter = 0 %>
+  
   <% @detail_receipt_report.each_with_index do |rec, index|%>
-  <%# counter += 1%>
-  <%# if counter < 4 %>
   <% array = [] %>
-    
   <% if index == 0 %>
-      <div></div>
-    
+      <div>
     <% else %>
-      <div style="page-break-before: always;"></div>
-        
-    
+      <div style="page-break-before: always;">
     <% end %>
+    
     <p align="center"> *** OFFICIAL RECEIPT ***</p>
     <p align="center">(Valid Upon Cheque Clearence)</p>
 
@@ -53,11 +49,79 @@
         <th>Cash Amt</th>
         <th>Contra Amt</th>
         <th>Total</th>
-
       </tr>
     </thead>
     <tbody>
       <% rec.statement_of_accounts.each_with_index do |pay , index| %>
+      <% counter += 1 %>
+      <% if counter < 3 %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>">
+        <td align="center"><%= index + 1 %></td>
+        <td align="center"><%= StatementOfAccount.transacted(pay) %></td>
+        <td align="center"><%= StatementOfAccount.transacted_date(pay) %></td>
+        <td align="right"><%= four_precision(pay.document_amount) rescue '-' %></td>
+        <% if index == 0 %>
+        <td align="right" style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>"><%= rec.cheque_amount rescue'-' %></td>
+        <% end %>
+        <% if index == 0 %>
+        <td align="right"  style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>"><%= rec.cash_amount rescue'-' %></td>
+        <% end %>
+        <% if index == 0 %>
+        <td align="right"  style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>">0.00</td>
+        <% end %>
+        <% if index == 0 %>
+        <td align="right"  style="vertical-align: top;" rowspan="<%= rec.statement_of_accounts.count %>"><%= rec.total_amount rescue'-' %></td>
+        <% end %>
+      </tr>
+    </tbody>
+    <%# end %>
+    <!-- <td>Continue Next Page</td> -->
+    <% else %>
+  </table>
+  
+  <div style="page-break-before: always;">
+  <%# render "/reports/show_receipt_report" %>
+  <p align="center"> *** OFFICIAL RECEIPT ***</p>
+    <p align="center">(Valid Upon Cheque Clearence)</p>
+    <table>
+      <tr>
+        <td>Received From :<br />
+          <%= rec.trade_company.code rescue'-' %> -
+          <%= rec.trade_company.name rescue'-' %><br />
+          <%= rec.trade_company.address_1 rescue'-' %><br />
+          <%= rec.trade_company.postcode_one rescue'-' %>&nbsp
+          <%= rec.trade_company.city_one rescue'-' %>
+        </td>
+       
+        <td align="right">
+          <br/ >
+          Receipt No. :<br />
+          Date :<br />
+          Page :<br />
+        </td>
+
+        <td>
+          <br />
+          <%= rec.receipt_no rescue'-' %><br />
+          <%= rec.receipt_date.strftime("%d-%m-%Y") %><br />
+          <%= index + 1 %>
+        </td>
+      </tr>
+    </table>
+  <table class="black-line-table">
+      <thead class="header_line">
+      <tr>
+        <th>No.</th>
+        <th>Type / Ref. No</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Cheque Amt</th>
+        <th>Cash Amt</th>
+        <th>Contra Amt</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
       <tr class="<%= cycle('odd_line', 'even_line') %>">
         <td align="center"><%= index + 1 %></td>
         <td align="center"><%= StatementOfAccount.transacted(pay) %></td>
@@ -82,13 +146,9 @@
         <td align="center"><%= pay.balance_amount rescue'-' %></td>
         <% array << pay.balance_amount %> -->
       </tr>
-      <% end %>
     </tbody>
-    <!-- <td>Continue Next Page</td> -->
-    <%# else %>
   </table>
-    <table>
-
+  <table>
       <tr>
         Cheque(s) :-
         <td><%= rec.cheque_no rescue'-' %></td>
@@ -98,7 +158,6 @@
       <tr>
         <td>&nbsp</td>
       </tr>
-
       <tr>
         <td>Prepared By,</td>
         <td>Approved By,</td>
@@ -114,10 +173,17 @@
           By LIM
           </td>
         </td>
-      </tr>
-    </table>
+      </tr> 
+  <% counter = 1 %>
+  
     <%# end %>
-    <% end %>
+</table>
+    <% end %>  <!-- end of counter -->
+    
+    <% end %>  <!-- end of first each -->
+    <% end %>  <!-- end of scound each -->
+  </div> <!-- end of page break div -->
+</div> <!-- end of second page break div -->
 <% else %>
   no record had found
 <% end %>

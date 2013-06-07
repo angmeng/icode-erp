@@ -1,5 +1,3 @@
-
-
 <% balance = 0 %>
 <% array = [] %>
     <% if @detail_statement_of_accounts_report.present? %>
@@ -35,19 +33,22 @@
 	  </table>
 
 	  <table class="black-line-table">
-	  	<tr>
-	  		<th>Date</th>
-	  		<th>Reference</th>
-	  		<th>Description</th>
-	  		<th></th>
-	  		<th>Debit</th>
-	  		<th>Credit</th>
-	  		<th>Balance</th>
-	  	</tr>
-	  	<% soa.statement_of_accounts.each_with_index do |acc ,index | %>
+	  	<thead>
+		  	<tr>
+		  		<th>Date</th>
+		  		<th>Reference</th>
+		  		<th>Description</th>
+		  		<th></th>
+		  		<th>Debit</th>
+		  		<th>Credit</th>
+		  		<th>Balance</th>
+		  	</tr>
+		</thead>
+	  	<% soa.each_with_index do |acc ,index | %>
 	  	
 	  	<% counter += 1 %>
-    	<% if counter < 52 %>
+    	<% if counter < 47 %>
+    	<tbody>
 	  	<tr>
 	  		<td align="center"><%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
 	  		<td align="center">
@@ -78,6 +79,9 @@
 	  			<% if acc.delivery_order.present? %>
 	  				<%= two_precision(acc.delivery_order.calculate_sum_of_doi) %>
 	  				<% balance += acc.delivery_order.calculate_sum_of_doi %>
+	  			<% elsif acc.debit_note.present? %>
+	  				<%= acc.debit_note.amount %>
+	  				<% balance += acc.debit_note.amount %>
 	  			<% else %>
 	  				&nbsp;
 	  			<% end %>
@@ -95,11 +99,11 @@
 	  			<%= two_precision(balance) %>
 	  		</td>
 	  	</tr>
+	  </tbody>
 	  	<% else %> <%# else for counter %>
-
-	  </table>
+	</table>
 	  <div style="page-break-before: always;">
-     <table>
+    <table>
       	<tr>
 	      	<td><%= soa.trade_company.code rescue'-' %>&nbsp;
 	      		<%= soa.trade_company.name rescue'-' %><br />
@@ -118,9 +122,10 @@
 	      		Tel : <%= soa.trade_company.tel_no1 rescue'-' %>
 	      		fax : <%= soa.trade_company.fax_no rescue'-' %> </td>
 	    </tr>
-	  </table>
+	</table>
 
-	  <table class="black-line-table">
+	<table class="black-line-table">
+	  	<thead>
 	  	<tr>
 	  		<th>Date</th>
 	  		<th>Reference</th>
@@ -130,8 +135,12 @@
 	  		<th>Credit</th>
 	  		<th>Balance</th>
 	  	</tr>
+	  </thead>
+	  <tbody>
 	  	<tr>
-	  		<td align="center"><%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+	  		<td align="center">
+	  			<%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %>
+	  		</td>
 	  		<td align="center">
 	  			<%= acc.transaction_type rescue'-' %> &nbsp;
 	  			<% if acc.debit_note.present? %>
@@ -178,10 +187,11 @@
 	  			<%= two_precision(balance) %>
 	  		</td>
 	  	</tr>
-	  	<% counter = 1%> 
+	  </tbody>
+	  	<% counter = 1 %> 
 	  	<% end %>
 	  	<% end %>
-	  </table>
+	</table>
 	  <br />
 	  <%= render "/reports/statement_of_accounts_total" %>
 	  <% end %> <%# end of each %>

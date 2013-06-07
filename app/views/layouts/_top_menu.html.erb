@@ -284,19 +284,19 @@
 
           <% if roles.include?(InventoryManagementSystem::SALES_ORDER_REPORT_MENU) %>
               <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT) %>
-            <li><%= link_to "Cus Summary Report", so_summary_report_reports_path %></li>
+            <li><%= link_to "SO Summary Report", sales_order_summary_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">Cus Summary Report</li>
+              <li class="text_gray">SO Summary Report</li>
             <% end %>
 
               <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
-            <li><%= link_to "Customer P/O Report", so_customer_po_detail_report_reports_path%></li>
+            <li><%= link_to "SO Customer P/O Detail Report", so_customer_po_detail_report_reports_path%></li>
             <% else %>
-              <li class="text_gray">Cus P/O Report</li>
+              <li class="text_gray">SO Customer P/O Detail Report</li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::SO_LISTING_REPORT) %>
-            <li><%= link_to "Sales Order Listing Report", so_listing_report_reports_path %></li>
+            <li><%= link_to "SO Listing Report", so_listing_report_reports_path %></li>
             <% else %>
               <li class="text_gray">SO Listing Report</li>
             <% end %>
@@ -318,7 +318,7 @@
 
             <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
 
-            <li><%= link_to "D/O Summary Report", do_summary_report_reports_path %></li>
+            <li><%= link_to "D/O Summary Report", delivery_order_summary_report_reports_path %></li>
               <% else %>
             <li><%= disabled_menu_style "D/O Summary Report" %></li>
 

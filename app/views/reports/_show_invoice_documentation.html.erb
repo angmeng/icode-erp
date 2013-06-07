@@ -35,10 +35,16 @@
     <span><%#= submit_tag "Excel Report" , :class => "k-button" %><%= not_link_excel %></span> 
 
     <% if roles.include?(InventoryManagementSystem::INVOICE_DOCUMENTATION_REPORT_PRINT) %>
-      <span><%= submit_tag "Invoice Printable" , :class =>"k-button" %></span>
+    <%#= @detail_invoice_documentation_report.authorize_print %>
+      <%# if @detail_invoice_documentation_report.authorize_print == 0 %>
+        <span><%= submit_tag "Invoice Printable" , :class =>"k-button" %></span>
+        <%#else %>
+        <%#= disabled_style "Invoice Printable" %>
+        <%# end %>
     <% else %>
       <%= disabled_style "Invoice Printable" %>
     <% end %>
+
       
     <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT_PRINT) %>
       <span><%= submit_tag "D/O Printable" , :class => "k-button" %></span>
