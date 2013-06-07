@@ -11,33 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517175125) do
-
-  create_table "bill_of_materials", :force => true do |t|
-    t.integer  "bom_no"
-    t.string   "type"
-    t.integer  "sales_order_item_id"
-    t.date     "bom_date"
-    t.string   "other_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "bill_of_materials", ["sales_order_item_id"], :name => "index_bill_of_materials_on_sales_order_item_id"
-
-  create_table "bom_materials", :force => true do |t|
-    t.integer  "material_id"
-    t.integer  "bill_of_material_id"
-    t.integer  "quantity"
-    t.integer  "unit_measurement_id"
-    t.string   "remark"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "bom_materials", ["bill_of_material_id"], :name => "index_bom_materials_on_bill_of_material_id"
-  add_index "bom_materials", ["material_id"], :name => "index_bom_materials_on_material_id"
-  add_index "bom_materials", ["unit_measurement_id"], :name => "index_bom_materials_on_unit_measurement_id"
+ActiveRecord::Schema.define(:version => 20130604131023) do
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -348,13 +322,6 @@ ActiveRecord::Schema.define(:version => 20130517175125) do
     t.integer  "status",                                                 :default => 1
   end
 
-  create_table "group_running_nos", :force => true do |t|
-    t.string   "code"
-    t.integer  "current_no", :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
   create_table "history_invoices", :force => true do |t|
     t.integer  "delivery_order_id"
     t.datetime "created_at",        :null => false
@@ -411,6 +378,92 @@ ActiveRecord::Schema.define(:version => 20130517175125) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "job_sheets", :force => true do |t|
+    t.string   "customer_name"
+    t.date     "qrf_date"
+    t.float    "open_size_length",         :default => 0.0
+    t.float    "open_size_width",          :default => 0.0
+    t.integer  "collating_no"
+    t.integer  "quotation_request_no"
+    t.integer  "updated_by"
+    t.integer  "authorized_by"
+    t.string   "status",                   :default => "PENDING"
+    t.string   "option_size"
+    t.float    "window_width",             :default => 0.0
+    t.float    "window_length",            :default => 0.0
+    t.integer  "window_usage",             :default => 0
+    t.integer  "no_of_moq",                :default => 0
+    t.string   "barcode"
+    t.string   "barcode_other"
+    t.string   "shortage"
+    t.string   "pre_print_textbox"
+    t.string   "packing_type"
+    t.string   "packing_type_other"
+    t.integer  "packed_quantity",          :default => 0
+    t.string   "collect_sequence"
+    t.string   "custom_stock_code"
+    t.string   "box_part_no"
+    t.integer  "lot_size_no"
+    t.string   "rev",                      :default => "00"
+    t.date     "job_sheet_date"
+    t.string   "job_no"
+    t.string   "customer_po_no"
+    t.integer  "trade_company_id"
+    t.date     "eta"
+    t.string   "description"
+    t.string   "issue_note"
+    t.string   "requested_by"
+    t.integer  "requested_qty",            :default => 0
+    t.float    "internal_dimensen_length", :default => 0.0
+    t.float    "internal_dimensen_width",  :default => 0.0
+    t.float    "internal_dimensen_height", :default => 0.0
+    t.integer  "size_xs_qty",              :default => 0
+    t.integer  "size_s_qty",               :default => 0
+    t.integer  "size_m_qty",               :default => 0
+    t.integer  "size_l_qty",               :default => 0
+    t.integer  "size_xl_qty",              :default => 0
+    t.integer  "size_xxl_qty",             :default => 0
+    t.integer  "printing_xs_qty",          :default => 0
+    t.integer  "printing_s_qty",           :default => 0
+    t.integer  "printing_m_qty",           :default => 0
+    t.integer  "printing_l_qty",           :default => 0
+    t.integer  "printing_xl_qty",          :default => 0
+    t.integer  "printing_xxl_qty",         :default => 0
+    t.string   "uv"
+    t.string   "varnish"
+    t.string   "lamination"
+    t.string   "die_cut"
+    t.string   "glueing"
+    t.string   "window"
+    t.string   "wax"
+    t.string   "finishing_other"
+    t.string   "matt_varnish"
+    t.text     "ink"
+    t.integer  "material_gramme",          :default => 0
+    t.integer  "unit_measurement_id"
+    t.string   "material_type"
+    t.float    "paper_width",              :default => 0.0
+    t.float    "paper_length",             :default => 0.0
+    t.text     "trim_size"
+    t.integer  "ratio",                    :default => 0
+    t.integer  "ori_size_qty",             :default => 0
+    t.text     "remarks"
+    t.integer  "stock_xs_qty",             :default => 0
+    t.integer  "stock_s_qty",              :default => 0
+    t.integer  "stock_m_qty",              :default => 0
+    t.integer  "stock_l_qty",              :default => 0
+    t.integer  "stock_xl_qty",             :default => 0
+    t.integer  "stock_xxl_qty",            :default => 0
+    t.text     "customer_ref"
+    t.string   "packing_qty"
+    t.text     "mould_no"
+    t.string   "prepared_by"
+    t.string   "sales_order_no"
+    t.text     "film_no"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
   create_table "journal_voucher_items", :force => true do |t|
     t.string   "document_type"
     t.integer  "document_no"
@@ -450,14 +503,6 @@ ActiveRecord::Schema.define(:version => 20130517175125) do
   end
 
   add_index "material_of_quantities", ["quotation_request_form_id"], :name => "index_material_of_quantities_on_quotation_request_form_id"
-
-  create_table "materials", :force => true do |t|
-    t.string   "code"
-    t.string   "description"
-    t.string   "status",      :default => "Active"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-  end
 
   create_table "packing_quantities", :force => true do |t|
     t.float   "quantity",     :default => 0.0
@@ -583,20 +628,6 @@ ActiveRecord::Schema.define(:version => 20130517175125) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  create_table "product_prices", :force => true do |t|
-    t.integer  "trade_company_id"
-    t.integer  "product_category_id"
-    t.integer  "currency_id"
-    t.decimal  "unit_price",          :precision => 10, :scale => 5, :default => 0.0
-    t.integer  "price_in"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
-    t.string   "part_no"
-  end
-
-  add_index "product_prices", ["product_category_id"], :name => "index_product_prices_on_product_category_id"
-  add_index "product_prices", ["trade_company_id"], :name => "index_product_prices_on_trade_company_id"
 
   create_table "product_running_numbers", :force => true do |t|
     t.string   "base_name"
@@ -1020,11 +1051,11 @@ ActiveRecord::Schema.define(:version => 20130517175125) do
     t.integer  "sales_tax_exemption_id"
     t.integer  "trade_company_id"
     t.integer  "delivery_order_item_id"
-    t.decimal  "used_qty",               :precision => 10, :scale => 2
+    t.decimal  "used_qty",               :precision => 10, :scale => 2, :default => 0.0
     t.date     "used_date"
     t.integer  "unit_measurement_id"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
   end
 
   create_table "sales_tax_exemption_lines", :force => true do |t|
@@ -1207,11 +1238,6 @@ ActiveRecord::Schema.define(:version => 20130517175125) do
   end
 
   add_index "temporary_sources", ["purchase_requisition_item_id"], :name => "index_temporary_sources_on_purchase_requisition_item_id"
-
-  create_table "temporary_tarif_codes", :force => true do |t|
-    t.string "tarif_code"
-    t.float  "remaining_total"
-  end
 
   create_table "trade_companies", :force => true do |t|
     t.string   "code"

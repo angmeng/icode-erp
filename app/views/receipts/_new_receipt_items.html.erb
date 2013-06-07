@@ -103,7 +103,7 @@
                                 var receipt_type      = $(receipt_type).html();
                                 var answer_fp         = $(fp_val).val();
                                 
-                                if (answer_fp == "F" || answer_fp == "f" || answer_fp == "P" || answer_fp == "p") {
+                                if (answer_fp == "F" || answer_fp == "f" || answer_fp == "P" || answer_fp == "p" || answer_fp == "T" || answer_fp == "t") {
                                     if (receipt_type == "<%= StatementOfAccount::DEBIT_NOTE %>" || receipt_type == "<%= StatementOfAccount::INVOICE %>"){
                                       var cal = rem_amount - select_value;
                                       var real_os_amount = answer_ori - answer_ori_entry;

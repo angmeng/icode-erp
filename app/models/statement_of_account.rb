@@ -86,6 +86,15 @@ class StatementOfAccount < ActiveRecord::Base
     end
   end
   
+  def self.update_fp(statement)
+    statement.each do |st|
+      if st.fp == StatementOfAccount::TEMP_PAYMENT
+        st.update_attributes!(:fp => StatementOfAccount::NULL_PAYMENT)
+      else
+        st.update_attributes!(:fp => StatementOfAccount::TEMP_PAYMENT)
+      end
+    end
+  end
     
   def uppercase_text
     self.fp.upcase! if self.fp.present?

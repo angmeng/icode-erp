@@ -28,9 +28,9 @@
 
         <b>QRF Date *</b>
         <% if @quotation_request_form.qrf_date.present? %>
-          <%= f.text_field :qrf_date, :value => @quotation_request_form.qrf_date.strftime('%d-%m-%Y'), "required validationMessage" => "Please Enter QRF Date" %>
+          <%= f.text_field :qrf_date, :value => @quotation_request_form.qrf_date.strftime('%d-%m-%Y'), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter QRF Date" %>
         <% else %>
-          <%= f.text_field :qrf_date, :value => Date.today.strftime('%d-%m-%Y'), "required validationMessage" => "Please Enter QRF Date" %>
+          <%= f.text_field :qrf_date, :value => Date.today.strftime('%d-%m-%Y'), :class => "mkendo_date maskDate", "required validationMessage" => "Please Enter QRF Date" %>
         <% end %>
         <span class="k-invalid-msg" data-for="quotation_request_form[qrf_date]"></span>
       </td>

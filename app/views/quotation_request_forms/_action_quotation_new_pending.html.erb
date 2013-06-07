@@ -1,6 +1,6 @@
 <div class="left_icon_tag">
   <% if roles.include?(InventoryManagementSystem::QR_NEW_ADD) %>
-    <%= link_to "Add Item", new_quotation_request_form_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
+    <%= link_to "Add Item", new_quotation_request_form_path, :class => "k-button font_bold" %>
   <% else %>
     <%= disabled_style "Add Item" %>
   <% end %>
@@ -8,30 +8,30 @@
 
 <div class="icon_tag">
   
-  <% if roles.include?(InventoryManagementSystem::QR_NEW_SHOW) %>
-    <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
-  <% else %>
-    <%= not_link_show %>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::QR_NEW_SHOW) %>
+    <!--span id="on_show" showClass="show_without_refresh_page_1600x900"><%#= not_link_show %></span-->
+  <%# else %>
+    <%#= not_link_show %>
+  <%# end %>
 
-  <% if roles.include?(InventoryManagementSystem::QR_NEW_EDIT) %>
-    <span id="on_edit" editClass="iframe_1600x900"><%= not_link_edit %></span>
-  <% else %>
-    <%= not_link_edit %>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::QR_NEW_EDIT) %>
+    <!--span id="on_edit" editClass="iframe_1600x900"><%#= not_link_edit %></span-->
+  <%# else %>
+    <%#= not_link_edit %>
+  <%# end %>
 
-  <% if roles.include?(InventoryManagementSystem::QR_NEW_KIV_ITEM) %>
-     <span id="on_kiv"><%= not_link_kiv %></span>
-  <% else %>
-    <%= not_link_kiv %>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::QR_NEW_KIV_ITEM) %>
+     <!--span id="on_kiv"><%#= not_link_kiv %></span-->
+  <%# else %>
+    <%#= not_link_kiv %>
+  <%# end %>
 
-  <% if roles.include?(InventoryManagementSystem::QR_NEW_PRINTABLE) %>
-    <span id="on_printable_qr"><%= not_link_printable %></span>
-  <% else %>
-    <%= not_link_printable %>
-  <% end %>
+  <%# if roles.include?(InventoryManagementSystem::QR_NEW_PRINTABLE) %>
+    <!--span id="on_printable_qr"><%#= not_link_printable %></span-->
+  <%# else %>
+    <%#= not_link_printable %>
+  <%# end %>
    
-  <%= link_home_button %>
+  <%= link_close_button %>
 
 </div>

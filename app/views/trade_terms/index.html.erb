@@ -1,21 +1,18 @@
-<table width="100%">
-  <tr>
-    <td align="right">
-      <%= link_to 'Search', "#", :class => "search_link" %>
-    </td>
-  </tr>
-</table>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISTING TRADE TERMS</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div><%= render "search_trade_term" %></div>
+<div id="tabify_listing">
+  <% if @trade_terms.present? %>
+    <div class="table_background"><%= render "listing_trade_term", :tt => @trade_terms %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
 
-<div style="background-color:blue"><strong style="color:white;">LISTING - TRADE TERMS</strong></div>
+<div id="tabify_search">
+  <%= render "search_trade_term" %>
+</div>
 
-<% if @trade_terms.present? %>
-  <%= render "listing_trade_term", :tt => @trade_terms %>
-  <%= render "action_trade_term" %>            
-<% else %>
-  Not Record Found.
-<% end %>
-
-<br/>
-
+<%= render "action_trade_term" %>

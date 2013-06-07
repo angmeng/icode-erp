@@ -247,6 +247,7 @@ $(document).ready(function() {
             var link_costing = "/costing_sheets?id=" + row_id;
             var link_add_product_id = "/products/message?pri_id=" + row_id;
             var link_history    = "/price_control_items?id=" + row_id;
+            var link_quotation = "/job_sheets/new?id=" + row_id;
 
             html_show = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_show  + "><b>Show</b></a>"
             html_edit = "<a class='k-button " + edit_class + "' data-fancybox-type='iframe' href=" + link_edit + "><b>Edit</b></a>"
@@ -272,6 +273,7 @@ $(document).ready(function() {
             html_costing = "<a class='k-button " + cost_class + "' data-fancybox-type='iframe' href=" + link_costing + "><b>Costing Sheet</b></a>"
             html_add_product_id = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_add_product_id + "><b>Apply the Product ID Registration</b></a>"
             html_history = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_history  + "><b>History</b></a>"
+            html_quotation = "<a class='k-button' href=" + link_quotation  + "><b>Open</b></a>"
             
             $("#on_show").html(html_show);
             $("#on_edit").html(html_edit);
@@ -297,6 +299,7 @@ $(document).ready(function() {
             allow_mail(row_id, html_mail);
             $("#on_add_product_id").html(html_add_product_id);
             $("#on_history").html(html_history);
+            $("#on_confirmed_quotation").html(html_quotation);
         };
     });
 

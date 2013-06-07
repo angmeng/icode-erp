@@ -265,8 +265,6 @@ $(document).ready(function () {
 //                height: popup_tab_height,
 //                scrolling: "yes"
 //            });
-
-//            $("#user_strip").css("height", popup_tab_height)
             
             // Popup Tabbing Table -- IMS
             $(".jgrid_popup").chromatable({
@@ -274,12 +272,6 @@ $(document).ready(function () {
                 height: popup_form_table_height,
                 scrolling: "yes"
             });
-            
-//            $(".jgrid_popup").chromatable({
-//                width:  ctn_width,
-//                height: popup_form_table_height,
-//                scrolling: "yes"
-//            });
             
     }, 500);
 });

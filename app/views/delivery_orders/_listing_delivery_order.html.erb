@@ -28,7 +28,11 @@
         <td align="center"><%= p.trade_term.name rescue '-' %></td>
         <td align="center"><%= p.transport.name rescue '-' %></td>
         <td align="center"><%= p.sales_rep rescue '-' %></td>
-        <td align="center"><%= p.sales_tax_exemption rescue '-' %></td>
+        <td align="center">
+          <% if p.try(:sales_tax_exemption) %>
+            [<%= p.sales_tax_exemption.running_no rescue '-' %>] <%= p.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
+          <% end %>
+        </td>
         <td align="center"><%= p.sales_tax rescue '-' %></td>
         <td align="center"><%= User.find(p.updated_by).name rescue '-' %></td>
       </tr>

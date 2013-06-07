@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer_name: MyString
+  qrf_date: 2013-06-04
+  description: MyString
+
+two:
+  customer_name: MyString
+  qrf_date: 2013-06-04
+  description: MyString
