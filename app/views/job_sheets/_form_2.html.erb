@@ -1,0 +1,176 @@
+<div class="quotation">
+  <table>
+    <tr>
+      <td width="30%">
+        <div style="margin-left: 40px;">TRIM SIZE</div>
+        <div style="border: 1px solid black; width: 200px; height: 100px; margin-left: 40px;"></div>
+      </td>
+      <td width="30%">
+        <div style="margin-left: 40px;">TRIM SIZE</div>
+        <div style="border: 1px solid black; width: 200px; height: 100px; margin-left: 40px;"></div>
+      </td>
+      <td width="40%">
+        <% c = [] %>
+        <div>INK</div>
+        <div style="width: 500px; height: 100px; padding: 5px;">
+          <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) %>
+            <% if @quotation.try(:color_type) %>
+              <% c << @quotation.color_type rescue '-' %>
+            <% end %>
+            <% if @quotation.colors.present? %>
+              <% @quotation.colors.each do |name| %>
+                <% c << name.color_name %>
+              <% end %>
+            <% end %>
+            <% if @quotation.colors.present? %>
+              <% @quotation.colors.each do |code| %>
+                <% c << code.color_code %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= f.text_area :ink, :value => c.join("\n"), :rows => 6, :cols => 60 %>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <hr/>
+
+  <table class="normal_table_black">
+    <tr>
+      <th width="30%">PAPER</th>
+      <th width="20%">ORIGINAL SIZE</th>
+      <th width="20%">TRIM SIZE</th>
+      <th width="10%">RATIO</th>
+      <th width="20%">QUANTITY (ORIGINAL SIZE)</th>
+    </tr>
+    <tr>
+      <td align="center">
+        <%= f.text_field :material_gramme, :value => @quotation.material_gramme, :style => "width: 50px;", :class => "k-textbox" %>
+        <%= f.text_field :unit_measurement_id, :value => @quotation.unit_measurement.code, :style => "width: 50px;", :class => "k-textbox" %>
+        <%= f.text_field :material_type, :value => @quotation.material_type, :class => "k-textbox" %>
+      </td>
+      <td align="center">
+        <%= f.text_field :paper_width, :value => @quotation.paper_width, :style => "width: 50px;", :class => "k-textbox" %> X <%= f.text_field :paper_length, :value => @quotation.paper_length, :style => "width: 50px;", :class => "k-textbox" %>
+      </td>
+      <td>
+        <% if @quotation.selection_printing_sizes.present? %>
+            <% d = [] %>
+            <% @quotation.selection_printing_sizes.each do |sps| %>
+              <% d << "#{two_precision(sps.try(:width))} X #{two_precision(sps.try(:length))} (#{sps.try(:ups)} UPS)" %>
+            <% end %>
+        <% end %>
+        <%= f.text_area :trim_size, :value => d.join("\n"), :rows => 3 %>
+      </td>
+      <td align="center"><%= f.text_field :ratio, :value => @quotation.ratio, :style => "width: 50px;", :class => "k-textbox" %></td>
+      <td align="center"><%= f.text_field :ori_size_qty, :class => "k-textbox" %></td>
+    </tr>
+  </table>
+
+  <hr/>
+
+  <table style="border: 1px solid black;">
+    <tr>
+      <td width="90%">
+        <% ff = [] %>
+        <% ff << "Size\tPart/Art No.\tCat/Reorder No.\tCustomer Stock Code" %>
+        <% @quotation.custom_productions.each do |cp| %>
+          <% ff << "#{cp.lot_size}\t#{cp.part_no}\t\t#{cp.category_no}\t\t#{cp.stock_reference}" %>
+        <% end %>
+        
+        <% if @field_sets.present? %>
+          <% if @field_sets.include?(QuotationRequestForm::COLLATING_FIELDSET) %>
+              <% gg = [] %>
+
+              <table>
+                <tr>
+                  <td style="vertical-align: top;"><b>Collect Sequence</b></td>
+
+                  <% if @quotation.collect_sequence == QuotationRequestForm::BIN %>
+
+                    <td>
+                      <table class="black-line-table">
+                        <tr>
+                          <% if @sequents.present? %>
+                            <% @sequents.each_with_index do |seq, index| %>
+                              <td width="80" align="center"><%= index + 1 %>/<%= @sequents.size %></td>
+                            <% end %>
+                          <% end %>
+                        </tr>
+
+                        <tr>
+                          <% if @sequents.present? %>
+                            <% @sequents.each do |seq| %>
+                              <td align="center"><%= seq rescue '-' %></td>
+                            <% end %>
+                          <% end %>
+                        </tr>
+                      </table>
+                    </td>
+
+                  <% elsif @quotation.collect_sequence == QuotationRequestForm::CARTON %>
+
+                    <td>
+                      <table class="black-line-table">
+                        <tr>
+                          <% if @sequents.present? %>
+                            <% x = @sequents.size %>
+                            <% @sequents.each do |seq| %>
+                              <td width="80" align="center"><%= x %>/<%= @sequents.size %></td>
+                              <% x -= 1 %>
+                            <% end %>
+                          <% end %>
+                        </tr>
+                        <tr>
+                          <% if @sequents.present? %>
+                            <% @sequents.reverse.each do |seq| %>
+                              <td align="center"><%= seq rescue '-' %></td>
+                            <% end %>
+                          <% end %>
+                        </tr>
+                      </table>
+                    </td>
+
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                </tr>
+              </table>
+          <% end %>
+        <% end %>
+
+        <b>REMARKS:</b><br/> <%= f.text_area :remarks, :rows => 5, :cols => 100 %><br/><br/>
+        <b>CUSTOMER REF:</b><br/> <%= f.text_area :customer_ref, :value => "#{ff.join("\n")}", :rows => 8, :cols => 100 %>
+      </td>
+      <td width="10%" style="border-left: 1px solid black;">
+        <table>
+          <tr><td>STOCK</td></tr>
+          <tr>
+            <td><b>XS=</b></td>
+            <td><%= f.text_field :stock_xs_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+          </tr>
+          <tr>
+            <td><b>S=</b></td>
+            <td><%= f.text_field :stock_s_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+          </tr>
+          <tr>
+            <td><b>M=</b></td>
+            <td><%= f.text_field :stock_m_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+          </tr>
+          <tr>
+            <td><b>L</b></td>
+            <td><%= f.text_field :stock_l_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+          </tr>
+          <tr>
+            <td><b>XL=</b></td>
+            <td><%= f.text_field :stock_xl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+          </tr>
+          <tr>
+            <td><b>XXL=</b></td>
+            <td><%= f.text_field :stock_xxl_qty, :style => "width: 80px;", :class => "k-textbox" %></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>

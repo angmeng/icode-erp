@@ -387,7 +387,7 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.integer  "quotation_request_no"
     t.integer  "updated_by"
     t.integer  "authorized_by"
-    t.string   "status",                   :default => "PENDING"
+    t.string   "status",                   :default => "1"
     t.string   "option_size"
     t.float    "window_width",             :default => 0.0
     t.float    "window_length",            :default => 0.0
@@ -458,11 +458,16 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.string   "packing_qty"
     t.text     "mould_no"
     t.string   "prepared_by"
-    t.string   "sales_order_no"
+    t.integer  "sales_order_id"
     t.text     "film_no"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.text     "wef"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
+
+  add_index "job_sheets", ["sales_order_id"], :name => "index_job_sheets_on_sales_order_id"
+  add_index "job_sheets", ["trade_company_id"], :name => "index_job_sheets_on_trade_company_id"
+  add_index "job_sheets", ["unit_measurement_id"], :name => "index_job_sheets_on_unit_measurement_id"
 
   create_table "journal_voucher_items", :force => true do |t|
     t.string   "document_type"
