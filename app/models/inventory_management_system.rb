@@ -674,6 +674,7 @@ class InventoryManagementSystem < ActiveRecord::Base
 
   RN_COMPANY_SUMMARY_REPORT_REPORT_SHOW             = 395
   RN_COMPANY_SUMMARY_REPORT_REPORT_PRINT            = 396
+
   RN_PART_SUMMARY_REPORT_SHOW                       = 397
   RN_PART_SUMMARY_REPORT_PRINT                      = 398
 
@@ -684,7 +685,7 @@ class InventoryManagementSystem < ActiveRecord::Base
   #==== ==== SUB MODULE REPORT ==== ====
   DO_INVOICE_DOCUMENTATION_REPORT                   = 400
   DO_SUMMARY_REPORT                                 = 401
-  DO_UNKNOW_REPORT                                  = 402  #============ UNKNOW NAME REPORT
+  DO_UNKNOW_REPORT                                  = 402  #=======js user puase here===== UNKNOW NAME REPORT
 
   #==== ==== ACTION ==== ====
   DO_SUMMARY_REPORT_SHOW                            = 403

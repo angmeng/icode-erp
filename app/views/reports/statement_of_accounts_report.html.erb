@@ -13,23 +13,22 @@
           <thead>
             <tr class="header_line">
               <th><%= check_box_tag 'checkall', :id =>"checkall" %></th>
-              
               <th>Trade Company Code</th>
               <th>Trade Company Name</th>
-              <th>Payment Date</th>
+              <!-- <th>Payment Date</th> -->
               <%#*<th>Quantity</th>%>
             </tr>
           </thead>
           <tbody>
    
 
-        <% @show_statement_of_accounts_report.each_with_index do |soa , index| %>
+        <% @show_statement_of_accounts_report.each do |soa, v| %>
             <tr class="<%= cycle("odd_line", "even_line") %>">
-              <td align="center"><%= check_box_tag "soa_ids[]" , soa.id %></td>
-              
-              <td align="center"><%= soa.trade_company.code rescue'-' %></td>
-              <td align="center"><%= soa.trade_company.name rescue'-' %></td>
-              <td align="center"><%= soa.payment_date.strftime("%d-%m-%Y") rescue'-' %>
+              <% tc = TradeCompany.find(soa) %>
+              <td align="center"><%= check_box_tag "soa_ids[]" , tc.id %></td>
+              <td align="center"><%= tc.code rescue'-' %></td>
+              <td align="center"><%= tc.name rescue'-' %></td>
+              <!-- <td align="center"><%#= tc.payment_date.strftime("%d-%m-%Y") rescue'-' %> -->
               </td>
             </tr>
           
