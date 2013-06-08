@@ -602,6 +602,7 @@ end
       if params[:commit] == "PDF Report"
         if params[:soa_ids].present?
           # Report.pdf_do_so_documentation_report(params[:doc_ids])
+
           @detail_statement_of_accounts_report = StatementOfAccount.find(params[:soa_ids])
           html = render_to_string(:layout => false , :action => "pdf_statement_of_accounts_report.html.erb")
             @kit = PDFKit.new(html)
@@ -610,10 +611,12 @@ end
                                     :disposition => "attachement")
         end
         elsif params[:commit] == "Show"
+         #render :text => params[:soa_ids].to_json
          if params[:soa_ids].present?
-            @detail_statement_of_accounts_report = StatementOfAccount.find(params[:soa_ids])
+            @detail_statement_of_accounts_report = StatementOfAccount.where(:trade_company_id => params[:soa_ids])
+# render :text => @detail_statement_of_accounts_report.to_json
             respond_to do |format|
-              format.html
+              format.html 
           end
         end
       else
@@ -621,6 +624,9 @@ end
       end
     end
 
+
+# @soa = StatementOfAccount.find_all_by_trade_company_id_and_fp(1, "F")
+# @soa.group(&:trade_company_id)
 
   # ======================================= end of pdf ============================================
 
@@ -786,12 +792,15 @@ end
 
   def statement_of_accounts_report
     @statement_of_accounts_report = StatementOfAccount.search(params[:search])
-    @show_statement_of_accounts_report = @statement_of_accounts_report.all
+    # @statement_of_account = @statement_of_accounts_report.where(:fp => StatementOfAccount::FULL_PAYMENT)
+    @statement_of_account = @statement_of_accounts_report.all
+    @show_statement_of_accounts_report = @statement_of_account.group_by(&:trade_company_id)
+    # render :text => @show_statement_of_accounts_report.to_json
   end
 
   def do_job_received_report
     @do_job_received_report = DeliveryOrder.search[params(:search)]
-      @show_do_job_received_report = @do_job_received_report.all
+    @show_do_job_received_report = @do_job_received_report.all
   end
 
  

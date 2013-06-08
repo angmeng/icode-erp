@@ -1,8 +1,11 @@
 <% balance = 0 %>
+<% counter = 0 %>
 <% array = [] %>
     <% if @detail_statement_of_accounts_report.present? %>
       <% @detail_statement_of_accounts_report.each_with_index do |soa , index| %>
-    	<% counter = 0 %>
+      <% counter += 1 %>
+    	<% if counter < 47 %>
+    	
     	<% if index == 0 %>
       		<div>
     	<% else %>
@@ -44,57 +47,55 @@
 		  		<th>Balance</th>
 		  	</tr>
 		</thead>
-	  	<% soa.each_with_index do |acc ,index | %>
+	  	<%# soa.each do |soa| %>
 	  	
-	  	<% counter += 1 %>
-    	<% if counter < 47 %>
     	<tbody>
 	  	<tr>
-	  		<td align="center"><%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+	  		<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
 	  		<td align="center">
-	  			<%= acc.transaction_type rescue'-' %> &nbsp;
-	  			<% if acc.debit_note.present? %>
-	  				<%= acc.debit_note.debit_note_no rescue'-' %>
-	  			<% elsif acc.credit_note.present? %>
-	  				<%= acc.credit_note.credit_note_no rescue'-' %>
-	  			<% elsif acc.delivery_order.present? %>
-	  				<%= acc.delivery_order.delivery_order_no rescue'-' %>
+	  			<%= soa.transaction_type rescue'-' %> &nbsp;
+	  			<% if soa.debit_note.present? %>
+	  				<%= soa.debit_note.debit_note_no rescue'-' %>
+	  			<% elsif soa.credit_note.present? %>
+	  				<%= soa.credit_note.credit_note_no rescue'-' %>
+	  			<% elsif soa.delivery_order.present? %>
+	  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
 	  			<% end %>
 	  		</td>
 	  		<td align="left">
-	  			<% if acc.debit_note.present? %>
-	  				<%= acc.debit_note.debit_type rescue'-' %>
-	  			<% elsif acc.credit_note.present? %>
-	  				<%= acc.credit_note.credit_type rescue'-' %>
+	  			<% if soa.debit_note.present? %>
+	  				<%= soa.debit_note.debit_type rescue'-' %>
+	  			<% elsif soa.credit_note.present? %>
+	  				<%= soa.credit_note.credit_type rescue'-' %>
 	  			<% end %>
 	  		</td>
 	  		<td align="center">
-	  			<% if acc.fp == 'F' || acc.fp == 'f' %>
+	  			<% if soa.fp == 'F' || soa.fp == 'f' %>
 	  			*
 	  			<% else %>
 	  			&nbsp;
 	  			<% end %>
 	  		</td>
 	  		<td align="right">
-	  			<% if acc.delivery_order.present? %>
-	  				<%= two_precision(acc.delivery_order.calculate_sum_of_doi) %>
-	  				<% balance += acc.delivery_order.calculate_sum_of_doi %>
-	  			<% elsif acc.debit_note.present? %>
-	  				<%= acc.debit_note.amount %>
-	  				<% balance += acc.debit_note.amount %>
+	  			<% if soa.delivery_order.present? %>
+	  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
+	  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
+	  			<% elsif soa.debit_note.present? %>
+	  				<%= soa.debit_note.amount %>
+	  				<% balance += soa.debit_note.amount %>
 	  			<% else %>
 	  				&nbsp;
 	  			<% end %>
 	  		</td>
 	  		<td align="right">
-	  			<% if acc.credit_note.present? %>
-	  				<%= acc.credit_note.amount %>
-	  				<% balance -= acc.credit_note.amount %>
+	  			<% if soa.credit_note.present? %>
+	  				<%= soa.credit_note.amount %>
+	  				<% balance -= soa.credit_note.amount %>
 	  			<% else %>
 	  				&nbsp;
 	  			<% end %>
 	  		</td>
-	  		<%# array << balance - acc.credit_note.amount %>
+	  		<%# array << balance - soa.credit_note.amount %>
 	  		<td align="right">
 	  			<%= two_precision(balance) %>
 	  		</td>
@@ -139,61 +140,61 @@
 	  <tbody>
 	  	<tr>
 	  		<td align="center">
-	  			<%= acc.transaction_date.strftime("%d-%m-%Y") rescue'-' %>
+	  			<%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %>
 	  		</td>
 	  		<td align="center">
-	  			<%= acc.transaction_type rescue'-' %> &nbsp;
-	  			<% if acc.debit_note.present? %>
-	  				<%= acc.debit_note.debit_note_no rescue'-' %>
-	  			<% elsif acc.credit_note.present? %>
-	  				<%= acc.credit_note.credit_note_no rescue'-' %>
-	  			<% elsif acc.delivery_order.present? %>
-	  				<%= acc.delivery_order.delivery_order_no rescue'-' %>
+	  			<%= soa.transaction_type rescue'-' %> &nbsp;
+	  			<% if soa.debit_note.present? %>
+	  				<%= soa.debit_note.debit_note_no rescue'-' %>
+	  			<% elsif soa.credit_note.present? %>
+	  				<%= soa.credit_note.credit_note_no rescue'-' %>
+	  			<% elsif soa.delivery_order.present? %>
+	  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
 	  			<% end %>
 	  		</td>
 	  		<td align="left">
-	  			<% if acc.debit_note.present? %>
-	  				<%= acc.debit_note.debit_type rescue'-' %>
-	  			<% elsif acc.credit_note.present? %>
-	  				<%= acc.credit_note.credit_type rescue'-' %>
+	  			<% if soa.debit_note.present? %>
+	  				<%= soa.debit_note.debit_type rescue'-' %>
+	  			<% elsif soa.credit_note.present? %>
+	  				<%= soa.credit_note.credit_type rescue'-' %>
 	  			<% end %>
 	  		</td>
 	  		<td align="center">
-	  			<% if acc.fp == 'F' || acc.fp == 'f' %>
+	  			<% if soa.fp == 'F' || soa.fp == 'f' %>
 	  			*
 	  			<% else %>
 	  			&nbsp;
 	  			<% end %>
 	  		</td>
 	  		<td align="right">
-	  			<% if acc.delivery_order.present? %>
-	  				<%= two_precision(acc.delivery_order.calculate_sum_of_doi) %>
-	  				<% balance += acc.delivery_order.calculate_sum_of_doi %>
+	  			<% if soa.delivery_order.present? %>
+	  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
+	  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
 	  			<% else %>
 	  				&nbsp;
 	  			<% end %>
 	  		</td>
 	  		<td align="right">
-	  			<% if acc.credit_note.present? %>
-	  				<%= acc.credit_note.amount %>
-	  				<% balance -= acc.credit_note.amount %>
+	  			<% if soa.credit_note.present? %>
+	  				<%= soa.credit_note.amount %>
+	  				<% balance -= soa.credit_note.amount %>
 	  			<% else %>
 	  				&nbsp;
 	  			<% end %>
 	  		</td>
 
-	  		<%# array << balance - acc.credit_note.amount %>
+	  		<%# array << balance - soa.credit_note.amount %>
 	  		<td align="right">
 	  			<%= two_precision(balance) %>
 	  		</td>
 	  	</tr>
 	  </tbody>
 	  	<% counter = 1 %> 
-	  	<% end %>
+	  	<%# end %>
 	  	<% end %>
 	</table>
 	  <br />
-	  <%= render "/reports/statement_of_accounts_total" %>
+	  <%#= render "/reports/statement_of_accounts_total" %>
 	  <% end %> <%# end of each %>
 	</div>
 <% else %>
