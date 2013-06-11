@@ -28,7 +28,7 @@
         <td><%= sales_order.sales_rep rescue '-' %></td>
         <td align="center"><%= sales_order.currency.name rescue '-' %></td>
         <td align="center"><%= sales_order.trade_term.name rescue '-' %></td>
-        <td align="center"><%= sales_order.revision %></td>
+        <td align="center"><%= sales_order.revision rescue '-' %></td>
         <td align="center"><%= sales_order.purpose == SalesOrder::SALES ? "SALES" : '-' %></td>
         <td align="center">
           <% updater = User.find(sales_order.updated_by) %>

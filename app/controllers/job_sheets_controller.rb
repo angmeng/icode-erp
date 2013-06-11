@@ -32,6 +32,7 @@ class JobSheetsController < ApplicationController
     @job_sheet = JobSheet.new
     @quotation = QuotationRequestForm.find(params[:id]) if params[:id]
     collect_all_process_types(@quotation)
+    @sales_orders = SalesOrder.mass_active
 
     respond_to do |format|
       format.html # new.html.erb
@@ -100,6 +101,6 @@ class JobSheetsController < ApplicationController
 #    @die_cut = quotation_request_form.selection_die_cuts.map(&:content)                 if quotation_request_form.selection_die_cuts.present?
 #    @glueing_types = quotation_request_form.selection_glueings.map(&:glueing)           if quotation_request_form.selection_glueings.present?
     @glueing_types_join = quotation_request_form.selection_glueings                     if quotation_request_form.selection_glueings.present?
-#    @sequents = quotation_request_form.sequents.map(&:sequent_color)                    if quotation_request_form.sequents.present?
+    @sequents = quotation_request_form.sequents.map(&:sequent_color)                    if quotation_request_form.sequents.present?
   end
 end

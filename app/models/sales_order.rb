@@ -11,6 +11,7 @@ class SalesOrder < ActiveRecord::Base
   belongs_to :trade_term
   
   has_many :sales_order_items, :dependent => :destroy
+  has_many :job_sheets
   
   ACTIVE = 'Active'
   IN_PROGRESS = 'IP'
@@ -19,6 +20,8 @@ class SalesOrder < ActiveRecord::Base
   SALES = 1
   
   default_scope order("sales_order_no DESC")
+  
+  scope :mass_active, where("status = ?", SalesOrder::ACTIVE)
   
   self.per_page = 50
   

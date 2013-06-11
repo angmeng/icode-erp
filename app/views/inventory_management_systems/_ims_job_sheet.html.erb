@@ -1,0 +1,75 @@
+<%#*<table>%>
+  <% if checkboxes.present? %>
+    <% if action_name == "show" %>
+
+        <tr>
+          <td></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRODUCTION_MENU) %> Production</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEETS) %> Job Sheet Data</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_NEW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEETS_KIV_INDEX) %> Job Sheet Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+    <% else %>
+        
+        <tr>
+          <td></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::PRODUCTION_MENU) %> Production</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEETS) %> Job Sheet Data</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_NEW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEETS_KIV_INDEX) %> Job Sheet Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::JOB_SHEET_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+    <% end %>
+
+  <% else %> 
+        
+        <tr>
+          <td></td>
+          <td><%= ims_new(InventoryManagementSystem::PRODUCTION_MENU) %> Production</td>
+          <td><%= ims_new(InventoryManagementSystem::JOB_SHEETS) %> Job Sheet Data</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_NEW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::JOB_SHEETS_KIV_INDEX) %> Job Sheet Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_KIV_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+      
+  <% end %>
+<%#*</table>%>

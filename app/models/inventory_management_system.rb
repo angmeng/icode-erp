@@ -206,6 +206,22 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   
 #===================================== SALES ORDER (END) =====================================================
+
+#===================================== JOB SHEET (START) =====================================================
+
+  PRODUCTION_MENU                       = 552
+  
+  JOB_SHEETS                            = 546
+  JOB_SHEET_SHOW                        = 547
+  JOB_SHEET_NEW                         = 548
+  JOB_SHEET_EDIT                        = 549
+  JOB_SHEET_KIV                         = 550
+  JOB_SHEET_PRINTABLE                   = 551
+  
+  JOB_SHEETS_KIV_INDEX                  = 553
+  JOB_SHEET_KIV_SHOW                    = 554
+  JOB_SHEET_RECOVER                     = 555
+#===================================== JOB SHEET (END) =====================================================
   
 #===================================== SALES TAX EXEMPTION (START) ===========================================
   #MODULE
@@ -512,7 +528,7 @@ class InventoryManagementSystem < ActiveRecord::Base
     
 
     
-  #start at 299, jump to 546
+  #start at 299, jump to 556
   
   
 
