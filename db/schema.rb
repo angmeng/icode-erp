@@ -211,7 +211,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.integer  "status_id",                                       :default => 1
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
-    t.text     "remark"
   end
 
   add_index "credit_notes", ["currency_id"], :name => "index_credit_notes_on_currency_id"
@@ -249,7 +248,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.integer  "account_id"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
-    t.text     "remark"
   end
 
   add_index "debit_notes", ["currency_id"], :name => "index_debit_notes_on_currency_id"
@@ -294,7 +292,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.datetime "updated_at",                                                                  :null => false
     t.date     "do_date"
     t.string   "status",                                                :default => "Active"
-    t.boolean  "authorize_print",                                       :default => false
     t.integer  "sales_tax_exemption_id"
   end
 
@@ -326,7 +323,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.integer  "delivery_order_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.date     "created_date"
   end
 
   create_table "incoming_rejects", :force => true do |t|
@@ -636,6 +632,7 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "product_category_id"
+    t.integer  "copied_no",           :default => 0
   end
 
   add_index "product_running_numbers", ["product_category_id"], :name => "index_product_running_numbers_on_product_category_id"
@@ -720,7 +717,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.string   "category"
     t.string   "window_code"
     t.string   "revision"
-    t.integer  "copied_no",                                                    :default => 0
   end
 
   add_index "products", ["sales_tax_exemption_id"], :name => "index_products_on_sales_tax_exemption_id"
@@ -778,6 +774,7 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.text     "remark"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
+    t.string   "status"
     t.string   "trade_company_new_name"
     t.integer  "user_id"
     t.boolean  "maintenance",             :default => false
@@ -785,7 +782,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.boolean  "approval_proposed",       :default => false
     t.string   "approval_remark"
     t.boolean  "urgent",                  :default => false
-    t.string   "status"
     t.boolean  "skip_to_purchase_order",  :default => false
   end
 
@@ -796,6 +792,7 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
 
   create_table "purchase_requisitions", :force => true do |t|
     t.integer  "pr_no"
+    t.string   "status"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.string   "requested_by"
@@ -808,7 +805,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.date     "approved_by_level_five_date"
     t.string   "remark"
     t.integer  "tasks"
-    t.string   "status"
     t.string   "recover_status"
     t.integer  "department_id"
   end
@@ -935,26 +931,24 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.string   "receipt_no"
     t.date     "receipt_date"
     t.integer  "trade_company_id"
-    t.decimal  "cash_amount",         :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "cheque_amount",       :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "total_amount",        :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "cash_amount",        :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "cheque_amount",      :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "total_amount",       :precision => 10, :scale => 2, :default => 0.0
     t.string   "journal_voucher_no"
     t.string   "remark"
     t.integer  "updated_by"
-    t.integer  "status_id",                                          :default => 1
-    t.datetime "created_at",                                                            :null => false
-    t.datetime "updated_at",                                                            :null => false
-    t.integer  "payment_received_id"
+    t.integer  "status_id",                                         :default => 1
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
     t.date     "payment_date"
     t.string   "bank"
     t.string   "place"
     t.string   "cheque_no"
     t.date     "cheque_date"
-    t.boolean  "outport_cheque",                                     :default => false
-    t.boolean  "third_party_cheque",                                 :default => false
+    t.boolean  "outport_cheque",                                    :default => false
+    t.boolean  "third_party_cheque",                                :default => false
   end
 
-  add_index "receipts", ["payment_received_id"], :name => "index_receipts_on_payment_received_id"
   add_index "receipts", ["trade_company_id"], :name => "index_receipts_on_trade_company_id"
 
   create_table "receive_note_items", :force => true do |t|
@@ -1001,9 +995,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "remaining_qty",       :default => 0
-    t.string   "lot_no"
-    t.string   "mfg_date"
-    t.string   "exp_date"
   end
 
   add_index "sales_order_items", ["product_id"], :name => "index_sales_order_items_on_product_id"
@@ -1024,6 +1015,9 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.datetime "updated_at",                              :null => false
     t.date     "so_date"
     t.string   "status",            :default => "Active"
+    t.string   "lot_no"
+    t.date     "mfg_date"
+    t.date     "exp_date"
   end
 
   add_index "sales_orders", ["currency_id"], :name => "index_sales_orders_on_currency_id"
@@ -1057,17 +1051,6 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.datetime "created_at",                                                             :null => false
     t.datetime "updated_at",                                                             :null => false
   end
-
-  create_table "sales_tax_exemption_lines", :force => true do |t|
-    t.integer  "sales_tax_exemption_id"
-    t.integer  "trade_company_id"
-    t.boolean  "validate_condition",     :default => true
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-  end
-
-  add_index "sales_tax_exemption_lines", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_lines_on_sales_tax_exemption_id"
-  add_index "sales_tax_exemption_lines", ["trade_company_id"], :name => "index_sales_tax_exemption_lines_on_trade_company_id"
 
   create_table "sales_tax_exemptions", :force => true do |t|
     t.integer  "running_no"
@@ -1344,12 +1327,12 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.datetime "updated_at",                                   :null => false
     t.string   "name"
     t.integer  "department_id"
-    t.string   "job_title"
     t.integer  "level"
+    t.string   "status",                 :default => "ACTIVE"
+    t.string   "job_title"
     t.boolean  "admin",                  :default => false
     t.integer  "level_two"
     t.integer  "level_three"
-    t.string   "status",                 :default => "ACTIVE"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

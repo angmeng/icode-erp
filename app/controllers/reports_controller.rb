@@ -596,7 +596,8 @@ end
       else
           redirect_to receipt_report_reports_path
       end
-    end
+    end 
+
 
     def pdf_statement_of_accounts_report
       if params[:commit] == "PDF Report"
@@ -799,8 +800,13 @@ end
   end
 
   def do_job_received_report
-    @do_job_received_report = DeliveryOrder.search[params(:search)]
+    @do_job_received_report = DeliveryOrder.search(params[:search])
     @show_do_job_received_report = @do_job_received_report.all
+  end
+
+  def purchase_summary_report
+    @purchase_summary_report = Product.search(params[:search])
+    @show_purchase_summar_report = @purchase_summary_report.all
   end
 
  
