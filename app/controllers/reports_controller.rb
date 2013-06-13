@@ -557,7 +557,7 @@ end
        if params[:js_ids].present?
           @detail_sales_journel_report = DeliveryOrder.find(params[:js_ids])
           html = render_to_string(:layout => false , :action => "pdf_journal_sales_report.html.erb")
-            @kit = PDFKit.new(html , :page_size => "A3")
+            @kit = PDFKit.new(html , :size => "A3")
             send_data(@kit.to_pdf , :filename => "pdf_journal_sales_report.pdf",
                                     :type => 'application/pdf' ,
                                     :disposition => "attachement")
@@ -612,10 +612,10 @@ end
                                     :disposition => "attachement")
         end
         elsif params[:commit] == "Show"
-         #render :text => params[:soa_ids].to_json
+        #render :text => params[:soa_ids].to_json
          if params[:soa_ids].present?
             @detail_statement_of_accounts_report = StatementOfAccount.where(:trade_company_id => params[:soa_ids])
-# render :text => @detail_statement_of_accounts_report.to_json
+        # render :text => @detail_statement_of_accounts_report.to_json
             respond_to do |format|
               format.html 
           end
