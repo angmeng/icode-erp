@@ -84,11 +84,11 @@ class ReceiveNote < ActiveRecord::Base
               
               if balance == 0
                 item.purchase_requisition_item.update_attributes(:status => PurchaseRequisitionItem::RECEIVED_FULL)
-                rni.purchase_order_item_line.update_attributes(:checked => TRUE, :receive_note_id => rn_id)
+                rni.purchase_order_item_line.update_attributes(:checked => TRUE, :receive_note_id => rn_id, :received_qty => received_qty)
                 self.check_pr_item_full(item.purchase_requisition_item)
               else
                 item.purchase_requisition_item.update_attributes(:status => PurchaseRequisitionItem::RECEIVED_PARTIAL)
-                rni.purchase_order_item_line.update_attributes(:checked => FALSE, :receive_note_id => rn_id)
+                rni.purchase_order_item_line.update_attributes(:checked => FALSE, :receive_note_id => rn_id, :received_qty => received_qty)
               end
             end
           end

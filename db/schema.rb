@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604131023) do
+ActiveRecord::Schema.define(:version => 20130615013203) do
+
+  create_table "boms", :force => true do |t|
+    t.integer  "status"
+    t.integer  "quotation_request_form_id"
+    t.string   "customer_po_no"
+    t.integer  "prepared_by"
+    t.string   "paper"
+    t.string   "original_size"
+    t.string   "trim_size"
+    t.integer  "ratio"
+    t.integer  "paper_product_id"
+    t.text     "packing_qty"
+    t.text     "mould_no"
+    t.string   "ecn"
+    t.text     "finishing"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "boms", ["quotation_request_form_id"], :name => "index_boms_on_quotation_request_form_id"
 
   create_table "change_company_codes", :force => true do |t|
     t.string   "old_code"
@@ -311,6 +331,18 @@ ActiveRecord::Schema.define(:version => 20130604131023) do
     t.string   "status",       :default => "ACTIVE"
     t.string   "shotcut_name"
   end
+
+  create_table "film_numbers", :force => true do |t|
+    t.string   "color_name"
+    t.string   "color_code"
+    t.string   "bom_size"
+    t.date     "film_date"
+    t.integer  "bom_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "film_numbers", ["bom_id"], :name => "index_film_numbers_on_bom_id"
 
   create_table "formulations", :force => true do |t|
     t.decimal  "per_value",                :precision => 8, :scale => 2

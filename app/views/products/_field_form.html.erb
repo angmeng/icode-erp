@@ -91,8 +91,7 @@
       <td colspan="3">
         <%= f.text_field :length, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Length" %>
         <span class="k-invalid-msg" data-for="product[length]"></span>
-        <%= f.select :length_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Length" } %>
-        <span class="k-invalid-msg" data-for="product[length_um]"></span>
+        <%= f.select :length_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100" } %>
       </td>
     </tr>
   <% end %>
@@ -103,8 +102,7 @@
       <td colspan="3">
         <%= f.text_field :width, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Width" %>
         <span class="k-invalid-msg" data-for="product[width]"></span>
-        <%= f.select :width_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Width" } %>
-        <span class="k-invalid-msg" data-for="product[width_um]"></span>
+        <%= f.select :width_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100" } %>
       </td>
     </tr>
   <% end %>
@@ -115,8 +113,7 @@
       <td colspan="3">
         <%= f.text_field :height, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Height" %>
         <span class="k-invalid-msg" data-for="product[height]"></span>
-        <%= f.select :height_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Height" } %>
-        <span class="k-invalid-msg" data-for="product[height_um]"></span>
+        <%= f.select :height_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100" } %>
       </td>
     </tr>
   <% end %>
@@ -127,8 +124,7 @@
       <td colspan="3">
         <%= f.text_field :tickness, :class => "kendo_precision_2 width_100", "required validationMessage" => "Please Enter Tickness" %>
         <span class="k-invalid-msg" data-for="product[tickness]"></span>
-        <%= f.select :tickness_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100", "required validationMessage" => "Please Enter the U/M of Tickness" } %>
-        <span class="k-invalid-msg" data-for="product[tickness_um]"></span>
+        <%= f.select :tickness_um, Product::COMBO_UM, { :include_blank => true }, { :class => "mkendo_combobox width_100" } %>
       </td>
     </tr>
   <% end %>

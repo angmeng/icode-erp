@@ -2,6 +2,7 @@
   <% if checkboxes.present? %>
     <% if action_name == "show" %>
 
+        <!-- Job Sheet -->
         <tr>
           <td></td>
           <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::PRODUCTION_MENU) %> Production</td>
@@ -20,6 +21,27 @@
           <% 5.times do |td| %><td></td><% end %>
           <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_KIV_SHOW) %></td>
           <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::JOB_SHEET_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <!-- BOMS -->
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOMS) %> BOM Data</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_NEW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_KIV) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOMS_KIV_INDEX) %> BOM Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_KIV_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::BOM_RECOVER) %></td>
           <% 2.times do |td| %><td></td><% end %>
         </tr>
         
@@ -46,6 +68,27 @@
           <% 2.times do |td| %><td></td><% end %>
         </tr>
         
+        <!-- BOMS -->
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOMS) %> BOM Data</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_NEW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_KIV) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOMS_KIV_INDEX) %> BOM Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_KIV_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::BOM_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
     <% end %>
 
   <% else %> 
@@ -68,6 +111,27 @@
           <% 5.times do |td| %><td></td><% end %>
           <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_KIV_SHOW) %></td>
           <td align="center"><%= ims_new(InventoryManagementSystem::JOB_SHEET_RECOVER) %></td>
+          <% 2.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <!-- BOMS -->
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::BOMS) %> BOM Data</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_NEW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_KIV) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+        
+        <tr>
+          <% 2.times do |td| %><td></td><% end %>
+          <td><%= ims_new(InventoryManagementSystem::BOMS_KIV_INDEX) %> BOM Data - KIV</td>
+          <% 5.times do |td| %><td></td><% end %>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_KIV_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::BOM_RECOVER) %></td>
           <% 2.times do |td| %><td></td><% end %>
         </tr>
       

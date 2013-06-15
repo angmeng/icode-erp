@@ -355,8 +355,8 @@
                         <td>
                           <%= @quotation_request_form.varnish rescue '-' %> 
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <% if @quotation_request_form.varnish == QuotationRequestForm::SPOT %>
-                          <b>Remark</b>: <%= @quotation_request_form.surface_remark rescue '-' %>
+                          <% if @quotation_request_form.surface_remark.present? %>
+                            <b>Remark</b>: <%= @quotation_request_form.surface_remark %>
                           <% end %>
                         </td>
                       </tr>

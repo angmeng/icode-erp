@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Quotation request form</th>
+    <th>Customer po no</th>
+    <th>Updated by</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @boms.each do |bom| %>
+  <tr>
+    <td><%= bom.status %></td>
+    <td><%= bom.quotation_request_form_id %></td>
+    <td><%= bom.customer_po_no %></td>
+    <td><%= bom.updated_by %></td>
+    <td><%= link_to 'Show', bom %></td>
+    <td><%= link_to 'Edit', edit_bom_path(bom) %></td>
+    <td><%= link_to 'Destroy', bom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

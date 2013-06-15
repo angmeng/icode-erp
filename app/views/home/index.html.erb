@@ -233,6 +233,15 @@
         
         <tr>
           <th class="block_box">PRODUCTION</th>
+          
+          <% if roles.include?(InventoryManagementSystem::BOMS) %>
+            <td><%= link_to "BOMs Data", boms_path,:class => "k-button" %></td>
+          <% else %>
+            <td><%= disabled_style("BOMs Data") %></td>
+          <% end %>
+          
+          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          
           <% if roles.include?(InventoryManagementSystem::JOB_SHEETS) %>
             <td><%= link_to "Job Sheets Data", job_sheets_path,:class => "k-button" %></td>
           <% else %>

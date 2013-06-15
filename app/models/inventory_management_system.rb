@@ -211,6 +211,17 @@ class InventoryManagementSystem < ActiveRecord::Base
 
   PRODUCTION_MENU                       = 552
   
+  BOMS                                  = 556
+  BOM_SHOW                              = 558
+  BOM_NEW                               = 559
+  BOM_EDIT                              = 560
+  BOM_KIV                               = 561
+  BOM_PRINTABLE                         = 562
+  
+  BOMS_KIV_INDEX                        = 557
+  BOM_KIV_SHOW                          = 563
+  BOM_RECOVER                           = 564
+  
   JOB_SHEETS                            = 546
   JOB_SHEET_SHOW                        = 547
   JOB_SHEET_NEW                         = 548
@@ -524,11 +535,9 @@ class InventoryManagementSystem < ActiveRecord::Base
   AC_GENERAL_JV_KIV_INDEX                           = 74
   AC_GENERAL_JV_KIV_SHOW                            = 236
   AC_GENERAL_JV_KIV_RECOVER                         = 540
-  
-    
 
     
-  #start at 299, jump to 556
+  #start at 299, jump to 565
   
   
 

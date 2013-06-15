@@ -1,4 +1,14 @@
 Merp::Application.routes.draw do
+
+
+  resources :film_numbers
+
+
+  resources :boms do
+    get "active_so", :on => :collection
+  end
+
+
   resources :job_sheets do
     get "confirmed_quotation", :on => :collection
   end

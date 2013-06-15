@@ -1,0 +1,32 @@
+<div class="quotation">  
+  <table>
+    <tr>
+      <th>PAPER</th>
+      <th>ORIGINAL SIZE</th>
+      <th>TRIM SIZE</th>
+      <th>RATIO</th>
+    </tr>
+    <tr>
+      <td>
+        <%= f.text_field :paper, :value => "#{@quotation.try(:material_gramme)} #{@quotation.try(:unit_measurement).try(:code)} #{@quotation.try(:material_type)}", :class => "k-textbox" %>
+      </td>
+      <td>
+        <%= f.text_field :original_size, :value => "#{@quotation.try(:paper_width)} X #{@quotation.try(:paper_length)}", :class => "k-textbox" %>
+      </td>
+      <td>
+          <% if @quotation.selection_printing_sizes.present? %>
+            <table>
+              <% @quotation.selection_printing_sizes.limit(1).each do |sps| %>
+                <tr><td width="100"><%= f.text_field :trim_size, :value => "#{two_precision(sps.width)} X #{two_precision(sps.length)} (#{ @quotation.selection_printing_sizes.sum(&:ups) } UPS)", :class => "k-textbox" %></td></tr>
+              <% end %>
+            </table>
+          <% end %>
+      </td>
+      <td><%= f.text_field :ratio, :value => @quotation.try(:ratio), :class => "k-textbox" %></td>
+    </tr>
+    <tr>
+      <td colspan="4"><b>PAPER PRODUCT ID</b>&nbsp;<%= f.select :paper_product_id, options_for_select(product_non_operation_n_operation_with_pr_combobox), {:include_blank => true} , { :class => "mkendo_combobox", :style => "width: 500px;" } %></td>
+    </tr>
+    
+  </table>
+</div>

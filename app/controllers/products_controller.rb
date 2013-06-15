@@ -192,6 +192,5 @@ class ProductsController < ApplicationController
     session[:po_up]             = nil #ok
     session[:po_vendor_id]      = nil #ok
     session[:qr_id]             = nil
-#    session[:refer_category_id] = nil
   end
 end

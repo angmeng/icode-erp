@@ -1,0 +1,13 @@
+<div class="quotation">  
+  <% if @field_sets.include?(QuotationRequestForm::COLOR_FIELDSET) %>
+    <ol>
+      <li>
+        <% if @quotation.colors.present? %>
+          <% @quotation.colors.each do |name| %>
+            <%= "#{name.color_name} (#{name.color_code})" %>
+          <% end %>
+        <% end %>
+      </li>
+    </ol>
+  <% end %>
+</div>

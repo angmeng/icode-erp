@@ -1,15 +1,20 @@
 <%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">QUOTATION REQUISITIONS DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div class="title_head">
-  <strong style="color:white;">QUOTATION REQUISITIONS DATA</strong>
-  <%= search_button %>
+<div id="tabify_listing">
+  <% if @quotation_request_forms.present? %>
+    <div class="table_background"><%= render "listing_quotation_request", :quotations => @quotation_request_forms %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
 </div>
-<div><%= render "search_quotation_request" %></div>
 
-<% if @quotation_request_forms.present? %>
-  <div class="table_background"><%= render "listing_quotation_request", :quotations => @quotation_request_forms %></div>
-<% else %>
-  <div class="linking_content">Not Record Found</div>
-<% end %>
-
+<div id="tabify_search">
+  <%= render "search_quotation_request" %>
+</div>
+  
 <%= render "action_quotation_transaction" %>

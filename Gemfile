@@ -30,6 +30,15 @@ gem 'jquery-rails', "2.1.4"
 gem "devise", "~> 2.1.0"
 gem "devise-encryptable"
 gem "omniauth"
+gem 'rabl'
+gem "will_paginate"
+gem "pdfkit", "0.5.2"
+gem "squeel"
+gem "meta_search"
+gem "paperclip"
+gem 'mime-types'
+gem 'thin'
+#gem 'wkhtmltopdf-binary'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -45,16 +54,3 @@ gem "omniauth"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-
-gem 'rabl'
-gem "will_paginate"
-gem "pdfkit", "0.5.2"
-gem "squeel"
-gem "meta_search"
-gem "paperclip"
-gem 'mime-types'
-gem 'thin'
-
-#gem 'wkhtmltopdf-binary'
-
-

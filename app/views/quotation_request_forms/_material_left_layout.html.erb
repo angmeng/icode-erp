@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td width="105"><b>Paper Quality *</b></td>
-    <td><%= f.text_field :material_gramme, :class => "kendo_precision_0" , "required validationMessage" => "Please Enter Paper Quality", :style => "width: 80px;" %> GSM<span class="k-invalid-msg" data-for="quotation_request_form[material_gramme]"></span></td>
+    <td><%= f.text_field :material_gramme, :class => "kendo_precision_2" , "required validationMessage" => "Please Enter Paper Quality", :style => "width: 80px;" %> GSM<span class="k-invalid-msg" data-for="quotation_request_form[material_gramme]"></span></td>
     
     <% if unit_measurement.find_by_code('GSM').present? %>
       <%= f.hidden_field :unit_measurement_id, :value => unit_measurement.find_by_code('GSM').id %>
