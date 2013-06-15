@@ -34,6 +34,7 @@ GEM
     better_errors (0.9.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    binding_of_caller (0.6.8)
     builder (3.0.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -142,6 +143,7 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.4)
+    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -149,6 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  binding_of_caller (~> 0.6.8)
   devise (~> 2.1.0)
   devise-encryptable
   jquery-datatables-rails
@@ -167,3 +170,4 @@ DEPENDENCIES
   squeel
   thin
   will_paginate
+  wkhtmltopdf-binary

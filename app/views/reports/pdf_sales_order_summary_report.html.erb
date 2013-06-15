@@ -1,4 +1,5 @@
 <div id="container">
+  <% arr = [] %>
 <h2><u>Sales Order Summary Report</u></h2>
 <br />
 	<% if @detail_sales_order_summary_report.present? %>
@@ -30,35 +31,39 @@
     			<th>U/P</th>
     			<th>ETA</th>
     			<th>Q/S Qty</th>
+
     		</tr>
       </thead>
       <tbody>
     		<tr>
-          <% sos.sales_order_items.each_with_index do |soi , index| %>
+          <% sos.sales_order_items.each_with_index do |soi| %>
             <% counter += 1 %>
             <% if counter < 28 %>
-
-          <% if index == 0 %> 
-    			<td align="center" rowspan="<%= sos.sales_order_items.count %>" >
-            <%= sos.sales_order_no rescue'-' %>
+          <%# if index == 0 %> 
+    			<td align="center"  rowspan="<%= sos.sales_order_items.count %>"><%= sos.sales_order_no rescue'-' %>
           </td>
-          <% end %>
-          <td align="center"><%= soi.customer_po rescue'-' %></td>
+          <%# end %>
+          <td align="center"><%= sos.purchase_order_no rescue'-' %></td>
     			<td align="center"><%= soi.product.product_combobox.product_code rescue'-' %>
             <br / >
             <%= soi.part_no rescue'-' %>
           </td>
     			<td align="center"><%= soi.product.desc rescue '-'%></td>
     			<td align="center"><%= soi.quantity rescue'-' %></td>
-          <td align="center"></td>
-          <td align="center"></td>
+          <%# soi.delivery_order_items.each do |doi| %>
+          <td align="center"><%#= soi.delivery_order_items.delivery_qty %></td>
+          <%# end %>
+          <%#= iproduct(pri.quantity, pri.unit_price) %>
+          <%# arr << soi.quantity - soi.delivery_order_items.delivery_qty %>
+
+          <td align="center"><%#= two_percision(iproduct) %></td>
     			<td align="center"><%= soi.unit_price rescue'-' %></td>
     			<td align="center"><%= soi.eta.strftime("%d/%m/%Y") rescue'-' %></td>
     			<td align="center"><%= soi.remaining_qty rescue'-' %></td>
     		</tr>
         
         <tr style="border-top: 1px solid;">
-         <td ></td>
+         <td></td>
         </tr>
 		</tbody>
     <% else %>
