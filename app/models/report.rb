@@ -2,14 +2,14 @@ class Report < ActiveRecord::Base
 
   # attr_accessible :created_date
   
-  def self.to_csv(options = {})
-    CSV.generate(options) do |csv|
-      csv << column_names
-      all.each do |p|
-        csv << p.attributes.values_at(*column_names)
-      end
-    end
-  end
+  # def self.to_csv(options = {})
+  #   CSV.generate(options) do |csv|
+  #     csv << column_names
+  #     all.each do |p|
+  #       csv << p.attributes.values_at(*column_names)
+  #     end
+  #   end
+  # end
 
 
   def self.pdf_do_so_documentation_report(doc_ids)

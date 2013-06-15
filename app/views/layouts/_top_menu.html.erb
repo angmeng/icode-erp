@@ -134,9 +134,13 @@
                   <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_MENU) %>
                 <li><%= link_to "Purchase requisitions Report", pr_report_reports_path %></li>
                 <% else %>
-                  <li class="text_gray">Purchase Requisition Report</li> %>
+                  <li class="text_gray">Purchase Requisition Report</li>
                   <% end %>
-                <li><%#= link_to "Monthly Purchae Analysis", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  <% if roles.include?(InventoryManagementSystem::PR_MONTHLY_PURCHASE_ANALYSIS)%>
+                <li><%= link_to "Monthly Purchae Analysis", purchase_summary_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                <li class="text_gray">Monthly Purchase Analysis</li>
+                <% end %>
 
                 <li><%#= link_to "Purchase by Creditors", purchase_by_creditor_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
 

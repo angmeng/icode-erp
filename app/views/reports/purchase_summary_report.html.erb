@@ -1,0 +1,38 @@
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">Purchase Summary Report</a></li>
+  <li><a href="#tabify_search">Search Engine</a></li>
+</ul>
+
+<div id="tabify_listing">
+	<%= form_tag pdf_purchase_order_report_reports_path ,:target=>"_blank" ,:method =>"get" do %>
+	<table>
+		<tr>
+			<th>No.</th>
+			<th>Description</th>
+			<th></th>
+		</tr>
+		<tr>
+
+			<% @show_purchase_summary_report.each do |ps , index| %>
+			<td></td>
+		</tr>
+	<% end %>
+	</table>
+	<% end %>
+</div>
+
+<div id="tabify_search">
+	<table>
+	<%= form_for @purchase_summary_report, :url => purchase_summary_report_reports_path do |f| %>
+      <tr>
+        <td>Date</td>
+        <td><%#= f.text_field :, :size => 9 , :class=> "mkendo_date"%> To 
+        <%#= f.text_field : , :size => 9 ,:class=> "mkendo_date" %></td>
+      </tr>
+
+      <tr>
+      <td><%= f.submit "Search" %></td>
+       </tr>
+    </table>
+  <% end %>
+</div>
