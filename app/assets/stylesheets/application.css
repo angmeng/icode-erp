@@ -146,7 +146,7 @@ p#alert {
 }
 .class_tabify { clear: both; }
 .class_tabify li { display: inline; }
-.class_tabify li a { background: #ccf; padding: 10px; border-right: 1px solid #ccf; border-bottom: none; text-decoration: none; color: #000; font-weight: bold;}
+.class_tabify li a { background: #ccf; padding: 2px; border-right: 1px solid #ccf; border-bottom: none; text-decoration: none; color: #000; font-weight: bold;}
 .class_tabify li.active a { background: #eef; }
 
 /* Table Layout Design */

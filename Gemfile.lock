@@ -142,7 +142,6 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.4)
-    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -155,7 +154,7 @@ DEPENDENCIES
   jquery-datatables-rails
   jquery-rails (= 2.1.4)
   jquery-ui-rails
-  json (= 1.7.5)
+  json
   meta_search
   mime-types
   mysql2 (~> 0.3.11)
@@ -168,4 +167,3 @@ DEPENDENCIES
   squeel
   thin
   will_paginate
-  wkhtmltopdf-binary

@@ -1,13 +1,19 @@
 <%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PR-REPAIR</a></li>
+</ul>
 
-<%= title_head "PR-REPAIR" %>
+<div id="tabify_listing">
 
-<%= form_tag add_vendor_purchase_orders_path, :method => :post do %>
-  <% if @maintenance.present? %>
-    <div class="table_background"><%= render "pr_repair", :maintenance => @maintenance %></div>
-  <% else %>
-    <div class="linking_content">No Record Found</div>
-  <% end %>
+	<%= form_tag add_vendor_purchase_orders_path, :method => :post do %>
+	  <% if @maintenance.present? %>
+	    <div class="table_background"><%= render "pr_repair", :maintenance => @maintenance %></div>
+	  <% else %>
+	    <div class="tabify_content">No Record Found</div>
+	  <% end %>
 
-  <%= render "action_purchase_order_repair" %>
-<% end %>
+	  <%= render "action_purchase_order_repair" %>
+	<% end %>
+
+</div>

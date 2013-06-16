@@ -545,8 +545,12 @@ end
        if params[:js_ids].present?
           @detail_sales_journel_report = DeliveryOrder.find(params[:js_ids])
           html = render_to_string(:layout => false , :action => "pdf_journal_sales_report.html.erb")
-            @kit = PDFKit.new(html , :size => "A3")
-            send_data(@kit.to_pdf , :filename => "pdf_journal_sales_report.pdf",
+#            @kit = PDFKit.new(html , :size => "A3")
+            @kit = PDFKit.new(html)
+            @a = send_data(@kit.to_pdf , :page_size => 'A3', :orientation => 'Portrait',
+                                    :margin_top => "5mm", :margin_bottom => "5mm",
+                                    :margin_right => "5mm", :margin_left => "5mm",
+                                    :filename => "pdf_journal_sales_report.pdf",
                                     :type => 'application/pdf' ,
                                     :disposition => "attachement")
           end

@@ -296,18 +296,3 @@ $(document).ready(function () {
             
     }, 500);
 });
-
-
-$(function() {
-    
-    $("input").bind("keypress", function(e) {
-        if (e.keyCode == 13){
-            if ($(this).attr("name") == "user[password]" || $(this).attr("name") == "user[name]"){
-                return true;
-            } else {
-                return false;
-            } 
-        }
-    });
- 
-});

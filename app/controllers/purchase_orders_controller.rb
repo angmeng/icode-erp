@@ -1,6 +1,6 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :inventory_management_system, :except => [:show]
+  # before_filter :inventory_management_system, :except => [:show]
   layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance]
 
   def index
@@ -232,12 +232,15 @@ class PurchaseOrdersController < ApplicationController
 
 #  ====================== VENDOR SELECTION ============================  
   def pending_approval
-    @pending_vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, false)
+    if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION)
+      @pending_vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, false)
+    else
+      render :html => "422.html", :status => 422
+    end
   end
   
   def show_select_vendor
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
-    render :layout => "sheetbox"
   end
   
   def approval_yes
@@ -326,7 +329,7 @@ class PurchaseOrdersController < ApplicationController
 #    @exist_sales_tax = ste_no_with_not_valid.find_all_by_trade_company_id(trade_company_id) # if need to renew STE
   end
 
-  def inventory_management_system
-    role(PurchaseOrder::ROLE)
-  end
+  # def inventory_management_system
+  #   role(PurchaseOrder::ROLE)
+  # end
 end

@@ -8,7 +8,8 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2', "~> 0.3.11"
 
-gem 'json', "1.7.5"
+# gem 'json', "1.7.5"
+gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,7 +23,8 @@ end
 
 group :development do
   gem "better_errors"
-  gem "binding_of_caller", "~> 0.6.8"
+  # gem "binding_of_caller", "~> 0.6.8"
+  # gem "binding_of_caller"
   gem "sextant"
 end
 
