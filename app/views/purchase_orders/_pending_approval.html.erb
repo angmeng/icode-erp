@@ -1,77 +1,75 @@
-<% if pending.present? %>
-  <table id="jgrid_linking" class="zebraLight">
-    <thead>
-      <tr class="header_line">
-        <th class="check_highlight"></th>
-        <th class="std_pr_no">PR No.</th>
-        <th class="std_pid">Product ID</th>
-        <th>Description</th>
-        <th class="std_company">Proposed Vendor</th>
-        <th class="std_qty">Qty</th>
-        <th class="std_eta">ETA</th>
-        <th class="std_up">Unit Price</th>
-        <th class="std_total">Amount</th>
-      </tr>
-    </thead>
+<table id="linking_tabify_datatable" class="zebraLight display">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th class="std_pr_no">PR No.</th>
+      <th class="std_pid">Product ID</th>
+      <th>Description</th>
+      <th class="std_company">Proposed Vendor</th>
+      <th class="std_qty">Qty</th>
+      <th class="std_eta">ETA</th>
+      <th class="std_up">Unit Price</th>
+      <th class="std_total">Amount</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% pending.each do |proposed| %>
+      <% unless proposed.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
     
-    <tbody>
-      <% pending.each do |proposed| %>
-        <% unless proposed.purchase_requisition.status == PurchaseRequisition::KEEP_IN_VIEW %>
-      
-          <% if proposed.temporary_sources.present? %>
-            <% if proposed.temporary_sources.find_by_select_vendor(TRUE).present? %>
-              <% sources = proposed.temporary_sources.find_by_select_vendor(TRUE) rescue '-' %>
-            <% end %>
+        <% if proposed.temporary_sources.present? %>
+          <% if proposed.temporary_sources.find_by_select_vendor(TRUE).present? %>
+            <% sources = proposed.temporary_sources.find_by_select_vendor(TRUE) rescue '-' %>
           <% end %>
-
-          <% if proposed.urgent == TRUE %>
-            <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
-              <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-            <% else %>
-              <tr class="<%= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-            <% end %>
-          <% else %>
-            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
-          <% end %>
-              <td></td>
-            <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
-            <td align="center">
-              <% if proposed.product_id? %>
-                <%= link_to(product_path(proposed.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-                  <%= render '/product_categories/join_product_category', :pc => proposed %>
-                <% end %>
-              <% end %>
-            </td>
-            
-            <td><%= proposed.description rescue '-' %></td>
-
-            <td>
-              <% unless proposed.maintenance == TRUE %>
-                <% if sources.present? %>
-                  <% if company = TradeCompany.find_by_name(sources.company_name) %>
-                    <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
-                      <%= sources.company_name rescue '-' %>
-                    <% end %>
-                  <% else %>
-                    <span class="red_alert"><%= sources.company_name rescue '-' %></span>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </td>
-
-            <td align="right"><%= proposed.quantity rescue '-' %> <%= proposed.unit_measurement.code rescue '-' %></td>
-            <td align="center">
-              <% if proposed.eta < Date.today %>
-                <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>
-              <% else %>
-                <%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %>
-              <% end %>
-            </td>
-            <td align="right"><%= four_precision(sources.unit_price) %></td>
-            <td align="right"><%= iproduct(proposed.quantity, sources.unit_price) %></td>
-          </tr>
         <% end %>
+
+        <% if proposed.urgent == TRUE %>
+          <% if proposed.status == PurchaseRequisitionItem::RECEIVED_FULL %>
+            <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
+          <% else %>
+            <tr class="<%= cycle('odd_line', 'even_line') %> red_urgent" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
+          <% end %>
+        <% else %>
+          <tr class="<%= cycle("odd_line", "even_line") %>" controllerName="<%= controller_name %>" rowsId="<%= proposed.id %>">
+        <% end %>
+            <td></td>
+          <td align="center"><%= proposed.purchase_requisition.pr_no rescue '-' %></td>
+          <td align="center">
+            <% if proposed.product_id? %>
+              <%= link_to(product_path(proposed.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
+                <%= render '/product_categories/join_product_category', :pc => proposed %>
+              <% end %>
+            <% end %>
+          </td>
+          
+          <td><%= proposed.description rescue '-' %></td>
+
+          <td>
+            <% unless proposed.maintenance == TRUE %>
+              <% if sources.present? %>
+                <% if company = TradeCompany.find_by_name(sources.company_name) %>
+                  <%= link_to(trade_company_path(company.id), { :class => "show_without_refresh_page_800x600", "data-fancybox-type" => "iframe"}) do %>
+                    <%= sources.company_name rescue '-' %>
+                  <% end %>
+                <% else %>
+                  <span class="red_alert"><%= sources.company_name rescue '-' %></span>
+                <% end %>
+              <% end %>
+            <% end %>
+          </td>
+
+          <td align="right"><%= proposed.quantity rescue '-' %> <%= proposed.unit_measurement.code rescue '-' %></td>
+          <td align="center">
+            <% if proposed.eta < Date.today %>
+              <span class="red_alert"><%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %></span>
+            <% else %>
+              <%= proposed.eta.strftime("%d-%m-%Y") rescue '-' %>
+            <% end %>
+          </td>
+          <td align="right"><%= four_precision(sources.unit_price) %></td>
+          <td align="right"><%= iproduct(proposed.quantity, sources.unit_price) %></td>
+        </tr>
       <% end %>
-    </tbody>
-  </table>
-<% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130615013203) do
+ActiveRecord::Schema.define(:version => 20130616181124) do
 
   create_table "boms", :force => true do |t|
     t.integer  "status"
@@ -415,7 +415,7 @@ ActiveRecord::Schema.define(:version => 20130615013203) do
     t.integer  "quotation_request_no"
     t.integer  "updated_by"
     t.integer  "authorized_by"
-    t.string   "status",                   :default => "PENDING"
+    t.string   "status",                   :default => "1"
     t.string   "option_size"
     t.float    "window_width",             :default => 0.0
     t.float    "window_length",            :default => 0.0
@@ -486,11 +486,16 @@ ActiveRecord::Schema.define(:version => 20130615013203) do
     t.string   "packing_qty"
     t.text     "mould_no"
     t.string   "prepared_by"
-    t.string   "sales_order_no"
+    t.integer  "sales_order_id"
     t.text     "film_no"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.text     "wef"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
+
+  add_index "job_sheets", ["sales_order_id"], :name => "index_job_sheets_on_sales_order_id"
+  add_index "job_sheets", ["trade_company_id"], :name => "index_job_sheets_on_trade_company_id"
+  add_index "job_sheets", ["unit_measurement_id"], :name => "index_job_sheets_on_unit_measurement_id"
 
   create_table "journal_voucher_items", :force => true do |t|
     t.string   "document_type"
@@ -1084,6 +1089,28 @@ ActiveRecord::Schema.define(:version => 20130615013203) do
     t.datetime "updated_at",                                                             :null => false
   end
 
+  create_table "sales_tax_exemption_lines", :force => true do |t|
+    t.integer  "sales_tax_exemption_id"
+    t.integer  "trade_company_id"
+    t.boolean  "validate_condition",     :default => true
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "sales_tax_exemption_lines", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_lines_on_sales_tax_exemption_id"
+  add_index "sales_tax_exemption_lines", ["trade_company_id"], :name => "index_sales_tax_exemption_lines_on_trade_company_id"
+
+  create_table "sales_tax_exemption_supplier_histories", :force => true do |t|
+    t.integer  "sales_tax_exemption_id"
+    t.integer  "product_id"
+    t.integer  "purchase_order_id"
+    t.decimal  "before_available_qty",      :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "after_available_qty",       :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "accumulative_complete_qty", :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
+  end
+
   create_table "sales_tax_exemptions", :force => true do |t|
     t.integer  "running_no"
     t.string   "sales_tax_exemption_no"
@@ -1222,6 +1249,21 @@ ActiveRecord::Schema.define(:version => 20130615013203) do
   add_index "statement_of_accounts", ["delivery_order_id"], :name => "index_statement_of_accounts_on_delivery_order_id"
   add_index "statement_of_accounts", ["receipt_id"], :name => "index_statement_of_accounts_on_payment_received_id"
   add_index "statement_of_accounts", ["trade_company_id"], :name => "index_statement_of_accounts_on_trade_company_id"
+
+  create_table "ste_supplier_histories", :force => true do |t|
+    t.integer  "sales_tax_exemption_id"
+    t.integer  "product_id"
+    t.integer  "purchase_order_id"
+    t.decimal  "before_available_qty",      :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "after_available_qty",       :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "accumulative_complete_qty", :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
+  end
+
+  add_index "ste_supplier_histories", ["product_id"], :name => "index_ste_supplier_histories_on_product_id"
+  add_index "ste_supplier_histories", ["purchase_order_id"], :name => "index_ste_supplier_histories_on_purchase_order_id"
+  add_index "ste_supplier_histories", ["sales_tax_exemption_id"], :name => "index_ste_supplier_histories_on_sales_tax_exemption_id"
 
   create_table "stock_outs", :force => true do |t|
     t.string   "transfer_note_no"

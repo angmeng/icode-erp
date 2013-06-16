@@ -237,6 +237,10 @@ class ApplicationController < ActionController::Base
     @period = SalesTaxExemption.where{ (valid_date_condition == true) }
     SalesTaxExemption.check_period(@period) if @period.present?
   end
+
+  def prohibit_html
+    render :file => "#{Rails.root}/public/422.html", :status => :unprocessable_entity, :layout => false
+  end
   
   private
   

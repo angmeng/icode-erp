@@ -72,7 +72,8 @@ class PurchaseOrderManagement
                   before_available_qty = barang.available_qty
                   after_available_qty = before_available_qty.to_f - pri.quantity.to_f
                   after_complete_qty = barang.complete_qty.to_f + pri.quantity.to_f
-                  stei = SalesTaxExemptionItem.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+                  # stei = SalesTaxExemptionItem.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+                  stei = SteSupplierHistory.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
                   stei.save!
                   barang.update_attributes!(:complete_qty => after_complete_qty, :available_qty => after_available_qty)
                 end

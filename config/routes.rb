@@ -1,6 +1,10 @@
 Merp::Application.routes.draw do
 
 
+
+  resources :ste_supplier_histories
+
+
   resources :film_numbers
 
 

@@ -1,11 +1,15 @@
-<%= render "linking" %> 
+<%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">VENDOR SELECTION</a></li>
+</ul>
 
-<%= title_head "VENDOR SELECTION" %>
-
-<% if @pending_vendor.present? %>
-  <div class="table_background"><%= render "/purchase_orders/pending_approval", :pending => @pending_vendor %></div>
-<% else %>
-  <div class="linking_content">No Record Found</div>
-<% end %>
-
+<div id="tabify_listing">
+	<% if @pending_vendor.present? %>
+	  <div class="table_background"><%= render "pending_approval", :pending => @pending_vendor %></div>
+	<% else %>
+	  <div class="tabify_content">No Record Found</div>
+	<% end %>
+</div>
+  
 <%= render "action_purchase_order_pending_app" %>
