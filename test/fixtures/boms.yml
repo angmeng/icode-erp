@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  status: 1
+  quotation_request_form_id: 1
+  customer_po_no: MyString
+  updated_by: 1
+
+two:
+  status: 1
+  quotation_request_form_id: 1
+  customer_po_no: MyString
+  updated_by: 1

@@ -1,0 +1,31 @@
+<h1>Listing film_numbers</h1>
+
+<table>
+  <tr>
+    <th>Color name</th>
+    <th>Color code</th>
+    <th>Bom size</th>
+    <th>Film date</th>
+    <th>Bom</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @film_numbers.each do |film_number| %>
+  <tr>
+    <td><%= film_number.color_name %></td>
+    <td><%= film_number.color_code %></td>
+    <td><%= film_number.bom_size %></td>
+    <td><%= film_number.film_date %></td>
+    <td><%= film_number.bom_id %></td>
+    <td><%= link_to 'Show', film_number %></td>
+    <td><%= link_to 'Edit', edit_film_number_path(film_number) %></td>
+    <td><%= link_to 'Destroy', film_number, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Film number', new_film_number_path %>

@@ -1,0 +1,18 @@
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">BOMS DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+
+<div id="tabify_listing">
+  <% if @boms.present? %>
+    <div class="table_background"><%= render "listing_bom", :boms => @boms %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%#= render "search_sales_orders" %>
+</div>
+  
+<%= render "action_boms" %>

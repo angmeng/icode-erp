@@ -1,4 +1,4 @@
-<div class="title_head"><strong style="color:white;">NEW PURCHASE REQUISITION ITEMS</strong></div>
+<%= title_head "NEW PURCHASE REQUISITION ITEMS" %>
 
 <div id="valid_purchase_requisition">
   <% if @new_product == PurchaseRequisition::YES %>
@@ -11,11 +11,16 @@
 <% content_for :jquery_script do %>
   <script>
     $(document).ready(function() {   
+        $("#purchase_requisition_item_quantity, #estimated_price").keyup(function(){
+            var qty   = $("#purchase_requisition_item_quantity").val();
+            var price = $("#estimated_price").val();
+            var total_price = parseInt(qty) * parseFloat(price);
+            $("#estimated_total_price").html(total_price.toFixed(4));
+        });
         
         var validator = $("#valid_purchase_requisition").kendoValidator().data("kendoValidator");
-        
         $("#save_button").click(function() {
-            if (validator.validate()) {}
+            if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
     });

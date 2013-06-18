@@ -6,7 +6,8 @@ class ReportsController < ApplicationController
   :rn_report , :sales_cj5_summary_co_report , :sales_tax_exemption_report ,
   :so_customer_po_detail_report , :so_listing_report , :sales_order_summary_report , 
   :po_listing_vendor_report , :debit_note_report , :receive_note_report , 
-  :journal_sales_report , :receipt_report , :statement_of_accounts_report]
+  :journal_sales_report , :receipt_report , :statement_of_accounts_report , 
+  :purchase_summary_report]
 
   def excel_so_customer_po_detail_report
     if params[:so_ids].present?
@@ -397,37 +398,24 @@ end
       end
     elsif params[:commit] == "Invoice Printable"
       if params[:doc_ids].present?
-
         Report.pdf_do_so_documentation_report(params[:doc_ids])
 
-        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids]).first
-        # render :text => @detail_invoice_documentation_report.to_json
-        if @detail_invoice_documentation_report.authorize_print == 0
+        @detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids])
+        # .first
+         #render :text => @detail_invoice_documentation_report.to_json
+          #if @detail_invoice_documentation_report.authorize_print == false
+
           html = render_to_string(:layout => false , :action => "pdf_do_so_documentation_report.html.erb")
            @kit = PDFKit.new(html , :page_size => 'Letter')
            send_data(@kit.to_pdf,  :filename => "pdf_invoice_report.pdf",
                                    :type => 'application/pdf' ,
                                    :disposition => "attachement" )
-       else
-         redirect_to do_so_documentation_report_reports_path,notice: 'Please get an authorize from admin'
-       end
 
+       # else
+       #   redirect_to do_so_documentation_report_reports_path,notice: 'Please get an authorize from admin'
+       # end
+      end 
 
-        #a = DeliveryOrder.find(params[:doc_ids].first)
-        # a = DeliveryOrder.find(params[:doc_ids])
-        # if a.authorize_print == false
-        # redirect_to do_so_documentation_report_reports_path, notice: 'Please get an authorize from supervisor'
-        # elsif a.authorize_print == 1
-        
-       #@detail_invoice_documentation_report = DeliveryOrder.find(params[:doc_ids].first) 
-        # a.authorize_print = false
-        # a.save!
-      # generate_history
-        
-
-       
-
-        end 
       else
       redirect_to do_so_documentation_report_reports_path
     end
@@ -557,8 +545,12 @@ end
        if params[:js_ids].present?
           @detail_sales_journel_report = DeliveryOrder.find(params[:js_ids])
           html = render_to_string(:layout => false , :action => "pdf_journal_sales_report.html.erb")
-            @kit = PDFKit.new(html , :page_size => "A3")
-            send_data(@kit.to_pdf , :filename => "pdf_journal_sales_report.pdf",
+#            @kit = PDFKit.new(html , :size => "A3")
+            @kit = PDFKit.new(html)
+            @a = send_data(@kit.to_pdf , :page_size => 'A3', :orientation => 'Portrait',
+                                    :margin_top => "5mm", :margin_bottom => "5mm",
+                                    :margin_right => "5mm", :margin_left => "5mm",
+                                    :filename => "pdf_journal_sales_report.pdf",
                                     :type => 'application/pdf' ,
                                     :disposition => "attachement")
           end
@@ -612,10 +604,10 @@ end
                                     :disposition => "attachement")
         end
         elsif params[:commit] == "Show"
-         #render :text => params[:soa_ids].to_json
+        #render :text => params[:soa_ids].to_json
          if params[:soa_ids].present?
             @detail_statement_of_accounts_report = StatementOfAccount.where(:trade_company_id => params[:soa_ids])
-# render :text => @detail_statement_of_accounts_report.to_json
+        # render :text => @detail_statement_of_accounts_report.to_json
             respond_to do |format|
               format.html 
           end
@@ -679,7 +671,8 @@ end
 
   def pr_report
     @pr_report = PurchaseRequisition.search(params[:search])
-    @show_pr_report = @pr_report.all
+    a = @pr_report.all
+    # @show_pr_report = a.group_by(&:)
     #@take_ids = @show_pr_report.map(&:id)
   end
 
@@ -805,8 +798,11 @@ end
   end
 
   def purchase_summary_report
-    @purchase_summary_report = Product.search(params[:search])
-    @show_purchase_summar_report = @purchase_summary_report.all
+
+    @purchase_summary_report = PurchaseRequisitionItem.search(params[:search])
+    a = @purchase_summary_report.all
+    @show_purchase_summary_report = a.group_by(&:product_id)
+
   end
 
  

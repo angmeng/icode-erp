@@ -1,4 +1,18 @@
 Merp::Application.routes.draw do
+
+
+
+  resources :ste_supplier_histories
+
+
+  resources :film_numbers
+
+
+  resources :boms do
+    get "active_so", :on => :collection
+  end
+
+
   resources :job_sheets do
     get "confirmed_quotation", :on => :collection
   end
@@ -76,6 +90,7 @@ Merp::Application.routes.draw do
     get "product_report"
     get "purchase_by_creditor_report"
     get "purchase_order_report"
+    get "purchase_summary_report"
     get "po_listing_vendor_report"
     get "receive_note_report"
     get "receipt_report"
@@ -103,6 +118,7 @@ Merp::Application.routes.draw do
     get "pdf_purchase_by_creditor_report"
     get "pdf_product_report"
     get "pdf_pr_report"
+    get "pdf_purchase_summary_report"
     get "pdf_purchase_order_report"
     get "pdf_po_listing_vendor_report"
     get "pdf_sales_cj5_summary_co_report"
@@ -118,6 +134,7 @@ Merp::Application.routes.draw do
     get "excel_product_report"
     get "excel_inventory_report"
     get "excel_pr_report"
+    get "excel_purchase_summary_report"
     get "excel_receive_note_report"
     get "excel_sales_tax_exemption_report"
     get "excel_sales_order_summary_report"

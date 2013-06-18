@@ -157,11 +157,10 @@ $(document).ready(function() {
     });
     
     $("#purchase_order_tax, #tax").keyup(function(){
-        a = parseInt($(this).val());
-        b = a / 100
-        c = +($(".po_subtotal").attr("title")); 
+        a = parseFloat($(this).val());
+        b = a / 100;
+        c = parseFloat($(".po_subtotal").attr("title"));
         d = c + c * b;
-        
         $(".add_s_tax").html(b.toFixed(2));
         $(".po_grandtotal").html(d.toFixed(2));
         $("#po_percent").html(a);
@@ -248,6 +247,7 @@ $(document).ready(function() {
             var link_add_product_id = "/products/message?pri_id=" + row_id;
             var link_history    = "/price_control_items?id=" + row_id;
             var link_quotation = "/job_sheets/new?id=" + row_id;
+            var link_active_so = "/boms/new?id=" + row_id;
 
             html_show = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_show  + "><b>Show</b></a>"
             html_edit = "<a class='k-button " + edit_class + "' data-fancybox-type='iframe' href=" + link_edit + "><b>Edit</b></a>"
@@ -264,7 +264,8 @@ $(document).ready(function() {
             html_apply_proposed_vendor = "<a class='k-button " + apply_proposed_vendor_class + "' data-fancybox-type='iframe' href=" + link_apply_proposed_vendor + "><b>Add New Sources</b></a>"
             html_submit_proposed_vendor = "<a rel='nofollow' class='k-button' data-method='put' data-confirm='Are you confirm submit to Vendor Selection?' href=" + link_submit_proposed_vendor + "><b>Submit to Vendor Selection</b></a>"
             html_vendor_reg = "<a class='k-button " + apply_vendor_reg_class + "' data-fancybox-type='iframe' href=" + link_apply_vendor_reg + "><b>Add New Vendor</b></a>"                          
-            html_make_po = "<a class='k-button " + apply_make_po_class + "' data-fancybox-type='iframe' href=" + link_apply_make_po + "><b>Add New PO</b></a>"
+            // html_make_po = "<a class='k-button " + apply_make_po_class + "' data-fancybox-type='iframe' href=" + link_apply_make_po + "><b>Open</b></a>"
+            html_make_po = "<a class='k-button' href=" + link_apply_make_po + "><b>Open</b></a>"
             html_printable_po = "<a target='_blank' class='k-button' href=" + link_printable_po + "><b>Printer</b></a>"
             html_ste_show_history = "<a class='show_without_refresh_page_1600x900 k-button' data-fancybox-type='iframe' href=" + link_show_history + "><b>Show Histories for Suppliers</b></a>"
             html_mail = "<a class='iframe_800x450 k-button' data-fancybox-type='iframe' href=" + link_mail + "><b>Mail</b></a>"
@@ -274,6 +275,7 @@ $(document).ready(function() {
             html_add_product_id = "<a class='k-button " + apply_class + "' data-fancybox-type='iframe' href=" + link_add_product_id + "><b>Apply the Product ID Registration</b></a>"
             html_history = "<a class='k-button " + show_class + "'  data-fancybox-type='iframe' href=" + link_history  + "><b>History</b></a>"
             html_quotation = "<a class='k-button' href=" + link_quotation  + "><b>Open</b></a>"
+            html_active_so = "<a class='k-button' href=" + link_active_so  + "><b>Open</b></a>"
             
             $("#on_show").html(html_show);
             $("#on_edit").html(html_edit);
@@ -300,6 +302,7 @@ $(document).ready(function() {
             $("#on_add_product_id").html(html_add_product_id);
             $("#on_history").html(html_history);
             $("#on_confirmed_quotation").html(html_quotation);
+            $("#on_active_so").html(html_active_so);
         };
     });
 

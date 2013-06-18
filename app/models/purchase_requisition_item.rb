@@ -2,8 +2,6 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   before_save   :uppercase_text
   before_update :uppercase_text
   
-#  validate :present_eta_date
-  
   attr_accessible :description, :eta, :product_id, :purchase_order_no, :purchase_requisition_id, :quantity, :remark, 
                   :trade_company_id, :unit_measurement_id, :unit_price, :status, :trade_company_new_name, :user_id, :maintenance,
                   :proposed_vendor, :temporary_sources_attributes, :approval_proposed, :approval_remark, :urgent, :skip_to_purchase_order
@@ -131,7 +129,6 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   
   def uppercase_text
     self.description.upcase!
-    self.remark.upcase!
     self.trade_company_new_name.upcase! if self.trade_company_new_name.present?
   end
   

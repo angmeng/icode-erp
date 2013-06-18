@@ -1,7 +1,7 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance]
+  # before_filter :inventory_management_system, :except => [:show]
+  layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance, :show_select_vendor, :make_purchase_order]
 
   def index
     @po_title = PurchaseOrder.title
@@ -232,12 +232,12 @@ class PurchaseOrdersController < ApplicationController
 
 #  ====================== VENDOR SELECTION ============================  
   def pending_approval
+    prohibit_html unless roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION)
     @pending_vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, false)
   end
   
   def show_select_vendor
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
-    render :layout => "sheetbox"
   end
   
   def approval_yes
@@ -272,12 +272,14 @@ class PurchaseOrdersController < ApplicationController
     
 #  ====================== VENDOR REGISTRATION ============================ 
   def vendor
+    prohibit_html unless roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_REGISTRATION)
     filter_matching_vendor
   end
 #  ====================== VENDOR REGISTRATION (END) ============================ 
   
 #  ====================== PRODUCT ID Registration (non operation and Operation) ============================ 
   def no_product_id
+    prohibit_html unless roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION)
     @no_product_id = PurchaseRequisitionItem.where(:status => PurchaseRequisitionItem::APPROVED)
                                             .reject { |attr_a| attr_a['trade_company_id'].blank? }
                                             .select { |attr_b| attr_b['product_id'].blank? }
@@ -326,7 +328,7 @@ class PurchaseOrdersController < ApplicationController
 #    @exist_sales_tax = ste_no_with_not_valid.find_all_by_trade_company_id(trade_company_id) # if need to renew STE
   end
 
-  def inventory_management_system
-    role(PurchaseOrder::ROLE)
-  end
+  # def inventory_management_system
+  #   role(PurchaseOrder::ROLE)
+  # end
 end

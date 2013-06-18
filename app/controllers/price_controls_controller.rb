@@ -37,37 +37,12 @@ class PriceControlsController < ApplicationController
       render action: "new"
     end
   end
-  
-#  def edit
-#    @price_control = PriceControl.find(params[:id])
-#    @pri = current_user.price_control_items.db_active if current_user.price_control_items.db_active.present?
-#  end
-
-#  def update
-#    @price_control = PriceControl.find(params[:id])
-#
-#    respond_to do |format|
-#      if @price_control.update_attributes(params[:price_control])
-#        format.html { redirect_to @price_control, notice: 'Price control was successfully updated.' }
-#        format.json { head :no_content }
-#      else
-#        format.html { render action: "edit" }
-#        format.json { render json: @price_control.errors, status: :unprocessable_entity }
-#      end
-#    end
-#  end
 
   def destroy
     @price_control = PriceControl.find(params[:id])
     @price_control.update_attributes!(:status => PriceControl::KEEP_IN_VIEW)
     redirect_to price_controls_path, :notice => "PP No # #{@price_control.pp_no} has moved to KIV."
   end
-  
-#  def moving_kiv
-#    @price_control = PriceControl.find(params[:id])
-#    @price_control.update_attributes!(:status => PriceControl::KEEP_IN_VIEW)
-#    redirect_to price_controls_path, :notice => "PP No.#{@price_control.pp_no} has moved to KIV."
-#  end
     
   def recover
     @price_control = PriceControl.find(params[:id])

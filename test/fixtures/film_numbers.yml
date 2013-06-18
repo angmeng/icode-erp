@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  color_name: MyString
+  color_code: MyString
+  bom_size: MyString
+  film_date: 2013-06-15
+  bom_id: 1
+
+two:
+  color_name: MyString
+  color_code: MyString
+  bom_size: MyString
+  film_date: 2013-06-15
+  bom_id: 1

@@ -1,6 +1,6 @@
 <div id="linking">
   <% if action_name == "index" %>
-    <span id="department_location"><b>DEPARTMENT:</b> <%= @purchase_requisitions.first.user.department.name rescue '-' %></span>
+    <span id="department_location"><b>DEPARTMENT:</b> <%= current_user.department.try(:name) %></span>
   <% end %>
   
   <% if roles.include?(InventoryManagementSystem::PR_MENU) %>
@@ -26,6 +26,6 @@
 
 <% content_for :css_style do %>
   <style>
-    #department_location { float: right; }
+    #department_location { float: right; margin-right: 10px; }
   </style>
 <% end %>

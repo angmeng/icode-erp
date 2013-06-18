@@ -36,6 +36,7 @@ $(document).ready(function () {
     var content_height           = wrapper_height - title_height - button_height - 12;
     var tabify_content_height    = wrapper_height - tabify_height - button_height - 12;    
     var linking_content_height   = wrapper_height - linking_height - title_height - button_height - 13;
+    var linking_tabify_height    = wrapper_height - linking_height - tabify_height - button_height - 13;   
     var searching_content_height = wrapper_height - searching_height - title_height - button_height - 13;
 
     // It is for normal page for without popup
@@ -48,7 +49,7 @@ $(document).ready(function () {
     $(".content").css({ 'height': content_height }).addClass("page_wrapper");
     
     // It is Tabbing with tabify
-    $(".tabify_content").css({ 'height': tabify_content_height }).addClass("page_wrapper");
+    $(".tabify_content").css({ 'height': linking_tabify_height }).addClass("page_wrapper");
     
     // It is for .content with linking
     $(".linking_content").css({ 'height': linking_content_height }).addClass("page_wrapper");
@@ -67,6 +68,12 @@ $(document).ready(function () {
     $("#jgrid_linking").chromatable({
         width:  ctn_width,
         height: linking_content_height,
+        scrolling: "yes"
+    });
+    
+    $("#jgrid_linking_tabify").chromatable({
+        width:  ctn_width,
+        height: linking_tabify_height,
         scrolling: "yes"
     });
     
@@ -103,6 +110,20 @@ $(document).ready(function () {
         // "bSort": false,
         // "bInfo": false,   //exp :showing 1 of 15 pages 
         //"bAutoWidth": true
+        
+        
+     $('#linking_tabify_datatable').dataTable({
+        "sScrollY":  linking_tabify_height - 97,
+        
+        "sPaginationType": "full_numbers",
+        "bJQueryUI": true,
+        "oLanguage": {
+                "sZeroRecords":  "No Record Found.",
+                "sSearch": "Search All Columns:"
+        },
+        "bInfo": false,   //exp :showing 1 of 15 pages 
+        "bAutoWidth": true
+     });
      
      $('#tabify_datatable').dataTable({
         "sScrollY": tabify_content_height - 97,
@@ -274,19 +295,4 @@ $(document).ready(function () {
             });
             
     }, 500);
-});
-
-
-$(function() {
-    
-    $("input").bind("keypress", function(e) {
-        if (e.keyCode == 13){
-            if ($(this).attr("name") == "user[password]" || $(this).attr("name") == "user[name]"){
-                return true;
-            } else {
-                return false;
-            } 
-        }
-    });
- 
 });

@@ -18,8 +18,12 @@ class JobSheet < ActiveRecord::Base
     :printing_xs_qty, :printing_s_qty, :printing_m_qty, :printing_l_qty, :printing_xl_qty, :printing_xxl_qty,
     :uv, :varnish, :lamination, :die_cut, :glueing, :window, :wax, :finishing_other, :matt_varnish, :ink,
     :material_gramme, :unit_measurement_id, :material_type, :paper_width, :paper_length, :trim_size, :ratio,
-    :remarks, :ori_size_qty, :packing_qty, :mould_no, :prepared_by, :sales_order_no, :film_no,
+    :remarks, :ori_size_qty, :packing_qty, :mould_no, :prepared_by, :sales_order_id, :film_no,
     :stock_xs_qty, :stock_s_qty, :stock_m_qty, :stock_l_qty, :stock_xl_qty, :stock_xxl_qty,
-    :customer_ref
-      
+    :customer_ref, :wef
+     
+  belongs_to :sales_order
+  
+  ACTIVE        = 1
+  KEEP_IN_VIEW  = 2
 end

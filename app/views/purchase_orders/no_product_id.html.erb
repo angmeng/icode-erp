@@ -1,11 +1,15 @@
-<%= render "linking" %> 
+<%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PRODUCT ID REGISTRATION (NON OPERATION AND OPERATION)</a></li>
+</ul>
 
-<%= title_head "PRODUCT ID REGISTRATION (NON OPERATION AND OPERATION)" %>
-
-<% if @no_product_id.present? %>
-  <div class="table_background"><%= render "/purchase_orders/read_no_product_id", :product_id => @no_product_id %></div>
-<% else %>
-  <div class="linking_content">No Record Found</div>
-<% end %>
-
+<div id="tabify_listing">
+	<% if @no_product_id.present? %>
+	  <div class="table_background"><%= render "read_no_product_id", :product_id => @no_product_id %></div>
+	<% else %>
+	  <div class="tabify_content">No Record Found</div>
+	<% end %>
+</div>
+  
 <%= render "action_purchase_order_no_product_id" %>

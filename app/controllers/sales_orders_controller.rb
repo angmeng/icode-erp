@@ -73,13 +73,4 @@ class SalesOrdersController < ApplicationController
   def customer_registration
     @quotation_request_forms = QuotationRequestForm.customer_confirmed.select { |attr_b| attr_b['trade_company_id'].blank? }
   end
-  
-#  def product_registration
-#    @quotation_request_forms = QuotationRequestForm.customer_confirmed
-#  end
-#  
-#  def production
-#    @sales_orders = SalesOrder.where(:status => SalesOrder::IN_PROGRESS)
-#  end
-
 end

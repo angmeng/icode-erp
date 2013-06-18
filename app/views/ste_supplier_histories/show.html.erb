@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sales tax exemption:</b>
+  <%= @ste_supplier_history.sales_tax_exemption_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @ste_supplier_history.product_id %>
+</p>
+
+<p>
+  <b>Purchase order:</b>
+  <%= @ste_supplier_history.purchase_order_id %>
+</p>
+
+<p>
+  <b>Before available qty:</b>
+  <%= @ste_supplier_history.before_available_qty %>
+</p>
+
+<p>
+  <b>After available qty:</b>
+  <%= @ste_supplier_history.after_available_qty %>
+</p>
+
+<p>
+  <b>Accumulative complete qty:</b>
+  <%= @ste_supplier_history.accumulative_complete_qty %>
+</p>
+
+
+<%= link_to 'Edit', edit_ste_supplier_history_path(@ste_supplier_history) %> |
+<%= link_to 'Back', ste_supplier_histories_path %>

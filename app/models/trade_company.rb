@@ -205,7 +205,6 @@ class TradeCompany < ActiveRecord::Base
   end
   
   def loading_ste 
-      
       if sales_tax_exemption_line.present?
         if sales_tax_exemption_line.sales_tax_exemption.present?
       
@@ -217,8 +216,6 @@ class TradeCompany < ActiveRecord::Base
           
         end
       end
-    
-    
   end
   
 end

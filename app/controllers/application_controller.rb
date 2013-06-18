@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   helper_method :perihal_barang_both
     
   def version
-    "Version 0.3.13"
+    "Version 0.3.15"
   end
     
   def company
@@ -236,6 +236,10 @@ class ApplicationController < ActionController::Base
   def check_validate_of_period_in_ste
     @period = SalesTaxExemption.where{ (valid_date_condition == true) }
     SalesTaxExemption.check_period(@period) if @period.present?
+  end
+
+  def prohibit_html
+    render :file => "#{Rails.root}/public/422.html", :status => :unprocessable_entity, :layout => false
   end
   
   private

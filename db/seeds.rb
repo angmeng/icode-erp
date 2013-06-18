@@ -121,7 +121,8 @@
 #   {:description => 'TRANSFER NOTE', :in_out => "OUT"},
 # ])
 
-#Material.create([
+# Keep in
+# Material.create([
 #  {code: '1', :description => 'Spray Powder'},
 #  {code: '2', :description => 'Ink Remover'},
 #  {code: '3', :description => 'Plate Cleaner'},
@@ -132,7 +133,7 @@
 #  {code: '8', :description => 'Water Base'},
 #  {code: '9', :description => 'Lube Guard'},
 #  {code: '10', :description => 'Anti Skin'},
-#  
+ 
 #  {code: '11', :description => 'Foamex'},
 #  {code: '12', :description => 'Drier'},
 #  {code: '13', :description => 'Orange Sponge'},
@@ -143,7 +144,7 @@
 #  {code: '18', :description => 'Jelly Compound'},
 #  {code: '19', :description => 'Die Cut Sponge'},
 #  {code: '20', :description => 'Channel'},
-#  
+ 
 #  {code: '21', :description => 'SKP Tape'},
 #  {code: '22', :description => 'Masking Tape'},
 #  {code: '23', :description => 'Glue 8890'},
@@ -154,44 +155,41 @@
 #  {code: '28', :description => 'Semi Auto Strap'},
 #  {code: '29', :description => 'Clip'},
 #  {code: '30', :description => 'Stretch Film'},
-#  
+ 
 #  {code: '31', :description => 'Double Side Tape'},
 #  {code: '32', :description => 'Silicone Spray'}
-#])
+# ])
 
-CompanyProfile.create([
- :name => 'ETHEOS IMPRINT TECHNOLOGY SDN BHD',
- :address => 'EOT 603 KAW PERINDUSTRIAN
-              KG TELUK SG DUA
-              13800 BUTTERWORTH PENANG.',
- :tel_no_1 => '04-3565872',
- :tel_no_2 => '04-3565870',
- :fax_no => '04-3565879',
- :sales_tax_no => 'A061583',
- :reg_no => '362823-K',
-
- :sn_purchase_req_no => 0,
- :sn_purchase_order_no => 0,
- :sn_receive_note_no => 0,
- :sn_quotation_request_no => 0,
- :sn_sales_order_no => 0,
- :sn_deliver_order_no => 0,
- :sn_transfer_slip_no => 0,
- :sn_store_voucher_no => 0,
- :sn_incoming_reject_no => 0,
- :sn_outgoing_reject_no => 0,
- :sn_credit_note_no => 0,
- :sn_debit_note_no => 0,
- :sn_billing_order_no => 0,
- :sn_product_price_no => 0,
- :sn_job_order_no => 0,
- :sn_shipment_schedule => 0,
- :sn_scrap_sheet_no => 0,
- :sn_receiving_instr_no => 0,
- :sn_shipping_instr_no => 0,
- :sn_receipt_no => 0,
- :sn_bankin_slip_no => 0,
- :sn_journal_voucher_no => 0,
- :sn_payment_voucher_no => 0,
- :sn_sales_tax_exemption_no => 0
-])
+# CompanyProfile.create([
+#  :name => 'ETHEOS IMPRINT TECHNOLOGY SDN BHD',
+#  :address => 'EOT 603 KAW PERINDUSTRIAN\nKG TELUK SG DUA\n13800 BUTTERWORTH PENANG.',
+#  :tel_no_1 => '04-3565872',
+#  :tel_no_2 => '04-3565870',
+#  :fax_no => '04-3565879',
+#  :sales_tax_no => 'A061583',
+#  :reg_no => '362823-K',
+#  :sn_purchase_req_no => 0,
+#  :sn_purchase_order_no => 0,
+#  :sn_receive_note_no => 0,
+#  :sn_quotation_request_no => 0,
+#  :sn_sales_order_no => 0,
+#  :sn_deliver_order_no => 0,
+#  :sn_transfer_slip_no => 0,
+#  :sn_store_voucher_no => 0,
+#  :sn_incoming_reject_no => 0,
+#  :sn_outgoing_reject_no => 0,
+#  :sn_credit_note_no => 0,
+#  :sn_debit_note_no => 0,
+#  :sn_billing_order_no => 0,
+#  :sn_product_price_no => 0,
+#  :sn_job_order_no => 0,
+#  :sn_shipment_schedule => 0,
+#  :sn_scrap_sheet_no => 0,
+#  :sn_receiving_instr_no => 0,
+#  :sn_shipping_instr_no => 0,
+#  :sn_receipt_no => 0,
+#  :sn_bankin_slip_no => 0,
+#  :sn_journal_voucher_no => 0,
+#  :sn_payment_voucher_no => 0,
+#  :sn_sales_tax_exemption_no => 0
+# ])

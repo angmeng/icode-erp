@@ -19,25 +19,27 @@
             <% if roles.include?(InventoryManagementSystem::PR_TRANSACTION) %>
               <li><%= link_to "Purchase Requisitions Data", purchase_requisitions_path %></li>
             <% else %>
-              <li class="disabled_menu">Purchase Requisitions Data</li>
+              <li><%= disabled_menu_style "Purchase Requisitions Data" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PR_SIGNATURE) %>
               <li><%= link_to "Approve / Reject PRs Tasks", signature_report_purchase_requisitions_path %></li>
             <% else %>
-              <li class="disabled_menu">Approve / Reject PRs Tasks</li>
+              <li><%= disabled_menu_style "Approve / Reject PRs Tasks" %></li>
             <% end %>
+              
+            <li><hr/></li>
 
             <% if roles.include?(InventoryManagementSystem::PR_KIV_VIEW) %>
               <li><%= link_to "Purchase Requisitions Data - KIV", kiv_purchase_requisitions_path %></li>
             <% else %>
-              <li class="disabled_menu">Purchase Requisitions Data - KIV</li>
+              <li><%= disabled_menu_style "Purchase Requisitions Data - KIV" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::PR_ITEMS_KIV_VIEW) %>
               <li><%= link_to "Purchase Requisition Items Data - KIV", kiv_purchase_requisition_items_path %></li>
             <% else %>
-              <li class="disabled_menu">Purchase Requisition Items Data - KIV</li>
+              <li><%= disabled_menu_style "Purchase Requisition Items Data - KIV" %></li>
             <% end %>
           </ul>
         </li>
@@ -94,6 +96,8 @@
             <% else %>
               <li><%= disabled_menu_style "PO Entry" %></li>
             <% end %>
+              
+            <li><hr/></li>
 
             <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_KIV_VIEW) %>
               <li><%= link_to "Listing Purchase Orders - KIV", kiv_purchase_orders_path %></li>
@@ -130,9 +134,13 @@
                   <% if roles.include?(InventoryManagementSystem::PURCHASE_REQUISITION_REPORT_MENU) %>
                 <li><%= link_to "Purchase requisitions Report", pr_report_reports_path %></li>
                 <% else %>
-                  <li class="text_gray">Purchase Requisition Report</li> %>
+                  <li class="text_gray">Purchase Requisition Report</li>
                   <% end %>
-                <li><%#= link_to "Monthly Purchae Analysis", reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                  <% if roles.include?(InventoryManagementSystem::PR_MONTHLY_PURCHASE_ANALYSIS)%>
+                <li><%= link_to "Monthly Purchae Analysis", purchase_summary_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+                <% else %>
+                <li class="text_gray">Monthly Purchase Analysis</li>
+                <% end %>
 
                 <li><%#= link_to "Purchase by Creditors", purchase_by_creditor_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
 
@@ -202,39 +210,53 @@
           Quotation Requisition
           <ul>
             <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
-              <li><%= link_to "QR Transactions & Histories", quotation_request_forms_path %></li>
+              <li><%= link_to "Quotation Requisitions Data", quotation_request_forms_path %></li>
             <% else %>
-              <li class="text_gray">QR Transactions & Histories</li>
+              <li><%= disabled_menu_style "Quotation Requisitions Data" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::QR_APPROVED_REJECT) %>
               <li><%= link_to 'Approve / Reject QRs Tasks', signature_quotation_quotation_request_forms_path %></li>
             <% else %>
-              <li class="text_gray">Approve / Reject QRs Tasks</li>
+              <li><%= disabled_menu_style "Approve / Reject QRs Tasks" %></li>
             <% end %>
-
-            <% if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
-              <li><%= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path %></li>
+              
+            <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
+              <li><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path %></li>
             <% else %>
-              <li class="text_gray">New & Pending QRs</li>
+              <li><%= disabled_menu_style "QR Customer Feedback" %></li>
             <% end %>
+              
+            <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %>
+              <li><%= link_to "Customer Registration", customer_registration_sales_orders_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style("Customer Registration") %></li>
+            <% end %>    
+
+            <% if roles.include?(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION) %>
+              <li><%= link_to "Product ID Registration (Finish Goods)", finish_good_products_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <% else %>
+              <li><%= disabled_menu_style("Product ID Registration (Finish Goods)") %></li>
+            <% end %>
+              
+            <% if roles.include?(InventoryManagementSystem::PRICE_CONTROL_CUSTOMER_NEW) %>
+              <li><%= link_to "New Product Price Control", new_price_control_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
+            <% else %>
+              <li><%= disabled_menu_style("New Product Price Control") %></li>
+            <% end %>
+              
+            <li><hr/></li>
 
             <% if roles.include?(InventoryManagementSystem::QR_KIV) %>
               <li><%= link_to 'Listing Quotation Request - KIV', kiv_quotation_request_forms_path %></li>
             <% else %>
-              <li class="text_gray">Listing Quotation Request - KIV</li>
+              <li><%= disabled_menu_style "Listing Quotation Request - KIV" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %>
               <li><%= link_to 'Costing Sheet - KIV', kiv_costing_sheets_path %></li>
             <% else %>
-              <li class="text_gray">Costing Sheet - KIV</li>
-            <% end %>
-
-            <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
-              <li><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path %></li>
-            <% else %>
-              <li class="text_gray">QR Customer Feedback</li>
+              <li><%= disabled_menu_style "Costing Sheet - KIV" %></li>
             <% end %>
           </ul>
         </li>
@@ -283,22 +305,23 @@
           <ul>
 
           <% if roles.include?(InventoryManagementSystem::SALES_ORDER_REPORT_MENU) %>
-              <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT) %>
-            <li><%= link_to "SO Summary Report", sales_order_summary_report_reports_path %></li>
+            
+            <% if roles.include?(InventoryManagementSystem::SO_CUS_SUMMARY_REPORT) %>
+              <li><%= link_to "SO Summary Report", sales_order_summary_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">SO Summary Report</li>
+              <li><%= disabled_menu_style "SO Summary Report" %></li>
             <% end %>
 
-              <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
-            <li><%= link_to "SO Customer P/O Detail Report", so_customer_po_detail_report_reports_path%></li>
+            <% if roles.include?(InventoryManagementSystem::SO_CUSTOMER_PO_DETAIL_REPORT) %>
+              <li><%= link_to "SO Customer P/O Detail Report", so_customer_po_detail_report_reports_path%></li>
             <% else %>
-              <li class="text_gray">SO Customer P/O Detail Report</li>
+              <li><%= disabled_menu_style "SO Customer P/O Detail Report" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::SO_LISTING_REPORT) %>
-            <li><%= link_to "SO Listing Report", so_listing_report_reports_path %></li>
+              <li><%= link_to "SO Listing Report", so_listing_report_reports_path %></li>
             <% else %>
-              <li class="text_gray">SO Listing Report</li>
+              <li><%= disabled_menu_style "SO Listing Report" %></li>
             <% end %>
           <% end %>
 
@@ -311,23 +334,21 @@
           <% if roles.include?(InventoryManagementSystem::DELIVERY_ORDER_REPORT_MENU) %>
               
             <% if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
-            <li><%= link_to "Print D/O, Invoice", do_so_documentation_report_reports_path %></li>
+              <li><%= link_to "Print D/O, Invoice", do_so_documentation_report_reports_path %></li>
             <% else %>
              <li><%= disabled_menu_style "Print D/O, Invoice" %></li>
             <% end %>
 
             <% if roles.include?(InventoryManagementSystem::DO_SUMMARY_REPORT) %>
-
-            <li><%= link_to "D/O Summary Report", delivery_order_summary_report_reports_path %></li>
-              <% else %>
-            <li><%= disabled_menu_style "D/O Summary Report" %></li>
-
+              <li><%= link_to "D/O Summary Report", delivery_order_summary_report_reports_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "D/O Summary Report" %></li>
             <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::DO_INVOICE_DOCUMENTATION_REPORT) %>
             <li><%= link_to "Print Invoice History", history_invoices_path %></li>
             <%# else %>
-             <!-- <li class="text_gray">Print D/O,Invoice Report</li> -->
+             <!-- <li><%#= disabled_menu_style "Print Invoice History" %></li> -->
             <%# end %>
           
             <% end %>
@@ -442,7 +463,7 @@
             <% if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
               <li><%= link_to "Formulation", costing_sheet_formulations_path, :class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>
             <% else %>
-              <li class="text_gray">Formulation</li>
+              <li><%= disabled_menu_style "Formulation" %></li>
             <% end %>
 
             <%# if roles.include?(InventoryManagementSystem::FORMULATION_FOR_COSTING_SHOW) %>
@@ -692,13 +713,13 @@
               <% if roles.include?(InventoryManagementSystem::LISTING_PRODUCT_ID_REPORT) %>
               <li><%= link_to "Product ID", product_report_reports_path %></li>
               <% else %>
-              <li class="text_gray">Product ID</li>
+              <li><%= disabled_menu_style("Product ID") %></li>
               <% end %>
 
               <% if roles.include?(InventoryManagementSystem::LISTING_PRICE_REPORT) %>
               <li><%= link_to "Price", price_report_reports_path %></li>
                <% else %>
-              <li class="text_gray">Listing Price</li>
+              <li><%= disabled_menu_style("Price") %></li>
               <% end %>
 
               <li><%#= link_to "Product - customer", customer_report_reports_path,:class => "show_without_refresh_page_1600x900", "data-fancybox-type" => "iframe" %></li>

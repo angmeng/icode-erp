@@ -485,6 +485,13 @@
             var paper_length_a = paper_length_b = $("#quotation_request_form_paper_length").val();
             var ra             = $("#quotation_request_form_ratio").val();
 
+            // var c=document.getElementById("myCanvas");
+            //     var ctx=c.getContext("2d");
+            //     ctx.moveTo(0,0);
+            //     ctx.lineTo(100,100);
+            //     ctx.stroke();
+
+
             if (paper_length_a != 0 && paper_width_a != 0){
                 $("#get_size").show();
                 $("#calculate_size").html('');
@@ -504,6 +511,7 @@
                 } else {
                     $("#paper_size").css({'width': paper_length_a}).css({'height': paper_width_a});
                 }
+
 
                 //OPTION A
                 $("#calculate_size").append('<div><input id="option_size_option_b" type="radio" value="option_b" name="option_size" checked="checked"> OPTION A - (W / Ratio)</div>');

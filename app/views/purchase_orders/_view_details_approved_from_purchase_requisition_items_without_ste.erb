@@ -99,7 +99,7 @@
             <td align="right" colspan="11"><b>Sub-Total</b></td>
           <% end %>
             
-          <td align="right" title="<%= two_precision(subtotal.sum()) %>" class="po_subtotal"><%= two_precision(subtotal.sum()) %></td>
+          <td align="right" title="<%= subtotal.sum() %>" class="po_subtotal"><%= two_precision(subtotal.sum()) %></td>
         </tr>
 
         <tr class="footer_line">

@@ -10,7 +10,6 @@ class PurchaseRequisitionItemsController < ApplicationController
   def show
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
     @select_vendor = @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE) if @purchase_requisition_item.temporary_sources.present?
-#    @find_unit_price = @purchase_requisition_item.find_unit_price(@purchase_requisition_item.product_id, @purchase_requisition_item.temporary_sources.first.company_name) if @purchase_requisiiton_item.temporary_sources.present?
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +25,7 @@ class PurchaseRequisitionItemsController < ApplicationController
   def create
     @purchase_requisition_item = PurchaseRequisitionItem.new(params[:purchase_requisition_item])
     @eta, msg = PurchaseRequisitionItem.present_date(@purchase_requisition_item.eta)
-    if @eta.present?      
+    if @eta.present?
       PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price]) unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
       if @purchase_requisition_item.save
         redirect_to @purchase_requisition_item, notice: 'Purchase Requisition Item was successfully created.'
@@ -46,14 +45,7 @@ class PurchaseRequisitionItemsController < ApplicationController
      if @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE).present? 
        company_name = @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE).company_name
      end 
-    end 
-    
-#    product_value = Product.find(@purchase_requisition_item.product_id) if @purchase_requisition_item.product_id.present?
-#    if product_value.present?
-#      @aa = Product.running_option(product_value, company_name)
-#    else
-#      @all_companies = TradeCompany.order("name").all.collect {|c| [c.name, c.name] }
-#    end
+    end
   end
 
   def update

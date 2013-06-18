@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Color name:</b>
+  <%= @film_number.color_name %>
+</p>
+
+<p>
+  <b>Color code:</b>
+  <%= @film_number.color_code %>
+</p>
+
+<p>
+  <b>Bom size:</b>
+  <%= @film_number.bom_size %>
+</p>
+
+<p>
+  <b>Film date:</b>
+  <%= @film_number.film_date %>
+</p>
+
+<p>
+  <b>Bom:</b>
+  <%= @film_number.bom_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_film_number_path(@film_number) %> |
+<%= link_to 'Back', film_numbers_path %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Status:</b>
+  <%= @bom.status %>
+</p>
+
+<p>
+  <b>Quotation request form:</b>
+  <%= @bom.quotation_request_form_id %>
+</p>
+
+<p>
+  <b>Customer po no:</b>
+  <%= @bom.customer_po_no %>
+</p>
+
+<p>
+  <b>Updated by:</b>
+  <%= @bom.updated_by %>
+</p>
+
+
+<%= link_to 'Edit', edit_bom_path(@bom) %> |
+<%= link_to 'Back', boms_path %>

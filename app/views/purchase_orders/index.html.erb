@@ -1,15 +1,20 @@
 <%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PURCHASE ORDERS DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div class="title_head">
-  <strong style="color:white;">TRANSACTIONS & HISTORIES FOR PURCHASE ORDERS</strong>
-  <%= search_button %>
+<div id="tabify_listing">
+	<% if @purchase_orders.present? %>
+	  <div class="table_background"><%= render "success_approved_from_purchase_requisition_items", :success => @purchase_orders %></div>
+	<% else %>
+	  <div class="tabify_content">No Record Found</div>
+	<% end %>
 </div>
-<%= render "search_po" %>
 
-<% if @purchase_orders.present? %>
-  <div class="table_background"><%= render "/purchase_orders/success_approved_from_purchase_requisition_items", :success => @purchase_orders %></div>
-<% else %>
-  <div class="linking_content">No Record Found</div>
-<% end %>
-
+<div id="tabify_search">
+	<%= render "search_po" %>
+</div>
+  
 <%= render "action_purchase_order_transaction" %>

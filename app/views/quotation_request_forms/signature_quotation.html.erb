@@ -1,11 +1,15 @@
 <%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">APPROVE / REJECT QUOTATION REQUEST TASKS</a></li>
+</ul>
 
-<div class="title_head"><strong style="color:white;">APPROVE / REJECT QUOTATION REQUEST TASKS</strong></div>
-
-<% if @quotation_request_forms.present? %>
-  <div class="table_background"><%= render "listing_quotation_request", :quotations => @quotation_request_forms %></div>
-<% else %>
-  <div class="linking_content">No Record Found</div>
-<% end %>
+<div id="tabify_listing">
+  <% if @quotation_request_forms.present? %>
+    <div class="table_background"><%= render "listing_quotation_request", :quotations => @quotation_request_forms %></div>
+  <% else %>
+    <div class="tabify_content">No Record Found</div>
+  <% end %>
+</div>
 
 <%= render "action_quotation_signature" %>

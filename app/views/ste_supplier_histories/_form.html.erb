@@ -1,0 +1,41 @@
+<%= form_for(@ste_supplier_history) do |f| %>
+  <% if @ste_supplier_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ste_supplier_history.errors.count, "error") %> prohibited this ste_supplier_history from being saved:</h2>
+
+      <ul>
+      <% @ste_supplier_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sales_tax_exemption_id %><br />
+    <%= f.number_field :sales_tax_exemption_id %>
+  </div>
+  <div class="field">
+    <%= f.label :product_id %><br />
+    <%= f.number_field :product_id %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase_order_id %><br />
+    <%= f.number_field :purchase_order_id %>
+  </div>
+  <div class="field">
+    <%= f.label :before_available_qty %><br />
+    <%= f.text_field :before_available_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :after_available_qty %><br />
+    <%= f.text_field :after_available_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :accumulative_complete_qty %><br />
+    <%= f.text_field :accumulative_complete_qty %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

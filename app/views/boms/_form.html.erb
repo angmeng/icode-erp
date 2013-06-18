@@ -1,0 +1,47 @@
+<%= form_for(@bom) do |f| %>
+  <% if @quotation.present? %>
+    <div id="valid_bom">
+      <!-- <div class="popup_content"> -->
+        
+          <%= f.hidden_field :quotation_request_form_id, :value => @quotation.id %>
+          <%= f.hidden_field :customer_po_no, :value => @quotation.customer_po_no %>
+          <%= f.hidden_field :updated_by, :value => current_user.id %>
+        
+          <div id="qr_strip">
+            <ul>
+              <li class="k-state-active">RAW MATERIAL</li>
+              <li>SUB MATERIAL</li>
+              <li>PROCESSING MATERIAL</li>
+              <li>PACKING MATERIAL</li>
+            </ul>
+
+            <div><%= render "raw_material", f: f %></div>
+            <div><%= render "sub_material", f: f %></div>
+            <div><%= render "processing_material", f: f %></div>
+            <div><%= render "packing_material", f: f %></div>
+          </div>
+      <!-- </div> -->
+    </div>
+  <% end %>
+
+  <div class="icon_tag">
+    <span class="alert_msg"></span>
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+        $(".numberKey").forceNumeric();
+        var validator = $("#valid_bom").kendoValidator().data("kendoValidator");
+
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; }
+        });
+    });
+
+  </script>
+<% end %>

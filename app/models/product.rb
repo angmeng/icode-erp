@@ -40,36 +40,36 @@ class Product < ActiveRecord::Base
   
   COMBO_UM = %w{ cm m mm micron inch}
   
-  ROLE = [
-    InventoryManagementSystem::PRODUCT_MENU,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION,
-    InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION,
-    InventoryManagementSystem::PRODUCT_OPERATION,
-    InventoryManagementSystem::KIV_PRODUCT_OPERATION,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD,
-    InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV,
-    InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER,
-    InventoryManagementSystem::PRODUCT_OPERATION_GROUP,
-    InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP,
-    InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT,
-    InventoryManagementSystem::PRODUCT_OPERATION_FILE,
-    InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT,
-    InventoryManagementSystem::PRODUCT_OPERATION_KIV,
-    InventoryManagementSystem::PRODUCT_OPERATION_RECOVER,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV,
-    InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER
-  ]
+  # ROLE = [
+  #   InventoryManagementSystem::PRODUCT_MENU,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION,
+  #   InventoryManagementSystem::KIV_PRODUCT_NON_OPERATION,
+  #   InventoryManagementSystem::PRODUCT_OPERATION,
+  #   InventoryManagementSystem::KIV_PRODUCT_OPERATION,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD,
+  #   InventoryManagementSystem::KIV_PRODUCT_FINISH_GOOD,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_GROUP,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_SUB_GROUP_EDIT,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_FILE_EDIT,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_KIV,
+  #   InventoryManagementSystem::PRODUCT_NON_OPERATION_RECOVER,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_GROUP,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_SUB_GROUP_EDIT,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_FILE,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_FILE_EDIT,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_KIV,
+  #   InventoryManagementSystem::PRODUCT_OPERATION_RECOVER,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_GROUP,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_SUB_GROUP_EDIT,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_FILE_EDIT,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_KIV,
+  #   InventoryManagementSystem::PRODUCT_FINISH_GOOD_RECOVER
+  # ]
     
   def uppercase_text
     if self.desc.present?

@@ -1,0 +1,33 @@
+<h1>Listing ste_supplier_histories</h1>
+
+<table>
+  <tr>
+    <th>Sales tax exemption</th>
+    <th>Product</th>
+    <th>Purchase order</th>
+    <th>Before available qty</th>
+    <th>After available qty</th>
+    <th>Accumulative complete qty</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ste_supplier_histories.each do |ste_supplier_history| %>
+  <tr>
+    <td><%= ste_supplier_history.sales_tax_exemption_id %></td>
+    <td><%= ste_supplier_history.product_id %></td>
+    <td><%= ste_supplier_history.purchase_order_id %></td>
+    <td><%= ste_supplier_history.before_available_qty %></td>
+    <td><%= ste_supplier_history.after_available_qty %></td>
+    <td><%= ste_supplier_history.accumulative_complete_qty %></td>
+    <td><%= link_to 'Show', ste_supplier_history %></td>
+    <td><%= link_to 'Edit', edit_ste_supplier_history_path(ste_supplier_history) %></td>
+    <td><%= link_to 'Destroy', ste_supplier_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ste supplier history', new_ste_supplier_history_path %>

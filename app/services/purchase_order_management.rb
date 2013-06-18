@@ -66,19 +66,19 @@ class PurchaseOrderManagement
           @barangs = @vendor_id.sales_tax_exemption.sales_tax_exemption_barangs
           if @barangs.present? && pri.product.present?
             if pri.product.tarif_code.present?
+              # it is Sales Tax Exemption if the supplier has provided the licence.
                 barang = @barangs.find_by_tarif_code(pri.product.tarif_code)
                 if barang.present?
                   before_available_qty = barang.available_qty
                   after_available_qty = before_available_qty.to_f - pri.quantity.to_f
                   after_complete_qty = barang.complete_qty.to_f + pri.quantity.to_f
-                  stei = SalesTaxExemptionItem.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+                  # stei = SalesTaxExemptionItem.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+                  stei = SteSupplierHistory.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
                   stei.save!
                   barang.update_attributes!(:complete_qty => after_complete_qty, :available_qty => after_available_qty)
                 end
             end
           end
-        else
-          PurchaseOrderItemLine.create!(:purchase_requisition_item_id => pri.id, :purchase_order_id => po_id)
         end
         pri.update_attributes(:status => PurchaseRequisitionItem::RECEIVE_NOTE)
         pri.purchase_requisition.update_attributes(:status => PurchaseRequisition::SUBMIT_RN)

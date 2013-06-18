@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :inventory_management_system, :except => [:show]
+  # before_filter :inventory_management_system, :except => [:show]
   layout "sheetbox"
   
   def message
+    prohibit_html unless roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY)
     if params[:pri_id].present?
       pri = PurchaseRequisitionItem.find(params[:pri_id])
       session[:pri_id]       = pri.id
@@ -169,9 +170,9 @@ class ProductsController < ApplicationController
   
   private
   
-  def inventory_management_system
-    role(Product::ROLE)
-  end
+  # def inventory_management_system
+  #   role(Product::ROLE)
+  # end
   
   def manage_categories(cat_id)
     @category_id        = cat_id
@@ -192,6 +193,5 @@ class ProductsController < ApplicationController
     session[:po_up]             = nil #ok
     session[:po_vendor_id]      = nil #ok
     session[:qr_id]             = nil
-#    session[:refer_category_id] = nil
   end
 end

@@ -1,3 +1,11 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_ENTRY) %>
+    <b><%= link_to "Add - New Purchase Order", make_purchase_order_purchase_orders_path, :class => "iframe_1600x900 k-button", "data-fancybox-type" => "iframe" %></b>
+  <% else %>
+    <b><%= disabled_style "Add - New Purchase Order" %></b>
+  <% end %>
+</div>
+
 <div class="icon_tag">
   
   <% if roles.include?(InventoryManagementSystem::PURCHASE_ORDER_TRANSACTION_SHOW) %>
@@ -24,7 +32,6 @@
     <span class="word_opac"><%= not_link_printable %></span>
   <% end %>
    
-  <%#= link_close_button %>
-    <%= link_home_button %>
+  <%= link_home_button %>
 
 </div>

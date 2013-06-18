@@ -1,0 +1,41 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::BOM_NEW) %>
+    <%= link_to "Add - New BOM", active_so_boms_path, :class => "iframe_1600x900 k-button font_bold", "data-fancybox-type" => "iframe" %>
+  <% else %>
+    <%= disabled_style("Add - New BOM") %>
+  <% end %>
+</div>
+
+<!--div class="center_icon_tag">
+  <div class="digg_pagination"><%#= will_paginate @job_sheets, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div-->
+
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::BOM_SHOW) %>
+    <span id="on_show" showClass="show_without_refresh_page_1600x900"><%= not_link_show %></span>
+  <% else %>
+    <%= not_link_show %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::BOM_EDIT) %>
+    <span id="on_edit" editClass="iframe_1600x900"><%= not_link_edit %></span>
+  <% else %>
+    <%= not_link_edit %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::BOM_KIV) %>
+     <span id="on_kiv"><%= not_link_kiv %></span>
+  <% else %>
+    <%= not_link_kiv %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::BOM_PRINTABLE) %>
+    <span id="on_printable"><%= not_link_printable %></span>
+  <% else %>
+    <%= not_link_printable %>
+  <% end %>
+   
+  <%= link_home_button %>
+
+</div>

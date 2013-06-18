@@ -1,21 +1,18 @@
-<div class="title_head">
-  <strong style="color:white;">LISITING CUSTOMERS - KIV</strong>
-  <%= search_button %>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">LISITING CUSTOMERS - KIV</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+
+<div id="tabify_listing">
+  <% if @trade_companies.present? %>
+    <div class="table_background"><%= render "listing_trade_company", :trade_company => @trade_companies %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
 </div>
-<div><%= render "search_kiv_customer" %></div>
 
-<% if @trade_companies.present? %>
-  <div class="table_background"><%= render "listing_trade_company", :trade_company => @trade_companies %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
-
-<%= render "action_trade_company_customer_kiv" %>
-
-
+<div id="tabify_search">
+  <%= render "search_kiv_customer" %>
+</div>
   
-                                                         
-
-
-
-
+<%= render "action_trade_company_customer_kiv" %>

@@ -1,0 +1,44 @@
+<div class="quotation">
+  <table class="normal_table_black">
+    <tr>
+      <td width="30%">
+        <div><b>PACKING QTY:</b></div>
+        <div><%= f.text_field :packing_qty, :value => "#{@quotation.packed_quantity} PCS", :class => "k-textbox" %></div>
+        <div><b>MOULD NO:</b></div>
+        <div>
+          <% e = [] %>
+          <% if @quotation.selection_die_cut_moulds.present? %>
+            <% @quotation.selection_die_cut_moulds.each do |mou| %>
+              <% e << mou.mould_no %>
+            <% end %>
+          <% end %>
+          <% if @quotation.selection_die_cut_moulds.present? %>
+            <% @quotation.selection_die_cut_moulds.each do |win| %>
+              <% e << win.window_no %>
+            <% end %>
+          <% end %>
+          <%= f.text_area :mould_no, :value => e.join("/"), :rows => 3 %>
+        </div>
+        <div><b>MASTER J/S PREPARED BY:</b></div><div><%= f.text_field :prepared_by, :class => "k-textbox" %></div>
+      </td>
+      <td width="30%">
+        APPROVED BY:
+        <table>
+          <tr>
+            <td width="100" height="50"></td>
+            <td width="100" height="50"></td>
+          </tr>
+          <tr>
+            <!--td height="50">SO # <%#= f.select :sales_order_id, options_from_collection_for_select(@sales_orders, :id, :sales_order_no, @job_sheet.sales_order_id), { :include_in => true, :style => "width: 80px;", :class => "mkendo_combobox" } %></td-->
+            <td>SO #<%= f.select :sales_order_id, options_from_collection_for_select(@sales_orders, :id, :sales_order_no, @job_sheet.sales_order_id), { :include_blank => true } , { :class => "mkendo_combobox", "required validationMessage" => "Please Select SO #", :style => "width: 80px;" } %></td>
+            <td height="50"></td>
+          </tr>
+        </table>
+      </td>
+      <td width="40%">
+        FILM NO:<br/>
+        <%= f.text_area :film_no, :rows => 6 %>
+      </td>
+    </tr>
+  </table>
+</div>  

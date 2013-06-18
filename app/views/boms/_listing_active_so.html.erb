@@ -1,0 +1,30 @@
+<table class="zebraLight jgrid_popup">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th align="center" width="100">Customer PO No#</th>
+      <th>QR No.</th>
+      <th>Customer Company</th>
+      <th>Description</th>
+      <th>QRF Date</th>
+      <th>QRF Updated By</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% sales_orders.each do |sorder| %>
+      <% quotation = QuotationRequestForm.find_by_customer_po_no(sorder.purchase_order_no) %>
+      <% if quotation.present? %>
+        <tr class="<%= cycle("odd_line", "even_line") %>" rowsId="<%= quotation.id %>">
+          <td></td>
+          <td align="center"><%= sorder.purchase_order_no rescue '-' %></td>
+          <td align="center"><%= quotation.quotation_request_no rescue '-' %></td>
+          <td align="center">[<%= sorder.trade_company.code rescue '-' %>] <%= sorder.trade_company.name rescue '-' %></td>
+          <td><%= quotation.description rescue '-' %></td>
+          <td align="center"><%= quotation.qrf_date.strftime("%d-%m-%Y") rescue '-' %></td>
+          <td align="center"><%= quotation.user.name rescue '-' %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

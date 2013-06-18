@@ -29,7 +29,7 @@ class CreateJobSheets < ActiveRecord::Migration
       t.integer :quotation_request_no
       t.integer :updated_by
       t.integer :authorized_by
-      t.string :status, :default => "PENDING"
+      t.string :status, :default => JobSheet::ACTIVE
       
 
 #      t.string :material_remark
@@ -62,7 +62,7 @@ class CreateJobSheets < ActiveRecord::Migration
       t.string :box_part_no
       t.integer :lot_size_no
       
-      # start here
+########################################### start here ##############################################
       t.string :rev, :default => '00'
       t.date :job_sheet_date
       t.string :job_no
@@ -130,10 +130,14 @@ class CreateJobSheets < ActiveRecord::Migration
       t.string :packing_qty
       t.text :mould_no
       t.string :prepared_by
-      t.string :sales_order_no
+      t.integer :sales_order_id
       t.text :film_no
+      t.text :wef
       
       t.timestamps
     end
+    add_index :job_sheets, :trade_company_id
+    add_index :job_sheets, :unit_measurement_id
+    add_index :job_sheets, :sales_order_id
   end
 end

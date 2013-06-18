@@ -11,6 +11,7 @@
   			<tr class="header_line">
   				<th>P/O #</th>
           <th>Date</th>
+          <th>RN Date</th>
   				<th>Product Code / Description</th>
   				<th>Quantity</th>
           <th>Out Standing</th>
@@ -21,30 +22,37 @@
   		</thead>
       
     	<tbody>
-        <% po.purchase_requisition.purchase_requisition_items.each_with_index do |pr , index| %>
+        <% po.purchase_requisition.purchase_requisition_items.each_with_index do |pri , index| %>
     		<tr>
           <% if index == 0 %>
-    			<td align="center" rowspan="<%= pr.purchase_requisition.purchase_requisition_items.count %>"><%= po.po_no rescue'-' %></td>
+    			<td align="center" rowspan="<%= pri.purchase_requisition.purchase_requisition_items.count %>"><%= po.po_no rescue'-' %></td>
           <% end %>
-          <td align="center"><%= pr.eta.strftime("%d/%m/%Y") rescue'-' %></td>
-    			<td align="center"><%= pr.product.product_combobox.product_code rescue '-' %> / 
-            <%= pr.description rescue'-' %></td>
-    			<td align="center"><%= pr.quantity rescue'-' %></td>
-          <% if pr.remark.present? %>
-          <td align="center"><%= pr.remark rescue'-' %></td>
-          <% else %>
-          <td align="center">-</td>
-          <% end %>
-          <td align="center"><%= pr.unit_measurement.code rescue '-' %></td>
-    			<td align="center"><%= pr.unit_price rescue '-' %></td>
+          <td align="center"><%= pri.eta.strftime("%d/%m/%Y") rescue'-' %></td>
           
-    			<td align="center"><%= iproduct(pr.quantity, pr.unit_price) %>
-                      <% arr << pr.quantity * pr.unit_price %></td>
+
+          <% po.purchase_order_item_lines.each do |rn| %>
+            <td align="center"><%= rn.receive_note.rn_date.strftime("%d/%m/%Y") %></td>
+          <% end %>
+
+    			<td align="center"><%= pri.product.product_combobox.product_code rescue '-' %> / 
+            <%= poi.description rescue'-' %></td>
+    			<td align="center"><%= pri.quantity rescue'-' %></td>
+
+          <%= iproduct(pri.quantity, pri.receive_note_item.received_qty) %>
+
+          <%# arr << poi.quantity - po.a.received_qty %>
+          <td align="center"><%#= two_precision(iproduct) rescue'-' %></td>
+          
+          <td align="center"><%= pri.unit_measurement.code rescue '-' %></td>
+    			<td align="center"><%= pri.unit_price rescue '-' %></td>
+          
+    			<td align="center"><%= iproduct(pri.quantity, pri.unit_price) %>
+                      <% arr << pri.quantity * pri.unit_price %></td>
     		</tr>
         <% end %>
         
         <tr style="border-top: 1px solid;">
-          <td colspan="7" align="right">Total :</td>
+          <td colspan="8" align="right">Total :</td>
           <td align="center"><%= two_precision(arr.sum) %></td>
         </tr>
         

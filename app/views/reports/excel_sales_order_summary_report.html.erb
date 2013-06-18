@@ -1,0 +1,158 @@
+<div id="container">
+<h2><u>Sales Order Summary Report</u></h2>
+<br />
+	<% if @detail_sales_order_summary_report.present? %>
+  <% @detail_sales_order_summary_report.each_with_index do |sos , index | %>
+    <% counter = 0 %>
+      <% if index == 0 %>
+          <div>
+      <% else %>
+          <div style="page-break-before: always;"> 
+        
+      <% end %>
+  <table>
+    <td>Trade Company: &nbsp;
+      <%= sos.trade_company.code rescue'-' %>&nbsp;
+      <%= sos.trade_company.name %>
+    </td>
+  </table>
+
+	<table class="black-line-table" >
+    <thead>
+    		<tr class="header_line">
+    			<th>SO</th>
+          <th>Customer PO</th>
+    			<th>Product ID / Part #</th>
+    			<th>Description</th>
+    			<th>Order Qty</th>
+          <th>Delivery Quantity</th>
+          <th>OutStanding</th>
+    			<th>U/P</th>
+    			<th>ETA</th>
+    			<th>Q/S Qty</th>
+    		</tr>
+      </thead>
+      <tbody>
+    		<tr>
+          <% sos.sales_order_items.each_with_index do |soi , index| %>
+            <% counter += 1 %>
+            <% if counter < 28 %>
+
+          <% if index == 0 %> 
+    			<td align="center" rowspan="<%= sos.sales_order_items.count %>" >
+            <%= sos.sales_order_no rescue'-' %>
+          </td>
+          <% end %>
+          <td align="center"><%= soi.customer_po rescue'-' %></td>
+    			<td align="center"><%= soi.product.product_combobox.product_code rescue'-' %>
+            <br / >
+            <%= soi.part_no rescue'-' %>
+          </td>
+    			<td align="center"><%= soi.product.desc rescue '-'%></td>
+    			<td align="center"><%= soi.quantity rescue'-' %></td>
+          <td align="center"></td>
+          <td align="center"></td>
+    			<td align="center"><%= soi.unit_price rescue'-' %></td>
+    			<td align="center"><%= soi.eta.strftime("%d/%m/%Y") rescue'-' %></td>
+    			<td align="center"><%= soi.remaining_qty rescue'-' %></td>
+    		</tr>
+        
+        <tr style="border-top: 1px solid;">
+         <td ></td>
+        </tr>
+		</tbody>
+    <% else %>
+  </table>
+  <div style="page-break-before: always;">
+  <table class="black-line-table" >
+      <thead>
+          <tr class="header_line">
+            <th>SO</th>
+            <th>Customer PO</th>
+            <th>Product ID / Part #</th>
+            <th>Description</th>
+            <th>Order Qty</th>
+            <th>U/P</th>
+            <th>ETA</th>
+            <th>Q/S Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% if index == 0 %>
+            <td align="center" rowspan="<%= sos.sales_order_items.count %>"><%= sos.sales_order_no rescue'-' %></td>
+            <% end %>
+            <td align="center"><%= soi.customer_po rescue'-' %></td>
+            <td align="center"><%= soi.product.product_combobox.product_code rescue'-' %></td>
+            <td align="center"><%= soi.product.desc rescue '-'%></td>
+            <td align="center"><%= soi.quantity rescue'-' %></td>
+            <td align="center"><%= soi.unit_price rescue'-' %></td>
+            <td align="center"><%= soi.eta rescue'-' %></td>
+            <td align="center"><%= soi.remaining_qty rescue'-' %></td>
+          </tr>
+          <tr style="border-top: 1px solid;">
+           <td ></td>
+          </tr>
+      
+          <% end %> 
+    </tbody>
+    <% counter = 1%> 
+    <% end %>
+  </table>
+  <% end %>
+  </div>
+  <br />
+		<% else %>
+		No Report Found
+	<% end %>
+	
+</div>
+
+
+<style>
+
+table{
+    width:100%;
+  }
+  
+  body {
+    background-color: #fff;
+    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 18px; }
+
+  p, div { margin: 0; }
+
+  p, ol, ul, td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; }
+
+    table.black-line-table {
+      width:100%;
+      border-width: 1px;
+      <%#*border-spacing: 0px;%>
+      border-style: none;
+      border-color: black;
+      border-collapse: collapse;
+      background-color: transparent; }
+
+  table.black-line-table th {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+
+  table.black-line-table td {
+          border-width: 1px;
+          padding: 1px;
+          border-style: solid;
+          border-color: black;
+          background-color: transparent; }
+   tbody tr {
+    border-top: 3pt solid white;
+ }
+  
+  
+</style>

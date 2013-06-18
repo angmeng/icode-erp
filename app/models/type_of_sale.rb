@@ -17,9 +17,4 @@ class TypeOfSale < ActiveRecord::Base
   CJ5_LICENCE_MANUFACTURER = self.find_by_name("CJ5 LICENCE MANUFACTURER").id
   EXPORT_SALES = self.find_by_name("EXPORT SALES").id
   IMPORT = self.find_by_name("IMPORT").id
-
-
-#  def self.ordered
-#    all
-#  end
 end

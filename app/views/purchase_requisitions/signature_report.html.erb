@@ -1,11 +1,15 @@
 <%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">APPROVE / REJECT PURCHASE REQUISITION TASKS</a></li>
+</ul>
 
-<%= title_head "APPROVE / REJECT PURCHASE REQUISITION TASKS" %>
-
-<% if @user_report.present? %>
-  <div class="table_background"><%= render "listing_purchase_requisitions", :listing => @user_report %></div>
-<% else %>
-  <div class="linking_content">No Record Found</div>
-<% end %>
-
+<div id="tabify_listing">
+  <% if @user_report.present? %>
+    <div class="table_background"><%= render "listing_purchase_requisitions", :listing => @user_report %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+  
 <%= render "action_purchase_requisition_signature" %>

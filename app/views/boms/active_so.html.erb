@@ -1,0 +1,9 @@
+<%= title_head "SELECTION SALES ORDER ACTIVE" %>
+
+<% if @sales_orders.present? %>
+  <div class="table_background"><%= render "listing_active_so", :sales_orders => @sales_orders %></div>
+<% else %>
+  <div class="linking_content">Not Record Found</div>
+<% end %>
+
+<%= render "action_active_so" %>
