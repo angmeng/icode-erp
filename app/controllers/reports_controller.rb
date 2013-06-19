@@ -798,9 +798,11 @@ end
   end
 
   def purchase_summary_report
+
     @purchase_summary_report = PurchaseRequisitionItem.search(params[:search])
     a = @purchase_summary_report.all
     @show_purchase_summary_report = a.group_by(&:product_id)
+
   end
 
  
