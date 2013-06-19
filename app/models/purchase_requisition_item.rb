@@ -1,4 +1,5 @@
 class PurchaseRequisitionItem < ActiveRecord::Base
+  before_validation :present_date
   before_save   :uppercase_text
   before_update :uppercase_text
   
@@ -17,8 +18,8 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   
   has_one    :receive_note
   has_one    :incoming_reject
-  
   has_one    :purchase_order_item_line, :dependent => :destroy
+  
   has_many   :purchase_orders, :through => :purchase_order_item_lines
   has_many   :temporary_sources, :dependent => :destroy
   accepts_nested_attributes_for :temporary_sources, :allow_destroy => true
@@ -41,32 +42,6 @@ class PurchaseRequisitionItem < ActiveRecord::Base
   
   #approved_pr in purchase order
   scope :ordered_purchase_requisition_id, order("purchase_requisition_id DESC").where("status = ?", PurchaseRequisitionItem::APPROVED)  
-  
-#  def self.run_update(purchase_requisition, user, select_items)
-#    user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
-#    if user_pending.present?
-#      user_pending.each do |p|
-#        if user.level == User::LEVEL_FIVE
-#          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::APPROVED)
-#        else
-#          p.update_attributes(:purchase_requisition_id => purchase_requisition.id, :status => PurchaseRequisitionItem::IN_PROCESSING)
-#        end
-#      end
-#    end
-#  end
-  
-#  def self.before_check_eta(user, select_items)
-#    user_pending = user.purchase_requisition_items.where(:status => PurchaseRequisitionItem::PENDING).find(select_items)
-#    if user_pending.present?
-#      user_pending.each do |p|
-#        if p.eta < Date.today
-#          return false, "ETA should have future date."
-#        else
-#          return true
-#        end
-#      end
-#    end
-#  end
 
   def is_skip_to_po?
     skip_to_purchase_order == TRUE
@@ -76,18 +51,6 @@ class PurchaseRequisitionItem < ActiveRecord::Base
     urgent == TRUE
   end
   
-#  def self.completed_update(app_three)
-#    all_pending = app_three.purchase_requisition_items.where(:status => PurchaseRequisitionItem::IN_PROCESSING)
-#    if all_pending.present?
-#      all_pending.each do |p|
-#        if p.is_skip_to_po?
-#          p.update_attributes(:status => PurchaseRequisitionItem::APPROVED)
-#        else
-#          p.update_attributes(:status => PurchaseRequisitionItem::APPROVED)
-#        end
-#      end
-#    end
-#  end
           
 #  def self.pr_items_status(company_id, po_id)
 #    @pri = self.where("status = ? and trade_company_id = ?", PurchaseRequisitionItem::APPROVED, company_id)
@@ -149,29 +112,16 @@ class PurchaseRequisitionItem < ActiveRecord::Base
     where(:status => PurchaseRequisitionItem::APPROVED, :trade_company_id => company_id.to_i)
   end
   
-  def self.present_date(eta)
-    if eta.present?
-      if eta < Date.today
-        return false, "ETA should be future date."
-      else 
-        return true
-      end
-    else
-      return false, "ETA should not blank."
-    end
-  end
-  
-  
-
-#  def self.running_new_temporary(purchase_requisition_item, company_name, estimated_price)
-#    if purchase_requisition_item.product_id.present?
-#      prod = Product.find(purchase_requisition_item.product_id)
-#      purchase_requisition_item.description = prod.desc
-#      purchase_requisition_item.unit_measurement_id = prod.unit_measurement_id
-#    end    
-#    purchase_requisition_item.temporary_sources.new(:company_name => company_name, :select_vendor => TRUE, :unit_price => estimated_price)
-#    purchase_requisition_item.temporary_sources.new(:company_name => "-", :select_vendor => FALSE, :unit_price => 0)
-#    purchase_requisition_item.temporary_sources.new(:company_name => "-", :select_vendor => FALSE, :unit_price => 0)
+#  def self.present_date(eta)
+#    if eta.present?
+#      if eta < Date.today
+#        return false, "ETA should be future date."
+#      else 
+#        return true
+#      end
+#    else
+#      return false, "ETA should not blank."
+#    end
 #  end
   
   def self.running_approval(pri)
@@ -244,6 +194,14 @@ class PurchaseRequisitionItem < ActiveRecord::Base
       end
     end
     return array
+  end
+  
+  private
+  
+  def present_date
+    if self.eta
+      errors.add(:eta, "should be future date.") if self.eta < Date.today
+    end
   end
 end
     

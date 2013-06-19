@@ -31,17 +31,15 @@ class PurchaseRequisitionsController < ApplicationController
 
   def create
     @purchase_requisition = PurchaseRequisition.new(params[:purchase_requisition])
-    pr_value = company.sn_purchase_req_no.to_i + 1
     @manage, msg = PurchaseRequisition.managing_validate(current_user, params[:select_items])   # Validate should checking whether select items and ETA date are valid?
-    PurchaseRequisitionManagement.arrange(current_user, @purchase_requisition, pr_value, director_data) if @manage.present?
-
+    PurchaseRequisitionManagement.arrange(current_user, @purchase_requisition, director_data) if @manage.present?
     if @manage.present? && @purchase_requisition.save
-      company.update_attributes!(:sn_purchase_req_no => pr_value)
+      company.update_attributes!(:sn_purchase_req_no => @purchase_requisition.pr_no)
       PurchaseRequisitionManagement.run_update(current_user, @purchase_requisition, params[:select_items])
       redirect_to new_purchase_requisition_path, notice: "PR No # #{@purchase_requisition.pr_no} has #{@purchase_requisition.purchase_requisition_items.size} items was created."
     else
       msg = [] unless msg.present?
-      msg << @purchase_requisition.errors.full_messages if @purchase_requisition.errors.present?
+      msg << @purchase_requisition.errors.full_messages if @purchase_requisition.errors
       flash[:alert] = msg.join(", ")
       new
       render action: "new"
@@ -151,7 +149,6 @@ class PurchaseRequisitionsController < ApplicationController
     @app_three = PurchaseRequisition.find(params[:id])
     if @app_three.update_attributes(:status => PurchaseRequisition::SUBMIT_PO, :approved_by_level_five => current_user.id, :approved_by_level_five_date => Date.today, :tasks => 0)
       PurchaseRequisitionManagement.completed_update(@app_three)
-#      PurchaseRequisitionItem.completed_update(@app_three)
       redirect_to edit_purchase_requisition_path(@app_three), :notice => "Update Successfully."
     else
       flash[:alert] = @app_three.errors.full_messages.join(",")

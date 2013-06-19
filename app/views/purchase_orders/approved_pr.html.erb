@@ -5,11 +5,11 @@
 </ul>
 
 <div id="tabify_listing">
-	<% if @approved_pr.present? %>
-	  <div class="table_background"><%= render "details_from_pri", :pr => @approved_pr %></div>
-	<% else %>
-	  <div class="tabify_content">No Record Found</div>
-	<% end %>
+  <% if @approved_pr.present? %>
+    <div class="table_background"><%= render "details_from_pri", :pr => @approved_pr %></div>
+  <% else %>
+    <div class="tabify_content">No Record Found</div>
+  <% end %>
 </div>
   
 <%= render "action_purchase_order_approved_pr" %>

@@ -10,7 +10,6 @@ class PurchaseRequisitionItemsController < ApplicationController
   def show
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
     @select_vendor = @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE) if @purchase_requisition_item.temporary_sources.present?
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @purchase_requisition_item }
@@ -24,17 +23,12 @@ class PurchaseRequisitionItemsController < ApplicationController
 
   def create
     @purchase_requisition_item = PurchaseRequisitionItem.new(params[:purchase_requisition_item])
-    @eta, msg = PurchaseRequisitionItem.present_date(@purchase_requisition_item.eta)
-    if @eta.present?
-      PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price]) unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
-      if @purchase_requisition_item.save
-        redirect_to @purchase_requisition_item, notice: 'Purchase Requisition Item was successfully created.'
-      else
-        flash[:alert] = @purchase_requisition_item.errors.full_messages.join(",")
-        error_functions
-      end
+    # Build First
+    PurchaseRequisitionManagement.running_new_temporary(@purchase_requisition_item, params[:company_name], params[:estimated_price]) unless @purchase_requisition_item.maintenance == PurchaseRequisitionItem::MAINTENANCE
+    if @purchase_requisition_item.save
+      redirect_to @purchase_requisition_item, notice: 'Purchase Requisition Item was successfully created.'
     else
-      flash[:alert] = msg
+      flash[:alert] = @purchase_requisition_item.errors.full_messages.join(",")
       error_functions
     end
   end
@@ -50,26 +44,20 @@ class PurchaseRequisitionItemsController < ApplicationController
 
   def update
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
-    @eta, msg = PurchaseRequisitionItem.present_date(params[:purchase_requisition_item][:eta].to_date)
-    if @eta.present?
-      select_vendor = @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE) if @purchase_requisition_item.temporary_sources.present?
-
-      if @purchase_requisition_item.update_attributes(params[:purchase_requisition_item])
-        unless @purchase_requisition_item.maintenance == TRUE
-          if select_vendor.update_attributes(:company_name => params[:company_name], :unit_price => params[:estimated_price])
-            redirect_to @purchase_requisition_item, notice: 'Purchase requisition item was successfully updated.'
-          else
-            render "edit"
-          end
-        else
+    select_vendor = @purchase_requisition_item.temporary_sources.find_by_select_vendor(TRUE) if @purchase_requisition_item.temporary_sources.present?
+    if @purchase_requisition_item.update_attributes(params[:purchase_requisition_item])
+      unless @purchase_requisition_item.maintenance == TRUE
+        if select_vendor.update_attributes(:company_name => params[:company_name], :unit_price => params[:estimated_price])
           redirect_to @purchase_requisition_item, notice: 'Purchase requisition item was successfully updated.'
+        else
+          flash[:alert] = "Invalid..."
+          render "edit"
         end
       else
-        flash[:alert] = @purchase_requisition_item.errors.full_messages.join(", ")
-        render "edit"
+        redirect_to @purchase_requisition_item, notice: 'Purchase requisition item was successfully updated.'
       end
     else
-      flash[:alert] = msg
+      flash[:alert] = @purchase_requisition_item.errors.full_messages.join(", ")
       render "edit"
     end
   end

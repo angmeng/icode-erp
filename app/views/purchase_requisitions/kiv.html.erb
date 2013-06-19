@@ -1,13 +1,18 @@
-<div class="title_head">
-  <strong style="color:white;">LISTING PURCHASE REQUISITIONS - KIV</strong>
-  <%= search_button %>
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">PURCHASE REQUISITION - KIV</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+
+<div id="tabify_listing">
+  <% if @purchase_requisitions.present? %>
+    <div class="table_background"><%= render "listing_purchase_requisitions", :listing => @purchase_requisitions %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
 </div>
-<div><%= render "search_purchase_requisition_kiv" %></div>
 
-<% if @purchase_requisitions.present? %>
-  <div class="table_background"><%= render "listing_purchase_requisitions", :listing => @purchase_requisitions %></div>
-<% else %>
-  <div class="content">Not Record Found</div>
-<% end %>
-
+<div id="tabify_search">
+  <%= render "search_purchase_requisition_kiv" %>
+</div>
+  
 <%= render "action_purchase_requisition_kiv" %>

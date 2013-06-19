@@ -38,18 +38,33 @@
           <td><%= f.text_field :registration_no, :class => "k-textbox" %></td>
         </tr>
 
-        <tr>
-          <td><b><%= f.label :trade_company_id, "Customer Company *" %></b></td>
-          <td>
-            <% if action_name == "edit" %>
-             <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @sales_tax_exemption.trade_company_id.to_i), {:include_blank => true}, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
-            <% else %>
-             <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
-            <% end %>
-            <span class="k-invalid-msg" data-for="sales_tax_exemption[trade_company_id]"></span>
-            <!--span id="ste_company_name"><%#= @sales_tax_exemption.trade_company.name if @sales_tax_exemption.trade_company_id.present? %></span-->
-          </td>
-        </tr>
+        <% if action_name == "new_customer" %>
+          <tr>
+            <td><b><%= f.label :trade_company_id, "Customer Company *" %></b></td>
+            <td>
+              <% if action_name == "edit" %>
+               <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @sales_tax_exemption.trade_company_id.to_i), {:include_blank => true}, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
+              <% else %>
+               <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
+              <% end %>
+              <span class="k-invalid-msg" data-for="sales_tax_exemption[trade_company_id]"></span>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <td><b><%= f.label :trade_company_id, "Supplier Company *" %></b></td>
+            <td>
+              <% if action_name == "edit" %>
+               <%= f.select "trade_company_id", options_for_select(trade_company_vendor_with_code, @sales_tax_exemption.trade_company_id.to_i), {:include_blank => true}, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
+              <% else %>
+               <%= f.select "trade_company_id", options_for_select(trade_company_vendor_with_code), { :include_blank => true }, { :style => "width:400px;", :class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Company" } %>
+              <% end %>
+              <span class="k-invalid-msg" data-for="sales_tax_exemption[trade_company_id]"></span>
+            </td>
+          </tr>
+        <% end %>
+        
+        
 
         <tr>
           <td><b>Period</b></td>

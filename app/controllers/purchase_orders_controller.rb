@@ -1,7 +1,7 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!
   # before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance, :show_select_vendor, :make_purchase_order]
+  layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance, :show_select_vendor, :make_purchase_order, :select_vendor]
 
   def index
     @po_title = PurchaseOrder.title
@@ -50,13 +50,10 @@ class PurchaseOrdersController < ApplicationController
   end
   
   def create_without_sales_tax_exemption
-    a = company.sn_purchase_order_no.to_i + 1
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
-    @purchase_order.po_no = a + 1
     callback_module(@purchase_order.trade_company_id) if @purchase_order.trade_company_id.present?
-
     if @purchase_order.save
-      company.update_attributes(:sn_purchase_order_no => a)
+      company.update_attributes(:sn_purchase_order_no => @purchase_order.po_no)
       PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
       PurchaseOrderManagement.pr_items_status(@purchase_order.trade_company_id, @purchase_order.id)
       redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
@@ -144,13 +141,13 @@ class PurchaseOrdersController < ApplicationController
     @option_product_id = PurchaseRequisitionItem.collect_pid
     if params[:item_status].present? or params[:pr_no].present? or params[:product_id].present?
       @approved_pr = PurchaseRequisitionItem.search_item_status(params[:item_status]) if params[:item_status].present?
-      @approved_pr = PurchaseRequisitionItem.search_pr_no(params[:pr_no]) if params[:pr_no].present?
-      @approved_pr = PurchaseRequisitionItem.search_product_id(params[:product_id]) if params[:product_id].present?
+      @approved_pr = PurchaseRequisitionItem.search_pr_no(params[:pr_no])             if params[:pr_no].present?
+      @approved_pr = PurchaseRequisitionItem.search_product_id(params[:product_id])   if params[:product_id].present?
     else
       @approved_pr = PurchaseRequisitionItem.ordered_purchase_requisition_id
     end
   end
-  #  =========================== Approved From Purchase Requisition (End) ===========================
+#  =========================== Approved From Purchase Requisition (End) ===========================
   
 #  =========================== Maintenance ==================================================
   def maintenance
@@ -172,16 +169,7 @@ class PurchaseOrdersController < ApplicationController
       else
         flash[:alert] = "Please key-in Proposed Vendor and Unit Price."
         render "maintenance"
-      end
-#      @pr_item = PurchaseRequisitionItem.find(params[:purchase_requisition_item_id])
-#      if params[:company_name].present? and params[:unit_price].present?
-#        PurchaseOrderManagement.goto_create_sources(@pr_item, params[:company_name], params[:unit_price])
-#        redirect_to display_maintenance_purchase_order_path(@pr_item), :notice => "Update Successfully."
-#      else
-#        flash[:alert] = "Supplier Name or Unit Price can't blank."
-#        render "display_maintenance"
-#      end
-      
+      end      
     else
       flash[:alert] = "Please select the checkboxes."
       render "maintenance"
@@ -198,7 +186,7 @@ class PurchaseOrdersController < ApplicationController
       redirect_to maintenance_purchase_orders_path #      render "maintenance"
     end
   end
-#  =========================== Maintenance (End) ==================================================
+#  =========================== Maintenance (End) ============================================
   
 #  ====================== PROPOSED VENDOR ============================
   def proposed_vendor
@@ -207,7 +195,6 @@ class PurchaseOrdersController < ApplicationController
   
   def select_vendor   #PROPOSED VENDOR - APPLY
     @purchase_requisition_item = PurchaseRequisitionItem.find(params[:id])
-    render :layout => "sheetbox"
   end
   
   def change_vendor
@@ -219,7 +206,7 @@ class PurchaseOrdersController < ApplicationController
     redirect_to select_vendor_purchase_orders_path(:id => @pri.id), :notice => "Changed vendor Successfully."
   end
   
-  def proposed_approval
+  def proposed_approval # click submit
     @pri = PurchaseRequisitionItem.find(params[:id])
     if @pri.update_attributes(:proposed_vendor => TRUE)
       redirect_to proposed_vendor_purchase_orders_path, :notice => "Submit to Vendor Selection successfully."
@@ -231,7 +218,7 @@ class PurchaseOrdersController < ApplicationController
 #  ====================== PROPOSED VENDOR (END) ============================
 
 #  ====================== VENDOR SELECTION ============================  
-  def pending_approval
+  def pending_approval # Vendor Selection
     prohibit_html unless roles.include?(InventoryManagementSystem::PURCHASE_ORDER_VENDOR_SELECTION)
     @pending_vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, false)
   end
@@ -242,9 +229,6 @@ class PurchaseOrdersController < ApplicationController
   
   def approval_yes
     @pri = PurchaseRequisitionItem.find(params[:id])
-#    @eta, msg = PurchaseRequisitionItem.present_date(@pri.eta)
-#    if @eta.present?
-#      PurchaseRequisitionItem.running_approval(@pri)
     if @pri.update_attributes!(:approval_proposed => TRUE)
       redirect_to show_select_vendor_purchase_order_path(@pri), :notice => "You have Approved. This form was sent to Vendor Registration or PO Entry."
     else
@@ -296,17 +280,8 @@ class PurchaseOrdersController < ApplicationController
   
   def filter_matching_vendor
     @vendor = PurchaseRequisitionItem.where("status = ? and proposed_vendor = ? and approval_proposed = ?", PurchaseRequisitionItem::APPROVED, true, true)
-#    PurchaseOrder.generator_match_vendor(@vendor, trade_company_vendor) #{Auto vendor if exist?}
-    PurchaseOrderManagement.generator_match_vendor(@vendor, trade_company_vendor) #Auto vendor if exist?
+    PurchaseOrderManagement.generator_match_vendor(@vendor, trade_company_vendor)
   end
-  
-#  def goto_create_sources(pr_item, company_name, unit_price)
-#    if pr_item.temporary_sources.present?
-#      pr_item.temporary_sources.find_by_select_vendor(TRUE).update_attributes(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)
-#    else
-#      pr_item.temporary_sources.create(:company_name => company_name, :select_vendor => TRUE, :unit_price => unit_price)
-#    end
-#  end
   
 #  def expired_date
 #    if ste_no_with_valid.present?

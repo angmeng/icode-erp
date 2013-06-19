@@ -94,7 +94,6 @@ class SalesTaxExemption < ActiveRecord::Base
   def self.looping_prod(prod_cat, prod_id)
     if prod_cat.present?
       prod_cat.each do |product_category|
-#        prod_id << self.collect_perihal_barang(product_category)
         prod_id << product_category.desc 
       end
     end

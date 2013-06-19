@@ -221,7 +221,6 @@ class PurchaseRequisition < ActiveRecord::Base
   def self.level_one_to(user, boss)
     ret = {}
     @requestor = User.find_by_id(user.requested_by)
-    
     if @requestor.has_level_two?
       ret[:status] = PurchaseRequisition::LEVEL_TWO
       ret[:task] = @requestor.level_two
@@ -232,14 +231,12 @@ class PurchaseRequisition < ActiveRecord::Base
       ret[:status] = PurchaseRequisition::LEVEL_FIVE
       ret[:task] = boss.id
     end
-    
     return ret
   end
   
   def self.level_two_to(user, boss)
     ret = {}
     @requestor = User.find_by_id(user.requested_by)
-    
     if @requestor.has_level_three?
       ret[:status] = PurchaseRequisition::LEVEL_THREE
       ret[:task] = @requestor.level_three
@@ -247,16 +244,16 @@ class PurchaseRequisition < ActiveRecord::Base
       ret[:status] = PurchaseRequisition::LEVEL_FIVE
       ret[:task] = boss.id
     end
-    
     return ret
   end
   
-  def self.overwrite_department_id
-    @pr = PurchaseRequisition.all
-    @pr.each do |pr|
-      user = User.find_by_id(pr.requested_by)
-      pr.update_attributes!(:department_id => user.department_id)
-    end
-  end
+  # It is script, for overwrite department id which belongs to department
+#  def self.overwrite_department_id
+#    @pr = PurchaseRequisition.all
+#    @pr.each do |pr|
+#      user = User.find_by_id(pr.requested_by)
+#      pr.update_attributes!(:department_id => user.department_id)
+#    end
+#  end
 
 end
