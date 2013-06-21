@@ -1,0 +1,65 @@
+<table>
+	<thead>
+	<tr>
+		<th>Date</th>
+		<th>Reference</th>
+		<th>Description</th>
+		<th></th>
+		<th>Debit</th>
+		<th>Credit</th>
+		<th>Balance</th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+  		<td align="center">
+  			<%= soa.transaction_type rescue'-' %> &nbsp;
+  			<% if soa.debit_note.present? %>
+  				<%= soa.debit_note.debit_note_no rescue'-' %>
+  			<% elsif soa.credit_note.present? %>
+  				<%= soa.credit_note.credit_note_no rescue'-' %>
+  			<% elsif soa.delivery_order.present? %>
+  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
+  			<% end %>
+  		</td>
+  		<td align="left">
+  			<% if soa.debit_note.present? %>
+  				<%= soa.debit_note.debit_type rescue'-' %>
+  			<% elsif soa.credit_note.present? %>
+  				<%= soa.credit_note.credit_type rescue'-' %>
+  			<% end %>
+  		</td>
+  		<td align="center">
+  			<% if soa.fp == 'F' || soa.fp == 'f' %>
+  			*
+  			<% else %>
+  			&nbsp;
+  			<% end %>
+  		</td>
+  		<td align="right">
+  			<% if soa.delivery_order.present? %>
+  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
+  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
+  			<% elsif soa.debit_note.present? %>
+  				<%= soa.debit_note.amount %>
+  				<% balance += soa.debit_note.amount %>
+  			<% else %>
+  				&nbsp;
+  			<% end %>
+  		</td>
+  		<td align="right">
+  			<% if soa.credit_note.present? %>
+  				<%= soa.credit_note.amount %>
+  				<% balance -= soa.credit_note.amount %>
+  			<% else %>
+  				&nbsp;
+  			<% end %>
+  		</td>
+  		<%# array << balance - soa.credit_note.amount %>
+  		<td align="right">
+  			<%= two_precision(balance) %>
+  		</td>
+		</tr>
+	</tbody>
+</table>

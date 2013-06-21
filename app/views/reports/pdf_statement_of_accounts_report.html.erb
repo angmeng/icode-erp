@@ -1,209 +1,197 @@
-<% balance = 0 %>
 
-<% index = 0 %>
 <% array = [] %>
-    <% if @detail_statement_of_accounts_report.present? %>
-      <% a = @detail_statement_of_accounts_report %>
-      <%# @detail_statement_of_accounts_report.each_with_index do |soa , index| %>
-      <% counter = 0 %>
-    	
-    	<% if index == 0 %>
-      		<div>
-    	<% else %>
-      		<div style="page-break-before: always;"> 
-        
-    	<% end %>
-      <table>
-      	
-      	
-      	<tr>
-	      	<td><%= a.first.trade_company.code rescue'-' %>&nbsp;
-	      		<%= a.first.trade_company.name rescue'-' %><br />
-	      		<%= a.first.trade_company.address_1 rescue'-' %><br />
-	      		<%= a.first.trade_company.address_2 rescue'-' %><br />
-	      		<%= a.first.trade_company.postcode_one rescue'-' %>
-	      		<%= a.first.trade_company.state_one rescue'-' %></td>
-	      	<td>AS AT <%= a.first.payment_date rescue'-' %><br />
-	      		<br />
-	      		Cur'cy : Malaysian Ringgit<br />
-	      		Page : 1
-	      	</td>
-      	</tr>
-	    <tr>
-	      	<td>Attn : <%= a.first.trade_company.contact_person rescue'-' %>
-	      		Tel : <%= a.first.trade_company.tel_no1 rescue'-' %>
-	      		fax : <%= a.first.trade_company.fax_no rescue'-' %> </td>
-	    </tr>
-	  </table>
+<% index = 0 %>
+<% balance = 0 %>
+<% counter = 0 %>
+<% if @detail_statement_of_accounts_report.present? %>
 
-	  <table class="black-line-table">
-	  	<thead>
-		  	<tr>
-		  		<th>Date</th>
-		  		<th>Reference</th>
-		  		<th>Description</th>
-		  		<th></th>
-		  		<th>Debit</th>
-		  		<th>Credit</th>
-		  		<th>Balance</th>
-		  	</tr>
-		</thead>
-	  	<%# soa.each do |soa| %>
-	  	<% @detail_statement_of_accounts_report.each_with_index do |soa , index| %>
-	  	<% counter += 1 %>
-    	<% if counter < 47 %>
+<% a = @detail_statement_of_accounts_report %>
 
-    	<tbody>
-	  	<tr>
-	  		<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
-	  		<td align="center">
-	  			<%= soa.transaction_type rescue'-' %> &nbsp;
-	  			<% if soa.debit_note.present? %>
-	  				<%= soa.debit_note.debit_note_no rescue'-' %>
-	  			<% elsif soa.credit_note.present? %>
-	  				<%= soa.credit_note.credit_note_no rescue'-' %>
-	  			<% elsif soa.delivery_order.present? %>
-	  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
-	  			<% end %>
-	  		</td>
-	  		<td align="left">
-	  			<% if soa.debit_note.present? %>
-	  				<%= soa.debit_note.debit_type rescue'-' %>
-	  			<% elsif soa.credit_note.present? %>
-	  				<%= soa.credit_note.credit_type rescue'-' %>
-	  			<% end %>
-	  		</td>
-	  		<td align="center">
-	  			<% if soa.fp == 'F' || soa.fp == 'f' %>
-	  			*
-	  			<% else %>
-	  			&nbsp;
-	  			<% end %>
-	  		</td>
-	  		<td align="right">
-	  			<% if soa.delivery_order.present? %>
-	  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
-	  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
-	  			<% elsif soa.debit_note.present? %>
-	  				<%= soa.debit_note.amount %>
-	  				<% balance += soa.debit_note.amount %>
-	  			<% else %>
-	  				&nbsp;
-	  			<% end %>
-	  		</td>
-	  		<td align="right">
-	  			<% if soa.credit_note.present? %>
-	  				<%= soa.credit_note.amount %>
-	  				<% balance -= soa.credit_note.amount %>
-	  			<% else %>
-	  				&nbsp;
-	  			<% end %>
-	  		</td>
-	  		<%# array << balance - soa.credit_note.amount %>
-	  		<td align="right">
-	  			<%= two_precision(balance) %>
-	  		</td>
-	  	</tr>
-	  </tbody>
-	  	<% else %> <%# else for counter %>
-	</table>
-	  <div style="page-break-before: always;">
-    <table>
-      	<tr>
-	      	<td><%= a.first.trade_company.code rescue'-' %>&nbsp;
-	      		<%= a.first.trade_company.name rescue'-' %><br />
-	      		<%= a.first.trade_company.address_1 rescue'-' %><br />
-	      		<%= a.first.trade_company.address_2 rescue'-' %><br />
-	      		<%= a.first.trade_company.postcode_one rescue'-' %>
-	      		<%= a.first.trade_company.state_one rescue'-' %></td>
-	      	<td>AS AT <%= a.first.payment_date rescue'-' %><br />
-	      		<br />
-	      		Cur'cy : Malaysian Ringgit<br />
-	      		Page : 1
-	      	</td>
-      	</tr>
-	    <tr>
-	      	<td>Attn : <%= a.first.trade_company.contact_person rescue'-' %>
-	      		Tel : <%= a.first.trade_company.tel_no1 rescue'-' %>
-	      		fax : <%= a.first.trade_company.fax_no rescue'-' %> </td>
-	    </tr>
-	</table>
+	<% if index == 0 %>
+      <div></div>
+    
+    <% else %>
+      <div style="page-break-before: always;">
+         	
+    
+    <% end %>
 
-	<table class="black-line-table">
-	  	<thead>
-	  	<tr>
-	  		<th>Date</th>
-	  		<th>Reference</th>
-	  		<th>Description</th>
-	  		<th></th>
-	  		<th>Debit</th>
-	  		<th>Credit</th>
-	  		<th>Balance</th>
-	  	</tr>
-	  </thead>
-	  <tbody>
-	  	<tr>not 1 time go in then each do ......
-	  		<td align="center">
-	  			<%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %>
-	  		</td>
-	  		<td align="center">
-	  			<%= soa.transaction_type rescue'-' %> &nbsp;
-	  			<% if soa.debit_note.present? %>
-	  				<%= soa.debit_note.debit_note_no rescue'-' %>
-	  			<% elsif soa.credit_note.present? %>
-	  				<%= soa.credit_note.credit_note_no rescue'-' %>
-	  			<% elsif soa.delivery_order.present? %>
-	  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
-	  			<% end %>
-	  		</td>
-	  		<td align="left">
-	  			<% if soa.debit_note.present? %>
-	  				<%= soa.debit_note.debit_type rescue'-' %>
-	  			<% elsif soa.credit_note.present? %>
-	  				<%= soa.credit_note.credit_type rescue'-' %>
-	  			<% end %>
-	  		</td>
-	  		<td align="center">
-	  			<% if soa.fp == 'F' || soa.fp == 'f' %>
-	  			*
-	  			<% else %>
-	  			&nbsp;
-	  			<% end %>
-	  		</td>
-	  		<td align="right">
-	  			<% if soa.delivery_order.present? %>
-	  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
-	  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
-	  			<% else %>
-	  				&nbsp;
-	  			<% end %>
-	  		</td>
-	  		<td align="right">
-	  			<% if soa.credit_note.present? %>
-	  				<%= soa.credit_note.amount %>
-	  				<% balance -= soa.credit_note.amount %>
-	  			<% else %>
-	  				&nbsp;
-	  			<% end %>
-	  		</td>
+<table>
+	<tr>
+		<td><%= a.first.trade_company.code rescue'-' %>&nbsp;
+      		<%= a.first.trade_company.name rescue'-' %><br />
+      		<%= a.first.trade_company.address_1 rescue'-' %><br />
+      		<%= a.first.trade_company.address_2 rescue'-' %><br />
+      		<%= a.first.trade_company.postcode_one rescue'-' %>
+      		<%= a.first.trade_company.state_one rescue'-' %></td>
+	    <td>AS AT <%= a.first.payment_date rescue'-' %><br />
+      		<br />
+      		Cur'cy : Malaysian Ringgit<br />
+      		Page : 1
+	    </td>
+	</tr>
+</table>
 
-	  		<%# array << balance - soa.credit_note.amount %>
-	  		<td align="right">
-	  			<%= two_precision(balance) %>
-	  		</td>
-	  	</tr>
-	  </tbody>
-	  	<% counter = 1 %> 
-	  	<% end %>
-	  	<%# end %>
-	</table>
-	  <br />
-	  <%#= render "/reports/statement_of_accounts_total" %>
-	  <% end %> <%# end of each %>
-	</div>
+<table class="black-line-table ">
+	<thead>
+	<tr>
+		<th>Date</th>
+		<th>Reference</th>
+		<th>Description</th>
+		<th></th>
+		<th>Debit</th>
+		<th>Credit</th>
+		<th>Balance</th>
+	</tr>
+	</head>
+	<tbody>
+	<% @detail_statement_of_accounts_report.each_with_index do |soa , index| %>
+	<% counter += 1 %>
+	<% if counter < 4 %>
+	<tr>
+		<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+  		<td align="center">
+  			<%= soa.transaction_type rescue'-' %> &nbsp;
+  			<% if soa.debit_note.present? %>
+  				<%= soa.debit_note.debit_note_no rescue'-' %>
+  			<% elsif soa.credit_note.present? %>
+  				<%= soa.credit_note.credit_note_no rescue'-' %>
+  			<% elsif soa.delivery_order.present? %>
+  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
+  			<% end %>
+  		</td>
+  		<td align="left">
+  			<% if soa.debit_note.present? %>
+  				<%= soa.debit_note.debit_type rescue'-' %>
+  			<% elsif soa.credit_note.present? %>
+  				<%= soa.credit_note.credit_type rescue'-' %>
+  			<% end %>
+  		</td>
+  		<td align="center">
+  			<% if soa.fp == 'F' || soa.fp == 'f' %>
+  			*
+  			<% else %>
+  			&nbsp;
+  			<% end %>
+  		</td>
+  		<td align="right">
+  			<% if soa.delivery_order.present? %>
+  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
+  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
+  			<% elsif soa.debit_note.present? %>
+  				<%= soa.debit_note.amount %>
+  				<% balance += soa.debit_note.amount %>
+  			<% else %>
+  				&nbsp;
+  			<% end %>
+  		</td>
+  		<td align="right">
+  			<% if soa.credit_note.present? %>
+  				<%= soa.credit_note.amount %>
+  				<% balance -= soa.credit_note.amount %>
+  			<% else %>
+  				&nbsp;
+  			<% end %>
+  		</td>
+  		<%# array << balance - soa.credit_note.amount %>
+  		<td align="right">
+  			<%= two_precision(balance) %>
+  		</td>
+	</tr>
+	</tbody>
+	<% else %> <!-- else for counter-if -->
+</table>
+	<div style="page-break-before: always;">
+
+<table>
+	<tr>
+		<td><%= a.first.trade_company.code rescue'-' %>&nbsp;
+      		<%= a.first.trade_company.name rescue'-' %><br />
+      		<%= a.first.trade_company.address_1 rescue'-' %><br />
+      		<%= a.first.trade_company.address_2 rescue'-' %><br />
+      		<%= a.first.trade_company.postcode_one rescue'-' %>
+      		<%= a.first.trade_company.state_one rescue'-' %></td>
+	    <td>AS AT <%= a.first.payment_date rescue'-' %><br />
+      		<br />
+      		Cur'cy : Malaysian Ringgit<br />
+      		Page : 1
+	    </td>
+	</tr> <!-- after counter table title -->
+</table>
+<table>
+	<thead>
+	<tr>
+		<th>Date</th>
+		<th>Reference</th>
+		<th>Description</th>
+		<th></th>
+		<th>Debit</th>
+		<th>Credit</th>
+		<th>Balance</th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+  		<td align="center">
+  			<%= soa.transaction_type rescue'-' %> &nbsp;
+  			<% if soa.debit_note.present? %>
+  				<%= soa.debit_note.debit_note_no rescue'-' %>
+  			<% elsif soa.credit_note.present? %>
+  				<%= soa.credit_note.credit_note_no rescue'-' %>
+  			<% elsif soa.delivery_order.present? %>
+  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
+  			<% end %>
+  		</td>
+  		<td align="left">
+  			<% if soa.debit_note.present? %>
+  				<%= soa.debit_note.debit_type rescue'-' %>
+  			<% elsif soa.credit_note.present? %>
+  				<%= soa.credit_note.credit_type rescue'-' %>
+  			<% end %>
+  		</td>
+  		<td align="center">
+  			<% if soa.fp == 'F' || soa.fp == 'f' %>
+  			*
+  			<% else %>
+  			&nbsp;
+  			<% end %>
+  		</td>
+  		<td align="right">
+  			<% if soa.delivery_order.present? %>
+  				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
+  				<% balance += soa.delivery_order.calculate_sum_of_doi %>
+  			<% elsif soa.debit_note.present? %>
+  				<%= soa.debit_note.amount %>
+  				<% balance += soa.debit_note.amount %>
+  			<% else %>
+  				&nbsp;
+  			<% end %>
+  		</td>
+  		<td align="right">
+  			<% if soa.credit_note.present? %>
+  				<%= soa.credit_note.amount %>
+  				<% balance -= soa.credit_note.amount %>
+  			<% else %>
+  				&nbsp;
+  			<% end %>
+  		</td>
+  		<%# array << balance - soa.credit_note.amount %>
+  		<td align="right">
+  			<%= two_precision(balance) %>
+  		</td>
+		</tr>
+	</tbody>
+</table>
+
+<% counter = 1 %>
+<% end %>	<!-- end of counter -->
+<% end %>  <!-- end of @statement_of_account.each --> 
+</div> <!-- end of div for break-page -->
 <% else %>
-No Record Found
+no record found
 <% end %>
+
 
 <style>
 
