@@ -34,7 +34,7 @@ $(document).ready(function () {
     var wrapper_height           = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
     var wrapper_quick_tip        = wrapper_height - quick_tip - 50;
     var content_height           = wrapper_height - title_height - button_height - 12;
-    var tabify_content_height    = wrapper_height - tabify_height - button_height - 12;    
+    var tabify_content_height    = wrapper_height - tabify_height - button_height - 13;    
     var linking_content_height   = wrapper_height - linking_height - title_height - button_height - 13;
     var linking_tabify_height    = wrapper_height - linking_height - tabify_height - button_height - 13;   
     var searching_content_height = wrapper_height - searching_height - title_height - button_height - 13;
@@ -114,12 +114,11 @@ $(document).ready(function () {
         
      $('#linking_tabify_datatable').dataTable({
         "sScrollY":  linking_tabify_height - 97,
-        
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
         "oLanguage": {
-                "sZeroRecords":  "No Record Found.",
-                "sSearch": "Search All Columns:"
+            "sZeroRecords":  "No Record Found.",
+            "sSearch": "Search All Columns:"
         },
         "bInfo": false,   //exp :showing 1 of 15 pages 
         "bAutoWidth": true

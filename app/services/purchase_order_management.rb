@@ -23,10 +23,10 @@ class PurchaseOrderManagement
   end
   
   def self.overwrite_eta(datarow)
-      datarow.each do |id, content|
-        @pri = PurchaseRequisitionItem.find(id)
-        @pri.update_attributes(:eta => content[:correct_eta])
-      end
+    datarow.each do |id, content|
+      @pri = PurchaseRequisitionItem.find(id)
+      @pri.update_attributes(:eta => content[:correct_eta])
+    end
   end
   
   # if vendor name must matching common vendor name, will overwrite them...

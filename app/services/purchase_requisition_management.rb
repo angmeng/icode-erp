@@ -1,9 +1,8 @@
 class PurchaseRequisitionManagement
   
-  def self.arrange(user, purchase_requisition, pr_value, boss)
-    @user = user
+  def self.arrange(user, purchase_requisition, boss)
+    @user                           = user
     @purchase_requisition           = purchase_requisition
-    @purchase_requisition.pr_no     = pr_value
     if user.has_level_two?
       @purchase_requisition.status  = PurchaseRequisition::LEVEL_TWO
       @purchase_requisition.tasks   = user.level_two

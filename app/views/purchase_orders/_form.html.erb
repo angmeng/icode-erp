@@ -1,11 +1,14 @@
 <table>
   <tr>
     <% if action_name == "edit" %>
-      <td width="140"><b>PO No.#</b></td>
+      <td width="140"><b>PO No #</b></td>
       <td><%= @purchase_order.po_no rescue '-' %></td>
     <% else %>
       <td width="140"><b>Current PO No.</b></td>
-      <td><%= company.sn_purchase_order_no + 1 %></td>
+      <td>
+        <%= f.hidden_field :po_no, :value => company.sn_purchase_order_no.to_i + 1 %>
+        <%= company.sn_purchase_order_no.to_i + 1 %>
+      </td>
     <% end %>
     <td width="50"></td>
     <td width="100"><b>Revision</b></td>
@@ -92,12 +95,15 @@
   
   <% if @vendor_id.sales_tax_exemption.present? %>
     <tr>
-      <td width="140" title="Sales Tax Exemption No."><b>STE No.</b></td>
+      <td width="140" title="Sales Tax Exemption No."><b>STE No #</b></td>
       <td>
-        [<%=  @vendor_id.sales_tax_exemption.running_no rescue '-' %>] <%=  @vendor_id.sales_tax_exemption.sales_tax_exemption_no rescue '-' %>
-        <% if @vendor_id.sales_tax_exemption.valid_condition == FALSE %> <!-- this is for expire date -->
-          <% @ste_valid = PurchaseOrder::STOPPED %>
-          <span style="color: red">Expired Date!!</span>
+        <% if @vendor_id.sales_tax_exemption.valid_date_condition == true %> <!-- this is for expire date -->
+          <span style="color: blue"><b>[<%=  @vendor_id.sales_tax_exemption.running_no rescue '-' %>] <%=  @vendor_id.sales_tax_exemption.sales_tax_exemption_no rescue '-' %></b></span>
+        <% else %>
+          <span style="color: red">
+            <b>[<%=  @vendor_id.sales_tax_exemption.running_no rescue '-' %>] <%=  @vendor_id.sales_tax_exemption.sales_tax_exemption_no rescue '-' %></b>
+            <% @ste_valid = PurchaseOrder::STOPPED %>  ( Expired Date!! )
+          </span>          
         <% end %>
         <%= f.hidden_field :sales_tax_exemption_id, :value =>  @vendor_id.sales_tax_exemption.id %> 
       </td>

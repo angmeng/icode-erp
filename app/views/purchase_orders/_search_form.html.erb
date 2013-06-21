@@ -1,0 +1,33 @@
+<table>
+  <tr>
+    <td><b><%= f.label :purchase_requisition_pr_no_equals, "PR No#" %></b></td>
+    <td><%= f.text_field :purchase_requisition_pr_no_equals, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :po_no_equals, "PO No#" %></b></td>
+    <td><%= f.text_field :po_no_equals, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td><b>PO Date</b></td>
+    <td>
+      <% if @search.po_date_gte.present? %>
+        <%= f.text_field :po_date_gte, :value => @search.po_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "k-textbox" %>
+      <% else %>
+        <%= f.text_field :po_date_gte, :include_blank => true, :class => "k-textbox" %>
+      <% end %>
+       - 
+      <% if @search.po_date_lte.present? %>
+        <%= f.text_field :po_date_lte, :value => @search.po_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "k-textbox" %>
+      <% else %>
+        <%= f.text_field :po_date_lte, :include_blank => true, :class => "k-textbox" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Vendor</b></td>
+    <td><%= f.text_field :trade_company_name_contains, :class => "k-textbox" %></td>
+  </tr>
+  <tr>
+    <td colspan="10" align="right"><%= f.submit 'search', :class => "k-button" %></td>
+  </tr>
+</table>

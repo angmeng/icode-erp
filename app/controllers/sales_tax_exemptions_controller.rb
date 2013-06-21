@@ -1,6 +1,5 @@
 class SalesTaxExemptionsController < ApplicationController
   before_filter :authenticate_user!
-#  before_filter :inventory_management_system
   layout "sheetbox", :only => [:new, :new_customer, :create, :edit, :update, :show, :display_items]
   
   def index                       # For Supplier with valid
