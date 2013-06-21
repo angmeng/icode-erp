@@ -2,19 +2,25 @@
 
 <%= form_for @purchase_order, :method => :put do |f| %>
 
-  <div class="table_details"><%= render "form", :f => f %></div>
+  <!--div class="table_details"><%#= render "form", :f => f %></div-->
 
-  <div class="table_background"> 
-    <% if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
-      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
-    <% else %>
-      <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %>
-    <% end %>
-  </div>
+  <!--div class="table_background"> 
+    <%# if ste_no_with_valid.find_by_trade_company_id(@purchase_order.trade_company_id).present? %>
+      <%#= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @pri_company %>
+    <%# else %>
+      <%#= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %>
+    <%# end %>
+  </div-->
 
-  <div class="icon_tag">
-    <%= link_save_button %>
-    <%= link_close_button %>
-  </div>
+  <!--div class="icon_tag">
+    <%#= link_save_button %>
+    <%#= link_close_button %>
+  </div-->
+  
+  <% if @vendor_id.sales_tax_exemption.present? %>
+    <%= render "/purchase_orders/with_sales_tax_exemption" %>
+  <% else %>
+    <%= render "/purchase_orders/without_sales_tax_exemption" %>
+  <% end %>
 
 <% end %>

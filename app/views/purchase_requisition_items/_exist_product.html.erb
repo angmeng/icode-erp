@@ -29,17 +29,6 @@
 
       <tr><td colspan="10"><hr/></td></tr>
 
-      <!--tr>
-        <td><b>Description</b></td>
-        <td>
-          <%# if @purchase_requisition_item.product_id.present? %>
-            <span class="get_desc"><%#= @purchase_requisition_item.description %></span>
-          <%# else %>
-            <span class="get_desc"></span>
-          <%# end %>
-        </td>
-      </tr-->
-
       <tr>
         <td><b>Quantity *</b></td>
         <td>
@@ -120,11 +109,9 @@
   <script>
     $(document).ready(function() {  
         $("#purchase_requisition_item_quantity, #estimated_price").keyup(function(){
-            var numerictextbox = $("#estimated_price").data("kendoNumericTextBox");
+            var numerictextbox  = $("#estimated_price").data("kendoNumericTextBox");
             var estimated_price = numerictextbox.value();
-          
-            var estimated_qty         = $("#purchase_requisition_item_quantity").val();
-            <%#*var estimated_price       = $("#estimated_price").val();%>
+            var estimated_qty   = $("#purchase_requisition_item_quantity").val();
             var estimated_total_price = parseInt(estimated_qty) * parseFloat(estimated_price);
             $("#estimated_total_price").html(estimated_total_price.toFixed(4));
         });

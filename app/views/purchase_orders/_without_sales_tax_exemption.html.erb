@@ -4,19 +4,19 @@
   <div class="table_background"><%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @pri_company %></div>
 
   <div class="icon_tag">
-      <% unless action_name == "edit" %>
-        <% @pri_company.each do |k| %>
-          <% if k.product.blank? %>
-            <% params[:blank_product] = "yes" %>
-          <% end %>
+    <% unless action_name == "edit" %>
+      <% @pri_company.each do |k| %>
+        <% if k.product.blank? %>
+          <% params[:blank_product] = "yes" %>
         <% end %>
       <% end %>
+    <% end %>
 
-      <% unless params[:blank_product] == "yes" %>
-        <%= link_save_button %>
-      <% end %>
-    
-      <%= link_close_button %>
+    <% unless params[:blank_product] == "yes" %>
+      <%= link_save_button %>
+    <% end %>
+
+    <%= link_close_button %>
   </div>
 
 <% end %>

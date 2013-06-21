@@ -81,14 +81,14 @@
       </td>
       <td></td>
       <td title="Sales Tax Exemption No."><b>STE No.</b></td>
-      <td><%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
+      <td>[<%= @purchase_order.sales_tax_exemption.running_no rescue "-" %>] <%= @purchase_order.sales_tax_exemption.sales_tax_exemption_no rescue "NO" %></td>
     </tr>
 </table>
 
 <hr/>
 
 <div class="table_background">
-  <% if @purchase_order.trade_company.sales_tax_exemption.present? %>
+  <% if @purchase_order.trade_company.try(:sales_tax_exemption) %>
     <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_with_ste", :approved => @purchase_order.purchase_requisition_items %>
   <% else %>
     <%= render "/purchase_orders/view_details_approved_from_purchase_requisition_items_without_ste", :approved => @purchase_order.purchase_requisition_items %>

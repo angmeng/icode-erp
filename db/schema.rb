@@ -1249,15 +1249,17 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
     t.integer  "sales_tax_exemption_id"
     t.integer  "product_id"
     t.integer  "purchase_order_id"
-    t.decimal  "before_available_qty",      :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "after_available_qty",       :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "accumulative_complete_qty", :precision => 10, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                                :null => false
-    t.datetime "updated_at",                                                                :null => false
+    t.integer  "purchase_order_item_line_id"
+    t.decimal  "before_available_qty",        :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "after_available_qty",         :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "accumulative_complete_qty",   :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
   end
 
   add_index "ste_supplier_histories", ["product_id"], :name => "index_ste_supplier_histories_on_product_id"
   add_index "ste_supplier_histories", ["purchase_order_id"], :name => "index_ste_supplier_histories_on_purchase_order_id"
+  add_index "ste_supplier_histories", ["purchase_order_item_line_id"], :name => "index_ste_supplier_histories_on_purchase_order_item_line_id"
   add_index "ste_supplier_histories", ["sales_tax_exemption_id"], :name => "index_ste_supplier_histories_on_sales_tax_exemption_id"
 
   create_table "stock_outs", :force => true do |t|

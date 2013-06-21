@@ -34,11 +34,8 @@ class PurchaseOrdersController < ApplicationController
   
   def create
     @purchase_order = PurchaseOrder.new(params[:purchase_order])
-    a = company.sn_purchase_order_no.to_i + 1
-    @purchase_order.po_no = a
-
     if @purchase_order.save
-      company.update_attributes(:sn_purchase_order_no => a)
+      company.update_attributes(:sn_purchase_order_no => @purchase_order.po_no)
       PurchaseOrderManagement.overwrite_eta(params[:datarow]) if params[:datarow].present?
       PurchaseOrderManagement.pri_status_with_ste(@purchase_order.trade_company_id, @purchase_order.id)
       redirect_to @purchase_order, notice: 'Purchase order was successfully created.'

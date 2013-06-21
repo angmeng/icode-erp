@@ -4,9 +4,9 @@
           <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_MENU) %> 
 
             <% if roles.include?(InventoryManagementSystem::RECEIVE_NOTE_TRANSACTION) %>
-              <td><%= link_to "RN Transactions & Histories", receive_notes_path, :class => "k-button" %></td>
+              <td><%= link_to "Received Notes Data", receive_notes_path, :class => "k-button" %></td>
             <% else %>
-              <td>RN Transactions & Histories</td>
+              <td>Receive Notes Data</td>
             <% end %>
 
             <td><%= image_tag "arrow-right.png", :width => "30px" %></td>

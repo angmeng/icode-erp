@@ -43,6 +43,7 @@ class SalesTaxExemption < ActiveRecord::Base
   accepts_nested_attributes_for :sales_tax_exemption_barangs, :allow_destroy => true
   
   has_many :products
+  has_many :ste_supplier_histories
   
   ACTIVE = "ACTIVE"
   DEACTIVATE = "DEACTIVATE"
