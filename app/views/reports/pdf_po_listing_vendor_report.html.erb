@@ -30,24 +30,24 @@
           <td align="center"><%= pri.eta.strftime("%d/%m/%Y") rescue'-' %></td>
           
 
-          <% po.purchase_order_item_lines.each do |rn| %>
-            <td align="center"><%= rn.receive_note.rn_date.strftime("%d/%m/%Y") %></td>
-          <% end %>
+          <%# po.purchase_order_item_lines.each do |rn| %>
+          <td align="center"><%= po.purchase_order_item-lines.receive_note.rn_date.strftime("%d/%m/%Y") rescue'-' %></td>
+          <%# end %>
 
     			<td align="center"><%= pri.product.product_combobox.product_code rescue '-' %> / 
             <%= poi.description rescue'-' %></td>
     			<td align="center"><%= pri.quantity rescue'-' %></td>
 
-          <%= iproduct(pri.quantity, pri.receive_note_item.received_qty) %>
+          <%# iproduct(pri.quantity, po.purchase_order_item_lines.receive_note.receive_note_items.received_qty) %>
 
-          <%# arr << poi.quantity - po.a.received_qty %>
-          <td align="center"><%#= two_precision(iproduct) rescue'-' %></td>
+          <% arr << pri.quantity - po.purchase_order_item_lines.received_qty %>
+          <td align="center"><%= two_precision(arr) %><%#= iproduct(pri.quantity, po.purchase_order_item_lines.receive_note.receive_note_items.received_qty) rescue'-' %></td>
           
           <td align="center"><%= pri.unit_measurement.code rescue '-' %></td>
     			<td align="center"><%= pri.unit_price rescue '-' %></td>
           
-    			<td align="center"><%= iproduct(pri.quantity, pri.unit_price) %>
-                      <% arr << pri.quantity * pri.unit_price %></td>
+    			<td align="center"><%= iproduct(pri.quantity, pri.unit_price) %></td>
+                      <% arr << pri.quantity * pri.unit_price %>
     		</tr>
         <% end %>
         
