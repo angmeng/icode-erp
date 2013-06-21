@@ -70,5 +70,6 @@ module Merp
 #    config.middleware.use "PDFKit::Middleware"
     config.middleware.use PDFKit::Middleware
     # config.middleware.use "PDFKit::Middleware", :print_media_type => true
+    
   end
 end

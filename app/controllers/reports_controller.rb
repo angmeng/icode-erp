@@ -596,7 +596,7 @@ end
         if params[:soa_ids].present?
           # Report.pdf_do_so_documentation_report(params[:doc_ids])
 
-          @detail_statement_of_accounts_report = StatementOfAccount.find(params[:soa_ids])
+          @detail_statement_of_accounts_report = StatementOfAccount.where(:trade_company_id => params[:soa_ids])
           html = render_to_string(:layout => false , :action => "pdf_statement_of_accounts_report.html.erb")
             @kit = PDFKit.new(html)
             send_data(@kit.to_pdf , :filename => "pdf_statement_of_accounts_report.pdf",
@@ -605,7 +605,7 @@ end
         end
         elsif params[:commit] == "Show"
         #render :text => params[:soa_ids].to_json
-         if params[:soa_ids].present?
+        if params[:soa_ids].present?
             @detail_statement_of_accounts_report = StatementOfAccount.where(:trade_company_id => params[:soa_ids])
         # render :text => @detail_statement_of_accounts_report.to_json
             respond_to do |format|

@@ -45,6 +45,7 @@ class DeliveryOrder < ActiveRecord::Base
     #   doi.map(&:unit_price).sum()
     # end
   end
+
     # if type_of_sale_id == TypeOfSale::SALES_WITH_TAX
     #   delivery_order_items.each do |p|
     #     if type_of_sale_id == TypeOfSale::SALES_WITH_TAX
