@@ -14,6 +14,7 @@ class PurchaseOrder < ActiveRecord::Base
   has_many   :purchase_order_item_lines, :dependent => :destroy
   has_many   :purchase_requisition_items, :through => :purchase_order_item_lines
   has_many   :sales_tax_exemption_item
+  has_many   :ste_supplier_histories
   
   YES = 1
   NO = 2

@@ -13,32 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130616181124) do
 
-  create_table "bill_of_materials", :force => true do |t|
-    t.integer  "bom_no"
-    t.string   "type"
-    t.integer  "sales_order_item_id"
-    t.date     "bom_date"
-    t.string   "other_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "bill_of_materials", ["sales_order_item_id"], :name => "index_bill_of_materials_on_sales_order_item_id"
-
-  create_table "bom_materials", :force => true do |t|
-    t.integer  "material_id"
-    t.integer  "bill_of_material_id"
-    t.integer  "quantity"
-    t.integer  "unit_measurement_id"
-    t.string   "remark"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "bom_materials", ["bill_of_material_id"], :name => "index_bom_materials_on_bill_of_material_id"
-  add_index "bom_materials", ["material_id"], :name => "index_bom_materials_on_material_id"
-  add_index "bom_materials", ["unit_measurement_id"], :name => "index_bom_materials_on_unit_measurement_id"
-
   create_table "boms", :force => true do |t|
     t.integer  "status"
     t.integer  "quotation_request_form_id"
@@ -380,13 +354,6 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
     t.integer  "status",                                                 :default => 1
   end
 
-  create_table "group_running_nos", :force => true do |t|
-    t.string   "code"
-    t.integer  "current_no", :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
   create_table "history_invoices", :force => true do |t|
     t.integer  "delivery_order_id"
     t.datetime "created_at",        :null => false
@@ -574,14 +541,6 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
 
   add_index "material_of_quantities", ["quotation_request_form_id"], :name => "index_material_of_quantities_on_quotation_request_form_id"
 
-  create_table "materials", :force => true do |t|
-    t.string   "code"
-    t.string   "description"
-    t.string   "status",      :default => "Active"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-  end
-
   create_table "packing_quantities", :force => true do |t|
     t.float   "quantity",     :default => 0.0
     t.string  "packing_type"
@@ -706,20 +665,6 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  create_table "product_prices", :force => true do |t|
-    t.integer  "trade_company_id"
-    t.integer  "product_category_id"
-    t.integer  "currency_id"
-    t.decimal  "unit_price",          :precision => 10, :scale => 5, :default => 0.0
-    t.integer  "price_in"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
-    t.string   "part_no"
-  end
-
-  add_index "product_prices", ["product_category_id"], :name => "index_product_prices_on_product_category_id"
-  add_index "product_prices", ["trade_company_id"], :name => "index_product_prices_on_trade_company_id"
 
   create_table "product_running_numbers", :force => true do |t|
     t.string   "base_name"
@@ -1143,11 +1088,11 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
     t.integer  "sales_tax_exemption_id"
     t.integer  "trade_company_id"
     t.integer  "delivery_order_item_id"
-    t.decimal  "used_qty",               :precision => 10, :scale => 2
+    t.decimal  "used_qty",               :precision => 10, :scale => 2, :default => 0.0
     t.date     "used_date"
     t.integer  "unit_measurement_id"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
   end
 
   create_table "sales_tax_exemption_lines", :force => true do |t|
@@ -1304,15 +1249,17 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
     t.integer  "sales_tax_exemption_id"
     t.integer  "product_id"
     t.integer  "purchase_order_id"
-    t.decimal  "before_available_qty",      :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "after_available_qty",       :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "accumulative_complete_qty", :precision => 10, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                                :null => false
-    t.datetime "updated_at",                                                                :null => false
+    t.integer  "purchase_order_item_line_id"
+    t.decimal  "before_available_qty",        :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "after_available_qty",         :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "accumulative_complete_qty",   :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
   end
 
   add_index "ste_supplier_histories", ["product_id"], :name => "index_ste_supplier_histories_on_product_id"
   add_index "ste_supplier_histories", ["purchase_order_id"], :name => "index_ste_supplier_histories_on_purchase_order_id"
+  add_index "ste_supplier_histories", ["purchase_order_item_line_id"], :name => "index_ste_supplier_histories_on_purchase_order_item_line_id"
   add_index "ste_supplier_histories", ["sales_tax_exemption_id"], :name => "index_ste_supplier_histories_on_sales_tax_exemption_id"
 
   create_table "stock_outs", :force => true do |t|
@@ -1345,11 +1292,6 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
   end
 
   add_index "temporary_sources", ["purchase_requisition_item_id"], :name => "index_temporary_sources_on_purchase_requisition_item_id"
-
-  create_table "temporary_tarif_codes", :force => true do |t|
-    t.string "tarif_code"
-    t.float  "remaining_total"
-  end
 
   create_table "trade_companies", :force => true do |t|
     t.string   "code"
@@ -1471,3 +1413,4 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
 end
+>>>>>>> 2c30ff87709df9dc711e7b63cb791fd22584f536

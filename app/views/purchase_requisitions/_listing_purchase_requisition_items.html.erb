@@ -48,9 +48,9 @@
           <% end %>
         </td>
         <td align="center">
-          <% if pri.product_id? %>
+          <% if pri.try(:product_id) %>
             <%= link_to(product_path(pri.product_id), { :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe"}) do %>
-              <%= render '/product_categories/join_product_category', :pc => p %>
+              <%= render '/product_categories/join_product_category', :pc => pri %>
             <% end %>
           <% end %>
         </td>

@@ -1,17 +1,22 @@
 <%= render "linking" %>
+  
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">RECEIVE NOTES COMPLETED</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
 
-<div class="title_head">
-  <strong style="color:white;">RECEIVE NOTES COMPLETED</strong>
-  <%= search_button %>
-</div> 
-<div><%= render "search_engine_receive_notes_info" %></div>
+<div id="tabify_listing">
+  <% if @po_no.present? %>
+    <div class="table_background"><%= render "info", :po_no => @po_no %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
 
-<% if @po_no.present? %>
-  <div class="table_background"><%= render "info", :po_no => @po_no %></div>
-<% else %>
-  <div class="linking_content">Not Record Found</div>
-<% end %>
-
+<div id="tabify_search">
+  <%= render "search_engine_receive_notes_info" %>
+</div>
+  
 <div class="icon_tag">
   <%= link_home_button %>
 </div>

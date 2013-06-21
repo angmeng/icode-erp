@@ -6,11 +6,11 @@
 </ul>
 
 <div id="tabify_listing">
-	<% if @purchase_orders.present? %>
-	  <div class="table_background"><%= render "success_approved_from_purchase_requisition_items", :success => @purchase_orders %></div>
-	<% else %>
-	  <div class="tabify_content">No Record Found</div>
-	<% end %>
+  <% if @purchase_orders.present? %>
+    <div class="table_background"><%= render "success_approved_from_purchase_requisition_items", :success => @purchase_orders %></div>
+  <% else %>
+    <div class="tabify_content">No Record Found</div>
+  <% end %>
 </div>
 
 <div id="tabify_search">
