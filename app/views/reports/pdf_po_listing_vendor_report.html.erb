@@ -22,7 +22,7 @@
   		</thead>
       
     	<tbody>
-        <% po.purchase_requisition.purchase_requisition_items.each_with_index do |pri , index| %>
+        <% po.purchase_requisition_items.each_with_index do |pri , index| %>
     		<tr>
           <% if index == 0 %>
     			<td align="center" rowspan="<%= pri.purchase_requisition.purchase_requisition_items.count %>"><%= po.po_no rescue'-' %></td>
@@ -31,7 +31,7 @@
           
 
           <%# po.purchase_order_item_lines.each do |rn| %>
-          <td align="center"><%= po.purchase_order_item-lines.receive_note.rn_date.strftime("%d/%m/%Y") rescue'-' %></td>
+          <td align="center"><%= po.purchase_order_item_lines.receive_note.rn_date.strftime("%d/%m/%Y") rescue'-' %></td>
           <%# end %>
 
     			<td align="center"><%= pri.product.product_combobox.product_code rescue '-' %> / 
@@ -39,10 +39,10 @@
     			<td align="center"><%= pri.quantity rescue'-' %></td>
 
           <%# iproduct(pri.quantity, po.purchase_order_item_lines.receive_note.receive_note_items.received_qty) %>
-
-          <% arr << pri.quantity - po.purchase_order_item_lines.received_qty %>
-          <td align="center"><%= two_precision(arr) %><%#= iproduct(pri.quantity, po.purchase_order_item_lines.receive_note.receive_note_items.received_qty) rescue'-' %></td>
-          
+          <%# po.purchase_order_item_lines.each_with_index do |poi , index| %>
+          <%# arr << pri.quantity - poi.received_qty %>
+          <td align="center"><%= iminus(pri.quantity , pri.purchase_order_item_line.received_qty) %><%#= iproduct(pri.quantity, po.purchase_order_item_lines.receive_note.receive_note_items.received_qty) rescue'-' %></td>
+          <%# end %>
           <td align="center"><%= pri.unit_measurement.code rescue '-' %></td>
     			<td align="center"><%= pri.unit_price rescue '-' %></td>
           
