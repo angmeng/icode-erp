@@ -57,7 +57,9 @@
   			<% elsif soa.credit_note.present? %>
   				<%= soa.credit_note.credit_note_no rescue'-' %>
   			<% elsif soa.delivery_order.present? %>
-  				<%= soa.delivery_order.delivery_order_no rescue'-' %>
+  				<%= soa.delivery_order.do_no rescue'-' %>
+        <% elsif soa.receipt.present? %>
+          <%= soa.receipt.receipt_no rescue'-' %>
   			<% end %>
   		</td>
   		<td align="left">
