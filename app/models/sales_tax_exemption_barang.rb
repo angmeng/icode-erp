@@ -1,6 +1,6 @@
 class SalesTaxExemptionBarang < ActiveRecord::Base
   attr_accessible :apply_qty, :complete_qty, :perihal_barang, :sales_tax_exemption_id, :tarif_code, :unit_measurement_id, 
-                  :valid_weight_condition, :available_qty, :calculate_um_id
+                  :valid_weight_condition, :available_qty, :calculate_um_id, :need_part_weight
   
   belongs_to :sales_tax_exemption
   belongs_to :unit_measurement
