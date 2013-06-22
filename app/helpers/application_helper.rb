@@ -212,6 +212,10 @@ module ApplicationHelper
   def iproduct(quantity, unit_price)
     number_with_precision(quantity * unit_price, :precision => 2, :separator => '.', :delimiter => ',') rescue '-'
   end
+
+  def iminus(quantity, unit_price)
+    number_with_precision(quantity - unit_price, :precision => 2, :separator => '.', :delimiter => ',') rescue '-'
+  end
     
   def six_precision(unit_price)
     number_with_precision(unit_price, :precision => 6, :separator => '.', :delimiter => ',') rescue '-'
