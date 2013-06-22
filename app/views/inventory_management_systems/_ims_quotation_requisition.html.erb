@@ -1,317 +1,312 @@
 <%#*<table>%>
   <% if checkboxes.present? %>
     <% if action_name == "show" %>
-        <tr>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_MENU) %> Quotation Requisition</td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_ADD) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_EDIT) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
-        
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
-          <td></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
-          <td></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
-          <% 3.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td>Costing Sheet Entry</td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_MENU) %> Quotation Requisition</td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION) %> Quotation Requisition Data</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_N_PENDING) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV) %> Quotation Requisition Data - KIV</td>
+        <td></td>
+        <% 4.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
 
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
-          <td></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
-          <td></td>
-        </tr>
+      <!--tr>
+        <td></td><td></td>
+        <%#*<td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_ADD) %></td>%>
+        <%#*<td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_SHOW) %></td>%>
+        <%#*<td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_EDIT) %></td>%>
+        <%#*<td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>%>
+        <%#*<td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>%>
+        <%# 4.times do |td| %><td></td><%# end %>
+      </tr-->
 
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV) %> QR KIV</td>
-          <td></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_KIV_RECOVER) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_APPROVED_REJECT) %> Approval / Reject QRs Tasks</td>
+        <td></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
+        <td></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
+        <% 3.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
+      </tr>
         
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
-          <td></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> Customer Approve</td>
+        <td></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
+        <% 3.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
+      </tr>
         
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
-          <td></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
-          <% 3.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
-        </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
+        <% 8.times do |td| %><td></td><% end %>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
+        <% 8.times do |td| %><td></td><% end %>
+      </tr> 
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Costing Sheet</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
+        <% 4.times do |td| %><td></td><% end %>
+      </tr>
         
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
-          <% 8.times do |td| %><td></td><% end %>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
-          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
-          <% 8.times do |td| %><td></td><% end %>
-        </tr> 
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> Costing Sheets - KIV</td>
+        <td></td>
+        <% 4.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
         
     <% else %> 
         
-        <tr>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_MENU) %> Quotation Requisition</td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_ADD) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_EDIT) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_MENU) %> Quotation Requisition</td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION) %> Quotation Requisition Data</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_N_PENDING) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV) %> Quotation Requisition Data - KIV</td>
+        <td></td>
+        <% 4.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
         
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
-          <td></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
-          <td></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
-          <% 3.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
-        </tr>
+      <!--tr>
+        <td></td><td></td>
+        <td align="center"><%#= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_ADD) %></td>
+        <td align="center"><%#= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_SHOW) %></td>
+        <td align="center"><%#= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_EDIT) %></td>
+        <td align="center"><%#= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
+        <td align="center"><%#= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
+        <%# 4.times do |td| %><td></td><%# end %>
+      </tr-->
         
-        <tr>
-          <td></td>
-          <td></td>
-          <td>Costing Sheet Entry</td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_APPROVED_REJECT) %> Approval / Reject QRs Tasks</td>
+        <td></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
+        <td></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
+        <% 3.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
+      </tr>
+        
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> Customer Approve</td>
+        <td></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
+        <% 3.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
+      </tr>
 
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
-          <td></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
-          <td></td>
-        </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
+        <% 8.times do |td| %><td></td><% end %>
+      </tr>
 
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV) %> QR KIV</td>
-          <td></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_KIV_RECOVER) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-        </tr>
-        
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
-          <td></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-        </tr>
-        
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
-          <td></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
-          <% 3.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
-          <% 8.times do |td| %><td></td><% end %>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
-          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
-          <% 8.times do |td| %><td></td><% end %>
-        </tr> 
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
+        <% 8.times do |td| %><td></td><% end %>
+      </tr> 
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Costing Sheet</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
+        <% 4.times do |td| %><td></td><% end %>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> Costing Sheets - KIV</td>
+        <td></td>
+        <% 4.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+      </tr>
         
     <% end %>
 
   <% else %>
+        
+    <tr>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::QR_MENU) %> Quotation Requisition</td>
+      <td><%= ims_new(InventoryManagementSystem::QR_TRANSACTION) %> Quotation Requisition Data</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_N_PENDING) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
+      <% 2.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
+      <td></td>
+    </tr>
     
-      <tr>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::QR_MENU) %> Quotation Requisition</td>
-          <td><%= ims_new(InventoryManagementSystem::QR_NEW_N_PENDING) %> New & Pending QRs</td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_ADD) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_EDIT) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::QR_KIV) %> Quotation Requisition Data - KIV</td>
+      <td></td>
+      <% 4.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_KIV_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_KIV_RECOVER) %></td>
+      <% 2.times do |td| %><td></td><% end %>
+    </tr>
         
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::QR_APPROVED_REJECT) %> QR Approval / Reject Tasks</td>
-          <td></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
-          <td></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
-          <% 3.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
-        </tr>
+    <!--tr>
+      <td></td>
+      <td></td>
+      <td align="center"><%#= ims_new(InventoryManagementSystem::QR_NEW_ADD) %></td>
+      <td align="center"><%#= ims_new(InventoryManagementSystem::QR_NEW_SHOW) %></td>
+      <td align="center"><%#= ims_new(InventoryManagementSystem::QR_NEW_EDIT) %></td>
+      <td align="center"><%#= ims_new(InventoryManagementSystem::QR_NEW_KIV_ITEM) %></td>
+      <td align="center"><%#= ims_new(InventoryManagementSystem::QR_NEW_PRINTABLE) %></td>
+      <%# 4.times do |td| %><td></td><%# end %>
+    </tr-->
         
-        <tr>
-          <td></td>
-          <td></td>
-          <td>Costing Sheet Entry</td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
-          <% 4.times do |td| %><td></td><% end %>
-        </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::QR_APPROVED_REJECT) %> Approval / Reject QRs Tasks</td>
+      <td></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_EDIT) %></td>
+      <td></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_PRINTABLE) %></td>
+      <% 3.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING) %></td>
+    </tr>
 
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::QR_TRANSACTION) %> QR Transaction & Histories</td>
-          <td></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_EDIT) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_KIV) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_PRINTABLE) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_TRANSACTION_MAIL) %></td>
-          <td></td>
-        </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> Customer Approve</td>
+      <td></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
+      <% 3.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
+    </tr>
 
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::QR_KIV) %> QR KIV</td>
-          <td></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_KIV_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_KIV_RECOVER) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-        </tr>
-        
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> COSTING SHEETS - KIV</td>
-          <td></td>
-          <% 4.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
-          <% 2.times do |td| %><td></td><% end %>
-        </tr>
-        
-       <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %> QR Customer Feedback</td>
-          <td></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_SHOW) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_EDIT) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_KIV) %></td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_PRINTABLE) %></td>
-          <% 3.times do |td| %><td></td><% end %>
-          <td align="center"><%= ims_new(InventoryManagementSystem::QR_FEEDBACK_COSTING) %></td>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
-          <% 8.times do |td| %><td></td><% end %>
-        </tr>
-        
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= ims_new(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
-          <td align="center"><%= ims_new(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
-          <% 8.times do |td| %><td></td><% end %>
-        </tr> 
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION) %> Customer Registration</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::SO_CUSTOMER_REGISTRATION_ADD) %></td>
+      <% 8.times do |td| %><td></td><% end %>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION)%> Product ID Registration</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::SO_PRODUCT_ID_REGISTRATION_ADD) %></td>
+      <% 8.times do |td| %><td></td><% end %>
+    </tr>
+    
+    <tr>
+      <td></td>
+      <td></td>
+      <td>Costing Sheet</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_ADD) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_EDIT) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_PRINTABLE) %></td>
+      <% 4.times do |td| %><td></td><% end %>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_MENU) %> Costing Sheets - KIV</td>
+      <td></td>
+      <% 4.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::QR_SIGNATURE_COSTING_KIV_RECOVER) %></td>
+      <% 2.times do |td| %><td></td><% end %>
+    </tr>
       
   <% end %>
 <%#*</table>%>

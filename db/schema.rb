@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616181124) do
+ActiveRecord::Schema.define(:version => 20130622020617) do
 
   create_table "boms", :force => true do |t|
     t.integer  "status"
@@ -1079,6 +1079,7 @@ ActiveRecord::Schema.define(:version => 20130616181124) do
     t.datetime "updated_at",                               :null => false
     t.float    "available_qty",          :default => 0.0
     t.integer  "calculate_um_id"
+    t.boolean  "part_weight"
   end
 
   add_index "sales_tax_exemption_barangs", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_barangs_on_sales_tax_exemption_id"

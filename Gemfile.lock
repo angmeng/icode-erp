@@ -145,7 +145,6 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.4)
-    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -172,4 +171,3 @@ DEPENDENCIES
   squeel
   thin
   will_paginate
-  wkhtmltopdf-binary
