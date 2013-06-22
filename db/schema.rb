@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -1076,11 +1075,11 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
     t.integer  "unit_measurement_id"
     t.string   "tarif_code"
     t.boolean  "valid_weight_condition", :default => true
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.float    "available_qty",          :default => 0.0
     t.integer  "calculate_um_id"
-    t.boolean  "part_weight"
+    t.boolean  "need_part_weight",       :default => false
   end
 
   add_index "sales_tax_exemption_barangs", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_barangs_on_sales_tax_exemption_id"

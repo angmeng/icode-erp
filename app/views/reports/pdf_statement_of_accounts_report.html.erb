@@ -47,7 +47,7 @@
 	<tbody>
 	<% @detail_statement_of_accounts_report.each_with_index do |soa , index| %>
 	<% counter += 1 %>
-	<% if counter < 4 %>
+	<% if counter < 52 %>
 	<tr>
 		<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
   		<td align="center">
