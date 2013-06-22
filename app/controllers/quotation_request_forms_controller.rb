@@ -1,6 +1,6 @@
 class QuotationRequestFormsController < ApplicationController
   before_filter :authenticate_user!
-  layout "sheetbox", :only => [:show, :new, :edit, :printable, :mailing, :pending_quotation]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :printable, :mailing, :pending_quotation]
   
   def index
     @search = QuotationRequestForm.search(params[:search])

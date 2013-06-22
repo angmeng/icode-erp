@@ -153,12 +153,6 @@
           <th class="block_box">QUOTATION REQUISITION</th>
 
           <% if roles.include?(InventoryManagementSystem::QR_MENU) %>
-
-            <%# if roles.include?(InventoryManagementSystem::QR_NEW_N_PENDING) %>
-              <!--td><%#= link_to 'New & Pending QRs', pending_quotation_quotation_request_forms_path, :class => "k-button"%></td-->
-            <%# else %>
-              <!--td><%#= disabled_style("New & Pending QRs") %></td-->
-            <%# end %>
               
             <% if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
               <td><%= link_to "Quotation Requisitions Data", quotation_request_forms_path, :class => "k-button" %></td>
@@ -176,18 +170,10 @@
 
             <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
 
-            <%# if roles.include?(InventoryManagementSystem::QR_TRANSACTION) %>
-              <!--td><%#= link_to "QR Transactions & Histories", quotation_request_forms_path, :class => "k-button" %></td-->
-            <%# else %>
-              <!--td><%#= disabled_style("QR Transactions & Histories") %></td-->
-            <%# end %>
-
-            <!--td><%#= image_tag "arrow-right.png", :width => "30px" %></td-->
-
             <% if roles.include?(InventoryManagementSystem::QR_CUSTOMER_FEEDBACK) %>
-              <td><%= link_to "QR Customer Feedback", feedback_quotation_request_forms_path,:class => "k-button" %></td>
+              <td><%= link_to "Customer Approve", feedback_quotation_request_forms_path,:class => "k-button" %></td>
             <% else %>
-              <td><%= disabled_style("QR Customer Feedback") %></td>
+              <td><%= disabled_style("Customer Approve") %></td>
             <% end %>
 
             <td><%= image_tag "arrow-right.png", :width => "30px" %></td>

@@ -13,11 +13,11 @@
         </thead>
 
     <tbody>
-      <td><%= render "/inventory_management_systems/ims_so_report", :checkboxes => @checkboxes %></td>
+      <%= render "/inventory_management_systems/ims_so_report", :checkboxes => @checkboxes %>
       <tr style="background-color: black;"><td colspan="100"></td></tr>
-      <td><%= render "/inventory_management_systems/ims_do_invoice_report", :checkboxes => @checkboxes %></td>
+      <%= render "/inventory_management_systems/ims_do_invoice_report", :checkboxes => @checkboxes %>
       <tr style="background-color: black;"><td colspan="100"></td></tr>
-      <td><%= render "/inventory_management_systems/ims_listing_report", :checkboxes => @checkboxes %></td>
+      <%= render "/inventory_management_systems/ims_listing_report", :checkboxes => @checkboxes %>
     </tbody>
   </table>
 </div>

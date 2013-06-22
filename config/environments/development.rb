@@ -46,13 +46,4 @@ Merp::Application.configure do
     :enable_starttls_auto => true,
     :authentication => :plain
   }
-
-#  config.action_mailer.smtp_settings = {
-#    :address => "smtp.etheos.com.my",
-#    :port => 25,
-#    :domain => 'etheos.com',
-#    :user_name => 'xx',
-#    :password => 'xx',
-#    :authentication => :none,
-#  }
 end
