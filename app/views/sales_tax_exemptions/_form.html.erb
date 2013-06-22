@@ -96,6 +96,7 @@
             <th>Apply Qty</th>
             <th>Origin U/M</th>
             <th>Calculate U/M</th>
+            <th>Calculate Part Weight</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -113,6 +114,9 @@
                   <span id="um_code_<%= index %>"><%= goods.available_qty rescue '-' %></span>
                   <%= select_tag "datarow[#{index}][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code', goods.calculate_um_id.to_i), :include_blank => true, :class => "mkendo_combobox", :onchange => "calculate_um(this)", "required validationMessage" => "Please Enter Calculate U/M" %>
                 </td>
+                <td align="center">
+                  <%= check_box_tag    "datarow[#{index}][need_part_weight]" %>
+                </td>
                 <td align="center"><%= remove_row_button %></td>
               </tr>
             <% end %>
@@ -124,11 +128,11 @@
               <td align="center"><%= text_field_tag   "datarow[0][tarif_code]", '', :class => "k-textbox", "required validationMessage" => "Please Enter Tarif Code" %></td>
               <td align="center"><%= text_field_tag   "datarow[0][apply_qty]", '', :class => "numberKey k-textbox", "required validationMessage" => "Please Enter Apply Qty" %>
               <td align="center"><%= select_tag       "datarow[0][unit_measurement_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => "mkendo_combobox", "required validationMessage" => "Please Enter Origin U/M" %></td>
-              <td align="center"><%= check_box_tag    "datarow[0][need_part_weight]" %></td>
               <td align="center">
                 <span id="um_code_0"></span>
                 <%= select_tag "datarow[0][calculate_um_id]", options_from_collection_for_select(unit_measurement, 'id', 'code'), :include_blank => true, :class => 'mkendo_combobox', :onchange => "calculate_um(this)", "required validationMessage" => "Please Enter Calculate U/M" %>
               </td>
+              <td align="center"><%= check_box_tag    "datarow[0][need_part_weight]" %></td>
               <td align="center"><%= remove_row_button %></td>
             </tr>
 
