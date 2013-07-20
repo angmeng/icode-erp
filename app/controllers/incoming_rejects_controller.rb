@@ -1,7 +1,5 @@
 class IncomingRejectsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :inventory_management_system, :except => [:show]
-
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search = IncomingReject.search(params[:search])
     @incoming_rejects = @search.paginate(:page => params[:page], :per_page => 10)
@@ -127,10 +125,5 @@ class IncomingRejectsController < ApplicationController
   
   def implement_product_id
     ReceiveNote.implement_product_id
-  end
-  
-  private
-  def inventory_management_system
-    role(IncomingReject::ROLE)
   end
 end

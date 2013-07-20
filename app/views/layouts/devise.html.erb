@@ -6,10 +6,10 @@
 <!--[if lt IE 9]>  <html class="ie     no-js" lang="en"> <![endif]-->
   
 <head>
-  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Etheos Imprint eResourse Planning System</title>
-  <%= stylesheet_link_tag "application", :media => 'all' %>
+  <link href="/assets/application.css?body=1" media="all" rel="stylesheet" type="text/css" />
+  <%= stylesheet_link_tag "kendo.blueopal.min", "kendo.common.min" %>
   <script>
     $(function() {
       $("input").bind("keypress", function(e) {
@@ -27,7 +27,7 @@
   <div>
     <% flash.each do |key, msg| %>
       <%= content_tag :p, :id => key do %>
-        <%= msg %><!--span><%#= link_to '[X]', '#', :style => "text-decoration: none; color: white;" %></span-->
+        <%= msg %>
       <% end %>
     <% end %>
     <%= yield %>

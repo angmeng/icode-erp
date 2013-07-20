@@ -1,36 +1,28 @@
 Merp::Application.routes.draw do
 
-
-
+  resources :outgoing_reject_items
+  resources :outgoing_rejects
+  resources :ste_customer_histories
   resources :ste_supplier_histories
-
-
   resources :film_numbers
-
 
   resources :boms do
     get "active_so", :on => :collection
   end
 
-
   resources :job_sheets do
     get "confirmed_quotation", :on => :collection
   end
 
-
   resources :sales_tax_exemption_customer_histories
-
   resources :receipt_statement_lines
-
   resources :sales_tax_exemption_lines
-
   resources :journal_voucher_items
-
   resources :journal_vouchers
-
   resources :history_invoices
-
-  resources :statement_of_accounts
+  resources :statement_of_accounts do
+    get "kiv", :on => :collection
+  end
 
   get "documentation/product_rule"
 
@@ -73,7 +65,6 @@ Merp::Application.routes.draw do
     get "kiv", :on => :collection
     put "recover", :on => :member
   end
-
 
   resources :reports do
     collection do
@@ -145,19 +136,12 @@ Merp::Application.routes.draw do
 
 
   resources :delivery_order_items
-
   resources :group_running_nos
-
   resources :change_company_codes
-
   resources :sales_tax_exemption_barangs
-
   resources :packing_quantities
-
   resources :contacts
-
   resources :product_fields
-
   resources :quotation_attachment_pos
 
   resources :product_customers do
@@ -208,35 +192,20 @@ Merp::Application.routes.draw do
   end
 
   resources :selection_flute_sizes
-
   resources :selection_die_cut_moulds
-
   resources :selection_stamping_sizes
-
   resources :custom_productions
-
   resources :selection_fieldsets
-
   resources :selection_stampings
-
   resources :selection_printing_sizes
-
   resources :pre_print_types
-
   resources :material_of_quantities
-
   resources :selection_varnish_types
-
   resources :colors
-
   resources :sequents
-
   resources :selection_die_cuts
-
   resources :selection_glueings
-
-
-
+ 
   resources :quotation_request_forms do
     collection do
       get "kiv"
@@ -269,11 +238,13 @@ Merp::Application.routes.draw do
   end
 
   resources :roles
-
   resources :inventory_management_systems
 
   resources :delivery_orders do
-    get "kiv", :on => :collection
+    collection do
+      get "kiv"
+      get "load_data_to_outgoing_reject", :default => {:format => :json}
+    end
     put "recover", :on => :member
   end
 
@@ -281,7 +252,6 @@ Merp::Application.routes.draw do
     get "kiv", :on => :collection
     put "recover", :on => :member
   end
-  
 
   resources :sales_orders do
     collection do
@@ -295,15 +265,10 @@ Merp::Application.routes.draw do
   end
 
   resources :inventory_issues
-
   resources :temporary_sources
-
   resources :inventory_histories
-
   resources :purchase_order_item_lines
-
   resources :purchase_order_items
-
   resources :incoming_rejects
 
   resources :sales_tax_exemptions do 
@@ -322,7 +287,6 @@ Merp::Application.routes.draw do
   end
 
   resources :customs
-
   resources :receive_note_items
 
   resources :receive_notes do
@@ -431,7 +395,7 @@ Merp::Application.routes.draw do
     put "recover", :on => :member
   end
 
-  resources :company_profiles
+  
 
   resources :unit_measurements do
     get "kiv", :on => :collection
@@ -495,13 +459,13 @@ Merp::Application.routes.draw do
     get "kiv", :on => :collection
     put "recover", :on => :member
   end
+
+  resources :company_profiles, :except => [:new, :create, :destroy]
   
   devise_for :users, :controllers => { :registrations => "registrations" }
   
   resources :users do
     member do
-#      get "profile"
-#      post "update_profile"
       put "recover"
     end
     collection do

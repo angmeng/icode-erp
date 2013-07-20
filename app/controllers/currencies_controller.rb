@@ -1,5 +1,4 @@
 class CurrenciesController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :are_you_director?
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
 

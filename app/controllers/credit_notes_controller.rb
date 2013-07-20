@@ -1,5 +1,4 @@
 class CreditNotesController < ApplicationController
-  before_filter :authenticate_user!
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :selection_cn, :show_cn, :update_cn]
  
   def index

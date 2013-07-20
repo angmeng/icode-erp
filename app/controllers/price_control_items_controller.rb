@@ -1,7 +1,5 @@
 class PriceControlItemsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @price_control_items = PriceControlItem.ordering_price_control_item.find_all_by_product_id(params[:id])
     @product_detail      = @price_control_items.first

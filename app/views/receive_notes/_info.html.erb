@@ -78,3 +78,25 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  // Overwrite here
+  $(document).ready(function () {
+    var window_height           = $(window).height();
+    var mainHeader_height       = $("#main_header").height();
+    var mainFooter_height       = $("#main_footer").height();
+    var menu_height             = $("#k_menu").height();
+    var ctn_width               = $(window).width() - 20; // It is for table width
+    var wrapper_height          = window_height - mainHeader_height - mainFooter_height - menu_height;
+    var linking_height          = $("#linking").height();
+    var title_height            = $("#jgrid_linking").height();
+    var button_height           = $(".icon_tag").height();
+    var linking_content_height  = wrapper_height - linking_height - title_height - button_height;
+    
+    $("#jgrid_linking").chromatable({
+        width:  ctn_width,
+        height: linking_content_height,
+        scrolling: "yes"
+    });
+  });
+</script>

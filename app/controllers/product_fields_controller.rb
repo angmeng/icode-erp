@@ -1,4 +1,5 @@
 class ProductFieldsController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /product_fields
   # GET /product_fields.json
   def index

@@ -1,24 +1,15 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :are_you_director?
-  layout "sheetbox", :except => [:index, :kiv]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :new_user_entry]
   
   def index
     @search = User.search(params[:search])
     @users  = User.search_users(@search).paginate(:page => params[:page])
-#    respond_to do |format|
-#      format.html
-#      format.json { render json: UsersDatatable.new(view_context) }
-#    end
   end
   
   def kiv
     @search = User.search(params[:search])
     @users  = User.search_users_kiv(@search).paginate(:page => params[:page])
-#    respond_to do |format|
-#      format.html
-#      format.json { render json: @users }
-#    end
   end
 
   def show
@@ -57,7 +48,7 @@ class UsersController < ApplicationController
       render "new_user_entry"
     end
   end
-  
+
   def edit
     @user = User.find(params[:id])
     checkboxes
@@ -80,11 +71,13 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-  
-#  def profile
-#    @user = User.find(params[:id])
-#  end
-#  
+
+  def authorize
+    unless current_user.level == User::LEVEL_FIVE
+      render :text => "You are not authorize this zone!!"
+    end
+  end
+
 #  def update_profile
 #    @user = User.find(params[:id])
 #    if @user.update_attributes(params[:user])
@@ -98,27 +91,7 @@ class UsersController < ApplicationController
 #    BackupUtility.process
 #    redirect_to root_url, :notice => "Backup Completed"
 #  end
-  
-#  def lookup_level
-#    if params[:lvl].present?
-#      @user = User.where("status = ? and level = ?", User::ACTIVE, params[:lvl])
-#    else
-#      @user = User.where("status = ?", User::ACTIVE)
-#    end
-#    render :text => @user.to_json
-#  end
-  
-#  def clear_database
-#    User.clearing
-#    redirect_to root_url, :notice => "Clear completed..."
-#  end
 
-  def authorize
-    unless current_user.level == User::LEVEL_FIVE
-      render :text => "You are not authorize this zone!!"
-    end
-  end
-  
   private
   
   def checkboxes

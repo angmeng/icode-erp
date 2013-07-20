@@ -2,7 +2,7 @@ class StatementOfAccount < ActiveRecord::Base
   before_save :uppercase_text
   before_update :uppercase_text
   
-  attr_accessible :credit_note_id, :debit_note_id, :trade_company_id, :transaction_date, :transaction_type, :receipt_id, :delivery_order_id, :fp, :os_amount, :document_amount, :balance_amount, :parent_id
+  attr_accessible :credit_note_id, :debit_note_id, :trade_company_id, :transaction_date, :transaction_type, :receipt_id, :delivery_order_id, :fp, :os_amount, :document_amount, :balance_amount, :parent_id, :running_no, :open_balance, :description, :status
   
   belongs_to :credit_note
   belongs_to :debit_note
@@ -18,6 +18,9 @@ class StatementOfAccount < ActiveRecord::Base
   
   validates :trade_company_id, :transaction_date, :presence => true
   
+  ACTIVE  = 1
+  KIV     = 2
+  
   FULL_PAYMENT    = "F"
   PARTIAL_PAYMENT = "P"
   NULL_PAYMENT    = "N"
@@ -27,7 +30,11 @@ class StatementOfAccount < ActiveRecord::Base
   INVOICE         = "INV"
   RECEIPT         = "REC"
   
-  default_scope order("transaction_date")
+  default_scope order("transaction_date DESC")
+  
+  def is_open_balance?
+    open_balance == true
+  end
   
   def self.transacted_type(statement)
     case statement.transaction_type
@@ -98,13 +105,6 @@ class StatementOfAccount < ActiveRecord::Base
     
   def uppercase_text
     self.fp.upcase! if self.fp.present?
+    self.description.upcase! if self.description.present?
   end
-  
-#  def credit_note?
-#    transaction_type == StatementOfAccount::CREDIT_NOTE
-#  end
-#  
-#  def credit_note?
-#    transaction_type == StatementOfAccount::CREDIT_NOTE
-#  end
 end

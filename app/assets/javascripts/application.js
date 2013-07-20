@@ -13,22 +13,32 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require_tree .
+//= require kendo.web.min
+//= require jquery.fancybox.pack
+//= require jquery.tabify
+//= require jquery.placeholder
+//= require jquery.chromatable
+//= require date
+//= require jquery.forcenumeric
 //= require dataTables/jquery.dataTables
+//= require jquery.functions
+//= require_self
+
+// Success remove jquery.easyui.min.js
 
 $(document).ready(function () {
     
-    var window_height           = $(window).height();
-    var ctn_width               = $(window).width() - 20; // It is for table width
-    var tabify_height           = $(".class_tabify").height();
-    var mainHeader_height       = $("#main_header").height();
-    var mainFooter_height       = $("#main_footer").height();
-    var menu_height             = $("#k_menu").height();
-    var linking_height          = $("#linking").height();
-    var searching_height        = $("#searching").height();
-    var title_height            = $(".title_head").height();
-    var button_height           = $(".icon_tag").height();
-    var quick_tip               = $("#bottom_quick_tip").height();
+    var window_height           = $(window).height() || 0;
+    var ctn_width               = $(window).width() - 20 || 0; // It is for table width
+    var tabify_height           = $(".class_tabify").height() || 0 ;
+    var mainHeader_height       = $("#main_header").height() || 0;
+    var mainFooter_height       = $("#main_footer").height() || 0;
+    var menu_height             = $("#k_menu").height() || 0;
+    var linking_height          = $("#linking").height() || 0;
+    var searching_height        = $("#searching").height() || 0;
+    var title_height            = $(".title_head").height() || 0;
+    var button_height           = $(".icon_tag").height() || 0;
+    var quick_tip               = $("#bottom_quick_tip").height() || 0;
     
     // Wrapper is calculate the height only available when without popup
     var wrapper_height           = window_height - mainHeader_height - mainFooter_height - menu_height - 25;
@@ -280,11 +290,11 @@ $(document).ready(function () {
             $(".quotation").height(popup_tab_height_and_signature).addClass("page_wrapper");
             
             // Popup Tabbing Table -- IMS
-//            $("#ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_report, #ims_account").chromatable({
-//                width:  $("#user_strip").width() - 50,
-//                height: popup_tab_height,
-//                scrolling: "yes"
-//            });
+            $("#ims_purchase, #ims_sale, #ims_inventory, #ims_custom, #ims_housekeeping, #ims_product, #ims_report, #ims_account").chromatable({
+                width:  $("#user_strip").width() - 50,
+                height: popup_tab_height,
+                scrolling: "yes"
+            });
             
             // Popup Tabbing Table -- IMS
             $(".jgrid_popup").chromatable({

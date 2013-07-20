@@ -1,5 +1,5 @@
 class SelectionVarnishTypesController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /selection_varnish_types
   # GET /selection_varnish_types.json
   def index

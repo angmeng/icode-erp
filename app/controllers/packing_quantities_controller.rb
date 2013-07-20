@@ -1,4 +1,5 @@
 class PackingQuantitiesController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /packing_quantities
   # GET /packing_quantities.json
   def index

@@ -1,0 +1,86 @@
+<%= form_for(@statement_of_account) do |f| %>
+
+  <div class="popup_content">
+    <div id="valid_soa">
+      <table>
+        <tr>
+          <td><b>Customer Company</b></td>
+          <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @statement_of_account.trade_company_id), { :include_blank => true } , { :class => "mkendo_combobox price_control_trade_company_id", "required validationMessage" => "Please Select Trade Company", :style => "width: 400px;", :onchange => "access_pp_no(this)" }  %></td>
+        </tr>
+        <tr>
+          <td><b>Transaction Date</b></td>
+          <td><%= f.text_field "transaction_date", :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date maskDate" %></td>
+        </tr>
+        <tr>
+          <td><b>Transaction Type</b></td>
+          <td>
+            <% if @statement_of_account.transaction_type.present? %>
+              <%= f.select "transaction_type", options_for_select(["INV", "CN", "DN", "REC"], @statement_of_account.transaction_type), { :include_blank => true }, { :class => "mkendo_combobox" } %>
+            <% else %>
+              <%= f.select "transaction_type", options_for_select(["INV", "CN", "DN", "REC"], "INV"), { :include_blank => true }, { :class => "mkendo_combobox" } %>
+            <% end %>
+            <%= f.text_field "running_no", :class => "k-textbox numberKey" %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Description</b></td>
+          <td>
+            <% if @statement_of_account.description.present? %>
+              <%= f.text_field "description", :class => "k-textbox", :style => "width: 300px;" %>
+            <% else %>
+              <%= f.text_field "description", :value => "TO GOODS", :class => "k-textbox", :style => "width: 300px;" %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Document Amount</b></td>
+          <td><%= f.text_field "document_amount", :class => "k-textbox numberKey" %></td>
+        </tr>
+        <tr>
+          <td><b>FP</b></td>
+          <td>
+            <% if @statement_of_account.fp.present? %>
+              <%= f.select "fp", options_for_select(["F", "N"], @statement_of_account.fp), { :include_blank => true }, { :class => "mkendo_combobox" } %>
+            <% else %>
+              <%= f.select "fp", options_for_select(["F", "N"], "N"), { :include_blank => true }, { :class => "mkendo_combobox" } %>
+            <% end %>
+          </td>
+        </tr>
+        
+        <!-- Default for Opening Balance -->
+        <%= f.hidden_field "debit_note_id", :value => 0 %>
+        <%= f.hidden_field "credit_note_id", :value => 0 %>
+        <%= f.hidden_field "receipt_id", :value => 0 %>
+        <%= f.hidden_field "delivery_order_id", :value => 0 %>
+        <%= f.hidden_field "balance_amount", :value => 0.00 %>
+        <%= f.hidden_field "os_amount", :value => 0.00 %>
+        <%= f.hidden_field "open_balance", :value => true %>
+      </table>
+    </div>
+  </div>
+  
+  <% if action_name == "new" %>
+    <div class="left_icon_tag">
+      <%= submit_tag "Next New Balance", :class => "k-button font_bold", :id => "left_save_button", :name => "save_and_new_balance" %>
+    </div>
+  <% end %>
+
+  <div class="icon_tag">
+    <%= link_save_button %>
+    <%= link_close_button %>
+  </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+        $(".numberKey").forceNumeric();
+        var validator = $("#valid_bom").kendoValidator().data("kendoValidator");
+
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; }
+        });
+    });
+  </script>
+<% end %>

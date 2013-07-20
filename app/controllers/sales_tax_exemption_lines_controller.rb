@@ -1,4 +1,5 @@
 class SalesTaxExemptionLinesController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /sales_tax_exemption_lines
   # GET /sales_tax_exemption_lines.json
   def index

@@ -52,23 +52,30 @@
 		<td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
   		<td align="center">
   			<%= soa.transaction_type rescue'-' %> &nbsp;
-  			<% if soa.debit_note.present? %>
-  				<%= soa.debit_note.debit_note_no rescue'-' %>
-  			<% elsif soa.credit_note.present? %>
-  				<%= soa.credit_note.credit_note_no rescue'-' %>
-  			<% elsif soa.delivery_order.present? %>
-  				<%= soa.delivery_order.do_no rescue'-' %>
-        <% elsif soa.receipt.present? %>
-          <%= soa.receipt.receipt_no rescue'-' %>
-  			<% end %>
+                        <% if soa.open_balance == true %>
+                          <%= soa.running_no %>
+                        <% else %>
+                            <% if soa.debit_note.present? %>
+                                    <%= soa.debit_note.debit_note_no rescue'-' %>
+                            <% elsif soa.credit_note.present? %>
+                                    <%= soa.credit_note.credit_note_no rescue'-' %>
+                            <% elsif soa.delivery_order.present? %>
+                                    <%= soa.delivery_order.do_no rescue'-' %>
+            <% elsif soa.receipt.present? %>
+              <%= soa.receipt.receipt_no rescue'-' %>
+                            <% end %>
+                        <% end %>
   		</td>
   		<td align="left">
+                  <% if soa.open_balance == true %>
+                    <%= soa.description %>
+                  <% else %>
   			<% if soa.debit_note.present? %>
   				<%= soa.debit_note.debit_type rescue'-' %>
   			<% elsif soa.credit_note.present? %>
   				<%= soa.credit_note.credit_type rescue'-' %>
-        
   			<% end %>
+                  <% end %>
   		</td>
   		<td align="center">
   			<% if soa.fp == 'F' || soa.fp == 'f' %>
@@ -78,6 +85,12 @@
   			<% end %>
   		</td>
   		<td align="right">
+                  <% if soa.open_balance == true %>
+                    <% if soa.transaction_type == "INV" or soa.transaction_type == "DN" %>
+                      <%= soa.document_amount %>
+                      <% balance += soa.document_amount.to_f %>
+                    <% end %>
+                  <% else %>
   			<% if soa.delivery_order.present? %>
   				<%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
   				<% balance += soa.delivery_order.calculate_sum_of_doi %>
@@ -87,8 +100,15 @@
   			<% else %>
   				&nbsp;
   			<% end %>
+                 <% end %>       
   		</td>
   		<td align="right">
+                  <% if soa.open_balance == true %>
+                    <% if soa.transaction_type == "CN" or soa.transaction_type == "REC" %>
+                      <%= soa.document_amount %>
+                      <% balance -= soa.document_amount.to_f %>
+                    <% end %>
+                  <% else %>
   			<% if soa.credit_note.present? %>
   				<%= soa.credit_note.amount %>
   				<% balance -= soa.credit_note.amount %>
@@ -97,11 +117,12 @@
           <% balance -= soa.receipt.cheque_amount %>
   			<% else %>
   				&nbsp;
-  			<% end %>
+  			<% end %>        
+                  <% end %>
   		</td>
   		<%# array << balance - soa.credit_note.amount %>
   		<td align="right">
-  			<%= two_precision(balance) %>
+                  <%= two_precision(balance.to_f) %>
   		</td>
 	</tr>
 	</tbody>

@@ -1,9 +1,6 @@
 class ReceiveNotesController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :implement_product_id
-  before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
-
+layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search = ReceiveNote.search(params[:search])
     @receive_notes = ReceiveNote.ordered(@search)
@@ -99,11 +96,5 @@ class ReceiveNotesController < ApplicationController
         @search = PurchaseOrder.search(params[:search])
       end
       render "new"
-  end
-  
-  private
-  
-  def inventory_management_system
-    role(ReceiveNote::ROLE)
   end
 end

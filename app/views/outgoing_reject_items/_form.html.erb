@@ -1,0 +1,61 @@
+<%= form_for(@outgoing_reject_item) do |f| %>
+  <% if @outgoing_reject_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@outgoing_reject_item.errors.count, "error") %> prohibited this outgoing_reject_item from being saved:</h2>
+
+      <ul>
+      <% @outgoing_reject_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :delivery_order_item_id %><br />
+    <%= f.number_field :delivery_order_item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :received_qty %><br />
+    <%= f.number_field :received_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :invoice_delivery_qty %><br />
+    <%= f.number_field :invoice_delivery_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :invoice_unit_price %><br />
+    <%= f.text_field :invoice_unit_price %>
+  </div>
+  <div class="field">
+    <%= f.label :so_balance_qty %><br />
+    <%= f.number_field :so_balance_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :current_stock %><br />
+    <%= f.number_field :current_stock %>
+  </div>
+  <div class="field">
+    <%= f.label :client_lot %><br />
+    <%= f.text_field :client_lot %>
+  </div>
+  <div class="field">
+    <%= f.label :client_part %><br />
+    <%= f.text_field :client_part %>
+  </div>
+  <div class="field">
+    <%= f.label :client_po %><br />
+    <%= f.text_field :client_po %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

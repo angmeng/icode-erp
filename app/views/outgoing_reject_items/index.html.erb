@@ -1,0 +1,43 @@
+<h1>Listing outgoing_reject_items</h1>
+
+<table>
+  <tr>
+    <th>Delivery order item</th>
+    <th>Quantity</th>
+    <th>Received qty</th>
+    <th>Invoice delivery qty</th>
+    <th>Invoice unit price</th>
+    <th>So balance qty</th>
+    <th>Status</th>
+    <th>Current stock</th>
+    <th>Client lot</th>
+    <th>Client part</th>
+    <th>Client po</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @outgoing_reject_items.each do |outgoing_reject_item| %>
+  <tr>
+    <td><%= outgoing_reject_item.delivery_order_item_id %></td>
+    <td><%= outgoing_reject_item.quantity %></td>
+    <td><%= outgoing_reject_item.received_qty %></td>
+    <td><%= outgoing_reject_item.invoice_delivery_qty %></td>
+    <td><%= outgoing_reject_item.invoice_unit_price %></td>
+    <td><%= outgoing_reject_item.so_balance_qty %></td>
+    <td><%= outgoing_reject_item.status %></td>
+    <td><%= outgoing_reject_item.current_stock %></td>
+    <td><%= outgoing_reject_item.client_lot %></td>
+    <td><%= outgoing_reject_item.client_part %></td>
+    <td><%= outgoing_reject_item.client_po %></td>
+    <td><%= link_to 'Show', outgoing_reject_item %></td>
+    <td><%= link_to 'Edit', edit_outgoing_reject_item_path(outgoing_reject_item) %></td>
+    <td><%= link_to 'Destroy', outgoing_reject_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Outgoing reject item', new_outgoing_reject_item_path %>

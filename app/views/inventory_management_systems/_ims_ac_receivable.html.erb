@@ -12,7 +12,7 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CREDIT_NOTE_EDIT) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CREDIT_NOTE_KIV) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CREDIT_NOTE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -21,6 +21,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CREDIT_NOTE_KIV_SHOW) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::CREDIT_NOTE_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
       
       <tr>
@@ -31,7 +32,7 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_EDIT) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -40,7 +41,35 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_SHOW) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
+      
+      <!--tr>
+        <%# 2.times do |td| %><td></td><%# end %>
+        <td>Opening Balance</td>
+        <td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::OPENING_BALANCE) %></td>
+        <%# 6.times do |td| %><td></td><%# end %>
+      </tr-->
+        
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_INDEX) %> Transaction Processing - Statement Of Accounts Data</td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_ADD) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_SHOW) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_EDIT) %></td>
+        <td></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_DELETE) %></td>
+      </tr>
+      
+      <!--tr>
+        <%# 2.times do |td| %><td></td><%# end %>
+        <td><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_INDEX) %> Transaction Processing - Debit Notes Data - KIV</td>
+        <%# 5.times do |td| %><td></td><%# end %>
+        <td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_SHOW) %></td>
+        <td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_RECOVER) %></td>
+      </tr-->
 
       <tr>
         <% 2.times do |td| %><td></td><% end %>
@@ -50,7 +79,7 @@
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_EDIT) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_KIV) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -59,6 +88,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_KIV_SHOW) %></td>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::RECEIPT_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
   
     <% else %>
@@ -72,7 +102,7 @@
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CREDIT_NOTE_EDIT) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CREDIT_NOTE_KIV) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CREDIT_NOTE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -81,6 +111,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CREDIT_NOTE_KIV_SHOW) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::CREDIT_NOTE_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
       
       <tr>
@@ -91,7 +122,7 @@
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DEBIT_NOTE_EDIT) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DEBIT_NOTE_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -100,6 +131,19 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_SHOW) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::DEBIT_NOTE_KIV_RECOVER) %></td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <% 2.times do |td| %><td></td><% end %>
+        <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_INDEX) %> Transaction Processing - Statement Of Accounts Data</td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_ADD) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_SHOW) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_EDIT) %></td>
+        <td></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_PRINTABLE) %></td>
+        <% 2.times do |td| %><td></td><% end %>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::STATEMENT_OF_ACCOUNT_DELETE) %></td>
       </tr>
       
       <tr>
@@ -110,7 +154,7 @@
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_EDIT) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_KIV) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_PRINTABLE) %></td>
-        <% 2.times do |td| %><td></td><% end %>
+        <% 3.times do |td| %><td></td><% end %>
       </tr>
       
       <tr>
@@ -119,6 +163,7 @@
         <% 5.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_KIV_SHOW) %></td>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::RECEIPT_KIV_RECOVER) %></td>
+        <td></td>
       </tr>
   
     <% end %>
@@ -134,7 +179,7 @@
       <td align="center"><%= ims_new(InventoryManagementSystem::CREDIT_NOTE_EDIT) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::CREDIT_NOTE_KIV) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::CREDIT_NOTE_PRINTABLE) %></td>
-      <% 2.times do |td| %><td></td><% end %>
+      <% 3.times do |td| %><td></td><% end %>
     </tr>
 
     <tr>
@@ -143,6 +188,7 @@
       <% 5.times do |td| %><td></td><% end %>
       <td align="center"><%= ims_new(InventoryManagementSystem::CREDIT_NOTE_KIV_SHOW) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::CREDIT_NOTE_KIV_RECOVER) %></td>
+      <td></td>
     </tr>
 
     <tr>
@@ -153,7 +199,7 @@
       <td align="center"><%= ims_new(InventoryManagementSystem::DEBIT_NOTE_EDIT) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::DEBIT_NOTE_KIV) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::DEBIT_NOTE_PRINTABLE) %></td>
-      <% 2.times do |td| %><td></td><% end %>
+      <% 3.times do |td| %><td></td><% end %>
     </tr>
 
     <tr>
@@ -162,6 +208,19 @@
       <% 5.times do |td| %><td></td><% end %>
       <td align="center"><%= ims_new(InventoryManagementSystem::DEBIT_NOTE_KIV_SHOW) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::DEBIT_NOTE_KIV_RECOVER) %></td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <% 2.times do |td| %><td></td><% end %>
+      <td><%= ims_new(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_INDEX) %> Transaction Processing - Statement Of Accounts Data</td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_ADD) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_SHOW) %></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_EDIT) %></td>
+      <td></td>
+      <td align="center"><%= ims_new(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_PRINTABLE) %></td>
+      <% 2.times do |td| %><td></td><% end %>
+      <td align="center"><%= ims_new(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_DELETE) %></td>
     </tr>
   
     <tr>
@@ -172,7 +231,7 @@
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_EDIT) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_KIV) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_PRINTABLE) %></td>
-      <% 2.times do |td| %><td></td><% end %>
+      <% 3.times do |td| %><td></td><% end %>
     </tr>
 
     <tr>
@@ -181,6 +240,7 @@
       <% 5.times do |td| %><td></td><% end %>
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_KIV_SHOW) %></td>
       <td align="center"><%= ims_new(InventoryManagementSystem::RECEIPT_KIV_RECOVER) %></td>
+      <td></td>
     </tr>
     
   <% end %>

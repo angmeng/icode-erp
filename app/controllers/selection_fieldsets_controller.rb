@@ -1,5 +1,5 @@
 class SelectionFieldsetsController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /selection_fieldsets
   # GET /selection_fieldsets.json
   def index

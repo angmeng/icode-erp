@@ -1,7 +1,5 @@
 class PaymentReceivedsController < ApplicationController
-  before_filter :authenticate_user!
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
-  
   def index
     @search = PaymentReceived.search(params[:search])
     @payment_receiveds = PaymentReceived.db_active(@search).paginate(:page => params[:page])

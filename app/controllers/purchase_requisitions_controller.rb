@@ -1,8 +1,6 @@
 class PurchaseRequisitionsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:new, :create, :edit, :update, :show]
-
+  # before_filter :inventory_management_system, :except => [:show]
+layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search = PurchaseRequisition.search(params[:search])
     @purchase_requisitions = PurchaseRequisition.search_purchase_requisitions(@search)
@@ -228,9 +226,9 @@ class PurchaseRequisitionsController < ApplicationController
   
   private 
   
-  def inventory_management_system
-    role(PurchaseRequisition::ROLE)
-  end
+  # def inventory_management_system
+  #   role(PurchaseRequisition::ROLE)
+  # end
   
   def generate_add_status(user)
     PurchaseRequisition::LEVEL_ONE

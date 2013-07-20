@@ -1,5 +1,4 @@
 class DeliveryOrdersController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :check_validate_of_period_in_ste, :only => [:new, :update]
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   
@@ -15,7 +14,7 @@ class DeliveryOrdersController < ApplicationController
     @delivery_orders = @delivery_orders.paginate(:page => params[:page])
   end
   
-  def show
+  def show_trade_company_name
     @delivery_order = DeliveryOrder.find(params[:id])
     respond_to do |format|
       format.html
@@ -71,5 +70,11 @@ class DeliveryOrdersController < ApplicationController
     @delivery_order = DeliveryOrder.find(params[:id])
     @delivery_order.update_attributes(:status => DeliveryOrder::ACTIVE)
     redirect_to kiv_delivery_orders_url, :notice => "Delivery Order No # #{@delivery_order.do_no} has recovered."
+  end
+  
+  def load_data_to_outgoing_reject
+    @delivery_order = DeliveryOrder.find_by_do_no_and_trade_company_id(params[:do_no], params[:company_id])
+    @delivery_order_json = @delivery_order.manage_outgoing_reject
+    render json: @delivery_order_json, :root => false
   end
 end

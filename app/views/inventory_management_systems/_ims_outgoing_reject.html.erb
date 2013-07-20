@@ -1,0 +1,41 @@
+<%#*<table>%>
+  <% if checkboxes.present? %>
+    <% if action_name == "show" %>
+        <tr>
+          <td></td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::OUTGOING_MENU) %> Outgoing Rejects Menu</td>
+          <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::OUTGOING_INDEX) %> Outgoing Rejects Data</td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::OUTGOING_ADD) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::OUTGOING_SHOW) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::OUTGOING_EDIT) %></td>
+          <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::OUTGOING_KIV) %></td>
+          <td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+    <% else %>
+        <tr>
+          <td></td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::OUTGOING_MENU) %> Outgoing Rejects Menu</td>
+          <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::OUTGOING_INDEX) %> Outgoing Rejects Data</td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::OUTGOING_ADD) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::OUTGOING_SHOW) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::OUTGOING_EDIT) %></td>
+          <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::OUTGOING_KIV) %></td>
+          <td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+    <% end %>
+  <% else %>
+        <tr>
+          <td></td>
+          <td><%= ims_new(InventoryManagementSystem::OUTGOING_MENU) %> Outgoing Rejects Menu</td>
+          <td><%= ims_new(InventoryManagementSystem::OUTGOING_INDEX) %> Outgoing Rejects Data</td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::OUTGOING_ADD) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::OUTGOING_SHOW) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::OUTGOING_EDIT) %></td>
+          <td align="center"><%= ims_new(InventoryManagementSystem::OUTGOING_KIV) %></td>
+          <td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::DO_TRANSACTION_PRINTABLE) %></td>
+          <% 4.times do |td| %><td></td><% end %>
+        </tr>
+  <% end %>
+<%#*</table>%>

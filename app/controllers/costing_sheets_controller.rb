@@ -1,7 +1,5 @@
 class CostingSheetsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @quotation_requisition = QuotationRequestForm.find(params[:id])
     @costing_sheets = @quotation_requisition.costing_sheets.reject {|s| s.status == CostingSheet::KEEP_IN_VIEW } if @quotation_requisition.costing_sheets.present?

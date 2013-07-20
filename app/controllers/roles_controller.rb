@@ -1,5 +1,5 @@
 class RolesController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   before_filter :is_director
   # GET /roles
   # GET /roles.json

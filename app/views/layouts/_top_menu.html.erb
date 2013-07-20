@@ -299,6 +299,19 @@
           </ul>
         </li>
       <% end %>
+        
+      <% if roles.include?(InventoryManagementSystem::OUTGOING_MENU) %>
+        <li style="width:150px;">
+          Outgoing Reject
+          <ul>
+            <% if roles.include?(InventoryManagementSystem::OUTGOING_INDEX) %>
+              <li><%= link_to "Outgoing Rejects Data", outgoing_rejects_path %></li>
+            <% else %>
+              <li><%= disabled_menu_style "Outgoing Rejects Data" %></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
 
       <li style="width:150px;">
           Sales Order Report
@@ -848,6 +861,20 @@
                 <% else %>
                   <li><%= disabled_menu_style "Debit Notes Data - KIV" %></li>
                 <% end %>
+                  
+                <% if roles.include?(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_INDEX) %>
+                  <li><%= link_to "Statement Of Accounts", statement_of_accounts_path %></li>
+                <% else %>
+                  <li><%= disabled_menu_style "Statement Of Accounts" %></li>
+                <% end %>
+                  
+                <!--
+                  <%# if roles.include?(InventoryManagementSystem::OPENING_BALANCE) %>
+                    <li><%#= link_to "Opening Balance", new_statement_of_account_path, :class => "show_without_refresh_page_800x450", "data-fancybox-type" => "iframe" %></li>
+                  <%# else %>
+                    <li><%#= disabled_menu_style "Opening Balance" %></li>
+                  <%# end %>
+                -->
               </ul>
             </li>
 

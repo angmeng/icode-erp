@@ -1,7 +1,6 @@
 class TypeOfSalesController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :is_director
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /type_of_sales
   # GET /type_of_sales.json
   def index

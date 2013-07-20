@@ -1,0 +1,131 @@
+<%= form_for(@outgoing_reject) do |f| %>
+  <div id="valid_outgoing_reject">
+    <div class="popup_content">
+      <table>
+        <tr>
+          <% if @outgoing_reject.outgoing_reject_no.present? %>
+            <td><b>O/R No #</b></td>
+            <td><%= @outgoing_reject.outgoing_reject_no rescue '-' %></td>
+          <% else %>
+            <td><b>Current O/R No.</b></td>
+            <td>
+              <%= outgoing_no = company.sn_outgoing_reject_no + 1 %>
+              <%= f.hidden_field "outgoing_reject_no", :value => outgoing_no %>
+            </td>
+          <% end %>
+          
+          <td><b>O/R Date</b></td>
+          <td>
+            <% if @outgoing_reject.outgoing_date.present? %>
+              <%= f.text_field :outgoing_date, :value => @outgoing_reject.outgoing_date.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Outgoing Reject Date" %>
+            <% else %>
+              <%= f.text_field :outgoing_date, :value => Date.today.strftime("%d-%m-%Y"), :class => "mkendo_date", "required validationMessage" => "Please Enter Outgoing Reject Date" %>
+            <% end %>
+            <span class="k-invalid-msg" data-for="outgoing_reject[outgoing_date]"></span>
+          </td>
+          
+          <td width="5px"></td>
+          
+          <td><b>Remark</b></td>
+          <td rowspan="3"><%= f.text_area :remark, :rows => 5 %></td>
+            
+        </tr>
+        
+        <tr>
+          <td><b>Customer Company</b></td>
+          <td>
+            <% if @outgoing_reject.trade_company_id.present? %>
+              <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code, @outgoing_reject.trade_company_id), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Customer Company", :onchange => "outgoing_reject_company_change(this)" } %>
+            <% else %>
+              <%= f.select "trade_company_id", options_for_select(trade_company_customer_with_code), { :include_blank => true }, { :class => "mkendo_combobox", :style => "width:400px;", "required validationMessage" => "Please Enter Customer Company", :onchange => "outgoing_reject_company_change(this)" } %>
+            <% end %>
+          </td>
+          <td colspan="2"><span class="k-invalid-msg" data-for="outgoing_reject[trade_company_id]"></span></td>
+        </tr>
+        
+        <tr>
+          <td><b>Currency</b></td>
+          <td>
+            <%= f.select :currency_id, options_from_collection_for_select(currency, 'id', 'name', @outgoing_reject.currency_id), { :include_blank => true }, { :class => "mkendo_combobox", "required validationMessage" => "Please Enter Currency" } %>
+            <span class="k-invalid-msg" data-for="outgoing_reject[currency_id]"></span>
+          </td>
+          <td><b>Sales Tax</b></td>
+          <td>
+            <%= f.text_field :sales_tax, :value => 0, :class => "kendo_precision_0", "required validationMessage" => "Please Enter Sales Tax" %>
+            <span class="k-invalid-msg" data-for="outgoing_reject[sales_tax]"></span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><b>Trade Term</b></td>
+          <td>
+            <%= f.select :trade_term_id, options_from_collection_for_select(trade_term, 'id', 'name', @outgoing_reject.trade_term_id), {:include_blank => true}, {:class => "mkendo_combobox", "required validationMessage" => "Please Enter Trade Term"} %>
+            <span class="k-invalid-msg" data-for="outgoing_reject[trade_term_id]"></span>
+          </td>
+          <td><b>Return Note No #</b></td>
+          <td colspan="2">
+            <%= f.text_field :return_note_no, :class => "k-textbox", "required validationMessage" => "Please Enter Return Note No" %>
+            <span class="k-invalid-msg" data-for="outgoing_reject[return_note_no]"></span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><b>Updated By</b></td>
+          <td>
+            <% if @outgoing_reject.updated_by.present? %> 
+              <% user = User.find(@outgoing_reject.updated_by) %>
+              <%= user.name %>
+            <% else %>
+              <%= current_user.name %>
+              <%= f.hidden_field :updated_by, :value => current_user.id %>
+            <% end %>
+          </td>
+          <td><b>Delivery Order No #</b></td>
+          <td colspan="2">
+            <%= f.text_field :delivery_order_no, :class => "k-textbox", "required validationMessage" => "Please Enter Delivery Order No" %>
+            <span class="k-invalid-msg" data-for="outgoing_reject[delivery_order_no]"></span>
+          </td>
+        </tr>
+      </table>
+      
+      <hr/>
+      
+      <!-- It will loading when entry trade_company_id and Return Note No -->
+        <table class="white-line-table target_table">
+          <thead>
+            <tr style="background-color: gainsboro;">
+              <th width="500">[Inv No][Product ID][Description]</th>
+              <th width="150">Received Qty</th>
+              <th width="150">Inv Date</th>      
+              <th width="150">Inv Delv Qty</th>
+              <th width="150">Inv U/Price</th>
+              <th width="150">S/O Bal Qty</th>
+              <th width="150">Status</th>
+              <th width="150">Current Stock</th>
+              <th width="150">Client's Lot#</th>
+              <th width="150">Client's Part</th>
+              <th width="150">Client's P/O</th>
+            </tr>
+          </thead>
+
+          <tbody id="render_outgoing_reject"></tbody>
+        </table>      
+    </div>
+    <div class="icon_tag">
+      <%= link_save_button %>
+      <%= link_close_button %>
+    </div>
+  </div>
+<% end %>
+
+<% content_for :jquery_script do %>
+  <script>
+    $(document).ready(function() {
+        var validator = $("#valid_outgoing_reject").kendoValidator().data("kendoValidator");
+        $("#save_button").click(function() {
+            if (validator.validate()) { busyHours(); }
+            else { alert("Invalid Data Form..."); return false; } 
+        });
+    });
+  </script>
+<% end %>

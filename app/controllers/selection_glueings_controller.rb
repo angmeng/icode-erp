@@ -1,5 +1,5 @@
 class SelectionGlueingsController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /selection_glueings
   # GET /selection_glueings.json
   def index

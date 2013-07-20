@@ -1,5 +1,5 @@
 class MaterialOfQuantitiesController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /material_of_quantities
   # GET /material_of_quantities.json
   def index

@@ -1,0 +1,61 @@
+<%= form_for(@ste_customer_history) do |f| %>
+  <% if @ste_customer_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ste_customer_history.errors.count, "error") %> prohibited this ste_customer_history from being saved:</h2>
+
+      <ul>
+      <% @ste_customer_history.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sales_tax_exemption_id %><br />
+    <%= f.number_field :sales_tax_exemption_id %>
+  </div>
+  <div class="field">
+    <%= f.label :product_id %><br />
+    <%= f.number_field :product_id %>
+  </div>
+  <div class="field">
+    <%= f.label :trade_company_id %><br />
+    <%= f.number_field :trade_company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_order_item_id %><br />
+    <%= f.number_field :delivery_order_item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_measurement_id %><br />
+    <%= f.number_field :unit_measurement_id %>
+  </div>
+  <div class="field">
+    <%= f.label :before_available_qty %><br />
+    <%= f.text_field :before_available_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :after_available_qty %><br />
+    <%= f.text_field :after_available_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :accumulative_complete_qty %><br />
+    <%= f.text_field :accumulative_complete_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_qty %><br />
+    <%= f.text_field :delivery_qty %>
+  </div>
+  <div class="field">
+    <%= f.label :pc_weight %><br />
+    <%= f.text_field :pc_weight %>
+  </div>
+  <div class="field">
+    <%= f.label :used_date %><br />
+    <%= f.date_select :used_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,7 +1,5 @@
 class FormulationsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox", :only => [:new, :create, :edit, :update, :show]
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search       = Formulation.search(params[:search])
     @formulations = Formulation.db_active(@search)

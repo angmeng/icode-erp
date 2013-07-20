@@ -1,7 +1,5 @@
-class DebitNotesController < ApplicationController
-  before_filter :authenticate_user!
+class DebitNotesController < ApplicationController  
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
-  
   def index
     @search = DebitNote.search(params[:search])
     @debit_notes = DebitNote.db_active(@search).paginate(:page => params[:page])

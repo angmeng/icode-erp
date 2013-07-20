@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_filter :authenticate_user!
+#  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   
   protect_from_forgery
   
@@ -13,7 +15,6 @@ class ApplicationController < ActionController::Base
 #  user_session
 #  After signing in a user, confirming the account or updating the password, Devise will look for a scoped root path to redirect. Example: For a :user resource, it will use +user_root_path+ if it exists, otherwise default +root_path+ will be used. This means that you need to set the root inside your routes:
 #
-#  root :to => "home#index"
 #  You can also overwrite +after_sign_in_path_for+ and +after_sign_out_path_for+ to customize your redirect hooks.
 #  Notice that if your devise model is not called "user" but "member", then the helpers you should use are:
 #
@@ -62,7 +63,7 @@ class ApplicationController < ActionController::Base
   helper_method :perihal_barang_both
     
   def version
-    "Version 0.3.16"
+    "Version 0.3.17"
   end
     
   def company
@@ -108,20 +109,10 @@ class ApplicationController < ActionController::Base
   def transport
     @transport ||= Transport.all
   end
-  
-
-  
 
   def perihal_barang_both
     @perihal_barang_both ||= SalesTaxExemptionBarang.where(:valid_condition => TRUE)
   end
-
-  
-
-
-
-  
-
   
   def trade_company_both
     @trade_company_both ||= TradeCompany.ordered_with_both
@@ -239,19 +230,17 @@ class ApplicationController < ActionController::Base
   end
 
   def prohibit_html
-    render :file => "#{Rails.root}/public/422.html", :status => :unprocessable_entity, :layout => false
+    render :file => "#{Rails.root}/public/permission_off.html", :status => :unprocessable_entity, :layout => false
   end
   
   private
   
   def are_you_director?
     unless user_is_admin?
-      flash[:alert] = "You are not authorize!!"
+      flash[:alert] = "You don't have permission."
       redirect_to root_url
     end
   end
-  
- 
   
   def role(model_array)
     model_array.each do |role|

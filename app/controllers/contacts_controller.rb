@@ -1,7 +1,5 @@
 class ContactsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /contacts
   # GET /contacts.json
   def index

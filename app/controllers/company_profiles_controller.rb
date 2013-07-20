@@ -1,28 +1,17 @@
 class CompanyProfilesController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox", :only => [:edit, :create, :update]
-  
-  
+  before_filter :security_url
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
+
   def index
     render :layout => "sheetbox" if params[:change_layout].present?
   end
 
-  def edit
+  def show
     @company_profile = CompanyProfile.find(params[:id])
   end
-  
-  def create
-    @company_profile = CompanyProfile.new(params[:company_profile])
 
-    respond_to do |format|
-      if @company_profile.save
-        format.html { redirect_to company_profiles_path, notice: 'Company profile was successfully created.' }
-        format.json { render json: @company_profile, status: :created, location: @company_profile }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @company_profile.errors, status: :unprocessable_entity }
-      end
-    end
+  def edit
+    @company_profile = CompanyProfile.find(params[:id])
   end
 
   def update
@@ -39,13 +28,15 @@ class CompanyProfilesController < ApplicationController
     end
   end
 
-  def destroy
-    @company_profile = CompanyProfile.find(params[:id])
-    @company_profile.destroy
+  private
 
-    respond_to do |format|
-      format.html { redirect_to company_profiles_url }
-      format.json { head :no_content }
+  def security_url
+    if action_name == "index"
+      prohibit_html unless roles.include?(InventoryManagementSystem::COMPANY_PROFILE_MENU)
+    elsif action_name == "edit"
+      prohibit_html unless roles.include?(InventoryManagementSystem::COMPANY_PROFILE_EDIT)
+    elsif action_name == "update"
+      prohibit_html unless roles.include?(InventoryManagementSystem::COMPANY_PROFILE_EDIT)
     end
   end
 end

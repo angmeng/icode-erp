@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  outgoing_reject: 1
+  outgoing_date: 2013-07-06
+  trade_company_id: 1
+  sales_tax: 9.99
+  currency_id: 1
+  lampiran: MyString
+  trade_term_id: 1
+  return_note_no: 1
+  updated_by: 1
+
+two:
+  outgoing_reject: 1
+  outgoing_date: 2013-07-06
+  trade_company_id: 1
+  sales_tax: 9.99
+  currency_id: 1
+  lampiran: MyString
+  trade_term_id: 1
+  return_note_no: 1
+  updated_by: 1

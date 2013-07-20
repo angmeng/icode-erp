@@ -28,6 +28,7 @@ class TradeCompany < ActiveRecord::Base
   has_one  :receipt
   has_one  :payment_received
   has_one  :sales_tax_exemption_line
+  has_one  :outgoing_reject
   
   has_many :product_vendors
   has_many :product_customers
@@ -35,6 +36,7 @@ class TradeCompany < ActiveRecord::Base
   has_many :receive_notes
   has_many :sales_orders
   has_many :statement_of_accounts
+  has_many :ste_customer_histories
   
   has_many :contacts, :dependent => :destroy
   

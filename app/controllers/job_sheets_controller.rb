@@ -1,5 +1,4 @@
 class JobSheetsController < ApplicationController
-  before_filter :authenticate_user!
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :confirmed_quotation]
   
   def index

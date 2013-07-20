@@ -59,29 +59,83 @@ class DeliveryOrderManagement
     end
   end
   
-  def self.insert_sales_tax_exemption(d_order)
-    ste_id = d_order.sales_tax_exemption_id
-    d_order.delivery_order_items.each do |doi|
-      d_qty = doi.delivery_qty
+#  def self.insert_sales_tax_exemption(d_order)
+#    ste_id = d_order.sales_tax_exemption_id
+#    d_order.delivery_order_items.each do |doi|
+#      d_qty = doi.delivery_qty
+#      
+#      if doi.sales_order_item.present?
+#        if doi.sales_order_item.product.present?
+#          if doi.sales_order_item.product.tarif_code.present?
+#            product_tarif_code = doi.sales_order_item.product.tarif_code
+#          end
+#        end
+#      end
+#      
+#      # The important is we don't check the perihal barang, only check with tarif_code, :)
+#      @brg = SalesTaxExemptionBarang.where("sales_tax_exemption_id = ? and tarif_code = ? and valid_weight_condition = ?", ste_id, product_tarif_code, true)
+#      if @brg.present?
+#        @brg.each do |brg|
+#          brg.complete_qty  += d_qty.to_i
+#          brg.available_qty -= d_qty.to_i
+#          brg.save!
+#        end
+#      end
       
-      if doi.sales_order_item.present?
-        if doi.sales_order_item.product.present?
-          if doi.sales_order_item.product.tarif_code.present?
-            product_tarif_code = doi.sales_order_item.product.tarif_code
+#      before_available_qty = barang.available_qty
+#      after_available_qty  = before_available_qty.to_f - pri.quantity.to_f
+#      after_complete_qty   = barang.complete_qty.to_f + pri.quantity.to_f
+#      stei = SteSupplierHistory.new(:sales_tax_exemption_id => @vendor_id.sales_tax_exemption.id, :product_id => pri.product_id, :purchase_order_id => po_id, :purchase_order_item_line_id => @poil.id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+#      stei.save!
+#      barang.update_attributes!(:complete_qty => after_complete_qty, :available_qty => after_available_qty)
+      
+#    end
+#    d_order
+#  end
+#end
+
+
+
+  def self.insert_sales_tax_exemption(d_order)
+    @doi = d_order.delivery_order_items
+    @customer_id = TradeCompany.find(d_order.trade_company_id)
+    if @doi.present?
+      @doi.each do |doi|
+        product = doi.try(:sales_order_item).try(:product)
+        if @customer_id.sales_tax_exemption.present?
+          if @customer_id.sales_tax_exemption.sales_tax_exemption_barangs.present?
+            @barangs = @customer_id.sales_tax_exemption.sales_tax_exemption_barangs
+            if @barangs.present? && product.present?
+              if product.tarif_code.present?
+                # it is Sales Tax Exemption if the supplier has provided the licence.
+                barang = @barangs.find_by_tarif_code(product.tarif_code)
+                if barang.present?
+                  before_available_qty = barang.available_qty
+                  if barang.need_part_weight == true
+                    wtpc = doi.delivery_qty.to_f * product.part_weight.to_f
+                    after_available_qty  = before_available_qty.to_f - wtpc
+                    after_complete_qty   = barang.complete_qty.to_f + wtpc
+                    stei = SteCustomerHistory.new(:sales_tax_exemption_id => @customer_id.sales_tax_exemption.id, :product_id => product.id, :trade_company_id => @customer_id.id, :delivery_order_item_id => doi.id, :unit_measurement_id => doi.sales_order_item.unit_measurement_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty, :delivery_qty => doi.delivery_qty, :pc_weight => product.part_weight.to_f)
+                  else
+                    after_available_qty  = before_available_qty.to_f - doi.delivery_qty.to_f
+                    after_complete_qty   = barang.complete_qty.to_f + doi.delivery_qty.to_f
+                    stei = SteCustomerHistory.new(:sales_tax_exemption_id => @customer_id.sales_tax_exemption.id, :product_id => product.id, :trade_company_id => @customer_id.id, :delivery_order_item_id => doi.id, :unit_measurement_id => doi.sales_order_item.unit_measurement_id, :before_available_qty => before_available_qty, :after_available_qty => after_available_qty, :accumulative_complete_qty => after_complete_qty)
+                  end
+                  stei.save!
+                  barang.update_attributes!(:complete_qty => after_complete_qty, :available_qty => after_available_qty)
+                  check_overweight(barang)
+                end
+              end
+            end
           end
         end
       end
-      
-      # The important is we don't check the perihal barang, only check with tarif_code, :)
-      @brg = SalesTaxExemptionBarang.where("sales_tax_exemption_id = ? and tarif_code = ? and valid_weight_condition = ?", ste_id, product_tarif_code, true)
-      if @brg.present?
-        @brg.each do |brg|
-          brg.complete_qty  += d_qty.to_i
-          brg.available_qty -= d_qty.to_i
-          brg.save!
-        end
-      end
     end
-    d_order
+  end
+  
+  private
+  
+  def check_overweight(brg)
+    brg.update_attributes(:valid_weight_condition => false) if brg.available_qty <= 0
   end
 end

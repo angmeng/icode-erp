@@ -1,7 +1,5 @@
 class ChangeCompanyCodesController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search = ChangeCompanyCode.search(params[:search])
     @change_company_codes = @search.order("created_at DESC")

@@ -1,0 +1,39 @@
+<%= title_head "Statement Of Account" %>  
+
+<div class="popup_content">
+    <div id="valid_soa">
+      <table>
+        <tr>
+          <td><b>Customer Company</b></td>
+          <td>[<%= @statement_of_account.trade_company.try(:code) %>] <%= @statement_of_account.trade_company.try(:name) %></td>
+        </tr>
+        <tr>
+          <td><b>Transaction Date</b></td>
+          <td><%= @statement_of_account.transaction_date.strftime("%d-%m-%Y") %></td>
+        </tr>
+        <tr>
+          <td><b>Transaction Type</b></td>
+          <td>
+            <%= @statement_of_account.transaction_type %>
+            <%= @statement_of_account.running_no %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Description</b></td>
+          <td><%= @statement_of_account.description %></td>
+        </tr>
+        <tr>
+          <td><b>Document Amount</b></td>
+          <td><%= two_precision(@statement_of_account.document_amount) %></td>
+        </tr>
+        <tr>
+          <td><b>FP</b></td>
+          <td><%= @statement_of_account.fp %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="icon_tag">
+    <%= link_close_button %>
+  </div>

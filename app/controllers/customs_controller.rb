@@ -1,7 +1,5 @@
 class CustomsController < ApplicationController
-  before_filter :authenticate_user!
-  layout false
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /customs
   # GET /customs.json
   def index

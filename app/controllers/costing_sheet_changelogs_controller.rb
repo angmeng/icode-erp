@@ -1,4 +1,5 @@
 class CostingSheetChangelogsController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /costing_sheet_changelogs
   # GET /costing_sheet_changelogs.json
   def index

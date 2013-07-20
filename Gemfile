@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-#gem 'rails', '3.2.8'
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -8,15 +7,14 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2', "~> 0.3.11"
 
-# gem 'json', "1.7.5"
-gem 'json'
+gem 'json', "~> 1.8.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
- 	# gem 'sass-rails',   '~> 3.2.3'
- 	# gem 'coffee-rails', '~> 3.2.1'
- 	# gem 'uglifier', '>= 1.0.3'
+  	# gem 'sass-rails',   "~> 3.2.3"
+  	# gem 'coffee-rails', "~> 3.2.1"
+  	# gem 'uglifier'
 	gem 'jquery-datatables-rails'
 	gem 'jquery-ui-rails'
 end
@@ -24,7 +22,6 @@ end
 group :development do
   gem "better_errors"
   # gem "binding_of_caller", "~> 0.6.8"
-  gem "binding_of_caller"
   gem "sextant"
 end
 
@@ -40,6 +37,7 @@ gem "meta_search"
 gem "paperclip"
 gem 'mime-types'
 gem 'thin'
+gem 'active_model_serializers'
 #gem 'wkhtmltopdf-binary'
 
 # To use ActiveModel has_secure_password

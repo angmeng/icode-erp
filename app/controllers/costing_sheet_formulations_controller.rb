@@ -1,7 +1,5 @@
 class CostingSheetFormulationsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @costing_sheet_formulations = CostingSheetFormulation.db_active
 

@@ -12,4 +12,8 @@ class SalesTaxExemptionBarang < ActiveRecord::Base
   validates :perihal_barang, :tarif_code, :apply_qty, :unit_measurement_id, :available_qty, :calculate_um_id, :presence => true
   
   validates :apply_qty, :numericality => { :greater_than => 0 }
+  
+  def check_part_weight?
+    need_part_weight == true
+  end
 end

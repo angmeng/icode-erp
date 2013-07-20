@@ -1,6 +1,5 @@
 class SalesTaxExemptionsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox", :only => [:new, :new_customer, :create, :edit, :update, :show, :display_items]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :new_customer, :display_items]
   
   def index                       # For Supplier with valid
     @search = SalesTaxExemption.search(params[:search])
@@ -64,9 +63,9 @@ class SalesTaxExemptionsController < ApplicationController
 
   def update
     @sales_tax_exemption = SalesTaxExemption.find(params[:id])
-    SalesTaxExemption.running_items(params[:datarow], @sales_tax_exemption)
+    SalesTaxExemptionManagement.running_items(params[:datarow], @sales_tax_exemption)
     if @sales_tax_exemption.update_attributes(params[:sales_tax_exemption])
-      flash[:alert] = @sales_tax_exemption.errors.full_messages
+      flash[:alert] = @sales_tax_exemption.errors
       redirect_to @sales_tax_exemption, notice: "Running No # #{@sales_tax_exemption.running_no} was successfully updated."
     else
       render action: "edit"
@@ -96,9 +95,4 @@ class SalesTaxExemptionsController < ApplicationController
   def display_items
     @ste = SalesTaxExemption.find(params[:id])
   end
-  
-  private
-#  def inventory_management_system
-#    role(SalesTaxExemption::ROLE)
-#  end
 end

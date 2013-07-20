@@ -1,0 +1,42 @@
+<table id="tabify_datatable" class="zebraLight display">
+  <thead>
+    <tr class="header_line">
+        <th class="check_highlight"></th>
+        <th>Outgoing Reject No.</th>
+        <th>Outgoing Reject Date</th>
+        <th>Customer Company</th>
+        <th>Sales Tax %</th>
+        <th>Currency</th>
+        <th>Trade Term</th>
+        <th>Return Note No.</th>
+        <th>Updated By</th>
+        <th>Remark</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% outgoing_rejects.each do |outgoing| %>
+
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= outgoing.id %>">
+        <td></td>
+        <td align="center"><%= outgoing.outgoing_reject_no %></td>
+        <td align="center"><%= outgoing.outgoing_date %></td>
+        <td>[<%= outgoing.try(:trade_company).try(:code) %>] <%= outgoing.try(:trade_company).try(:name) %></td>
+        <td align="center"><%= outgoing.sales_tax rescue '-' %></td>
+        <td align="center"><%= outgoing.currency.name rescue '-' %></td>
+        <td align="center"><%= outgoing.trade_term.name rescue '-' %></td>
+        <td align="center"><%= outgoing.return_note_no %></td>
+        
+        <td align="center">
+          <% user = User.find(outgoing.updated_by) %>
+          <%= user.name %>
+        </td>
+        <td align="center"><%= outgoing.remark rescue '-' %></td>
+      </tr>
+
+    <% end %>
+
+  </tbody>
+</table>
+

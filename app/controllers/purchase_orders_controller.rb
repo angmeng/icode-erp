@@ -1,8 +1,5 @@
 class PurchaseOrdersController < ApplicationController
-  before_filter :authenticate_user!
-  # before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox", :only => [:new, :create, :edit, :update, :show, :printable, :display_maintenance, :show_select_vendor, :make_purchase_order, :select_vendor]
-
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :printable, :display_maintenance, :show_select_vendor, :make_purchase_order, :select_vendor]
   def index
     @po_title = PurchaseOrder.title
     @search = PurchaseOrder.search(params[:search])

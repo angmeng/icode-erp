@@ -38,7 +38,7 @@
           <td><%= f.text_field :registration_no, :class => "k-textbox" %></td>
         </tr>
 
-        <% if action_name == "new_customer" %>
+        <% if action_name == "new_customer" or @sales_tax_exemption.company_type == "CUSTOMER" %>
           <tr>
             <td><b><%= f.label :trade_company_id, "Customer Company *" %></b></td>
             <td>

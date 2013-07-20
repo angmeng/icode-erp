@@ -1,4 +1,5 @@
 class JournalVoucherItemsController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /journal_voucher_items
   # GET /journal_voucher_items.json
   def index

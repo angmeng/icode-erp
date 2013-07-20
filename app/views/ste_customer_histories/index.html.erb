@@ -1,0 +1,43 @@
+<h1>Listing ste_customer_histories</h1>
+
+<table>
+  <tr>
+    <th>Sales tax exemption</th>
+    <th>Product</th>
+    <th>Trade company</th>
+    <th>Delivery order item</th>
+    <th>Unit measurement</th>
+    <th>Before available qty</th>
+    <th>After available qty</th>
+    <th>Accumulative complete qty</th>
+    <th>Delivery qty</th>
+    <th>Pc weight</th>
+    <th>Used date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ste_customer_histories.each do |ste_customer_history| %>
+  <tr>
+    <td><%= ste_customer_history.sales_tax_exemption_id %></td>
+    <td><%= ste_customer_history.product_id %></td>
+    <td><%= ste_customer_history.trade_company_id %></td>
+    <td><%= ste_customer_history.delivery_order_item_id %></td>
+    <td><%= ste_customer_history.unit_measurement_id %></td>
+    <td><%= ste_customer_history.before_available_qty %></td>
+    <td><%= ste_customer_history.after_available_qty %></td>
+    <td><%= ste_customer_history.accumulative_complete_qty %></td>
+    <td><%= ste_customer_history.delivery_qty %></td>
+    <td><%= ste_customer_history.pc_weight %></td>
+    <td><%= ste_customer_history.used_date %></td>
+    <td><%= link_to 'Show', ste_customer_history %></td>
+    <td><%= link_to 'Edit', edit_ste_customer_history_path(ste_customer_history) %></td>
+    <td><%= link_to 'Destroy', ste_customer_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ste customer history', new_ste_customer_history_path %>

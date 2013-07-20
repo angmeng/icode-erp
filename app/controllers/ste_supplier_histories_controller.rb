@@ -1,4 +1,5 @@
 class SteSupplierHistoriesController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /ste_supplier_histories
   # GET /ste_supplier_histories.json
   def index

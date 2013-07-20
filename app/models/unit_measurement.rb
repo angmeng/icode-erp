@@ -13,6 +13,7 @@ class UnitMeasurement < ActiveRecord::Base
   has_one :sales_tax_exemption
   has_one :sales_tax_exemption_barang
   has_one :sales_order_item
+  has_one :ste_customer_history
   
   validates :code, :presence => true
   validates :code, :uniqueness => true

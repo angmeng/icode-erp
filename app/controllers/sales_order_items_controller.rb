@@ -1,7 +1,5 @@
 class SalesOrderItemsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-
+layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @sales_order_items = SalesOrderItem.all
 

@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Delivery order item:</b>
+  <%= @outgoing_reject_item.delivery_order_item_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @outgoing_reject_item.quantity %>
+</p>
+
+<p>
+  <b>Received qty:</b>
+  <%= @outgoing_reject_item.received_qty %>
+</p>
+
+<p>
+  <b>Invoice delivery qty:</b>
+  <%= @outgoing_reject_item.invoice_delivery_qty %>
+</p>
+
+<p>
+  <b>Invoice unit price:</b>
+  <%= @outgoing_reject_item.invoice_unit_price %>
+</p>
+
+<p>
+  <b>So balance qty:</b>
+  <%= @outgoing_reject_item.so_balance_qty %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @outgoing_reject_item.status %>
+</p>
+
+<p>
+  <b>Current stock:</b>
+  <%= @outgoing_reject_item.current_stock %>
+</p>
+
+<p>
+  <b>Client lot:</b>
+  <%= @outgoing_reject_item.client_lot %>
+</p>
+
+<p>
+  <b>Client part:</b>
+  <%= @outgoing_reject_item.client_part %>
+</p>
+
+<p>
+  <b>Client po:</b>
+  <%= @outgoing_reject_item.client_po %>
+</p>
+
+
+<%= link_to 'Edit', edit_outgoing_reject_item_path(@outgoing_reject_item) %> |
+<%= link_to 'Back', outgoing_reject_items_path %>

@@ -1,0 +1,107 @@
+<table id="tabify_datatable" class="zebraLight display">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th>Trade Company</th>
+      <th>Transaction Date</th>
+      <th>Reference</th>
+      <th>Description</th>
+      <th></th>
+      <th>Debit</th>
+      <th>Credit</th>
+      <th>Open Balance</th>
+      <!--th>Balance</th-->
+    </tr>
+  </thead>
+  <tbody>
+    <% balance = 0 %>
+    <% statement_of_accounts.each do |soa| %>
+      <tr class="<%= cycle('odd_line', 'even_line') %>" controllerName="<%= controller_name %>" rowsId="<%= soa.id %>">
+        <td></td>
+        <td>[<%= soa.trade_company.code rescue '-' %>] <%= soa.trade_company.name rescue '-' %></td>
+        <td align="center"><%= soa.transaction_date.strftime("%d-%m-%Y") rescue'-' %></td>
+        <td>
+          <%= soa.transaction_type rescue'-' %> &nbsp;
+
+          <% if soa.open_balance == true %>
+            <%= soa.running_no %>
+          <% else %>
+              <% if soa.debit_note.present? %>
+                <%= soa.debit_note.debit_note_no rescue'-' %>
+              <% elsif soa.credit_note.present? %>
+                <%= soa.credit_note.credit_note_no rescue'-' %>
+              <% elsif soa.delivery_order.present? %>
+                <%= soa.delivery_order.do_no rescue'-' %>
+              <% elsif soa.receipt.present? %>
+                <%= soa.receipt.receipt_no rescue'-' %>
+              <% end %>
+          <% end %>
+        </td>
+        <td align="left">
+          <% if soa.open_balance == true %>
+            <%= soa.description %>
+          <% else %>
+            <% if soa.debit_note.present? %>
+              <%= soa.debit_note.debit_type rescue'-' %>
+            <% elsif soa.credit_note.present? %>
+              <%= soa.credit_note.credit_type rescue'-' %>
+            <% end %>
+          <% end %>
+        </td>
+        <td align="center">
+          <% if soa.fp == 'F' || soa.fp == 'f' %>
+            *
+          <% else %>
+            &nbsp;
+          <% end %>
+        </td>
+        <td align="right">
+          <% if soa.open_balance == true %>
+            <% if soa.transaction_type == "INV" or soa.transaction_type == "DN" %>
+              <%= soa.document_amount %>
+              <% balance += soa.document_amount.to_f %>
+            <% end %>
+          <% else %>
+            <% if soa.delivery_order.present? %>
+              <%= two_precision(soa.delivery_order.calculate_sum_of_doi) %>
+              <% balance += soa.delivery_order.calculate_sum_of_doi %>
+            <% elsif soa.debit_note.present? %>
+              <%= soa.debit_note.amount %>
+              <% balance += soa.debit_note.amount %>
+            <% else %>
+              &nbsp;
+            <% end %>
+         <% end %>       
+        </td>
+        <td align="right">
+          <% if soa.open_balance == true %>
+            <% if soa.transaction_type == "CN" or soa.transaction_type == "REC" %>
+              <%= soa.document_amount %>
+              <% balance -= soa.document_amount.to_f %>
+            <% end %>
+          <% else %>
+            <% if soa.credit_note.present? %>
+              <%= soa.credit_note.amount %>
+              <% balance -= soa.credit_note.amount %>
+            <% elsif soa.receipt.present? %>
+              <%= soa.receipt.cheque_amount %>
+              <% balance -= soa.receipt.cheque_amount %>
+            <% else %>
+              &nbsp;
+            <% end %>        
+          <% end %>
+        </td>
+        <td width="80" align="center">
+          <% if soa.is_open_balance? %>
+            V
+          <% else %>
+            &Chi;
+          <% end %>
+        </td>
+        <!--td align="right">
+          <%#= two_precision(balance.to_f) %>
+        </td-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

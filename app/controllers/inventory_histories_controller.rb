@@ -1,8 +1,5 @@
 class InventoryHistoriesController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :inventory_management_system
-  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
-
+layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search = InventoryHistory.search(params[:search])
     @inventories = @search.paginate(:page => params[:page])
@@ -68,11 +65,5 @@ class InventoryHistoriesController < ApplicationController
       format.html { redirect_to inventory_histories_url, :notice => "This inventory was dropped to KIV." }
       format.json { head :no_content }
     end
-  end
-  
-  private
-  
-  def inventory_management_system
-    role(InventoryHistory::ROLE)
   end
 end

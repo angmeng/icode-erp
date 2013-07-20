@@ -1,0 +1,88 @@
+<%= title_head "SHOW OUTGOING REJECT" %>
+
+<div class="table_details">
+  <table>
+    <tr>
+      <td><b>O/R No #</b></td>
+      <td><%= @outgoing_reject.outgoing_reject_no rescue '-' %></td>
+      <td><b>O/R Date</b></td>
+      <td><%= @outgoing_reject.outgoing_date.strftime("%d-%m-%Y") %></td>
+      <td width="5px"></td>
+      <td><b>Remark</b></td>
+      <td rowspan="3"><%= @outgoing_reject.remark %></td>
+    </tr>
+
+    <tr>
+      <td><b>Customer Company</b></td>
+      <td>[<%= @outgoing_reject.trade_company.code rescue '-' %>] <%= @outgoing_reject.trade_company.name rescue '-' %></td>
+    </tr>
+
+    <tr>
+      <td><b>Currency</b></td>
+      <td><%= @outgoing_reject.currency.name rescue '-' %></td>
+      <td><b>Sales Tax %</b></td>
+      <td><%= @outgoing_reject.sales_tax %></td>
+    </tr>
+
+    <tr>
+      <td><b>Trade Term</b></td>
+      <td><%= @outgoing_reject.trade_term.name %></td>
+      <td><b>Return Note No #</b></td>
+      <td colspan="2"><%= @outgoing_reject.return_note_no %></td>
+    </tr>
+
+    <tr>
+      <td><b>Updated By</b></td>
+      <td>
+        <% user = User.find(@outgoing_reject.updated_by) %> 
+        <%= user.name %>
+      </td>
+      <td><b>Delivery Order No #</b></td>
+      <td colspan="2"><%= @outgoing_reject.delivery_order_no %></td>
+    </tr>
+  </table>
+</div>
+
+<hr/>
+
+<table class="jgrid_popup zebraLight">
+  <thead>
+    <tr class="header_line">
+      <th class="check_highlight"></th>
+      <th width="500">[Inv No][Product ID][Description]</th>
+      <th width="150">Received Qty</th>
+      <th width="150">Inv Date</th>      
+      <th width="150">Inv Delv Qty</th>
+      <th width="150">Inv U/Price</th>
+      <th width="150">S/O Bal Qty</th>
+      <th width="150">Status</th>
+      <th width="150">Current Stock</th>
+      <th width="150">Client's Lot#</th>
+      <th width="150">Client's Part</th>
+      <th width="150">Client's P/O</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outgoing_reject.outgoing_reject_items.each do |ori| %>
+      <tr>
+        <td></td>
+        <td width="500">[<%= @outgoing_reject.delivery_order_no %>][<%= ori.try(:sales_order_item).try(:product).try(:product_combobox).try(:product_code) %>][<%= ori.try(:sales_order_item).try(:product).try(:desc) %>]</td>
+        <td width="150" align="right"><%= ori.received_qty %> <%= ori.sales_order_item.unit_measurement.code rescue '-' %></th>
+        <td width="150" align="center"><%= ori.try(:delivery_order_item).try(:delivery_order).try(:do_date) %></td>      
+        <td width="150" align="right"><%= ori.delivery_order_item.delivery_qty rescue '-' %> <%= ori.sales_order_item.unit_measurement.code rescue '-' %></td>
+        <td width="150" align="right"><%= ori.delivery_order_item.unit_price rescue '-' %></td>
+        <td width="150" align="right"><%= ori.delivery_order_item.balance_qty rescue '-' %> <%= ori.sales_order_item.unit_measurement.code rescue '-' %></td>
+        <td width="150" align="right"><%= ori.delivery_order_item.try(:decode_doi) rescue '-' %></td>
+        <td width="150"><%= ori.delivery_order_item.try(:sales_order_item).try(:product).try(:current_stock) rescue '-' %></td>
+        <td width="150"><%= ori.delivery_order_item.client_lot rescue '-' %></td>
+        <td width="150"><%= ori.delivery_order_item.part_no rescue '-' %></td>
+        <td width="150"><%= ori.delivery_order_item.client_po rescue '-' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="icon_tag">
+  <%= link_close_button %>
+</div>

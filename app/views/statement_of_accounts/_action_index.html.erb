@@ -1,0 +1,41 @@
+<div class="left_icon_tag">
+  <% if roles.include?(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_ADD) %>
+    <b><%= link_to "Add - Opening Balance", new_statement_of_account_path, :class => "iframe_800x450 k-button", "data-fancybox-type" => "iframe" %></b>
+  <% else %>
+    <%= disabled_style "Add - Opening Balance" %>
+  <% end %>
+</div>
+
+<div class="center_icon_tag">
+  <div class="digg_pagination"><%#= will_paginate @credit_notes, :container => false, :previous_label => '<', :next_label => '>' %></div>
+</div>
+
+<div class="icon_tag">
+  
+  <% if roles.include?(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_SHOW) %>
+    <span id="on_show" showClass="show_without_refresh_page_800x450"><%= not_link_show %></span>
+  <% else %>
+    <%= not_link_show %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_EDIT) %>
+    <span id="on_edit" editClass="iframe_800x450"><%= not_link_edit %></span>
+  <% else %>
+    <%= not_link_edit %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_DELETE) %>
+    <span id="on_delete"><%= disabled_style "Delete" %></span>
+  <% else %>
+    <%= disabled_style "Delete" %>
+  <% end %>
+
+  <% if roles.include?(InventoryManagementSystem::STATEMENT_OF_ACCOUNT_PRINTABLE) %>
+    <span id="on_printable"><%= not_link_printable %></span>
+  <% else %>
+    <%= not_link_printable %>
+  <% end %>
+  
+  <%= link_home_button %>
+
+</div>

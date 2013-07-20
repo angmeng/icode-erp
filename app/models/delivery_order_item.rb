@@ -4,6 +4,10 @@ class DeliveryOrderItem < ActiveRecord::Base
   belongs_to :delivery_order
   belongs_to :sales_order_item
   
+  has_one :outgoing_reject_item
+  has_many :ste_customer_histories
+  has_many :sales_order_items, :through => :ste_customer_histories
+  
   validates :sales_order_item_id, :delivery_qty, :unit_price, :presence => true
   
   def do_pending?
@@ -20,5 +24,18 @@ class DeliveryOrderItem < ActiveRecord::Base
   
   def so_balance_qty_is_zero?
     balance_qty == 0
+  end
+  
+  def decode_doi
+    case do_status
+    when DataStatus::DOI_PENDING
+      "Pending"
+    when DataStatus::DOI_PROCESSING
+      "Processing"
+    when DataStatus::DOI_COMPLETED
+      "Completed"
+    else
+      "nothing"
+    end
   end
 end

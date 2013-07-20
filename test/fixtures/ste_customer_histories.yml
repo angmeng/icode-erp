@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sales_tax_exemption_id: 1
+  product_id: 1
+  trade_company_id: 1
+  delivery_order_item_id: 1
+  unit_measurement_id: 1
+  before_available_qty: 9.99
+  after_available_qty: 9.99
+  accumulative_complete_qty: 9.99
+  delivery_qty: 9.99
+  pc_weight: 1.5
+  used_date: 2013-06-25
+
+two:
+  sales_tax_exemption_id: 1
+  product_id: 1
+  trade_company_id: 1
+  delivery_order_item_id: 1
+  unit_measurement_id: 1
+  before_available_qty: 9.99
+  after_available_qty: 9.99
+  accumulative_complete_qty: 9.99
+  delivery_qty: 9.99
+  pc_weight: 1.5
+  used_date: 2013-06-25

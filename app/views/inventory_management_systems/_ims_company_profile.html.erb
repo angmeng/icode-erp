@@ -1,46 +1,38 @@
 <%#*<table>%>
   <% if checkboxes.present? %>
-  
     <% if action_name == "show" %>
-  
       <tr>
         <td></td>
         <td><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_MENU) %> Company Profile</td>
         <% 2.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
-        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
+        <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td><td></td>
+        <!--td align="center"><%#= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td-->
         <td align="center"><%= ims_show_disabled(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
         <% 3.times do |td| %><td></td><% end %>
       </tr>
-  
     <% else %>
-  
       <tr>
         <td></td>
         <td><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_MENU) %> Company Profile</td>
         <% 2.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
-        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
+        <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td><td></td>
+        <!--td align="center"><%#= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td-->
         <td align="center"><%= ims_edit_checked(checkboxes, InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
         <% 3.times do |td| %><td></td><% end %>
       </tr>
-      
     <% end %>
-
   <% else %>
-    
       <tr>
         <td></td>
         <td><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_MENU) %> Company Profile</td>
         <% 2.times do |td| %><td></td><% end %>
         <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_SHOW) %></td>
-        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td>
-        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td>
+        <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_EDIT) %></td><td></td>
+        <!--td align="center"><%#= ims_new(InventoryManagementSystem::COMPANY_PROFILE_KIV) %></td-->
         <td align="center"><%= ims_new(InventoryManagementSystem::COMPANY_PROFILE_PRINTABLE) %></td>
         <% 3.times do |td| %><td></td><% end %>
       </tr>
-
   <% end %>
 <%#*</table>%>

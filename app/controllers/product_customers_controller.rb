@@ -1,6 +1,5 @@
 class ProductCustomersController < ApplicationController
-  before_filter :authenticate_user!
-
+layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search            = ProductCustomer.search(params[:search])
     @product_customers = ProductCustomer.ordering_attr(@search).paginate(:page => params[:page])

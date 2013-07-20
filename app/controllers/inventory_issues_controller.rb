@@ -1,7 +1,5 @@
 class InventoryIssuesController < ApplicationController
-  before_filter :authenticate_user!
-#  before_filter :inventory_management_system, :except => [:show ]
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @inventory_issues = InventoryIssue.where(:in_out => params[:type_id])
 

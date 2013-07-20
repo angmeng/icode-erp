@@ -12,6 +12,7 @@ class TradeTerm < ActiveRecord::Base
   
   has_one :purchase_order
   has_one :delivery_order
+  has_one :outgoing_reject
   
   validates :name, :uniqueness => true
   

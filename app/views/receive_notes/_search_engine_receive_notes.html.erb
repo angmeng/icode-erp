@@ -2,38 +2,34 @@
   <table>
     <tr>
       <td>R/N No.</td>
-      <td><%= f.text_field :receive_note_no_equals %></td>
+      <td><%= f.text_field :receive_note_no_equals, :class => "k-textbox" %></td>
     </tr>
     <tr>
       <td>R/N Date</td>
       <td>
         <% if @search.rn_date_gte.present? %>
-          <%= f.text_field :rn_date_gte, :value => @search.rn_date_gte.strftime("%d-%m-%Y"), :include_blank => true %>
+          <%= f.text_field :rn_date_gte, :value => @search.rn_date_gte.strftime("%d-%m-%Y"), :include_blank => true, :class => "k-textbox" %>
         <% else %>
-          <%= f.text_field :rn_date_gte, :include_blank => true %>
+          <%= f.text_field :rn_date_gte, :include_blank => true, :class => "k-textbox" %>
         <% end %>
          - 
         <% if @search.rn_date_lte.present? %>
-          <%= f.text_field :rn_date_lte, :value => @search.rn_date_lte.strftime("%d-%m-%Y"), :include_blank => true %>
+          <%= f.text_field :rn_date_lte, :value => @search.rn_date_lte.strftime("%d-%m-%Y"), :include_blank => true, :class => "k-textbox" %>
         <% else %>
-          <%= f.text_field :rn_date_lte, :include_blank => true %>
+          <%= f.text_field :rn_date_lte, :include_blank => true, :class => "k-textbox" %>
         <% end %>
       </td>
     </tr>
     <tr>
-      <td>Updated By</td>
-      <td><%= f.select :updated_by_equals, options_for_select(@rn_updater, params[:updated_by_equals].to_s), :include_blank => true %></td>
-    </tr>
-    <tr>
       <td>Vendor</td>
-      <td><%= f.text_field :trade_company_name_contains %></td>
+      <td><%= f.text_field :trade_company_name_contains, :class => "k-textbox" %></td>
     </tr>
     <tr>
       <td>Vendor's D/O</td>
-      <td><%= f.text_field :vendor_delivery_no_contains %></td>
+      <td><%= f.text_field :vendor_delivery_no_contains, :class => "k-textbox" %></td>
     </tr>
     <tr>
-      <td colspan="10" align="right"><%= f.submit 'search' %></td>
+      <td colspan="10" align="right"><%= f.submit 'search', :class => "k-button" %></td>
     </tr>
   </table>
 <% end %>

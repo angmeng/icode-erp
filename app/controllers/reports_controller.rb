@@ -1,5 +1,4 @@
 class ReportsController < ApplicationController
-  before_filter :authenticate_user!
   layout "sheetbox", :except => [:company_report , :credit_note_report , :customer_report , :debit_repot, 
   :do_so_documentation_report, :delivery_order_summary_report , :inventory_report , :purchase_order_report , :pr_report,
   :price_report , :product_report , :purchase_by_creditor_report ,:rn_part_summary_report,

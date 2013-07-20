@@ -1,7 +1,5 @@
 class PurchaseOrderItemLinesController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @purchase_order_item_lines = PurchaseOrderItemLine.all
 

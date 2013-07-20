@@ -1,1 +1,21 @@
-<%= render "/receipts/new_receipt_items" %>
+<%#= render "/receipts/new_receipt_items" %>
+
+<ul id="j_tabify" class="class_tabify" >
+  <li class="active"><a href="#tabify_listing">STATEMENT OF ACCOUNTS</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+         
+<!-- <input type="checkbox" name="all" id="checkall" />Check All -->
+<div id="tabify_listing">
+  <% if @statement_of_accounts.present? %>
+    <div class="table_background"><%= render "listing_statement_of_accounts", :statement_of_accounts => @statement_of_accounts %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%#= render "search_statement_of_accounts" %>
+</div>
+
+<%= render "action_index" %>

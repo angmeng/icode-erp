@@ -1,4 +1,5 @@
 class FilmNumbersController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /film_numbers
   # GET /film_numbers.json
   def index

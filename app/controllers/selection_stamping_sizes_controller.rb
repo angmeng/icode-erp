@@ -1,5 +1,5 @@
 class SelectionStampingSizesController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /selection_stamping_sizes
   # GET /selection_stamping_sizes.json
   def index

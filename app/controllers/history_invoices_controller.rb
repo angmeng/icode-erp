@@ -1,7 +1,5 @@
 class HistoryInvoicesController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox", :except => [:index]
-
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /history_invoices
   # GET /history_invoices.json
   def index

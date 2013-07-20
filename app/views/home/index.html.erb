@@ -1,6 +1,6 @@
 <div style="background-color: gainsboro;">
   <div id="top_quick_tip">
-    <div id="main_pr">  
+    <div id="main_pr">
       <table>
         <tr>
           <th class="block_box" width="150">PURCHASE REQUISITION</th>
@@ -223,27 +223,27 @@
           <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
         </tr>
         
-        <tr>
+        <!--tr>
           <th class="block_box">PRODUCTION</th>
           
-          <% if roles.include?(InventoryManagementSystem::BOMS) %>
-            <td><%= link_to "BOMs Data", boms_path,:class => "k-button" %></td>
-          <% else %>
-            <td><%= disabled_style("BOMs Data") %></td>
-          <% end %>
+          <%# if roles.include?(InventoryManagementSystem::BOMS) %>
+            <td><%#= link_to "BOMs Data", boms_path,:class => "k-button" %></td>
+          <%# else %>
+            <td><%#= disabled_style("BOMs Data") %></td>
+          <%# end %>
           
-          <td><%= image_tag "arrow-right.png", :width => "30px" %></td>
+          <td><%#= image_tag "arrow-right.png", :width => "30px" %></td>
           
-          <% if roles.include?(InventoryManagementSystem::JOB_SHEETS) %>
-            <td><%= link_to "Job Sheets Data", job_sheets_path,:class => "k-button" %></td>
-          <% else %>
-            <td><%= disabled_style("Job Sheets Data") %></td>
-          <% end %>
-        </tr>
+          <%# if roles.include?(InventoryManagementSystem::JOB_SHEETS) %>
+            <td><%#= link_to "Job Sheets Data", job_sheets_path,:class => "k-button" %></td>
+          <%# else %>
+            <td><%#= disabled_style("Job Sheets Data") %></td>
+          <%# end %>
+        </tr-->
 
-        <tr>
-          <th><%= image_tag "arrow-bottom.png", :width => "30px" %></th>
-        </tr>
+        <!--tr>
+          <th><%#= image_tag "arrow-bottom.png", :width => "30px" %></th>
+        </tr-->
 
         <tr>
             <th class="block_box">DELIVERY ORDER</th>

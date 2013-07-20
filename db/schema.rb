@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622020617) do
+ActiveRecord::Schema.define(:version => 20130720024928) do
 
   create_table "boms", :force => true do |t|
     t.integer  "status"
@@ -84,13 +84,14 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
     t.integer  "sn_bankin_slip_no",                                        :default => 0
     t.integer  "sn_journal_voucher_no",                                    :default => 0
     t.integer  "sn_payment_voucher_no",                                    :default => 0
-    t.datetime "created_at",                                                                :null => false
-    t.datetime "updated_at",                                                                :null => false
+    t.datetime "created_at",                                                                         :null => false
+    t.datetime "updated_at",                                                                         :null => false
     t.integer  "sn_product_id_no"
     t.integer  "sn_sales_tax_exemption_no",                                :default => 0
     t.integer  "sn_quotation_request_no",                                  :default => 0
     t.integer  "sn_bom_no",                                                :default => 0
     t.decimal  "total_amount",              :precision => 10, :scale => 2, :default => 0.0
+    t.date     "check_expire_date",                                        :default => '2013-07-02'
   end
 
   create_table "contacts", :force => true do |t|
@@ -345,13 +346,13 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
   add_index "film_numbers", ["bom_id"], :name => "index_film_numbers_on_bom_id"
 
   create_table "formulations", :force => true do |t|
-    t.decimal  "per_value",                :precision => 8, :scale => 2
+    t.float    "per_value",                :default => 0.0
     t.integer  "from_unit_measurement_id"
-    t.decimal  "convert_value",            :precision => 8, :scale => 2
+    t.float    "convert_value",            :default => 0.0
     t.integer  "to_unit_measurement_id"
-    t.datetime "created_at",                                                            :null => false
-    t.datetime "updated_at",                                                            :null => false
-    t.integer  "status",                                                 :default => 1
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.integer  "status",                   :default => 1
   end
 
   create_table "history_invoices", :force => true do |t|
@@ -540,6 +541,46 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
   end
 
   add_index "material_of_quantities", ["quotation_request_form_id"], :name => "index_material_of_quantities_on_quotation_request_form_id"
+
+  create_table "outgoing_reject_items", :force => true do |t|
+    t.integer  "quantity"
+    t.integer  "received_qty"
+    t.integer  "invoice_delivery_qty"
+    t.float    "invoice_unit_price",     :default => 0.0
+    t.integer  "so_balance_qty"
+    t.integer  "status",                 :default => 1
+    t.integer  "current_stock"
+    t.string   "client_lot"
+    t.string   "client_part"
+    t.string   "client_po"
+    t.integer  "sales_order_item_id"
+    t.integer  "outgoing_reject_id"
+    t.integer  "delivery_order_item_id"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+  end
+
+  create_table "outgoing_rejects", :force => true do |t|
+    t.integer  "outgoing_reject_no"
+    t.date     "outgoing_date",                                     :default => '2013-07-06'
+    t.integer  "trade_company_id"
+    t.decimal  "sales_tax",          :precision => 10, :scale => 2, :default => 0.0
+    t.integer  "currency_id"
+    t.integer  "trade_term_id"
+    t.integer  "return_note_no"
+    t.integer  "updated_by"
+    t.integer  "delivery_order_id"
+    t.integer  "status",                                            :default => 1
+    t.integer  "delivery_order_no"
+    t.text     "remark"
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
+  end
+
+  add_index "outgoing_rejects", ["currency_id"], :name => "index_outgoing_rejects_on_currency_id"
+  add_index "outgoing_rejects", ["delivery_order_id"], :name => "index_outgoing_rejects_on_delivery_order_id"
+  add_index "outgoing_rejects", ["trade_company_id"], :name => "index_outgoing_rejects_on_trade_company_id"
+  add_index "outgoing_rejects", ["trade_term_id"], :name => "index_outgoing_rejects_on_trade_term_id"
 
   create_table "packing_quantities", :force => true do |t|
     t.float   "quantity",     :default => 0.0
@@ -1071,6 +1112,7 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
     t.integer  "sales_tax_exemption_id"
     t.string   "perihal_barang"
     t.float    "apply_qty",              :default => 0.0
+    t.float    "convert_apply_qty",      :default => 0.0
     t.float    "complete_qty",           :default => 0.0
     t.integer  "unit_measurement_id"
     t.string   "tarif_code"
@@ -1084,17 +1126,6 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
 
   add_index "sales_tax_exemption_barangs", ["sales_tax_exemption_id"], :name => "index_sales_tax_exemption_barangs_on_sales_tax_exemption_id"
   add_index "sales_tax_exemption_barangs", ["unit_measurement_id"], :name => "index_sales_tax_exemption_barangs_on_unit_measurement_id"
-
-  create_table "sales_tax_exemption_customer_histories", :force => true do |t|
-    t.integer  "sales_tax_exemption_id"
-    t.integer  "trade_company_id"
-    t.integer  "delivery_order_item_id"
-    t.decimal  "used_qty",               :precision => 10, :scale => 2, :default => 0.0
-    t.date     "used_date"
-    t.integer  "unit_measurement_id"
-    t.datetime "created_at",                                                             :null => false
-    t.datetime "updated_at",                                                             :null => false
-  end
 
   create_table "sales_tax_exemption_lines", :force => true do |t|
     t.integer  "sales_tax_exemption_id"
@@ -1229,8 +1260,8 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
     t.string   "transaction_type"
     t.integer  "debit_note_id"
     t.integer  "credit_note_id"
-    t.datetime "created_at",                                                        :null => false
-    t.datetime "updated_at",                                                        :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
     t.integer  "receipt_id",                                       :default => 0
     t.integer  "delivery_order_id",                                :default => 0
     t.decimal  "document_amount",   :precision => 10, :scale => 2
@@ -1238,6 +1269,10 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
     t.string   "fp",                                               :default => "N"
     t.decimal  "os_amount",         :precision => 10, :scale => 2
     t.integer  "parent_id"
+    t.boolean  "open_balance",                                     :default => false
+    t.string   "running_no"
+    t.string   "description"
+    t.integer  "status",                                           :default => 1
   end
 
   add_index "statement_of_accounts", ["credit_note_id"], :name => "index_statement_of_accounts_on_credit_note_id"
@@ -1245,6 +1280,28 @@ ActiveRecord::Schema.define(:version => 20130622020617) do
   add_index "statement_of_accounts", ["delivery_order_id"], :name => "index_statement_of_accounts_on_delivery_order_id"
   add_index "statement_of_accounts", ["receipt_id"], :name => "index_statement_of_accounts_on_payment_received_id"
   add_index "statement_of_accounts", ["trade_company_id"], :name => "index_statement_of_accounts_on_trade_company_id"
+
+  create_table "ste_customer_histories", :force => true do |t|
+    t.integer  "sales_tax_exemption_id"
+    t.integer  "product_id"
+    t.integer  "trade_company_id"
+    t.integer  "delivery_order_item_id"
+    t.integer  "unit_measurement_id"
+    t.decimal  "before_available_qty",      :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "after_available_qty",       :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "accumulative_complete_qty", :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "delivery_qty",              :precision => 10, :scale => 2, :default => 0.0
+    t.float    "pc_weight",                                                :default => 0.0
+    t.date     "used_date"
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
+  end
+
+  add_index "ste_customer_histories", ["delivery_order_item_id"], :name => "index_ste_customer_histories_on_delivery_order_item_id"
+  add_index "ste_customer_histories", ["product_id"], :name => "index_ste_customer_histories_on_product_id"
+  add_index "ste_customer_histories", ["sales_tax_exemption_id"], :name => "index_ste_customer_histories_on_sales_tax_exemption_id"
+  add_index "ste_customer_histories", ["trade_company_id"], :name => "index_ste_customer_histories_on_trade_company_id"
+  add_index "ste_customer_histories", ["unit_measurement_id"], :name => "index_ste_customer_histories_on_unit_measurement_id"
 
   create_table "ste_supplier_histories", :force => true do |t|
     t.integer  "sales_tax_exemption_id"

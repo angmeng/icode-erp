@@ -324,11 +324,9 @@ class InventoryManagementSystem < ActiveRecord::Base
   
   COMPANY_PROFILE_MENU                    = 88
   
-
-  
   COMPANY_PROFILE_SHOW                    = 90
   COMPANY_PROFILE_EDIT                    = 91
-  COMPANY_PROFILE_KIV                     = 92
+#  COMPANY_PROFILE_KIV                     = 92
   COMPANY_PROFILE_PRINTABLE               = 93
   
   TRADE_COMPANY_MENU                      = 94
@@ -535,9 +533,29 @@ class InventoryManagementSystem < ActiveRecord::Base
   AC_GENERAL_JV_KIV_INDEX                           = 74
   AC_GENERAL_JV_KIV_SHOW                            = 236
   AC_GENERAL_JV_KIV_RECOVER                         = 540
+  
+  OUTGOING_MENU                                     = 565
+  OUTGOING_INDEX                                    = 566
+  OUTGOING_ADD                                      = 568
+  OUTGOING_SHOW                                     = 569
+  OUTGOING_EDIT                                     = 570
+  OUTGOING_KIV                                      = 571
+  
+  OPENING_BALANCE                                   = 567
+  
+  STATEMENT_OF_ACCOUNT_INDEX                        = 572
+  STATEMENT_OF_ACCOUNT_ADD                          = 573
+  STATEMENT_OF_ACCOUNT_SHOW                         = 574
+  STATEMENT_OF_ACCOUNT_EDIT                         = 575
+  STATEMENT_OF_ACCOUNT_DELETE                       = 576
+  STATEMENT_OF_ACCOUNT_PRINTABLE                    = 577
 
     
-  #start at 299, jump to 565
+  #start at 299, jump to 578
+  
+  
+  
+  
   
   
 

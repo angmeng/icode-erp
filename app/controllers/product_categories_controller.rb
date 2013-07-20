@@ -1,7 +1,5 @@
-class ProductCategoriesController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox"
-  
+class ProductCategoriesController < ApplicationController  
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def non_operation
     @categories = ProductCategory.db_non_operation
   end
@@ -175,9 +173,4 @@ class ProductCategoriesController < ApplicationController
     ProductCategory.recover_product(@product_category)
     goto_direction_kiv(@product_category)
   end
-  
-  private
-#  def inventory_management_system
-#    role(ProductCategory::ROLE)
-#  end
 end

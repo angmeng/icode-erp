@@ -1,0 +1,18 @@
+<ul id="j_tabify" class="class_tabify">
+  <li class="active"><a href="#tabify_listing">OUTGOING REJECTS DATA</a></li>
+  <li><a href="#tabify_search">SEARCH ENGINE</a></li>
+</ul>
+
+<div id="tabify_listing">
+  <% if @outgoing_rejects.present? %>
+    <div class="table_background"><%= render "listing_outgoing_rejects", :outgoing_rejects => @outgoing_rejects %></div>
+  <% else %>
+    <div class="tabify_content">Not Record Found</div>
+  <% end %>
+</div>
+
+<div id="tabify_search">
+  <%#= render "search_outgoing_reject" %>
+</div>
+
+<%= render "action_outgoing_reject" %>

@@ -13,6 +13,7 @@ class Currency < ActiveRecord::Base
   has_one :credit_note
   has_one :product_customer
   has_one :product_vendor
+  has_one :outgoing_reject
   
   ACTIVE = "ACTIVE"
   KEEP_IN_VIEW = "KIV"

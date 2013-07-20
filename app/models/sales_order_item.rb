@@ -4,6 +4,8 @@ class SalesOrderItem < ActiveRecord::Base
   
   attr_accessible :sales_order_id, :product_id, :quantity, :unit_measurement_id, :eta, :unit_price, :status, :customer_po, :part_no, :remaining_qty, :lot_no, :mfg_date, :exp_date
   
+  has_one :outgoing_reject_item
+  
   belongs_to :user
   belongs_to :product
   belongs_to :unit_measurement

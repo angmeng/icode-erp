@@ -9,7 +9,7 @@ class SalesTaxExemptionManagement
           @formula = Formulation.find_by_from_unit_measurement_id_and_to_unit_measurement_id(content[:unit_measurement_id].to_i, content[:calculate_um_id].to_i)
           if @formula.present?
             answer_value = content[:apply_qty].to_i * @formula.convert_value.to_i
-            ste_control = ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => answer_value)
+            ste_control = ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :convert_apply_qty => answer_value, :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => answer_value, :need_part_weight => content[:need_part_weight])
           else
             msg = []
             a = UnitMeasurement.find(content[:unit_measurement_id])
@@ -18,7 +18,7 @@ class SalesTaxExemptionManagement
             break;
           end
         else
-          ste_control = ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => content[:apply_qty])
+          ste_control = ste.sales_tax_exemption_barangs.build(:perihal_barang => content[:perihal_barang], :apply_qty => content[:apply_qty], :convert_apply_qty => content[:apply_qty], :complete_qty => 0, :unit_measurement_id => content[:unit_measurement_id], :tarif_code => content[:tarif_code], :calculate_um_id => content[:calculate_um_id], :available_qty => content[:apply_qty], :need_part_weight => content[:need_part_weight])
         end
         
         unless ste_control.valid?

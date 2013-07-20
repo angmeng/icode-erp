@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  delivery_order_item_id: 1
+  quantity: 1
+  received_qty: 1
+  invoice_delivery_qty: 1
+  invoice_unit_price: 1.5
+  so_balance_qty: 1
+  status: 1
+  current_stock: 1
+  client_lot: MyString
+  client_part: MyString
+  client_po: MyString
+
+two:
+  delivery_order_item_id: 1
+  quantity: 1
+  received_qty: 1
+  invoice_delivery_qty: 1
+  invoice_unit_price: 1.5
+  so_balance_qty: 1
+  status: 1
+  current_stock: 1
+  client_lot: MyString
+  client_part: MyString
+  client_po: MyString

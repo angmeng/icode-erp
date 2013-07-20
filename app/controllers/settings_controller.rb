@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   before_filter :is_director
   # GET /settings
   # GET /settings.json

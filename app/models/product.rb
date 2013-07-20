@@ -28,6 +28,7 @@ class Product < ActiveRecord::Base
   has_many   :inventory_histories, :dependent => :destroy
   has_many   :packing_quantities, :dependent => :destroy
   has_many   :ste_supplier_histories
+  has_many   :ste_customer_histories
   
 #  has_many :product_vendors, :dependent => :destroy
 #  accepts_nested_attributes_for :product_vendors, :reject_if => lambda { |a| a[:trade_company_id].blank? }, :allow_destroy => true

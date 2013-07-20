@@ -44,6 +44,7 @@ class SalesTaxExemption < ActiveRecord::Base
   
   has_many :products
   has_many :ste_supplier_histories
+  has_many :ste_customer_histories
   
   ACTIVE = "ACTIVE"
   DEACTIVATE = "DEACTIVATE"

@@ -1,5 +1,5 @@
 class ProductComboboxesController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /product_comboboxes
   # GET /product_comboboxes.json
   def index

@@ -1,6 +1,5 @@
 class BomsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox", :only => [:new, :show, :create, :edit, :update, :active_so]
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :active_so]
 
   def index
     @boms = Bom.all

@@ -1,5 +1,5 @@
 class SelectionPrintingSizesController < ApplicationController
-  before_filter :authenticate_user!
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /selection_printing_sizes
   # GET /selection_printing_sizes.json
   def index

@@ -17,23 +17,20 @@
           <td align="right"><b>PASSWORD</b></td>
           <td><%= f.password_field :password, :class => "k-textbox" %></td>
         </tr>
-        
-        <tr>
-          <% if devise_mapping.rememberable? -%>
-            <td colspan="2" align="right"><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
-          <% end -%>
-        </tr>
       </table>
     
-      <div class="left_icon_tag">
-        <b><%= version %></b>
-      </div>
+      
     
-      <div class="icon_tag">
+      <div align="right" style="padding: 10px;">
         <%= f.submit "Log In", :name => "logging_in", :class => "k-button" %>
       </div>
+    
     <% end %>
+    
+      <div align="center">
+        <i><%= version %></i>
+      </div>
   
-    <%= render "links" %>
+    <%#= render "links" %>
   </fieldset>
 </div>

@@ -81,4 +81,29 @@ class DeliveryOrder < ActiveRecord::Base
   def uppercase_text
     self.sales_rep.upcase! if self.sales_rep.present?
   end
+  
+  def manage_outgoing_reject
+    generate_json ||= []
+    if delivery_order_items.present?
+      delivery_order_items.each do |doi|
+        generate_json << { :do_no => doi.try(:delivery_order).try(:do_no), 
+                           :doi_id => doi.id,
+                           :soi_id => doi.try(:sales_order_item_id),
+                           :product_id => doi.try(:sales_order_item).try(:product).try(:product_combobox).try(:product_code),
+                           :description => doi.try(:sales_order_item).try(:product).try(:desc), 
+                           :do_date => doi.try(:delivery_order).try(:do_date),
+                           :inv_delv_qty => doi.try(:delivery_qty),
+                           :unit_measurement => doi.try(:sales_order_item).try(:unit_measurement).try(:code),
+                           :inv_unit_price => doi.try(:unit_price),
+                           :so_bal_qty => doi.try(:balance_qty),
+                           :do_status => doi.try(:decode_doi),
+                           :current_stock => doi.try(:sales_order_item).try(:product).try(:current_stock),
+                           :client_lot => (doi.client_lot || ''),
+                           :client_part => (doi.part_no || ''),
+                           :client_po => (doi.client_po || '')
+        }
+      end
+    end
+    return generate_json
+  end
 end

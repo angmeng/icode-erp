@@ -26,6 +26,29 @@
             if (validator.validate()) { busyHours(); }
             else { alert("Invalid Data Form..."); return false; } 
         });
+        
+        $(".close_when_click_1, .close_when_click_2").bind("click", function () {
+          $("#window").data("kendoWindow").close();
+        });
+
+        function initWindow() {
+            var windowOptions = {
+                width: "500px",
+                title: "REQUEST",
+                visible: false,
+                close: onClose
+            };
+
+            $("#window").kendoWindow(windowOptions);
+
+            $("#undo").bind("click", function () { $("#window").data("kendoWindow").open().center(); });
+        }
+
+        initWindow();
     });
+    
+    function onClose() {
+        $("#undo").hide();
+    }    
   </script>
 <% end %>

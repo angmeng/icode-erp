@@ -1,4 +1,5 @@
 class GroupRunningNosController < ApplicationController
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   # GET /group_running_nos
   # GET /group_running_nos.json
   def index

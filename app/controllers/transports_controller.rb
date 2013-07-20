@@ -1,8 +1,6 @@
 class TransportsController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :are_you_director?
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
-  
   def index
     @search = Transport.search(params[:search])
     @transports = Transport.ordered_name(@search)

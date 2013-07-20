@@ -1,7 +1,5 @@
 class PriceControlsController < ApplicationController
-  before_filter :authenticate_user!
-  layout "sheetbox", :only => [:show, :new, :edit, :create]
-
+layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
   def index
     @search         = PriceControl.search(params[:search])
     @price_controls = PriceControl.search_price_control(@search).paginate(:page => params[:page])

@@ -1,7 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!
-  # before_filter :inventory_management_system, :except => [:show]
-  layout "sheetbox"
+  layout "sheetbox", :only => [:show, :new, :create, :edit, :update, :non_operation, :operation, :finish_good, :kiv_non_operation, :kiv_operation, :kiv_finish_good]
   
   def message
     prohibit_html unless roles.include?(InventoryManagementSystem::PURCHASE_ORDER_PRODUCT_ID_REGISTRATION_APPLY)
@@ -74,10 +72,6 @@ class ProductsController < ApplicationController
     kiv_finish_good
     render :layout => false
   end
-
-  
-  
-  
   
   def show
     @product = Product.find(params[:id])
@@ -169,10 +163,6 @@ class ProductsController < ApplicationController
   end
   
   private
-  
-  # def inventory_management_system
-  #   role(Product::ROLE)
-  # end
   
   def manage_categories(cat_id)
     @category_id        = cat_id

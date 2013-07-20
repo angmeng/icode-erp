@@ -1,7 +1,5 @@
 class JournalVouchersController < ApplicationController
-  before_filter :authenticate_user!
   layout "sheetbox", :only => [:show, :new, :create, :edit, :update]
-  
   def index
     @journal_vouchers = JournalVoucher.all
 

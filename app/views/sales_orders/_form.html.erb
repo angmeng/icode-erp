@@ -34,9 +34,7 @@
         <tr>
           <td><b>Customer Company *</b></td>
           <td><%= f.select :trade_company_id, options_for_select(trade_company_customer_with_code, @sales_order.trade_company_id), { :include_blank => true }, { :class => "sales_order_trade_company_id mkendo_combobox", "required validationMessage" => "Please Enter Customer Company" , :style => "width: 400px;", :onchange => "sales_order_company_change(this)" } %></td>
-
           <td></td>
-
           <td><b>Revision *</b></td>
           <td><%= f.text_field :revision, :value => 0, :class => "k-textbox", "required validationMessage" => "Please Enter Revision"  %></td>
         </tr>

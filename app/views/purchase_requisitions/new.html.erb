@@ -26,12 +26,21 @@
   <% end %>
 </div>
 
-<div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:300px;height:150px;'>
+<!--div id='pr_items_show' class='easyui-window' title='REQUEST' closed='true' minimizable='false' style='width:300px;height:150px;'>
   <div style="position: absolute; top: 50%; left: 50%; margin-left: -80px; margin-top: -50px;" >
     <h3>New Item Request?</h3>
     <br/>
-    <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
-    <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
+    <%#= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_one" %>
+    <%#= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600", "data-fancybox-type" => "iframe", :id => "on_button_two" %>
+  </div>
+</div-->
+
+<div id="window">
+  <div style="text-align: center;">
+    <h3>New Item Request?</h3>
+    <br/>
+    <%= link_to image_tag("yes_button.jpg", :alt => "YES", :title => "YES", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::YES), :class => "iframe_800x600 close_when_click_1", "data-fancybox-type" => "iframe" %>
+    <%= link_to image_tag("no_button.jpg", :alt => "NO", :title => "NO", :size => "80x40", :style => "border: none;"), new_purchase_requisition_item_path(:new_product => PurchaseRequisition::NO),  :class => "iframe_800x600 close_when_click_2", "data-fancybox-type" => "iframe" %>
   </div>
 </div>
 
